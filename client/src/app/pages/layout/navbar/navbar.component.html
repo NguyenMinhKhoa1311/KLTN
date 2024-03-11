@@ -1,0 +1,41 @@
+<div id="navbar_container">
+    <div id="logo" (click)="onTabClick('home')">
+        <img src="https://vcdn1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=i2M2IgCcw574LT-bXFY92g" alt="">
+    </div>
+    <div id="navbar_box">
+        <tui-tabs>
+            <button tuiTab (click)="onTabClick('home')">
+                <span class="material-symbols-outlined">
+                home
+                </span>
+                Trang chủ
+            </button>
+            <button tuiTab (click)="onTabClick('job')" >
+                <span class="material-symbols-outlined">
+                work
+                </span>
+                Việc làm
+            </button>
+            <button tuiTab (click)="onTabClick('company')">
+                <span class="material-symbols-outlined">
+                apartment
+                </span>
+                Công ty
+            </button>
+            <button tuiTab (click)="onTabClick('favorite')">
+                <span class="material-symbols-outlined">
+                    favorite
+                </span>
+                Việc của tôi
+            </button>
+        </tui-tabs>
+    </div>
+    <div id="login_button">
+        <div class="login_box">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+            <span>Đăng nhập</span>
+        </div>
+    </div>
+</div>
