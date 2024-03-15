@@ -1,0 +1,66 @@
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
+
+export type candidateDocument = HydratedDocument<Candidate>;
+
+
+@Schema({timestamps: true})
+export class Candidate {
+    @Prop({required: true, unique: true})
+    CandidateId: string;
+
+    @Prop({required: true})
+    Name: string;
+
+    @Prop({required: true})
+    Email: string;
+
+    @Prop({required: true})
+    Phone: string;
+
+    @Prop({required: true})
+    Address: string;
+
+    @Prop({required: true})
+    Position: string;
+
+    @Prop({required: true})
+    Experience: number;
+
+    @Prop({required: true})
+    Education: string;
+
+    @Prop({required: true})
+    Skill: string[];
+
+    @Prop({
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'DesiredJob',
+        required: true
+    })
+    DesiredJob: string;
+
+    @Prop({
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Field',
+        required: true
+    })
+    Field: string;
+
+    @Prop({
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Career',
+        required: true
+    })
+    Career: string;
+
+    @Prop({
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    })
+    User: string;
+
+
+}
+export const CandidateSchema = SchemaFactory.createForClass(Candidate);
