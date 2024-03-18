@@ -15,6 +15,7 @@ import { BillModule } from './bill/bill.module';
 import { JobModule } from './job/job.module';
 import { RecruitmentModule } from './recruitment/recruitment.module';
 import { StorageModule } from './storage/storage.module';
+import { TagModule } from './tag/tag.module';
 
 
 @Module({
@@ -32,7 +33,8 @@ import { StorageModule } from './storage/storage.module';
     BillModule,
     JobModule,
     RecruitmentModule,
-    StorageModule
+    StorageModule,
+    TagModule,
 
 
   ],

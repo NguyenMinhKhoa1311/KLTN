@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@nestjs/common';
 import { JobService } from './job.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
@@ -18,24 +18,16 @@ export class JobController {
       throw err
     }
   }
-
-  @Get()
-  findAll() {
-    return this.jobService.findAll();
+  @Put('updateStatusPayment')
+  async updateStatusPayment(@Query('id') id: string, @Body() status: boolean) {
+    try{
+      const job = await this.jobService.updateStatusPayment(id, status);
+      return job
+    }
+    catch(err){
+      throw err
+    }
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.jobService.findOne(+id);
-  }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateJobDto: UpdateJobDto) {
-    return this.jobService.update(+id, updateJobDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.jobService.remove(+id);
-  }
 }

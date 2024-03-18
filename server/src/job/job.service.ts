@@ -22,19 +22,35 @@ export class JobService {
     }
   }
 
-  findAll() {
-    return `This action returns all job`;
+  async updateStatusPayment(id: String, status: boolean) {
+    try{
+      if(status){
+        const updateJob = await this.JobModel.findOneAndUpdate(
+          {JobId: id},
+          { StatusPayment: true,
+            StatusRecruitment: true
+          },
+          {new:true}
+          );
+          return updateJob;
+      }
+      else{
+        const updateJob = await this.JobModel.findOneAndUpdate(
+          {JobId: id},
+          {
+            StatusPayment: true,
+            StatusRecruitment: true
+          },
+          {new:true}
+          );
+          return updateJob;
+      }
+
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} job`;
-  }
 
-  update(id: number, updateJobDto: UpdateJobDto) {
-    return `This action updates a #${id} job`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} job`;
-  }
 }

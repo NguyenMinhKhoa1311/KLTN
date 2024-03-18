@@ -54,9 +54,27 @@ export class Job {
     @Prop({required: true})
     EndDate: Date;
 
+    @Prop({required: true})
+    StatusPayment: boolean;
 
     @Prop({required: true})
-    Status: boolean;
+    StatusRecruitment: boolean;
+
+    @Prop({required: true})
+    Requirement: string;
+
+    @Prop({
+        required: true,
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Tag'
+    })
+    Tags: [mongoose.Schema.Types.ObjectId];
+
+    @Prop({required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ServicePackage'
+    })
+    ServicePackage: string;
 
 }
 

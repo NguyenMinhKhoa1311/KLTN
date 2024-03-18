@@ -5,12 +5,16 @@ export class CreateJobDto {
         public Description: string,
         public Company: string,
         public Location: string,
+        public Requirement :string,
         public Salary: number,
         public Welfare: string[],
         public Career: string,
         public Recruiter: string,
-        public field: string,
+        public Field: string,
         public EndDate: Date,
-        public Status: boolean
+        public ServicePackage: string,
+        public StatusPayment: boolean,
+        public StatusRecruitment: boolean,
+        public Tags: string[],
     ){}
 }
