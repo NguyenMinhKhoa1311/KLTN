@@ -22,8 +22,33 @@ export class UserService {
     }
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    try{
+      return await this.UserModel.find();
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
+  }
+  async findByUserName(userName:string){
+    try{
+      const user = await this.UserModel.findOne({ Username: userName }).exec();
+
+      
+      if(!user){
+        let errUser = {
+          _id: "404 user not found",
+          Username: "404 user not found",
+          Password: "404 user not found",
+          Uid: "404 user not found",
+        }
+        return errUser;
+      }
+      return user;
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
   }
 
   findOne(id: number) {

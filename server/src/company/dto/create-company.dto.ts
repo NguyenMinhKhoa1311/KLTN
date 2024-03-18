@@ -6,5 +6,9 @@ export class CreateCompanyDto {
         public  Phone: string,
         public  Address: string,
         public  Field: string,
+        public  Avatar: string,
+        public  StorageAvatar: string,
+        public  StorageCover: string,
+        public  Cover: string,
     ){}
 }

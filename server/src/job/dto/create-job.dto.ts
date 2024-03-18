@@ -11,7 +11,6 @@ export class CreateJobDto {
         public Recruiter: string,
         public field: string,
         public EndDate: Date,
-        public ServicePackage: string,
         public Status: boolean
     ){}
 }

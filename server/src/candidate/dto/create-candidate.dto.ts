@@ -2,7 +2,8 @@ export class CreateCandidateDto {
     constructor(
         public CandidateId: string,
         public Name: string,
-        public Email: string,
+        public Avatar: string,
+        public Storage: string,
         public Phone: string,
         public Address: string,
         public Position: string,
@@ -12,7 +13,8 @@ export class CreateCandidateDto {
         public DesiredJob: string,
         public Field: string,
         public Career: string,
-        public User: string 
+        public User: string,
+        public DateOfBirth: Date,
         
     ){}
 }

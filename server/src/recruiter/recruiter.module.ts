@@ -11,6 +11,7 @@ import { UserSchema } from 'src/user/entities/user.entity';
 import { UserModule } from 'src/user/user.module';
 import { VoucherSchema } from 'src/voucher/entities/voucher.entity';
 import { VoucherModule } from 'src/voucher/voucher.module';
+import { StorageSchema } from 'src/storage/entities/storage.entity';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { VoucherModule } from 'src/voucher/voucher.module';
       {name:'Company', schema: CompanySchema},
       {name:'User', schema: UserSchema},
       {name:'Voucher', schema: VoucherSchema},
+      {name:'Storage', schema: StorageSchema}
     ]),
     forwardRef(() => CompanyModule),
     forwardRef(() => UserModule),

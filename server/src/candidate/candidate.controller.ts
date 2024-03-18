@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CandidateService } from './candidate.service';
 import { CreateCandidateDto } from './dto/create-candidate.dto';
 import { UpdateCandidateDto } from './dto/update-candidate.dto';
@@ -18,23 +18,21 @@ export class CandidateController {
     }
   }
 
-  @Get()
-  findAll() {
+  @Get('getAll')
+  async findAll() {
     return this.candidateService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.candidateService.findOne(+id);
+  @Get('getByUser')
+  async findByUser(@Query('user') user:string){
+    try{
+      const candidate = await this.candidateService.findByUser(user);
+      return candidate;
+    }
+    catch(error){
+      throw error;
+    }
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCandidateDto: UpdateCandidateDto) {
-    return this.candidateService.update(+id, updateCandidateDto);
-  }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.candidateService.remove(+id);
-  }
 }

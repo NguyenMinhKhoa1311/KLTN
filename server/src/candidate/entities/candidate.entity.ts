@@ -33,6 +33,16 @@ export class Candidate {
     @Prop({required: true})
     Skill: string[];
 
+    @Prop({required: true})
+    Avatar: string;
+
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Storage',
+    })
+    Storage: string;
+
     @Prop({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'DesiredJob',
@@ -60,6 +70,9 @@ export class Candidate {
         required: true
     })
     User: string;
+    
+    @Prop({required: true})
+    DateOfBirth: Date;
 
 
 }

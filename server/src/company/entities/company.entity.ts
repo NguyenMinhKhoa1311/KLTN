@@ -27,5 +27,25 @@ export class Company {
     })
     Field: string;
 
+    @Prop({required: true})
+    Avatar: string;
+
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Storage',
+    })
+    StorageAvatar: string;
+
+    @Prop({required: true})
+    Cover: string;
+
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Storage',
+    })
+    StorageCover: string;
+
 }
 export const CompanySchema = SchemaFactory.createForClass(Company);

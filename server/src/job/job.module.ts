@@ -23,7 +23,6 @@ import { JobSchema } from './entities/job.entity';
       { name: 'Job', schema: JobSchema },
       { name:'Field',schema: FieldSchema},
       { name:'Career',schema:CareerSchema},
-      { name: 'ServicePackage',schema:ServicePackageSchema},
       { name: 'Company',schema:CompanySchema},
       { name: 'Recruiter',schema:RecruiterSchema},
     ]),

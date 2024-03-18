@@ -20,19 +20,25 @@ export class CandidateService {
     }
   }
 
-  findAll() {
-    return `This action returns all candidate`;
+  async findAll() {
+    try{
+      return await this.CandidateModel.find();
+    }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} candidate`;
-  }
-
-  update(id: number, updateCandidateDto: UpdateCandidateDto) {
-    return `This action updates a #${id} candidate`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} candidate`;
+  async findByUser(user:string){
+    try{
+      const candidate = await this.CandidateModel.findOne({ User: user }).exec();
+      if(!candidate){
+        throw new  HttpException("Candidate not found", 404);
+      }
+      return candidate;
+    }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
   }
 }

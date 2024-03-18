@@ -11,6 +11,7 @@ import { CareerSchema } from 'src/career/entities/career.entity';
 import { CareerModule } from 'src/career/career.module';
 import { FieldSchema } from 'src/field/entities/field.entity';
 import { FieldModule } from 'src/field/field.module';
+import { StorageSchema } from 'src/storage/entities/storage.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { FieldModule } from 'src/field/field.module';
       {name: 'User', schema: UserSchema},
       {name: 'DesiredJob', schema: DesiredJobSchema},
       {name: 'Career', schema: CareerSchema},
-      {name: 'Field', schema: FieldSchema}
+      {name: 'Field', schema: FieldSchema},
+      {name: 'Storage', schema: StorageSchema}
     ]),
     forwardRef(() => DesiredJobModule),
     forwardRef(() => UserModule),

@@ -6,12 +6,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { FieldModule } from 'src/field/field.module';
 import { CompanySchema } from './entities/company.entity';
+import { StorageSchema } from 'src/storage/entities/storage.entity';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: 'Company', schema: CompanySchema},
-      { name: 'Field', schema: FieldSchema }
+      { name: 'Field', schema: FieldSchema },
+      { name: 'Storage', schema: StorageSchema}
     ]),
     forwardRef(() => FieldModule)
   ],
