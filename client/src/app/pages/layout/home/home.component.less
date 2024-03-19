@@ -1,0 +1,119 @@
+#home_container{
+    width: 100%;
+    height: 100%;
+    background-color: #003699;
+    //padding-top: 4rem;
+    .home_box{
+        width: 90%;
+        height: 45rem;
+        margin: 0 auto;
+        .search_home{
+            height: 10%;
+            padding: 0 20px;
+            .search_box{
+                border-radius: 68px;
+                //width: 100%;
+                height: 3rem;
+                background-color: #002466;
+                display: flex;
+                padding: 10px;
+                .search_information{
+                    background-color: #ffffff;
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 68px;
+                    display: flex;
+                    flex-direction: row;
+                    .search_img{
+                        width: 4%;
+                        height: 100%;
+                        //margin: 0 0 0 0.5rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        svg{
+                            width: 1.5rem;
+                            height: 1.5rem;
+                        }
+                    }
+                    .search{
+                        width: 80%;
+                        height: 100%;
+                        input{
+                            width: 100%;
+                            height: 100%;
+                            border: none;
+                            font-size: 1rem;
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+                    }
+                    .search_btn{
+                        width: 18%;
+                        height: 100%;
+                        //margin: 0 0.5rem 0 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        .search_btn_box{
+                            width: 80%;
+                            height: 60%;
+                            padding: 5px;
+                            background-color: #005AFF;
+                            border-radius: 68px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            
+                            span{
+                                
+                                font-size: 1rem;
+                                color: white;
+                            }
+                        }
+                        :hover{
+                            background-color: #347BFF;
+                        }
+                    }
+                    
+                }
+            }
+        }
+
+        .carousel_home{
+            width: 100%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .carousel_container{
+                border-radius: 1rem;
+                .carousel_item{
+                    height: 35rem;
+                    padding: 0;
+                    border: none !important;
+                    .img_copany{
+                        width: 100%;
+                        height: 80%;
+                        
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 1rem;
+                        }
+                    }
+                    
+                }
+            }
+            .pagination{
+                margin: 5px 0 0 0;
+                color: black;
+            }
+            
+        }
+    }
+}
