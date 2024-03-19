@@ -49,7 +49,7 @@ export class Job {
         ref: 'Field',
         required: true
     })
-    field: string;
+    Field: string;
 
     @Prop({required: true})
     EndDate: Date;

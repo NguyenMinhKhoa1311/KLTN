@@ -15,6 +15,7 @@ export class CreateCandidateDto {
         public Career: string,
         public User: string,
         public DateOfBirth: Date,
+        public FavoriteJobs: string[],
         
     ){}
 }

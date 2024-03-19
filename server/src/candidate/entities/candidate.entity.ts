@@ -65,6 +65,13 @@ export class Candidate {
     Career: string;
 
     @Prop({
+        required: true,
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Job'
+    })
+    FavoriteJobs: [mongoose.Schema.Types.ObjectId];
+
+    @Prop({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true

@@ -27,7 +27,7 @@ import { ServicePackageSchema } from 'src/service-package/entities/service-packa
       { name: 'Company',schema:CompanySchema},
       { name: 'Recruiter',schema:RecruiterSchema},
       { name: 'Tag',schema:TagSchema},
-      {name: 'Servicepackage', schema: ServicePackageSchema}
+      {name: 'ServicePackage', schema: ServicePackageSchema}
     ]),
     forwardRef(() => FieldModule),
     forwardRef(() => CareerModule),
