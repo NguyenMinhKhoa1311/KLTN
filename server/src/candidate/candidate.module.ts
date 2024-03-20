@@ -13,6 +13,16 @@ import { FieldSchema } from 'src/field/entities/field.entity';
 import { FieldModule } from 'src/field/field.module';
 import { StorageSchema } from 'src/storage/entities/storage.entity';
 import { JobSchema } from 'src/job/entities/job.entity';
+import { EducationSchema } from 'src/education/entities/education.entity';
+import { WorkExperienceSchema } from 'src/work-experience/entities/work-experience.entity';
+import { CandidateLanguageSchema } from 'src/candidate-language/entities/candidate-language.entity';
+import { CandidateSkillSchema } from 'src/candidate-skill/entities/candidate-skill.entity';
+import { StorageModule } from 'src/storage/storage.module';
+import { JobModule } from 'src/job/job.module';
+import { EducationModule } from 'src/education/education.module';
+import { WorkExperienceModule } from 'src/work-experience/work-experience.module';
+import { CandidateLanguageModule } from 'src/candidate-language/candidate-language.module';
+import { CandidateSkillModule } from 'src/candidate-skill/candidate-skill.module';
 
 @Module({
   imports: [
@@ -24,11 +34,21 @@ import { JobSchema } from 'src/job/entities/job.entity';
       {name: 'Field', schema: FieldSchema},
       {name: 'Storage', schema: StorageSchema},
       {name: 'Job', schema: JobSchema},
+      {name: 'Education', schema: EducationSchema},
+      {name: 'WorkExperience', schema: WorkExperienceSchema},
+      {name: 'CandidateLanguage', schema: CandidateLanguageSchema},
+      {name:"CandidateSkill", schema: CandidateSkillSchema},
     ]),
     forwardRef(() => DesiredJobModule),
     forwardRef(() => UserModule),
     forwardRef(() => CareerModule),
-    forwardRef(() => FieldModule)
+    forwardRef(() => FieldModule),
+    forwardRef(() => StorageModule),
+    forwardRef(() => JobModule),
+    forwardRef(() =>EducationModule),
+    forwardRef(() => WorkExperienceModule),
+    forwardRef(() => CandidateLanguageModule),
+    forwardRef(() => CandidateSkillModule),
 
   ],
   controllers: [CandidateController],

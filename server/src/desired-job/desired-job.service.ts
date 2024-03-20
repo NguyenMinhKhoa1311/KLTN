@@ -21,7 +21,7 @@ export class DesiredJobService {
       return newDesiredJob.save();
     }
     catch(err){
-      throw err;
+      throw new HttpException(err.message,err.status);
     }
   }
 

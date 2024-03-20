@@ -16,6 +16,12 @@ import { JobModule } from './job/job.module';
 import { RecruitmentModule } from './recruitment/recruitment.module';
 import { StorageModule } from './storage/storage.module';
 import { TagModule } from './tag/tag.module';
+import { SkillModule } from './skill/skill.module';
+import { EducationModule } from './education/education.module';
+import { LanguageModule } from './language/language.module';
+import { CandidateSkillModule } from './candidate-skill/candidate-skill.module';
+import { CandidateLanguageModule } from './candidate-language/candidate-language.module';
+import { WorkExperienceModule } from './work-experience/work-experience.module';
 
 
 @Module({
@@ -35,6 +41,13 @@ import { TagModule } from './tag/tag.module';
     RecruitmentModule,
     StorageModule,
     TagModule,
+    SkillModule,
+    EducationModule,
+    LanguageModule,
+    CandidateSkillModule,
+    CandidateLanguageModule,
+    WorkExperienceModule,
+
 
 
   ],

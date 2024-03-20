@@ -27,11 +27,33 @@ export class Candidate {
     @Prop({required: true})
     Experience: number;
 
-    @Prop({required: true})
-    Education: string;
+    @Prop({
+        required: true,
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Education',
+    })
+    Education:[mongoose.Schema.Types.ObjectId];
 
-    @Prop({required: true})
-    Skill: string[];
+    @Prop({
+        required: true,
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'WorkExperience',
+    })
+    WorkExperience: [mongoose.Schema.Types.ObjectId];
+
+    @Prop({
+        required: true,
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'CandidateSkill',
+    })
+    Skills: [mongoose.Schema.Types.ObjectId];
+
+    @Prop({
+        required: true,
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'CandidateLanguage',
+    })
+    Languages: [mongoose.Schema.Types.ObjectId];
 
     @Prop({required: true})
     Avatar: string;
