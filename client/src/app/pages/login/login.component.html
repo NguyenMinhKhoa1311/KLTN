@@ -1,4 +1,5 @@
 <div id="login_container">
+    <div id="background_register"></div>
     <div id="login_box">
         <div id="login_form_box">
             <div class="header">
@@ -47,7 +48,7 @@
                 <div class="reset_pass" >
                     <span>Quên mật khẩu</span>
                 </div>
-                <div (click)="showCVCreationForm()" class="btn_login">
+                <div class="btn_login">
                         <button
                         appearance="primary"
                         tuiButton
@@ -60,88 +61,13 @@
                 <span class="login_option">Hoặc đăng nhập bằng</span>
                 <div class="login_google" (click)="loginWithGoogle()">
                     <div class="img_google">
-                        <img src="../../../assets/images/google_icon.png" alt="">
+                        <img src="../../../assets/images/icons8-google-30.png" alt="">
                     </div>
                     <span>Google</span>
                 </div>
                 <div class="register_box">
                     <span>Bạn chưa có tài khoản?</span>
-                    <span style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng ký ngay</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="cv_creation_form">
-    <div id="login_box">
-        <div id="login_form_box">
-            <div class="header">
-            <span>Chào mừng bạn đã quay trở lại </span>
-            <span style="font-size: 14px; color: black; font-weight: normal; margin-top: 10px;">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng</span>
-            </div>
-            <div class="body">
-                <div class="form_login">
-                    <form class="form_login_box">
-                        <label>Email</label>
-                        <p>
-                            <tui-input
-                                formControlName="testValue"
-                                [tuiTextfieldCleaner]="true"
-                                [tuiTextfieldLabelOutside]="true"
-                            >
-                                Email
-                                <input
-                                    autocomplete="email"
-                                    placeholder="Nhập email"
-                                    tuiTextfield
-                                    type="email"
-                                />
-                            </tui-input>
-                        </p>
-                    </form>
-                    <form class="form_login_box">
-                        <label style="margin-top: 10px;">Mật khẩu</label>
-                        <p>
-                            <tui-input
-                                formControlName="testValue"
-                                [tuiTextfieldCleaner]="true"
-                                [tuiTextfieldLabelOutside]="true"
-                            >
-                                Mật khẩu
-                                <input
-                                    autocomplete="new-password"
-                                    placeholder="Nhập mật khẩu"
-                                    tuiTextfield
-                                    type="password"
-                                />
-                            </tui-input>
-                        </p>
-                    </form>
-                </div>
-                <div class="reset_pass" >
-                    <span>Quên mật khẩu</span>
-                </div>
-                <div (click)="showCVCreationForm()" class="btn_login">
-                        <button
-                        appearance="primary"
-                        tuiButton
-                        type="button"
-                        class="tui-space_right-3 tui-space_bottom-3"
-                    >
-                        Đăng nhập
-                    </button>
-                </div>
-                <span class="login_option">Hoặc đăng nhập bằng</span>
-                <div class="login_google" (click)="loginWithGoogle()">
-                    <div class="img_google">
-                        <img src="../../../assets/images/google_icon.png" alt="">
-                    </div>
-                    <span>Google</span>
-                </div>
-                <div class="register_box">
-                    <span>Bạn chưa có tài khoản?</span>
-                    <span style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng ký ngay</span>
+                    <span (click)="register()" style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng ký ngay</span>
                 </div>
             </div>
         </div>
