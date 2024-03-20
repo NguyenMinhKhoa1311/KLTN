@@ -1,14 +1,32 @@
-<div id="login_container">
-    <div id="login_box">
-        <div id="login_form_box">
+<div id="register_container">
+    <div id="background_register"></div>    
+    <div id="register_box">
+        <div id="register_form_box">
             <div class="header">
-            <span>Đăng ký</span>
-            <span style="font-size: 14px; color: black; font-weight: normal; margin-top: 10px;">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng</span>
+            <span>Đăng ký thành viên</span>
             </div>
             <div class="body">
-                <div class="form_login">
-                    <form class="form_login_box">
-                        <label>Email</label>
+                <div class="form_register">
+                    <form class="form_register_box">
+                        <label>Họ và tên</label>
+                        <p>
+                            <tui-input
+                                formControlName="testValue"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                            >
+                                Họ và tên
+                                <input
+                                    autocomplete="name"
+                                    placeholder="Nhập họ và tên"
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </p>
+                    </form>
+                    <form class="form_register_box">
+                        <label style="margin-top: 10px;">Email</label>
                         <p>
                             <tui-input
                                 formControlName="testValue"
@@ -25,7 +43,7 @@
                             </tui-input>
                         </p>
                     </form>
-                    <form class="form_login_box">
+                    <form class="form_register_box">
                         <label style="margin-top: 10px;">Mật khẩu</label>
                         <p>
                             <tui-input
@@ -43,30 +61,46 @@
                             </tui-input>
                         </p>
                     </form>
+                    <form class="form_register_box">
+                        <label style="margin-top: 10px;">Xác nhận mật khẩu</label>
+                        <p>
+                            <tui-input
+                                formControlName="testValue"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                            >
+                                Xác nhận mật khẩu
+                                <input
+                                    autocomplete="new-password"
+                                    placeholder="Xác nhận mật khẩu"
+                                    tuiTextfield
+                                    type="password"
+                                />
+                            </tui-input>
+                        </p>
+                    </form>
                 </div>
-                <div class="reset_pass" >
-                    <span>Quên mật khẩu</span>
-                </div>
-                <div  class="btn_login">
+                
+                <div  class="btn_register">
                         <button
                         appearance="primary"
                         tuiButton
                         type="button"
                         class="tui-space_right-3 tui-space_bottom-3"
                     >
-                        Đăng nhập
+                        Đăng ký
                     </button>
                 </div>
-                <span class="login_option">Hoặc đăng nhập bằng</span>
-                <div class="login_google" >
+                <span class="register_option">Hoặc đăng nhập bằng</span>
+                <div class="register_google" >
                     <div class="img_google">
-                        <img src="../../../assets/images/google_icon.png" alt="">
+                        <img src="../../../assets/images/icons8-google-30.png" alt="">
                     </div>
                     <span>Google</span>
                 </div>
                 <div class="register_box">
-                    <span>Bạn chưa có tài khoản?</span>
-                    <span style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng ký ngay</span>
+                    <span>Bạn đã có tài khoản?</span>
+                    <span (click)="login()" style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng nhập ngay</span>
                 </div>
             </div>
         </div>

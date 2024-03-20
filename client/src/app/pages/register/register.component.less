@@ -1,34 +1,50 @@
-#login_container {
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(270deg, rgb(0, 90, 255) 0%, rgb(0, 23, 68) 100%);
+#register_container {
+    height: 100vh;
+    width: 100vw;
+    //background: linear-gradient(270deg, rgb(0, 90, 255) 0%, rgb(0, 23, 68) 100%);
     display: flex;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
+    flex-direction: column;
 
-    #login_box {
+    #background_register {
+        min-height: 188px;
+        width: 100vw;
+        background: linear-gradient(270deg, rgb(0, 90, 255) 0%, rgb(0, 23, 68) 100%);
+    }
+
+    #register_box {
         width: calc(50% - 120px);
-        height: calc(85% - 120px);
+        //height: calc(100% - 60px);
         background-color: white;
-        padding: 60px;
+        padding: 40px;
+        position: absolute;
+        top: 5%;
+        border-radius: 10px;
+        box-shadow: 0px 0px 8px -1px rgba(124, 105, 105, 0.54);
+        -webkit-box-shadow: 0px 0px 8px -1px rgba(124, 105, 105, 0.54);
+        -moz-box-shadow: 0px 0px 8px -1px rgba(124, 105, 105, 0.54);
+        
 
-        #login_form_box {
+        #register_form_box {
             width: 600px;
+            height: 100%;
             margin: 0 auto;
 
             .header {
                 display: flex;
-                flex-direction: column;
+                justify-content: center;
+
                 span {
-                    font-size: 20px;
+                    font-size: 32px;
                     font-weight: 600;
                     color: #526ed3;
                 }
             }
 
             .body {
-                .form_login {
-                    .form_login_box {
+                .form_register {
+                    .form_register_box {
                         margin-top: 1rem;
 
                         label {
@@ -37,15 +53,7 @@
                         }
                     }
                 }
-
-                .reset_pass {
-                    font-size: 14px;
-                    color: #526ed3;
-                    display: flex;
-                    justify-content: flex-end;
-                }
-
-                .btn_login {
+                .btn_register {
                     display: flex;
                     justify-content: center;
 
@@ -58,7 +66,7 @@
                     }
                 }
 
-                .login_option {
+                .register_option {
                     font-size: 14px;
                     width: 100%;
                     display: flex;
@@ -66,15 +74,19 @@
                     margin: 15px 0;
                 }
 
-                .login_google {
+                .register_google {
                     font-size: 14px;
-                    padding: 12px;
+                    padding: 14px;
                     background-color: #E73B2F;
                     cursor: pointer;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    border-radius: 5px;
                     .img_google{
-                        width: 30px;
-                        height: 30px;
-                        margin-right: 10px;
+                        width: 20px;
+                        height: 20px;
+                        margin-right: 5px;
                         img{
                             width: 100%;
                             height: 100%;
@@ -86,15 +98,13 @@
                         color: white;
                         font-weight: 600;
                         display: flex;
-                        
-                        justify-content: center;
+                        //justify-content: center;
                     }
                 }
-
                 .register_box{
                     display: flex;
                     justify-content: center;
-                    margin-top: 20px;
+                    margin-top: 10px;
                     span{
                         font-size: 14px;
                     }
