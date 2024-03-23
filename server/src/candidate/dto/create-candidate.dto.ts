@@ -6,6 +6,7 @@ export class CreateCandidateDto {
         public Gender: string,
         public Storage: string,
         public Phone: string,
+        public Email: string,
         public Address: string,
         public Position: string,
         public Experience: number,

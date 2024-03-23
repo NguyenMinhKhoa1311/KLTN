@@ -3,6 +3,7 @@ export class CreateRecruiterDto {
         public  RecruiterId: string,
         public User: string,
         public  Name: string,
+        public  Email: string,
         public  Storage: string,
         public  Avatar: string,
         public  Phone: string,

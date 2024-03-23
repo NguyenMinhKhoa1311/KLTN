@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
 
 export type CareerDocument = HydratedDocument<Career>;
 
@@ -10,5 +10,12 @@ export class Career {
 
     @Prop({required: true})
     Name: string;
+
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Field'
+    })
+    Field: string;
 }
 export const CareerSchema = SchemaFactory.createForClass(Career);

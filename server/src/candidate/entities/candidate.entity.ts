@@ -18,6 +18,7 @@ export class Candidate {
     @Prop({required: true})
     Phone: string;
 
+
     @Prop({required: true})
     Address: string;
 
@@ -50,10 +51,8 @@ export class Candidate {
 
     @Prop({
         required: true,
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'CandidateLanguage',
     })
-    Languages: [mongoose.Schema.Types.ObjectId];
+    Languages: string;
 
     @Prop({required: true})
     Avatar: string;

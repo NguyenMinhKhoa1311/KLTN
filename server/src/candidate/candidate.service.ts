@@ -33,7 +33,13 @@ export class CandidateService {
     try{
       const candidate = await this.CandidateModel.findOne({ User: user }).exec();
       if(!candidate){
-        throw new  HttpException("Candidate not found", 404);
+        return {
+          _id: "404 candidate not found",
+          CandidateId: "404 candidate not found",
+          Name: "404 candidate not found",
+          Avatar: "404 candidate not found",
+          Gender: "404 candidate not found",
+        }
       }
       return candidate;
     }
