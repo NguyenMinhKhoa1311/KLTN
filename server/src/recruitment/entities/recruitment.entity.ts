@@ -31,6 +31,9 @@ export class Recruitment {
     Recruiter: string;
 
     @Prop({required: true})
+    StatusSeenOfRecruiter: boolean;
+
+    @Prop({required: true})
     Status: boolean;
 
     @Prop({required: true})

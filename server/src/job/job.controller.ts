@@ -44,6 +44,56 @@ export class JobController {
       throw err
     }
   }
+  @Get('getByField')
+  async getByField(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('field') field: string
+    ) {
+    try{
+      const job = await this.jobService.getByField(page, limit, sortBy, sortOrder,field);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+  @Get('getByCareer')
+  async getByCareer(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('career') career: string
+    ) {
+    try{
+      const job = await this.jobService.getByCareer(page, limit, sortBy, sortOrder, career);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+  @Get('getByPriority')
+  async getByPriority(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('priority') priority: number
+    ) {
+    try{
+      const job = await this.jobService.getByPriority(page, limit, sortBy, sortOrder,priority);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
 
   
   @Put('updateStatusPayment')

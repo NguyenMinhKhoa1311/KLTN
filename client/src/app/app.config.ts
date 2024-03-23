@@ -15,6 +15,12 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideHttpClient } from "@angular/common/http";
+import { userReducer } from "./ngrx/reducers/user.reducer";
+import { UserEffects } from "./ngrx/effects/user.effects";
+import { candidateReducer } from "./ngrx/reducers/candidate.reducer";
+import { CandidateEffects } from "./ngrx/effects/candidate.effects";
+import { jobReducer } from "./ngrx/reducers/job.reducer";
+import { JobEffects } from "./ngrx/effects/job.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,8 +37,15 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(provideStorage(() => getStorage())),
     provideStore(), 
     provideState({name:'auth', reducer: authReducer}),
+    provideState({name:'user', reducer: userReducer}),
+    provideState({name:'candidate', reducer: candidateReducer}),
+    provideState({name:'job', reducer: jobReducer}),
     provideEffects([
-      AuthEffects
+      AuthEffects,
+      UserEffects,
+      CandidateEffects,
+      JobEffects
+
     ]),
     provideHttpClient(),
     

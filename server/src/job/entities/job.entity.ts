@@ -15,11 +15,11 @@ export class Job {
     Description: string;
 
     @Prop({
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Company',
-        required: true
+        required: true,
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Recruitment'
     })
-    Company: string;
+    Recruitment: [mongoose.Schema.Types.ObjectId];
 
     @Prop({
         required: true,
@@ -32,7 +32,7 @@ export class Job {
     Location: string;
 
     @Prop({required: true})
-    Salary: number;
+    Salary: string;
 
     @Prop({
         required: true
@@ -52,29 +52,39 @@ export class Job {
     Field: string;
 
     @Prop({required: true})
+    StartDate: Date;
+
+    @Prop({required: true})
     EndDate: Date;
 
     @Prop({required: true})
     StatusPayment: boolean;
 
     @Prop({required: true})
-    StatusRecruitment: boolean;
-
-    @Prop({required: true})
     Requirement: string;
 
     @Prop({
         required: true,
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Tag'
     })
-    Tags: [mongoose.Schema.Types.ObjectId];
+    Tags: string[];
 
     @Prop({required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ServicePackage'
     })
     ServicePackage: string;
+
+    @Prop({required: true})
+    Priority: number;
+
+    @Prop({required: true})
+    Hot: boolean;
+
+    @Prop({required: true})
+    ColorTitle: boolean;
+
+    @Prop({required: true})
+    Urgent: boolean;
 
 }
 

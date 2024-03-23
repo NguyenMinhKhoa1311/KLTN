@@ -1,9 +1,15 @@
+
 import { UserFirebase } from "../../models/userFirebase.model";
 
+
 export interface AuthState {
-  userFirebase: UserFirebase
-  isLoading: boolean;
-  isSuccessful: boolean;
-  errorMessage: string;
-  isLogoutSuccess: boolean;
+  user: UserFirebase;
+  
+  isLoginLoading: boolean;
+  isLoginSuccessfull: boolean;
+  loginErrorMessage: string;
+
+  isLogoutLoading: boolean;
+  isLogoutSuccessfull: boolean;
+  logoutErrorMessage: string;
 }
