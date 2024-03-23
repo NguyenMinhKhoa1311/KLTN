@@ -1,10 +1,10 @@
 #home_container{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: #003699;
     //padding-top: 4rem;
     .home_box{
-        width: 90%;
+        width: calc(85% + 20px);
         height: 45rem;
         margin: 0 auto;
         .search_home{
@@ -115,5 +115,132 @@
             }
             
         }
+        
+    }
+}
+
+.best_work{
+    width: 100vw;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    .best_work_box{
+        width: calc(85% - 20px);
+        //height: 1rem;
+        border: 1px solid #ccdeff;
+        border-radius: 6px;
+        .header{
+            //width: 100%;
+            //height: 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 20px;
+            background-color: #F2F7FF;
+            border-radius: 6px 6px 0 0;
+            .title{
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+            .see_more{
+                font-size: 1rem;
+                color: #005AFF;
+                cursor: pointer;
+            }
+        }
+
+        .body{
+            padding: 20px;
+            //background-color: bisque;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            
+            justify-content: center;
+            .item_box{
+                width: 23.5rem;
+                border: 1px solid rgb(207, 224, 255);
+                margin: 5px;
+                border-radius: 12px;
+                padding: 16px 12px;
+                display: flex;
+                
+                justify-content: space-between;
+                .img_logo{
+                    width: 27%;
+                    height: 100%;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 12px;
+                    }
+                }
+                .item_content{
+                    width: 60%;
+                    display: flex;
+                    flex-direction: column;
+                    
+                    
+                    gap: 4px;
+                    .job_name{
+                        font-size: 16px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        white-space: nowrap; /* Ngăn không cho văn bản ngắn xuống dòng */
+                        overflow: hidden; /* Ẩn phần văn bản vượt quá phạm vi */
+                        text-overflow: ellipsis; /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                    }
+                    .job_name:hover{
+                        color: #FF7D55;
+                    }
+
+                    .company_name{
+                        font-size: 14px;
+                        cursor: pointer;
+                    }
+                    .company_name:hover{
+                        color: #FF7D55;
+                    }
+                    .salary{
+                        font-size: 14px;
+                        color: #FF7D55;
+                    }
+                    .address{
+                        font-size: 14px;
+                    }
+                }
+
+                .item_hot{
+                    width: 10%;
+                    
+                    .hot_box{
+                        width: 100%;
+                        background-color: #FCEDED;
+                        border-radius: 8px;
+                        padding: 2px;
+                        display: flex;
+                        align-items: center;
+                        color: #DC362E;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.key_industries{
+    margin-top: 50px;
+    width: 100vw;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .wrapper{
+        width: calc(85% - 20px);
+        display: flex;
+        flex-direction: row;
     }
 }

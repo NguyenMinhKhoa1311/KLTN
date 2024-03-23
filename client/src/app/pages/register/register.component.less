@@ -78,11 +78,12 @@
                     font-size: 14px;
                     padding: 14px;
                     background-color: #E73B2F;
-                    cursor: pointer;
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
                     border-radius: 5px;
+                    position: relative;
+                   
                     .img_google{
                         width: 20px;
                         height: 20px;
@@ -100,6 +101,21 @@
                         display: flex;
                         //justify-content: center;
                     }
+                }
+
+                .register_google:hover::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #dfe3f3 !important;
+                    opacity: 0.2; /* Tùy chỉnh độ mờ */
+                }
+
+                .register_google:hover {
+                    cursor: pointer;
                 }
                 .register_box{
                     display: flex;
