@@ -1,0 +1,20 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Job } from '../../models/job.model';
+import { URL } from '../../../environments/environments';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class JobService {
+
+  constructor(private httpClient: HttpClient) {}
+
+  getByField(field: string, page: number, limit: number, sortBy: string, sortOrder: string) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByField?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&field=${field}`);
+  }
+
+  getByCareer(career: string, page: number, limit: number, sortBy: string, sortOrder: string) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareer?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&career=${career}`);
+  }
+}
