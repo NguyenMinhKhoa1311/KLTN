@@ -11,6 +11,7 @@ import * as JobActions from '../../../ngrx/actions/job.actions';
 import { FieldState } from '../../../ngrx/states/field.state';
 import * as FieldActions from '../../../ngrx/actions/field.actions';
 
+import { Career } from '../../../models/career.model';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -27,6 +28,8 @@ export class HomeComponent {
   isGetJobsByCareerAtHome$ = this.store.select('job', 'isGetByCareerAtHomeSuccess');
   jobsTakenByField$ = this.store.select('job', 'jobTakenByFieldAtHome');
   jobsTakenByCareer$ = this.store.select('job', 'jobTakenByCareerAtHome');
+  careerList : Career[] = [];
+
 
   //ngrx for field
   isGetFieldsAtHome$ = this.store.select('field', 'isGetFieldAtHomeSuccess');
@@ -78,14 +81,51 @@ export class HomeComponent {
       }
     });
   }
+
+  index_outstanding = 0;
+  index_item = 0;
   index = 2;
  
   readonly items = [
-      'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-2.jpg',
-      'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-4.jpg',
-      'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-5.jpg',
-      'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-6.jpg',
-      'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-13.jpg',
-      'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-17.jpg',
-  ];
+      {
+          img: 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-2.jpg',
+          title: 'Image',
+      },
+      {
+        img: 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-4.jpg',
+        title: 'Image',
+      },
+      {
+        img: 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-5.jpg',
+        title: 'Image',
+      },
+      {
+        img: 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-6.jpg',
+        title: 'Image',
+      },
+      {
+        img: 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-13.jpg',
+        title: 'Image',
+      },
+    ];
+
+    readonly bestWorkList = [
+      {
+        nameWork: 'Truong phong kinh doanh kinh te',
+        company: 'Google',
+        location: 'USA',
+      },
+      {
+        nameWork: 'Truong phong kinh qweqweqweqweqwe',
+        company: 'Google',
+        location: 'USA',
+      },
+      {
+        nameWork: 'Truong phong kinh danh kinh te',
+        company: 'Google',
+        location: 'USA',
+      },
+    ];
+
+
 }

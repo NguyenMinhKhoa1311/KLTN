@@ -1,0 +1,66 @@
+#createProfile_container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #createProfile_box{
+        width: 70%;
+        //height: 60%;
+        background-color: aquamarine;
+        margin: auto;
+        padding: 10px;
+        
+        #header{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            .title{
+                font-size: 2.2rem;
+                margin-bottom: 15px;
+                font-weight: 600;
+            }
+            .title_2{
+                font-size: 1.2rem;
+            }
+        }
+
+        #body{
+            .row1{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                margin: 12px 0;
+                .dateTime_box, .phone_box, .render_box{
+                    width: 48%;
+                    .b-form{
+                        margin-top: 5px;
+                    }
+                    .title{
+                        font-size: 14px;
+                        font-weight: 600;
+                        margin-bottom: 12px;
+                    }
+                    .title::before{
+                        content: "*";
+                        color: rgb(220, 54, 46);
+                        margin-right: 4px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// <div class="render_box">
+//                     <span class="title">Ngày sinh</span>
+//                     <div class="render_male">
+//                         <span>Nam</span>
+//                         <tui-radio
+//                             formControlName="testValue1"
+//                             item="One"
+//                             class="tui-space_bottom-3"
+//                         ></tui-radio>
+//                     </div>
+//                 </div>
