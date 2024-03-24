@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Query } from '@nestjs/common';
 import { FieldService } from './field.service';
 import { CreateFieldDto } from './dto/create-field.dto';
 import { UpdateFieldDto } from './dto/update-field.dto';
@@ -19,10 +19,34 @@ export class FieldController {
   }
   @Get('getAll')
   async findAllAndSort(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
   ){
     try{
-      const fields =  await this.fieldService.getAll();
+      const fields =  await this.fieldService.getAllWithLimit(page, limit);
       return fields;
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
+  @Put('increase')
+  async increase(@Body() id: string){
+    try{
+      const field = await this.fieldService.increase(id);
+      return field;
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
+  @Put('decrease')
+  async decrease(@Body() id: string){
+    try{
+      const field = await this.fieldService.decrease(id);
+      return field;
     }
     catch(err){
       throw err;

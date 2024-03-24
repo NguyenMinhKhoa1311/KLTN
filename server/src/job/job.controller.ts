@@ -3,11 +3,18 @@ import { JobService } from './job.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { log } from 'console';
+import { FieldService } from 'src/field/field.service';
+import { CareerService } from 'src/career/career.service';
 
 
 @Controller('job')
 export class JobController {
-  constructor(private readonly jobService: JobService) {}
+  constructor(
+    private readonly jobService: JobService,
+    private readonly fieldService: FieldService,
+    private readonly careerService: CareerService,
+    
+    ) {}
 
   @Post('create')
   async create(@Body() createJobDto: CreateJobDto) {
@@ -54,6 +61,7 @@ export class JobController {
     ) {
     try{
       const job = await this.jobService.getByField(page, limit, sortBy, sortOrder,field);
+      
       return job
     }
     catch(err){

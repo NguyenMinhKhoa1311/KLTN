@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { CareerService } from './career.service';
 import { CreateCareerDto } from './dto/create-career.dto';
 import { UpdateCareerDto } from './dto/update-career.dto';
@@ -17,24 +17,27 @@ export class CareerController {
       throw err;
     }
   }
-
-  @Get()
-  findAll() {
-    return this.careerService.findAll();
+  @Put('increase')
+  async increase(@Body() id: string){
+    try{
+      const career = await this.careerService.increase(id);
+      return career;
+    }
+    catch(err){
+      throw err;
+    }
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.careerService.findOne(+id);
+  @Put('decrease')
+  async decrease(@Body() id: string){
+    try{
+      const career = await this.careerService.decrease(id);
+      return career;
+    }
+    catch(err){
+      throw err;
+    }
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCareerDto: UpdateCareerDto) {
-    return this.careerService.update(+id, updateCareerDto);
-  }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.careerService.remove(+id);
-  }
 }
