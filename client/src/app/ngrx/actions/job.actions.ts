@@ -8,7 +8,7 @@ export const getByFieldAtHome = createAction(
 
 export const getByFieldAtHomeSuccess = createAction(
     '[Job] Get By Field At Home Success',
-    props<{ jobs: Job }>()
+    props<{ jobs: Job[] }>()
 );
 
 export const getByFieldAtHomeFailure = createAction(
@@ -23,10 +23,26 @@ export const getByCareerAtHome = createAction(
 
 export const getByCareerAtHomeSuccess = createAction(
     '[Job] Get By Career At Home Success',
-    props<{ jobs: Job }>()
+    props<{ jobs: Job[] }>()
 );
 
 export const getByCareerAtHomeFailure = createAction(
     '[Job] Get By Career At Home Failure',
+    props<{ error: string }>()
+);
+
+
+export const getByHotJobAtHome = createAction(
+    '[Job] Get By Hot Job At Home',
+    props<{ page: number; limit: number; sortBy: string; sortOrder: string }>()
+);
+
+export const getByHotJobAtHomeSuccess = createAction(
+    '[Job] Get By Hot Job At Home Success',
+    props<{ jobs: Job[] }>()
+);
+
+export const getByHotJobAtHomeFailure = createAction(
+    '[Job] Get By Hot Job At Home Failure',
     props<{ error: string }>()
 );

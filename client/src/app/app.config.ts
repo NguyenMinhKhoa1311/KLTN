@@ -21,6 +21,10 @@ import { candidateReducer } from "./ngrx/reducers/candidate.reducer";
 import { CandidateEffects } from "./ngrx/effects/candidate.effects";
 import { jobReducer } from "./ngrx/reducers/job.reducer";
 import { JobEffects } from "./ngrx/effects/job.effects";
+import { fieldReducer } from "./ngrx/reducers/field.reducer";
+import { FieldEffects } from "./ngrx/effects/field.effects";
+import { companyReducer } from "./ngrx/reducers/company.reducer";
+import { CompanyEffects } from "./ngrx/effects/company.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,11 +44,15 @@ export const appConfig: ApplicationConfig = {
     provideState({name:'user', reducer: userReducer}),
     provideState({name:'candidate', reducer: candidateReducer}),
     provideState({name:'job', reducer: jobReducer}),
+    provideState({name:'field', reducer: fieldReducer}),
+    provideState({name:'company', reducer: companyReducer}),
     provideEffects([
       AuthEffects,
       UserEffects,
       CandidateEffects,
-      JobEffects
+      JobEffects,
+      FieldEffects,
+      CompanyEffects
 
     ]),
     provideHttpClient(),

@@ -28,6 +28,7 @@ export interface Job{
      Hot: boolean,
      ColorTitle: boolean,
      Urgent: boolean,
+     ImageOfCompany: string,
         createAt: Date;
         updateAt: Date;
 }
