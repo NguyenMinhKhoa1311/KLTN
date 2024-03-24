@@ -1,62 +1,73 @@
-#home_container{
+#home_container {
     width: 100vw;
     height: 100vh;
     background-color: #003699;
+
     //padding-top: 4rem;
-    .home_box{
+    .home_box {
         width: calc(85% + 20px);
         height: 45rem;
         margin: 0 auto;
-        .search_home{
+
+        .search_home {
             height: 10%;
             padding: 0 20px;
-            .search_box{
+
+            .search_box {
                 border-radius: 68px;
                 //width: 100%;
                 height: 3rem;
                 background-color: #002466;
                 display: flex;
                 padding: 10px;
-                .search_information{
+
+                .search_information {
                     background-color: #ffffff;
                     height: 100%;
                     width: 100%;
                     border-radius: 68px;
                     display: flex;
                     flex-direction: row;
-                    .search_img{
+
+                    .search_img {
                         width: 4%;
                         height: 100%;
                         //margin: 0 0 0 0.5rem;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        svg{
+
+                        svg {
                             width: 1.5rem;
                             height: 1.5rem;
                         }
                     }
-                    .search{
+
+                    .search {
                         width: 80%;
                         height: 100%;
-                        input{
+
+                        input {
                             width: 100%;
                             height: 100%;
                             border: none;
                             font-size: 1rem;
-                            &:focus{
+
+                            &:focus {
                                 outline: none;
                             }
                         }
                     }
-                    .search_btn{
+
+                    .search_btn {
                         width: 18%;
                         height: 100%;
                         //margin: 0 0.5rem 0 0;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        .search_btn_box{
+
+                        .search_btn_box {
                             width: 80%;
                             height: 60%;
                             padding: 5px;
@@ -66,72 +77,79 @@
                             align-items: center;
                             justify-content: center;
                             cursor: pointer;
-                            
-                            span{
-                                
+
+                            span {
+
                                 font-size: 1rem;
                                 color: white;
                             }
                         }
-                        :hover{
+
+                        :hover {
                             background-color: #347BFF;
                         }
                     }
-                    
+
                 }
             }
         }
 
-        .carousel_home{
+        .carousel_home {
             width: 100%;
             height: 90%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            .carousel_container{
+
+            .carousel_container {
                 border-radius: 1rem;
-                .carousel_item{
+
+                .carousel_item {
                     height: 35rem;
                     padding: 0;
                     border: none !important;
-                    .img_copany{
+
+                    .img_copany {
                         width: 100%;
                         height: 80%;
-                        
-                        img{
+
+                        img {
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
                             border-radius: 1rem;
                         }
                     }
-                    
+
                 }
             }
-            .pagination{
+
+            .pagination {
                 margin: 5px 0 0 0;
                 color: black;
             }
-            
+
         }
-        
+
     }
 }
 
-.best_work{
+.best_work {
     width: 100vw;
     height: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 50px;
-    .best_work_box{
+
+    .best_work_box {
         width: calc(85% - 20px);
         //height: 1rem;
         border: 1px solid #ccdeff;
         border-radius: 6px;
-        .header{
+
+        .header {
             //width: 100%;
             //height: 5rem;
             display: flex;
@@ -140,107 +158,373 @@
             padding: 25px 20px;
             background-color: #F2F7FF;
             border-radius: 6px 6px 0 0;
-            .title{
+
+            .title {
                 font-size: 1.5rem;
                 font-weight: bold;
             }
-            .see_more{
+
+            .see_more {
                 font-size: 1rem;
                 color: #005AFF;
                 cursor: pointer;
             }
         }
 
-        .body{
-            padding: 20px;
+        .body {
+
             //background-color: bisque;
             display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            
-            justify-content: center;
-            .item_box{
-                width: 23.5rem;
-                border: 1px solid rgb(207, 224, 255);
-                margin: 5px;
-                border-radius: 12px;
-                padding: 16px 12px;
-                display: flex;
-                
-                justify-content: space-between;
-                .img_logo{
-                    width: 27%;
-                    height: 100%;
-                    img{
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: 12px;
-                    }
-                }
-                .item_content{
-                    width: 60%;
-                    display: flex;
-                    flex-direction: column;
-                    
-                    
-                    gap: 4px;
-                    .job_name{
-                        font-size: 16px;
-                        font-weight: bold;
-                        cursor: pointer;
-                        white-space: nowrap; /* Ngăn không cho văn bản ngắn xuống dòng */
-                        overflow: hidden; /* Ẩn phần văn bản vượt quá phạm vi */
-                        text-overflow: ellipsis; /* Thêm dấu ba chấm cho văn bản đã ẩn */
-                    }
-                    .job_name:hover{
-                        color: #FF7D55;
-                    }
+            flex-direction: column;
 
-                    .company_name{
-                        font-size: 14px;
-                        cursor: pointer;
-                    }
-                    .company_name:hover{
-                        color: #FF7D55;
-                    }
-                    .salary{
-                        font-size: 14px;
-                        color: #FF7D55;
-                    }
-                    .address{
-                        font-size: 14px;
-                    }
-                }
+            .wrapper {
+                padding: 0 !important;
 
-                .item_hot{
-                    width: 10%;
-                    
-                    .hot_box{
-                        width: 100%;
-                        background-color: #FCEDED;
-                        border-radius: 8px;
-                        padding: 2px;
+                .carousel {
+                    .item_carousel {
                         display: flex;
-                        align-items: center;
-                        color: #DC362E;
+                        flex-direction: row;
+                        justify-content: space-between;
+
+                        .item_box_column {
+                            display: flex;
+                            flex-direction: column;
+                            height: 26rem;
+                            padding: 10px 0;
+                            gap: 8px;
+
+                            .item_box {
+                                width: 23.5rem;
+                                border: 1px solid rgb(207, 224, 255);
+                                margin: 5px;
+                                border-radius: 12px;
+                                padding: 16px 12px;
+                                display: flex;
+                                justify-content: space-between;
+
+                                .img_logo {
+                                    width: 27%;
+                                    height: 100%;
+
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                        border-radius: 12px;
+                                    }
+                                }
+
+                                .item_content {
+                                    width: 60%;
+                                    display: flex;
+                                    flex-direction: column;
+
+
+                                    gap: 4px;
+
+                                    .job_name {
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                        cursor: pointer;
+                                        white-space: nowrap;
+                                        /* Ngăn không cho văn bản ngắn xuống dòng */
+                                        overflow: hidden;
+                                        /* Ẩn phần văn bản vượt quá phạm vi */
+                                        text-overflow: ellipsis;
+                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                    }
+
+                                    .job_name:hover {
+                                        color: #FF7D55;
+                                    }
+
+                                    .company_name {
+                                        font-size: 14px;
+                                        cursor: pointer;
+                                    }
+
+                                    .company_name:hover {
+                                        color: #FF7D55;
+                                    }
+
+                                    .salary {
+                                        font-size: 14px;
+                                        color: #FF7D55;
+                                    }
+
+                                    .address {
+                                        font-size: 14px;
+                                    }
+                                }
+
+                                .item_hot {
+                                    width: 10%;
+
+                                    .hot_box {
+                                        width: 100%;
+                                        background-color: #FCEDED;
+                                        border-radius: 8px;
+                                        padding: 2px;
+                                        display: flex;
+                                        align-items: center;
+                                        color: #DC362E;
+                                    }
+                                }
+                            }
+                        }
                     }
+                }
+            }
+
+            .control_item {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                button {
+                    border-radius: 50%;
+                    height: 35px;
+                    width: 35px;
+                    margin: 10px 20px 20px 20px;
                 }
             }
         }
     }
 }
 
-.key_industries{
+.key_industries {
     margin-top: 50px;
     width: 100vw;
     height: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
-    .wrapper{
-        width: calc(85% - 20px);
+    flex-direction: column;
+
+    .title {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .wrapper {
+        width: 92%;
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        .carousel {
+            border: none !important;
+            border-radius: 12px;
+        }
+
+        .carousel_industries {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .item_industries {
+                width: calc(15rem - 40px);
+                height: calc(13rem - 40px);
+                background-color: #F2F7FF;
+                border-radius: 12px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+
+                .logo_industries {
+                    //width: 50%;
+                    height: 90px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .name_industries {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    //margin: 20px 0;
+                }
+
+                .quantity_industries {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        .tui-island_size_m {
+            padding: 0 !important;
+        }
+
+    }
+}
+
+.outstanding_jobs {
+    width: 100vw;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+
+    .best_work_box {
+        width: calc(85% - 20px);
+        //height: 1rem;
+        border: 1px solid #ccdeff;
+        border-radius: 6px;
+
+        .header {
+            //width: 100%;
+            //height: 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 20px;
+            background-color: #F2F7FF;
+            border-radius: 6px 6px 0 0;
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .hightLight {
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin-left: 5px;
+            }
+
+            .see_more {
+                font-size: 1rem;
+                color: #005AFF;
+                cursor: pointer;
+            }
+        }
+
+        .body {
+
+            //background-color: bisque;
+            display: flex;
+            flex-direction: column;
+
+            .wrapper {
+                padding: 0 !important;
+
+                .carousel {
+                    .item_carousel {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+
+                        .item_box_column {
+                            display: flex;
+                            flex-direction: column;
+                            height: 26rem;
+                            padding: 10px 0;
+                            gap: 8px;
+
+                            .item_box {
+                                width: 23.5rem;
+                                border: 1px solid rgb(207, 224, 255);
+                                margin: 5px;
+                                border-radius: 12px;
+                                padding: 16px 12px;
+                                display: flex;
+                                justify-content: space-between;
+
+                                .img_logo {
+                                    width: 27%;
+                                    height: 100%;
+
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                        border-radius: 12px;
+                                    }
+                                }
+
+                                .item_content {
+                                    width: 60%;
+                                    display: flex;
+                                    flex-direction: column;
+
+
+                                    gap: 4px;
+
+                                    .job_name {
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                        cursor: pointer;
+                                        white-space: nowrap;
+                                        /* Ngăn không cho văn bản ngắn xuống dòng */
+                                        overflow: hidden;
+                                        /* Ẩn phần văn bản vượt quá phạm vi */
+                                        text-overflow: ellipsis;
+                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                    }
+
+                                    .job_name:hover {
+                                        color: #FF7D55;
+                                    }
+
+                                    .company_name {
+                                        font-size: 14px;
+                                        cursor: pointer;
+                                    }
+
+                                    .company_name:hover {
+                                        color: #FF7D55;
+                                    }
+
+                                    .salary {
+                                        font-size: 14px;
+                                        color: #FF7D55;
+                                    }
+
+                                    .address {
+                                        font-size: 14px;
+                                    }
+                                }
+
+                                .item_hot {
+                                    width: 10%;
+
+                                    .hot_box {
+                                        width: 100%;
+                                        background-color: #FCEDED;
+                                        border-radius: 8px;
+                                        padding: 2px;
+                                        display: flex;
+                                        align-items: center;
+                                        color: #DC362E;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .control_item {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                button {
+                    border-radius: 50%;
+                    height: 35px;
+                    width: 35px;
+                    margin: 10px 20px 20px 20px;
+                }
+            }
+        }
     }
 }
