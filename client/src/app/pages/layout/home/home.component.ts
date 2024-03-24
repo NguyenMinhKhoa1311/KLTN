@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { ShareModule } from '../../../shared/shared.module';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { Career } from '../../../models/career.model';
   styleUrl: './home.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
 
   isGetJobsByFieldAtHome$ = this.store.select('job', 'isGetByFieldAtHomeSuccess');
@@ -48,10 +48,21 @@ export class HomeComponent {
     });
   }
 
+
+
   index_outstanding = 0;
   index_item = 0;
   index = 2;
- 
+  
+
+
+
+  ngOnInit() {
+    
+  }
+
+  
+
   readonly items = [
       {
           img: 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-2.jpg',
@@ -79,19 +90,54 @@ export class HomeComponent {
       {
         nameWork: 'Truong phong kinh doanh kinh te',
         company: 'Google',
-        location: 'USA',
+        location: '1',
       },
       {
         nameWork: 'Truong phong kinh qweqweqweqweqwe',
         company: 'Google',
-        location: 'USA',
+        location: '2',
       },
       {
         nameWork: 'Truong phong kinh danh kinh te',
         company: 'Google',
-        location: 'USA',
+        location: '3',
       },
+      {
+        nameWork: 'Truong phong kinh doanh kinh te',
+        company: 'Google',
+        location: '4',
+      },
+      {
+        nameWork: 'Truong phong kinh qweqweqweqweqwe',
+        company: 'Google',
+        location: '5',
+      },
+      {
+        nameWork: 'Truong phong kinh danh kinh te',
+        company: 'Google',
+        location: '6',
+      },
+      {
+        nameWork: 'Truong phong kinh doanh kinh te',
+        company: 'Google',
+        location: '7',
+      },
+      {
+        nameWork: 'Truong phong kinh doanh kinh te',
+        company: 'Google',
+        location: '8',
+      },
+      {
+        nameWork: 'Truong phong kinh doanh kinh te',
+        company: 'Google',
+        location: '9',
+      },
+      
+     
+      
+      
     ];
+    
 
 
 }
