@@ -95,6 +95,33 @@ export class JobController {
     }
   }
 
+  @Get('getByHotJob')
+  async getByHotJob(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    ) {
+    try{
+      const job = await this.jobService.getByHotJob(page, limit, sortBy, sortOrder);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+  @Get('getById')
+  async getById(@Query('id') id: string) {
+    try{
+      const job = await this.jobService.getById(id);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  };
+
   
   @Put('updateStatusPayment')
   async updateStatusPayment(@Query('id') id: string, @Body() status: any) {
@@ -116,6 +143,8 @@ export class JobController {
       throw err
     }
   }
+
+
 
 
 }

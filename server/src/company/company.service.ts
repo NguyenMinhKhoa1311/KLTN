@@ -22,19 +22,8 @@ export class CompanyService {
     }
   }
 
-  findAll() {
-    return `This action returns all company`;
+  async getAllWithLimit(limit: number, page: number) {
+      return await this.CompanyModel.find().limit(limit).skip(limit * page);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} company`;
-  }
-
-  update(id: number, updateCompanyDto: UpdateCompanyDto) {
-    return `This action updates a #${id} company`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} company`;
-  }
 }

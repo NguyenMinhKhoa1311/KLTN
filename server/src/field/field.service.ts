@@ -22,19 +22,11 @@ constructor(
     }
   }
 
-  findAll() {
-    return `This action returns all field`;
+  async getAll(){
+
+    const fields = await this.FieldModel.find().find().exec();
+    return fields
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} field`;
-  }
 
-  update(id: number, updateFieldDto: UpdateFieldDto) {
-    return `This action updates a #${id} field`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} field`;
-  }
 }

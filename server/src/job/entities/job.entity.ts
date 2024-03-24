@@ -86,6 +86,9 @@ export class Job {
     @Prop({required: true})
     Urgent: boolean;
 
+    @Prop({required: true})
+    ImageOfCompany: string;
+
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

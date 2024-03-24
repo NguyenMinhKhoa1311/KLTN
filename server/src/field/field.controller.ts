@@ -17,24 +17,17 @@ export class FieldController {
       throw err;
     }
   }
-
-  @Get()
-  findAll() {
-    return this.fieldService.findAll();
+  @Get('getAll')
+  async findAllAndSort(
+  ){
+    try{
+      const fields =  await this.fieldService.getAll();
+      return fields;
+    }
+    catch(err){
+      throw err;
+    }
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fieldService.findOne(+id);
-  }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFieldDto: UpdateFieldDto) {
-    return this.fieldService.update(+id, updateFieldDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.fieldService.remove(+id);
-  }
 }
