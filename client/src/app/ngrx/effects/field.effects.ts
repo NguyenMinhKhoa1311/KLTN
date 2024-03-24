@@ -13,17 +13,17 @@ export class FieldEffects {
     getAllFields$ = createEffect(()=>
     this.action$.pipe(
         ofType(FieldActions.getFieldAtHome),
-        exhaustMap(() =>
-         this.fieldService.getAll().pipe(
+        exhaustMap((action) =>
+         this.fieldService.getAll(action.page,action.limit).pipe(
             map((fields)=>{
                 if(fields != undefined || fields != null){
                     return FieldActions.getFieldAtHomeSuccess({fields: fields})
                 }
                 else{
-                    return FieldActions.getAllFieldsFailure({error: "Get All Fields Failure"})
+                    return FieldActions.getFieldAtHomeFailure({err: "Get All Fields Failure"})
                 }
             }),
-            catchError((error) => of(FieldActions.getAllFieldsFailure({error: error})))))
+            catchError((error) => of(FieldActions.getFieldAtHomeFailure({err: error})))))
          )
     );
 }

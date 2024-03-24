@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { ShareModule } from '../../../shared/shared.module';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,12 @@ import * as JobActions from '../../../ngrx/actions/job.actions';
 import { FieldState } from '../../../ngrx/states/field.state';
 import * as FieldActions from '../../../ngrx/actions/field.actions';
 
-import { Career } from '../../../models/career.model';
+import { Job } from '../../../models/job.model';
+import { Field } from '../../../models/field.model';
+import { Subscription } from 'rxjs';
+
+
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -20,7 +25,12 @@ import { Career } from '../../../models/career.model';
   styleUrl: './home.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+
+
+export class HomeComponent implements OnDestroy {
+
+  subscriptions: Subscription[] = [];
+
   //ngrx of job
   isGetJobsByHotJobAtHome$ = this.store.select('job', 'isGetByHotJobAtHomeSuccess');
   jobsTakenByHotJob$ = this.store.select('job', 'jobTakenByHotJobAtHome');
@@ -28,7 +38,11 @@ export class HomeComponent {
   isGetJobsByCareerAtHome$ = this.store.select('job', 'isGetByCareerAtHomeSuccess');
   jobsTakenByField$ = this.store.select('job', 'jobTakenByFieldAtHome');
   jobsTakenByCareer$ = this.store.select('job', 'jobTakenByCareerAtHome');
-  careerList : Career[] = [];
+
+  JobGetByHotJob: Job[] = [];
+  JobGetByField: Job[] = [];
+  JobGetByCareer: Job[] = [];
+  fields: Field[] = [];
 
 
   //ngrx for field
@@ -40,52 +54,73 @@ export class HomeComponent {
     private router: Router
   ){
 
-    this.store.dispatch(JobActions.getByCareerAtHome({career:"65f1562282e49c175be5c0d1", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
-    this.store.dispatch(JobActions.getByFieldAtHome({field:"65f1973d0f14f077b6d83684", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByCareerAtHome({career:"65fcd76688351d8e59e4156c", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByFieldAtHome({field:"65fa87733dcc1153af38b186", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
-    this.store.dispatch(FieldActions.getFieldAtHome())
+    this.store.dispatch(FieldActions.getFieldAtHome({page: 0, limit: 10}))
 
-    //job taken by field
+    this.subscriptions.push(
+      //job taken by field
     this.isGetJobsByFieldAtHome$.subscribe((isSuccess) => {
       if (isSuccess) {
         this.jobsTakenByField$.subscribe((jobs) => {
           console.log(jobs);
+          this.JobGetByField = jobs;
         });
       }
-    });
+    }),
 
     //job taken by career
     this.isGetJobsByCareerAtHome$.subscribe((isSuccess) => {
       if (isSuccess) {
         this.jobsTakenByCareer$.subscribe((jobs) => {
           console.log(jobs);
+          this.JobGetByCareer = jobs;
         });
       }
-    });
+    }),
 
     //job taken by hot job
     this.isGetJobsByHotJobAtHome$.subscribe((isSuccess) => {
       if (isSuccess) {
         this.jobsTakenByHotJob$.subscribe((jobs) => {
           console.log(jobs);
+          this.JobGetByHotJob = jobs;
         });
       }
-    });
+    }),
 
     // all field
     this.isGetFieldsAtHome$.subscribe((isSuccess) => {
       if (isSuccess) {
         this.fieldsTakenAtHome$.subscribe((fields) => {
           console.log(fields);
+          this.fields = fields;
         });
       }
-    });
+    }),
+    )
+    
   }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+    this.store.dispatch(JobActions.clearState());
+  }
+
+
 
   index_outstanding = 0;
   index_item = 0;
   index = 2;
- 
+  
+
+
+
+
+  
+
   readonly items = [
       {
           img: 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-2.jpg',
@@ -109,23 +144,10 @@ export class HomeComponent {
       },
     ];
 
-    readonly bestWorkList = [
-      {
-        nameWork: 'Truong phong kinh doanh kinh te',
-        company: 'Google',
-        location: 'USA',
-      },
-      {
-        nameWork: 'Truong phong kinh qweqweqweqweqwe',
-        company: 'Google',
-        location: 'USA',
-      },
-      {
-        nameWork: 'Truong phong kinh danh kinh te',
-        company: 'Google',
-        location: 'USA',
-      },
-    ];
+
+
+   
+    
 
 
 }

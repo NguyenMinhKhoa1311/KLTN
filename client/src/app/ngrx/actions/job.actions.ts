@@ -46,3 +46,7 @@ export const getByHotJobAtHomeFailure = createAction(
     '[Job] Get By Hot Job At Home Failure',
     props<{ error: string }>()
 );
+
+export const clearState = createAction(
+    '[Job] Clear State'
+);

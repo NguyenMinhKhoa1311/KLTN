@@ -10,8 +10,8 @@ export class FieldService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(){
-    return this.httpClient.get<Field[]>(`${URL}/field/getAll`);
+  getAll(page: number, limit: number){
+    return this.httpClient.get<Field[]>(`${URL}/field/getAll/?page=${page}&limit=${limit}`);
   }
 
 }

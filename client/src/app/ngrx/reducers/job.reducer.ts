@@ -102,4 +102,23 @@ export const jobReducer = createReducer(
             getByHotJobAtHomeError: action.error,
         }
     }),
+    on(JobActions.clearState,(state,action)=>{
+        return{
+            ...state,
+            jobTakenByFieldAtHome: [],
+            isGetByFieldAtHomeLoading: false,
+            isGetByFieldAtHomeSuccess: false,
+            getByFieldAtHomeError: "",
+
+            jobTakenByCareerAtHome: [],
+            isGetByCareerAtHomeLoading: false,
+            isGetByCareerAtHomeSuccess: false,
+            getByCareerAtHomeError: "",
+
+            jobTakenByHotJobAtHome: [],
+            isGetByHotJobAtHomeLoading: false,
+            isGetByHotJobAtHomeSuccess: false,
+            getByHotJobAtHomeError: "",
+        }
+    })
 )

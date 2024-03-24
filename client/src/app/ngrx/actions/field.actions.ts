@@ -2,7 +2,8 @@ import { createAction, props } from "@ngrx/store";
 import { Field } from "../../models/field.model";
 
 export const getFieldAtHome = createAction(
-    '[Field] Get Field At Home'
+    '[Field] Get Field At Home',
+    props<{page: number, limit: number}>()
     );
 
 export const getFieldAtHomeSuccess = createAction(
@@ -15,6 +16,3 @@ export const getFieldAtHomeFailure = createAction(
     props<{err: string}>()
     );
 
-export function getAllFieldsFailure(arg0: { error: any; }): any {
-    throw new Error("Function not implemented.");
-}
