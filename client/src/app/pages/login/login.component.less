@@ -34,7 +34,7 @@
                 flex-direction: column;
                 span {
                     font-size: 20px;
-                    font-weight: 600;
+                    font-weight: 700;
                     color: #526ed3;
                 }
             }
@@ -56,11 +56,14 @@
                     color: #526ed3;
                     display: flex;
                     justify-content: flex-end;
+                    margin-bottom: 5px;
+                    cursor: pointer;
                 }
 
                 .btn_login {
                     display: flex;
                     justify-content: center;
+                    
 
                     .tui-space_bottom-3 {
                         margin: 5px 0;
@@ -68,6 +71,7 @@
                         height: 3rem;
                         border-radius: 5px;
                         font-weight: normal;
+                        border-radius: 8px;
                     }
                 }
 
@@ -83,11 +87,12 @@
                     font-size: 14px;
                     padding: 14px;
                     background-color: #E73B2F;
-                    cursor: pointer;
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
-                    border-radius: 5px;
+                    border-radius: 8px;
+                    position: relative;
+                   
                     .img_google{
                         width: 20px;
                         height: 20px;
@@ -105,6 +110,21 @@
                         display: flex;
                         //justify-content: center;
                     }
+                }
+
+                .login_google:hover::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #dfe3f3 !important;
+                    opacity: 0.2; /* Tùy chỉnh độ mờ */
+                }
+
+                .login_google:hover {
+                    cursor: pointer;
                 }
 
                 .register_box{
