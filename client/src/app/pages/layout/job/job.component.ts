@@ -108,9 +108,7 @@ export class JobComponent {
       company: 'Google',
       location: '9',
     },
-    
-   
-    
-    
   ];
+
+  
 }

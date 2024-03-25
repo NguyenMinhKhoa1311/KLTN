@@ -148,7 +148,16 @@ export class HomeComponent implements OnDestroy {
 
 
 
-   
+    readonly zxc = [
+      {
+        name: 'KINH DOANH',
+        quantity: 1662,
+      },
+      {
+        name: 'KINH DOANH',
+        quantity: 1662,
+      }
+    ];
     
 
 
