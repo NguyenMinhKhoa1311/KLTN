@@ -94,18 +94,18 @@ export class LoginComponent implements OnInit {
       });
 
       // kiểm tra candidate nếu chưa có thì tạo, có r thì log vào home
-      this.isGetCadidateWithGoogleAtLoginSuccess$.subscribe((isSuccess) => {
-        if (isSuccess) {
+
           this.candidateTakenByUserWithGoogleAtLogin$.subscribe((candidate) => {
-            if (candidate._id == "404 candidate not found") {
-              this.router.navigate(['/register']);
-            }
-            else{
-              this.router.navigate(['/home']);
+            if (candidate._id.length > 0) {
+              if (candidate._id == "404 candidate not found") {
+                this.router.navigate(['/register']);
+              }
+              else{
+                this.router.navigate(['/home']);
+              }
             }
           })
-        }
-      });
+
 
     }
 

@@ -12,6 +12,11 @@ export const initialState: jobState = {
     isGetByCareerAtHomeLoading: false,
     isGetByCareerAtHomeSuccess: false,
     getByCareerAtHomeError: "",
+
+    jobTakenByHotJobAtHome: [],
+    isGetByHotJobAtHomeLoading: false,
+    isGetByHotJobAtHomeSuccess: false,
+    getByHotJobAtHomeError: "",
 }
 
 export const jobReducer = createReducer(
@@ -41,6 +46,9 @@ export const jobReducer = createReducer(
             getByFieldAtHomeError: action.error,
         }
     }),
+
+
+
     on(JobActions.getByCareerAtHome,(state,action)=>{
         return{
             ...state,
@@ -66,4 +74,51 @@ export const jobReducer = createReducer(
             getByCareerAtHomeError: action.error,
         }
     }),
+
+
+
+    on(JobActions.getByHotJobAtHome,(state,action)=>{
+        return{
+            ...state,
+            isGetByHotJobAtHomeLoading: true,
+            isGetByHotJobAtHomeSuccess: false,
+            getByHotJobAtHomeError: "",
+        }
+    }),
+    on(JobActions.getByHotJobAtHomeSuccess,(state,action)=>{
+        return{
+            ...state,
+            jobTakenByHotJobAtHome: state.jobTakenByHotJobAtHome.concat(action.jobs),
+            isGetByHotJobAtHomeLoading: false,
+            isGetByHotJobAtHomeSuccess: true,
+            getByHotJobAtHomeError: "",
+        }
+    }),
+    on(JobActions.getByHotJobAtHomeFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByHotJobAtHomeLoading: false,
+            isGetByHotJobAtHomeSuccess: false,
+            getByHotJobAtHomeError: action.error,
+        }
+    }),
+    on(JobActions.clearState,(state,action)=>{
+        return{
+            ...state,
+            jobTakenByFieldAtHome: [],
+            isGetByFieldAtHomeLoading: false,
+            isGetByFieldAtHomeSuccess: false,
+            getByFieldAtHomeError: "",
+
+            jobTakenByCareerAtHome: [],
+            isGetByCareerAtHomeLoading: false,
+            isGetByCareerAtHomeSuccess: false,
+            getByCareerAtHomeError: "",
+
+            jobTakenByHotJobAtHome: [],
+            isGetByHotJobAtHomeLoading: false,
+            isGetByHotJobAtHomeSuccess: false,
+            getByHotJobAtHomeError: "",
+        }
+    })
 )

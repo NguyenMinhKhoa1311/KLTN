@@ -19,15 +19,14 @@ export class JobEffects {
                 map(jobs =>{
                     return JobActions.getByFieldAtHomeSuccess({jobs})
                 }),
-                catchError(() => 
-                    of(JobActions.getByFieldAtHomeFailure({error: "Error"}))
+                catchError((err) => 
+                    of(JobActions.getByFieldAtHomeFailure({error: err}))
                 )
             )
-        )
-            
+        ) 
         )
         );
-        getByCareerAtHome$ = createEffect(() =>
+   getByCareerAtHome$ = createEffect(() =>
         this.actions$.pipe(
             ofType(JobActions.getByCareerAtHome),
             exhaustMap(action =>
@@ -35,8 +34,24 @@ export class JobEffects {
                     map(jobs => {
                         return JobActions.getByCareerAtHomeSuccess({jobs})
                     }),
-                    catchError(() =>
-                        of(JobActions.getByCareerAtHomeFailure({error: "Error"})
+                    catchError((err) =>
+                        of(JobActions.getByCareerAtHomeFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+   getByHotJobAtHome$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByHotJobAtHome),
+            exhaustMap(action =>
+                this.jobService.getByHotJob( action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map(jobs => {
+                        return JobActions.getByHotJobAtHomeSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByCareerAtHomeFailure({error: err})
                     )
                 )
             )

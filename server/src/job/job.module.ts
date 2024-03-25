@@ -14,6 +14,8 @@ import { ServicePackageModule } from 'src/service-package/service-package.module
 import { ServicePackageSchema } from 'src/service-package/entities/service-package.entity';
 import { RecruitmentSchema } from 'src/recruitment/entities/recruitment.entity';
 import { RecruitmentModule } from 'src/recruitment/recruitment.module';
+import { CompanySchema } from 'src/company/entities/company.entity';
+import { CompanyModule } from 'src/company/company.module';
 
 
 @Module({
@@ -24,13 +26,15 @@ import { RecruitmentModule } from 'src/recruitment/recruitment.module';
       { name:'Career',schema:CareerSchema},
       { name: 'Recruiter',schema:RecruiterSchema},
       { name: 'Recruitment', schema: RecruitmentSchema},
-      {name: 'ServicePackage', schema: ServicePackageSchema}
+      {name: 'ServicePackage', schema: ServicePackageSchema},
+      { name: 'Company', schema: CompanySchema}
     ]),
     forwardRef(() => FieldModule),
     forwardRef(() => CareerModule),
     forwardRef(() => RecruiterModule),
     forwardRef(() => ServicePackageModule),
-    forwardRef(() => RecruitmentModule)
+    forwardRef(() => RecruitmentModule),
+    forwardRef(() => CompanyModule),
   ],
   controllers: [JobController],
   providers: [JobService],

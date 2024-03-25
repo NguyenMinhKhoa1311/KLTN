@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Query } from '@nestjs/common';
 import { FieldService } from './field.service';
 import { CreateFieldDto } from './dto/create-field.dto';
 import { UpdateFieldDto } from './dto/update-field.dto';
@@ -17,24 +17,52 @@ export class FieldController {
       throw err;
     }
   }
-
-  @Get()
-  findAll() {
-    return this.fieldService.findAll();
+  @Get('getAllWithLimit')
+  async findAllAndSort(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ){
+    try{
+      const fields =  await this.fieldService.getAllWithLimit(page, limit);
+      return fields;
+    }
+    catch(err){
+      throw err;
+    }
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fieldService.findOne(+id);
+  @Get('getAll')
+  async getAll(){
+    try{
+      const fields = await this.fieldService.getAll();
+      return fields;
+    }
+    catch(err){
+      throw err;
+    }
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFieldDto: UpdateFieldDto) {
-    return this.fieldService.update(+id, updateFieldDto);
+  @Put('increase')
+  async increase(@Body() id: string){
+    try{
+      const field = await this.fieldService.increase(id);
+      return field;
+    }
+    catch(err){
+      throw err;
+    }
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.fieldService.remove(+id);
+  @Put('decrease')
+  async decrease(@Body() id: string){
+    try{
+      const field = await this.fieldService.decrease(id);
+      return field;
+    }
+    catch(err){
+      throw err;
+    }
   }
+
+
 }

@@ -10,5 +10,8 @@ export class Field {
 
     @Prop({required: true})
     FieldName: string;
+
+    @Prop({required: true})
+    Quantity: number;
 }
 export const FieldSchema = SchemaFactory.createForClass(Field);

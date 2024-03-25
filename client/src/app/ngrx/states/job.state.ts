@@ -11,4 +11,11 @@ export interface jobState{
     isGetByCareerAtHomeLoading: boolean;
     isGetByCareerAtHomeSuccess: boolean;
     getByCareerAtHomeError: string;
+
+    jobTakenByHotJobAtHome: Job[];
+    isGetByHotJobAtHomeLoading: boolean;
+    isGetByHotJobAtHomeSuccess: boolean;
+    getByHotJobAtHomeError: string;
+
+    
 }

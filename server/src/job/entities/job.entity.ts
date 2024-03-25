@@ -86,6 +86,13 @@ export class Job {
     @Prop({required: true})
     Urgent: boolean;
 
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Company'
+    })
+    Company: string;
+
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

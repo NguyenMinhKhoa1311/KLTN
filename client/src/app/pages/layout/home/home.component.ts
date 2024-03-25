@@ -1,11 +1,22 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { ShareModule } from '../../../shared/shared.module';
 import { Store } from '@ngrx/store';
-import { jobState } from '../../../ngrx/states/job.state';
+
 import { Router } from '@angular/router';
+
+import { jobState } from '../../../ngrx/states/job.state';
 import * as JobActions from '../../../ngrx/actions/job.actions';
-import { Career } from '../../../models/career.model';
+
+import { FieldState } from '../../../ngrx/states/field.state';
+import * as FieldActions from '../../../ngrx/actions/field.actions';
+
+import { Job } from '../../../models/job.model';
+import { Field } from '../../../models/field.model';
+import { Subscription } from 'rxjs';
+
+
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -14,38 +25,90 @@ import { Career } from '../../../models/career.model';
   styleUrl: './home.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit{
 
 
+export class HomeComponent implements OnDestroy {
+
+  subscriptions: Subscription[] = [];
+
+  //ngrx of job
+  isGetJobsByHotJobAtHome$ = this.store.select('job', 'isGetByHotJobAtHomeSuccess');
+  jobsTakenByHotJob$ = this.store.select('job', 'jobTakenByHotJobAtHome');
   isGetJobsByFieldAtHome$ = this.store.select('job', 'isGetByFieldAtHomeSuccess');
   isGetJobsByCareerAtHome$ = this.store.select('job', 'isGetByCareerAtHomeSuccess');
   jobsTakenByField$ = this.store.select('job', 'jobTakenByFieldAtHome');
   jobsTakenByCareer$ = this.store.select('job', 'jobTakenByCareerAtHome');
-  careerList : Career[] = [];
 
+  JobGetByHotJob: Job[] = [];
+  JobGetByField: Job[] = [];
+  JobGetByCareer: Job[] = [];
+  fields: Field[] = [];
+
+
+  //ngrx for field
+  isGetFieldsAtHome$ = this.store.select('field', 'isGetFieldAtHomeSuccess');
+  fieldsTakenAtHome$ = this.store.select('field', 'fieldAtHome');
 
   constructor(
-    private store : Store<{job: jobState}>,
+    private store : Store<{job: jobState, field: FieldState}>,
     private router: Router
   ){
 
-    this.store.dispatch(JobActions.getByCareerAtHome({career:"65f1562282e49c175be5c0d1", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
-    this.store.dispatch(JobActions.getByFieldAtHome({field:"65f1973d0f14f077b6d83684", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByCareerAtHome({career:"65fcd76688351d8e59e4156c", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByFieldAtHome({field:"65fa87733dcc1153af38b186", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(FieldActions.getFieldAtHome({page: 0, limit: 10}))
 
-    this.isGetJobsByFieldAtHome$.subscribe((isSuccess) => {
-      if (isSuccess) {
+    this.subscriptions.push(
+      //job taken by field
+
         this.jobsTakenByField$.subscribe((jobs) => {
-          console.log(jobs);
-        });
-      }
-    });
-    this.isGetJobsByCareerAtHome$.subscribe((isSuccess) => {
-      if (isSuccess) {
+          if (jobs.length>0) {
+            console.log(jobs);
+            this.JobGetByField = jobs;
+  
+          }
+        }),
+
+
+    //job taken by career
+
         this.jobsTakenByCareer$.subscribe((jobs) => {
+          if(jobs.length>0){
+            console.log(jobs);
+            this.JobGetByCareer = jobs;
+          }
+
+        }),
+
+
+    //job taken by hot job
+
+        this.jobsTakenByHotJob$.subscribe((jobs) => {
+          if(jobs.length>0){
           console.log(jobs);
-        });
-      }
+          this.JobGetByHotJob = jobs;
+          }
+        }),
+
+    // all field
+
+        this.fieldsTakenAtHome$.subscribe((fields) => {
+          if(fields.length>0){
+            console.log(fields);
+            this.fields = fields;
+          }
+
+        })
+
+    )
+    
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
     });
+    this.store.dispatch(JobActions.clearState());
   }
 
 
@@ -57,9 +120,6 @@ export class HomeComponent implements OnInit{
 
 
 
-  ngOnInit() {
-    
-  }
 
   
 
@@ -86,57 +146,9 @@ export class HomeComponent implements OnInit{
       },
     ];
 
-    readonly bestWorkList = [
-      {
-        nameWork: 'Truong phong kinh doanh kinh te',
-        company: 'Google',
-        location: '1',
-      },
-      {
-        nameWork: 'Truong phong kinh qweqweqweqweqwe',
-        company: 'Google',
-        location: '2',
-      },
-      {
-        nameWork: 'Truong phong kinh danh kinh te',
-        company: 'Google',
-        location: '3',
-      },
-      {
-        nameWork: 'Truong phong kinh doanh kinh te',
-        company: 'Google',
-        location: '4',
-      },
-      {
-        nameWork: 'Truong phong kinh qweqweqweqweqwe',
-        company: 'Google',
-        location: '5',
-      },
-      {
-        nameWork: 'Truong phong kinh danh kinh te',
-        company: 'Google',
-        location: '6',
-      },
-      {
-        nameWork: 'Truong phong kinh doanh kinh te',
-        company: 'Google',
-        location: '7',
-      },
-      {
-        nameWork: 'Truong phong kinh doanh kinh te',
-        company: 'Google',
-        location: '8',
-      },
-      {
-        nameWork: 'Truong phong kinh doanh kinh te',
-        company: 'Google',
-        location: '9',
-      },
-      
-     
-      
-      
-    ];
+
+
+   
     
 
 

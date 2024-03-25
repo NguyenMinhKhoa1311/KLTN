@@ -21,19 +21,51 @@ export class CareerService {
     }
   }
 
-  findAll() {
-    return `This action returns all career`;
+  async getAll(){
+    try{
+      return await this.careerModel.find()
+      .populate('Field', 'FieldId FieldName')
+      .exec();
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status)
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} career`;
+  async increase(id: string){
+    try{
+      const career = await this.careerModel.findByIdAndUpdate(
+        id,
+        {$inc:{Quantity:1}},
+        {new: true}
+      )
+      return career
+
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status)
+    }
   }
 
-  update(id: number, updateCareerDto: UpdateCareerDto) {
-    return `This action updates a #${id} career`;
+  async decrease(id: string){
+    try{
+      const updateCareer = await this.careerModel.findById(id).exec();
+      if(updateCareer.Quantity === 0){
+        throw new HttpException('Quantity is 0', 400)
+      }
+      else{
+        const career = await this.careerModel.findByIdAndUpdate(
+          id,
+          {$inc:{Quantity:-1}},
+          {new: true}
+        )
+        return career
+      }
+
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status)
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} career`;
-  }
 }

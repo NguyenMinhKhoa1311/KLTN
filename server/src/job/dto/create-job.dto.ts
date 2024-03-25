@@ -20,6 +20,7 @@ export class CreateJobDto {
         public Hot: boolean,
         public ColorTitle: boolean,
         public Urgent: boolean,
+        public Company: string,
         
     ){}
 }

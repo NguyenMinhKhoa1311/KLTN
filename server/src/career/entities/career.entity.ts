@@ -17,5 +17,8 @@ export class Career {
         ref:'Field'
     })
     Field: string;
+
+    @Prop({required: true})
+    Quantity: number;
 }
 export const CareerSchema = SchemaFactory.createForClass(Career);

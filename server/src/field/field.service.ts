@@ -22,19 +22,60 @@ constructor(
     }
   }
 
-  findAll() {
-    return `This action returns all field`;
+  async getAll(){
+    try{
+      return await this.FieldModel.find().exec();
+    }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} field`;
+  async getAllWithLimit(
+    page: number,
+    limit: number,
+  ){
+    const skip = page * limit;
+    const fields = await this.FieldModel
+    .find()
+    .skip(skip)
+    .limit(limit)
+    .exec();
+    return fields
+  }
+  async increase(id: string){
+    try{
+      const field = await this.FieldModel.findByIdAndUpdate(
+        id,
+        { $inc: { Quantity: 1 } },
+        { new: true }
+        );
+      return field;
+    }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
+  }
+  async decrease(id: string){
+    try{
+      const updateField = await this.FieldModel.findById(id).exec();
+      if(updateField.Quantity === 0){
+        throw new HttpException('Quantity is 0',400);
+      }
+      else{
+        const field = await this.FieldModel.findByIdAndUpdate(
+          id,
+          { $inc: { Quantity: -1 } },
+          { new: true }
+          );
+        return field;
+      }
+
+  }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
   }
 
-  update(id: number, updateFieldDto: UpdateFieldDto) {
-    return `This action updates a #${id} field`;
-  }
 
-  remove(id: number) {
-    return `This action removes a #${id} field`;
-  }
 }

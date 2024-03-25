@@ -20,6 +20,7 @@ export class JobService {
   @InjectModel(Field.name) private fieldModel: Model<Field>,
   @InjectModel(Career.name) private careerModel: Model<Career>,
   @InjectModel(ServicePackage.name) private servicePackageModel: Model<ServicePackage>,
+  @InjectModel(Company.name) private companyModel: Model<Company>
  )
 {}
   async create(createJobDto: CreateJobDto) {
@@ -36,6 +37,7 @@ export class JobService {
       const jobs = await this.JobModel.find()
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.fieldModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .exec();;
@@ -51,7 +53,8 @@ export class JobService {
       const skip = page * limit;
       const jobs = await this.JobModel.find()
       .populate('Career','CareerId Name', this.careerModel)
-      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Recruiter','RecruiterId Name ', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name Priority Hot ColorTitle Urgent', this.servicePackageModel)
       .sort(sortOptions)
@@ -71,7 +74,8 @@ export class JobService {
       const skip = page * limit;
       const jobs = await this.JobModel.find({Career: careerId})
       .populate('Career','CareerId Name', this.careerModel)
-      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Recruiter','RecruiterId Name ', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .sort(sortOptions)
@@ -92,6 +96,7 @@ export class JobService {
       const jobs = await this.JobModel.find({Field: fieldId})
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .sort(sortOptions)
@@ -112,6 +117,7 @@ export class JobService {
       const jobs = await this.JobModel.find({Priority: priority})
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .sort(sortOptions)
@@ -125,6 +131,43 @@ export class JobService {
     }
   }
 
+  async getByHotJob(page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc'){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({Hot: true})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
+  async getById(id: string){
+    try{
+      const job = await this.JobModel.findOne({JobId: id})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .exec();
+      return job
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
+
+  }
 
 
 

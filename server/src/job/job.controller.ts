@@ -3,11 +3,18 @@ import { JobService } from './job.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { log } from 'console';
+import { FieldService } from 'src/field/field.service';
+import { CareerService } from 'src/career/career.service';
 
 
 @Controller('job')
 export class JobController {
-  constructor(private readonly jobService: JobService) {}
+  constructor(
+    private readonly jobService: JobService,
+    private readonly fieldService: FieldService,
+    private readonly careerService: CareerService,
+    
+    ) {}
 
   @Post('create')
   async create(@Body() createJobDto: CreateJobDto) {
@@ -54,6 +61,7 @@ export class JobController {
     ) {
     try{
       const job = await this.jobService.getByField(page, limit, sortBy, sortOrder,field);
+      
       return job
     }
     catch(err){
@@ -95,6 +103,33 @@ export class JobController {
     }
   }
 
+  @Get('getByHotJob')
+  async getByHotJob(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    ) {
+    try{
+      const job = await this.jobService.getByHotJob(page, limit, sortBy, sortOrder);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+  @Get('getById')
+  async getById(@Query('id') id: string) {
+    try{
+      const job = await this.jobService.getById(id);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  };
+
   
   @Put('updateStatusPayment')
   async updateStatusPayment(@Query('id') id: string, @Body() status: any) {
@@ -116,6 +151,8 @@ export class JobController {
       throw err
     }
   }
+
+
 
 
 }
