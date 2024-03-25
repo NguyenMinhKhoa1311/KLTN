@@ -17,13 +17,24 @@ export class FieldController {
       throw err;
     }
   }
-  @Get('getAll')
+  @Get('getAllWithLimit')
   async findAllAndSort(
     @Query('page') page: number,
     @Query('limit') limit: number,
   ){
     try{
       const fields =  await this.fieldService.getAllWithLimit(page, limit);
+      return fields;
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
+  @Get('getAll')
+  async getAll(){
+    try{
+      const fields = await this.fieldService.getAll();
       return fields;
     }
     catch(err){

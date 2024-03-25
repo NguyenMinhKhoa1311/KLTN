@@ -19,6 +19,6 @@ export class Career {
     Field: string;
 
     @Prop({required: true})
-    quantity: number;
+    Quantity: number;
 }
 export const CareerSchema = SchemaFactory.createForClass(Career);

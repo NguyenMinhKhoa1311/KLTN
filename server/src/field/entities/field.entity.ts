@@ -12,6 +12,6 @@ export class Field {
     FieldName: string;
 
     @Prop({required: true})
-    quantity: number;
+    Quantity: number;
 }
 export const FieldSchema = SchemaFactory.createForClass(Field);

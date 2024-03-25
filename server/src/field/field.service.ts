@@ -22,6 +22,15 @@ constructor(
     }
   }
 
+  async getAll(){
+    try{
+      return await this.FieldModel.find().exec();
+    }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
+  }
+
   async getAllWithLimit(
     page: number,
     limit: number,
@@ -38,7 +47,7 @@ constructor(
     try{
       const field = await this.FieldModel.findByIdAndUpdate(
         id,
-        { $inc: { quantity: 1 } },
+        { $inc: { Quantity: 1 } },
         { new: true }
         );
       return field;
@@ -50,13 +59,13 @@ constructor(
   async decrease(id: string){
     try{
       const updateField = await this.FieldModel.findById(id).exec();
-      if(updateField.quantity === 0){
+      if(updateField.Quantity === 0){
         throw new HttpException('Quantity is 0',400);
       }
       else{
         const field = await this.FieldModel.findByIdAndUpdate(
           id,
-          { $inc: { quantity: -1 } },
+          { $inc: { Quantity: -1 } },
           { new: true }
           );
         return field;

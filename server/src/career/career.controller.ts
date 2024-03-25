@@ -17,6 +17,18 @@ export class CareerController {
       throw err;
     }
   }
+
+  @Get('getAll')
+  async getAll(){
+    try{
+      const careers = await this.careerService.getAll();
+      return careers;
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
   @Put('increase')
   async increase(@Body() id: string){
     try{

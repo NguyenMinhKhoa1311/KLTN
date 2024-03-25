@@ -21,11 +21,22 @@ export class CareerService {
     }
   }
 
+  async getAll(){
+    try{
+      return await this.careerModel.find()
+      .populate('Field', 'FieldId FieldName')
+      .exec();
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status)
+    }
+  }
+
   async increase(id: string){
     try{
       const career = await this.careerModel.findByIdAndUpdate(
         id,
-        {$inc:{quantity:1}},
+        {$inc:{Quantity:1}},
         {new: true}
       )
       return career
@@ -39,13 +50,13 @@ export class CareerService {
   async decrease(id: string){
     try{
       const updateCareer = await this.careerModel.findById(id).exec();
-      if(updateCareer.quantity === 0){
+      if(updateCareer.Quantity === 0){
         throw new HttpException('Quantity is 0', 400)
       }
       else{
         const career = await this.careerModel.findByIdAndUpdate(
           id,
-          {$inc:{quantity:-1}},
+          {$inc:{Quantity:-1}},
           {new: true}
         )
         return career

@@ -3,6 +3,6 @@ export class CreateCareerDto {
         public CareerId: string,
         public Field: string,
         public Name: string,
-        public quantity: number
+        public Quantity: number
     ){}
 }
