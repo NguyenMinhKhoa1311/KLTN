@@ -168,16 +168,16 @@
         <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" style="margin: auto 0;"
             ></button>
         <div class="carousel">
-            <div class="carousel_industries" *ngFor="let itemField of zxc">
+            <div class="carousel_industries" *ngFor="let field of fields">
                 <div class="item_industries">
                     <div class="logo_industries">
                         <img src="../../../../assets/images/kinhdoanh.png" alt="">
                     </div>
                     <div class="name_industries">
-                        <span>{{itemField.name}}</span>
+                        <span>{{field.FieldName}}</span>
                     </div>
                     <div class="quantity_industries">
-                        <span class="quantity" style="margin-right: 4px;">{{itemField.quantity}}</span>
+                        <span class="quantity" style="margin-right: 4px;">{{field.Quantity}}</span>
                         <span>việc làm</span>
                     </div>
                 </div>
@@ -195,7 +195,7 @@
         <div class="header">
             <div class="title_box">
                 <span class="title">Việc làm nổi bật</span>
-                <span class="hightLight">Tài chính đầu tư</span>
+                <span class="hightLight">Lĩnh vực</span>
             </div>
             <span class="see_more"> Xem tất cả</span>
         </div>
@@ -310,7 +310,7 @@
         <div class="header">
             <div class="title_box">
                 <span class="title">Việc làm nổi bật</span>
-                <span class="hightLight">Tài chính đầu tư</span>
+                <span class="hightLight">Ngành nghề</span>
             </div>
             <span class="see_more"> Xem tất cả</span>
         </div>
@@ -321,7 +321,7 @@
                         <div class="item_carousel">
                             <div class="item_box_column">
                                 <div class="item_box"
-                                    *ngFor="let job of JobGetByField.slice(0, 3); let i=index">
+                                    *ngFor="let job of JobGetByCareer.slice(0, 3); let i=index">
                                     <div class="img_logo">
                                         <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                             alt="">
@@ -350,7 +350,7 @@
                             </div>
                             <div class="item_box_column">
                                 <div class="item_box"
-                                    *ngFor="let job of JobGetByField.slice(3, 6); let i=index">
+                                    *ngFor="let job of JobGetByCareer.slice(3, 6); let i=index">
                                     <div class="img_logo">
                                         <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                             alt="">
@@ -379,7 +379,7 @@
                             </div>
                             <div class="item_box_column">
                                 <div class="item_box"
-                                    *ngFor="let job of JobGetByField.slice(6, 9); let i=index">
+                                    *ngFor="let job of JobGetByCareer.slice(6, 9); let i=index">
                                     <div class="img_logo">
                                         <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                             alt="">

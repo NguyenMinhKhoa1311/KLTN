@@ -5,6 +5,7 @@ export interface Career{
      CareerId: string,
      Field: Field
      Name: string
+        Quantity: number,
     createAt: Date;
     updateAt: Date;
 }

@@ -57,7 +57,7 @@ export class HomeComponent implements OnDestroy {
     this.store.dispatch(JobActions.getByCareerAtHome({career:"65fcd76688351d8e59e4156c", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(JobActions.getByFieldAtHome({field:"65fa87733dcc1153af38b186", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
-    this.store.dispatch(FieldActions.getFieldAtHome({page: 0, limit: 10}))
+    this.store.dispatch(FieldActions.getFieldAtHome({page: 0, limit: 5}))
 
     this.subscriptions.push(
       //job taken by field

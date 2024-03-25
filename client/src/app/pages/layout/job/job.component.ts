@@ -26,6 +26,8 @@ export class JobComponent {
     // this.store.dispatch(
     //   JobActions.getByFieldAtHome({ page: this.page, pageSize: 2 })
     // );
+    console.log('page', this.page);
+    
   }
 
   constructor(
