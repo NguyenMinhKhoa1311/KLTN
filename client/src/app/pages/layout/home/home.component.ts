@@ -61,44 +61,46 @@ export class HomeComponent implements OnDestroy {
 
     this.subscriptions.push(
       //job taken by field
-    this.isGetJobsByFieldAtHome$.subscribe((isSuccess) => {
-      if (isSuccess) {
+
         this.jobsTakenByField$.subscribe((jobs) => {
-          console.log(jobs);
-          this.JobGetByField = jobs;
-        });
-      }
-    }),
+          if (jobs.length>0) {
+            console.log(jobs);
+            this.JobGetByField = jobs;
+  
+          }
+        }),
+
 
     //job taken by career
-    this.isGetJobsByCareerAtHome$.subscribe((isSuccess) => {
-      if (isSuccess) {
+
         this.jobsTakenByCareer$.subscribe((jobs) => {
-          console.log(jobs);
-          this.JobGetByCareer = jobs;
-        });
-      }
-    }),
+          if(jobs.length>0){
+            console.log(jobs);
+            this.JobGetByCareer = jobs;
+          }
+
+        }),
+
 
     //job taken by hot job
-    this.isGetJobsByHotJobAtHome$.subscribe((isSuccess) => {
-      if (isSuccess) {
+
         this.jobsTakenByHotJob$.subscribe((jobs) => {
+          if(jobs.length>0){
           console.log(jobs);
           this.JobGetByHotJob = jobs;
-        });
-      }
-    }),
+          }
+        }),
 
     // all field
-    this.isGetFieldsAtHome$.subscribe((isSuccess) => {
-      if (isSuccess) {
+
         this.fieldsTakenAtHome$.subscribe((fields) => {
-          console.log(fields);
-          this.fields = fields;
-        });
-      }
-    }),
+          if(fields.length>0){
+            console.log(fields);
+            this.fields = fields;
+          }
+
+        })
+
     )
     
   }
