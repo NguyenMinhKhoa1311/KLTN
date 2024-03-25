@@ -58,5 +58,21 @@ export class JobEffects {
         )
         )
         )
+    getAllAndSortAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getAllAndSortAtJob),
+            exhaustMap(action =>
+                this.jobService.getAllAndSort(action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map(jobs => {
+                        return JobActions.getAllAndSortAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getAllAndSortAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
 
 }

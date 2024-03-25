@@ -47,6 +47,22 @@ export const getByHotJobAtHomeFailure = createAction(
     props<{ error: string }>()
 );
 
-export const clearState = createAction(
+export const clearStateAtHome = createAction(
     '[Job] Clear State'
+);
+
+
+export const getAllAndSortAtJob = createAction(
+    '[Job] Get All And Sort At Job',
+    props<{ page: number; limit: number; sortBy: string; sortOrder: string }>()
+);
+
+export const getAllAndSortAtJobSuccess = createAction(
+    '[Job] Get All And Sort At Job Success',
+    props<{ jobs: Job[] }>()
+);
+
+export const getAllAndSortAtJobFailure = createAction(
+    '[Job] Get All And Sort At Job Failure',
+    props<{ error: string }>()
 );

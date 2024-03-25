@@ -32,10 +32,7 @@ export class HomeComponent implements OnDestroy {
   subscriptions: Subscription[] = [];
 
   //ngrx of job
-  isGetJobsByHotJobAtHome$ = this.store.select('job', 'isGetByHotJobAtHomeSuccess');
   jobsTakenByHotJob$ = this.store.select('job', 'jobTakenByHotJobAtHome');
-  isGetJobsByFieldAtHome$ = this.store.select('job', 'isGetByFieldAtHomeSuccess');
-  isGetJobsByCareerAtHome$ = this.store.select('job', 'isGetByCareerAtHomeSuccess');
   jobsTakenByField$ = this.store.select('job', 'jobTakenByFieldAtHome');
   jobsTakenByCareer$ = this.store.select('job', 'jobTakenByCareerAtHome');
 
@@ -43,20 +40,27 @@ export class HomeComponent implements OnDestroy {
   JobGetByField: Job[] = [];
   JobGetByCareer: Job[] = [];
   fields: Field[] = [];
+  pageHotJob: number = 0;
+
+  trackByJob(index: number, job: any): number {
+    return job._id; // Sử dụng id của job làm key để theo dõi
+  }
 
 
   //ngrx for field
   isGetFieldsAtHome$ = this.store.select('field', 'isGetFieldAtHomeSuccess');
   fieldsTakenAtHome$ = this.store.select('field', 'fieldAtHome');
 
+
+
   constructor(
     private store : Store<{job: jobState, field: FieldState}>,
     private router: Router
   ){
 
-    this.store.dispatch(JobActions.getByCareerAtHome({career:"65fcd76688351d8e59e4156c", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
-    this.store.dispatch(JobActions.getByFieldAtHome({field:"65fa87733dcc1153af38b186", page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
-    this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 10, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByCareerAtHome({career:"65fcd76688351d8e59e4156c", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByFieldAtHome({field:"65fa87733dcc1153af38b186", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(FieldActions.getFieldAtHome({page: 0, limit: 5}))
 
     this.subscriptions.push(
@@ -108,8 +112,10 @@ export class HomeComponent implements OnDestroy {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
-    this.store.dispatch(JobActions.clearState());
+    this.store.dispatch(JobActions.clearStateAtHome());
   }
+
+
 
   index_outstanding = 0;
   index_item = 0;

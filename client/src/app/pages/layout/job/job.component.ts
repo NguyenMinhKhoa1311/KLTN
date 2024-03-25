@@ -4,6 +4,7 @@ import { TaigaModule } from '../../../shared/taiga.module';
 import { Store } from '@ngrx/store';
 import { jobState } from '../../../ngrx/states/job.state';
 import * as JobActions from '../../../ngrx/actions/job.actions';
+import { Job } from '../../../models/job.model';
 
 @Component({
   selector: 'app-job',
@@ -15,25 +16,43 @@ import * as JobActions from '../../../ngrx/actions/job.actions';
 })
 export class JobComponent {
 
-  page: number = 0;
-  throttle = 500;
+  // variable for infinite scrolling
+
+  throttle = 20;
   scrollDistance = 1;
-  scrollUpDistance = 2;
+  scrollUpDistance = 1.5;
+
+  // ngrx of getAllAndSortAtJob
+  page: number = 0;
+  jobsTakenByAllAndSort$ = this.store.select('job', 'JobTakenBygetAllAndSortAtJob');
+  jobsTakenByAllAndSort: Job[] = [];
+
+
+
+  constructor(
+    private store: Store<{ job: jobState }>
+  ){
+    this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 3, sortBy: "createdAt", sortOrder: "desc"}));
+
+    this.jobsTakenByAllAndSort$.subscribe((jobs)=>{
+
+      if(jobs.length>0){
+        console.log(jobs);
+        this.jobsTakenByAllAndSort = jobs;
+        console.log(this.jobsTakenByAllAndSort);
+        
+      }
+    })
+  }
 
   onScrollDown(ev: any) {
     console.log('scrolled down!!', ev);
     this.page += 1;
-    // this.store.dispatch(
-    //   JobActions.getByFieldAtHome({ page: this.page, pageSize: 2 })
-    // );
+
     console.log('page', this.page);
+    this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 3, sortBy: "createdAt", sortOrder: "desc"}));
     
   }
-
-  constructor(
-    private store: Store<{ job: jobState }>
-  ){}
-
 
   readonly locations = [
       'Tất cả địa điểm',

@@ -21,4 +21,8 @@ export class JobService {
   getByHotJob( page: number, limit: number, sortBy: string, sortOrder: string) {
     return this.httpClient.get<Job[] | any>(`${URL}/job/getByHotJob?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
+
+  getAllAndSort(page: number, limit: number, sortBy: string, sortOrder: string) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getAllAndSort?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  }
 }

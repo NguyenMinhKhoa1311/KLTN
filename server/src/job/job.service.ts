@@ -37,7 +37,7 @@ export class JobService {
       const jobs = await this.JobModel.find()
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name', this.recruiterModel)
-      .populate('Company','CompanyId Name Avatar', this.fieldModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .exec();;
