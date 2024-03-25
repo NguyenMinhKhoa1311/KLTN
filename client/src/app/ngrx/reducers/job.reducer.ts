@@ -17,6 +17,11 @@ export const initialState: jobState = {
     isGetByHotJobAtHomeLoading: false,
     isGetByHotJobAtHomeSuccess: false,
     getByHotJobAtHomeError: "",
+
+    JobTakenBygetAllAndSortAtJob: [],
+    isGetAllAndSortAtJobLoading: false,
+    isGetAllAndSortAtJobSuccess: false,
+    getAllAndSortAtJobError: "",
 }
 
 export const jobReducer = createReducer(
@@ -88,7 +93,7 @@ export const jobReducer = createReducer(
     on(JobActions.getByHotJobAtHomeSuccess,(state,action)=>{
         return{
             ...state,
-            jobTakenByHotJobAtHome: state.jobTakenByHotJobAtHome.concat(action.jobs),
+            jobTakenByHotJobAtHome: action.jobs,
             isGetByHotJobAtHomeLoading: false,
             isGetByHotJobAtHomeSuccess: true,
             getByHotJobAtHomeError: "",
@@ -102,7 +107,7 @@ export const jobReducer = createReducer(
             getByHotJobAtHomeError: action.error,
         }
     }),
-    on(JobActions.clearState,(state,action)=>{
+    on(JobActions.clearStateAtHome,(state,action)=>{
         return{
             ...state,
             jobTakenByFieldAtHome: [],
@@ -120,5 +125,30 @@ export const jobReducer = createReducer(
             isGetByHotJobAtHomeSuccess: false,
             getByHotJobAtHomeError: "",
         }
-    })
+    }),
+    on(JobActions.getAllAndSortAtJob,(state,action)=>{
+        return{
+            ...state,
+            isGetAllAndSortAtJobLoading: true,
+            isGetAllAndSortAtJobSuccess: false,
+            getAllAndSortAtJobError: "",
+        }
+    }),
+    on(JobActions.getAllAndSortAtJobSuccess,(state,action)=>{
+        return{
+            ...state,
+            JobTakenBygetAllAndSortAtJob: state.JobTakenBygetAllAndSortAtJob.concat(action.jobs),
+            isGetAllAndSortAtJobLoading: false,
+            isGetAllAndSortAtJobSuccess: true,
+            getAllAndSortAtJobError: "",
+        }
+    }),
+    on(JobActions.getAllAndSortAtJobFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetAllAndSortAtJobLoading: false,
+            isGetAllAndSortAtJobSuccess: false,
+            getAllAndSortAtJobError: action.error,
+        }
+    }),
 )

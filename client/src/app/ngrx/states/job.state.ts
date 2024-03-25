@@ -17,5 +17,8 @@ export interface jobState{
     isGetByHotJobAtHomeSuccess: boolean;
     getByHotJobAtHomeError: string;
 
-    
+    JobTakenBygetAllAndSortAtJob: Job[];
+    isGetAllAndSortAtJobLoading: boolean;
+    isGetAllAndSortAtJobSuccess: boolean;
+    getAllAndSortAtJobError: string;
 }

@@ -60,7 +60,7 @@
                         <div class="item_carousel">
                             <div class="item_box_column">
                                 <div class="item_box"
-                                    *ngFor="let job of JobGetByHotJob.slice(0, 3); let i=index">
+                                    *ngFor="let job of JobGetByHotJob.slice(0, 3); let i=index trackBy: trackByJob" >
                                     <div class="img_logo">
                                         <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                             alt="">
@@ -89,7 +89,7 @@
                             </div>
                             <div class="item_box_column">
                                 <div class="item_box "
-                                    *ngFor="let job of JobGetByHotJob.slice(3, 6); let i=index">
+                                    *ngFor="let job of JobGetByHotJob.slice(3, 6); let i=index trackBy: trackByJob">
                                     <div class="img_logo">
                                         <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                             alt="">
@@ -118,7 +118,7 @@
                             </div>
                             <div class="item_box_column">
                                 <div class="item_box"
-                                    *ngFor="let job of JobGetByHotJob.slice(6, 9); let i=index">
+                                    *ngFor="let job of JobGetByHotJob.slice(6, 9); let i=index trackBy: trackByJob">
                                     <div class="img_logo">
                                         <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                             alt="">
@@ -151,9 +151,9 @@
             </div>
 
             <div class="control_item">
-                <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button"></button>
+                <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" (click)="previousPageHotJob()"></button>
                 <tui-pagination size="s" class="pagination" [length]="5" [(index)]="index_item"></tui-pagination>
-                <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button"></button>
+                <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button" (click)="nextPageHotJob()"></button>
             </div>
         </div>
     </div>
