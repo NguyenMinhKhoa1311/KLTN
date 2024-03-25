@@ -111,18 +111,10 @@ export class HomeComponent implements OnDestroy {
     this.store.dispatch(JobActions.clearState());
   }
 
-
-
   index_outstanding = 0;
   index_item = 0;
   index = 2;
   
-
-
-
-
-  
-
   readonly items = [
       {
           img: 'https://cdn.sforum.vn/sforum/wp-content/uploads/2023/02/hinh-nen-may-tinh-4k-2.jpg',
