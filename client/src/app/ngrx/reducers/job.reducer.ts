@@ -42,7 +42,7 @@ export const jobReducer = createReducer(
     on(JobActions.getByFieldAtHomeSuccess,(state,action)=>{
         return{
             ...state,
-            jobTakenByFieldAtHome: state.jobTakenByFieldAtHome.concat(action.jobs),
+            jobTakenByFieldAtHome: action.jobs,
             isGetByFieldAtHomeLoading: false,
             isGetByFieldAtHomeSuccess: true,
             getByFieldAtHomeError: "",
@@ -70,7 +70,7 @@ export const jobReducer = createReducer(
     on(JobActions.getByCareerAtHomeSuccess,(state,action)=>{
         return{
             ...state,
-            jobTakenByCareerAtHome: state.jobTakenByCareerAtHome.concat(action.jobs),
+            jobTakenByCareerAtHome: action.jobs,
             isGetByCareerAtHomeLoading: false,
             isGetByCareerAtHomeSuccess: true,
             getByCareerAtHomeError: "",
