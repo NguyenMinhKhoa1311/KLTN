@@ -5,7 +5,6 @@ export interface jobState{
     isGetByFieldAtHomeLoading: boolean;
     isGetByFieldAtHomeSuccess: boolean;
     getByFieldAtHomeError: string;
-    
 
     jobTakenByCareerAtHome: Job[];
     isGetByCareerAtHomeLoading: boolean;
@@ -21,4 +20,9 @@ export interface jobState{
     isGetAllAndSortAtJobLoading: boolean;
     isGetAllAndSortAtJobSuccess: boolean;
     getAllAndSortAtJobError: string;
+
+    jobTakenByGetFieldAtJob: Job[];
+    isGetFieldAtJobLoading: boolean;
+    isGetFieldAtJobSuccess: boolean;
+    getFieldAtJobError: string;
 }

@@ -6,5 +6,9 @@ export interface FieldState{
     isGetFieldAtHomeSuccess: boolean;
     getFieldAtHomeError: string;
     
+    fieldNoLimitAtJob: Field[];
+    isGetAllNoLimitLoading: boolean;
+    isGetAllNoLimitSuccess: boolean;
+    getAllNoLimitError: string;
 
 }

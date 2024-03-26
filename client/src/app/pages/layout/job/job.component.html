@@ -19,21 +19,25 @@
         </div> -->
 
         <div class="search_industries">
-            <tui-combo-box class="b-form" [(ngModel)]="industryValue">
+            <tui-combo-box class="b-form" [(ngModel)]="industryValue" (ngModelChange)="onIndustryValueChange()">
                 Chọn ngành nghề
                 <input tuiTextfield />
-                <tui-data-list-wrapper *tuiDataList [items]="industries | tuiFilterByInput"></tui-data-list-wrapper>
+                <tui-data-list-wrapper *tuiDataList [items]="careerList"></tui-data-list-wrapper>
             </tui-combo-box>
         </div>
 
         <div class="search_field">
-            <tui-combo-box class="b-form" [(ngModel)]="fieldValue">
+            <tui-combo-box class="b-form" [(ngModel)]="fieldValue" (ngModelChange)="onFieldValueChange()">
                 Chọn lĩnh vực công ty
                 <input tuiTextfield />
-                <tui-data-list-wrapper *tuiDataList [items]="fields | tuiFilterByInput"></tui-data-list-wrapper>
+                <tui-data-list-wrapper *tuiDataList [items]="fieldList"></tui-data-list-wrapper>
             </tui-combo-box>
         </div>
-
+        <!-- <form>
+                <select name="cars" id="cars" class="field_list">
+                  <option style="cursor: pointer;" *ngFor="let fields of getAllNoLimit">{{fields.FieldName}}</option>
+                </select>
+            </form> -->
         <div class="delete_btn">
             <span>Xóa</span>
         </div>

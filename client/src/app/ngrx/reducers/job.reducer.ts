@@ -22,6 +22,11 @@ export const initialState: jobState = {
     isGetAllAndSortAtJobLoading: false,
     isGetAllAndSortAtJobSuccess: false,
     getAllAndSortAtJobError: "",
+
+    jobTakenByGetFieldAtJob: [],
+    isGetFieldAtJobLoading: false,
+    isGetFieldAtJobSuccess: false,
+    getFieldAtJobError: "",
 }
 
 export const jobReducer = createReducer(
@@ -151,4 +156,6 @@ export const jobReducer = createReducer(
             getAllAndSortAtJobError: action.error,
         }
     }),
+
+    
 )

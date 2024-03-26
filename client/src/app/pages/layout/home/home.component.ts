@@ -116,6 +116,17 @@ export class HomeComponent implements OnDestroy {
   }
 
 
+  nextPageHotJob(): void {
+    this.pageHotJob += 1;
+    this.store.dispatch(JobActions.getByHotJobAtHome({ page: this.pageHotJob, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+  }
+  previousPageHotJob(): void {
+    if (this.pageHotJob > 0) {
+      this.pageHotJob -= 1;
+      this.store.dispatch(JobActions.getByHotJobAtHome({ page: this.pageHotJob, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }
+  }
+
 
   index_outstanding = 0;
   index_item = 0;
