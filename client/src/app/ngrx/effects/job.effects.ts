@@ -75,4 +75,21 @@ export class JobEffects {
         )
         )
 
+    getByFieldAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByFieldAtJob),
+            exhaustMap(action =>
+                this.jobService.getByField(action.field, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map(jobs => {
+                        return JobActions.getByFieldAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByFieldAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
 }

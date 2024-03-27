@@ -23,7 +23,7 @@ import { Subscription } from 'rxjs';
   imports: [TaigaModule,ShareModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 
 
@@ -205,6 +205,4 @@ export class HomeComponent implements OnDestroy {
       }
     ];
     
-
-
 }

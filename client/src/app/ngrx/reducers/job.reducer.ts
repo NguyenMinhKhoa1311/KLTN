@@ -157,5 +157,30 @@ export const jobReducer = createReducer(
         }
     }),
 
-    
+    //get field at job
+    on(JobActions.getByFieldAtJob,(state,action)=>{
+        return{
+            ...state,
+            isGetFieldAtJobLoading: true,
+            isGetFieldAtJobSuccess: false,
+            getFieldAtJobError: "",
+        }
+    }),
+    on(JobActions.getByFieldAtJobSuccess,(state,action)=>{
+        return{
+            ...state,
+            jobTakenByGetFieldAtJob: action.jobs,
+            isGetFieldAtJobLoading: false,
+            isGetFieldAtJobSuccess: true,
+            getFieldAtJobError: "",
+        }
+    }),
+    on(JobActions.getByFieldAtJobFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetFieldAtJobLoading: false,
+            isGetFieldAtJobSuccess: false,
+            getFieldAtJobError: action.error,
+        }
+    }),
 )
