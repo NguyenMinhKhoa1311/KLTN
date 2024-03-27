@@ -11,9 +11,14 @@ import * as JobActions from '../../../ngrx/actions/job.actions';
 import { FieldState } from '../../../ngrx/states/field.state';
 import * as FieldActions from '../../../ngrx/actions/field.actions';
 
+import { CompanyState } from '../../../ngrx/states/company.state';
+import * as CompanyActions from '../../../ngrx/actions/company.actions';
+
 import { Job } from '../../../models/job.model';
 import { Field } from '../../../models/field.model';
 import { Subscription } from 'rxjs';
+import { Company } from '../../../models/company.model';
+
 
 
 
@@ -23,7 +28,7 @@ import { Subscription } from 'rxjs';
   imports: [TaigaModule,ShareModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -38,8 +43,11 @@ export class HomeComponent implements OnDestroy {
 
 
   //ngrx for field
-  isGetFieldsAtHome$ = this.store.select('field', 'isGetFieldAtHomeSuccess');
   fieldsTakenAtHome$ = this.store.select('field', 'fieldAtHome');
+
+
+  //ngrx for company
+  compantTakenByGetAllAndSortAtHome$ = this.store.select('company', 'companysTakenByGetAllAndSortAtHome');
 
 
 
@@ -47,22 +55,24 @@ export class HomeComponent implements OnDestroy {
   JobGetByField: Job[] = [];
   JobGetByCareer: Job[] = [];
   fields: Field[] = [];
+  companys: Company[] = [];
   pageHotJob: number = 0;
   pageByField: number = 0;
   pageByCareer: number = 0;
   pageOfField: number = 0;
 
 
-
   constructor(
-    private store : Store<{job: jobState, field: FieldState}>,
+    private store : Store<{job: jobState, field: FieldState, company: CompanyState}>,
     private router: Router
   ){
 
-    this.store.dispatch(JobActions.getByCareerAtHome({career:"65fcd76688351d8e59e4156c", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-    this.store.dispatch(JobActions.getByFieldAtHome({field:"65fa87733dcc1153af38b186", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByCareerAtHome({career:"660274523564facdc8ccc2c0", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByFieldAtHome({field:"660267f23564facdc8ccc270", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(FieldActions.getFieldAtHome({page: 0, limit: 5}))
+    this.store.dispatch(CompanyActions.getAllAndSortAtHome({page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}))
+    
 
     this.subscriptions.push(
       //job taken by field
@@ -104,6 +114,15 @@ export class HomeComponent implements OnDestroy {
             this.fields = fields;
           }
 
+        }),
+
+    // all company
+
+        this.compantTakenByGetAllAndSortAtHome$.subscribe((companys) => {
+          if(companys.length>0){
+            console.log(companys);
+            this.companys = companys;
+          }
         })
 
     )
@@ -130,25 +149,25 @@ export class HomeComponent implements OnDestroy {
 
   nextPageByField(): void {
     this.pageByField += 1;
-    this.store.dispatch(JobActions.getByFieldAtHome({field:"65fa87733dcc1153af38b186", page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByFieldAtHome({field:"660267f23564facdc8ccc270", page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
   }
 
   previousPageByField(): void {
     if (this.pageByField > 0) {
       this.pageByField -= 1;
-      this.store.dispatch(JobActions.getByFieldAtHome({field:"65fa87733dcc1153af38b186", page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      this.store.dispatch(JobActions.getByFieldAtHome({field:"660267f23564facdc8ccc270", page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
   }
 
   nextPageByCareer(): void {
     this.pageByCareer += 1;
-    this.store.dispatch(JobActions.getByCareerAtHome({career:"65fcd76688351d8e59e4156c", page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByCareerAtHome({career:"660274523564facdc8ccc2c0", page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
   }
 
   previousPageByCareer(): void {
     if (this.pageByCareer > 0) {
       this.pageByCareer -= 1;
-      this.store.dispatch(JobActions.getByCareerAtHome({career:"65fcd76688351d8e59e4156c", page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      this.store.dispatch(JobActions.getByCareerAtHome({career:"660274523564facdc8ccc2c0", page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
   }
 

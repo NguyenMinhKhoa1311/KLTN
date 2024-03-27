@@ -22,6 +22,16 @@ export const initialState: jobState = {
     isGetAllAndSortAtJobLoading: false,
     isGetAllAndSortAtJobSuccess: false,
     getAllAndSortAtJobError: "",
+
+    JobTakenByFieldNameAtJob: [],
+    isGetByFieldNameAtJobLoading: false,
+    isGetByFieldNameAtJobSuccess: false,
+    getByFieldNameAtJobError: "",
+
+    JobTakenByCareerNameAtJob: [],
+    isGetByCareerNameAtJobLoading: false,
+    isGetByCareerNameAtJobSuccess: false,
+    getByCareerNameAtJobError: "",
 }
 
 export const jobReducer = createReducer(
@@ -149,6 +159,57 @@ export const jobReducer = createReducer(
             isGetAllAndSortAtJobLoading: false,
             isGetAllAndSortAtJobSuccess: false,
             getAllAndSortAtJobError: action.error,
+        }
+    }),
+
+    on(JobActions.getByFieldNameAtJob,(state,action)=>{
+        return{
+            ...state,
+            isGetByFieldNameAtJobLoading: true,
+            isGetByFieldNameAtJobSuccess: false,
+            getByFieldNameAtJobError: "",
+        }
+    }),
+    on(JobActions.getByFieldNameAtJobSuccess,(state,action)=>{
+        return{
+            ...state,
+            JobTakenByFieldNameAtJob: action.jobs,
+            isGetByFieldNameAtJobLoading: false,
+            isGetByFieldNameAtJobSuccess: true,
+            getByFieldNameAtJobError: "",
+        }
+    }),
+    on(JobActions.getByFieldNameAtJobFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByFieldNameAtJobLoading: false,
+            isGetByFieldNameAtJobSuccess: false,
+            getByFieldNameAtJobError: action.error,
+        }
+    }),
+    on(JobActions.getByCareerNameAtJob,(state,action)=>{
+        return{
+            ...state,
+            isGetByCareerNameAtJobLoading: true,
+            isGetByCareerNameAtJobSuccess: false,
+            getByCareerNameAtJobError: "",
+        }
+    }),
+    on(JobActions.getByCareerNameAtJobSuccess,(state,action)=>{
+        return{
+            ...state,
+            JobTakenByCareerNameAtJob: action.jobs,
+            isGetByCareerNameAtJobLoading: false,
+            isGetByCareerNameAtJobSuccess: true,
+            getByCareerNameAtJobError: "",
+        }
+    }),
+    on(JobActions.getByCareerNameAtJobFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByCareerNameAtJobLoading: false,
+            isGetByCareerNameAtJobSuccess: false,
+            getByCareerNameAtJobError: action.error,
         }
     }),
 )

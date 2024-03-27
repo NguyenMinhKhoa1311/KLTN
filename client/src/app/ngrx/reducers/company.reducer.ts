@@ -3,36 +3,36 @@ import { CompanyState } from "../states/company.state";
 import * as CompanyActions from "../actions/company.actions";
 
 export const initualState: CompanyState = {
-    isGetAllAtCompanyLoading: false,
-    isGetAllAtCompanySuccess: false,
-    getAllAtCompanyError: '',
-    companysTakenByGetAllAtCompany: []
+    isGetAllAndSortAtHomeLoading: false,
+    isGetAllAndSortAtHomeSuccess: false,
+    getAllAndSortAtHomeError: '',
+    companysTakenByGetAllAndSortAtHome: []
 };
 
 export const companyReducer = createReducer(
     initualState,
-    on(CompanyActions.getAllAtCompany,(state,action)=>{
+    on(CompanyActions.getAllAndSortAtHome,(state,action)=>{
         return {
             ...state,
-            isGetAllAtCompanyLoading: true,
-            isGetAllAtCompanySuccess: false,
-            getAllAtCompanyError: ''
+            isGetAllAndSortAtHomeLoading: true,
+            isGetAllAndSortAtHomeSuccess: false,
+            getAllAndSortAtHomeError: ''
         }
     }),
-    on(CompanyActions.getAllAtCompanySuccess,(state,action)=>{
+    on(CompanyActions.getAllAndSortAtHomeSuccess,(state,action)=>{
         return {
             ...state,
-            isGetAllAtCompanyLoading: false,
-            isGetAllAtCompanySuccess: true,
-            companysTakenByGetAllAtCompany: action.companys
+            isGetAllAndSortAtHomeLoading: false,
+            isGetAllAndSortAtHomeSuccess: true,
+            companysTakenByGetAllAndSortAtHome: action.companys
         }
     }),
-    on(CompanyActions.getAllAtCompanyFailure,(state,action)=>{
+    on(CompanyActions.getAllAndSortAtHomeFailure,(state,action)=>{
         return {
             ...state,
-            isGetAllAtCompanyLoading: false,
-            isGetAllAtCompanySuccess: false,
-            getAllAtCompanyError: action.error
+            isGetAllAndSortAtHomeLoading: false,
+            isGetAllAndSortAtHomeSuccess: false,
+            getAllAndSortAtHomeError: action.error
         }
     })
 )

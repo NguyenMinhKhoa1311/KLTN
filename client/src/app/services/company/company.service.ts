@@ -10,7 +10,7 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(page: number, limit: number){
-    return this.httpClient.get<Company[]>(`${URL}/company/getAllWithLimit?page=${page}&limit=${limit}`);
+  getAllAndSort(page: number, limit: number, sortBy: string, sortOrder: string){
+    return this.httpClient.get<Company[]>(`${URL}/company/getAllWithLimit?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
 }

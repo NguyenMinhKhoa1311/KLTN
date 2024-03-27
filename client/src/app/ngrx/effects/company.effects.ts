@@ -11,16 +11,16 @@ export class CompanyEffects{
         private companyService: CompanyService
     ){}
 
-    getAllAtCompany$ = createEffect(()=>{
+    getAllAndSortAtHome$ = createEffect(()=>{
         return this.actions$.pipe(
-            ofType(CompanyActions.getAllAtCompany),
+            ofType(CompanyActions.getAllAndSortAtHome),
             switchMap((action)=>{
-                return this.companyService.getAll(action.page, action.limit).pipe(
+                return this.companyService.getAllAndSort(action.page, action.limit, action.sortBy, action.sortOrder).pipe(
                     map((companys)=>{
-                        return CompanyActions.getAllAtCompanySuccess({companys: companys});
+                        return CompanyActions.getAllAndSortAtHomeSuccess({companys: companys});
                     }),
                     catchError((error)=>{
-                        return of(CompanyActions.getAllAtCompanyFailure({error}));
+                        return of(CompanyActions.getAllAndSortAtHomeFailure({error}));
                     })
                 )
             })
