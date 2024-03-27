@@ -69,16 +69,30 @@ export class CareerService {
     }
   }
 
+
   async getByCareerName(careerName: string){
     try{
       const career = await this.careerModel.findOne({Name: careerName}).exec();
-      log(careerName)
+      if(career != null&&career != undefined){
       return career
       }
+      else{
+        return {_id:"65fa87893dcc1153af38b18a"}
+      }
+      }
     catch(err){
-      throw new HttpException(err.message, err.status)
+      return {_id:"65fa87893dcc1153af38b18a"}
     }
   }
-
+  
+  async getByField(id: string){
+    try{
+      const fields = await this.careerModel.find({Field: id}).exec();
+      return fields
+    }
+    catch(err){
+      return []
+    }
+  }
 
 }
