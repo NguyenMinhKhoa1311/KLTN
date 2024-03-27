@@ -14,7 +14,7 @@
         <div class="search_industries">
             <tui-combo-box class="b-form" [(ngModel)]="careerValue" (ngModelChange)="onCareerValueChange()">
                 Chọn ngành nghề
-                <input tuiTextfield />
+                <input tuiTextfield [attr.ng-reflect-focus]="false"/>
                 <tui-data-list-wrapper *tuiDataList [items]="careerList"></tui-data-list-wrapper>
             </tui-combo-box>
         </div>
