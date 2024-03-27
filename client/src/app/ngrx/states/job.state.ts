@@ -5,7 +5,6 @@ export interface jobState{
     isGetByFieldAtHomeLoading: boolean;
     isGetByFieldAtHomeSuccess: boolean;
     getByFieldAtHomeError: string;
-    
 
     jobTakenByCareerAtHome: Job[];
     isGetByCareerAtHomeLoading: boolean;

@@ -27,6 +27,7 @@ import { companyReducer } from "./ngrx/reducers/company.reducer";
 import { CompanyEffects } from "./ngrx/effects/company.effects";
 import { careerReducer } from "./ngrx/reducers/career.reducer";
 import { CareerEffects } from "./ngrx/effects/career.effects";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -59,7 +60,7 @@ export const appConfig: ApplicationConfig = {
       CareerEffects
 
     ]),
-    provideHttpClient(),
+    provideHttpClient(), provideAnimationsAsync(),
     
   ]
 };
