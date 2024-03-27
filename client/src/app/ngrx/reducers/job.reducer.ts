@@ -147,7 +147,7 @@ export const jobReducer = createReducer(
     on(JobActions.getAllAndSortAtJobSuccess,(state,action)=>{
         return{
             ...state,
-            JobTakenBygetAllAndSortAtJob: state.JobTakenBygetAllAndSortAtJob.concat(action.jobs),
+            JobTakenBygetAllAndSortAtJob: action.jobs,
             isGetAllAndSortAtJobLoading: false,
             isGetAllAndSortAtJobSuccess: true,
             getAllAndSortAtJobError: "",

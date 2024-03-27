@@ -84,7 +84,7 @@ export const getByFieldNameAtJobFailure = createAction(
 
 export const getByCareerNameAtJob = createAction(
     '[Job] Get By Career Name At Job',
-    props<{ CareerName: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
+    props<{ careerName: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
 );
 
 export const getByCareerNameAtJobSuccess = createAction(

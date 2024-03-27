@@ -96,7 +96,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByCareerNameAtJob),
             exhaustMap(action =>
-                this.jobService.getByCareerName(action.CareerName, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByCareerName(action.careerName, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
                     map(jobs => {
                         return JobActions.getByCareerNameAtJobSuccess({jobs})
                     }),

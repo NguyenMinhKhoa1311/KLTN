@@ -15,6 +15,7 @@ import * as CareerActions from '../../../ngrx/actions/career.actions';
 import { Job } from '../../../models/job.model';
 import { Field } from '../../../models/field.model';
 import { Career } from '../../../models/career.model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -27,19 +28,17 @@ import { Career } from '../../../models/career.model';
 })
 export class JobComponent {
 
-  // variable for infinite scrolling
+  subscriptions: Subscription[] = [];
 
-  throttle = 20;
-  scrollDistance = 1;
-  scrollUpDistance = 1.5;
-  
   // ngrx of getAllAndSortAtJob
   page: number = 0;
   jobsTakenByAllAndSort$ = this.store.select('job', 'JobTakenBygetAllAndSortAtJob');
+  jobTakenByFieldName$ = this.store.select('job', 'JobTakenByFieldNameAtJob');
+  jobTakenByCareerName$ = this.store.select('job', 'JobTakenByCareerNameAtJob');
   getAllNoLimit$ = this.store.select('field','fieldNoLimitAtJob');
   getAll$ = this.store.select('career','careersTakenByGetAllAtJob');  
 
-  jobsTakenByAllAndSort: Job[] = [];
+  jobToRender: Job[] = [];
   getAllNoLimit: Field[] = [];
   getAll: Career[] = [];
   getByFieldAtJob: Job[] = [];
@@ -50,48 +49,68 @@ export class JobComponent {
   constructor(
     private store: Store<{ job: jobState, field : FieldState, career : CareerState }>
   ){
-    this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 3, sortBy: "createdAt", sortOrder: "desc"}));
-    this.jobsTakenByAllAndSort$.subscribe((jobs)=>{
-      if(jobs.length>0){
-        //console.log(jobs);
-        this.jobsTakenByAllAndSort = jobs;
-        //console.log(this.jobsTakenByAllAndSort);
-      }
-    });
-
+    this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(FieldActions.getAllNoLimit());
-    this.getAllNoLimit$.subscribe((fields)=>{
-      if(fields.length>0){
-        //console.log(fields);
-        this.getAllNoLimit = fields;
-        console.log(this.getAllNoLimit);
-        //lấy ra danh sách các field name
-        this.fieldList = fields.map(field => field.FieldName);
-      }
-    });
-    
     this.store.dispatch(CareerActions.getAllAtJobs());
-    this.getAll$.subscribe((careers)=>{
-      if(careers.length>0){
-        //console.log(careers);
-        this.getAll = careers;
-        //console.log(this.getAll);
-        //lấy ra danh sách các industry name
-        this.careerList = careers.map(career => career.Name);
-      }
-    });
+
+    this.subscriptions.push(
+
+      //subscribe to ngrx of getAllAndSortAtJob
+      this.jobsTakenByAllAndSort$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }
+      }),
+      
+      //subscribe to ngrx of getAllNoLimit
+      this.getAllNoLimit$.subscribe((fields)=>{
+        if(fields.length>0){
+          this.getAllNoLimit = fields;
+          //lấy ra danh sách các field name
+          this.fieldList = fields.map(field => field.FieldName);
+        }
+      }),
+      
+      //subscribe to ngrx of getAll
+      this.getAll$.subscribe((careers)=>{
+        if(careers.length>0){
+          this.getAll = careers;
+          //lấy ra danh sách các industry name
+          this.careerList = careers.map(career => career.Name);
+        }
+      }),
+
+      //subscribe to ngrx of getByFieldNameAtJob
+      this.jobTakenByFieldName$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }
+      }),
+
+      //subscribe to ngrx of getByCareerNameAtJob
+      this.jobTakenByCareerName$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }
+      })
+    )
+
+
+
   }
 
 
   fieldValue: any;
   onFieldValueChange() {
     console.log("Giá trị đã chọn là: ", this.fieldValue);
+    this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
   
   }
 
   careerValue:any;
   onCareerValueChange(){
     console.log("Giá trị đã chọn là: ", this.careerValue);
+    this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
   }
   
 
