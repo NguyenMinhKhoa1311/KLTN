@@ -23,10 +23,15 @@ export const initialState: jobState = {
     isGetAllAndSortAtJobSuccess: false,
     getAllAndSortAtJobError: "",
 
-    jobTakenByGetFieldAtJob: [],
-    isGetFieldAtJobLoading: false,
-    isGetFieldAtJobSuccess: false,
-    getFieldAtJobError: "",
+    JobTakenByFieldNameAtJob: [],
+    isGetByFieldNameAtJobLoading: false,
+    isGetByFieldNameAtJobSuccess: false,
+    getByFieldNameAtJobError: "",
+
+    JobTakenByCareerNameAtJob: [],
+    isGetByCareerNameAtJobLoading: false,
+    isGetByCareerNameAtJobSuccess: false,
+    getByCareerNameAtJobError: "",
 }
 
 export const jobReducer = createReducer(
@@ -142,7 +147,7 @@ export const jobReducer = createReducer(
     on(JobActions.getAllAndSortAtJobSuccess,(state,action)=>{
         return{
             ...state,
-            JobTakenBygetAllAndSortAtJob: state.JobTakenBygetAllAndSortAtJob.concat(action.jobs),
+            JobTakenBygetAllAndSortAtJob: action.jobs,
             isGetAllAndSortAtJobLoading: false,
             isGetAllAndSortAtJobSuccess: true,
             getAllAndSortAtJobError: "",
@@ -157,30 +162,54 @@ export const jobReducer = createReducer(
         }
     }),
 
-    //get field at job
-    on(JobActions.getByFieldAtJob,(state,action)=>{
+    on(JobActions.getByFieldNameAtJob,(state,action)=>{
         return{
             ...state,
-            isGetFieldAtJobLoading: true,
-            isGetFieldAtJobSuccess: false,
-            getFieldAtJobError: "",
+            isGetByFieldNameAtJobLoading: true,
+            isGetByFieldNameAtJobSuccess: false,
+            getByFieldNameAtJobError: "",
         }
     }),
-    on(JobActions.getByFieldAtJobSuccess,(state,action)=>{
+    on(JobActions.getByFieldNameAtJobSuccess,(state,action)=>{
         return{
             ...state,
-            jobTakenByGetFieldAtJob: action.jobs,
-            isGetFieldAtJobLoading: false,
-            isGetFieldAtJobSuccess: true,
-            getFieldAtJobError: "",
+            JobTakenByFieldNameAtJob: action.jobs,
+            isGetByFieldNameAtJobLoading: false,
+            isGetByFieldNameAtJobSuccess: true,
+            getByFieldNameAtJobError: "",
         }
     }),
-    on(JobActions.getByFieldAtJobFailure,(state,action)=>{
+    on(JobActions.getByFieldNameAtJobFailure,(state,action)=>{
         return{
             ...state,
-            isGetFieldAtJobLoading: false,
-            isGetFieldAtJobSuccess: false,
-            getFieldAtJobError: action.error,
+            isGetByFieldNameAtJobLoading: false,
+            isGetByFieldNameAtJobSuccess: false,
+            getByFieldNameAtJobError: action.error,
+        }
+    }),
+    on(JobActions.getByCareerNameAtJob,(state,action)=>{
+        return{
+            ...state,
+            isGetByCareerNameAtJobLoading: true,
+            isGetByCareerNameAtJobSuccess: false,
+            getByCareerNameAtJobError: "",
+        }
+    }),
+    on(JobActions.getByCareerNameAtJobSuccess,(state,action)=>{
+        return{
+            ...state,
+            JobTakenByCareerNameAtJob: action.jobs,
+            isGetByCareerNameAtJobLoading: false,
+            isGetByCareerNameAtJobSuccess: true,
+            getByCareerNameAtJobError: "",
+        }
+    }),
+    on(JobActions.getByCareerNameAtJobFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByCareerNameAtJobLoading: false,
+            isGetByCareerNameAtJobSuccess: false,
+            getByCareerNameAtJobError: action.error,
         }
     }),
 )

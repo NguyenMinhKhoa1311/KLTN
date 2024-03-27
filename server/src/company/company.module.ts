@@ -7,15 +7,21 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { FieldModule } from 'src/field/field.module';
 import { CompanySchema } from './entities/company.entity';
 import { StorageSchema } from 'src/storage/entities/storage.entity';
+import { CareerSchema } from 'src/career/entities/career.entity';
+import { StorageModule } from 'src/storage/storage.module';
+import { CareerModule } from 'src/career/career.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: 'Company', schema: CompanySchema},
       { name: 'Field', schema: FieldSchema },
-      { name: 'Storage', schema: StorageSchema}
+      { name: 'Storage', schema: StorageSchema},
+      { name: 'Career', schema: CareerSchema}
     ]),
-    forwardRef(() => FieldModule)
+    forwardRef(() => FieldModule),
+    forwardRef(() => StorageModule),
+    forwardRef(() => CareerModule)
   ],
   controllers: [CompanyController],
   providers: [CompanyService],

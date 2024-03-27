@@ -26,4 +26,12 @@ export class JobService {
     return this.httpClient.get<Job[] | any>(`${URL}/job/getAllAndSort?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
 
+  getByFieldName( fieldName: string, page: number,limit: number,  sortBy: string, sortOrder: string) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByFieldName?fieldName=${fieldName}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  }
+  getByCareerName(CareerName: string, page: number, limit: number, sortBy: string, sortOrder: string) {
+    console.log(CareerName);
+    
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareerName?careerName=${CareerName}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  }
 }

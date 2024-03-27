@@ -21,8 +21,13 @@ export interface jobState{
     isGetAllAndSortAtJobSuccess: boolean;
     getAllAndSortAtJobError: string;
 
-    jobTakenByGetFieldAtJob: Job[];
-    isGetFieldAtJobLoading: boolean;
-    isGetFieldAtJobSuccess: boolean;
-    getFieldAtJobError: string;
+    JobTakenByFieldNameAtJob: Job[];
+    isGetByFieldNameAtJobLoading: boolean;
+    isGetByFieldNameAtJobSuccess: boolean;
+    getByFieldNameAtJobError: string;
+
+    JobTakenByCareerNameAtJob: Job[];
+    isGetByCareerNameAtJobLoading: boolean;
+    isGetByCareerNameAtJobSuccess: boolean;
+    getByCareerNameAtJobError: string;
 }

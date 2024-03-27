@@ -1,16 +1,16 @@
 import { createAction, props } from "@ngrx/store";
 import { Company } from "../../models/company.model";
 
-export const getAllAtCompany = createAction(
-    '[Company] Get All At Company',
-    props<{ page: number, limit: number }>()
+export const getAllAndSortAtHome = createAction(
+    '[Company] Get All And Sort At Home',
+    props<{ page: number, limit: number, sortBy: string, sortOrder: string }>()
     );
 
-export const getAllAtCompanySuccess = createAction(
-    '[Company] Get All At Company Success',
+export const getAllAndSortAtHomeSuccess = createAction(
+    '[Company] Get AllAnd Sort At Home Success',
      props<{ companys: Company[] }>()
      );
-export const getAllAtCompanyFailure = createAction(
-    '[Company] Get All At Company Failure',
+export const getAllAndSortAtHomeFailure = createAction(
+    '[Company] Get All And Sort At Home Failure',
     props<{ error: string }>()
     );

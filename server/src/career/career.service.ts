@@ -4,6 +4,7 @@ import { UpdateCareerDto } from './dto/update-career.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Career } from './entities/career.entity';
 import { Model } from 'mongoose';
+import { log } from 'console';
 
 @Injectable()
 export class CareerService {
@@ -32,7 +33,7 @@ export class CareerService {
     }
   }
 
-  async increase(id: string){
+  async increaseQuantity(id: string){
     try{
       const career = await this.careerModel.findByIdAndUpdate(
         id,
@@ -47,7 +48,7 @@ export class CareerService {
     }
   }
 
-  async decrease(id: string){
+  async decreaseQuantity(id: string){
     try{
       const updateCareer = await this.careerModel.findById(id).exec();
       if(updateCareer.Quantity === 0){
@@ -67,5 +68,17 @@ export class CareerService {
       throw new HttpException(err.message, err.status)
     }
   }
+
+  async getByCareerName(careerName: string){
+    try{
+      const career = await this.careerModel.findOne({Name: careerName}).exec();
+      log(careerName)
+      return career
+      }
+    catch(err){
+      throw new HttpException(err.message, err.status)
+    }
+  }
+
 
 }

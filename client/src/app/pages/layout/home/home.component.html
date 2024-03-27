@@ -23,26 +23,26 @@
         </div>
         <div class="carousel_home">
             <tui-carousel [duration]="3000" [(index)]="index" class="carousel_container">
-                <ng-container *ngFor="let item of items">
+                <ng-container *ngFor="let company of companys">
                     <tui-island *tuiItem class="carousel_item">
                         <div class="img_copany">
-                            <img src={{item.img}} alt="">
+                            <img src={{company.Cover}} alt="">
                         </div>
                         <div class="company_information">
                             <div class="campany_logo">
-                                <!-- <img src={{item}} alt=""> -->
+                              <!-- <img src={{company.Avatar}} alt=""> -->
                             </div>
                             <div class="company_address">
-                                <span>Address</span>
+                                <span>{{company.Address}}</span>
                             </div>
                             <div class="company_description">
-                                <span>Description</span>
+                                <span>{{company.Name}}</span>
                             </div>
                         </div>
                     </tui-island>
                 </ng-container>
             </tui-carousel>
-            <tui-pagination size="s" class="pagination" [length]="items.length" [(index)]="index"></tui-pagination>
+            <tui-pagination size="s" class="pagination" [length]="companys.length" [(index)]="index"></tui-pagination>
         </div>
     </div>
 </div>

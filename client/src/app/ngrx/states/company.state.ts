@@ -1,9 +1,9 @@
 import { Company } from "../../models/company.model";
 
 export interface CompanyState{
-    isGetAllAtCompanyLoading: boolean;
-    isGetAllAtCompanySuccess: boolean;
-    getAllAtCompanyError: string;
-    companysTakenByGetAllAtCompany: Company[];
+    isGetAllAndSortAtHomeLoading: boolean;
+    isGetAllAndSortAtHomeSuccess: boolean;
+    getAllAndSortAtHomeError: string;
+    companysTakenByGetAllAndSortAtHome: Company[];
 
 } 

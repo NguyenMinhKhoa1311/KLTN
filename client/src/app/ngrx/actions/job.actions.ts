@@ -67,19 +67,33 @@ export const getAllAndSortAtJobFailure = createAction(
     props<{ error: string }>()
 );
 
-
-export const getByFieldAtJob = createAction(
-    '[Job] Get Field At Job',
-    props<{ field: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
+export const getByFieldNameAtJob = createAction(
+    '[Job] Get By Field Name At Job',
+    props<{ fieldName: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
 );
 
-export const getByFieldAtJobSuccess = createAction(
-    '[Job] Get Field At Job Success',
+export const getByFieldNameAtJobSuccess = createAction(
+    '[Job] Get By Field Name At Job Success',
     props<{ jobs: Job[] }>()
 );
 
-export const getByFieldAtJobFailure = createAction(
-    '[Job] Get Field At Job Failure',
+export const getByFieldNameAtJobFailure = createAction(
+    '[Job] Get By Field Name At Job Failure',
+    props<{ error: string }>()
+);
+
+export const getByCareerNameAtJob = createAction(
+    '[Job] Get By Career Name At Job',
+    props<{ careerName: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
+);
+
+export const getByCareerNameAtJobSuccess = createAction(
+    '[Job] Get By Career Name At Job Success',
+    props<{ jobs: Job[] }>()
+);
+
+export const getByCareerNameAtJobFailure = createAction(
+    '[Job] Get By Career Name At Job Failure',
     props<{ error: string }>()
 );
 
