@@ -43,7 +43,7 @@ constructor(
     .exec();
     return fields
   }
-  async increase(id: string){
+  async increaseQuantity(id: string){
     try{
       const field = await this.FieldModel.findByIdAndUpdate(
         id,
@@ -56,7 +56,7 @@ constructor(
       throw new HttpException(err.message,err.status);
     }
   }
-  async decrease(id: string){
+  async decreaseQuantity(id: string){
     try{
       const updateField = await this.FieldModel.findById(id).exec();
       if(updateField.Quantity === 0){
@@ -72,6 +72,16 @@ constructor(
       }
 
   }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
+  }
+
+
+  async getByFieldName(name: string){
+    try{
+      return await this.FieldModel.findOne({FieldName: name}).exec();
+    }
     catch(err){
       throw new HttpException(err.message,err.status);
     }

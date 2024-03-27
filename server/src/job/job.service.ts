@@ -202,5 +202,26 @@ export class JobService {
     }
   }
 
+  async getByCompany(companyId: String,page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc'){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({Company: companyId})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
 
 }

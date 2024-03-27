@@ -32,7 +32,7 @@ export class CareerController {
   @Put('increase')
   async increase(@Body() id: string){
     try{
-      const career = await this.careerService.increase(id);
+      const career = await this.careerService.increaseQuantity(id);
       return career;
     }
     catch(err){
@@ -43,7 +43,7 @@ export class CareerController {
   @Put('decrease')
   async decrease(@Body() id: string){
     try{
-      const career = await this.careerService.decrease(id);
+      const career = await this.careerService.decreaseQuantity(id);
       return career;
     }
     catch(err){

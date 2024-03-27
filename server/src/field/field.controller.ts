@@ -45,7 +45,7 @@ export class FieldController {
   @Put('increase')
   async increase(@Body() id: string){
     try{
-      const field = await this.fieldService.increase(id);
+      const field = await this.fieldService.increaseQuantity(id);
       return field;
     }
     catch(err){
@@ -56,7 +56,7 @@ export class FieldController {
   @Put('decrease')
   async decrease(@Body() id: string){
     try{
-      const field = await this.fieldService.decrease(id);
+      const field = await this.fieldService.decreaseQuantity(id);
       return field;
     }
     catch(err){

@@ -10,5 +10,7 @@ export class CreateCompanyDto {
         public  StorageAvatar: string,
         public  StorageCover: string,
         public  Cover: string,
+        public  JobQuantity: number,
+        public  Career: string,
     ){}
 }

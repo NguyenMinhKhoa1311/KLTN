@@ -20,8 +20,15 @@ export class CompanyController {
   async getAllWithLimit(
     @Query('page') page: number,
     @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
   ) {
-    return await this.companyService.getAllWithLimit(page, limit);
+    return await this.companyService.getAllWithLimit(page, limit, sortBy, sortOrder);
+  }
+
+  @Get('getBy_id')
+  async getBy_id(@Query('id') id: string) {
+    return await this.companyService.getBy_id(id);
   }
 
 

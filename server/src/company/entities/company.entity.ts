@@ -27,6 +27,13 @@ export class Company {
     })
     Field: string;
 
+    @Prop({
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Career',
+        required: true
+    })
+    Career: string;
+
     @Prop({required: true})
     Avatar: string;
 
@@ -46,6 +53,9 @@ export class Company {
         ref: 'Storage',
     })
     StorageCover: string;
+
+    @Prop({required: true})
+    JobQuantity: number;
 
 }
 export const CompanySchema = SchemaFactory.createForClass(Company);

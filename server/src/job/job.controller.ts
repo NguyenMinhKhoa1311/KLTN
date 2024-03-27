@@ -5,6 +5,7 @@ import { UpdateJobDto } from './dto/update-job.dto';
 import { log } from 'console';
 import { FieldService } from 'src/field/field.service';
 import { CareerService } from 'src/career/career.service';
+import { CompanyService } from 'src/company/company.service';
 
 
 @Controller('job')
@@ -13,6 +14,7 @@ export class JobController {
     private readonly jobService: JobService,
     private readonly fieldService: FieldService,
     private readonly careerService: CareerService,
+    private readonly companyService: CompanyService
     
     ) {}
 
@@ -152,6 +154,59 @@ export class JobController {
     }
   }
 
+  @Get('getByFieldName')
+  async getByFieldName(
+    @Query('fieldName') fieldName: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    try{
+      const field = await this.fieldService.getByFieldName(fieldName)
+      log(field)
+      const job = await this.jobService.getByField(page, limit, sortBy, sortOrder,  field._id.toString())
+
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+  @Get('getByCareerName')
+  async getByCareerName(
+  @Query('careerName') careerName: string,
+  @Query('page') page: number,
+  @Query('limit') limit: number,
+  @Query('sortBy') sortBy = 'Priority',
+  @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    try{
+      const career = await this.careerService.getByCareerName(careerName)
+      log(careerName)
+      const job = await this.jobService.getByCareer(page, limit, sortBy, sortOrder, career._id.toString())
+
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+  @Get('getByCompany')
+  async getByCompany(
+    @Query('companyId') companyId: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    try{
+      const job = await this.jobService.getByCompany(companyId, page, limit, sortBy, sortOrder)
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
 
 
 
