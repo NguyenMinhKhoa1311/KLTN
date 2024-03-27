@@ -25,4 +25,5 @@ export class JobService {
   getAllAndSort(page: number, limit: number, sortBy: string, sortOrder: string) {
     return this.httpClient.get<Job[] | any>(`${URL}/job/getAllAndSort?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
+
 }

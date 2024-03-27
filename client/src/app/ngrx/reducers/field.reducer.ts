@@ -6,7 +6,11 @@ export const initualState: FieldState = {
     fieldAtHome: [],
     isGetFieldAtHomeLoading: false,
     isGetFieldAtHomeSuccess: false,
-    getFieldAtHomeError: ''
+    getFieldAtHomeError: '',
+    fieldNoLimitAtJob: [],
+    isGetAllNoLimitLoading: false,
+    isGetAllNoLimitSuccess: false,
+    getAllNoLimitError: ''
 }
 
 export const fieldReducer = createReducer(
@@ -34,6 +38,32 @@ export const fieldReducer = createReducer(
             isGetFieldAtHomeLoading: false,
             isGetFieldAtHomeSuccess: false,
             getFieldAtHomeError: action.err
+        }
+    }),
+    
+    on(FieldActions.getAllNoLimit, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitLoading: true,
+            isGetAllNoLimitSuccess: false,
+            getAllNoLimitError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitSuccess, (state, action) =>{
+        return {
+            ...state,
+            fieldNoLimitAtJob: action.fields,
+            isGetAllNoLimitLoading: false,
+            isGetAllNoLimitSuccess: true,
+            getAllNoLimitError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitFailure, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitLoading: false,
+            isGetAllNoLimitSuccess: false,
+            getAllNoLimitError: action.err
         }
     })
 )

@@ -16,3 +16,15 @@ export const getFieldAtHomeFailure = createAction(
     props<{err: string}>()
     );
 
+export const getAllNoLimit = createAction(
+    '[Field] Get All No Limit'
+    );
+
+export const getAllNoLimitSuccess = createAction(
+    '[Field] Get All No Limit Success',
+    props<{fields: Field[]}>()
+    );
+export const getAllNoLimitFailure = createAction(
+    '[Field] Get All No Limit Failure',
+    props<{err: string}>()
+    );

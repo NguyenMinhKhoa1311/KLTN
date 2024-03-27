@@ -14,4 +14,8 @@ export class FieldService {
     return this.httpClient.get<Field[]>(`${URL}/field/getAllWithLimit/?page=${page}&limit=${limit}`);
   }
 
+  getAllNoLimit(){
+    return this.httpClient.get<Field[]>(`${URL}/field/getAll`);
+  }
+
 }

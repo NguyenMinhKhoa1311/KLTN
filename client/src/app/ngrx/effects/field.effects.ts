@@ -26,4 +26,20 @@ export class FieldEffects {
             catchError((error) => of(FieldActions.getFieldAtHomeFailure({err: error})))))
          )
     );
+    getAllNoLimit$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(FieldActions.getAllNoLimit),
+        exhaustMap(() =>
+         this.fieldService.getAllNoLimit().pipe(
+            map((fields)=>{
+                if(fields != undefined || fields != null){
+                    return FieldActions.getAllNoLimitSuccess({fields: fields})
+                }
+                else{
+                    return FieldActions.getAllNoLimitFailure({err: "Get All Fields No Limit Failure"})
+                }
+            }),
+            catchError((error) => of(FieldActions.getAllNoLimitFailure({err: error})))))
+         )
+    );
 }
