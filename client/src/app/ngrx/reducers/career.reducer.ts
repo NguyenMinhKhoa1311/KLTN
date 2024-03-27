@@ -6,7 +6,12 @@ export const initialState: CareerState = {
     careersTakenByGetAllAtJob: [],
     isGetAllAtJobLoading: false,
     isGetAllAtJobSuccess: false,
-    getAllAtJobError: ''
+    getAllAtJobError: '',
+    
+    careersTakenByGetByFieldNameAtJob: [] ,
+    isGetByFieldNameAtJobLoading: false,
+    isGetByFieldNameAtJobSuccess: false,
+    getByFieldNameAtJobError: ''
 }
 
 export const careerReducer = createReducer(
