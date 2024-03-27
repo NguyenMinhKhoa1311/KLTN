@@ -39,5 +39,31 @@ export const careerReducer = createReducer(
             isGetAllAtJobSuccess: false,
             getAllAtJobError: action.error
         }
+    }),
+
+    on(CareerActions.getByFieldNameAtJob,(state,action)=>{
+        return {
+            ...state,
+            isGetByFieldNameAtJobLoading: true,
+            isGetByFieldNameAtJobSuccess: false,
+            getByFieldNameAtJobError: ''
+        }
+    }),
+    on(CareerActions.getByFieldNameAtJobSuccess,(state,action)=>{
+        return {
+            ...state,
+            careersTakenByGetAllAtJob: action.careers,
+            isGetByFieldNameAtJobLoading: false,
+            isGetByFieldNameAtJobSuccess: true,
+            careersTakenByGetByFieldNameAtJob: action.careers
+        }
+    }),
+    on(CareerActions.getByFieldNameAtJobFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetByFieldNameAtJobLoading: false,
+            isGetByFieldNameAtJobSuccess: false,
+            getByFieldNameAtJobError: action.error
+        }
     })
 )
