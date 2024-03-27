@@ -129,4 +129,5 @@ export class JobComponent {
     
     console.log("Giá trị đã chọn là: ", _id);
   }
+  
 }

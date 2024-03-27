@@ -6,7 +6,7 @@ export const LAYOUT_ROUTERS: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-        {
+          {
             path: '',
             redirectTo: 'home',
             pathMatch: 'full',
@@ -31,6 +31,11 @@ export const LAYOUT_ROUTERS: Routes = [
             loadChildren: () =>
               import('./company/company.routes').then((m) => m.COMPANY_ROUTERS),
           },
+          {
+            path:'bestjob',
+            loadChildren: () =>
+              import('./bestjob/bestjob.routes').then((m) => m.BESTJOB_ROUTERS),
+          }
     ],
   },
 ];
