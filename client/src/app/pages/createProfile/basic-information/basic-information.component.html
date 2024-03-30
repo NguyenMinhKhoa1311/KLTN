@@ -1,0 +1,90 @@
+<div id="personalInformation_container">
+    <div id="personalInformation_box">
+        <div id="header">
+            <span class="title">Bây giờ bạn đang làm công việc gì ?</span>
+            <span class="title_2">Nghề nghiệp hiện tại của bạn là thông tin quan trọng đối với nhà tuyển dụng.</span>
+        </div>
+        <form [formGroup]="testForm">
+            <div id="body" >
+                <div class="position_box" > 
+                    <span class="title">Chức danh</span>
+                        <tui-input
+                            formControlName="Position"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                        >
+                            Nhập chức danh của bạn
+                            <input
+                                tuiTextfield
+                                type="text"
+                            />
+                        </tui-input>
+                        <tui-error
+                            formControlName="Position"
+                            [error]="[] | tuiFieldError | async"
+                        ></tui-error>
+                </div>
+                <div class="experience_box"> 
+                    <span class="title">Số năm kinh nghiệm</span>
+                        <tui-input
+                            formControlName="Experience"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                        >
+                            Nhập số năm kinh nghiệm của bạn
+                            <input
+                                autocomplete="Experience"
+                                tuiTextfield
+                                type="number"
+                            />
+                        </tui-input>
+                </div>
+                <div class="career_box"> 
+                    <span class="title">Ngành nghề hiện tại</span>
+                    <tui-combo-box class="b-form" [(ngModel)]="value" [tuiTextfieldCleaner]="true" formControlName="Career">
+                        Chọn ngành nghề hiện tại
+                        <input tuiTextfield [attr.ng-reflect-focus]="false" />
+                        <tui-data-list-wrapper *tuiDataList [items]="items1"></tui-data-list-wrapper>
+                    </tui-combo-box>
+                    <tui-error
+                            formControlName="Career"
+                            [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+                <div class="field_box"> 
+                    <span class="title">Lĩnh vực hiện tại</span>
+                    <tui-combo-box class="b-form" [(ngModel)]="value" [tuiTextfieldCleaner]="true">
+                        Chọn lĩnh vực công ty
+                        <input tuiTextfield [attr.ng-reflect-focus]="false"/>
+                        <tui-data-list-wrapper *tuiDataList [items]="items1"></tui-data-list-wrapper>
+                    </tui-combo-box>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="accept_box">
+        <div class="btn_back">
+            <button
+            appearance="primary"
+            tuiButton
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+        >
+        Quay lại
+        </button>
+        </div>
+
+        <div class="btn_next">
+            <button
+            appearance="primary"
+            tuiButton
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+        >
+        Tiếp tục
+        </button>
+        </div>
+        
+    </div>
+</div>
