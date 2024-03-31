@@ -5,4 +5,10 @@ export interface CareerState{
     isGetAllAtJobLoading: boolean;
     isGetAllAtJobSuccess: boolean;
     getAllAtJobError: string;
+
+    careersTakenByGetByFieldNameAtJob: Career[];
+    isGetByFieldNameAtJobLoading: boolean;
+    isGetByFieldNameAtJobSuccess: boolean;
+    getByFieldNameAtJobError: string;
+
 }

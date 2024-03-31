@@ -11,7 +11,7 @@ export class CareerEffects{
         private careerService: CareerService
     ){}
 
-    getAll$ = createEffect(()=>
+    getAllAtJob$ = createEffect(()=>
         this.actions$.pipe(
             ofType(CareerActions.getAllAtJobs),
             exhaustMap(()=>
@@ -27,4 +27,23 @@ export class CareerEffects{
 
         )
     )
+
+    getByFieldNameAtJob$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getByFieldNameAtJob),
+            exhaustMap((action)=>
+                this.careerService.getByFieldName(action.fieldName).pipe(
+                    map((careers)=>{
+                        return CareerActions.getByFieldNameAtJobSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getByFieldNameAtJobFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+
+
 }

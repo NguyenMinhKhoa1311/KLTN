@@ -80,10 +80,16 @@ constructor(
 
   async getByFieldName(name: string){
     try{
-      return await this.FieldModel.findOne({FieldName: name}).exec();
+      const field = await this.FieldModel.findOne({FieldName: name}).exec();
+      if(field != null && field != undefined){
+        return field;
+      }
+      else{
+        return {_id:"65fa87893dcc1153af38b18a"}
+      }
     }
     catch(err){
-      throw new HttpException(err.message,err.status);
+      return {_id:"65fa87893dcc1153af38b18a"}
     }
   }
 

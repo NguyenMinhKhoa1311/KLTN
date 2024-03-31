@@ -30,20 +30,22 @@ import { Subscription } from 'rxjs';
 export class JobComponent {
 
   subscriptions: Subscription[] = [];
-
-  // ngrx of getAllAndSortAtJob
   page: number = 0;
+
+  // ngrx of job
+
   jobsTakenByAllAndSort$ = this.store.select('job', 'JobTakenBygetAllAndSortAtJob');
   jobTakenByFieldName$ = this.store.select('job', 'JobTakenByFieldNameAtJob');
   jobTakenByCareerName$ = this.store.select('job', 'JobTakenByCareerNameAtJob');
-  getAllNoLimit$ = this.store.select('field','fieldNoLimitAtJob');
-  getAll$ = this.store.select('career','careersTakenByGetAllAtJob');  
+
+  // ngrx of field
+  fieldNoLimitAtJob$ = this.store.select('field','fieldNoLimitAtJob');
+
+  //ngrx of career
+  careersTakenByGetAllAtJob$ = this.store.select('career','careersTakenByGetAllAtJob');  
+  careerTakenByFieldName$ = this.store.select('career','careersTakenByGetByFieldNameAtJob')
 
   jobToRender: Job[] = [];
-  getAllNoLimit: Field[] = [];
-  getAll: Career[] = [];
-  getByFieldAtJob: Job[] = [];
-
   fieldList: readonly string[] = [];
   careerList: readonly string[] = [];
 
@@ -63,19 +65,18 @@ export class JobComponent {
         }
       }),
       
-      //subscribe to ngrx of getAllNoLimit
-      this.getAllNoLimit$.subscribe((fields)=>{
+      //subscribe to ngrx of fieldNoLimitAtJob
+      this.fieldNoLimitAtJob$.subscribe((fields)=>{
         if(fields.length>0){
-          this.getAllNoLimit = fields;
           //lấy ra danh sách các field name
           this.fieldList = fields.map(field => field.FieldName);
         }
       }),
       
-      //subscribe to ngrx of getAll
-      this.getAll$.subscribe((careers)=>{
+      //subscribe to ngrx of careersTakenByGetAllAtJob
+      this.careersTakenByGetAllAtJob$.subscribe((careers)=>{
         if(careers.length>0){
-          this.getAll = careers;
+
           //lấy ra danh sách các industry name
           this.careerList = careers.map(career => career.Name);
         }
@@ -93,7 +94,19 @@ export class JobComponent {
         if(jobs.length>0){
           this.jobToRender = jobs;
         }
+      }),
+
+      //subscribe to ngrx of getByFieldNameAtJob
+      this.careerTakenByFieldName$.subscribe((careers)=>{
+        console.log("CAREER: ", careers);
+        
+        if(careers.length>0){
+          console.log("CAREER: ", careers);
+          
+          this.careerList = careers.map(career => career.Name);
+        }
       })
+      
     )
 
 
@@ -104,14 +117,27 @@ export class JobComponent {
   fieldValue: any;
   onFieldValueChange() {
     console.log("Giá trị đã chọn là: ", this.fieldValue);
-    this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    if(this.fieldValue != null){
+      this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      this.store.dispatch(CareerActions.getByFieldNameAtJob({fieldName: this.fieldValue}));
+    }else{
+      this.store.dispatch(CareerActions.getAllAtJobs());
+      this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }
+    
   
   }
 
   careerValue:any;
   onCareerValueChange(){
     console.log("Giá trị đã chọn là: ", this.careerValue);
-    this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    if(this.careerValue != null){
+      this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }else{
+      this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+
+    }
+
   }
   
 

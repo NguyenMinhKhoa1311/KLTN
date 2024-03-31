@@ -13,4 +13,8 @@ export class CareerService {
   getAll(){
     return this.httpClient.get<Career[]>(`${URL}/career/getAll`);
   }
+
+  getByFieldName(fieldName: string){
+    return this.httpClient.get<Career[]>(`${URL}/career/getByFieldName?name=${fieldName}`);
+  }
 }

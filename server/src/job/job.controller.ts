@@ -182,7 +182,7 @@ export class JobController {
   @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
     try{
       const career = await this.careerService.getByCareerName(careerName)
-      log(careerName)
+      log(career)
       const job = await this.jobService.getByCareer(page, limit, sortBy, sortOrder, career._id.toString())
 
       return job
