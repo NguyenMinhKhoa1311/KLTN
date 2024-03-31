@@ -20,19 +20,8 @@ export class SkillService {
     }
   }
 
-  findAll() {
-    return `This action returns all skill`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} skill`;
-  }
-
-  update(id: number, updateSkillDto: UpdateSkillDto) {
-    return `This action updates a #${id} skill`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} skill`;
-  }
+async getAll(){
+  const allSkill = await this.skillModel.find();
+  return allSkill;
+}
 }

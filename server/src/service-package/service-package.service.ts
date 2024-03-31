@@ -22,19 +22,7 @@ export class ServicePackageService {
     }
   }
 
-  findAll() {
-    return `This action returns all servicePackage`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} servicePackage`;
-  }
-
-  update(id: number, updateServicePackageDto: UpdateServicePackageDto) {
-    return `This action updates a #${id} servicePackage`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} servicePackage`;
+  async getAll() {
+    return this.ServicePackageModel.find();
   }
 }

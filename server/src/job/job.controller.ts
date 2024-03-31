@@ -208,6 +208,57 @@ export class JobController {
     }
   }
 
+  @Get('getByNameWithKeyword')
+  async getByNameWithKeyword(
+    @Query('keyword') keyword: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    try{
+      const job = await this.jobService.getByNameWithKeyword(keyword, page, limit, sortBy, sortOrder)
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+  @Get('getByTagsWithKeyword')
+  async getByTagsWithKeyword(
+    @Query('keyword') keyword: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    try{
+      const job = await this.jobService.getByTagsWithKeyword(keyword, page, limit, sortBy, sortOrder)
+      return job
+    }
+    catch(err){
+      return []
+    }
+  }
+
+  @Get('getByLocationdWithKeyword')
+  async getByLocationdWithKeyword(
+    @Query('keyword') keyword: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    try{
+      const job = await this.jobService.getByLocationWithKeyWord(keyword, page, limit, sortBy, sortOrder)
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+
+
+
 
 
 }

@@ -64,5 +64,16 @@ export class CareerController {
     }
   }
 
+  @Get('getByField')
+  async getByField(@Query('field') field: string){
+    try{
+      const careers = await this.careerService.getByField(field);
+      return careers;
+    }
+    catch(err){
+      return []
+    }
+  }
+
 
 }

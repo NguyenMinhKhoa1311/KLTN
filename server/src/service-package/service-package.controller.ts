@@ -19,23 +19,8 @@ export class ServicePackageController {
     }
   }
 
-  @Get()
+  @Get('getAll')
   findAll() {
-    return this.servicePackageService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.servicePackageService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServicePackageDto: UpdateServicePackageDto) {
-    return this.servicePackageService.update(+id, updateServicePackageDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.servicePackageService.remove(+id);
+    return this.servicePackageService.getAll();
   }
 }
