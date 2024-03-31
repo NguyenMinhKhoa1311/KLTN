@@ -13,6 +13,16 @@ export const initialState: UserState ={
     isGetByUsernameWithGoogleAtLoginSuccess: false,
     getByUsernameWithGoogleAtLoginError: '',
     userTakenByUsernameWithGoogleAtLogin: <User>{},
+
+    isCreateWithGoogleAtRegisterLoading: false,
+    isCreateWithGoogleAtRegisterSuccess: false,
+    createWithGoogleAtRegisterError: '',
+
+    isGetByUsernameWithGoogleAtRegisterLoading: false,
+    isGetByUsernameWithGoogleAtRegisterSuccess: false,
+    getByUsernameWithGoogleAtRegisterError: '',
+    userTakenByUsernameWithGoogleAtRegister: <User>{},
+
 };
 
 export const userReducer = createReducer(
@@ -83,6 +93,79 @@ export const userReducer = createReducer(
             isGetByUsernameWithGoogleAtLoginLoading: false,
             isGetByUsernameWithGoogleAtLoginSuccess: false,
             getByUsernameWithGoogleAtLoginError: action.errorMessage,
+        };
+        return newState;
+    }),
+
+    on(UserActions.createWithGoogoleAtRegister, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isCreateWithGoogleAtRegisterLoading: true,
+            isCreateWithGoogleAtRegisterSuccess: false,
+            createWithGoogleAtRegisterError: '',
+        };
+        return newState;
+    }),
+
+    on(UserActions.createWithGoogleAtRegisterSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isCreateWithGoogleAtRegisterLoading: false,
+            isCreateWithGoogleAtRegisterSuccess: true,
+            createWithGoogleAtRegisterError: '',
+        };
+        return newState;
+    }),
+
+    on(UserActions.createWithGoogleAtRegisterFailure, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isCreateWithGoogleAtRegisterLoading: false,
+            isCreateWithGoogleAtRegisterSuccess: false,
+            createWithGoogleAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }),
+
+    on(UserActions.getUserByGmailWithGoogleAtRegisterSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameWithGoogleAtRegisterLoading: false,
+            isGetByUsernameWithGoogleAtRegisterSuccess: true,
+            getByUsernameWithGoogleAtRegisterError: '',
+            userTakenByUsernameWithGoogleAtRegister: action.user,
+        };
+        return newState;
+    }),
+
+    on(UserActions.getUserByGmailWithGoogleAtRegisterFailure, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameWithGoogleAtRegisterLoading: false,
+            isGetByUsernameWithGoogleAtRegisterSuccess: false,
+            getByUsernameWithGoogleAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }),
+
+    on(UserActions.getUserByGmailWithGoogleAtRegister, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameWithGoogleAtRegisterLoading: true,
+            isGetByUsernameWithGoogleAtRegisterSuccess: false,
+            getByUsernameWithGoogleAtRegisterError: '',
         };
         return newState;
     }),

@@ -14,6 +14,21 @@ export const loginFailure = createAction(
   props<{ errorMessage: any }>()
 );
 
+export const loginAtRegister = createAction
+('[Auth] login at register'
+);
+
+export const loginAtRegisterSuccess = createAction(
+  '[Auth] login at register success',
+  props<{ user: UserFirebase }>()
+);
+
+export const loginAtRegisterFailure = createAction(
+  '[Auth] login at register failure',
+  props<{ errorMessage: any }>()
+);
+
+
 export const logout = createAction('[Auth] logout');
 
 export const logoutSuccess = createAction('[Auth] logout success');

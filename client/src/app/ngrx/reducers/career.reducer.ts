@@ -11,7 +11,12 @@ export const initialState: CareerState = {
     careersTakenByGetByFieldNameAtJob: [] ,
     isGetByFieldNameAtJobLoading: false,
     isGetByFieldNameAtJobSuccess: false,
-    getByFieldNameAtJobError: ''
+    getByFieldNameAtJobError: '',
+
+    careersTakenByGetAllAtCreateProfile: [],
+    isGetAllAtCreateProfileLoading: false,
+    isGetAllAtCreateProfileSuccess: false,
+    getAllAtCreateProfileError: ''
 }
 
 export const careerReducer = createReducer(
@@ -41,6 +46,9 @@ export const careerReducer = createReducer(
         }
     }),
 
+
+    
+
     on(CareerActions.getByFieldNameAtJob,(state,action)=>{
         return {
             ...state,
@@ -64,6 +72,34 @@ export const careerReducer = createReducer(
             isGetByFieldNameAtJobLoading: false,
             isGetByFieldNameAtJobSuccess: false,
             getByFieldNameAtJobError: action.error
+        }
+    }),
+
+
+
+
+    on(CareerActions.getAllAtCreateProfile,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAtCreateProfileLoading: true,
+            isGetAllAtCreateProfileSuccess: false,
+            getAllAtCreateProfileError: ''
+        }
+    }),
+    on(CareerActions.getAllAtCreateProfileSuccess,(state,action)=>{
+        return {
+            ...state,
+            careersTakenByGetAllAtCreateProfile: action.careers,
+            isGetAllAtCreateProfileLoading: false,
+            isGetAllAtCreateProfileSuccess: true
+        }
+    }),
+    on(CareerActions.getAllAtCreateProfileFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAtCreateProfileLoading: false,
+            isGetAllAtCreateProfileSuccess: false,
+            getAllAtCreateProfileError: action.error
         }
     })
 )

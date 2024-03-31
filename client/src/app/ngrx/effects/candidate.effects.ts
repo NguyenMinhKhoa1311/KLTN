@@ -17,7 +17,7 @@ export class CandidateEffects{
         exhaustMap((action) =>
          this.candidateService.create(action.candidate).pipe(
             map((item)=>{
-                if(item != undefined || item != null|| isCandidate(item)){
+                if(item._id.length>0){
                     return CandidateActions.createCandidateWithGoogleAtLoginSuccess()
                 }
                 else{
@@ -33,7 +33,7 @@ export class CandidateEffects{
         exhaustMap((action) =>
          this.candidateService.getByUser(action.user).pipe(
             map((item)=>{
-                if(item != undefined || item != null || isCandidate(item) ){
+                if(item._id.length>0 ){
                     return CandidateActions.getByUserWithGoogleAtLoginSuccess({candidate: item})
                 }
                 else{
@@ -41,6 +41,40 @@ export class CandidateEffects{
                 }
             }),
             catchError((error) => of(CandidateActions.getByUserWithGoogleAtLoginFailure({error: error})))))
+         )
+    );
+
+    createCandidateAtRegister$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.createCandidateAtCreateProfile),
+        exhaustMap((action) =>
+         this.candidateService.create(action.candidate).pipe(
+            map((item)=>{
+                if(item._id.length>0 ){
+                    return CandidateActions.createCandidateAtCreateProfileSuccess()
+                }
+                else{
+                    return CandidateActions.createCandidateAtCreateProfileFailure({error: "Create Candidate At Register Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.createCandidateAtCreateProfileFailure({error: error})))))
+         )
+    );
+
+    getCandidateByUserWithGoogleAtRegister$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.getByUserWithGoogleAtRegister),
+        exhaustMap((action) =>
+         this.candidateService.getByUser(action.user).pipe(
+            map((item)=>{
+                if(item._id.length>0){
+                    return CandidateActions.getByUserWithGoogleAtRegisterSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.getByUserWithGoogleAtRegisterFailure({error: "Get By User With Google At Register Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.getByUserWithGoogleAtRegisterFailure({error: error})))))
          )
     );
 }

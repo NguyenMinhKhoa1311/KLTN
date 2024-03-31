@@ -6,3 +6,13 @@ export interface User{
     createAt: Date;
     updateAt: Date;
 }
+export function isUser(obj: any): obj is User {
+    return (
+      obj._id &&
+      obj.Uid &&
+      obj.Username &&
+      obj.Password &&
+      obj.createAt &&
+      obj.updateAt
+    );
+  }

@@ -12,6 +12,15 @@ export const initialState: candidateState = {
     isGetByUserWithGoogleAtLoginSuccess: false,
     getByUserWithGoogleAtLoginError: "",
     candidateTakenByUserWithGoogleAtLogin: <Candidate>{},
+
+    isCreateCandidateAtCreateProfileLoading: false,
+    isCreateCandidateAtCreateProfileSuccess: false,
+    createCandidateAtCreateProfileError: "",
+
+    isGetByUserWithGoogleAtRegisterLoading: false,
+    isGetByUserWithGoogleAtRegisterSuccess: false,
+    getByUserWithGoogleAtRegisterError: "",
+    candidateTakenByUserWithGoogleAtRegister: <Candidate>{},
 };
 
 
@@ -64,6 +73,57 @@ export const candidateReducer = createReducer(
             isGetByUserWithGoogleAtLoginLoading: false,
             isGetByUserWithGoogleAtLoginSuccess: false,
             getByUserWithGoogleAtLoginError: actions.error,
+        };
+    }),
+    on(CandidateActions.createCandidateAtCreateProfile,(state, actions)=>{
+        return{
+            ...state,
+            isCreateCandidateAtRegisterLoading: true,
+            isCreateCandidateAtRegisterSuccess: false,
+            createCandidateAtRegisterError: "",
+        };
+    }),
+    on(CandidateActions.createCandidateAtCreateProfileSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isCreateCandidateAtRegisterLoading: false,
+            isCreateCandidateAtRegisterSuccess: true,
+            createCandidateAtRegisterError: "",
+        };
+    }),
+    on(CandidateActions.createCandidateAtCreateProfileFailure,(state, actions)=>{
+        return{
+            ...state,
+            isCreateCandidateAtRegisterLoading: false,
+            isCreateCandidateAtRegisterSuccess: false,
+            createCandidateAtRegisterError: actions.error,
+        };
+    }),
+
+
+    on(CandidateActions.getByUserWithGoogleAtRegister,(state, actions)=>{
+        return{
+            ...state,
+            isGetByUserWithGoogleAtRegisterLoading: true,
+            isGetByUserWithGoogleAtRegisterSuccess: false,
+            getByUserWithGoogleAtRegisterError: "",
+        };
+    }),
+    on(CandidateActions.getByUserWithGoogleAtRegisterSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isGetByUserWithGoogleAtRegisterLoading: false,
+            isGetByUserWithGoogleAtRegisterSuccess: true,
+            getByUserWithGoogleAtRegisterError: "",
+            candidateTakenByUserWithGoogleAtRegister: actions.candidate,
+        };
+    }),
+    on(CandidateActions.getByUserWithGoogleAtRegisterFailure,(state, actions)=>{
+        return{
+            ...state,
+            isGetByUserWithGoogleAtRegisterLoading: false,
+            isGetByUserWithGoogleAtRegisterSuccess: false,
+            getByUserWithGoogleAtRegisterError: actions.error,
         };
     }),
 );

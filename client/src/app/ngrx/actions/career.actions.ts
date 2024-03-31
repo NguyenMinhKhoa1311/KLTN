@@ -28,4 +28,17 @@ export const getByFieldNameAtJobFailure = createAction(
     '[Career] Get By Field Name At Job Failure',
     props<{error: string}>()
     );
+
+export const getAllAtCreateProfile = createAction(
+    '[Career] Get All At Create Profile'
+    );
+export const getAllAtCreateProfileSuccess = createAction(
+    '[Career] Get All At Create Profile Success',
+    props<{careers: Career[]}>()
+    );
+
+export const getAllAtCreateProfileFailure = createAction(
+    '[Career] Get All At Create Profile Failure',
+    props<{error: string}>()
+    );
     

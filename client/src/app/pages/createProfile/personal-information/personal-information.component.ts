@@ -4,6 +4,7 @@ import {TuiDay, TuiTime} from '@taiga-ui/cdk';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { ShareModule } from '../../../shared/shared.module';
 import {tuiInputDateOptionsProvider} from '@taiga-ui/kit';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-personal-information',
@@ -29,6 +30,10 @@ export class PersonalInformationComponent {
     },
   ];
 
+  constructor(    private router: Router){
+    
+  }
+
   readonly personalForm = new FormGroup({
     Datetime: new FormControl(new TuiDay(2017, 2, 15)),
     Phone: new FormControl('', [Validators.required]),
@@ -36,6 +41,10 @@ export class PersonalInformationComponent {
     Render: new FormControl('', [Validators.required]),
 });
 
+nextStep(){
+  console.log(this.personalForm.value);
+  this.router.navigate(['createProfile/basic-information']);
+}
   
 
 }

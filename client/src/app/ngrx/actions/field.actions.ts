@@ -28,3 +28,15 @@ export const getAllNoLimitFailure = createAction(
     '[Field] Get All No Limit Failure',
     props<{err: string}>()
     );
+
+export const getAllNoLimitAtCreaetProfile = createAction(
+    '[Field] Get All No Limit At Create Profile'
+    );
+export const getAllNoLimitAtCreaetProfileSuccess = createAction(
+    '[Field] Get All No Limit At Create Profile Success',
+    props<{fields: Field[]}>()
+    );
+export const getAllNoLimitAtCreaetProfileFailure = createAction(
+    '[Field] Get All No Limit At Create Profile Failure',
+    props<{err: string}>()
+    );

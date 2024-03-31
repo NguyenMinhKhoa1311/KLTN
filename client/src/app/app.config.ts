@@ -28,6 +28,9 @@ import { CompanyEffects } from "./ngrx/effects/company.effects";
 import { careerReducer } from "./ngrx/reducers/career.reducer";
 import { CareerEffects } from "./ngrx/effects/career.effects";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { servicePackageReducer } from "./ngrx/reducers/service-package.reducer";
+import { skillReducer } from "./ngrx/reducers/skill.reducer";
+import { SkillEffects } from "./ngrx/effects/skill.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -50,6 +53,8 @@ export const appConfig: ApplicationConfig = {
     provideState({name:'field', reducer: fieldReducer}),
     provideState({name:'company', reducer: companyReducer}),
     provideState({name:'career', reducer:careerReducer}),
+    provideState({name:'service-package', reducer: servicePackageReducer}),
+    provideState({name:'skill', reducer: skillReducer}),
     provideEffects([
       AuthEffects,
       UserEffects,
@@ -57,7 +62,8 @@ export const appConfig: ApplicationConfig = {
       JobEffects,
       FieldEffects,
       CompanyEffects,
-      CareerEffects
+      CareerEffects,
+      SkillEffects
 
     ]),
     provideHttpClient(), provideAnimationsAsync(),

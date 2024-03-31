@@ -43,8 +43,8 @@
                     <span class="title">Ngành nghề hiện tại</span>
                     <mat-form-field class="info_box">
                         <mat-select formControlName="Career" placeholder="Chọn hãng xe">
-                            <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer.name">
-                                {{manufacturer.name}}
+                            <mat-option *ngFor="let career of careerList" [value]="career._id">
+                                {{career.Name}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -57,8 +57,8 @@
                     <span class="title">Lĩnh vực hiện tại</span>
                     <mat-form-field class="info_box">
                         <mat-select formControlName="Field" placeholder="Chọn hãng xe">
-                            <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer.name">
-                                {{manufacturer.name}}
+                            <mat-option *ngFor="let field of fieldList" [value]="field._id">
+                                {{field.FieldName}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

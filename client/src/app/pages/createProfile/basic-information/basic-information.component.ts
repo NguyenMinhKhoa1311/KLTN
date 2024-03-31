@@ -7,6 +7,14 @@ import {tuiInputDateOptionsProvider} from '@taiga-ui/kit';
 import {TUI_VALIDATION_ERRORS} from '@taiga-ui/kit';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Store } from '@ngrx/store';
+import { FieldState } from '../../../ngrx/states/field.state';
+import { CareerState } from '../../../ngrx/states/career.state';
+import { Router } from '@angular/router';
+import * as CareerActions from '../../../ngrx/actions/career.actions';
+import * as FieldActions from '../../../ngrx/actions/field.actions';
+import { Field } from '../../../models/field.model';
+import { Career } from '../../../models/career.model';
 
 @Component({
   selector: 'app-basic-information',
@@ -16,6 +24,43 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrl: './basic-information.component.scss',
 })
 export class BasicInformationComponent {
+
+
+  //ngrx of career
+  careersTakenByGetAllAtCreateProfile$ = this.store.select('career', 'careersTakenByGetAllAtCreateProfile');
+
+  //ngrx of field
+  fieldsTakenByGetAllNoLimitAtCreateProfile$ = this.store.select('field', 'fieldNoLimitAtCreateProfile');
+
+
+  fieldList:  Field[] = [];
+  careerList:  Career[] = [];
+
+  constructor(
+    private store : Store<{ field: FieldState, career: CareerState}>,
+    private router: Router
+  ){
+
+    this.store.dispatch(FieldActions.getAllNoLimitAtCreaetProfile());
+    this.store.dispatch(CareerActions.getAllAtCreateProfile());
+
+    this.careersTakenByGetAllAtCreateProfile$.subscribe(careers=>{
+      console.log(careers);
+      if(careers.length > 0){
+        this.careerList = careers;
+       
+      }
+    });
+
+    this.fieldsTakenByGetAllNoLimitAtCreateProfile$.subscribe(fields=>{
+      console.log(fields);
+      if(fields.length > 0){
+        this.fieldList = fields;
+      }
+    });
+
+
+  }
   readonly items = [
     {
         name: 'Simple',

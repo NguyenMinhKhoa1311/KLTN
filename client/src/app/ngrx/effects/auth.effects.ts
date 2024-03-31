@@ -28,6 +28,20 @@ export class AuthEffects {
     )
   );
 
+  loginAtRegister$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginAtRegister),
+      exhaustMap(() =>
+        from(this.authService.loginWithGoogle()).pipe(
+          map((user) => AuthActions.loginAtRegisterSuccess({ user })),
+          catchError((error) =>
+            of(AuthActions.loginAtRegisterFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
   logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logout),

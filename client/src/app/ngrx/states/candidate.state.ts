@@ -9,4 +9,14 @@ export interface candidateState{
     isGetByUserWithGoogleAtLoginSuccess: boolean;
     getByUserWithGoogleAtLoginError: string;
     candidateTakenByUserWithGoogleAtLogin: Candidate;
+
+    isCreateCandidateAtCreateProfileLoading: boolean;
+    isCreateCandidateAtCreateProfileSuccess: boolean;
+    createCandidateAtCreateProfileError: string;
+
+    isGetByUserWithGoogleAtRegisterLoading: boolean;
+    isGetByUserWithGoogleAtRegisterSuccess: boolean;
+    getByUserWithGoogleAtRegisterError: string;
+    candidateTakenByUserWithGoogleAtRegister: Candidate;
+
 }

@@ -8,7 +8,7 @@
             <form [formGroup]="regisForm">
             <div class="body">
                 <div class="form_register">
-                    <form class="form_register_box">
+                    <div class="form_register_box">
                         <label>Họ và tên</label>
                         <p>
                             <tui-input
@@ -25,8 +25,8 @@
                                 />
                             </tui-input>
                         </p>
-                    </form>
-                    <form class="form_register_box">
+                    </div>
+                    <div class="form_register_box">
                         <label style="margin-top: 10px;">Email</label>
                         <p>
                             <tui-input
@@ -43,8 +43,8 @@
                                 />
                             </tui-input>
                         </p>
-                    </form>
-                    <form class="form_register_box">
+                    </div>
+                    <div class="form_register_box">
                         <label style="margin-top: 10px;">Mật khẩu</label>
                         <p>
                             <tui-input
@@ -61,8 +61,8 @@
                                 />
                             </tui-input>
                         </p>
-                    </form>
-                    <form class="form_register_box">
+                    </div>
+                    <div class="form_register_box">
                         <label style="margin-top: 10px;">Xác nhận mật khẩu</label>
                         <p>
                             <tui-input
@@ -79,7 +79,7 @@
                                 />
                             </tui-input>
                         </p>
-                    </form>
+                    </div>
                 </div>
                 
                 <div  class="btn_register">
@@ -88,12 +88,13 @@
                         tuiButton
                         type="button"
                         class="tui-space_right-3 tui-space_bottom-3"
+                        (click)="register()"
                     >
                         Đăng ký
                     </button>
                 </div>
                 <span class="register_option">Hoặc đăng nhập bằng</span>
-                <div class="register_google" >
+                <div class="register_google" (click)="registerWithGoogle()" >
                     <div class="img_google">
                         <img src="../../../assets/images/icons8-google-30.png" alt="">
                     </div>

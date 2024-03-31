@@ -45,5 +45,23 @@ export class CareerEffects{
         )
     )
 
+    getAllAtCreateProfile$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getAllAtCreateProfile),
+            exhaustMap(()=>
+                this.careerService.getAll().pipe(
+                    map((careers)=>{
+                        return CareerActions.getAllAtCreateProfileSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getAllAtCreateProfileFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+
+
 
 }

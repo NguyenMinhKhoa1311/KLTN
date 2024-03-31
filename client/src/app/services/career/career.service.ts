@@ -17,4 +17,8 @@ export class CareerService {
   getByFieldName(fieldName: string){
     return this.httpClient.get<Career[]>(`${URL}/career/getByFieldName?name=${fieldName}`);
   }
+
+  
+
+
 }

@@ -29,3 +29,33 @@ export const getUserByGmailWithGoogleAtLoginFailure = createAction(
     '[User]  get user by gmail with google failure',
     props<{ errorMessage: string}>()
 );
+
+
+export const createWithGoogoleAtRegister = createAction(
+    '[User] create with google at register',
+    props<{ user: User}>()
+);
+
+export const createWithGoogleAtRegisterSuccess = createAction(
+    '[User] create with google at register success',
+);
+
+export const createWithGoogleAtRegisterFailure = createAction(
+    '[User] create with google at register failure',
+    props<{ errorMessage: string}>()
+);
+
+export const getUserByGmailWithGoogleAtRegisterSuccess = createAction(
+    '[User] get user by gmail with google at register success',
+    props<{ user: User}>()
+);
+
+export const getUserByGmailWithGoogleAtRegisterFailure = createAction(
+    '[User] get user by gmail with google at register failure',
+    props<{ errorMessage: string}>()
+);
+
+export const getUserByGmailWithGoogleAtRegister = createAction(
+    '[User] get user by gmail with google at register',
+    props<{ username: string}>()
+);

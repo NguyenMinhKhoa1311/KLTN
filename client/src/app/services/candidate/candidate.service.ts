@@ -15,6 +15,6 @@ export class CandidateService {
   }
 
   create(candidate: any){
-    return this.httpClient.post(`${URL}/candidate/create`, candidate);
+    return this.httpClient.post<Candidate>(`${URL}/candidate/create`, candidate);
   }
 }

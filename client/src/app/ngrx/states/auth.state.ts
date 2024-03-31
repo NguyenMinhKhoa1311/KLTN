@@ -12,4 +12,9 @@ export interface AuthState {
   isLogoutLoading: boolean;
   isLogoutSuccessfull: boolean;
   logoutErrorMessage: string;
+
+  isLoginAtRegisterLoading: boolean;
+  isLoginAtRegisterSuccessfull: boolean;
+  loginAtRegisterErrorMessage: string;
+  userAtregister: UserFirebase;
 }

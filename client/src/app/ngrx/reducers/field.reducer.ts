@@ -7,10 +7,16 @@ export const initualState: FieldState = {
     isGetFieldAtHomeLoading: false,
     isGetFieldAtHomeSuccess: false,
     getFieldAtHomeError: '',
+
     fieldNoLimitAtJob: [],
     isGetAllNoLimitLoading: false,
     isGetAllNoLimitSuccess: false,
-    getAllNoLimitError: ''
+    getAllNoLimitError: '',
+
+    fieldNoLimitAtCreateProfile: [],
+    isGetAllNoLimitAtCreateProfileLoading: false,
+    isGetAllNoLimitAtCreateProfileSuccess: false,
+    getAllNoLimitAtCreateProfileError: ''
 }
 
 export const fieldReducer = createReducer(
@@ -64,6 +70,31 @@ export const fieldReducer = createReducer(
             isGetAllNoLimitLoading: false,
             isGetAllNoLimitSuccess: false,
             getAllNoLimitError: action.err
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtCreaetProfile, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtCreateProfileLoading: true,
+            isGetAllNoLimitAtCreateProfileSuccess: false,
+            getAllNoLimitAtCreateProfileError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtCreaetProfileSuccess, (state, action) =>{
+        return {
+            ...state,
+            fieldNoLimitAtCreateProfile: action.fields,
+            isGetAllNoLimitAtCreateProfileLoading: false,
+            isGetAllNoLimitAtCreateProfileSuccess: true,
+            getAllNoLimitAtCreateProfileError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtCreaetProfileFailure, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtCreateProfileLoading: false,
+            isGetAllNoLimitAtCreateProfileSuccess: false,
+            getAllNoLimitAtCreateProfileError: action.err
         }
     })
 )

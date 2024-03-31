@@ -12,7 +12,12 @@ export const initialState: AuthState = {
 
     isLogoutLoading: false,
     isLogoutSuccessfull: false,
-    logoutErrorMessage: ''
+    logoutErrorMessage: '',
+
+    isLoginAtRegisterLoading: false,
+    isLoginAtRegisterSuccessfull: false,
+    loginAtRegisterErrorMessage: '',
+    userAtregister: <UserFirebase>{},
 };
 
 export const authReducer = createReducer(
@@ -49,6 +54,37 @@ export const authReducer = createReducer(
         isLoginLoading: false,
         isLoginSuccessfull: false,
         loginErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+    on(LoginActions.loginAtRegister, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isLoginAtRegisterLoading: true,
+        isLoginAtRegisterSuccessfull: false,
+        loginAtRegisterErrorMessage: '',
+      };
+      return newState;
+    }),
+
+    on(LoginActions.loginAtRegisterSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        userAtregister: action.user,
+        isLoginAtRegisterLoading: false,
+        isLoginAtRegisterSuccessfull: true,
+        loginAtRegisterErrorMessage: '',
+      };
+      return newState;
+    }),
+
+    on(LoginActions.loginAtRegisterFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isLoginAtRegisterLoading: false,
+        isLoginAtRegisterSuccessfull: false,
+        loginAtRegisterErrorMessage: action.errorMessage,
       };
       return newState;
     }),

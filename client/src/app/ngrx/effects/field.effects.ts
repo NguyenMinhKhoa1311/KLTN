@@ -42,4 +42,21 @@ export class FieldEffects {
             catchError((error) => of(FieldActions.getAllNoLimitFailure({err: error})))))
          )
     );
+
+    getAllNoLimitAtCreateProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(FieldActions.getAllNoLimitAtCreaetProfile),
+        exhaustMap(() =>
+         this.fieldService.getAllNoLimit().pipe(
+            map((fields)=>{
+                if(fields != undefined || fields != null){
+                    return FieldActions.getAllNoLimitAtCreaetProfileSuccess({fields: fields})
+                }
+                else{
+                    return FieldActions.getAllNoLimitAtCreaetProfileFailure({err: "Get All Fields No Limit At Create Profile Failure"})
+                }
+            }),
+            catchError((error) => of(FieldActions.getAllNoLimitAtCreaetProfileFailure({err: error})))))
+         )
+    );
 }

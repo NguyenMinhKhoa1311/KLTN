@@ -9,4 +9,14 @@ export interface UserState{
     isGetByUsernameWithGoogleAtLoginSuccess: boolean;
     getByUsernameWithGoogleAtLoginError: string;
     userTakenByUsernameWithGoogleAtLogin: User;
+
+
+    isCreateWithGoogleAtRegisterLoading: boolean;
+    isCreateWithGoogleAtRegisterSuccess: boolean;
+    createWithGoogleAtRegisterError: string;
+
+    isGetByUsernameWithGoogleAtRegisterLoading: boolean;
+    isGetByUsernameWithGoogleAtRegisterSuccess: boolean;
+    getByUsernameWithGoogleAtRegisterError: string;
+    userTakenByUsernameWithGoogleAtRegister: User;
 }
