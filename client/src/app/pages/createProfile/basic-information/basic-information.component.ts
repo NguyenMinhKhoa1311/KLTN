@@ -34,6 +34,7 @@ export class BasicInformationComponent {
     Phone: new FormControl(''),
     Position: new FormControl('',[Validators.required]),
     Experience: new FormControl('',[Validators.required]),
+    Career: new FormControl('',[Validators.required]),
 
     //render
     tariff: new FormControl(this.items[0]),
