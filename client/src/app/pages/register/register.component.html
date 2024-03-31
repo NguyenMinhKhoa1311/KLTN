@@ -5,13 +5,14 @@
             <div class="header">
             <span>Đăng ký thành viên</span>
             </div>
+            <form [formGroup]="regisForm">
             <div class="body">
                 <div class="form_register">
                     <form class="form_register_box">
                         <label>Họ và tên</label>
                         <p>
                             <tui-input
-                                formControlName="testValue"
+                                formControlName="Name"
                                 [tuiTextfieldCleaner]="true"
                                 [tuiTextfieldLabelOutside]="true"
                             >
@@ -29,7 +30,7 @@
                         <label style="margin-top: 10px;">Email</label>
                         <p>
                             <tui-input
-                                formControlName="testValue"
+                                formControlName="Email"
                                 [tuiTextfieldCleaner]="true"
                                 [tuiTextfieldLabelOutside]="true"
                             >
@@ -47,7 +48,7 @@
                         <label style="margin-top: 10px;">Mật khẩu</label>
                         <p>
                             <tui-input
-                                formControlName="testValue"
+                                formControlName="Password"
                                 [tuiTextfieldCleaner]="true"
                                 [tuiTextfieldLabelOutside]="true"
                             >
@@ -65,7 +66,7 @@
                         <label style="margin-top: 10px;">Xác nhận mật khẩu</label>
                         <p>
                             <tui-input
-                                formControlName="testValue"
+                                formControlName="ConfirmPassword"
                                 [tuiTextfieldCleaner]="true"
                                 [tuiTextfieldLabelOutside]="true"
                             >
@@ -103,6 +104,7 @@
                     <span (click)="login()" style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng nhập ngay</span>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>
