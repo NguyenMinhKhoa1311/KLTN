@@ -1,70 +1,7 @@
 
-<div id="createProfile_container">
-    <div id="createProfile_box">
-        <div id="header">
-            <span class="title">Hãy cho chúng tôi biết một chút về bạn</span>
-            <span class="title_2">Thông tin này đóng vai trò quan trọng trong việc giới thiệu bạn đến nhà tuyển dụng và bạn có thể sửa đổi nó bất cứ lúc nào.</span>
-        </div>
-        <div id="body" [formGroup]="testForm">
-            <div class="row1" >
-                <div class="dateTime_box">
-                    <span class="title">Ngày sinh</span>
-                    <form class="b-form">
-                        <tui-input-date-time
-                            formControlName="Datetime"
-                            [tuiTextfieldCleaner]="true"
-                        >
-                            Vui lòng chọn ...
-                            <input
-                                placeholder="DD/MM/YYYY"
-                                tuiTextfield
-                            />
-                        </tui-input-date-time>
-                    </form>
-                </div>
-                <div class="phone_box"> 
-                    <span class="title">Số điện thoại</span>
-                    <form class="b-form">
-                        <tui-input
-                            formControlName="Phone"
-                            [tuiTextfieldCleaner]="true"
-                            [tuiTextfieldLabelOutside]="true"
-                        >
-                            Type an email
-                            <input
-                                autocomplete="email"
-                                placeholder="mail@mail.ru"
-                                tuiTextfield
-                                type="email"
-                            />
-                        </tui-input>
-                    </form>
-                </div>
-            </div>
-            <div class="row1" >
-                <div class="dateTime_box">
-                    <span class="title">Ngày sinh</span>
-                    
-                </div>
-                <div class="phone_box"> 
-                    <span class="title">Số điện thoại</span>
-                    <form class="b-form">
-                        <tui-input
-                            formControlName="Phone"
-                            [tuiTextfieldCleaner]="true"
-                            [tuiTextfieldLabelOutside]="true"
-                        >
-                            Type an email
-                            <input
-                                autocomplete="email"
-                                placeholder="mail@mail.ru"
-                                tuiTextfield
-                                type="email"
-                            />
-                        </tui-input>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+
+<div id="root-container">
+    <router-outlet></router-outlet>
 </div>

@@ -2,7 +2,8 @@ import { Component,ChangeDetectionStrategy } from '@angular/core';
 import { ShareModule } from '../../../shared/shared.module';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { Store } from '@ngrx/store';
-0
+import {FormControl, FormGroup} from '@angular/forms';
+
 
 import { jobState } from '../../../ngrx/states/job.state';
 import { FieldState } from '../../../ngrx/states/field.state';
@@ -156,4 +157,10 @@ export class JobComponent {
     console.log("Giá trị đã chọn là: ", _id);
   }
   
+
+  testForm = new FormGroup({
+   
+    testValue2: new FormControl(false),
+    
+});
 }

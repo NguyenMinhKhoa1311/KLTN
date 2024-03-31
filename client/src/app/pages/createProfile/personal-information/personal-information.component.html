@@ -1,0 +1,96 @@
+<div id="personalInformation_container">
+    <div id="personalInformation_box">
+        <div id="header">
+            <span class="title">Hãy cho chúng tôi biết một chút về bạn</span>
+            <span class="title_2">Thông tin này đóng vai trò quan trọng trong việc giới thiệu bạn đến nhà tuyển dụng và bạn có thể sửa đổi nó bất cứ lúc nào.</span>
+        </div>
+        <form [formGroup]="testForm">
+            <div id="body" >
+                <div class="dateTime_box">
+                    <span class="title">Ngày sinh</span>
+                    <form class="b-form">
+                        <tui-input-date-time
+                            formControlName="Datetime"
+                            [tuiTextfieldCleaner]="true"
+                        >
+                            Vui lòng chọn ...
+                            <input
+                                placeholder="DD/MM/YYYY"
+                                tuiTextfield
+                            />
+                        </tui-input-date-time>
+                    </form>
+                </div>
+                <div class="phone_box"> 
+                    <span class="title">Số điện thoại</span>
+                    <form class="b-form">
+                        <tui-input
+                            formControlName="Phone"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                        >
+                            Nhập vào số điện thoại của bạn
+                            <input
+                                autocomplete="number"
+                                tuiTextfield
+                                inputmode="numeric"
+                            />
+                        </tui-input>
+                    </form>
+                </div>
+                <div class="render_box">
+                    <span class="title">Giới tính</span>
+                    <div class="check_render">
+                        <input type="radio" id="html" name="fav_language" value="Nam">
+                        <label for="Nam">Nam</label><br>
+                        <input type="radio" id="css" name="fav_language" value="Nữ" style="margin-left: 10px;">
+                        <label for="Nữ">Nữ</label><br>
+                    </div>
+                    
+                </div>
+                <div class="address_box"> 
+                    <span class="title">Địa chỉ</span>
+                    <form class="b-form">
+                        <tui-input
+                            formControlName="Phone"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                        >
+                            Nhập địa chỉ của bạn
+                            <input
+                                autocomplete="address"
+                                tuiTextfield
+                                type="text"
+                            />
+                        </tui-input>
+                    </form>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+    <div id="accept_box">
+        <div class="btn_back">
+            <button
+            appearance="primary"
+            tuiButton
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+        >
+        Quay lại
+        </button>
+        </div>
+
+        <div class="btn_next">
+            <button
+            appearance="primary"
+            tuiButton
+            type="button"
+            class="tui-space_right-3 tui-space_bottom-3"
+        >
+        Tiếp tục
+        </button>
+        </div>
+        
+    </div>
+</div>
