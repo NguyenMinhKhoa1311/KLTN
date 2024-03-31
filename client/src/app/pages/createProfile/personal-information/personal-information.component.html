@@ -4,7 +4,7 @@
             <span class="title">Hãy cho chúng tôi biết một chút về bạn</span>
             <span class="title_2">Thông tin này đóng vai trò quan trọng trong việc giới thiệu bạn đến nhà tuyển dụng và bạn có thể sửa đổi nó bất cứ lúc nào.</span>
         </div>
-        <form [formGroup]="testForm">
+        <form [formGroup]="personalForm">
             <div id="body" >
                 <div class="dateTime_box">
                     <span class="title">Ngày sinh</span>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="phone_box"> 
                     <span class="title">Số điện thoại</span>
-                    <form class="b-form">
+                    <div class="b-form">
                         <tui-input
                             formControlName="Phone"
                             [tuiTextfieldCleaner]="true"
@@ -36,7 +36,7 @@
                                 inputmode="numeric"
                             />
                         </tui-input>
-                    </form>
+                    </div>
                 </div>
                 <div class="render_box">
                     <span class="title">Giới tính</span>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="address_box"> 
                     <span class="title">Địa chỉ</span>
-                    <form class="b-form">
+                    <div class="b-form">
                         <tui-input
                             formControlName="Phone"
                             [tuiTextfieldCleaner]="true"
@@ -63,7 +63,7 @@
                                 type="text"
                             />
                         </tui-input>
-                    </form>
+                    </div>
                 </div>
                 
             </div>
