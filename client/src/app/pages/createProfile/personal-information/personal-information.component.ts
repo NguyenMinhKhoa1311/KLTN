@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TuiDay, TuiTime} from '@taiga-ui/cdk';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { ShareModule } from '../../../shared/shared.module';
@@ -29,14 +29,13 @@ export class PersonalInformationComponent {
     },
   ];
 
-  readonly testForm = new FormGroup({
+  readonly personalForm = new FormGroup({
     Datetime: new FormControl(new TuiDay(2017, 2, 15)),
-    Phone: new FormControl(''),
-
-    //render
-    tariff: new FormControl(this.items[0]),
+    Phone: new FormControl('', [Validators.required]),
+    Address: new FormControl('', [Validators.required]),
+    Render: new FormControl('', [Validators.required]),
 });
 
-
+  
 
 }

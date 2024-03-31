@@ -5,11 +5,13 @@ import { TaigaModule } from '../../../shared/taiga.module';
 import { ShareModule } from '../../../shared/shared.module';
 import {tuiInputDateOptionsProvider} from '@taiga-ui/kit';
 import {TUI_VALIDATION_ERRORS} from '@taiga-ui/kit';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-basic-information',
   standalone: true,
-  imports: [TaigaModule,ShareModule],
+  imports: [TaigaModule,ShareModule, MatSelectModule, MatFormFieldModule],
   templateUrl: './basic-information.component.html',
   styleUrl: './basic-information.component.scss',
 })
@@ -35,9 +37,8 @@ export class BasicInformationComponent {
     Position: new FormControl('',[Validators.required]),
     Experience: new FormControl('',[Validators.required]),
     Career: new FormControl('',[Validators.required]),
-
-    //render
-    tariff: new FormControl(this.items[0]),
+    Field: new FormControl('',[Validators.required]),
+    
   });
 
   readonly items1 = [
@@ -48,6 +49,45 @@ export class BasicInformationComponent {
     'Terry Gilliam',
     'Terry Jones',
 ];
+
+  readonly manufacturers=[
+    {
+      name: 'Simple',
+      description: 'Something usual',
+    },
+    {
+      name: 'Advanced',
+      description: 'Something better',
+    },
+    {
+      name: 'PRO',
+      description: 'Something cool',
+    },
+    {
+      name: 'Simple',
+      description: 'Something usual',
+    },
+    {
+      name: 'Advanced',
+      description: 'Something better',
+    },
+    {
+      name: 'PRO',
+      description: 'Something cool',
+    },
+    {
+      name: 'Simple',
+      description: 'Something usual',
+    },
+    {
+      name: 'Advanced',
+      description: 'Something better',
+    },
+    {
+      name: 'PRO',
+      description: 'Something cool',
+    }
+  ]
 
 value = '';
 
