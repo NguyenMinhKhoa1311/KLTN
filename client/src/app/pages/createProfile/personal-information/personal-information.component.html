@@ -6,6 +6,23 @@
         </div>
         <form [formGroup]="personalForm">
             <div id="body" >
+                <div class="name_box"> 
+                    <span class="title">Họ và tên</span>
+                    <div class="b-form">
+                        <tui-input
+                            formControlName="Name"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                        >
+                            Nhập họ và tên của bạn
+                            <input
+                                autocomplete="name"
+                                tuiTextfield
+                                type="text"
+                            />
+                        </tui-input>
+                    </div>
+                </div>
                 <div class="dateTime_box">
                     <span class="title">Ngày sinh</span>
                     <tui-input-date

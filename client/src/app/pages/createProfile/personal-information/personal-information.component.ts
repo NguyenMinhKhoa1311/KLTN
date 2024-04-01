@@ -35,6 +35,7 @@ export class PersonalInformationComponent {
   }
 
   readonly personalForm = new FormGroup({
+    Name: new FormControl('', [Validators.required]),
     Datetime: new FormControl(new TuiDay(2017, 2, 15)),
     Phone: new FormControl('', [Validators.required]),
     Address: new FormControl('', [Validators.required]),
