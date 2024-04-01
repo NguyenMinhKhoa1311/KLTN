@@ -14,6 +14,11 @@ export const getAllAtJobsFailure = createAction(
     props<{error: string}>()
     );
 
+
+
+
+
+
 export const getByFieldNameAtJob = createAction(
     '[Career] Get By Field Name At Job',
     props<{fieldName: string}>()
@@ -29,6 +34,9 @@ export const getByFieldNameAtJobFailure = createAction(
     props<{error: string}>()
     );
 
+
+
+
 export const getAllAtCreateProfile = createAction(
     '[Career] Get All At Create Profile'
     );
@@ -41,4 +49,23 @@ export const getAllAtCreateProfileFailure = createAction(
     '[Career] Get All At Create Profile Failure',
     props<{error: string}>()
     );
-    
+
+
+
+
+
+export const getByFieldAtProfile = createAction(
+    '[Career] Get By Field At Profile',
+    props<{field: string}>()
+    );
+
+export const getByFieldAtProfileSuccess = createAction(
+    '[Career] Get By Field At Profile Success',
+    props<{careers: Career[]}>()
+    );
+export const getByFieldAtProfileFailure = createAction(
+    '[Career] Get By Field At Profile Failure',
+    props<{error: string}>()
+    );
+
+            

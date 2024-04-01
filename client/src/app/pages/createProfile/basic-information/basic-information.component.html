@@ -39,6 +39,20 @@
                         />
                     </tui-input>
                 </div>
+                <div class="field_box"> 
+                    <span class="title">Lĩnh vực hiện tại</span>
+                    <mat-form-field class="info_box">
+                        <mat-select formControlName="Field" placeholder="Chọn hãng xe" (valueChange)="onFieldChange($event)" >
+                            <mat-option *ngFor="let field of fieldList" [value]="field._id">
+                                {{field.FieldName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <tui-error
+                            formControlName="Field"
+                            [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
                 <div class="career_box"> 
                     <span class="title">Ngành nghề hiện tại</span>
                     <mat-form-field class="info_box">
@@ -53,20 +67,7 @@
                             [error]="[] | tuiFieldError | async"
                     ></tui-error>
                 </div>
-                <div class="field_box"> 
-                    <span class="title">Lĩnh vực hiện tại</span>
-                    <mat-form-field class="info_box">
-                        <mat-select formControlName="Field" placeholder="Chọn hãng xe">
-                            <mat-option *ngFor="let field of fieldList" [value]="field._id">
-                                {{field.FieldName}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <tui-error
-                            formControlName="Field"
-                            [error]="[] | tuiFieldError | async"
-                    ></tui-error>
-                </div>
+
                 
             </div>
         </form>

@@ -62,6 +62,23 @@ export class CareerEffects{
         )
     )
 
+    getByFieldAtProfile$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getByFieldAtProfile),
+            exhaustMap((action)=>
+                this.careerService.getByField(action.field).pipe(
+                    map((careers)=>{
+                        return CareerActions.getByFieldAtProfileSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getByFieldAtProfileFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+
 
 
 }

@@ -87,7 +87,6 @@ export class CareerService {
   
   async getByField(id: string){
     try{
-      log(id)
       const fields = await this.careerModel.find({Field: id}).exec();
       return fields
     }

@@ -16,7 +16,12 @@ export const initialState: CareerState = {
     careersTakenByGetAllAtCreateProfile: [],
     isGetAllAtCreateProfileLoading: false,
     isGetAllAtCreateProfileSuccess: false,
-    getAllAtCreateProfileError: ''
+    getAllAtCreateProfileError: '',
+
+    careersTakenByGetByFieldAtProfile: [],
+    isGetByFieldAtProfileLoading: false,
+    isGetByFieldAtProfileSuccess: false,
+    getByFieldAtProfileError: ''
 }
 
 export const careerReducer = createReducer(
@@ -100,6 +105,32 @@ export const careerReducer = createReducer(
             isGetAllAtCreateProfileLoading: false,
             isGetAllAtCreateProfileSuccess: false,
             getAllAtCreateProfileError: action.error
+        }
+    }),
+
+    
+    on(CareerActions.getByFieldAtProfile,(state,action)=>{
+        return {
+            ...state,
+            isGetByFieldAtProfileLoading: true,
+            isGetByFieldAtProfileSuccess: false,
+            getByFieldAtProfileError: ''
+        }
+    }),
+    on(CareerActions.getByFieldAtProfileSuccess,(state,action)=>{
+        return {
+            ...state,
+            careersTakenByGetByFieldAtProfile: action.careers,
+            isGetByFieldAtProfileLoading: false,
+            isGetByFieldAtProfileSuccess: true
+        }
+    }),
+    on(CareerActions.getByFieldAtProfileFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetByFieldAtProfileLoading: false,
+            isGetByFieldAtProfileSuccess: false,
+            getByFieldAtProfileError: action.error
         }
     })
 )

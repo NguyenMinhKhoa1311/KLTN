@@ -38,12 +38,16 @@ export class PersonalInformationComponent {
     Datetime: new FormControl(new TuiDay(2017, 2, 15)),
     Phone: new FormControl('', [Validators.required]),
     Address: new FormControl('', [Validators.required]),
-    Render: new FormControl('', [Validators.required]),
+    Gender: new FormControl('', [Validators.required]),
 });
 
 nextStep(){
   console.log(this.personalForm.value);
+  const candidate = this.personalForm.value;
   this.router.navigate(['createProfile/basic-information']);
+  const cadidateAsJson = JSON.stringify(candidate);
+  sessionStorage.setItem('candidate', cadidateAsJson);
+  
 }
   
 

@@ -66,8 +66,7 @@ export class HomeComponent implements OnDestroy {
     private store : Store<{job: jobState, field: FieldState, company: CompanyState}>,
     private router: Router
   ){
-    const userAsJson = sessionStorage.getItem('user');
-        console.log(userAsJson);
+
     this.store.dispatch(JobActions.getByCareerAtHome({career:"660274523564facdc8ccc2c0", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(JobActions.getByFieldAtHome({field:"660267f23564facdc8ccc270", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));

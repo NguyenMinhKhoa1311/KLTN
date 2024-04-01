@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Store } from '@ngrx/store';
 import { FieldState } from '../../../ngrx/states/field.state';
 import { CareerState } from '../../../ngrx/states/career.state';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as CareerActions from '../../../ngrx/actions/career.actions';
 import * as FieldActions from '../../../ngrx/actions/field.actions';
 import { Field } from '../../../models/field.model';
@@ -28,6 +28,7 @@ export class BasicInformationComponent {
 
   //ngrx of career
   careersTakenByGetAllAtCreateProfile$ = this.store.select('career', 'careersTakenByGetAllAtCreateProfile');
+  careersTakenByGetByFieldAtProfile$ = this.store.select('career', 'careersTakenByGetByFieldAtProfile');
 
   //ngrx of field
   fieldsTakenByGetAllNoLimitAtCreateProfile$ = this.store.select('field', 'fieldNoLimitAtCreateProfile');
@@ -38,9 +39,13 @@ export class BasicInformationComponent {
 
   constructor(
     private store : Store<{ field: FieldState, career: CareerState}>,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ){
-
+    const candidate = sessionStorage.getItem('candidate');
+    console.log(candidate);
+    const userAsJson = sessionStorage.getItem('user');
+    console.log(userAsJson);
     this.store.dispatch(FieldActions.getAllNoLimitAtCreaetProfile());
     this.store.dispatch(CareerActions.getAllAtCreateProfile());
 
@@ -59,7 +64,19 @@ export class BasicInformationComponent {
       }
     });
 
+    this.careersTakenByGetByFieldAtProfile$.subscribe(careers=>{
+      console.log(careers);
+      if(careers.length > 0){
+        this.careerList = careers;
+      }
+    });
 
+
+  }
+
+  onFieldChange(event: any) {
+    this.store.dispatch(CareerActions.getByFieldAtProfile({field: event}));
+    
   }
   readonly items = [
     {
@@ -95,44 +112,7 @@ export class BasicInformationComponent {
     'Terry Jones',
 ];
 
-  readonly manufacturers=[
-    {
-      name: 'Simple',
-      description: 'Something usual',
-    },
-    {
-      name: 'Advanced',
-      description: 'Something better',
-    },
-    {
-      name: 'PRO',
-      description: 'Something cool',
-    },
-    {
-      name: 'Simple',
-      description: 'Something usual',
-    },
-    {
-      name: 'Advanced',
-      description: 'Something better',
-    },
-    {
-      name: 'PRO',
-      description: 'Something cool',
-    },
-    {
-      name: 'Simple',
-      description: 'Something usual',
-    },
-    {
-      name: 'Advanced',
-      description: 'Something better',
-    },
-    {
-      name: 'PRO',
-      description: 'Something cool',
-    }
-  ]
+
 
 value = '';
 

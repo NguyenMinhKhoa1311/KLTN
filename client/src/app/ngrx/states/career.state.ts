@@ -16,4 +16,9 @@ export interface CareerState{
     isGetAllAtCreateProfileSuccess: boolean;
     getAllAtCreateProfileError: string;
 
+    careersTakenByGetByFieldAtProfile: Career[];
+    isGetByFieldAtProfileLoading: boolean;
+    isGetByFieldAtProfileSuccess: boolean;
+    getByFieldAtProfileError: string;
+
 }
