@@ -1,1 +1,192 @@
-<p>job-posting works!</p>
+<div id="jobPosting_container">
+    <div class="jobPosting_box">
+        <label class="title_header">Đăng tuyển dụng</label>
+        <form [formGroup]="jobPostForm">
+            <div class="name_job">
+                <div class="header">
+                    <span class="title">Tên công việc:</span>
+                </div>
+                <div class="body">
+                    <tui-input formControlName="Name" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
+                        Nhập tên công việc
+                        <input tuiTextfield type="text" />
+                    </tui-input>
+                    <tui-error formControlName="Name" [error]="[] | tuiFieldError | async"></tui-error>
+                </div>
+            </div>
+            <div class="description_job">
+                <div class="header">
+                    <span class="title">Mô tả công việc:</span>
+                </div>
+                <div class="body">
+                    <tui-textarea formControlName="Description" [tuiTextfieldCleaner]="true">
+                        Nhập mô tả công việc
+                    </tui-textarea>
+                    <tui-error formControlName="Description" [error]="[] | tuiFieldError | async"></tui-error>
+                </div>
+            </div>
+
+            <div class="salary_job">
+                <div class="header">
+                    <span class="title">Lương công việc:</span>
+                </div>
+                <div class="body">
+                    <div class="salary_value">
+                        <span>Từ</span>
+                        <tui-input-number formControlName="SalaryStart" class="salary_input">
+                        </tui-input-number>
+                        <tui-error formControlName="SalaryStart" [error]="[] | tuiFieldError | async"></tui-error>
+    
+                        <span>Đến</span>
+                        <tui-input-number formControlName="SalaryEnd" class="salary_input">
+                        </tui-input-number>
+                        <tui-error formControlName="SalaryEnd" [error]="[] | tuiFieldError | async"></tui-error>
+                    
+                        <div class="check_salary">
+                            <tui-checkbox
+                                formControlName="ThuongLuong"
+                                class="tui-space_bottom-3"
+                            ></tui-checkbox>
+                            <span>Thương lượng</span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="walfare_job">
+                <div class="header">
+                    <span class="title">Phúc lợi:</span>
+                </div>
+                <div class="body">
+                    <tui-multi-select
+                        placeholder="Ignored text"
+                        class="b-form"
+                        [editable]="false"
+                        [formControl]="control"
+                        [tuiTextfieldLabelOutside]="true"
+                        [(search)]="search"
+                    >
+                        Chọn phúc lợi
+                        <tui-data-list-wrapper
+                            *tuiDataList
+                            tuiMultiSelectGroup
+                            [items]="filter(search)"
+                        ></tui-data-list-wrapper>
+                    </tui-multi-select>
+                </div>
+            </div>
+
+            <div class="career_job">
+                <div class="header">
+                    <span class="title">Ngành nghề:</span>
+                </div>
+                <div class="body">
+                    <tui-combo-box class="b-form" formControlName="Career" [(ngModel)]="careerValue"
+                        (ngModelChange)="onCareerValueChange()" [tuiTextfieldCleaner]="true">
+                        Chọn ngành nghề
+                        <input tuiTextfield [attr.ng-reflect-focus]="false" />
+                        <tui-data-list-wrapper *tuiDataList [items]="careerList"></tui-data-list-wrapper>
+                    </tui-combo-box>
+                </div>
+            </div>
+
+            <div class="field_job">
+                <div class="header">
+                    <span class="title">Lĩnh vực:</span>
+                </div>
+                <div class="body">
+                    <tui-combo-box class="b-form" formControlName="Field" [(ngModel)]="fieldValue"
+                        (ngModelChange)="onFieldValueChange()" [tuiTextfieldCleaner]="true">
+                        Chọn lĩnh vực công ty
+                        <input tuiTextfield (input)="fieldValue" />
+                        <tui-data-list-wrapper *tuiDataList [items]="fieldList"></tui-data-list-wrapper>
+                    </tui-combo-box>
+                </div>
+            </div>
+
+            <div class="dateStart_job">
+                <div class="header">
+                    <span class="title">Ngày bắt đầu:</span>
+                </div>
+                <div class="body">
+                    <tui-input-date class="b-form" formControlName="DateStart">
+                        Choose a date
+                        <input autocomplete="bday" tuiTextfield />
+                    </tui-input-date>
+                    <tui-error formControlName="DateStart" [error]="[] | tuiFieldError | async"></tui-error>
+                </div>
+            </div>
+
+            <div class="dateEnd_job">
+                <div class="header">
+                    <span class="title">Ngày kết thúc:</span>
+                </div>
+                <div class="body">
+                    <tui-input-date class="b-form" formControlName="DateEnd">
+                        Choose a date
+                        <input autocomplete="bday" tuiTextfield />
+                    </tui-input-date>
+                    <tui-error formControlName="DateEnd" [error]="[] | tuiFieldError | async"></tui-error>
+                </div>
+            </div>
+
+            <div class="requirement_job">
+                <div class="header">
+                    <span class="title">Yêu cầu:</span>
+                </div>
+                <div class="body">
+                     <tui-textarea formControlName="Requirement" [tuiTextfieldCleaner]="true">
+                    Nhập yêu cầu công việc
+                </tui-textarea>
+                <tui-error formControlName="Requirement" [error]="[] | tuiFieldError | async"></tui-error>
+                </div>
+            </div>
+
+            <div class="tag_job">
+                <div class="header">
+                    <span class="title">Tag:</span>
+                </div>
+                <div class="body">
+                    <div class="tag_input">
+                        <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Tag">
+                            Nhập tên Tag
+                            <input tuiTextfield type="text" />
+                        </tui-input>
+                        <button
+                            appearance="primary"
+                            tuiButton
+                            type="button"
+                            class="tui-space_right-3 tui-space_bottom-3"
+                            (click)="addTag()"
+                        >
+                            Thêm
+                        </button>
+                    </div>
+                    <div class="tag_list">
+                        <div class="tag_select" *ngFor="let tag of tagsList; let i=index">
+                            <div>{{tag}}</div>
+                            <span class="material-symbols-outlined" (click)="removeTag(i)">
+                                close
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="servicePackage_job">
+                <div class="header">
+                    <span class="title">Gói dịch vụ:</span>
+                </div>
+                <div class="body">
+                    <tui-combo-box class="b-form" formControlName="ServicePakage" [(ngModel)]="servicePakageValue"
+                        (ngModelChange)="onServicePakageChange()" [tuiTextfieldCleaner]="true">
+                        Chọn ngành nghề
+                        <input tuiTextfield [attr.ng-reflect-focus]="false" />
+                        <tui-data-list-wrapper *tuiDataList [items]="servicePakageList"></tui-data-list-wrapper>
+                    </tui-combo-box>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -137,7 +137,6 @@ export class JobComponent {
       this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
 
     }
-
   }
   
 

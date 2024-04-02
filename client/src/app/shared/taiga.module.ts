@@ -78,6 +78,8 @@ import { TuiProgressModule } from '@taiga-ui/kit';
 import { TuiMultiSelectModule } from '@taiga-ui/kit';
 import { TuiLineClampModule } from '@taiga-ui/kit';
 import { TuiSidebarModule } from '@taiga-ui/addon-mobile';
+import { TuiRadioListModule } from '@taiga-ui/kit';
+
 
 const TaigaModules = [
   TuiInputModule,
@@ -94,7 +96,7 @@ const TaigaModules = [
   TuiTextareaModule,
   TuiInputDateRangeModule,
   TuiInputPhoneInternationalModule,
-
+  TuiRadioListModule,
   TuiButtonModule,
   TuiActionModule,
 
