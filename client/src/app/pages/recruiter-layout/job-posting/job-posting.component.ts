@@ -35,7 +35,7 @@ export class JobPostingComponent {
     Salary: new FormControl('', [Validators.required]),
     SalaryStart: new FormControl('', [Validators.required]),
     SalaryEnd: new FormControl('', [Validators.required]),
-    ThuongLuong: new FormControl(false),
+    Negotiate: new FormControl(false),
 
     Requirement: new FormControl('', [Validators.required]),
     Career: new FormControl('', [Validators.required]),
@@ -99,12 +99,23 @@ export class JobPostingComponent {
 
   //Phúc lợi
   search: string | null = '';
-  readonly control = new FormControl([ITEMS[0]]);
+  readonly Walfare = new FormControl([ITEMS[0]]);
   @tuiPure
   filter(search: string | null): readonly string[] {
       return ITEMS.filter(item => TUI_DEFAULT_MATCHER(item, search || ''));
   }
   //
+
+  
+
+  test: any={};
+  add(){
+    this.test={
+      a:this.Walfare.value,
+      b:this.jobPostForm.value.Negotiate,
+    }
+    console.log(this.test);
+  }
 
 }
 
