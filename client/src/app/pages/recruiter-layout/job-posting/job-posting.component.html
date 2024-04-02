@@ -44,7 +44,7 @@
                     
                         <div class="check_salary">
                             <tui-checkbox
-                                formControlName="ThuongLuong"
+                                formControlName="Negotiate"
                                 class="tui-space_bottom-3"
                             ></tui-checkbox>
                             <span>Thương lượng</span>
@@ -63,7 +63,7 @@
                         placeholder="Ignored text"
                         class="b-form"
                         [editable]="false"
-                        [formControl]="control"
+                        [formControl]="Walfare"
                         [tuiTextfieldLabelOutside]="true"
                         [(search)]="search"
                     >
@@ -181,11 +181,17 @@
                 <div class="body">
                     <tui-combo-box class="b-form" formControlName="ServicePakage" [(ngModel)]="servicePakageValue"
                         (ngModelChange)="onServicePakageChange()" [tuiTextfieldCleaner]="true">
-                        Chọn ngành nghề
+                        Chọn gói dịch vụ
                         <input tuiTextfield [attr.ng-reflect-focus]="false" />
                         <tui-data-list-wrapper *tuiDataList [items]="servicePakageList"></tui-data-list-wrapper>
                     </tui-combo-box>
                 </div>
+            </div>
+            <div class="btn_accept">
+                <button appearance="primary" tuiButton type="button" 
+                class="tui-space_right-3 tui-space_bottom-3" (click)="add()">
+                    Đăng tuyển
+                </button>
             </div>
         </form>
     </div>
