@@ -51,15 +51,23 @@ export class UserService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async getByUserNameAndPassword(userName:string, password:string){
+    try{
+      const user = await this.UserModel.findOne({ Username: userName, Password: password }).exec();
+      if(!user){
+        let errUser = {
+          _id: "404 user not found",
+          Username: "404 user not found",
+          Password: "404 user not found",
+          Uid: "404 user not found",
+        }
+        return errUser;
+      }
+      return user;
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
 }

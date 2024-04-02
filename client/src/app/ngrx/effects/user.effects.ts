@@ -65,4 +65,16 @@ export class UserEffects {
         )
     )
     )
+
+    getUserByGmailAtCreateProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(UserActions.getUserByGmailAtCreateProfile),
+        mergeMap((action) => 
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getUserByGmailAtCreateProfileSuccess({user})),
+                catchError((error) => of(UserActions.getUserByGmailAtCreateProfileFailure({errorMessage: error.message})))
+                )
+        )
+    )
+    )
 }

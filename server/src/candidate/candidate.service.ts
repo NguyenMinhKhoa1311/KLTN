@@ -4,6 +4,7 @@ import { UpdateCandidateDto } from './dto/update-candidate.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Candidate } from './entities/candidate.entity';
 import { Model } from 'mongoose';
+import { log } from 'console';
 
 @Injectable()
 export class CandidateService {
@@ -12,6 +13,7 @@ export class CandidateService {
   ){}
   async create(createCandidateDto: CreateCandidateDto) {
     try {
+      log(createCandidateDto);
       const newCandidate = new this.CandidateModel(createCandidateDto);
       return newCandidate.save();
     }

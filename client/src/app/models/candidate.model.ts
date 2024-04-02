@@ -14,6 +14,7 @@ export interface Candidate{
      Avatar: string,
      Gender: string,
      Storage: string,
+     Email: string,
      Phone: string,
      Address: string,
      Position: string,
@@ -32,35 +33,3 @@ export interface Candidate{
     updateAt: Date;
 }
 
-export function isCandidate(obj: any): obj is Candidate {
-    // Kiểm tra các trường bắt buộc
-    const requiredFields = [
-      "_id",
-      "CandidateId",
-      "Name",
-      "Avatar",
-      "Gender",
-      "Storage",
-      "Phone",
-      "Address",
-      "Position",
-      "Experience",
-      "Education",
-      "WorkExperience",
-      "Skills",
-      "Languages",
-      "DesiredJob",
-      "Field",
-      "Career",
-      "User",
-      "DateOfBirth",
-      "FavoriteJobs",
-      "createAt",
-      "updateAt",
-    ];
-  
-    if (!requiredFields.every((field) => field in obj)) {
-      return false;
-    }
-    return true;
-  }

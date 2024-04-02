@@ -69,8 +69,6 @@ export class LoginComponent implements OnInit {
                 //không có user thì tạo user
   
                 console.log(user);
-                const userAsJsoBth = JSON.stringify(user);
-                sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
                 this.store.dispatch(UserActions.createWithGoogleAtLogin({user: this.userLoginWithGoogle}));      
                 
               }
@@ -89,6 +87,8 @@ export class LoginComponent implements OnInit {
       // kiểm tra tạo user thành công hay chưa r chuyển qua trang register
       this.isCreateUserWithGoogleAtLoginSuccess$.subscribe((isSuccess) => {
         if (isSuccess) {
+          const userAsJsoBth = JSON.stringify(this.userLoginWithGoogle);
+          sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
           this.router.navigate(['createProfile/personal-information']);
         }
       });

@@ -56,10 +56,9 @@ export class RegisterComponent {
         if(user.Username.length > 0){
           if (user.Username == "404 user not found" ) {
             //không có user thì tạo user
-
-            console.log(user);
-            const userAsJsoBth = JSON.stringify(user);
+            const userAsJsoBth = JSON.stringify(this.userLoginWithGoogle);
             sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
+            console.log(user);
             this.store.dispatch(UserActions.createWithGoogoleAtRegister({user: this.userLoginWithGoogle}));      
             
           }
@@ -97,6 +96,8 @@ export class RegisterComponent {
       Username: this.regisForm.value.Name ?? '',
       Password: this.regisForm.value.Password??'',
     }
+    const userAsJsoBth = JSON.stringify(regisUser);
+    sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
     const formData = this.regisForm.value;
     console.log(formData);
     

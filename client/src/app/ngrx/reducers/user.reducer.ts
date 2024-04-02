@@ -23,6 +23,11 @@ export const initialState: UserState ={
     getByUsernameWithGoogleAtRegisterError: '',
     userTakenByUsernameWithGoogleAtRegister: <User>{},
 
+    isGetByUsernameAtCreateProfileLoading: false,
+    isGetByUsernameAtCreateProfileSuccess: false,
+    getByUsernameAtCreateProfileError: '',
+    userTakenByUsernameAtCreateProfile: <User>{},
+
 };
 
 export const userReducer = createReducer(
@@ -38,7 +43,6 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
-
     on(UserActions.createWithGoogleAtLoginSuccess, (state, action) => {
         console.log(action.type);
         let newState: UserState = {
@@ -49,7 +53,6 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
-
     on(UserActions.createWithGoogleAtLoginFailure, (state, action) => {
         console.log(action.type, action.errorMessage);
         let newState: UserState = {
@@ -61,6 +64,11 @@ export const userReducer = createReducer(
         return newState;
     }),
 
+
+
+
+
+
     on(UserActions.getUserByGmailWithGoogleAtLogin, (state, action) => {
         console.log(action.Username);
         let newState: UserState = {
@@ -71,7 +79,6 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
-
     on(UserActions.getUserByGmailWithGoogleAtLoginSuccess, (state, action) => {
         console.log(action.type);
         
@@ -84,7 +91,6 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
-
     on(UserActions.getUserByGmailWithGoogleAtLoginFailure, (state, action) => {
         console.log(action.type);
         
@@ -97,6 +103,9 @@ export const userReducer = createReducer(
         return newState;
     }),
 
+
+
+
     on(UserActions.createWithGoogoleAtRegister, (state, action) => {
         console.log(action.type);
         
@@ -108,7 +117,6 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
-
     on(UserActions.createWithGoogleAtRegisterSuccess, (state, action) => {
         console.log(action.type);
         
@@ -120,7 +128,6 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
-
     on(UserActions.createWithGoogleAtRegisterFailure, (state, action) => {
         console.log(action.type);
         
@@ -132,6 +139,9 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
+
+
+
 
     on(UserActions.getUserByGmailWithGoogleAtRegisterSuccess, (state, action) => {
         console.log(action.type);
@@ -145,7 +155,6 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
-
     on(UserActions.getUserByGmailWithGoogleAtRegisterFailure, (state, action) => {
         console.log(action.type);
         
@@ -157,7 +166,6 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
-
     on(UserActions.getUserByGmailWithGoogleAtRegister, (state, action) => {
         console.log(action.type);
         
@@ -166,6 +174,44 @@ export const userReducer = createReducer(
             isGetByUsernameWithGoogleAtRegisterLoading: true,
             isGetByUsernameWithGoogleAtRegisterSuccess: false,
             getByUsernameWithGoogleAtRegisterError: '',
+        };
+        return newState;
+    }),
+
+
+
+
+    on(UserActions.getUserByGmailAtCreateProfile, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtCreateProfileLoading: true,
+            isGetByUsernameAtCreateProfileSuccess: false,
+            getByUsernameAtCreateProfileError: '',
+        };
+        return newState;
+    }),
+    on(UserActions.getUserByGmailAtCreateProfileSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtCreateProfileLoading: false,
+            isGetByUsernameAtCreateProfileSuccess: true,
+            getByUsernameAtCreateProfileError: '',
+            userTakenByUsernameAtCreateProfile: action.user,
+        };
+        return newState;
+    }),
+    on(UserActions.getUserByGmailAtCreateProfileFailure, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtCreateProfileLoading: false,
+            isGetByUsernameAtCreateProfileSuccess: false,
+            getByUsernameAtCreateProfileError: action.errorMessage,
         };
         return newState;
     }),

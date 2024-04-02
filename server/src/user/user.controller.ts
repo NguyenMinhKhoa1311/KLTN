@@ -41,18 +41,14 @@ export class UserController {
     }
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Get('getByUserNameAndPassword')
+  async getByUserNameAndPassword(@Query('userName') username: string, @Query('password') password: string){
+    try{
+      const user = await this.userService.getByUserNameAndPassword(username, password);
+      return user;
+    }
+    catch(err){
+      throw err;
+    }
   }
 }

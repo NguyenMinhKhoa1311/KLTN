@@ -19,4 +19,9 @@ export interface UserState{
     isGetByUsernameWithGoogleAtRegisterSuccess: boolean;
     getByUsernameWithGoogleAtRegisterError: string;
     userTakenByUsernameWithGoogleAtRegister: User;
+
+    isGetByUsernameAtCreateProfileLoading: boolean;
+    isGetByUsernameAtCreateProfileSuccess: boolean;
+    getByUsernameAtCreateProfileError: string;
+    userTakenByUsernameAtCreateProfile: User;
 }
