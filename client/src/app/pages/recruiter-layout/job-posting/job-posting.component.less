@@ -1,0 +1,161 @@
+#jobPosting_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    padding: 20px 0 20px 0;
+    .jobPosting_box{
+        width: 50%;
+        .title_header{
+            width: 100%;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .name_job, .description_job, .walfare_job, .career_job, .field_job ,.dateStart_job,
+        .dateEnd_job, .requirement_job, .servicePackage_job{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            .header{
+                width: 30%;
+                .title{
+                    font-size: 16px;
+                    font-weight: 600;
+                    //margin-bottom: 15px;
+                }
+                .title::before{
+                    content: "*";
+                    color: rgb(220, 54, 46);
+                    margin-right: 4px;
+                }
+            }
+            .body{
+                width: 70%;
+                margin-bottom: 10px;
+            }
+        }
+
+        .tag_job{
+            width: 100%;
+            height: 15rem;
+            display: flex;
+            flex-direction: row;
+            .header{
+                width: 30%;
+                .title{
+                    font-size: 16px;
+                    font-weight: 600;
+                    //margin-bottom: 15px;
+                }
+                .title::before{
+                    content: "*";
+                    color: rgb(220, 54, 46);
+                    margin-right: 4px;
+                }
+            }
+            .body{
+                width: 70%;
+                margin-bottom: 10px;
+                .tag_input{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    
+                    tui-input{
+                        width: 80%;
+                    }
+                }
+
+                ::ng-deep .t-wrapper[_ngcontent-ng-c3926154569]{
+                    padding: 20px;
+                }
+
+                ::ng-deep .tui-space_right-3 {
+                    margin-right: 0;
+                }
+
+                .tag_list{
+                    height: calc(10rem - 24px);
+                    border: 1px solid #ccc;
+                    border-radius: 12px;
+                    padding: 12px;
+                    .tag_select{
+                        font-size: 14px;
+                        display: inline-flex;
+                        align-items: center; 
+                        border: 1px solid #ccc;
+                        margin-right: 5px;
+                        margin-bottom: 5px; 
+                        padding: 5px 0 5px 5px; 
+                        border-radius: 6px;
+                        cursor: pointer;
+                        width: auto;
+                        .material-symbols-outlined {
+                            transform: scale(0.8);
+                            color: #999; 
+                            cursor: pointer; 
+                        }
+                    }
+                }
+            }
+        }
+
+        .salary_job{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            .header{
+                width: 30%;
+                .title{
+                    font-size: 16px;
+                    font-weight: 600;
+                    //margin-bottom: 15px;
+                }
+                .title::before{
+                    content: "*";
+                    color: rgb(220, 54, 46);
+                    margin-right: 4px;
+                }
+            }
+            .body{
+                width: 70%;
+                margin-bottom: 10px;
+                .salary_value{
+                    display: flex;
+                    flex-direction: row;
+                    span{
+                        font-size: 16px;
+                        font-weight: 600;
+                        margin-right: 10px;
+                    }
+                    .salary_input{
+                        width: 20%;
+                        margin-right: 5px;
+                    }
+                    .check_salary{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        span{
+                            font-size: 14px;
+                            font-weight: 600;
+                            margin-left: 10px;
+                        }
+                        .tui-space_bottom-3{
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+                
+            }
+        }
+
+        
+    }
+}

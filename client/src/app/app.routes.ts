@@ -26,4 +26,9 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/createProfile/create-profile.routes').then((m) => m.CREATEPROFILE_ROUTERS),
     }, 
+    {
+        path: 'recruiterLayout',
+        loadChildren: () =>
+          import('./pages/recruiter-layout/recruiter-layout.routes').then((m) => m.RECRUITERLAYOUT_ROUTERS),
+    }
 ];
