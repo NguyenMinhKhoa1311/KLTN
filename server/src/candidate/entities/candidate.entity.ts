@@ -29,32 +29,38 @@ export class Candidate {
     Experience: number;
 
     @Prop({
+        required: true,
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Education',
     })
     Education:[mongoose.Schema.Types.ObjectId];
 
     @Prop({
-
+        required: true,
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'WorkExperience',
     })
     WorkExperience: [mongoose.Schema.Types.ObjectId];
 
     @Prop({
+        required: true,
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'CandidateSkill',
     })
     Skills: [mongoose.Schema.Types.ObjectId];
 
     @Prop({
+        required: true,
     })
-    Languages: string;
+    Languages: string[];
 
-    @Prop({})
+    @Prop({
+        required: true,
+    })
     Avatar: string;
 
     @Prop({
+        required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Storage',
     })
@@ -67,6 +73,7 @@ export class Candidate {
     DesiredJob: string;
 
     @Prop({
+        
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Field',
         required: true
@@ -81,6 +88,7 @@ export class Candidate {
     Career: string;
 
     @Prop({
+        required: true,
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Job'
     })

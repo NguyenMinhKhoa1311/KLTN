@@ -42,7 +42,7 @@ export class UserController {
   }
 
   @Get('getByUserNameAndPassword')
-  async getByUserNameAndPassword(@Query('userName') username: string, @Query('password') password: string){
+  async getByUserNameAndPassword(@Query('username') username: string, @Query('password') password: string){
     try{
       const user = await this.userService.getByUserNameAndPassword(username, password);
       return user;
