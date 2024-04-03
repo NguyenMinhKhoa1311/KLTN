@@ -14,10 +14,10 @@
         </div>
         <div class="filter_search">
             <div class="search_location">
-                <tui-combo-box class="b-form" [(ngModel)]="careerValue" (ngModelChange)="onCareerValueChange()" [tuiTextfieldCleaner]="true">
+                <tui-combo-box class="b-form" [(ngModel)]="locationValue" (ngModelChange)="onCareerValueChange()" [tuiTextfieldCleaner]="true">
                     Chọn địa điểm
                     <input tuiTextfield [attr.ng-reflect-focus]="false"/>
-                    <tui-data-list-wrapper *tuiDataList [items]="careerList"></tui-data-list-wrapper>
+                    <tui-data-list-wrapper *tuiDataList [items]="locationList | tuiFilterByInput"></tui-data-list-wrapper>
                 </tui-combo-box>
             </div>
             <div class="search_industries">

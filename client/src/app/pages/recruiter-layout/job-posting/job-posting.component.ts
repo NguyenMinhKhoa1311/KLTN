@@ -55,12 +55,21 @@ export class JobPostingComponent implements OnDestroy{
   //ngrx of job
   isCreateJobAtJob$ = this.store.select('job', 'isCreateJobAtCreateJobSuccess');
 
+  // Lấy timestamp hiện tại
+  timestamp = Date.now();
 
- 
+  // Khởi tạo Date object từ timestamp
+  date = new Date(this.timestamp);
+
+  // Lấy ngày, tháng, năm từ Date object
+  day = this.date.getDate();
+  month = this.date.getMonth(); 
+  year = this.date.getFullYear();
 
   jobPostForm = new FormGroup({
     Name: new FormControl('', [Validators.required]),
     Description: new FormControl('', [Validators.required]),
+    Location: new FormControl('', [Validators.required]),
     
     Salary: new FormControl('', [Validators.required]),
     SalaryStart: new FormControl('', [Validators.required]),
@@ -70,8 +79,8 @@ export class JobPostingComponent implements OnDestroy{
     Requirement: new FormControl('', [Validators.required]),
     Career: new FormControl('', [Validators.required]),
     Field: new FormControl('', [Validators.required]),
-    DateStart: new FormControl(new TuiDay(2017, 2, 15)),
-    DateEnd: new FormControl(new TuiDay(2017, 2, 15)),
+    DateStart: new FormControl(new TuiDay(this.year, this.month, this.day)),
+    DateEnd: new FormControl(new TuiDay(this.year, this.month, this.day)),
     
     Walfare: new FormControl('', [Validators.required]),
     Tag: new FormControl('', [Validators.required]),

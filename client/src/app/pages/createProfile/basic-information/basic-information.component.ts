@@ -24,6 +24,7 @@ import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 import { generateUuid } from '../../../../environments/environments';
 import { Subscription } from 'rxjs';
 
+
 @Component({
   selector: 'app-basic-information',
   standalone: true,
