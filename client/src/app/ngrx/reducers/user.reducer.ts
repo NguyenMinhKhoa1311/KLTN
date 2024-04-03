@@ -28,6 +28,16 @@ export const initialState: UserState ={
     getByUsernameAtCreateProfileError: '',
     userTakenByUsernameAtCreateProfile: <User>{},
 
+    isGetUserByUsernameAndPasswordAtLoginLoading: false,
+    isGetUserByUsernameAndPasswordAtLoginSuccess: false,
+    getUserByUsernameAndPasswordAtLoginError: '',
+    userTakenByUsernameAndPasswordAtLogin: <User>{},
+
+    isGetByUsernameWithAccountAtRegisterLoading: false,
+    isGetByUsernameWithAccountAtRegisterSuccess: false,
+    getByUsernameWithAccountAtRegisterError: '',
+    userTakenByUsernameWithAccountAtRegister: <User>{},
+
 };
 
 export const userReducer = createReducer(
@@ -215,4 +225,80 @@ export const userReducer = createReducer(
         };
         return newState;
     }),
+
+
+
+
+    on(UserActions.getUserByUsernameAndPasswordAtLogin, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetUserByUsernameAndPasswordAtLoginLoading: true,
+            isGetUserByUsernameAndPasswordAtLoginSuccess: false,
+            getUserByUsernameAndPasswordAtLoginError: '',
+        };
+        return newState;
+    }),
+    on(UserActions.getUserByUsernameAndPasswordAtLoginSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetUserByUsernameAndPasswordAtLoginLoading: false,
+            isGetUserByUsernameAndPasswordAtLoginSuccess: true,
+            getUserByUsernameAndPasswordAtLoginError: '',
+            userTakenByUsernameAndPasswordAtLogin: action.user,
+        };
+        return newState;
+    }),
+    on(UserActions.getUserByUsernameAndPasswordAtLoginFailure, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetUserByUsernameAndPasswordAtLoginLoading: false,
+            isGetUserByUsernameAndPasswordAtLoginSuccess: false,
+            getUserByUsernameAndPasswordAtLoginError: action.errorMessage,
+        };
+        return newState;
+    }),
+
+
+
+    on(UserActions.getUserByGmailWithAccountAtRegister, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameWithAccountAtRegisterLoading: true,
+            isGetByUsernameWithAccountAtRegisterSuccess: false,
+            getByUsernameWithAccountAtRegisterError: '',
+        };
+        return newState;
+    }),
+    on(UserActions.getUserByGmailWithAccountAtRegisterSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameWithAccountAtRegisterLoading: false,
+            isGetByUsernameWithAccountAtRegisterSuccess: true,
+            getByUsernameWithAccountAtRegisterError: '',
+            userTakenByUsernameWithAccountAtRegister: action.user,
+        };
+        return newState;
+    }),
+    on(UserActions.getUserByGmailWithAccountAtRegisterFailure, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameWithAccountAtRegisterLoading: false,
+            isGetByUsernameWithAccountAtRegisterSuccess: false,
+            getByUsernameWithAccountAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }),
+
 )

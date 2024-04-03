@@ -16,7 +16,12 @@ export const initualState: FieldState = {
     fieldNoLimitAtCreateProfile: [],
     isGetAllNoLimitAtCreateProfileLoading: false,
     isGetAllNoLimitAtCreateProfileSuccess: false,
-    getAllNoLimitAtCreateProfileError: ''
+    getAllNoLimitAtCreateProfileError: '',
+
+    fieldNoLimitAtCreateJob: [],    
+    isGetAllNoLimitAtCreateJobLoading: false,
+    isGetAllNoLimitAtCreateJobSuccess: false,
+    getAllNoLimitAtCreateJobError: ''
 }
 
 export const fieldReducer = createReducer(
@@ -47,6 +52,8 @@ export const fieldReducer = createReducer(
         }
     }),
     
+
+    
     on(FieldActions.getAllNoLimit, (state, action) =>{
         return {
             ...state,
@@ -72,6 +79,9 @@ export const fieldReducer = createReducer(
             getAllNoLimitError: action.err
         }
     }),
+
+
+
     on(FieldActions.getAllNoLimitAtCreaetProfile, (state, action) =>{
         return {
             ...state,
@@ -96,5 +106,36 @@ export const fieldReducer = createReducer(
             isGetAllNoLimitAtCreateProfileSuccess: false,
             getAllNoLimitAtCreateProfileError: action.err
         }
+    }),
+
+
+
+
+    on(FieldActions.getAllNoLimitAtCreateJob, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtCreateJobLoading: true,
+            isGetAllNoLimitAtCreateJobSuccess: false,
+            getAllNoLimitAtCreateJobError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtCreateJobSuccess, (state, action) =>{
+        return {
+            ...state,
+            fieldNoLimitAtCreateJob: action.fields,
+            isGetAllNoLimitAtCreateJobLoading: false,
+            isGetAllNoLimitAtCreateJobSuccess: true,
+            getAllNoLimitAtCreateJobError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtCreateJobFailure, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtCreateJobLoading: false,
+            isGetAllNoLimitAtCreateJobSuccess: false,
+            getAllNoLimitAtCreateJobError: action.err
+        }
     })
+
+
 )

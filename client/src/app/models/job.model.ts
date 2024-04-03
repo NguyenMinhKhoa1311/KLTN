@@ -13,7 +13,7 @@ export interface Job{
      Description: string,
      Location: string,
      Requirement :string,
-     Salary: number,
+     Salary: string,
      Welfare: string[],
      Career: Career,
      Recruiter: Recruiter,

@@ -32,6 +32,11 @@ export const initialState: jobState = {
     isGetByCareerNameAtJobLoading: false,
     isGetByCareerNameAtJobSuccess: false,
     getByCareerNameAtJobError: "",
+
+
+    isCreateJobAtCreateJobLoading: false,
+    isCreateJobAtCreateJobSuccess: false,
+    createJobAtCreateJobError: "",
 }
 
 export const jobReducer = createReducer(
@@ -64,6 +69,11 @@ export const jobReducer = createReducer(
 
 
 
+
+
+
+
+
     on(JobActions.getByCareerAtHome,(state,action)=>{
         return{
             ...state,
@@ -92,6 +102,7 @@ export const jobReducer = createReducer(
 
 
 
+
     on(JobActions.getByHotJobAtHome,(state,action)=>{
         return{
             ...state,
@@ -117,6 +128,10 @@ export const jobReducer = createReducer(
             getByHotJobAtHomeError: action.error,
         }
     }),
+
+
+
+
     on(JobActions.clearStateAtHome,(state,action)=>{
         return{
             ...state,
@@ -136,6 +151,11 @@ export const jobReducer = createReducer(
             getByHotJobAtHomeError: "",
         }
     }),
+
+
+
+
+
     on(JobActions.getAllAndSortAtJob,(state,action)=>{
         return{
             ...state,
@@ -162,6 +182,11 @@ export const jobReducer = createReducer(
         }
     }),
 
+
+
+
+
+
     on(JobActions.getByFieldNameAtJob,(state,action)=>{
         return{
             ...state,
@@ -187,6 +212,10 @@ export const jobReducer = createReducer(
             getByFieldNameAtJobError: action.error,
         }
     }),
+
+
+
+
     on(JobActions.getByCareerNameAtJob,(state,action)=>{
         return{
             ...state,
@@ -210,6 +239,34 @@ export const jobReducer = createReducer(
             isGetByCareerNameAtJobLoading: false,
             isGetByCareerNameAtJobSuccess: false,
             getByCareerNameAtJobError: action.error,
+        }
+    }),
+
+
+
+
+    on(JobActions.createJobAtJob,(state,action)=>{
+        return{
+            ...state,
+            isCreateJobAtCreateJobLoading: true,
+            isCreateJobAtCreateJobSuccess: false,
+            createJobAtCreateJobError: "",
+        }
+    }),
+    on(JobActions.createJobAtJobSuccess,(state,action)=>{
+        return{
+            ...state,
+            isCreateJobAtCreateJobLoading: false,
+            isCreateJobAtCreateJobSuccess: true,
+            createJobAtCreateJobError: "",
+        }
+    }),
+    on(JobActions.createJobAtJobFailure,(state,action)=>{
+        return{
+            ...state,
+            isCreateJobAtCreateJobLoading: false,
+            isCreateJobAtCreateJobSuccess: false,
+            createJobAtCreateJobError: action.error,
         }
     }),
 )

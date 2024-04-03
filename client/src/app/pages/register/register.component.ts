@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TaigaModule } from '../../shared/taiga.module';
 import { ShareModule } from '../../shared/shared.module';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { AuthState } from '../../ngrx/states/auth.state';
 import * as AuthActions from '../../ngrx/actions/auth.actions';
 import { UserState } from '../../ngrx/states/user.state';
 import * as UserActions from '../../ngrx/actions/user.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ import * as UserActions from '../../ngrx/actions/user.actions';
   templateUrl: './register.component.html',
   styleUrl: './register.component.less'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy  {
+  subscriptions: Subscription[] = [];
 
   //ngrx of Auth
   userFirebase$ = this.store.select('auth', 'userAtregister');
@@ -29,18 +31,31 @@ export class RegisterComponent {
   //ngrx of user
   userTakenByGmailWithGoogleAtRegister$ = this.store.select('user', 'userTakenByUsernameWithGoogleAtRegister');
   isCreateUserWithGoogleAtRegisterSuccess$ = this.store.select('user', 'isCreateWithGoogleAtRegisterSuccess');
+  userTakenByGmailWithAccountAtRegister$ = this.store.select('user', 'userTakenByUsernameWithAccountAtRegister');
 
   //ngrx of candidate
   candidateTakenByUserWithGoogleAtRegister$ = this.store.select('candidate', 'candidateTakenByUserWithGoogleAtRegister');
 
+  //Skip first init of userTakenByGmailWithAccountAtRegister$
+  isFirstInitOfuserTakenByGmailWithAccountAtRegister$ = true;
+
 
   userLoginWithGoogle: User = <User>{};
+
+  regisForm = new FormGroup({
+    Email: new FormControl('', [Validators.required]),
+    Password: new FormControl('', [Validators.required]),
+    ConfirmPassword: new FormControl('', [Validators.required]),
+  });
 
   constructor(
     private router: Router,
     private store: Store<{candidate: candidateState, auth: AuthState, user: UserState}>
     ) {
 
+      this.subscriptions.push(
+
+        
       // kiểm tra login with google thành công hay chưa r gọi action getUserByGmailWithGoogleAtLogin
       this.userFirebase$.subscribe(User=>{
         if(User.email.length > 0){
@@ -50,7 +65,7 @@ export class RegisterComponent {
           this.userLoginWithGoogle.Uid = User.uid;
           this.store.dispatch(UserActions.getUserByGmailWithGoogleAtRegister({username: this.userLoginWithGoogle.Username}));
         }
-      });
+      }),
 
       this.userTakenByGmailWithGoogleAtRegister$.subscribe(user=>{
         if(user.Username.length > 0){
@@ -71,8 +86,9 @@ export class RegisterComponent {
 
           }
         }
-      });
+      }),
 
+      //Kiểm tra user có profile chưa
       this.candidateTakenByUserWithGoogleAtRegister$.subscribe(candidate=>{
         if (candidate._id.length > 0) {
           if (candidate._id == "404 candidate not found") {
@@ -82,37 +98,49 @@ export class RegisterComponent {
             this.router.navigate(['/home']);
           }
         }
-      });
+      }),
+
+      //Kiểm tra user có tạo thành công không
       this.isCreateUserWithGoogleAtRegisterSuccess$.subscribe(isSuccess=>{
         if (isSuccess) {
           this.router.navigate(['createProfile/personal-information']);
         }
-      } );
+      }),
+      
+      //Kiểm tra email đã được sử dụng chưa
+      this.userTakenByGmailWithAccountAtRegister$.subscribe(user=>{
+          if(user.Username == "404 user not found"){
+          let regisUser: any= {
+            Uid: generateUuid(),
+            Username: this.regisForm.value.Email ?? '',
+            Password: this.regisForm.value.Password??'',
+          }
+          const userAsJsoBth = JSON.stringify(regisUser);
+          sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
+          const formData = this.regisForm.value;
+          console.log(formData);
+          this.store.dispatch(UserActions.createWithGoogoleAtRegister({user: regisUser}));
+        }else if(!this.isFirstInitOfuserTakenByGmailWithAccountAtRegister$){
+          alert('Email is already taken');
+        }
+      })
+      );
      }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
 
   register(){
-    let regisUser: any= {
-      Uid: generateUuid(),
-      Username: this.regisForm.value.Name ?? '',
-      Password: this.regisForm.value.Password??'',
-    }
-    const userAsJsoBth = JSON.stringify(regisUser);
-    sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
-    const formData = this.regisForm.value;
-    console.log(formData);
-    
     if(this.regisForm.value.Password !== this.regisForm.value.ConfirmPassword){
       alert('Password and Confirm Password are not the same');
       return;
     }
-    this.store.dispatch(UserActions.createWithGoogoleAtRegister({user: regisUser}));
+    this.isFirstInitOfuserTakenByGmailWithAccountAtRegister$ = false;
+    this.store.dispatch(UserActions.getUserByGmailWithAccountAtRegister({ username: this.regisForm.value.Email ?? '' }));
   }
-   regisForm = new FormGroup({
-    Name: new FormControl('', [Validators.required]),
-    Email: new FormControl('', [Validators.required]),
-    Password: new FormControl('', [Validators.required]),
-    ConfirmPassword: new FormControl('', [Validators.required]),
-  });
+
 
   registerWithGoogle(){
     this.store.dispatch(AuthActions.loginAtRegister());

@@ -18,4 +18,7 @@ export class UserService {
   create(newUser: any){
     return this.httpClient.post<User | any>(`${URL}/user/create`, newUser)
   }
+  getUserWithUserNameAndPassword(userName: string, password: string){
+    return this.httpClient.get<User | any>(`${URL}/user/getByUserNameAndPassword/?username=${userName}&password=${password}`)
+  }
 }

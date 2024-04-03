@@ -108,5 +108,21 @@ export class JobEffects {
         )
         )
         )
+    createJobAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.createJobAtJob),
+            exhaustMap(action =>
+                this.jobService.create(action.job).pipe(
+                    map(() => {
+                        return JobActions.createJobAtJobSuccess()
+                    }),
+                    catchError((err) =>
+                        of(JobActions.createJobAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
 
 }

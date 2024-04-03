@@ -34,4 +34,7 @@ export class JobService {
     
     return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareerName?careerName=${CareerName}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
+  create(job:any){
+    return this.httpClient.post(`${URL}/job/create`,job);
+  }
 }

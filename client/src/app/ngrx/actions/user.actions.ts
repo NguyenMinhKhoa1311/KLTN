@@ -65,6 +65,22 @@ export const getUserByGmailWithGoogleAtRegister = createAction(
 
 
 
+
+export const getUserByGmailWithAccountAtRegister = createAction(
+    '[User] get user by gmail with account at register',
+    props<{ username: string}>()
+);
+export const getUserByGmailWithAccountAtRegisterSuccess = createAction(
+    '[User] get user by gmail with account at register success',
+    props<{ user: User}>()
+);
+export const getUserByGmailWithAccountAtRegisterFailure = createAction(
+    '[User] get user by gmail with account at register failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
 export const getUserByGmailAtCreateProfile = createAction(
     '[User] get user by gmail at create profile',
     props<{ username: string}>()
@@ -75,5 +91,21 @@ export const getUserByGmailAtCreateProfileSuccess = createAction(
 );
 export const getUserByGmailAtCreateProfileFailure = createAction(
     '[User] get user by gmail at create profile failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+export const getUserByUsernameAndPasswordAtLogin = createAction(
+    '[User] get user by username and password at login',
+    props<{ username: string, password: string}>()
+);
+export const getUserByUsernameAndPasswordAtLoginSuccess = createAction(
+    '[User] get user by username and password at login success',
+    props<{ user: User}>()
+);
+export const getUserByUsernameAndPasswordAtLoginFailure = createAction(
+    '[User] get user by username and password at login failure',
     props<{ errorMessage: string}>()
 );

@@ -16,4 +16,9 @@ export interface FieldState{
     isGetAllNoLimitAtCreateProfileSuccess: boolean;
     getAllNoLimitAtCreateProfileError: string;
 
+    fieldNoLimitAtCreateJob: Field[];
+    isGetAllNoLimitAtCreateJobLoading: boolean;
+    isGetAllNoLimitAtCreateJobSuccess: boolean;
+    getAllNoLimitAtCreateJobError: string;
+
 }

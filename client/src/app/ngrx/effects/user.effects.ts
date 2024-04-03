@@ -77,4 +77,28 @@ export class UserEffects {
         )
     )
     )
+
+    getByUsernameAndPaswordAtLogin$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(UserActions.getUserByUsernameAndPasswordAtLogin),
+        mergeMap((action) => 
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getUserByGmailAtCreateProfileSuccess({user})),
+                catchError((error) => of(UserActions.getUserByGmailAtCreateProfileFailure({errorMessage: error.message})))
+                )
+        )
+    )
+    )
+
+    getUserByGmailWithAccountAtRegister$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(UserActions.getUserByGmailWithAccountAtRegister),
+        mergeMap((action) => 
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getUserByGmailWithAccountAtRegisterSuccess({user})),
+                catchError((error) => of(UserActions.getUserByGmailWithAccountAtRegisterFailure({errorMessage: error.message})))
+                )
+        )
+    )
+    )
 }

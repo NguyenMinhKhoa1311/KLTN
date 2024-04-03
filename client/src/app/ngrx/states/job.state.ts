@@ -30,4 +30,8 @@ export interface jobState{
     isGetByCareerNameAtJobLoading: boolean;
     isGetByCareerNameAtJobSuccess: boolean;
     getByCareerNameAtJobError: string;
+
+    isCreateJobAtCreateJobSuccess: boolean;
+    isCreateJobAtCreateJobLoading: boolean;
+    createJobAtCreateJobError: string;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TuiDay, TuiTime} from '@taiga-ui/cdk';
 import { TaigaModule } from '../../../shared/taiga.module';
@@ -22,6 +22,7 @@ import { Candidate } from '../../../models/candidate.model';
 import { candidateState } from '../../../ngrx/states/candidate.state';
 import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 import { generateUuid } from '../../../../environments/environments';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-basic-information',
@@ -30,8 +31,10 @@ import { generateUuid } from '../../../../environments/environments';
   templateUrl: './basic-information.component.html',
   styleUrl: './basic-information.component.scss',
 })
-export class BasicInformationComponent {
+export class BasicInformationComponent implements OnDestroy {
 
+
+  subscriptions: Subscription[] = [];
 
   //ngrx of career
   careersTakenByGetAllAtCreateProfile$ = this.store.select('career', 'careersTakenByGetAllAtCreateProfile');
@@ -89,15 +92,15 @@ export class BasicInformationComponent {
     this.store.dispatch(FieldActions.getAllNoLimitAtCreaetProfile());
     this.store.dispatch(CareerActions.getAllAtCreateProfile());
 
-
-    // lắng nghe action
+    this.subscriptions.push(
+          // lắng nghe action
     this.careersTakenByGetAllAtCreateProfile$.subscribe(careers=>{
       console.log(careers);
       if(careers.length > 0){
         this.careerList = careers;
        
       }
-    });
+    }),
 
     // lắng nghe action
     this.fieldsTakenByGetAllNoLimitAtCreateProfile$.subscribe(fields=>{
@@ -105,7 +108,7 @@ export class BasicInformationComponent {
       if(fields.length > 0){
         this.fieldList = fields;
       }
-    });
+    }),
 
     // lắng nghe action
     this.careersTakenByGetByFieldAtProfile$.subscribe(careers=>{
@@ -113,7 +116,7 @@ export class BasicInformationComponent {
       if(careers.length > 0){
         this.careerList = careers;
       }
-    });
+    }),
 
     // lắng nghe action
     this.userTakenByUsernameAtCreateProfile$.subscribe(user=>{
@@ -121,7 +124,7 @@ export class BasicInformationComponent {
       if(user._id.length > 0){
         this.user = user;
       }
-    });
+    }),
 
     // lắng nghe action
     this.isCreateCandidateAtCreateProfileSuccess$.subscribe(isSuccess=>{
@@ -132,6 +135,12 @@ export class BasicInformationComponent {
         
         this.router.navigate(['createProfile/create-success']);
       }
+    })
+    )
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
     });
   }
 
@@ -154,6 +163,15 @@ export class BasicInformationComponent {
       Career: this.testForm.value.Career,
       Field: this.testForm.value.Field,
       Experience: this.testForm.value.Experience,
+      WorkExperience: [],
+      Languages:[],
+      Avatar:"https://storage.googleapis.com/storagedoan.appspot.com/images/CloneAvatar/c6139be4-6e0a-4e5b-8fcd-ff75466607fb-avatar-trang-4.jpg?GoogleAccessId=firebase-adminsdk-8r86k%40storagedoan.iam.gserviceaccount.com&Expires=4162813200&Signature=vQgsNuWiC8gGsB6uky3ucxyRhILtcvRvEW6K8NDEaKD1iEkHHFD7hIMkhqrS9aDYGO7rHRvFCOjJcHZihO8smr0opYETm4HZEKoCPi1HqxRRT9XhE9fnOcDluw4NByUhi5XXsWp0YMibEvjhsLOd0hn9ZPvqT%2BdIvhgWl6lilCuLcrr9EW%2Ff4KkhP0SGY%2FN%2BjwcY7cyQZDNQc9ExqY1l2%2BXpknRuaiyzZr6wnmpBncZx7UBvBVEtrCEToVWKs3IXGZEXUiFYFIis07d0d4IzOFoqnBIMyRB7H41B6XTEse3PtWL1lBfEtIRN1vw%2FRAz2D5RuPvruynG%2FfcytoHzW4w%3D%3D",
+      Storage:"65f8390d13079793cbb2101d",
+      FavoriteJobs:[],
+
+
+
+      
     }
     console.log(this.candidateToRegister);
     this.store.dispatch(CandidateActions.createCandidateAtCreateProfile({candidate: this.candidateToRegister}))

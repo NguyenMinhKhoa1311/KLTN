@@ -24,4 +24,14 @@ export interface UserState{
     isGetByUsernameAtCreateProfileSuccess: boolean;
     getByUsernameAtCreateProfileError: string;
     userTakenByUsernameAtCreateProfile: User;
+
+    isGetByUsernameWithAccountAtRegisterLoading: boolean;
+    isGetByUsernameWithAccountAtRegisterSuccess: boolean;
+    getByUsernameWithAccountAtRegisterError: string;
+    userTakenByUsernameWithAccountAtRegister: User;
+
+    isGetUserByUsernameAndPasswordAtLoginLoading: boolean;
+    isGetUserByUsernameAndPasswordAtLoginSuccess: boolean;
+    getUserByUsernameAndPasswordAtLoginError: string;
+    userTakenByUsernameAndPasswordAtLogin: User;
 }

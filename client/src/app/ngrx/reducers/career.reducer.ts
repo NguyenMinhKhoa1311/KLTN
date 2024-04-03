@@ -21,7 +21,18 @@ export const initialState: CareerState = {
     careersTakenByGetByFieldAtProfile: [],
     isGetByFieldAtProfileLoading: false,
     isGetByFieldAtProfileSuccess: false,
-    getByFieldAtProfileError: ''
+    getByFieldAtProfileError: '',
+
+    isGetAllAtCreateJobLoading: false,
+    isGetAllAtCreateJobSuccess: false,
+    careersTakenByGetAllAtCreateJob: [],
+    getAllAtCreateJobError: '',
+
+    isGetByFieldAtCreateJobLoading: true,
+    isGetByFieldAtCreateJobSuccess: false,
+    careersTakenByGetByFieldAtCreateJob: [],
+    getByFieldAtCreateJobError: ''
+
 }
 
 export const careerReducer = createReducer(
@@ -131,6 +142,63 @@ export const careerReducer = createReducer(
             isGetByFieldAtProfileLoading: false,
             isGetByFieldAtProfileSuccess: false,
             getByFieldAtProfileError: action.error
+        }
+    }),
+
+
+
+
+
+    on(CareerActions.getAllAtCreateJob,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAtCreateJobLoading: true,
+            isGetAllAtCreateJobSuccess: false,
+            getAllAtCreateJobError: ''
+        }
+    }),
+    on(CareerActions.getAllAtCreateJobSuccess,(state,action)=>{
+        return {
+            ...state,
+            careersTakenByGetAllAtCreateJob: action.careers,
+            isGetAllAtCreateJobLoading: false,
+            isGetAllAtCreateJobSuccess: true
+        }
+    }),
+    on(CareerActions.getAllAtCreateJobFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAtCreateJobLoading: false,
+            isGetAllAtCreateJobSuccess: false,
+            getAllAtCreateJobError: action.error
+        }
+    }),
+
+
+
+
+    on(CareerActions.getByFieldAtCreateJob,(state,action)=>{
+        return {
+            ...state,
+            isGetByFieldAtCreateJobLoading: true,
+            isGetByFieldAtCreateJobSuccess: false,
+            getByFieldAtCreateJobError: ''
+        }
+    }),
+    on(CareerActions.getByFieldAtCreateJobSuccess,(state,action)=>{
+        return {
+            ...state,
+            careersTakenByGetByFieldAtCreateJob: action.careers,
+            isGetByFieldAtCreateJobLoading: false,
+            isGetByFieldAtCreateJobSuccess: true
+        }
+    }),
+    on(CareerActions.getByFieldAtCreateJobFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetByFieldAtCreateJobLoading: false,
+            isGetByFieldAtCreateJobSuccess: false,
+            getByFieldAtCreateJobError: action.error
         }
     })
 )

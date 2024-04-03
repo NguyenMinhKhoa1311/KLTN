@@ -42,7 +42,7 @@
                 <div class="field_box"> 
                     <span class="title">Lĩnh vực hiện tại</span>
                     <mat-form-field class="info_box">
-                        <mat-select formControlName="Field" placeholder="Chọn hãng xe" (valueChange)="onFieldChange($event)" >
+                        <mat-select formControlName="Field" placeholder="Chọn lĩnh vực" (valueChange)="onFieldChange($event)" >
                             <mat-option *ngFor="let field of fieldList" [value]="field._id">
                                 {{field.FieldName}}
                             </mat-option>
