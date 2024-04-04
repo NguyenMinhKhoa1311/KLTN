@@ -26,6 +26,19 @@
                 </div>
             </div>
 
+            <div class="location_job">
+                <div class="header">
+                    <span class="title">Địa chỉ làm việc:</span>
+                </div>
+                <div class="body">
+                    <tui-input formControlName="Location" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
+                        Nhập địa chỉ làm việc
+                        <input tuiTextfield type="text" />
+                    </tui-input>
+                    <tui-error formControlName="Location" [error]="[] | tuiFieldError | async"></tui-error>
+                </div>
+            </div>
+
             <div class="salary_job">
                 <div class="header">
                     <span class="title">Lương công việc:</span>

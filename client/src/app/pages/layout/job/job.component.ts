@@ -140,26 +140,74 @@ export class JobComponent {
   }
   
 
-  readonly locations = [
-      'Tất cả địa điểm',
-      'Ninh Thuận',
-      'Ninh Bình',
-      'Bình Dương',
-      'Bình Chánh',
-      'Hồ Chí Minh',
-      'Phan Thiết',
+  readonly locationList = [
+    "An Giang",
+    "Bà Rịa-Vũng Tàu",
+    "Bắc Giang",
+    "Bắc Kạn",
+    "Bạc Liêu",
+    "Bắc Ninh",
+    "Bến Tre",
+    "Bình Định",
+    "Bình Dương",
+    "Bình Phước",
+    "Bình Thuận",
+    "Cà Mau",
+    "Cao Bằng",
+    "Đắk Lắk",
+    "Đắk Nông",
+    "Điện Biên",
+    "Đồng Nai",
+    "Đồng Tháp",
+    "Gia Lai",
+    "Hà Giang",
+    "Hà Nam",
+    "Hà Tĩnh",
+    "Hải Dương",
+    "Hậu Giang",
+    "Hòa Bình",
+    "Hưng Yên",
+    "Khánh Hòa",
+    "Kiên Giang",
+    "Kon Tum",
+    "Lai Châu",
+    "Lâm Đồng",
+    "Lạng Sơn",
+    "Lào Cai",
+    "Long An",
+    "Nam Định",
+    "Nghệ An",
+    "Ninh Bình",
+    "Ninh Thuận",
+    "Phú Thọ",
+    "Quảng Bình",
+    "Quảng Nam",
+    "Quảng Ngãi",
+    "Quảng Ninh",
+    "Quảng Trị",
+    "Sóc Trăng",
+    "Sơn La",
+    "Tây Ninh",
+    "Thái Bình",
+    "Thái Nguyên",
+    "Thanh Hóa",
+    "Thừa Thiên Huế",
+    "Tiền Giang",
+    "Trà Vinh",
+    "Tuyên Quang",
+    "Vĩnh Long",
+    "Vĩnh Phúc",
+    "Yên Bái"
   ];
-  locationValue = 'Tất cả địa điểm';
+
+  locationValue = '';
 
   onSelectionChange(_id: string) {
-    
     console.log("Giá trị đã chọn là: ", _id);
   }
   
 
   testForm = new FormGroup({
-   
     testValue2: new FormControl(false),
-    
-});
+  });
 }

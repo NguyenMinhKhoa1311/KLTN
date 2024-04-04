@@ -21,27 +21,27 @@
           </button> -->
         </tui-tabs>
     </div>
-    <div id="login_button">
-        <div class="login_box" (click)="login()" style="margin-right: 10px;">
+    <div id="option_user">
+        <div class="login" (click)="login()">
+          Đăng nhập
+        </div>
+        
+        <div class="register" (click)="register()">
+          Đăng ký
+        </div>
+        
+        <div class="dropdown">
+          <button class="dropbtn">
+            <span>Dành cho nhà tuyển dụng</span>
             <span class="material-symbols-outlined">
-                person
+              expand_more
             </span>
-            <span>Đăng nhập</span>
-        </div>
-
-        <div>
-            <div class="register_box" (click)="register()" style="margin-right: 10px;">
-                <span class="material-symbols-outlined">
-                    person_add
-                </span>
-                <span>Đăng ký</span>
-            </div>
-        </div>
-
-        <div>
-          <div class="login_box" >
-              <span>Dành cho Nhà tuyển dụng</span>
+          </button>
+          <div class="dropdown-content dropdown-content-hover">
+            <a href="#">Đăng nhập</a>
+            <a href="#">Đăng kí</a>
+            <a href="/recruiterLayout/job-posting">Đăng tuyển dụng</a>
           </div>
-      </div>
+        </div>
     </div>
 </div>
