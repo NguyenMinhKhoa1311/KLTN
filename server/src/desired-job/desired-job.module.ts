@@ -12,8 +12,6 @@ import { CareerSchema } from 'src/career/entities/career.entity';
   imports: [
     MongooseModule.forFeature([
       { name: 'DesiredJob', schema: DesiredJobSchema},
-      { name: 'Field', schema: FieldSchema},
-      { name: 'Career', schema: CareerSchema}
      ]),
      forwardRef(()=>FieldModule)
   ],

@@ -256,6 +256,24 @@ export class JobController {
     }
   }
 
+  @Put('updateJob')
+  async updateJob(@Query('id') id: string, @Body() updateJobDto: UpdateJobDto) {
+    try{
+      const job = await this.jobService.updateJob(id, updateJobDto);
+      if(job._id == "500"){
+        return {
+          _id: "500",
+        }
+      }
+      else return job;
+    }
+    catch(err){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
 
 
 

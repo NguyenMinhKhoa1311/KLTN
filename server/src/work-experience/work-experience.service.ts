@@ -12,26 +12,35 @@ export class WorkExperienceService {
   ) {}
   async create(createWorkExperienceDto: CreateWorkExperienceDto) {
     try {
-      const workExperience = new this.workExperienceModel(createWorkExperienceDto);
-      return await workExperience.save();
+      const workExperience = await new this.workExperienceModel(createWorkExperienceDto).save();
+      if(workExperience._id.toString().length>0){
+        return workExperience;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
     } catch (err) {
-      throw new HttpException(err.message, err.status);
+      return {
+        _id: "500",
+      }
     }
   }
 
-  findAll() {
-    return `This action returns all workExperience`;
+  async delete(id: string){
+    try{
+      const workExperience = await this.workExperienceModel.findByIdAndDelete(id);
+      if(workExperience._id.toString().length > 0){
+        return true;
+      }
+      else{
+        return false
+      }
+    }
+    catch(err){
+      return false
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} workExperience`;
-  }
-
-  update(id: number, updateWorkExperienceDto: UpdateWorkExperienceDto) {
-    return `This action updates a #${id} workExperience`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} workExperience`;
-  }
 }

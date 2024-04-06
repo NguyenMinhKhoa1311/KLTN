@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Education } from './entities/education.entity';
 
+
 @Injectable()
 export class EducationService {
   constructor(
@@ -13,26 +14,34 @@ export class EducationService {
 
   async create(createEducationDto: CreateEducationDto) {
     try {
-      const education = new this.educationModel(createEducationDto);
-      return await education.save();
+      const education =await new this.educationModel(createEducationDto).save();
+      if(education._id.toString().length > 0){
+        return education;
+      }
+      else{
+        return {
+          _id: "500",
+        };
+      }
     } catch (err) {
-      throw new HttpException(err.message,err.status);
+      return {
+        _id: "500",
+      }
+    };
+  }
+
+  async delete(id: string){
+    try{
+      const education = await this.educationModel.findByIdAndDelete(id);
+      if(education._id.toString().length > 0){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
-  }
-
-  findAll() {
-    return `This action returns all education`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} education`;
-  }
-
-  update(id: number, updateEducationDto: UpdateEducationDto) {
-    return `This action updates a #${id} education`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} education`;
+    catch(err){
+      return false;
+    }
   }
 }

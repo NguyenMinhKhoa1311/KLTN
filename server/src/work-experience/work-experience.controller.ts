@@ -11,30 +11,19 @@ export class WorkExperienceController {
   async create(@Body() createWorkExperienceDto: CreateWorkExperienceDto) {
     try{
       const newWorkExperience = await this.workExperienceService.create(createWorkExperienceDto);
-      return newWorkExperience;
+      if(newWorkExperience._id.toString()!="500"){
+        return newWorkExperience;
+      }
+      else return{
+        _id: "500",
+      }
     }
     catch(err){
-      return err;
+      return{
+        _id: "500",
+      }
     }
   }
+  
 
-  @Get()
-  findAll() {
-    return this.workExperienceService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.workExperienceService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkExperienceDto: UpdateWorkExperienceDto) {
-    return this.workExperienceService.update(+id, updateWorkExperienceDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.workExperienceService.remove(+id);
-  }
 }

@@ -19,6 +19,7 @@ import { SkillModule } from './skill/skill.module';
 import { EducationModule } from './education/education.module';
 import { CandidateSkillModule } from './candidate-skill/candidate-skill.module';
 import { WorkExperienceModule } from './work-experience/work-experience.module';
+import { SendMailModule } from './send-mail/send-mail.module';
 
 
 @Module({
@@ -41,6 +42,7 @@ import { WorkExperienceModule } from './work-experience/work-experience.module';
     EducationModule,
     CandidateSkillModule,
     WorkExperienceModule,
+    SendMailModule,
 
 
 

@@ -6,46 +6,58 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Career } from 'src/career/entities/career.entity';
 import { Field } from 'src/field/entities/field.entity';
+import { log } from 'console';
 
 @Injectable()
 export class DesiredJobService {
   constructor(
     @InjectModel(DesiredJob.name) private DesiredJobModel: Model<DesiredJob>,
-    @InjectModel(Career.name) private CareerModel: Model<Career>,
-    @InjectModel(Field.name) private FieldModel: Model<Field>
 
   ){}
   async create(createDesiredJobDto: CreateDesiredJobDto) {
     try {
-      const newDesiredJob = new this.DesiredJobModel(createDesiredJobDto);
-      return newDesiredJob.save();
+      const newDesiredJob = await new this.DesiredJobModel(createDesiredJobDto).save();
+      if (newDesiredJob._id.toString().length > 0) {
+        return newDesiredJob;
+      }
+      else {
+        return {
+          _id: "500",
+        }
+      }
     }
     catch(err){
-      throw new HttpException(err.message,err.status);
+      log(err);
+      return {
+        _id: "500",
+      }
     }
   }
 
   async findAll() {
     try{
-      return await this.DesiredJobModel.find()
-      .populate('Career','CareerId Name', this.CareerModel)
-      .populate('Field','FieldId Name', this.FieldModel)
-      .exec();
+      return await this.DesiredJobModel.find().exec();
     }
     catch(err){
       throw new HttpException(err.message,err.status);
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} desiredJob`;
+  async delete(id: string) {
+    try{
+      return await this.DesiredJobModel.findByIdAndDelete(id).exec();
+    }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
   }
 
-  update(id: number, updateDesiredJobDto: UpdateDesiredJobDto) {
-    return `This action updates a #${id} desiredJob`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} desiredJob`;
+  async update(id: string, updateDesiredJobDto: UpdateDesiredJobDto) {
+    try{
+      return await this.DesiredJobModel.findByIdAndUpdate(id,updateDesiredJobDto).exec();
+    }
+    catch(err){
+      throw new HttpException(err.message,err.status);
+    }
   }
 }

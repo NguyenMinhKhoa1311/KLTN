@@ -11,30 +11,35 @@ export class EducationController {
   async create(@Body() createEducationDto: CreateEducationDto) {
     try{
       const newEducation = await this.educationService.create(createEducationDto);
-      return newEducation;
+      console.log(newEducation);
+      
+      if(newEducation._id!="500"){
+        return newEducation;
+      }
+      else return{
+        _id: "500",
+    }
     }
     catch(err){
-      return err;
+      return{
+        _id: "500",
+    }
     }
   }
 
-  @Get()
-  findAll() {
-    return this.educationService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.educationService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEducationDto: UpdateEducationDto) {
-    return this.educationService.update(+id, updateEducationDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.educationService.remove(+id);
+  @Delete('delete')
+  async delete(@Param('id') id: string){
+    try{
+      const deleted = await this.educationService.delete(id);
+      if(deleted){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    catch(err){
+      return false;
+    }
   }
 }

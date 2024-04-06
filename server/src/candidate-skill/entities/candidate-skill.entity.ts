@@ -16,6 +16,9 @@ export class CandidateSkill {
     Skill: string;
 
     @Prop({required: true})
+    Name: string;   
+
+    @Prop({required: true})
     Proficiency: number;
 }
 

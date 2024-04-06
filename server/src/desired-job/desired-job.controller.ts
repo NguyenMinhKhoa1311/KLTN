@@ -29,18 +29,4 @@ export class DesiredJobController {
     }
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.desiredJobService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDesiredJobDto: UpdateDesiredJobDto) {
-    return this.desiredJobService.update(+id, updateDesiredJobDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.desiredJobService.remove(+id);
-  }
 }

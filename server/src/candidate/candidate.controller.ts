@@ -1,11 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@nestjs/common';
 import { CandidateService } from './candidate.service';
 import { CreateCandidateDto } from './dto/create-candidate.dto';
 import { UpdateCandidateDto } from './dto/update-candidate.dto';
+import { EducationService } from 'src/education/education.service';
+import { CreateEducationDto } from 'src/education/dto/create-education.dto';
+import { CreateWorkExperienceDto } from 'src/work-experience/dto/create-work-experience.dto';
+import { WorkExperienceService } from 'src/work-experience/work-experience.service';
+import { CreateCandidateSkillDto } from 'src/candidate-skill/dto/create-candidate-skill.dto';
+import { CandidateSkillService } from 'src/candidate-skill/candidate-skill.service';
+import { log } from 'console';
+import { DesiredJobService } from 'src/desired-job/desired-job.service';
+import { CreateDesiredJobDto } from 'src/desired-job/dto/create-desired-job.dto';
 
 @Controller('candidate')
 export class CandidateController {
-  constructor(private readonly candidateService: CandidateService) {}
+  constructor(
+    private readonly candidateService: CandidateService,
+    private readonly educationService: EducationService,
+    private readonly workExperienceService: WorkExperienceService,
+    private readonly candidateSkillService: CandidateSkillService,
+    private readonly desiredJobService: DesiredJobService
+    ) {}
 
   @Post('create')
   async create(@Body() createCandidateDto: CreateCandidateDto) {
@@ -33,6 +48,323 @@ export class CandidateController {
       throw error;
     }
   }
+
+  @Put('updateEducation')
+  async updateEducation(@Body() createEducationDto: CreateEducationDto, @Query('id') id: string){
+    try{
+      const newEducation = await this.educationService.create(createEducationDto);
+      if(newEducation._id.toString()=="500"){
+        return {
+          _id: "500",
+        }
+      }
+      const candidate = await this.candidateService.updateEducation(id, newEducation._id.toString());
+      if(candidate._id.toString() !="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('updateWorkExperience')
+  async updateWorkExperience(@Query('id') id: string, @Body()createWorkExperienceDto: CreateWorkExperienceDto){
+    try{
+      const workExperience = await this.workExperienceService.create(createWorkExperienceDto);
+      if(workExperience._id.toString()=="500"){
+        return {
+          _id: "500",
+        }
+      }
+      const candidate = await this.candidateService.updateWorkExperience(id, workExperience._id.toString());
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('updateSkills')
+  async updateSkill(@Query('id') id: string, @Body()createCandidateSkillDto: CreateCandidateSkillDto){
+    try{
+      const skill = await this.candidateSkillService.create(createCandidateSkillDto);
+      log(skill)
+      if(skill._id.toString()=="500"){
+        return {
+          _id: "500",
+        }
+      }
+      const candidate = await this.candidateService.updateSkill(id, skill._id.toString());
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+
+  @Put('updateAvatar')
+  async updateAvatar(@Query('id') id: string, @Query('avatar') avatar: string, @Query('storage_id') storage_id: string){
+    try{
+      const candidate = await this.candidateService.updateAvatar(id, avatar, storage_id);
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('UpdateFavoriteJobs')
+  async updateFavoriteJobs(@Query('id') id: string, @Query('job_id') job_id: string){
+    try{
+      const candidate = await this.candidateService.updateFavoriteJobs(id, job_id);
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('updateBasicInfo')
+  async updateBasicInfo(@Query('id') id: string, @Body() updateCandidateDto: UpdateCandidateDto){
+    try{
+      const candidate = await this.candidateService.updateBasicInfo(id,updateCandidateDto );
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('updateLanguage')
+  async updateLanguage(@Query('id') id: string, @Query('language') language: string){
+    try{
+      const candidate = await this.candidateService.updateLanguage(id, language);
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('updateDesiredJob')
+  async updateDesiredJob(@Query('id') id: string, @Body() createDesiredJobDto: CreateDesiredJobDto){
+    try{
+      const desiredJob = await this.desiredJobService.create(createDesiredJobDto);
+      if(desiredJob._id.toString()=="500"){
+        return {
+          _id: "500",
+        }
+      }
+      log(desiredJob._id.toString())
+      const candidate = await this.candidateService.updateDesiredJob(id, desiredJob._id.toString());
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('DeleteFavoriteJobs')
+  async deleteFavoriteJobs(@Query('id') id: string, @Query('job_id') job_id: string){
+    try{
+      const candidate = await this.candidateService.deleteFavoriteJobs(id, job_id);
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+
+  @Put('DeleteSkills')
+  async deleteSkills(@Query('id') id: string, @Query('skill_id') skill_id: string){
+    try{
+      const result = await this.candidateSkillService.delete(skill_id);
+      if(result){
+        const candidate = await this.candidateService.deleteSkills(id, skill_id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('DeleteWorkExperience')
+  async deleteWorkExperience(@Query('id') id: string, @Query('work_experience_id') work_experience_id: string){
+    try{
+      const result = this.workExperienceService.delete(work_experience_id);
+      if(result){
+        const candidate = await this.candidateService.deleteWorkExperience(id, work_experience_id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('DeleteEducation')
+  async deleteEducation(@Query('id') id: string, @Query('education_id') education_id: string){
+    try{
+      const result = this.educationService.delete(education_id);
+      if(result){
+        const candidate = await this.candidateService.deleteEducation(id, education_id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('deleteLanguage')
+  async deleteLanguage(@Query('id') id: string, @Query('language') language: string){
+    try{
+      const candidate = await this.candidateService.deleteLanguage(id, language);
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+
+  
 
 
 }

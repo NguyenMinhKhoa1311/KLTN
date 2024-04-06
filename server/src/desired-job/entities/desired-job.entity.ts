@@ -11,20 +11,6 @@ export class DesiredJob {
     @Prop({required: true})
     Location: string;
 
-    @Prop({
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Field',
-        required: true
-    })
-    Field: string;
-
-    @Prop({
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Career',
-        required: true
-    })
-    Career: string;
-
     @Prop({required: true})
     Salary: number;
 

@@ -9,7 +9,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  const serviceAccount = require('../config/storage.json');
+  const serviceAccount = require('../../config/storage.json');
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
