@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 const {EMAIL_USER, EMAIL_PASSWORD, EMAIL_HOST,EMAIL_PORT} = require('../../config/email.config');
 import { MailOptions } from './dto/mail-options.dto';
+import { log } from 'console';
 
 @Injectable()
 export class SendMailService {
