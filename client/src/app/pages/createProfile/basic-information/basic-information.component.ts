@@ -30,7 +30,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [TaigaModule,ShareModule, MatSelectModule, MatFormFieldModule],
   templateUrl: './basic-information.component.html',
-  styleUrl: './basic-information.component.scss',
+  styleUrl: './basic-information.component.less',
 })
 export class BasicInformationComponent implements OnDestroy {
 
