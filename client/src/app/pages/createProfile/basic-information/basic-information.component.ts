@@ -133,7 +133,7 @@ export class BasicInformationComponent implements OnDestroy {
       
       if(isSuccess){
         console.log('create candidate success');
-        
+        sessionStorage.setItem('userLogged', this.user._id);
         this.router.navigate(['createProfile/create-success']);
       }
     })
@@ -170,10 +170,6 @@ export class BasicInformationComponent implements OnDestroy {
       Avatar:"https://storage.googleapis.com/storagedoan.appspot.com/images/CloneAvatar/c6139be4-6e0a-4e5b-8fcd-ff75466607fb-avatar-trang-4.jpg?GoogleAccessId=firebase-adminsdk-8r86k%40storagedoan.iam.gserviceaccount.com&Expires=4162813200&Signature=vQgsNuWiC8gGsB6uky3ucxyRhILtcvRvEW6K8NDEaKD1iEkHHFD7hIMkhqrS9aDYGO7rHRvFCOjJcHZihO8smr0opYETm4HZEKoCPi1HqxRRT9XhE9fnOcDluw4NByUhi5XXsWp0YMibEvjhsLOd0hn9ZPvqT%2BdIvhgWl6lilCuLcrr9EW%2Ff4KkhP0SGY%2FN%2BjwcY7cyQZDNQc9ExqY1l2%2BXpknRuaiyzZr6wnmpBncZx7UBvBVEtrCEToVWKs3IXGZEXUiFYFIis07d0d4IzOFoqnBIMyRB7H41B6XTEse3PtWL1lBfEtIRN1vw%2FRAz2D5RuPvruynG%2FfcytoHzW4w%3D%3D",
       Storage:"65f8390d13079793cbb2101d",
       FavoriteJobs:[],
-
-
-
-      
     }
     console.log(this.candidateToRegister);
     this.store.dispatch(CandidateActions.createCandidateAtCreateProfile({candidate: this.candidateToRegister}))

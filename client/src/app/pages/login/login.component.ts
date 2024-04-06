@@ -13,6 +13,7 @@ import { UserState } from '../../ngrx/states/user.state';
 import { User } from '../../models/user.model';
 import { candidateState } from '../../ngrx/states/candidate.state';
 import { Subscription } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -41,6 +42,11 @@ export class LoginComponent implements  OnDestroy {
 
 
   userUseForLoginWithGoogleAtLogin: User = <User>{};
+  
+  readonly loginForm = new FormGroup({
+    Username: new FormControl('',[Validators.required]),
+    Password: new FormControl('',[Validators.required]),    
+  });
 
 
 
@@ -113,10 +119,7 @@ export class LoginComponent implements  OnDestroy {
               alert("Sai tài khoản hoặc mật khẩu")
             }
             else{
-              const userAsJsoBth = JSON.stringify(user);
-              sessionStorage.setItem('userLoginSuccess', userAsJsoBth);
-              this.router.navigate(['/home']);
-
+              this.store.dispatch(CandidateActions.getByUserWithGoogleAtLogin({user: user._id}))
             }
           }
         }),
