@@ -88,9 +88,9 @@
                 </div>
             </div>
             <div class="control_item">
-                <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" ></button>
+                <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" (click)="previousJobs()"></button>
                 <tui-pagination size="s" class="pagination" [length]="5"></tui-pagination>
-                <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button" ></button>
+                <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button"  (click)="nextJobs()"></button>
             </div>
             
         </div>

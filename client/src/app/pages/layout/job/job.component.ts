@@ -140,6 +140,19 @@ export class JobComponent {
   }
   
 
+  nextJobs(){
+    this.page++;
+    this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+
+  }
+  previousJobs(){
+    if(this.page > 0){
+      this.page--;
+      this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }
+
+  }
+
   readonly locationList = [
     "An Giang",
     "Bà Rịa-Vũng Tàu",
@@ -205,6 +218,8 @@ export class JobComponent {
   onSelectionChange(_id: string) {
     console.log("Giá trị đã chọn là: ", _id);
   }
+
+
   
 
   testForm = new FormGroup({
