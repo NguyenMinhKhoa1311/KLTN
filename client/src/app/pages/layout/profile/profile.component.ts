@@ -26,6 +26,7 @@ export class ProfileComponent {
     Major: new FormControl('', Validators.required),
     Achievement: new FormControl('', Validators.required),
     Skill: new FormControl(''),
+    Language: new FormControl(''),
   });
   
   @ViewChild('exprienceDialog', { static: true })
@@ -77,4 +78,18 @@ export class ProfileComponent {
     this.skillsList.splice(index, 1);
     console.log(this.skillsList);
   }
+
+  @ViewChild('languageDialog', { static: true })
+  languageDialog!: ElementRef<HTMLDialogElement>;
+  cdr4 = inject(ChangeDetectorRef);
+  openLanguageDialog() {
+    this.languageDialog.nativeElement.showModal();
+    this.cdr4.detectChanges();
+  }
+  closeLanguageDialog() {
+    this.languageDialog.nativeElement.close();
+    this.cdr4.detectChanges();
+  }
+
+  
 }

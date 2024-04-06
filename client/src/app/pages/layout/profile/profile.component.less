@@ -160,7 +160,7 @@
 
         .learn{
             .skill_list {
-                width: 90%;
+                margin-top: 10px;
                 .skill_select {
                     font-size: 14px;
                     display: inline-flex;
@@ -180,14 +180,12 @@
                 }
                 
             }
-            .edit_btn{
-                font-size: 20px;
-            }
+            
         }
     }
 }
 
-#experience_dialog, #learn_dialog, #skill_dialog {
+#experience_dialog, #learn_dialog, #skill_dialog, #language_dialog, #language_dialog {
     //height: 60%;
     width: 40%;
     border: 1px solid #fff;
@@ -342,8 +340,11 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                .tui-space_right-3{
+                    margin-right: 0;
+                }
                 tui-input{
-                    width: 78%;;
+                    width: 80%;;
                 }
             }
             .skill_list {
@@ -370,6 +371,26 @@
                         cursor: pointer;
                     }
                 }
+            }
+        }
+    }
+}
+
+#language_dialog{
+    #body_dialog{
+        .language_box{
+            tui-input{
+                margin-top: 10px;
+            }
+            width: 100%;
+            .title{
+                font-size: 14px;
+                font-weight: 600;
+            }
+            .title::before{
+                content: "*";
+                color: rgb(220, 54, 46);
+                margin-right: 4px;
             }
         }
     }
