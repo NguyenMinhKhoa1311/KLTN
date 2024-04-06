@@ -39,6 +39,37 @@
                 </div>
             </div>
 
+            <div class="tag_job">
+                <div class="header">
+                    <span class="title">Địa điểm làm việc:</span>
+                </div>
+                <div class="body">
+                    <div class="tag_input">
+                        <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Address">
+                            Nhập địa điểm
+                            <input tuiTextfield type="text" />
+                        </tui-input>
+                        <button
+                            appearance="primary"
+                            tuiButton
+                            type="button"
+                            class="tui-space_right-3 tui-space_bottom-3"
+                            (click)="addAddress()"
+                        >
+                            Thêm
+                        </button>
+                    </div>
+                    <div class="tag_list">
+                        <div class="tag_select" *ngFor="let address of addressList; let i=index">
+                            <div>{{address}}</div>
+                            <span class="material-symbols-outlined" (click)="removeAddress(i)">
+                                close
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="salary_job">
                 <div class="header">
                     <span class="title">Lương công việc:</span>
