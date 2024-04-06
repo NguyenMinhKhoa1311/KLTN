@@ -7,6 +7,7 @@
             <span style="font-size: 14px; color: black; font-weight: normal; margin-top: 10px;">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng</span>
             </div>
             <div class="body">
+                <form [formGroup]="loginForm">
                 <div class="form_login">
                     <div class="form_login_box">
                         <p>
@@ -14,6 +15,7 @@
                                 
                                 [tuiTextfieldCleaner]="true"
                                 [tuiTextfieldLabelOutside]="true"
+                                formControlName="Username"
                             >
                                 Email
                                 <input
@@ -31,6 +33,7 @@
                                 
                                 [tuiTextfieldCleaner]="true"
                                 [tuiTextfieldLabelOutside]="true"
+                                formControlName="Password"
                             >
                                 Mật khẩu
                                 <input
@@ -68,7 +71,7 @@
                     <span>Bạn chưa có tài khoản?</span>
                     <span (click)="register()" style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng ký ngay</span>
                 </div>
-                
+            </form>
             </div>
         </div>
     </div>
