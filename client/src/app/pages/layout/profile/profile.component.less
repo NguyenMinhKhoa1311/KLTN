@@ -24,6 +24,7 @@
                 display: flex;
                 flex-direction: row;
                 border-radius: 12px;
+                cursor: pointer;
                 .img_profile{
                     width: 100px;
                     height: 100px;
@@ -111,12 +112,13 @@
                     .location, .salary_desired{
                         font-size: 14px;
                         font-weight: 500;
+                        cursor: pointer;
                     }
                 }
                 
             }
         }
-        .work_experience ,.learn ,.skill{
+        .work_experience ,.learn ,.skill, .language{
             background-color: #fff;
             border-radius: 8px;
             width: 100%;
@@ -158,7 +160,130 @@
             }
         }
 
+        .work_experience{
+            .experience_select{
+                width: calc(100% - 32px);
+                padding: 16px;
+                background: #F7F8FA;
+                margin-top: 10px;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .box1{
+                    display: flex;
+                    flex-direction: row;
+                    .img_experience{
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 5px;
+                        margin-right: 10px;
+                        img{
+                            //width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .info_experience{
+                        display: flex;
+                        flex-direction: column;
+                        .position_user{
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+                        .company_user{
+                            font-size: 14px;
+                            
+                        }
+                        .date_user{
+                            font-size: 14px;
+                            display: flex;
+                            flex-direction: row;
+                        }
+                    }
+                }
+                
+                .control{
+                    display: flex;
+                    flex-direction: row;
+                    font-size: 16px;
+                    .edit{
+                        cursor: pointer;
+                        span{
+                            font-size: 20px;
+                        }
+                    }
+                    .delete{
+                        margin-left: 10px;
+                        cursor: pointer;
+                        span{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
         .learn{
+            .learn_select{
+                width: calc(100% - 32px);
+                padding: 16px;
+                background: #F7F8FA;
+                margin-top: 10px;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .box1{
+                    display: flex;
+                    flex-direction: row;
+                    .img_experience{
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 5px;
+                        margin-right: 10px;
+                        img{
+                            //width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .info_learn{
+                        display: flex;
+                        flex-direction: column;
+                        .learn_name{
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+                        
+                        .date_user{
+                            font-size: 14px;
+                            display: flex;
+                            flex-direction: row;
+                        }
+                    }
+                }
+                
+                .control{
+                    display: flex;
+                    flex-direction: row;
+                    font-size: 16px;
+                    .edit{
+                        cursor: pointer;
+                        span{
+                            font-size: 20px;
+                        }
+                    }
+                    .delete{
+                        margin-left: 10px;
+                        cursor: pointer;
+                        span{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .skill{
             .skill_list {
                 margin-top: 10px;
                 .skill_select {
@@ -178,14 +303,39 @@
                         cursor: pointer;
                     }
                 }
-                
             }
             
+        }
+
+        .language{
+            .language_select{
+                width: calc(100% - 32px);
+                border-radius: 12px;
+                margin-top: 10px;
+                padding: 16px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+                span{
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin: 0;
+                }
+                .material-symbols-outlined{
+                    font-size: 20px;
+                }
+            }
+            .language_select:hover{
+                background: #F7F8FA;
+            }
         }
     }
 }
 
-#experience_dialog, #learn_dialog, #skill_dialog, #language_dialog, #language_dialog {
+#experience_dialog, #learn_dialog, #skill_dialog, 
+#language_dialog, #language_dialog, #desired_dialog, #user_dialog {
     //height: 60%;
     width: 40%;
     border: 1px solid #fff;
@@ -395,3 +545,116 @@
         }
     }
 }
+
+#desired_dialog{
+    #body_dialog{
+        .row1{
+            display: flex;
+            flex-direction: column;
+            .location_box, .salary_box{
+                tui-input{
+                    margin-top: 10px;
+                }
+                width: 100%;
+                .title{
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+                .title::before{
+                    content: "*";
+                    color: rgb(220, 54, 46);
+                    margin-right: 4px;
+                }
+            }
+
+        }
+    }
+}
+
+#user_dialog{
+    #body_dialog{
+        .row1{
+            display: flex;
+            flex-direction: column;
+            .basic{
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 10px;
+                .img_user{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .img_box{
+                        width: 120px;
+                        height: 120px;
+                        border-radius: 5px;
+                        margin-right: 10px;
+                        img{
+                            height: 100%;
+                        }
+                    }
+                    .edit_img{
+                        cursor: pointer;
+                        font-size: 14px;
+                        margin-top: 20px;
+                        color: rgb(102, 102, 102);
+                    }
+                }
+                .info_user{
+                    width: 100%;
+                    .name_user, .position_user{
+                        tui-input{
+                            margin-top: 10px;
+                        }
+                        .title{
+                            font-size: 14px;
+                            font-weight: 600;
+                        }
+                        .title::before{
+                            content: "*";
+                            color: rgb(220, 54, 46);
+                            margin-right: 4px;
+                        }
+                    }
+                }
+            }
+            .row{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .experience, .salary, .email, .phone{
+                    width: 48%;
+                    tui-input{
+                        margin-top: 10px;
+                    }
+                    .title{
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
+                    .title::before{
+                        content: "*";
+                        color: rgb(220, 54, 46);
+                        margin-right: 4px;
+                    }
+                }
+            }
+        }
+        
+        .address{
+            width: 100%;
+            tui-input{
+                margin-top: 10px;
+            }
+            .title{
+                font-size: 14px;
+                font-weight: 600;
+            }
+            .title::before{
+                content: "*";
+                color: rgb(220, 54, 46);
+                margin-right: 4px;
+            }
+        }
+    }
+}
+
