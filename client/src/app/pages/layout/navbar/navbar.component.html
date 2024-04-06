@@ -22,26 +22,45 @@
         </tui-tabs>
     </div>
     <div id="option_user">
-        <div class="login" (click)="login()">
-          Đăng nhập
-        </div>
         
-        <div class="register" (click)="register()">
-          Đăng ký
-        </div>
-        
-        <div class="dropdown">
-          <button class="dropbtn">
-            <span>Dành cho nhà tuyển dụng</span>
+      <div class="login" (click)="login()">
+        Đăng nhập
+      </div>
+      <div class="register" (click)="register()">
+        Đăng ký
+      </div>
+
+      <div class="user_dropdown">
+        <button class="user_dropbtn">
+          <div class="user_box">
+            <div class="img_user">
+              <img src="../../../../assets/images/kinhdoanh.png" alt="">
+            </div>
+            <span>Phùng Minh Khoa</span>
             <span class="material-symbols-outlined">
               expand_more
             </span>
-          </button>
-          <div class="dropdown-content dropdown-content-hover">
-            <a href="#">Đăng nhập</a>
-            <a href="#">Đăng kí</a>
-            <a href="/recruiterLayout/job-posting">Đăng tuyển dụng</a>
           </div>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Đăng nhập</a>
+          <a href="#">Đăng kí</a>
+          <a href="/profile">Hồ sơ</a>
         </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">
+          <span>Dành cho nhà tuyển dụng</span>
+          <span class="material-symbols-outlined">
+            expand_more
+          </span>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Đăng nhập</a>
+          <a href="#">Đăng kí</a>
+          <a href="/recruiterLayout/job-posting">Đăng tuyển dụng</a>
+        </div>
+      </div>
     </div>
 </div>

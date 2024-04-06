@@ -1,0 +1,376 @@
+#profile_container{
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    padding: 20px;
+    background-color: #F7F8FA;
+    .profile_center{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        
+        .basic_information{
+            padding: 16px;
+            background-color: #F1F2F4;
+            border-radius: 8px;
+            width: 100%;
+            //height: 15rem;
+            display: flex;
+            flex-direction: column;
+            .information_box{
+                width: calc(100% - 32px);
+                height: 7rem;
+                background: #fff;
+                padding: 16px;
+                display: flex;
+                flex-direction: row;
+                border-radius: 12px;
+                .img_profile{
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 5px;
+                    img{
+                        //width: 100%;
+                        height: 100%;
+                        
+                    }
+                }
+                .information{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0 0 0 15px;
+                    width: calc(100% - 100px);
+                    .user_name{
+                        font-size: 25px;
+                        font-weight: bold;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        margin-bottom: 5px;
+                        .material-symbols-outlined{
+                            font-size: 20px;
+                        }
+                    }
+                    .box1{
+                        margin-bottom: 5px;
+                    }
+                    .info_list{
+                        .row1, .row2{
+                            display: flex;
+                            flex-direction: row;
+                            .gmail_user, .phone_user, .address_user{
+                                width: 50%;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                .material-symbols-outlined{
+                                    font-size: 18px;
+                                }
+                                .gmail, .phone, .address{
+                                    font-size: 14px;
+                                    margin-left: 7px;
+                                }
+                                span{
+                                    margin: 0;
+                                }
+                            }
+                        }
+                        
+                    }
+
+                }
+            }
+
+            .desired_job{
+                margin-top: 20px;
+                width: calc(100% - 32px);
+                height: 100px;
+                padding: 16px;
+                background: #fff;
+                border-radius: 12px;
+                .title{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin-bottom: 12px;
+                    h2{
+                        font-size: 22px;
+                        font-weight: bold;
+                    }
+                    .material-symbols-outlined{
+                        font-size: 20px;
+                    }
+                }
+                .workplace, .salary{
+                    display: flex;
+                    flex-direction: row;
+                    .title_workplace, .title_salary{
+                        width: 28%;
+                        font-size: 14px;
+                        color: #8C8C8C;
+                    }
+                    .location, .salary_desired{
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                }
+                
+            }
+        }
+        .work_experience ,.learn ,.skill{
+            background-color: #fff;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 16px;
+            padding: 16px;
+            
+            h2{
+                font-size: 22px;
+                //font-weight: bold;
+                margin-bottom: 16px;
+            }
+            .introduction{
+                font-size: 12px;
+                font-style: italic;
+            }
+            .add_text{
+                cursor: pointer;
+                font-size: 14px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                color: #005aff;
+                font-weight: 500;
+                margin-top: 16px;
+                .material-symbols-outlined{
+                    margin-right: 5px;
+                }
+            }
+
+            .input_work_experience{
+                margin-top: 20px;
+                display: flex;
+                flex-direction: row;
+
+                tui-input{
+                    width: 50%;
+                }
+
+            }
+        }
+
+        .learn{
+            .skill_list {
+                width: 90%;
+                .skill_select {
+                    font-size: 14px;
+                    display: inline-flex;
+                    align-items: center;
+                    border: 1px solid #ccc;
+                    margin-right: 5px;
+                    margin-bottom: 5px;
+                    padding: 5px 0 5px 5px;
+                    border-radius: 6px;
+                    cursor: pointer;
+
+                    .material-symbols-outlined {
+                        transform: scale(0.8);
+                        color: #999;
+                        cursor: pointer;
+                    }
+                }
+                
+            }
+            .edit_btn{
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+#experience_dialog, #learn_dialog, #skill_dialog {
+    //height: 60%;
+    width: 40%;
+    border: 1px solid #fff;
+    border-radius: 12px;
+    padding: 24px;
+    #top_dialog {
+        height: 7%;
+        width: 100%;
+        border-bottom: 1px solid #cac8c8;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .title{
+            h4{
+                font-size: 20px;
+                font-weight: 500;
+            }
+        }
+        .btnClose {
+            cursor: pointer;
+            .material-symbols-outlined {
+                font-size: 23px;
+                color: rgb(102,102, 102);
+            }
+        }
+    }
+    #body_dialog{
+        margin-top: 20px;
+        .row1{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .position_box, .company_box{
+                width: 48%;
+                gap: 10px;
+                tui-input{
+                    margin-top: 10px;
+                }
+                .title{
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+                .title::before{
+                    content: "*";
+                    color: rgb(220, 54, 46);
+                    margin-right: 4px;
+                }
+            }
+        }
+        .row2{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 20px;
+            .start_box, .end_box{
+                width: 48%;
+                gap: 10px;
+                tui-input{
+                    margin-top: 10px;
+                }
+                .title{
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+        }
+        .row3{
+            display: flex;
+            margin-top: 20px;
+            .description_box{
+                width: 100%;
+                gap: 10px;
+                tui-textarea{
+                    margin-top: 10px;
+                }
+                .title{
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+                .title::before{
+                    content: "*";
+                    color: rgb(220, 54, 46);
+                    margin-right: 4px;
+                }
+            }
+        }
+
+        .row4{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            gap: 10px;
+            .btn_Huy, .btn_Luu{
+                .tui-space_right-3{
+                    margin-right: 0;
+                }
+                .tui-space_bottom-3{
+                    margin-bottom: 0;
+                }
+            }
+            .btn_Luu{
+                ::ng-deep [tuiWrapper][data-appearance=primary]{
+                    background-color: #fd916f;
+                    // border-color: #005aff;
+                    color: #fff;
+                }
+            }
+            .btn_Huy{
+                ::ng-deep [tuiWrapper][data-appearance=primary]{
+                    background-color: #f1f2f4;
+                    color: #000000;
+                }
+            }
+        }
+    }
+}
+
+#learn_dialog{
+    #body_dialog{
+        .major_box{
+            tui-input{
+                margin-top: 10px;
+            }
+            width: 100%;
+            .title{
+                font-size: 14px;
+                font-weight: 600;
+            }
+            .title::before{
+                content: "*";
+                color: rgb(220, 54, 46);
+                margin-right: 4px;
+            }
+        }
+    }
+}
+
+
+#skill_dialog{
+    #body_dialog{
+        .skill_box{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .title{
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+            .skill_input{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                tui-input{
+                    width: 78%;;
+                }
+            }
+            .skill_list {
+                height: calc(10rem - 24px);
+                border: 1px solid #ccc;
+                border-radius: 12px;
+                padding: 12px;
+
+                .skill_select {
+                    font-size: 14px;
+                    display: inline-flex;
+                    align-items: center;
+                    border: 1px solid #ccc;
+                    margin-right: 5px;
+                    margin-bottom: 5px;
+                    padding: 5px 0 5px 5px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    width: auto;
+
+                    .material-symbols-outlined {
+                        transform: scale(0.8);
+                        color: #999;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

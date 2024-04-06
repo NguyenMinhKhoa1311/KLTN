@@ -1,1 +1,384 @@
-<p>profile works!</p>
+<div id="profile_container">
+    <form [formGroup]="profileForm">
+    <div class="profile_center">
+        <div class="basic_information">
+            <div class="information_box">
+                <div class="img_profile">
+                    <img src="../../../../assets/images/kinhdoanh.png" alt="">
+                </div>
+                <div class="information">
+                    <div class="user_name">
+                        Phùng Minh Khoa
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </div>
+                    <div class="box1">
+                        <div class="position_box">
+                            Thêm chức danh - Thêm số năm kinh nghiệm
+                        </div>
+                    </div>
+                    <div class="info_list">
+                        <div class="row1">
+                            <div class="gmail_user">
+                                <span class="material-symbols-outlined">
+                                    mail
+                                </span>
+                                <span class="gmail">Gmail</span>
+                            </div>
+                            <div class="phone_user">
+                                <span class="material-symbols-outlined">
+                                    phone
+                                </span>
+                                <span class="phone">Phone</span>
+                            </div>
+                        </div>
+                        <div class="row2">
+                            <div class="address_user">
+                                <span class="material-symbols-outlined">
+                                    home
+                                </span>
+                                <span class="address">Địa chỉ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="desired_job">
+                <div class="title">
+                    <h2>Công Việc Mong Muốn</h2>
+                    <span class="material-symbols-outlined">
+                        edit
+                    </span>
+                </div>
+                <div class="workplace">
+                    <div class="title_workplace">
+                        Nơi làm việc
+                    </div>
+                    <div class="location">
+                        location
+                    </div>
+                </div>
+                <div class="salary">
+                    <div class="title_salary">
+                        Mức lương mong muốn (USD/tháng)
+                    </div>
+                    <div class="salary_desired">
+                        Mức lương mong muốn
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="work_experience">
+            <h2>Kinh nghiệm làm việc</h2>
+            <span class="introduction">Mô tả kinh nghiệm làm việc của bạn càng chi tiết càng tốt, điều đó giúp bạn có cơ hội hiển thị nhiều hơn trong kết quả tìm kiếm</span>
+            <div class="add_text" (click)="openExperienceDialog()">
+                <span class="material-symbols-outlined">
+                    add_circle
+                </span>
+                <span>Thêm Kinh Nghiệm Làm Việc</span>
+            </div>
+        </div>
+
+        <div class="learn">
+            <h2>Học vấn</h2>
+            <span class="introduction">Mô tả toàn bộ quá trình học vấn của bạn, cũng như các bằng cấp bạn đã được và các khóa huấn luyện bạn đã tham gia</span>
+            <div class="add_text" (click)="openLearnDialog()">
+                <span class="material-symbols-outlined">
+                    add_circle
+                </span>
+                <span>Thêm Học Vấn</span>
+            </div>
+        </div>
+
+        <div class="learn">
+            <h2>Kỹ Năng</h2>
+            <div class="add_text" (click)="openSkillDialog()">
+                <span class="material-symbols-outlined">
+                    add_circle
+                </span>
+                <span>Thêm Học Vấn</span>
+            </div>
+            <div class="skill_list">
+                <div class="skill_select" *ngFor="let skill of skillsList; let i=index">
+                    <div>{{skill}}</div>
+                    <span class="material-symbols-outlined">
+                        done
+                    </span>
+                </div>
+            </div>
+            <div class="edit_btn">
+                <span class="material-symbols-outlined">
+                    edit
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+<dialog id="experience_dialog" style="color: #1f1a1c" #exprienceDialog>
+    <form [formGroup]="profileForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thêm Kinh Nghiệm Làm Việc</h4>
+            </div>
+            <div class="btnClose" (click)="closeExperienceDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <div class="position_box" > 
+                    <span class="title">Chức Danh</span>
+                    <tui-input
+                        formControlName="Position"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        Nhập Chức Danh Của Bạn
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                    <tui-error
+                        formControlName="Position"
+                        [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+                
+                <div class="company_box" > 
+                    <span class="title">Công Ty</span>
+                    <tui-input
+                        formControlName="Company"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        Nhập Công Ty
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                    <tui-error
+                        formControlName="Company"
+                        [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+            </div>
+            <div class="row2">
+                <div class="start_box">
+                    <span class="title">Từ Ngày</span>
+                    <tui-input
+                        formControlName="StartDay"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        Nhập Ngày Bắt Đầu
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+                <div class="end_box">
+                    <span class="title">Đến Ngày</span>
+                    <tui-input
+                        formControlName="EndDay"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        Nhập Ngày Kết Thúc
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+            </div>
+            <div class="row3">
+                <div class="description_box" > 
+                    <span class="title">Mô tả</span>
+                    <tui-textarea formControlName="Description" [tuiTextfieldCleaner]="true">
+                        Nhập Mô Tả
+                    </tui-textarea>
+                    <tui-error
+                        formControlName="Description"
+                        [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+            </div>
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeExperienceDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button" (click)="closeExperienceDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>
+
+<dialog id="learn_dialog" style="color: #1f1a1c" #learnDialog>
+    <form [formGroup]="profileForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thêm Học Vấn</h4>
+            </div>
+            <div class="btnClose" (click)="closeLearnDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <div class="major_box" > 
+                    <span class="title">Chuyên ngành</span>
+                    <tui-input
+                        formControlName="Major"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        Nhập Chuyên Ngành
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                    <tui-error
+                        formControlName="Major"
+                        [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+            </div>
+            <div class="row2">
+                <div class="start_box">
+                    <span class="title">Từ Ngày</span>
+                    <tui-input
+                        formControlName="StartDay"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        Nhập Ngày Bắt Đầu
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+                <div class="end_box">
+                    <span class="title">Đến Ngày</span>
+                    <tui-input
+                        formControlName="EndDay"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        Nhập Ngày Kết Thúc
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+            </div>
+            <div class="row3">
+                <div class="description_box" > 
+                    <span class="title">Thành tựu</span>
+                    <tui-textarea formControlName="Achievement" [tuiTextfieldCleaner]="true">
+                        Nhập Thành Tựu
+                    </tui-textarea>
+                    <tui-error
+                        formControlName="Description"
+                        [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+            </div>
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeLearnDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button" (click)="closeLearnDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>
+
+<dialog id="skill_dialog" style="color: #1f1a1c" #skillDialog>
+    <form [formGroup]="profileForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thêm Kỹ Năng</h4>
+            </div>
+            <div class="btnClose" (click)="closeSkillDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <div class="skill_box" > 
+                    <span class="title">Tên kĩ năng</span>
+                    <div class="skill_input">
+                        <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Skill">
+                            Nhập tên Tag
+                            <input tuiTextfield type="text" />
+                        </tui-input>
+                        <button
+                            appearance="primary"
+                            tuiButton
+                            type="button"
+                            class="tui-space_right-3 tui-space_bottom-3"
+                            (click)="addSkill()"
+                        >
+                            Thêm
+                        </button>
+                    </div>
+                    <div class="skill_list">
+                        <div class="skill_select" *ngFor="let skill of skillsList; let i=index">
+                            <div>{{skill}}</div>
+                            <span class="material-symbols-outlined" (click)="removeTag(i)">
+                                close
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeSkillDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>

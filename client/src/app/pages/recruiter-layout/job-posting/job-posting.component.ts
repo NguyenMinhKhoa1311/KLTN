@@ -70,7 +70,8 @@ export class JobPostingComponent implements OnDestroy{
     Name: new FormControl('', [Validators.required]),
     Description: new FormControl('', [Validators.required]),
     Location: new FormControl('', [Validators.required]),
-    
+    Address: new FormControl('', [Validators.required]),
+
     Salary: new FormControl('', [Validators.required]),
     SalaryStart: new FormControl('', [Validators.required]),
     SalaryEnd: new FormControl('', [Validators.required]),
@@ -145,9 +146,6 @@ export class JobPostingComponent implements OnDestroy{
           }
         })
       );
-
-
-
      }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {
@@ -166,10 +164,6 @@ export class JobPostingComponent implements OnDestroy{
     }
     
   }
-
-
-
-
 
   createJob(){
     if(this.jobPostForm.value.Negotiate){
@@ -207,9 +201,6 @@ export class JobPostingComponent implements OnDestroy{
     this.store.dispatch(JobActions.createJobAtJob({job: jobToCreate}));
   }
   
-
-
-
   tagsList : string[] = [];
   addTag(){
     const newTag = this.jobPostForm.value.Tag;
@@ -224,9 +215,19 @@ export class JobPostingComponent implements OnDestroy{
     console.log(this.tagsList);
   }
 
-
-
-
+  addressList:string[]=[];
+  addAddress(){
+    const newLocation = this.jobPostForm.value.Address;
+    if(newLocation){
+      this.addressList.push(newLocation);
+      this.jobPostForm.controls.Address.setValue('');
+    }
+    console.log(this.addressList);
+  }
+  removeAddress(index: number){
+    this.addressList.splice(index, 1);
+    console.log(this.addressList);
+  }
 
   //Phúc lợi
   search: string | null = '';
@@ -236,17 +237,6 @@ export class JobPostingComponent implements OnDestroy{
       return ITEMS.filter(item => TUI_DEFAULT_MATCHER(item, search || ''));
   }
   //
-
-  
-
-  test: any={};
-  add(){
-    this.test={
-      a:this.Welfare.value,
-      b:this.jobPostForm.value.Negotiate,
-    }
-    console.log(this.test);
-  }
 
 }
 
