@@ -12,6 +12,7 @@ import { Router,NavigationStart,RouterLink } from '@angular/router';
 export class NavbarComponent implements OnInit{
   selectedTab!: string; // Thuộc tính để lưu trữ tên của tab hiện đang được chọn
   activeItemIndex = 0;
+  isLogin = false;
   constructor (private router: Router) {
     if (this.router.url.includes('/home')) {
       this.activeItemIndex = 0;
@@ -25,7 +26,21 @@ export class NavbarComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    console.log('navigation');
+    console.log(this.isLogin);
+    
+    let userLogged = sessionStorage.getItem('userLogged');
+    if(userLogged){
+      let userAfterParse = JSON.parse(userLogged);
+      if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
+        console.log('userLogged',userLogged);
+        this.isLogin = true;
+  
+      }
+    }
+
     this.router.events.subscribe((event) => {
+      ('navigation')
       if (event instanceof NavigationStart) {
         const url = event.url;
         if (url === '/home') {

@@ -10,6 +10,7 @@ export interface candidateState{
     isCreateCandidateAtCreateProfileLoading: boolean;
     isCreateCandidateAtCreateProfileSuccess: boolean;
     createCandidateAtCreateProfileError: string;
+    candidateCreatedAtCreateProfile: Candidate;
 
     isGetByUserWithGoogleAtRegisterLoading: boolean;
     isGetByUserWithGoogleAtRegisterSuccess: boolean;

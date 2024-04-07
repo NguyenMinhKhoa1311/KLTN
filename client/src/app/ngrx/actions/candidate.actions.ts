@@ -16,6 +16,15 @@ export const getByUserWithGoogleAtLoginFailure = createAction(
     props<{error: string}>()
     );
 
+
+
+
+
+
+
+
+
+
 export const createCandidateAtCreateProfile = createAction(
     "[Candidate] Create Candidate At Register",
     props<{candidate: any}>()
@@ -23,12 +32,21 @@ export const createCandidateAtCreateProfile = createAction(
 
 export const createCandidateAtCreateProfileSuccess = createAction(
     "[Candidate] Create Candidate At Register Success",
+    props<{candidate: Candidate}>()
     );
 
 export const createCandidateAtCreateProfileFailure = createAction(
     "[Candidate] Create Candidate At Register Failure",
     props<{error: string}>()
     );
+
+
+
+
+
+
+
+
 
     export const getByUserWithGoogleAtRegister = createAction(
         "[Candidate] Get By User With Google At Register",
@@ -44,3 +62,12 @@ export const createCandidateAtCreateProfileFailure = createAction(
         "[Candidate] Get By User With Google At Register Failure",
         props<{error: string}>()
         );
+
+
+
+
+
+
+        export const resetState = createAction(
+            "[Candidate] Reset State"
+            );

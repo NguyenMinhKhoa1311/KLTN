@@ -13,6 +13,7 @@ export const initialState: candidateState = {
     isCreateCandidateAtCreateProfileLoading: false,
     isCreateCandidateAtCreateProfileSuccess: false,
     createCandidateAtCreateProfileError: "",
+    candidateCreatedAtCreateProfile: <Candidate>{},
 
     isGetByUserWithGoogleAtRegisterLoading: false,
     isGetByUserWithGoogleAtRegisterSuccess: false,
@@ -65,6 +66,7 @@ export const candidateReducer = createReducer(
         
         return{
             ...state,
+            candidateCreatedAtCreateProfile: actions.candidate,
             isCreateCandidateAtCreateProfileLoading: false,
             isCreateCandidateAtCreateProfileSuccess: true,
             createCandidateAtCreateProfileError: "",
@@ -105,6 +107,30 @@ export const candidateReducer = createReducer(
             isGetByUserWithGoogleAtRegisterLoading: false,
             isGetByUserWithGoogleAtRegisterSuccess: false,
             getByUserWithGoogleAtRegisterError: actions.error,
+        };
+    }),
+
+
+
+
+    on(CandidateActions.resetState,(state) => {
+        console.log('reset state');
+        return {
+            ...state,
+            isGetByUserWithGoogleAtLoginLoading: false,
+            isGetByUserWithGoogleAtLoginSuccess: false,
+            getByUserWithGoogleAtLoginError: "",
+            candidateTakenByUserWithGoogleAtLogin: <Candidate>{},
+        
+            isCreateCandidateAtCreateProfileLoading: false,
+            isCreateCandidateAtCreateProfileSuccess: false,
+            createCandidateAtCreateProfileError: "",
+            candidateCreatedAtCreateProfile: <Candidate>{},
+        
+            isGetByUserWithGoogleAtRegisterLoading: false,
+            isGetByUserWithGoogleAtRegisterSuccess: false,
+            getByUserWithGoogleAtRegisterError: "",
+            candidateTakenByUserWithGoogleAtRegister: <Candidate>{},
         };
     }),
 );

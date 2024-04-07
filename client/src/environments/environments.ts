@@ -37,3 +37,23 @@ export function generateUuid(): string {
 
   return parts.join("");
 }
+
+export function convertToDatetime(inputDate: string): Date {
+  // Xác định định dạng ngày
+  let format: string;
+  if (inputDate.includes('/')) {
+    format = '%d/%m/%Y';
+  } else if (inputDate.includes('-')) {
+    format = '%d-%m-%Y';
+  } else {
+    format = '%d%m%Y';
+  }
+
+  // Chuyển đổi chuỗi sang datetime
+  const parsedDate = new Date(inputDate);
+  if (isNaN(parsedDate.getTime())) {
+    throw new Error(`Lỗi định dạng ngày: ${inputDate}`);
+  }
+
+  return parsedDate;
+}

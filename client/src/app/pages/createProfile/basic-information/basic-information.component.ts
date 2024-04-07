@@ -49,6 +49,7 @@ export class BasicInformationComponent implements OnDestroy {
 
   //ngrx of candidate
   isCreateCandidateAtCreateProfileSuccess$ = this.store.select('candidate', 'isCreateCandidateAtCreateProfileSuccess');
+  candidateCreatedAtCreateProfile$ = this.store.select('candidate', 'candidateCreatedAtCreateProfile');
 
 
   fieldList:  Field[] = [];
@@ -128,12 +129,10 @@ export class BasicInformationComponent implements OnDestroy {
     }),
 
     // lắng nghe action
-    this.isCreateCandidateAtCreateProfileSuccess$.subscribe(isSuccess=>{
-      console.log(isSuccess);
-      
-      if(isSuccess){
+    this.candidateCreatedAtCreateProfile$.subscribe(candidate=>{
+      if(candidate._id.length > 0){
         console.log('create candidate success');
-        sessionStorage.setItem('userLogged', this.user._id);
+        sessionStorage.setItem('userLogged', JSON.stringify(candidate));
         this.router.navigate(['createProfile/create-success']);
       }
     })

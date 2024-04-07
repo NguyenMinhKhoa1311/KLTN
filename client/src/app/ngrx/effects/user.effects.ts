@@ -83,8 +83,8 @@ export class UserEffects {
         ofType(UserActions.getUserByUsernameAndPasswordAtLogin),
         mergeMap((action) => 
             this.userService.getUserWithUserName(action.username).pipe(
-                map((user) => UserActions.getUserByGmailAtCreateProfileSuccess({user})),
-                catchError((error) => of(UserActions.getUserByGmailAtCreateProfileFailure({errorMessage: error.message})))
+                map((user) => UserActions.getUserByUsernameAndPasswordAtLoginSuccess({user})),
+                catchError((error) => of(UserActions.getUserByUsernameAndPasswordAtLoginFailure({errorMessage: error.message})))
                 )
         )
     )

@@ -109,3 +109,11 @@ export const getUserByUsernameAndPasswordAtLoginFailure = createAction(
     '[User] get user by username and password at login failure',
     props<{ errorMessage: string}>()
 );
+
+
+
+
+
+export const resetState = createAction(
+    '[User] reset state',
+);

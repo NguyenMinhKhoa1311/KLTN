@@ -108,7 +108,8 @@ export class LoginComponent implements  OnDestroy {
                 this.router.navigate(['createProfile/personal-information']);
               }
               else{
-              this.router.navigate(['/home']);
+                sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+                this.router.navigate(['/home']);
               }
           }
         }),
@@ -119,6 +120,8 @@ export class LoginComponent implements  OnDestroy {
               alert("Sai tài khoản hoặc mật khẩu")
             }
             else{
+              console.log(user);
+              
               this.store.dispatch(CandidateActions.getByUserWithGoogleAtLogin({user: user._id}))
             }
           }
@@ -126,9 +129,6 @@ export class LoginComponent implements  OnDestroy {
 
 
       )
-
- 
-
 
     }
   ngOnDestroy(): void {
@@ -139,7 +139,7 @@ export class LoginComponent implements  OnDestroy {
 
   loginWithAcouunt() {
     // bỏ cái form user name vào ...... !!!!!!!!!!!!! bỏ password vào ....... !!!!!!!!!!!!!
-    this.store.dispatch(UserActions.getUserByUsernameAndPasswordAtLogin({username: ".....", password: "....."}))
+    this.store.dispatch(UserActions.getUserByUsernameAndPasswordAtLogin({username: this.loginForm.value.Username??"", password: this.loginForm.value.Password??""}));
 
   }
 

@@ -40,7 +40,7 @@ export class CandidateEffects{
                 if(item._id.length>0 ){
                     console.log('create candidate success');
                     
-                    return CandidateActions.createCandidateAtCreateProfileSuccess()
+                    return CandidateActions.createCandidateAtCreateProfileSuccess({candidate: item})
                 }
                 else{
                     return CandidateActions.createCandidateAtCreateProfileFailure({error: "Create Candidate At Register Failure"})
