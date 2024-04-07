@@ -5,6 +5,13 @@
             <div class="information_box">
                 <div class="img_profile">
                     <img src="../../../../assets/images/kinhdoanh.png" alt="">
+                    <input type="file" accept="image/*" (change)="onFileSelected($event) "
+                        #fileInput formControlName="Image" />
+                    
+                    <!-- <i class="fa-solid fa-cloud-arrow-up" style="cursor: pointer;" (click)="fileInput.click()"></i> -->
+                    <div class="img-file" *ngIf="file">
+                        <img [src]="selectedImage" alt="Selected Image" style="width: 100px;height: 100px;" />
+                    </div>
                 </div>
                 <div class="information" (click)="openUserDialog()">
                     <div class="user_name">
@@ -48,7 +55,7 @@
             <div class="desired_job">
                 <div class="title">
                     <h2>Công Việc Mong Muốn</h2>
-                    <span class="material-symbols-outlined">
+                    <span class="material-symbols-outlined" (click)="openDesiredDialog()">
                         edit
                     </span>
                 </div>
@@ -146,7 +153,7 @@
                             </div>
                         </div>
                         <div class="achivement">
-                            <span>Thành tựu:</span>
+                            <span>Bằng cấp:</span>
                         </div>
                     </div>
                 </div>
@@ -381,12 +388,12 @@
             </div>
             <div class="row3">
                 <div class="description_box" > 
-                    <span class="title">Thành tựu</span>
-                    <tui-textarea formControlName="Achievement" [tuiTextfieldCleaner]="true">
-                        Nhập Thành Tựu
+                    <span class="title">Bằng cấp</span>
+                    <tui-textarea formControlName="Degree" [tuiTextfieldCleaner]="true">
+                        Nhập Bằng Cấp
                     </tui-textarea>
                     <tui-error
-                        formControlName="Description"
+                        formControlName="Degree"
                         [error]="[] | tuiFieldError | async"
                     ></tui-error>
                 </div>
@@ -591,31 +598,7 @@
         </div>
         <div id="body_dialog">
             <div class="row1">
-                <!-- <div class="location_box" > 
-                    <span class="title">Nơi làm việc</span>
-                    <tui-input
-                        formControlName="Location"
-                        [tuiTextfieldCleaner]="true"
-                        [tuiTextfieldLabelOutside]="true"
-                        style="margin-bottom: 10px;"
-                    >
-                        <input
-                            tuiTextfield
-                            type="text"
-                        />
-                    </tui-input>
-                </div> -->
                 <div class="basic">
-                    <div class="img_user">
-                        <div class="img_box">
-                            <img src="../../../../assets/images/kinhdoanh.png" alt="">
-                        </div>
-                        <div class="edit_img">
-                            <span class="material-symbols-outlined">
-                                edit
-                            </span>
-                        </div>
-                    </div>
                     <div class="info_user">
                         <div class="name_user">
                             <span class="title">Họ và Tên</span>
@@ -705,6 +688,24 @@
                                 type="number"
                             />
                         </tui-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="career">
+                        <span class="title">Ngành nghề</span>
+                        <div class="custom-select" style="width:200px;" > 
+                            <select formControlName="Career">
+                              <option *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <span class="title">Ngành nghề</span>
+                        <div class="custom-select" style="width:200px;" > 
+                            <select formControlName="Field">
+                              <option *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="address">
