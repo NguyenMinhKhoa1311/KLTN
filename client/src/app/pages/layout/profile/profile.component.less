@@ -99,6 +99,7 @@
                     }
                     .material-symbols-outlined{
                         font-size: 20px;
+                        cursor: pointer;
                     }
                 }
                 .workplace, .salary{
@@ -571,7 +572,15 @@
     }
 }
 
+#user_dialog::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
 #user_dialog{
+    height: 80%;
+    overflow: auto;
+    position: fixed;
     #body_dialog{
         .row1{
             display: flex;
@@ -580,26 +589,6 @@
                 display: flex;
                 flex-direction: row;
                 margin-bottom: 10px;
-                .img_user{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    .img_box{
-                        width: 120px;
-                        height: 120px;
-                        border-radius: 5px;
-                        margin-right: 10px;
-                        img{
-                            height: 100%;
-                        }
-                    }
-                    .edit_img{
-                        cursor: pointer;
-                        font-size: 14px;
-                        margin-top: 20px;
-                        color: rgb(102, 102, 102);
-                    }
-                }
                 .info_user{
                     width: 100%;
                     .name_user, .position_user{
@@ -622,7 +611,8 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                .experience, .salary, .email, .phone{
+                .experience, .salary, .email, 
+                .phone, .career ,.field{
                     width: 48%;
                     tui-input{
                         margin-top: 10px;
@@ -637,6 +627,8 @@
                         margin-right: 4px;
                     }
                 }
+
+                .career{}
             }
         }
         
