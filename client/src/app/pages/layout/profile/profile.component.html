@@ -6,7 +6,7 @@
                 <div class="img_profile">
                     <img src="../../../../assets/images/kinhdoanh.png" alt="">
                 </div>
-                <div class="information">
+                <div class="information" (click)="openUserDialog()">
                     <div class="user_name">
                         Phùng Minh Khoa
                         <span class="material-symbols-outlined">
@@ -52,15 +52,15 @@
                         edit
                     </span>
                 </div>
-                <div class="workplace">
+                <div class="workplace" (click)="openDesiredDialog()">
                     <div class="title_workplace">
                         Nơi làm việc
                     </div>
                     <div class="location">
-                        location
+                        Location
                     </div>
                 </div>
-                <div class="salary">
+                <div class="salary" (click)="openDesiredDialog()">
                     <div class="title_salary">
                         Mức lương mong muốn (USD/tháng)
                     </div>
@@ -79,6 +79,42 @@
                 </span>
                 <span>Thêm Kinh Nghiệm Làm Việc</span>
             </div>
+            <div class="experience_select">
+                <div class="box1">
+                    <div class="img_experience">
+                        <img src="../../../../assets/images/kinhdoanh.png" alt="">
+                    </div>
+                    <div class="info_experience">
+                        <div class="position_user">
+                            Nhân viên
+                        </div>
+                        <div class="company_user">
+                            FPT Software
+                        </div>
+                        <div class="date_user">
+                            <div class="dateStart">
+                                01/01/2021
+                            </div>
+                            <div style="margin: 0 3px;">-</div>
+                            <div class="dateEnd">
+                                01/01/2021
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="control">
+                    <div class="edit">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </div>
+                    <div class="delete">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="learn">
@@ -90,9 +126,46 @@
                 </span>
                 <span>Thêm Học Vấn</span>
             </div>
+            <div class="learn_select">
+                <div class="box1">
+                    <div class="img_experience">
+                        <img src="../../../../assets/images/kinhdoanh.png" alt="">
+                    </div>
+                    <div class="info_learn">
+                        <div class="learn_name">
+                            Công nghệ thông tin
+                        </div>
+                        
+                        <div class="date_user">
+                            <div class="dateStart">
+                                01/01/2021
+                            </div>
+                            <div style="margin: 0 3px;">-</div>
+                            <div class="dateEnd">
+                                01/01/2021
+                            </div>
+                        </div>
+                        <div class="achivement">
+                            <span>Thành tựu:</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="control">
+                    <div class="edit">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </div>
+                    <div class="delete">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="learn">
+        
+        <div class="skill">
             <h2>Kỹ Năng</h2>
             <div class="add_text" (click)="openSkillDialog()">
                 <span class="material-symbols-outlined">
@@ -110,7 +183,7 @@
             </div>
         </div>
 
-        <div class="learn">
+        <div class="language">
             <h2>Ngoại ngữ</h2>
             <div class="add_text" (click)="openLanguageDialog()">
                 <span class="material-symbols-outlined">
@@ -118,13 +191,11 @@
                 </span>
                 <span>Thêm Ngoại Ngữ</span>
             </div>
-            <div class="skill_list">
-                <div class="skill_select" *ngFor="let skill of skillsList; let i=index">
-                    <div>{{skill}}</div>
-                    <span class="material-symbols-outlined">
-                        done
-                    </span>
-                </div>
+            <div class="language_select">
+                <span>English</span>
+                <span class="material-symbols-outlined">
+                    delete
+                </span>
             </div>
         </div>
     </div>
@@ -417,7 +488,6 @@
                         [tuiTextfieldCleaner]="true"
                         [tuiTextfieldLabelOutside]="true"
                     >
-                        
                         <input
                             tuiTextfield
                             type="text"
@@ -425,10 +495,6 @@
                     </tui-input>
                 </div>
             </div>
-            <div class="language_select">
-                
-            </div>
-            
             <div class="a" style="width: 100%;
             border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
             <div class="row4">
@@ -440,6 +506,233 @@
                 </div>
                 <div class="btn_Luu">
                     <button appearance="primary" tuiButton type="button" (click)="closeLanguageDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>
+
+<dialog id="desired_dialog" style="color: #1f1a1c" #desiredDialog>
+    <form [formGroup]="profileForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Sửa Công Việc Mong Muốn</h4>
+            </div>
+            <div class="btnClose" (click)="closeDesiredDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <div class="location_box" > 
+                    <span class="title">Nơi làm việc</span>
+                    <tui-input
+                        formControlName="Location"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                        style="margin-bottom: 10px;"
+                    >
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+                <div class="salary_box" > 
+                    <span class="title">Mức lương mong muốn (USD/Tháng)</span>
+                    <tui-input
+                        formControlName="Salary"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+            </div>
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeDesiredDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button" (click)="closeDesiredDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>
+
+<dialog id="user_dialog" style="color: #1f1a1c" #userDialog>
+    <form [formGroup]="profileForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thông tin cơ bản</h4>
+            </div>
+            <div class="btnClose" (click)="closeUserDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <!-- <div class="location_box" > 
+                    <span class="title">Nơi làm việc</span>
+                    <tui-input
+                        formControlName="Location"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                        style="margin-bottom: 10px;"
+                    >
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div> -->
+                <div class="basic">
+                    <div class="img_user">
+                        <div class="img_box">
+                            <img src="../../../../assets/images/kinhdoanh.png" alt="">
+                        </div>
+                        <div class="edit_img">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </div>
+                    </div>
+                    <div class="info_user">
+                        <div class="name_user">
+                            <span class="title">Họ và Tên</span>
+                            <tui-input
+                                formControlName="Name"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                                style="margin-bottom: 10px;"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                        <div class="position_user">
+                            <span class="title">Chức danh</span>
+                            <tui-input
+                                formControlName="Position"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                                style="margin-bottom: 10px;"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="experience">
+                        <span class="title">Kinh nghiệm</span>
+                        <tui-input
+                            formControlName="Experience"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            style="margin-bottom: 10px;"
+                        >
+                            <input
+                                tuiTextfield
+                                type="text"
+                            />
+                        </tui-input>
+                    </div>
+                    <div class="salary">
+                        <span class="title">Mức lương mong muốn</span>
+                        <tui-input
+                            formControlName="Salary"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            style="margin-bottom: 10px;"
+                        >
+                            <input
+                                tuiTextfield
+                                type="text"
+                            />
+                        </tui-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="email">
+                        <span class="title">Email</span>
+                        <tui-input
+                            formControlName="Email"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            style="margin-bottom: 10px;"
+                        >
+                            <input
+                                tuiTextfield
+                                type="email"
+                            />
+                        </tui-input>
+                    </div>
+                    <div class="phone">
+                        <span class="title">Điện thoại</span>
+                        <tui-input
+                            formControlName="Phone"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            style="margin-bottom: 10px;"
+                        >
+                            <input
+                                tuiTextfield
+                                type="number"
+                            />
+                        </tui-input>
+                    </div>
+                </div>
+                <div class="address">
+                    <span class="title">Địa chỉ</span>
+                    <tui-input
+                        formControlName="Address"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                        style="margin-bottom: 10px;"
+                    >
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+            </div>
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeUserDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button" (click)="closeUserDialog()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>

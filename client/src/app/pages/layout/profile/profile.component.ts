@@ -12,10 +12,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ProfileComponent {
 
   profileForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', Validators.required),
-    address: new FormControl('', Validators.required),
+    Name: new FormControl('', Validators.required),
+    Email: new FormControl('', [Validators.required, Validators.email]),
+    Phone: new FormControl('', Validators.required),
+    Address: new FormControl('', Validators.required),
+    Experience: new FormControl('', Validators.required),
 
     Position: new FormControl('', Validators.required),
     Company: new FormControl('', Validators.required),
@@ -27,6 +28,9 @@ export class ProfileComponent {
     Achievement: new FormControl('', Validators.required),
     Skill: new FormControl(''),
     Language: new FormControl(''),
+
+    Location: new FormControl('', Validators.required),
+    Salary: new FormControl('', Validators.required),
   });
   
   @ViewChild('exprienceDialog', { static: true })
@@ -91,5 +95,28 @@ export class ProfileComponent {
     this.cdr4.detectChanges();
   }
 
+  @ViewChild('desiredDialog', { static: true })
+  desiredDialog!: ElementRef<HTMLDialogElement>;
+  cdr5 = inject(ChangeDetectorRef);
+  openDesiredDialog() {
+    this.desiredDialog.nativeElement.showModal();
+    this.cdr5.detectChanges();
+  }
+  closeDesiredDialog() {
+    this.desiredDialog.nativeElement.close();
+    this.cdr5.detectChanges();
+  }
+
+  @ViewChild('userDialog', { static: true })
+  userDialog!: ElementRef<HTMLDialogElement>;
+  cdr6 = inject(ChangeDetectorRef);
+  openUserDialog() {
+    this.userDialog.nativeElement.showModal();
+    this.cdr6.detectChanges();
+  }
+  closeUserDialog() {
+    this.userDialog.nativeElement.close();
+    this.cdr6.detectChanges();
+  }
   
 }
