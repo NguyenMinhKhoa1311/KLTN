@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { Router,NavigationStart,RouterLink } from '@angular/router';
+import { ShareModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [TaigaModule,RouterLink],
+  imports: [TaigaModule,RouterLink,ShareModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.less'
 })

@@ -1,0 +1,297 @@
+<div id="jobdetail_container">
+    <div class="jobdetail_box">
+        <div class="title">
+            Bài đăng tuyển dụng
+        </div>
+        <div class="list_job">
+            <div class="job">
+                <div class="job_box">
+                    <div class="img_job">
+                        <img src="../../../../assets/images/kinhdoanh.png" alt="">
+                    </div>
+                    <div class="info_job">
+                        <div class="name_job">
+                            Chuyên viên đào tạo
+                        </div>
+                        <div class="company_job">
+                            Công ty TNHH ABC
+                        </div>
+                        <div class="salary">
+                            10 000
+                        </div>
+                        <div class="address">
+                            Hà Nội
+                        </div>
+                        <div class="time">
+                            <div class="dateStart">
+                                2021-06-01
+                            </div>
+                            <div style="margin: 0 5px;">-</div>
+                            <div class="dateEnd">
+                                2021-06-30
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="edit">
+                    <span class="material-symbols-outlined" (click)="openJobDialog()">
+                        edit
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<dialog id="job_dialog" style="color: #1f1a1c" #jobDialog>
+    <form [formGroup]="jobForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thông tin cơ bản</h4>
+            </div>
+            <div class="btnClose" (click)="closeJobDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="job_box">
+                <form [formGroup]="jobForm">
+                    <div class="name_job">
+                        <div class="header">
+                            <span class="title">Tên công việc:</span>
+                        </div>
+                        <div class="body">
+                            <tui-input formControlName="Name" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
+                                Nhập tên công việc
+                                <input tuiTextfield type="text" />
+                            </tui-input>
+                            <tui-error formControlName="Name" [error]="[] | tuiFieldError | async"></tui-error>
+                        </div>
+                    </div>
+                    <div class="description_job">
+                        <div class="header">
+                            <span class="title">Mô tả công việc:</span>
+                        </div>
+                        <div class="body">
+                            <tui-textarea formControlName="Description" [tuiTextfieldCleaner]="true">
+                                Nhập mô tả công việc
+                            </tui-textarea>
+                            <tui-error formControlName="Description" [error]="[] | tuiFieldError | async"></tui-error>
+                        </div>
+                    </div>
+        
+                    <div class="location_job">
+                        <div class="header">
+                            <span class="title">Địa chỉ làm việc:</span>
+                        </div>
+                        <div class="body">
+                            <tui-input formControlName="Location" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
+                                Nhập địa chỉ làm việc
+                                <input tuiTextfield type="text" />
+                            </tui-input>
+                            <tui-error formControlName="Location" [error]="[] | tuiFieldError | async"></tui-error>
+                        </div>
+                    </div>
+        
+                    <div class="tag_job">
+                        <div class="header">
+                            <span class="title">Địa điểm làm việc:</span>
+                        </div>
+                        <div class="body">
+                            <div class="tag_input">
+                                <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Address">
+                                    Nhập địa điểm
+                                    <input tuiTextfield type="text" />
+                                </tui-input>
+                                <button
+                                    appearance="primary"
+                                    tuiButton
+                                    type="button"
+                                    class="tui-space_right-3 tui-space_bottom-3"
+                                    (click)="addAddress()"
+                                >
+                                    Thêm
+                                </button>
+                            </div>
+                            <div class="tag_list">
+                                <div class="tag_select" *ngFor="let address of addressList; let i=index">
+                                    <div>{{address}}</div>
+                                    <span class="material-symbols-outlined" (click)="removeAddress(i)">
+                                        close
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="salary_job">
+                        <div class="header">
+                            <span class="title">Lương công việc:</span>
+                        </div>
+                        <div class="body">
+                            <div class="salary_value">
+                                <span>Từ</span>
+                                <tui-input-number formControlName="SalaryStart" class="salary_input">
+                                </tui-input-number>
+                                <tui-error formControlName="SalaryStart" [error]="[] | tuiFieldError | async"></tui-error>
+            
+                                <span>Đến</span>
+                                <tui-input-number formControlName="SalaryEnd" class="salary_input">
+                                </tui-input-number>
+                                <tui-error formControlName="SalaryEnd" [error]="[] | tuiFieldError | async"></tui-error>
+                            
+                                <div class="check_salary">
+                                    <tui-checkbox
+                                        formControlName="Negotiate"
+                                        class="tui-space_bottom-3"
+                                    ></tui-checkbox>
+                                    <span>Thương lượng</span>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="walfare_job">
+                        <div class="header">
+                            <span class="title">Phúc lợi:</span>
+                        </div>
+                        <div class="body">
+                            <tui-multi-select
+                                placeholder="Ignored text"
+                                class="b-form"
+                                [editable]="false"
+                                [formControl]="Welfare"
+                                [tuiTextfieldLabelOutside]="true"
+                                [(search)]="search"
+                            >
+                                Chọn phúc lợi
+                                <tui-data-list-wrapper
+                                    *tuiDataList
+                                    tuiMultiSelectGroup
+                                    [items]="filter(search)"
+                                ></tui-data-list-wrapper>
+                            </tui-multi-select>
+                        </div>
+                    </div>
+        
+        
+                    <div class="field_job">
+                        <div class="header">
+                            <span class="title">Lĩnh vực:</span>
+                        </div>
+                        <div class="body">
+                            <div class="custom-select"> 
+                                <select formControlName="Field">
+                                  <option class="select-item" *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="career_job">
+                        <div class="header">
+                            <span class="title">Ngành nghề:</span>
+                        </div>
+                        <div class="body">
+                            <div class="custom-select"> 
+                                <select formControlName="Career">
+                                    <option *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="dateStart_job">
+                        <div class="header">
+                            <span class="title">Ngày bắt đầu:</span>
+                        </div>
+                        <div class="body">
+                            <tui-input-date class="b-form" formControlName="DateStart">
+                                Choose a date
+                                <input autocomplete="bday" tuiTextfield />
+                            </tui-input-date>
+                            <tui-error formControlName="DateStart" [error]="[] | tuiFieldError | async"></tui-error>
+                        </div>
+                    </div>
+        
+                    <div class="dateEnd_job">
+                        <div class="header">
+                            <span class="title">Ngày kết thúc:</span>
+                        </div>
+                        <div class="body">
+                            <tui-input-date class="b-form" formControlName="DateEnd">
+                                Choose a date
+                                <input autocomplete="bday" tuiTextfield />
+                            </tui-input-date>
+                            <tui-error formControlName="DateEnd" [error]="[] | tuiFieldError | async"></tui-error>
+                        </div>
+                    </div>
+        
+                    <div class="requirement_job">
+                        <div class="header">
+                            <span class="title">Yêu cầu:</span>
+                        </div>
+                        <div class="body">
+                             <tui-textarea formControlName="Requirement" [tuiTextfieldCleaner]="true">
+                            Nhập yêu cầu công việc
+                        </tui-textarea>
+                        <tui-error formControlName="Requirement" [error]="[] | tuiFieldError | async"></tui-error>
+                        </div>
+                    </div>
+        
+                    <div class="tag_job">
+                        <div class="header">
+                            <span class="title">Tag:</span>
+                        </div>
+                        <div class="body">
+                            <div class="tag_input">
+                                <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Tag">
+                                    Nhập tên Tag
+                                    <input tuiTextfield type="text" />
+                                </tui-input>
+                                <button
+                                    appearance="primary"
+                                    tuiButton
+                                    type="button"
+                                    class="tui-space_right-3 tui-space_bottom-3"
+                                    (click)="addTag()"
+                                >
+                                    Thêm
+                                </button>
+                            </div>
+                            <div class="tag_list">
+                                <div class="tag_select" *ngFor="let tag of tagsList; let i=index">
+                                    <div>{{tag}}</div>
+                                    <span class="material-symbols-outlined" (click)="removeTag(i)">
+                                        close
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeJobDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button" (click)="closeJobDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>
+
