@@ -17,4 +17,25 @@ export interface candidateState{
     getByUserWithGoogleAtRegisterError: string;
     candidateTakenByUserWithGoogleAtRegister: Candidate;
 
+    isUpdateEducationAtProfileLoading: boolean;
+    isUpdateEducationAtProfileSuccess: boolean;
+    updateEducationAtProfileError: string;
+    candidateUpdatedEducationAtProfile: Candidate;
+
+    isUpdateWorkExperienceAtProfileLoading: boolean;
+    isUpdateWorkExperienceAtProfileSuccess: boolean;
+    updateWorkExperienceAtProfileError: string;
+    candidateUpdatedWorkExperienceAtProfile: Candidate;
+
+    isUpdateLanguageAtProfileLoading: boolean;
+    isUpdateLanguageAtProfileSuccess: boolean;
+    updateLanguageAtProfileError: string;
+    candidateUpdatedLanguageAtProfile: Candidate;
+
+
+    isUpdateDesiredJobAtProfileLoading: boolean;
+    isUpdateDesiredJobAtProfileSuccess: boolean;
+    updateDesiredJobAtProfileError: string;
+    candidateUpdatedDesiredJobAtProfile: Candidate;
+
 }

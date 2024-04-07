@@ -15,7 +15,7 @@ export const createWithGoogleAtLoginFailure = createAction(
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getUserByGmailWithGoogleAtLogin = createAction(
     '[User]  get user by gmail with google at login',
     props<{ Username: string}>()
@@ -32,7 +32,7 @@ export const getUserByGmailWithGoogleAtLoginFailure = createAction(
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const createWithGoogoleAtRegister = createAction(
     '[User] create with google at register',
     props<{ user: User}>()
@@ -47,7 +47,7 @@ export const createWithGoogleAtRegisterFailure = createAction(
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getUserByGmailWithGoogleAtRegisterSuccess = createAction(
     '[User] get user by gmail with google at register success',
     props<{ user: User}>()
@@ -65,7 +65,7 @@ export const getUserByGmailWithGoogleAtRegister = createAction(
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getUserByGmailWithAccountAtRegister = createAction(
     '[User] get user by gmail with account at register',
     props<{ username: string}>()
@@ -80,7 +80,7 @@ export const getUserByGmailWithAccountAtRegisterFailure = createAction(
 );
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getUserByGmailAtCreateProfile = createAction(
     '[User] get user by gmail at create profile',
     props<{ username: string}>()
@@ -96,7 +96,7 @@ export const getUserByGmailAtCreateProfileFailure = createAction(
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getUserByUsernameAndPasswordAtLogin = createAction(
     '[User] get user by username and password at login',
     props<{ username: string, password: string}>()
@@ -113,7 +113,7 @@ export const getUserByUsernameAndPasswordAtLoginFailure = createAction(
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const resetState = createAction(
     '[User] reset state',
 );

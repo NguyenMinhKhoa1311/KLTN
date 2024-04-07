@@ -38,22 +38,33 @@ export function generateUuid(): string {
   return parts.join("");
 }
 
-export function convertToDatetime(inputDate: string): Date {
-  // Xác định định dạng ngày
-  let format: string;
-  if (inputDate.includes('/')) {
-    format = '%d/%m/%Y';
-  } else if (inputDate.includes('-')) {
-    format = '%d-%m-%Y';
-  } else {
-    format = '%d%m%Y';
-  }
+export function convertStringToDate(str: string): Date | null {
+    // Xóa các ký tự '-' và '/' ra khỏi chuỗi
+    const cleanedString = str.replace(/[-/]/g, '');
 
-  // Chuyển đổi chuỗi sang datetime
-  const parsedDate = new Date(inputDate);
-  if (isNaN(parsedDate.getTime())) {
-    throw new Error(`Lỗi định dạng ngày: ${inputDate}`);
-  }
+    // Kiểm tra độ dài của chuỗi
+    if (cleanedString.length !== 8) {
+        console.error('Invalid input length');
+        return null;
+    }
 
-  return parsedDate;
+    // Tách chuỗi thành ngày, tháng và năm
+    const day = cleanedString.slice(0, 2);
+    const month = cleanedString.slice(2, 4);
+    const year = cleanedString.slice(4);
+
+    // Kiểm tra xem ngày, tháng và năm có hợp lệ không
+    if (!/^\d{2}$/.test(day) || !/^\d{2}$/.test(month) || !/^\d{4}$/.test(year)) {
+        console.error('Invalid input format');
+        return null;
+    }
+
+    // Chuyển đổi thành kiểu Date
+    const date = new Date(`${year}-${month}-${day}`);
+    if (isNaN(date.getTime())) {
+        console.error('Invalid date');
+        return null;
+    }
+
+    return date;
 }

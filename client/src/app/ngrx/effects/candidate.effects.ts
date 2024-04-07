@@ -50,6 +50,7 @@ export class CandidateEffects{
          )
     );
 
+    
     getCandidateByUserWithGoogleAtRegister$ = createEffect(()=>
     this.action$.pipe(
         ofType(CandidateActions.getByUserWithGoogleAtRegister),
@@ -66,6 +67,76 @@ export class CandidateEffects{
                 }
             }),
             catchError((error) => of(CandidateActions.getByUserWithGoogleAtRegisterFailure({error: error})))))
+         )
+    );
+
+
+    updateEducationAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateEducationAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateEducation(action.education, action.id).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateEducationAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateEducationAtProfileFailure({error: "Update Education At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateEducationAtProfileFailure({error: error})))))
+         )
+    );
+
+    updateWorkExperienceAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateWorkExperienceAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateWorkExperience(action.workExperience, action.id).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateWorkExperienceAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateWorkExperienceAtProfileFailure({error: "Update Work Experience At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateWorkExperienceAtProfileFailure({error: error})))))
+         )
+    );
+
+    updateLanguageAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateLanguageAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateLanguage(action.language, action.id).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateLanguageAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateLanguageAtProfileFailure({error: "Update Language At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateLanguageAtProfileFailure({error: error})))))
+         )
+    );
+
+
+    updateDesiredJobAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateDesiredJobAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateDesiredJob(action.desiredJob, action.id).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateDesiredJobAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateDesiredJobAtProfileFailure({error: "Update Desired Job At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateDesiredJobAtProfileFailure({error: error})))))
          )
     );
 }

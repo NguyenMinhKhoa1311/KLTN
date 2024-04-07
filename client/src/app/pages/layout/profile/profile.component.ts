@@ -1,12 +1,15 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
 import { ShareModule } from '../../../shared/shared.module';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { candidateState } from '../../../ngrx/states/candidate.state';
-import { convertToDatetime, generateUuid } from '../../../../environments/environments';
+import { convertStringToDate, generateUuid } from '../../../../environments/environments';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
+import { Subscription } from 'rxjs';
+import { Candidate } from '../../../models/candidate.model';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.less'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnDestroy {
   constructor(
     private store: Store<{
       candidate: candidateState,
@@ -24,12 +27,74 @@ export class ProfileComponent {
   ) {
     let userLogged = sessionStorage.getItem('userLogged');
     if(userLogged){
-      let userAfterParse = JSON.parse(userLogged);
-      if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
-        console.log('userLogged',userLogged);
+      let userAfterParse = JSON.parse(userLogged) as Candidate;
+      if(userAfterParse?._id.length > 0&&userAfterParse?._id!=""){
+        this.candidateToRender = userAfterParse;
+        console.log(this.candidateToRender);
+        
       }
     }
+    this.subscriptions.push(
+      // theo dõi candidate dc cập nhật education
+      this.candidateupdatedEducationAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateEducation){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              
+            }
+        }
+      }),
+      // theo dõi candidate dc cập nhật work experience
+      this.candidateupdatedWorkExperienceAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateWorkExperience){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              
+            }
+        }
+      }),
+      // theo dõi candidate dc cập nhật language
+      this.candidateupdatedLanguageAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateLanguage){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              
+            }
+        }
+      }),
+      // theo dõi candidate dc cập nhật desired job
+      this.candidateupdatedDesiredJobAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateDesiredJob){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              
+            }
+        }
+      })
+    )
+
+    
    }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
+  //variables
+  isUpdateEducation: boolean = false;
+  isUpdateWorkExperience: boolean = false;
+  isUpdateLanguage: boolean = false;
+  isUpdateDesiredJob: boolean = false;
+  subscriptions: Subscription[] = [];
+  candidateToRender: Candidate=<Candidate>{}
+
+  //ngrx of candidate
+  candidateupdatedEducationAtProfile$ = this.store.select('candidate','candidateUpdatedEducationAtProfile');
+  candidateupdatedWorkExperienceAtProfile$ = this.store.select('candidate','candidateUpdatedWorkExperienceAtProfile');
+  candidateupdatedLanguageAtProfile$ = this.store.select('candidate','candidateUpdatedLanguageAtProfile');
+  candidateupdatedDesiredJobAtProfile$ = this.store.select('candidate','candidateUpdatedDesiredJobAtProfile');
+
 
   profileForm = new FormGroup({
     Name: new FormControl('', Validators.required),
@@ -62,10 +127,78 @@ export class ProfileComponent {
       EducationId: generateUuid(),
       Major: this.profileForm.value.Major,
       Degree: this.profileForm.value.Degree,
-      StartDate: convertToDatetime(this.profileForm.value.StartDay??""),
-      EndDate: convertToDatetime(this.profileForm.value.EndDay??""),
+      School:"Đại Học Hoa Sen",
+      StartDate: convertStringToDate(this.profileForm.value.StartDay??""),
+      EndDate: convertStringToDate(this.profileForm.value.EndDay??""),
     }
-    console.log(educationData);
+    // níu dữ liệu lỗi thì cook
+    if(educationData.StartDate==null || educationData.EndDate ==null|| educationData.Major==""||educationData.Degree==""){
+      alert('Invalid date');
+    }else{
+      if(!this.isUpdateEducation){
+        this.isUpdateEducation = true;
+      }
+      this.store.dispatch(CandidateActions.updateEducationAtProfile({education: educationData, id: '6610f3b7dc62116473071b2e'}));
+      
+    }
+  }
+
+  updateWorkExperience(){
+    let workExperienceData = {
+      WorkExperienceId: generateUuid(),
+      JobTitle: this.profileForm.value.Position,
+      CompanyName: this.profileForm.value.Company,
+      StartDate: convertStringToDate(this.profileForm.value.StartDay??""),
+      EndDate: convertStringToDate(this.profileForm.value.EndDay??""),
+      Description: this.profileForm.value.Description,
+    }
+    // níu dữ liệu lỗi thì cook
+    if(workExperienceData.StartDate==null || workExperienceData.EndDate ==null|| workExperienceData.JobTitle==""||workExperienceData.CompanyName==""||workExperienceData.Description==""){
+      alert('Invalid date');
+    }else{
+      if(!this.isUpdateWorkExperience){
+        this.isUpdateWorkExperience = true;
+      }
+      this.store.dispatch(CandidateActions.updateWorkExperienceAtProfile({workExperience: workExperienceData, id:'6610f3b7dc62116473071b2e'}));
+      
+    }
+  }
+
+  updateLanguage(){
+    const language = this.profileForm.value.Language??"";
+    // kiểm tra dl có lỗi k nếu có thì cook
+    if(language?.length > 0){
+      if(!this.isUpdateLanguage){
+        this.isUpdateLanguage = true;
+      }
+      this.store.dispatch(CandidateActions.updateLanguageAtProfile({language: language, id:'6610f3b7dc62116473071b2e'}));
+    }
+    else{
+      alert('Invalid date');
+    }
+    
+  }
+
+  updateDesiredJob(){
+    // kiểm tra dl có lỗi k nếu có thì cook
+    if(this.profileForm.value.Location=="" || this.profileForm.value.Salary=="" ){
+      alert('Invalid date');      
+    }else{
+      const desiredJobData = {
+        Location: this.profileForm.value.Location,
+        Salary: parseInt(this.profileForm.value.Salary??""),
+        DesiredJobId: generateUuid()
+      }
+      if(!Number.isNaN(desiredJobData.Salary)){
+        if(!this.isUpdateDesiredJob){
+          this.isUpdateDesiredJob = true;
+        }
+        this.store.dispatch(CandidateActions.updateDesiredJobAtProfile({desiredJob: desiredJobData, id:'6610f3b7dc62116473071b2e'}));
+      }
+      else{
+        alert('Invalid date');
+      }
+    }
   }
   
   @ViewChild('exprienceDialog', { static: true })

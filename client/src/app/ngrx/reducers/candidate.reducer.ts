@@ -19,9 +19,29 @@ export const initialState: candidateState = {
     isGetByUserWithGoogleAtRegisterSuccess: false,
     getByUserWithGoogleAtRegisterError: "",
     candidateTakenByUserWithGoogleAtRegister: <Candidate>{},
+
+    isUpdateEducationAtProfileLoading: false,
+    isUpdateEducationAtProfileSuccess: false,
+    updateEducationAtProfileError: "",
+    candidateUpdatedEducationAtProfile: <Candidate>{},
+
+    isUpdateWorkExperienceAtProfileLoading: false,
+    isUpdateWorkExperienceAtProfileSuccess: false,
+    updateWorkExperienceAtProfileError: "",
+    candidateUpdatedWorkExperienceAtProfile: <Candidate>{},
+
+    isUpdateLanguageAtProfileLoading: false,
+    isUpdateLanguageAtProfileSuccess: false,
+    updateLanguageAtProfileError: "",
+    candidateUpdatedLanguageAtProfile: <Candidate>{},
+
+    isUpdateDesiredJobAtProfileLoading: false,
+    isUpdateDesiredJobAtProfileSuccess: false,
+    updateDesiredJobAtProfileError: "",
+    candidateUpdatedDesiredJobAtProfile: <Candidate>{},
 };
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const candidateReducer = createReducer(
     initialState,
     on(CandidateActions.getByUserWithGoogleAtLogin,(state, actions)=>{
@@ -49,6 +69,10 @@ export const candidateReducer = createReducer(
             getByUserWithGoogleAtLoginError: actions.error,
         };
     }),
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(CandidateActions.createCandidateAtCreateProfile,(state, actions)=>{
         console.log(actions.candidate);
         
@@ -84,6 +108,9 @@ export const candidateReducer = createReducer(
     }),
 
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(CandidateActions.getByUserWithGoogleAtRegister,(state, actions)=>{
         return{
             ...state,
@@ -113,6 +140,134 @@ export const candidateReducer = createReducer(
 
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.updateWorkExperienceAtProfile,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateWorkExperienceAtProfileLoading: true,
+            isUpdateWorkExperienceAtProfileSuccess: false,
+            updateWorkExperienceAtProfileError: "",
+        };
+    }),
+    on(CandidateActions.updateWorkExperienceAtProfileSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateWorkExperienceAtProfileLoading: false,
+            isUpdateWorkExperienceAtProfileSuccess: true,
+            updateWorkExperienceAtProfileError: "",
+            candidateUpdatedWorkExperienceAtProfile: actions.candidate,
+        };
+    }),
+    on(CandidateActions.updateWorkExperienceAtProfileFailure,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateWorkExperienceAtProfileLoading: false,
+            isUpdateWorkExperienceAtProfileSuccess: false,
+            updateWorkExperienceAtProfileError: actions.error,
+        };
+    }),
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateLanguageAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateLanguageAtProfileLoading: true,
+        isUpdateLanguageAtProfileSuccess: false,
+        updateLanguageAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateLanguageAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateLanguageAtProfileLoading: false,
+        isUpdateLanguageAtProfileSuccess: true,
+        updateLanguageAtProfileError: "",
+        candidateUpdatedLanguageAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateLanguageAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateLanguageAtProfileLoading: false,
+        isUpdateLanguageAtProfileSuccess: false,
+        updateLanguageAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateDesiredJobAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateDesiredJobAtProfileLoading: true,
+        isUpdateDesiredJobAtProfileSuccess: false,
+        updateDesiredJobAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateDesiredJobAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateDesiredJobAtProfileLoading: false,
+        isUpdateDesiredJobAtProfileSuccess: true,
+        updateDesiredJobAtProfileError: "",
+        candidateUpdatedDesiredJobAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateDesiredJobAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateDesiredJobAtProfileLoading: false,
+        isUpdateDesiredJobAtProfileSuccess: false,
+        updateDesiredJobAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.updateEducationAtProfile,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateEducationAtProfileLoading: true,
+            isUpdateEducationAtProfileSuccess: false,
+            updateEducationAtProfileError: "",
+        };
+    }),
+    on(CandidateActions.updateEducationAtProfileSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateEducationAtProfileLoading: false,
+            isUpdateEducationAtProfileSuccess: true,
+            updateEducationAtProfileError: "",
+            candidateUpdatedEducationAtProfile: actions.candidate,
+        };
+    }),
+    on(CandidateActions.updateEducationAtProfileFailure,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateEducationAtProfileLoading: false,
+            isUpdateEducationAtProfileSuccess: false,
+            updateEducationAtProfileError: actions.error,
+        };
+    }),
+
+    
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(CandidateActions.resetState,(state) => {
         console.log('reset state');
         return {
@@ -131,6 +286,26 @@ export const candidateReducer = createReducer(
             isGetByUserWithGoogleAtRegisterSuccess: false,
             getByUserWithGoogleAtRegisterError: "",
             candidateTakenByUserWithGoogleAtRegister: <Candidate>{},
+        
+            isUpdateEducationAtProfileLoading: false,
+            isUpdateEducationAtProfileSuccess: false,
+            updateEducationAtProfileError: "",
+            candidateUpdatedEducationAtProfile: <Candidate>{},
+        
+            isUpdateWorkExperienceAtProfileLoading: false,
+            isUpdateWorkExperienceAtProfileSuccess: false,
+            updateWorkExperienceAtProfileError: "",
+            candidateUpdatedWorkExperienceAtProfile: <Candidate>{},
+        
+            isUpdateLanguageAtProfileLoading: false,
+            isUpdateLanguageAtProfileSuccess: false,
+            updateLanguageAtProfileError: "",
+            candidateUpdatedLanguageAtProfile: <Candidate>{},
+        
+            isUpdateDesiredJobAtProfileLoading: false,
+            isUpdateDesiredJobAtProfileSuccess: false,
+            updateDesiredJobAtProfileError: "",
+            candidateUpdatedDesiredJobAtProfile: <Candidate>{},
         };
     }),
 );
