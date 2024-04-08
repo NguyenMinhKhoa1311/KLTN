@@ -119,6 +119,7 @@ export class ProfileComponent implements OnDestroy {
 
     Location: new FormControl('', Validators.required),
     Salary: new FormControl('', Validators.required),
+    Level: new FormControl('', Validators.required),
   });
 
 
@@ -293,6 +294,14 @@ export class ProfileComponent implements OnDestroy {
     {_id: 3, name: 'career3'},
     {_id: 4, name: 'career4'},
     {_id: 5, name: 'career5'},
+  ];
+
+  levelList=[
+    {_id: 1, name: 'level1'},
+    {_id: 2, name: 'level2'},
+    {_id: 3, name: 'level3'},
+    {_id: 4, name: 'level4'},
+    {_id: 5, name: 'level5'},
   ];
 
   selectedImage: string | ArrayBuffer | null = null;

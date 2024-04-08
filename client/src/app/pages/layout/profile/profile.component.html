@@ -449,6 +449,11 @@
                             Thêm
                         </button>
                     </div>
+                    <div class="custom-select"> 
+                        <select formControlName="Level">
+                          <option *ngFor="let level of levelList" value="level._id" >{{level.name}}</option>
+                        </select>
+                    </div>
                     <div class="skill_list">
                         <div class="skill_select" *ngFor="let skill of skillsList; let i=index">
                             <div>{{skill}}</div>
@@ -693,7 +698,7 @@
                 <div class="row">
                     <div class="career">
                         <span class="title">Ngành nghề</span>
-                        <div class="custom-select" style="width:200px;" > 
+                        <div class="custom-select" > 
                             <select formControlName="Career">
                               <option *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
                             </select>
@@ -701,7 +706,7 @@
                     </div>
                     <div class="field">
                         <span class="title">Ngành nghề</span>
-                        <div class="custom-select" style="width:200px;" > 
+                        <div class="custom-select"> 
                             <select formControlName="Field">
                               <option *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
                             </select>

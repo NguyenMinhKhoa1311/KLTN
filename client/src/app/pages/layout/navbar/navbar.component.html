@@ -23,14 +23,14 @@
     </div>
     <div id="option_user">
         
-      <div class="login" (click)="login()">
+      <div class="login" (click)="login()" *ngIf="isLogin == false">
         Đăng nhập
       </div>
-      <div class="register" (click)="register()">
+      <div class="register" (click)="register()" *ngIf="isLogin == false">
         Đăng ký
       </div>
 
-      <div class="user_dropdown">
+      <div class="user_dropdown" *ngIf="isLogin == true">
         <button class="user_dropbtn">
           <div class="user_box">
             <div class="img_user">
@@ -60,6 +60,7 @@
           <a href="#">Đăng nhập</a>
           <a href="#">Đăng kí</a>
           <a href="/recruiterLayout/job-posting">Đăng tuyển dụng</a>
+          <a href="/recruiterLayout/job-detail">Bài tuyển dụng</a>
         </div>
       </div>
     </div>
