@@ -54,8 +54,8 @@ export class ProfileComponent implements OnDestroy {
         this.profileForm.controls.Image.setValue(this.candidateToRender.Avatar);
         this.profileForm.controls.Position.setValue(this.candidateToRender.Position);
         
-        // this.profileForm.controls.Location.setValue(this.candidateToRender.DesiredJob.Location);
-        // this.profileForm.controls.Salary.setValue(this.candidateToRender.DesiredJob.Salary.toString());
+        this.profileForm.controls.Location.setValue(this.candidateToRender.DesiredJob.Location);
+        this.profileForm.controls.Salary.setValue(this.candidateToRender.DesiredJob.Salary.toString());
         
       }
     }
@@ -250,6 +250,7 @@ export class ProfileComponent implements OnDestroy {
     Level: new FormControl('', Validators.required),
 
     JobTitle: new FormControl('', Validators.required),
+    School: new FormControl('', Validators.required),
   });
 
   onFieldChange(event: any) {
@@ -349,12 +350,7 @@ export class ProfileComponent implements OnDestroy {
   }
 
   updateSkill() {
-    if(this.skillsList.length>0){
-      console.log(this.skillsList);
-    }
-    else{
-      alert('Invalid date');
-    }
+    
   }
 
   updateAvatar(){
@@ -430,20 +426,7 @@ export class ProfileComponent implements OnDestroy {
     this.cdr3.detectChanges();
   }
 
-  skillsList : string[] = [];
-  addSkill(){
-    const newSkill = this.profileForm.value.Skill;
-    if(newSkill){
-      this.skillsList.push(newSkill);
-      this.profileForm.controls.Skill.setValue('');
-    }
-    console.log(this.skillsList);
-  }
-  removeTag(index: number){
-    this.skillsList.splice(index, 1);
-    console.log(this.skillsList);
-  }
-
+  
   @ViewChild('languageDialog', { static: true })
   languageDialog!: ElementRef<HTMLDialogElement>;
   cdr4 = inject(ChangeDetectorRef);
