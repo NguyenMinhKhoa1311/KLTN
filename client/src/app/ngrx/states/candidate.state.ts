@@ -49,4 +49,11 @@ export interface candidateState{
     updateAvatarAtProfileError: string;
     candidateUpdatedAvatarAtProfile: Candidate;
 
+
+    isUpdateBasicInfoAtProfileLoading: boolean;
+    isUpdateBasicInfoAtProfileSuccess: boolean;
+    updateBasicInfoAtProfileError: string;
+    candidateUpdatedBasicInfoAtProfile: Candidate;
+
+
 }

@@ -12,6 +12,12 @@ import { Subscription } from 'rxjs';
 import { Candidate } from '../../../models/candidate.model';
 import { StorageState } from '../../../ngrx/states/storage.state';
 import * as StorageActions from '../../../ngrx/actions/storage.actions';
+import { CareerState } from '../../../ngrx/states/career.state';
+import { FieldState } from '../../../ngrx/states/field.state';
+import * as FieldActions from '../../../ngrx/actions/field.actions';
+import * as CareerActions from '../../../ngrx/actions/career.actions';
+import { Career } from '../../../models/career.model';
+import { Field } from '../../../models/field.model';
 
 @Component({
   selector: 'app-profile',
@@ -24,10 +30,13 @@ export class ProfileComponent implements OnDestroy {
   constructor(
     private store: Store<{
       candidate: candidateState,
-      storage: StorageState
+      storage: StorageState,
+      career: CareerState,
+      field: FieldState
 
     }>
   ) {
+    //lấy user đã login và dùng
     let userLogged = sessionStorage.getItem('userLogged');
     if(userLogged){
       let userAfterParse = JSON.parse(userLogged) as Candidate;
@@ -40,8 +49,8 @@ export class ProfileComponent implements OnDestroy {
         this.profileForm.controls.Phone.setValue(this.candidateToRender.Phone);
         this.profileForm.controls.Address.setValue(this.candidateToRender.Address);
         this.profileForm.controls.Experience.setValue(this.candidateToRender.Experience.toString());
-        this.profileForm.controls.Career.setValue(this.candidateToRender.Career.Name);
-        this.profileForm.controls.Field.setValue(this.candidateToRender.Field.FieldName);
+        this.profileForm.controls.Career.setValue(this.candidateToRender.Career._id);
+        this.profileForm.controls.Field.setValue(this.candidateToRender.Field._id);
         this.profileForm.controls.Image.setValue(this.candidateToRender.Avatar);
         this.profileForm.controls.Position.setValue(this.candidateToRender.Position);
         
@@ -50,13 +59,21 @@ export class ProfileComponent implements OnDestroy {
         
       }
     }
+    //lấy carrer và field
+    this.store.dispatch(CareerActions.getAllAtProfile());
+    this.store.dispatch(FieldActions.getAllNoLimitAtProfile());
+
+    // theo dõi các ngrx
     this.subscriptions.push(
       // theo dõi candidate dc cập nhật education
       this.candidateupdatedEducationAtProfile$.subscribe((candidate) => {
         if(this.isUpdateEducation){
             if(candidate._id!="500"){
               console.log(candidate);
-              
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.learnDialog.nativeElement.close();
+              this.cdr2.detectChanges();
             }
         }
       }),
@@ -66,6 +83,9 @@ export class ProfileComponent implements OnDestroy {
             if(candidate._id!="500"){
               console.log(candidate);
               this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.exprienceDialog.nativeElement.close();
+              this.cdr1.detectChanges();
             }
         }
       }),
@@ -74,7 +94,10 @@ export class ProfileComponent implements OnDestroy {
         if(this.isUpdateLanguage){
             if(candidate._id!="500"){
               console.log(candidate);
-              
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.languageDialog.nativeElement.close();
+              this.cdr4.detectChanges();
             }
         }
       }),
@@ -83,7 +106,10 @@ export class ProfileComponent implements OnDestroy {
         if(this.isUpdateDesiredJob){
             if(candidate._id!="500"){
               console.log(candidate);
-              
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.desiredDialog.nativeElement.close();
+              this.cdr5.detectChanges();
             }
         }
       }),
@@ -104,6 +130,48 @@ export class ProfileComponent implements OnDestroy {
             console.log(file);
           }
         }
+      }),
+      //theo dõi career dc lấy ra từ getAll
+      this.careerTakenByGetAllAtProfile$.subscribe((careers) => {
+        if(careers.length > 0){
+          console.log(careers);
+          this.careerList= careers
+        }
+      }),
+      //theo dõi field dc lấy ra từ getAllNoLimit
+      this.fieldTakenByGetAllAtProfile$.subscribe((fields) => {
+        if(fields.length > 0){
+          console.log(fields);
+          this.fieldList = fields;
+        }
+      }),
+      //theo dõi career dc lấy ra từ getByField
+      this.careerTakenByGetByFieldAtProfile$.subscribe((careers) => {
+        if(careers.length > 0){
+          console.log(careers);
+          this.careerList= careers
+        }
+      }),
+      //theo dõi candidate dc update basic info
+      this.candidateUpdateBasicInfoAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateBasicInfo){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.userDialog.nativeElement.close();
+              this.cdr6.detectChanges();
+              this.profileForm.controls.Name.setValue(this.candidateToRender.Name);
+              this.profileForm.controls.Email.setValue(this.candidateToRender.Email);
+              this.profileForm.controls.Phone.setValue(this.candidateToRender.Phone);
+              this.profileForm.controls.Address.setValue(this.candidateToRender.Address);
+              this.profileForm.controls.Experience.setValue(this.candidateToRender.Experience.toString());
+              this.profileForm.controls.Career.setValue(this.candidateToRender.Career._id);
+              this.profileForm.controls.Field.setValue(this.candidateToRender.Field._id);
+              this.profileForm.controls.Position.setValue(this.candidateToRender.Position);
+
+            }
+        }
       })
     )
 
@@ -121,20 +189,39 @@ export class ProfileComponent implements OnDestroy {
   isUpdateLanguage: boolean = false;
   isUpdateDesiredJob: boolean = false;
   isGetFileByFolderName: boolean = false;
+  isUpdateBasicInfo: boolean = false;
   subscriptions: Subscription[] = [];
   candidateToRender: Candidate=<Candidate>{} ;
   foldernameCreatedAtProfile: string = "";
+  careerList: Career[] = [];
+  fieldList: Field[] = [];
+
+  levelList=[
+    {_id: 1, name: 'level1'},
+    {_id: 2, name: 'level2'},
+    {_id: 3, name: 'level3'},
+    {_id: 4, name: 'level4'},
+    {_id: 5, name: 'level5'},
+  ];
 
   //ngrx of candidate
   candidateupdatedEducationAtProfile$ = this.store.select('candidate','candidateUpdatedEducationAtProfile');
   candidateupdatedWorkExperienceAtProfile$ = this.store.select('candidate','candidateUpdatedWorkExperienceAtProfile');
   candidateupdatedLanguageAtProfile$ = this.store.select('candidate','candidateUpdatedLanguageAtProfile');
   candidateupdatedDesiredJobAtProfile$ = this.store.select('candidate','candidateUpdatedDesiredJobAtProfile');
+  candidateUpdateBasicInfoAtProfile$ = this.store.select('candidate','candidateUpdatedBasicInfoAtProfile');
 
 
   //ngrx of storage
   isCreateAtProfileSuccess$ = this.store.select('storage','isCreateAtProfileSuccess');
   fileTakenByFolderNameAtProfile$ = this.store.select('storage','fileTakenByFolderNameAtProfile');
+
+  //ngrx of career
+  careerTakenByGetAllAtProfile$ = this.store.select('career','careersTakenByGetAllAtProfile');
+  careerTakenByGetByFieldAtProfile$ = this.store.select('career','careersTakenByGetByFieldAtProfile');
+
+  //ngrx of field
+  fieldTakenByGetAllAtProfile$ = this.store.select('field','fieldNoLimitAtProfile');
 
 
   profileForm = new FormGroup({
@@ -165,6 +252,12 @@ export class ProfileComponent implements OnDestroy {
     JobTitle: new FormControl('', Validators.required),
   });
 
+  onFieldChange(event: any) {
+    const field_id = this.profileForm.value.Field;
+    console.log(field_id);
+    this.store.dispatch(CareerActions.getByFieldAtUpdateProfile({field: field_id??""}));
+    
+  }
 
   updateEducation(){
     let educationData = {
@@ -183,7 +276,10 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateEducation = true;
       }
       this.store.dispatch(CandidateActions.updateEducationAtProfile({education: educationData, id: '6610f3b7dc62116473071b2e'}));
-      
+      this.profileForm.controls.Major.setValue('');
+      this.profileForm.controls.Degree.setValue('');
+      this.profileForm.controls.StartDay.setValue('');
+      this.profileForm.controls.EndDay.setValue('');
     }
   }
 
@@ -204,7 +300,11 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateWorkExperience = true;
       }
       this.store.dispatch(CandidateActions.updateWorkExperienceAtProfile({workExperience: workExperienceData, id:'6610f3b7dc62116473071b2e'}));
-      
+      this.profileForm.controls.JobTitle.setValue('');
+      this.profileForm.controls.Company.setValue('');
+      this.profileForm.controls.StartDay.setValue('');
+      this.profileForm.controls.EndDay.setValue('');
+      this.profileForm.controls.Description.setValue('');
     }
   }
 
@@ -238,6 +338,9 @@ export class ProfileComponent implements OnDestroy {
           this.isUpdateDesiredJob = true;
         }
         this.store.dispatch(CandidateActions.updateDesiredJobAtProfile({desiredJob: desiredJobData, id:'6610f3b7dc62116473071b2e'}));
+        this.profileForm.controls.Location.setValue('');
+        this.profileForm.controls.Salary.setValue('');
+
       }
       else{
         alert('Invalid date');
@@ -263,6 +366,32 @@ export class ProfileComponent implements OnDestroy {
     else{
       alert('Invalid date');
     }
+  }
+
+  updateBasicInfo(){
+    let basicInfo = {
+      Name:this.profileForm.value.Name,
+      Email: this.profileForm.value.Email,
+      Phone: this.profileForm.value.Phone,
+      Address: this.profileForm.value.Address,
+      Experience: parseInt(this.profileForm.value.Experience??""),
+      Career: this.profileForm.value.Career,
+      Field: this.profileForm.value.Field,
+      Position: this.profileForm.value.Position,
+      DateOfBirth: this.candidateToRender.DateOfBirth,
+    }
+    console.log(basicInfo);
+    
+    if(basicInfo.Name=="" || basicInfo.Email=="" || basicInfo.Phone=="" || basicInfo.Address=="" || basicInfo.Experience==null || basicInfo.Career=="" || basicInfo.Field=="" || basicInfo.Position==""){
+      alert('Invalid date');
+    }
+    else{
+      if(!this.isUpdateBasicInfo){
+        this.isUpdateBasicInfo = true;
+      }
+      this.store.dispatch(CandidateActions.updateBasicInfoAtProfile({basicInfo: basicInfo, id:'6610f3b7dc62116473071b2e'}));
+    }
+
   }
   
   @ViewChild('exprienceDialog', { static: true })
@@ -351,21 +480,7 @@ export class ProfileComponent implements OnDestroy {
     this.cdr6.detectChanges();
   }
   
-  careerList=[
-    {_id: 1, name: 'career1'},
-    {_id: 2, name: 'career2'},
-    {_id: 3, name: 'career3'},
-    {_id: 4, name: 'career4'},
-    {_id: 5, name: 'career5'},
-  ];
 
-  levelList=[
-    {_id: 1, name: 'level1'},
-    {_id: 2, name: 'level2'},
-    {_id: 3, name: 'level3'},
-    {_id: 4, name: 'level4'},
-    {_id: 5, name: 'level5'},
-  ];
 
   selectedImage: string | ArrayBuffer | null = null;
   formData: FormData = new FormData();

@@ -113,6 +113,39 @@ export class CareerEffects{
         )
     )
 
+    getAllAtProfile$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getAllAtProfile),
+            exhaustMap(()=>
+                this.careerService.getAll().pipe(
+                    map((careers)=>{
+                        return CareerActions.getAllAtProfileSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getAllAtProfileFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+    getByFieldAtUpdateProfile$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getByFieldAtUpdateProfile),
+            exhaustMap((action)=>
+                this.careerService.getByField(action.field).pipe(
+                    map((careers)=>{
+                        return CareerActions.getByFieldAtUpdateProfileSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getByFieldAtUpdateProfileFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+
 
 
 }

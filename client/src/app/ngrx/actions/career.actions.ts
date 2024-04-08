@@ -83,6 +83,40 @@ export const getAllAtCreateJobFailure = createAction(
     );
 
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllAtProfile = createAction(
+    '[Career] Get All At Profile'
+    );
+export const getAllAtProfileSuccess = createAction(
+    '[Career] Get All At Profile Success',
+    props<{careers: Career[]}>()
+    );
+export const getAllAtProfileFailure = createAction(
+    '[Career] Get All At Profile Failure',
+    props<{error: string}>()
+    );
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByFieldAtUpdateProfile = createAction(
+    '[Career] Get By Field At Profile',
+    props<{field: string}>()
+    );
+export const getByFieldAtUpdateProfileSuccess = createAction(
+    '[Career] Get By Field At Profile Success',
+    props<{careers: Career[]}>()
+    );
+export const getByFieldAtUpdateProfileFailure = createAction(
+    '[Career] Get By Field At Profile Failure',
+    props<{error: string}>()
+    );
+
+
     
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByFieldAtCreateJob = createAction(

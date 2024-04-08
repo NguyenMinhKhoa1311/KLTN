@@ -171,4 +171,20 @@ export class CandidateEffects{
             catchError((error) => of(CandidateActions.updateAvatarAtProfileFailure({error: error})))))
          )
     );
+    updateBasicInfoAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateBasicInfoAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateBasicInfo(action.basicInfo, action.id).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateBasicInfoAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateBasicInfoAtProfileFailure({error: "Update Basic Info At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateBasicInfoAtProfileFailure({error: error})))))
+         )
+    );
 }

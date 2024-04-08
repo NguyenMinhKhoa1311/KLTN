@@ -49,6 +49,11 @@ export const initialState: candidateState = {
     isUpdateAvatarAtProfileSuccess: false,
     updateAvatarAtProfileError: "",
     candidateUpdatedAvatarAtProfile: <Candidate>{},
+
+    isUpdateBasicInfoAtProfileLoading:  false,
+    isUpdateBasicInfoAtProfileSuccess:  false,
+    updateBasicInfoAtProfileError:  "",
+    candidateUpdatedBasicInfoAtProfile: <Candidate>{},
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -334,6 +339,37 @@ on(CandidateActions.updateDesiredJobAtProfileFailure,(state, actions)=>{
             updateAvatarAtProfileError: actions.error,
         };
     }),
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateBasicInfoAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateBasicInfoAtProfileLoading: true,
+        isUpdateBasicInfoAtProfileSuccess: false,
+        updateBasicInfoAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateBasicInfoAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateBasicInfoAtProfileLoading: false,
+        isUpdateBasicInfoAtProfileSuccess: true,
+        updateBasicInfoAtProfileError: "",
+        candidateUpdatedBasicInfoAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateBasicInfoAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateBasicInfoAtProfileLoading: false,
+        isUpdateBasicInfoAtProfileSuccess: false,
+        updateBasicInfoAtProfileError: actions.error,
+    };
+}),
+
     
 
 

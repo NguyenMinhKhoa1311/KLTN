@@ -36,4 +36,7 @@ export class CandidateService {
   updateAvatar(avatar: string,storage_id:string, id:string){ 
     return this.httpClient.put<Candidate>(`${URL}/candidate/updateAvatar?id=${id}&avatar=${avatar}$storage_id${storage_id}`, {});
   }
+  updateBasicInfo(basicInfo: any,id:string){
+    return this.httpClient.put<Candidate>(`${URL}/candidate/updateBasicInfo?id=${id}`, basicInfo);
+  }
 }

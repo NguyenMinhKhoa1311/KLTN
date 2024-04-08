@@ -688,19 +688,19 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="field">
+                        <span class="title">Lĩnh vực</span>
+                        <div class="custom-select"> 
+                            <select formControlName="Field" (change)="onFieldChange($event)">
+                              <option *ngFor="let field of fieldList" value="{{field._id}}" >{{field.FieldName}}</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="career">
                         <span class="title">Ngành nghề</span>
                         <div class="custom-select" > 
                             <select formControlName="Career">
-                              <option *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <span class="title">Ngành nghề</span>
-                        <div class="custom-select"> 
-                            <select formControlName="Field">
-                              <option *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
+                              <option *ngFor="let career of careerList" value="{{career._id}}" >{{career.Name}}</option>
                             </select>
                         </div>
                     </div>
@@ -730,7 +730,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="closeUserDialog()"
+                    <button appearance="primary" tuiButton type="button" (click)="updateBasicInfo()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>
