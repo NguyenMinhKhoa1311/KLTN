@@ -306,41 +306,7 @@ export const userReducer = createReducer(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(UserActions.resetState, (state) => {
         console.log('reset state');
-        return {
-            ...state,
-            isCreateWithGoogleAtLoginLoading: false,
-            isCreateWithGoogleAtLoginSuccess: false,
-            cerateWithGoogleAtLoginError: '',
-
-            isGetByUsernameWithGoogleAtLoginLoading: false,
-            isGetByUsernameWithGoogleAtLoginSuccess: false,
-            getByUsernameWithGoogleAtLoginError: '',
-            userTakenByUsernameWithGoogleAtLogin: <User>{},
-
-            isCreateWithGoogleAtRegisterLoading: false,
-            isCreateWithGoogleAtRegisterSuccess: false,
-            createWithGoogleAtRegisterError: '',
-
-            isGetByUsernameWithGoogleAtRegisterLoading: false,
-            isGetByUsernameWithGoogleAtRegisterSuccess: false,
-            getByUsernameWithGoogleAtRegisterError: '',
-            userTakenByUsernameWithGoogleAtRegister: <User>{},
-
-            isGetByUsernameAtCreateProfileLoading: false,
-            isGetByUsernameAtCreateProfileSuccess: false,
-            getByUsernameAtCreateProfileError: '',
-            userTakenByUsernameAtCreateProfile: <User>{},
-
-            isGetUserByUsernameAndPasswordAtLoginLoading: false,
-            isGetUserByUsernameAndPasswordAtLoginSuccess: false,
-            getUserByUsernameAndPasswordAtLoginError: '',
-            userTakenByUsernameAndPasswordAtLogin: <User>{},
-
-            isGetByUsernameWithAccountAtRegisterLoading: false,
-            isGetByUsernameWithAccountAtRegisterSuccess: false,
-            getByUsernameWithAccountAtRegisterError: '',
-            userTakenByUsernameWithAccountAtRegister: <User>{},
-        }
+        return initialState;
     }),
 
 )

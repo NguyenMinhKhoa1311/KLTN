@@ -135,6 +135,63 @@ export const updateDesiredJobAtProfileFailure = createAction(
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateSkillAtProfile = createAction(
+    "[Candidate] Update Skill",
+    props<{skill: any, id:string}>()
+    );
+export const updateSkillAtProfileSuccess = createAction(
+    "[Candidate] Update Skill Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateSkillAtProfileFailure = createAction(
+    "[Candidate] Update Skill Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateAvatarAtProfile = createAction(
+    "[Candidate] Update Avatar",
+    props<{avatar:string, id:string,storage_id:string}>()
+    );
+export const updateAvatarAtProfileSuccess = createAction(
+    "[Candidate] Update Avatar Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateAvatarAtProfileFailure = createAction(
+    "[Candidate] Update Avatar Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateBasicInfoAtProfile = createAction(
+    "[Candidate] Update Basic Info",
+    props<{basicInfo: any, id:string}>()
+    );
+
+export const updateBasicInfoAtProfileSuccess = createAction(
+    "[Candidate] Update Basic Info Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateBasicInfoAtProfileFailure = createAction(
+    "[Candidate] Update Basic Info Failure",
+    props<{error: string}>()
+    );
+
 
 
 

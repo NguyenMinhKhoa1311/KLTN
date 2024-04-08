@@ -29,9 +29,9 @@ import { careerReducer } from "./ngrx/reducers/career.reducer";
 import { CareerEffects } from "./ngrx/effects/career.effects";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { servicePackageReducer } from "./ngrx/reducers/service-package.reducer";
-import { skillReducer } from "./ngrx/reducers/skill.reducer";
-import { SkillEffects } from "./ngrx/effects/skill.effects";
 import {ServicePackageEffects} from "./ngrx/effects/service-package.effects"
+import { StorageEffects } from "./ngrx/effects/storage.effects";
+import { storageReducer } from "./ngrx/reducers/storage.reducer";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -55,7 +55,7 @@ export const appConfig: ApplicationConfig = {
     provideState({name:'company', reducer: companyReducer}),
     provideState({name:'career', reducer:careerReducer}),
     provideState({name:'servicePackage', reducer: servicePackageReducer}),
-    provideState({name:'skill', reducer: skillReducer}),
+    provideState({name:'storage', reducer: storageReducer}),
     provideEffects([
       AuthEffects,
       UserEffects,
@@ -64,8 +64,8 @@ export const appConfig: ApplicationConfig = {
       FieldEffects,
       CompanyEffects,
       CareerEffects,
-      SkillEffects,
-      ServicePackageEffects
+      ServicePackageEffects,
+      StorageEffects,
 
     ]),
     provideHttpClient(), provideAnimationsAsync(),

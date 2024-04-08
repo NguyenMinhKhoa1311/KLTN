@@ -137,16 +137,7 @@ export const authReducer = createReducer(
       };
     }),
     on(LoginActions.resetState, (state, action) => {
-      let newState: AuthState = {
-        ...state,
-        user: <UserFirebase>{},
-        isLoginLoading: false,
-        isLoginSuccessfull: false,
-        loginErrorMessage: '',
-        isLogoutLoading: false,
-        isLogoutSuccessfull: false,
-        logoutErrorMessage: ''
-      };
-      return newState;
+
+      return initialState;
     })
   );

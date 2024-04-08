@@ -139,4 +139,36 @@ export class CandidateEffects{
             catchError((error) => of(CandidateActions.updateDesiredJobAtProfileFailure({error: error})))))
          )
     );
+    updateSkillAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateSkillAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateSkill(action.skill, action.id).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateSkillAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateSkillAtProfileFailure({error: "Update Skill At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateSkillAtProfileFailure({error: error})))))
+         )
+    );
+    updateAvatarAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateAvatarAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateAvatar(action.avatar, action.storage_id, action.id).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateAvatarAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateAvatarAtProfileFailure({error: "Update Avatar At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateAvatarAtProfileFailure({error: error})))))
+         )
+    );
 }

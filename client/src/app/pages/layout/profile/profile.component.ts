@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 import { Subscription } from 'rxjs';
 import { Candidate } from '../../../models/candidate.model';
+import { StorageState } from '../../../ngrx/states/storage.state';
+import * as StorageActions from '../../../ngrx/actions/storage.actions';
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +24,7 @@ export class ProfileComponent implements OnDestroy {
   constructor(
     private store: Store<{
       candidate: candidateState,
+      storage: StorageState
 
     }>
   ) {
@@ -70,6 +73,24 @@ export class ProfileComponent implements OnDestroy {
               
             }
         }
+      }),
+      //theo dõi storage dc create
+      this.isCreateAtProfileSuccess$.subscribe((isSuccess) => {
+        if(isSuccess){
+          if(!this.isGetFileByFolderName){
+            this.isGetFileByFolderName = true;
+          }
+
+          this.store.dispatch(StorageActions.getByFolderNameAtProfile({folderName:this.foldernameCreatedAtProfile}));
+        }
+      }),
+      //lấy ra file theo folder name
+      this.fileTakenByFolderNameAtProfile$.subscribe((file) => {
+        if(this.isGetFileByFolderName){
+          if(file._id.length > 0){
+            console.log(file);
+          }
+        }
       })
     )
 
@@ -86,14 +107,21 @@ export class ProfileComponent implements OnDestroy {
   isUpdateWorkExperience: boolean = false;
   isUpdateLanguage: boolean = false;
   isUpdateDesiredJob: boolean = false;
+  isGetFileByFolderName: boolean = false;
   subscriptions: Subscription[] = [];
   candidateToRender: Candidate=<Candidate>{}
+  foldernameCreatedAtProfile: string = "";
 
   //ngrx of candidate
   candidateupdatedEducationAtProfile$ = this.store.select('candidate','candidateUpdatedEducationAtProfile');
   candidateupdatedWorkExperienceAtProfile$ = this.store.select('candidate','candidateUpdatedWorkExperienceAtProfile');
   candidateupdatedLanguageAtProfile$ = this.store.select('candidate','candidateUpdatedLanguageAtProfile');
   candidateupdatedDesiredJobAtProfile$ = this.store.select('candidate','candidateUpdatedDesiredJobAtProfile');
+
+
+  //ngrx of storage
+  isCreateAtProfileSuccess$ = this.store.select('storage','isCreateAtProfileSuccess');
+  fileTakenByFolderNameAtProfile$ = this.store.select('storage','fileTakenByFolderNameAtProfile');
 
 
   profileForm = new FormGroup({
@@ -199,6 +227,26 @@ export class ProfileComponent implements OnDestroy {
       else{
         alert('Invalid date');
       }
+    }
+  }
+
+  updateSkill() {
+    if(this.skillsList.length>0){
+      console.log(this.skillsList);
+    }
+    else{
+      alert('Invalid date');
+    }
+  }
+
+  updateAvatar(){
+    if(this.file){
+      let fileName ="ImgOf_"+ this.candidateToRender.Name +"_"+ generateUuid();
+      this.foldernameCreatedAtProfile=fileName;
+      this.store.dispatch(StorageActions.createAtProfile({fileName:fileName, file:this.file}));
+    }
+    else{
+      alert('Invalid date');
     }
   }
   

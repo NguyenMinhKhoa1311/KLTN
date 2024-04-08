@@ -30,4 +30,10 @@ export class CandidateService {
   updateDesiredJob(desiredJob: any,id:string){
     return this.httpClient.put<Candidate>(`${URL}/candidate/updateDesiredJob?id=${id}`, desiredJob);
   }
+  updateSkill(skill: any,id:string){
+    return this.httpClient.put<Candidate>(`${URL}/candidate/updateSkills?id=${id}`, skill);
+  }
+  updateAvatar(avatar: string,storage_id:string, id:string){ 
+    return this.httpClient.put<Candidate>(`${URL}/candidate/updateAvatar?id=${id}&avatar=${avatar}$storage_id${storage_id}`, {});
+  }
 }

@@ -39,6 +39,16 @@ export const initialState: candidateState = {
     isUpdateDesiredJobAtProfileSuccess: false,
     updateDesiredJobAtProfileError: "",
     candidateUpdatedDesiredJobAtProfile: <Candidate>{},
+
+    isUpdateSkillAtProfileLoading: false,
+    isUpdateSkillAtProfileSuccess: false,
+    updateSkillAtProfileError: "",
+    candidateUpdatedSkillAtProfile: <Candidate>{},
+
+    isUpdateAvatarAtProfileLoading: false,
+    isUpdateAvatarAtProfileSuccess: false,
+    updateAvatarAtProfileError: "",
+    candidateUpdatedAvatarAtProfile: <Candidate>{},
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -262,6 +272,68 @@ on(CandidateActions.updateDesiredJobAtProfileFailure,(state, actions)=>{
         };
     }),
 
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.updateSkillAtProfile,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateSkillAtProfileLoading: true,
+            isUpdateSkillAtProfileSuccess: false,
+            updateSkillAtProfileError: "",
+        };
+    }),
+    on(CandidateActions.updateSkillAtProfileSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateSkillAtProfileLoading: false,
+            isUpdateSkillAtProfileSuccess: true,
+            updateSkillAtProfileError: "",
+            candidateUpdatedSkillAtProfile: actions.candidate,
+        };
+    }),
+    on(CandidateActions.updateSkillAtProfileFailure,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateSkillAtProfileLoading: false,
+            isUpdateSkillAtProfileSuccess: false,
+            updateSkillAtProfileError: actions.error,
+        };
+    }),
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.updateAvatarAtProfile,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateAvatarAtProfileLoading: true,
+            isUpdateAvatarAtProfileSuccess: false,
+            updateAvatarAtProfileError: "",
+        };
+    }),
+    on(CandidateActions.updateAvatarAtProfileSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateAvatarAtProfileLoading: false,
+            isUpdateAvatarAtProfileSuccess: true,
+            updateAvatarAtProfileError: "",
+            candidateUpdatedAvatarAtProfile: actions.candidate,
+        };
+    }),
+    on(CandidateActions.updateAvatarAtProfileFailure,(state, actions)=>{
+        return{
+            ...state,
+            isUpdateAvatarAtProfileLoading: false,
+            isUpdateAvatarAtProfileSuccess: false,
+            updateAvatarAtProfileError: actions.error,
+        };
+    }),
     
 
 
@@ -269,43 +341,7 @@ on(CandidateActions.updateDesiredJobAtProfileFailure,(state, actions)=>{
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(CandidateActions.resetState,(state) => {
-        console.log('reset state');
-        return {
-            ...state,
-            isGetByUserWithGoogleAtLoginLoading: false,
-            isGetByUserWithGoogleAtLoginSuccess: false,
-            getByUserWithGoogleAtLoginError: "",
-            candidateTakenByUserWithGoogleAtLogin: <Candidate>{},
-        
-            isCreateCandidateAtCreateProfileLoading: false,
-            isCreateCandidateAtCreateProfileSuccess: false,
-            createCandidateAtCreateProfileError: "",
-            candidateCreatedAtCreateProfile: <Candidate>{},
-        
-            isGetByUserWithGoogleAtRegisterLoading: false,
-            isGetByUserWithGoogleAtRegisterSuccess: false,
-            getByUserWithGoogleAtRegisterError: "",
-            candidateTakenByUserWithGoogleAtRegister: <Candidate>{},
-        
-            isUpdateEducationAtProfileLoading: false,
-            isUpdateEducationAtProfileSuccess: false,
-            updateEducationAtProfileError: "",
-            candidateUpdatedEducationAtProfile: <Candidate>{},
-        
-            isUpdateWorkExperienceAtProfileLoading: false,
-            isUpdateWorkExperienceAtProfileSuccess: false,
-            updateWorkExperienceAtProfileError: "",
-            candidateUpdatedWorkExperienceAtProfile: <Candidate>{},
-        
-            isUpdateLanguageAtProfileLoading: false,
-            isUpdateLanguageAtProfileSuccess: false,
-            updateLanguageAtProfileError: "",
-            candidateUpdatedLanguageAtProfile: <Candidate>{},
-        
-            isUpdateDesiredJobAtProfileLoading: false,
-            isUpdateDesiredJobAtProfileSuccess: false,
-            updateDesiredJobAtProfileError: "",
-            candidateUpdatedDesiredJobAtProfile: <Candidate>{},
-        };
+        console.log('reset state', initialState);
+        return initialState;
     }),
 );

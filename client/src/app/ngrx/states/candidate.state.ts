@@ -38,4 +38,15 @@ export interface candidateState{
     updateDesiredJobAtProfileError: string;
     candidateUpdatedDesiredJobAtProfile: Candidate;
 
+
+    isUpdateSkillAtProfileLoading: boolean;
+    isUpdateSkillAtProfileSuccess: boolean;
+    updateSkillAtProfileError: string;
+    candidateUpdatedSkillAtProfile: Candidate;
+
+    isUpdateAvatarAtProfileLoading: boolean;
+    isUpdateAvatarAtProfileSuccess: boolean;
+    updateAvatarAtProfileError: string;
+    candidateUpdatedAvatarAtProfile: Candidate;
+
 }
