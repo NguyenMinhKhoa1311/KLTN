@@ -31,9 +31,22 @@ export class ProfileComponent implements OnDestroy {
     let userLogged = sessionStorage.getItem('userLogged');
     if(userLogged){
       let userAfterParse = JSON.parse(userLogged) as Candidate;
-      if(userAfterParse?._id.length > 0&&userAfterParse?._id!=""){
+      if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
+        
         this.candidateToRender = userAfterParse;
         console.log(this.candidateToRender);
+        this.profileForm.controls.Name.setValue(this.candidateToRender.Name);
+        this.profileForm.controls.Email.setValue(this.candidateToRender.Email);
+        this.profileForm.controls.Phone.setValue(this.candidateToRender.Phone);
+        this.profileForm.controls.Address.setValue(this.candidateToRender.Address);
+        this.profileForm.controls.Experience.setValue(this.candidateToRender.Experience.toString());
+        this.profileForm.controls.Career.setValue(this.candidateToRender.Career.Name);
+        this.profileForm.controls.Field.setValue(this.candidateToRender.Field.FieldName);
+        this.profileForm.controls.Image.setValue(this.candidateToRender.Avatar);
+        this.profileForm.controls.Position.setValue(this.candidateToRender.Position);
+        
+        // this.profileForm.controls.Location.setValue(this.candidateToRender.DesiredJob.Location);
+        // this.profileForm.controls.Salary.setValue(this.candidateToRender.DesiredJob.Salary.toString());
         
       }
     }
@@ -52,7 +65,7 @@ export class ProfileComponent implements OnDestroy {
         if(this.isUpdateWorkExperience){
             if(candidate._id!="500"){
               console.log(candidate);
-              
+              this.candidateToRender = candidate;
             }
         }
       }),
@@ -109,7 +122,7 @@ export class ProfileComponent implements OnDestroy {
   isUpdateDesiredJob: boolean = false;
   isGetFileByFolderName: boolean = false;
   subscriptions: Subscription[] = [];
-  candidateToRender: Candidate=<Candidate>{}
+  candidateToRender: Candidate=<Candidate>{} ;
   foldernameCreatedAtProfile: string = "";
 
   //ngrx of candidate
@@ -148,6 +161,8 @@ export class ProfileComponent implements OnDestroy {
     Location: new FormControl('', Validators.required),
     Salary: new FormControl('', Validators.required),
     Level: new FormControl('', Validators.required),
+
+    JobTitle: new FormControl('', Validators.required),
   });
 
 
@@ -175,7 +190,7 @@ export class ProfileComponent implements OnDestroy {
   updateWorkExperience(){
     let workExperienceData = {
       WorkExperienceId: generateUuid(),
-      JobTitle: this.profileForm.value.Position,
+      JobTitle: this.profileForm.value.JobTitle,
       CompanyName: this.profileForm.value.Company,
       StartDate: convertStringToDate(this.profileForm.value.StartDay??""),
       EndDate: convertStringToDate(this.profileForm.value.EndDay??""),
