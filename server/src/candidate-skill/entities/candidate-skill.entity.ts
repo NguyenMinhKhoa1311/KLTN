@@ -8,13 +8,6 @@ export class CandidateSkill {
     @Prop({required: true, unique: true})
     CandidateSkillId: string;
 
-    @Prop({
-        required: true,
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Skill",
-    })
-    Skill: string;
-
     @Prop({required: true})
     Name: string;   
 
