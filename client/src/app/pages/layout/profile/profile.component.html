@@ -8,21 +8,20 @@
                     <input type="file" accept="image/*" (change)="onFileSelected($event) "
                         #fileInput formControlName="Image" />
                     
-                    <!-- <i class="fa-solid fa-cloud-arrow-up" style="cursor: pointer;" (click)="fileInput.click()"></i> -->
                     <div class="img-file" *ngIf="file">
                         <img [src]="selectedImage" alt="Selected Image" style="width: 100px;height: 100px;" />
                     </div>
                 </div>
                 <div class="information" (click)="openUserDialog()">
                     <div class="user_name">
-                        Phùng Minh Khoa
+                        {{candidateToRender.Name}}
                         <span class="material-symbols-outlined">
                             edit
                         </span>
                     </div>
                     <div class="box1">
                         <div class="position_box">
-                            Thêm chức danh - Thêm số năm kinh nghiệm
+                            {{candidateToRender.Position}} - {{candidateToRender.Experience}} năm
                         </div>
                     </div>
                     <div class="info_list">
@@ -31,13 +30,13 @@
                                 <span class="material-symbols-outlined">
                                     mail
                                 </span>
-                                <span class="gmail">Gmail</span>
+                                <span class="gmail">{{candidateToRender.Email}}</span>
                             </div>
                             <div class="phone_user">
                                 <span class="material-symbols-outlined">
                                     phone
                                 </span>
-                                <span class="phone">Phone</span>
+                                <span class="phone">{{candidateToRender.Phone}}</span>
                             </div>
                         </div>
                         <div class="row2">
@@ -45,7 +44,7 @@
                                 <span class="material-symbols-outlined">
                                     home
                                 </span>
-                                <span class="address">Địa chỉ</span>
+                                <span class="address">{{candidateToRender.Address}}</span>
                             </div>
                         </div>
                     </div>
@@ -63,16 +62,22 @@
                     <div class="title_workplace">
                         Nơi làm việc
                     </div>
-                    <div class="location">
-                        Location
+                    <div class="location" *ngIf="candidateToRender.DesiredJob._id != '500'">
+                        {{candidateToRender.DesiredJob.Location}} Nhập vô đê mập ey
+                    </div>
+                    <div class="location" *ngIf="candidateToRender.DesiredJob._id == '500'">
+                        Cập nhật nơi làm việc
                     </div>
                 </div>
                 <div class="salary" (click)="openDesiredDialog()">
                     <div class="title_salary">
                         Mức lương mong muốn (USD/tháng)
                     </div>
-                    <div class="salary_desired">
-                        Mức lương mong muốn
+                    <div class="salary_desired" *ngIf="candidateToRender.DesiredJob._id != '500'">
+                        {{candidateToRender.DesiredJob.Salary}} Nhập vô đê mập ey
+                    </div>
+                    <div class="salary_desired" *ngIf="candidateToRender.DesiredJob._id == '500'">
+                        Cập nhật mức lương mong muốn
                     </div>
                 </div>
             </div>
@@ -86,25 +91,25 @@
                 </span>
                 <span>Thêm Kinh Nghiệm Làm Việc</span>
             </div>
-            <div class="experience_select">
+            <div class="experience_select" *ngFor="let experience of candidateToRender.WorkExperience">
                 <div class="box1">
                     <div class="img_experience">
                         <img src="../../../../assets/images/kinhdoanh.png" alt="">
                     </div>
                     <div class="info_experience">
                         <div class="position_user">
-                            Nhân viên
+                            {{experience.JobTitle}}
                         </div>
                         <div class="company_user">
-                            FPT Software
+                            {{experience.CompanyName}}
                         </div>
                         <div class="date_user">
                             <div class="dateStart">
-                                01/01/2021
+                                {{experience.StartDate | date: 'dd/MM/yyyy'}}
                             </div>
                             <div style="margin: 0 3px;">-</div>
                             <div class="dateEnd">
-                                01/01/2021
+                                {{experience.EndDate | date: 'dd/MM/yyyy'}}
                             </div>
                         </div>
                     </div>
@@ -226,7 +231,7 @@
                 <div class="position_box" > 
                     <span class="title">Chức Danh</span>
                     <tui-input
-                        formControlName="Position"
+                        formControlName="JobTitle"
                         [tuiTextfieldCleaner]="true"
                         [tuiTextfieldLabelOutside]="true"
                     >
@@ -237,7 +242,7 @@
                         />
                     </tui-input>
                     <tui-error
-                        formControlName="Position"
+                        formControlName="JobTitle"
                         [error]="[] | tuiFieldError | async"
                     ></tui-error>
                 </div>
@@ -616,6 +621,7 @@
                                 <input
                                     tuiTextfield
                                     type="text"
+                                   
                                 />
                             </tui-input>
                         </div>
@@ -637,7 +643,7 @@
                 </div>
                 <div class="row">
                     <div class="experience">
-                        <span class="title">Kinh nghiệm</span>
+                        <span class="title">Kinh nghiệm (Năm)</span>
                         <tui-input
                             formControlName="Experience"
                             [tuiTextfieldCleaner]="true"
@@ -650,17 +656,17 @@
                             />
                         </tui-input>
                     </div>
-                    <div class="salary">
-                        <span class="title">Mức lương mong muốn</span>
+                    <div class="phone">
+                        <span class="title">Điện thoại</span>
                         <tui-input
-                            formControlName="Salary"
+                            formControlName="Phone"
                             [tuiTextfieldCleaner]="true"
                             [tuiTextfieldLabelOutside]="true"
                             style="margin-bottom: 10px;"
                         >
                             <input
                                 tuiTextfield
-                                type="text"
+                                type="number"
                             />
                         </tui-input>
                     </div>
@@ -677,20 +683,6 @@
                             <input
                                 tuiTextfield
                                 type="email"
-                            />
-                        </tui-input>
-                    </div>
-                    <div class="phone">
-                        <span class="title">Điện thoại</span>
-                        <tui-input
-                            formControlName="Phone"
-                            [tuiTextfieldCleaner]="true"
-                            [tuiTextfieldLabelOutside]="true"
-                            style="margin-bottom: 10px;"
-                        >
-                            <input
-                                tuiTextfield
-                                type="number"
                             />
                         </tui-input>
                     </div>
@@ -747,3 +739,4 @@
         </div>
     </form>
 </dialog>
+
