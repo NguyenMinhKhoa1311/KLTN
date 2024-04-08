@@ -10,6 +10,7 @@ import { Field } from 'src/field/entities/field.entity';
 import { Education } from 'src/education/entities/education.entity';
 import { WorkExperience } from 'src/work-experience/entities/work-experience.entity';
 import { CandidateSkill } from 'src/candidate-skill/entities/candidate-skill.entity';
+import { DesiredJob } from 'src/desired-job/entities/desired-job.entity';
 
 @Injectable()
 export class CandidateService {
@@ -20,6 +21,7 @@ export class CandidateService {
     @InjectModel(Education.name) private EducationModel: Model<Education>,
     @InjectModel(WorkExperience.name) private WorkExperienceModel: Model<WorkExperience>,
     @InjectModel(CandidateSkill.name) private SkillModel: Model<CandidateSkill>,
+    @InjectModel(DesiredJob.name) private DesiredJobModel: Model<DesiredJob>,
   ){}
   async create(createCandidateDto: CreateCandidateDto) {
     try {
@@ -38,6 +40,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
     }
@@ -52,6 +55,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
@@ -86,6 +90,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -114,6 +119,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -142,6 +148,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -168,6 +175,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -196,6 +204,7 @@ export class CandidateService {
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
@@ -225,6 +234,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -261,6 +271,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -288,6 +299,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       log(candidateAfterUpdate)
@@ -319,6 +331,7 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -347,6 +360,7 @@ async deleteSkills(id:string, job_id :string){
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
     .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+    .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel);
     if(candidateAfterUpdate._id.toString().length > 0){
@@ -375,6 +389,7 @@ async deleteEducation(id:string, job_id :string){
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
     .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+    .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel);
     if(candidateAfterUpdate._id.toString().length > 0){
@@ -403,6 +418,7 @@ async deleteWorkExperience(id:string, job_id :string){
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
     .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+    .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel);
     if(candidateAfterUpdate._id.toString().length > 0){
@@ -430,6 +446,7 @@ async deleteLanguage(id:string, language:string){
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
     .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+    .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel);
     if(candidateAfterUpdate._id.toString().length > 0){
