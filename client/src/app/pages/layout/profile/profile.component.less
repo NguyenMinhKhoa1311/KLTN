@@ -29,6 +29,7 @@
                     width: 100px;
                     height: 100px;
                     border-radius: 5px;
+                    
                     img{
                         //width: 100%;
                         height: 100%;
@@ -52,7 +53,10 @@
                         }
                     }
                     .box1{
-                        margin-bottom: 5px;
+                        margin: 3px 0 5px 0;
+                        .position_box{
+                            font-size: 14px;
+                        }
                     }
                     .info_list{
                         .row1, .row2{
@@ -250,11 +254,14 @@
                     .info_learn{
                         display: flex;
                         flex-direction: column;
-                        .learn_name{
+                        .learn_name {
                             font-size: 16px;
                             font-weight: 500;
                         }
                         
+                        .school_name{
+                            font-size: 14px;
+                        }
                         .date_user{
                             font-size: 14px;
                             display: flex;
@@ -284,32 +291,9 @@
             }
         }
 
-        .skill{
-            .skill_list {
-                margin-top: 10px;
-                .skill_select {
-                    font-size: 14px;
-                    display: inline-flex;
-                    align-items: center;
-                    border: 1px solid #ccc;
-                    margin-right: 5px;
-                    margin-bottom: 5px;
-                    padding: 5px 0 5px 5px;
-                    border-radius: 6px;
-                    cursor: pointer;
-
-                    .material-symbols-outlined {
-                        transform: scale(0.8);
-                        color: #999;
-                        cursor: pointer;
-                    }
-                }
-            }
-            
-        }
-
-        .language{
-            .language_select{
+        
+        .language, .skill{
+            .language_select ,.skill_select{
                 width: calc(100% - 32px);
                 border-radius: 12px;
                 margin-top: 10px;
@@ -328,7 +312,7 @@
                     font-size: 20px;
                 }
             }
-            .language_select:hover{
+            .language_select:hover, .skill_select:hover{
                 background: #F7F8FA;
             }
         }
@@ -479,49 +463,18 @@
 #skill_dialog{
     #body_dialog{
         .skill_box{
+            tui-input{
+                margin-top: 10px;
+            }
             width: 100%;
-            display: flex;
-            flex-direction: column;
             .title{
                 font-size: 14px;
                 font-weight: 600;
-                margin-bottom: 10px;
             }
-            .skill_input{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                .tui-space_right-3{
-                    margin-right: 0;
-                }
-                tui-input{
-                    width: 80%;;
-                }
-            }
-            .skill_list {
-                height: calc(10rem - 24px);
-                border: 1px solid #ccc;
-                border-radius: 12px;
-                padding: 12px;
-
-                .skill_select {
-                    font-size: 14px;
-                    display: inline-flex;
-                    align-items: center;
-                    border: 1px solid #ccc;
-                    margin-right: 5px;
-                    margin-bottom: 5px;
-                    padding: 5px 0 5px 5px;
-                    border-radius: 6px;
-                    cursor: pointer;
-                    width: auto;
-
-                    .material-symbols-outlined {
-                        transform: scale(0.8);
-                        color: #999;
-                        cursor: pointer;
-                    }
-                }
+            .title::before{
+                content: "*";
+                color: rgb(220, 54, 46);
+                margin-right: 4px;
             }
         }
     }
