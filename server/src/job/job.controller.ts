@@ -255,6 +255,17 @@ export class JobController {
       throw err
     }
   }
+  
+  @Get('getByRecruiter')
+  async getByRecruiter(@Query('id') id: string) {
+    try{
+      const job = await this.jobService.getByRecruiter(id);
+      return job
+    }
+    catch(err){
+      return[]
+    }
+  }
 
   @Put('updateJob')
   async updateJob(@Query('id') id: string, @Body() updateJobDto: UpdateJobDto) {
@@ -273,6 +284,7 @@ export class JobController {
       }
     }
   }
+
 
 
 

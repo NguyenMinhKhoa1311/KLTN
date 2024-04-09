@@ -289,6 +289,23 @@ export class JobService {
       return [];
     }
   }
+    async getByRecruiter(recruiter: string){
+    try{
+      const jobs = await this.JobModel.find({Recruiter: recruiter})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      return[]
+    }
+  }
+
+  
   async updateJob(jobId: string, updateJobDto: UpdateJobDto) {
     try{
       log(jobId)
@@ -328,6 +345,7 @@ export class JobService {
       }
     }
   }
+
 
 
 
