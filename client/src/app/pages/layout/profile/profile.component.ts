@@ -53,9 +53,9 @@ export class ProfileComponent implements OnDestroy {
         this.profileForm.controls.Field.setValue(this.candidateToRender.Field._id);
         this.profileForm.controls.Image.setValue(this.candidateToRender.Avatar);
         this.profileForm.controls.Position.setValue(this.candidateToRender.Position);
-        
         this.profileForm.controls.Location.setValue(this.candidateToRender.DesiredJob.Location);
         this.profileForm.controls.Salary.setValue(this.candidateToRender.DesiredJob.Salary.toString());
+
         
       }
     }
@@ -113,13 +113,23 @@ export class ProfileComponent implements OnDestroy {
             }
         }
       }),
+      //theo dõi candidate dc cập nhật avatar
+      this.candidateUpdateAdvatarAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateImageOfCandidate){
+          if(candidate._id!="500"){
+            console.log(candidate);
+            this.candidateToRender = candidate;
+            sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+            this.isUpdateImage = false;
+          }
+        }
+      }),
       //theo dõi storage dc create
       this.isCreateAtProfileSuccess$.subscribe((isSuccess) => {
         if(isSuccess){
           if(!this.isGetFileByFolderName){
             this.isGetFileByFolderName = true;
           }
-
           this.store.dispatch(StorageActions.getByFolderNameAtProfile({folderName:this.foldernameCreatedAtProfile}));
         }
       }),
@@ -128,6 +138,10 @@ export class ProfileComponent implements OnDestroy {
         if(this.isGetFileByFolderName){
           if(file._id.length > 0){
             console.log(file);
+            if(!this.isUpdateImageOfCandidate){
+              this.isUpdateImageOfCandidate = true;
+            }
+            this.store.dispatch(CandidateActions.updateAvatarAtProfile({ id:this.candidateToRender._id, storage:file}))
           }
         }
       }),
@@ -172,7 +186,19 @@ export class ProfileComponent implements OnDestroy {
 
             }
         }
-      })
+      }),
+      // theo dõi candidate dc update skill
+      this.candidateUpdateSkillAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateLanguage){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.skillDialog.nativeElement.close();
+              this.cdr3.detectChanges();
+            }
+        }
+      }),
     )
 
     
@@ -190,6 +216,8 @@ export class ProfileComponent implements OnDestroy {
   isUpdateDesiredJob: boolean = false;
   isGetFileByFolderName: boolean = false;
   isUpdateBasicInfo: boolean = false;
+  isUpdateImage: boolean = false;
+  isUpdateImageOfCandidate: boolean = false;
   subscriptions: Subscription[] = [];
   candidateToRender: Candidate=<Candidate>{} ;
   foldernameCreatedAtProfile: string = "";
@@ -210,6 +238,9 @@ export class ProfileComponent implements OnDestroy {
   candidateupdatedLanguageAtProfile$ = this.store.select('candidate','candidateUpdatedLanguageAtProfile');
   candidateupdatedDesiredJobAtProfile$ = this.store.select('candidate','candidateUpdatedDesiredJobAtProfile');
   candidateUpdateBasicInfoAtProfile$ = this.store.select('candidate','candidateUpdatedBasicInfoAtProfile');
+  candidateUpdateAdvatarAtProfile$ = this.store.select('candidate','candidateUpdatedAvatarAtProfile');
+  candidateUpdateSkillAtProfile$ = this.store.select('candidate','candidateUpdatedSkillAtProfile');
+
 
 
   //ngrx of storage
@@ -276,7 +307,7 @@ export class ProfileComponent implements OnDestroy {
       if(!this.isUpdateEducation){
         this.isUpdateEducation = true;
       }
-      this.store.dispatch(CandidateActions.updateEducationAtProfile({education: educationData, id: '6610f3b7dc62116473071b2e'}));
+      this.store.dispatch(CandidateActions.updateEducationAtProfile({education: educationData, id: this.candidateToRender._id}));
       this.profileForm.controls.Major.setValue('');
       this.profileForm.controls.Degree.setValue('');
       this.profileForm.controls.StartDay.setValue('');
@@ -300,7 +331,7 @@ export class ProfileComponent implements OnDestroy {
       if(!this.isUpdateWorkExperience){
         this.isUpdateWorkExperience = true;
       }
-      this.store.dispatch(CandidateActions.updateWorkExperienceAtProfile({workExperience: workExperienceData, id:'6610f3b7dc62116473071b2e'}));
+      this.store.dispatch(CandidateActions.updateWorkExperienceAtProfile({workExperience: workExperienceData, id:this.candidateToRender._id}));
       this.profileForm.controls.JobTitle.setValue('');
       this.profileForm.controls.Company.setValue('');
       this.profileForm.controls.StartDay.setValue('');
@@ -316,7 +347,7 @@ export class ProfileComponent implements OnDestroy {
       if(!this.isUpdateLanguage){
         this.isUpdateLanguage = true;
       }
-      this.store.dispatch(CandidateActions.updateLanguageAtProfile({language: language, id:'6610f3b7dc62116473071b2e'}));
+      this.store.dispatch(CandidateActions.updateLanguageAtProfile({language: language, id:this.candidateToRender._id}));
     }
     else{
       alert('Invalid date');
@@ -338,7 +369,9 @@ export class ProfileComponent implements OnDestroy {
         if(!this.isUpdateDesiredJob){
           this.isUpdateDesiredJob = true;
         }
-        this.store.dispatch(CandidateActions.updateDesiredJobAtProfile({desiredJob: desiredJobData, id:'6610f3b7dc62116473071b2e'}));
+        console.log(desiredJobData);
+        
+        this.store.dispatch(CandidateActions.updateDesiredJobAtProfile({desiredJob: desiredJobData, id:this.candidateToRender._id}));
         this.profileForm.controls.Location.setValue('');
         this.profileForm.controls.Salary.setValue('');
 
@@ -350,7 +383,17 @@ export class ProfileComponent implements OnDestroy {
   }
 
   updateSkill() {
-    
+    const skill = this.profileForm.value.Skill??"";
+    // kiểm tra dl có lỗi k nếu có thì cook
+    if(skill?.length > 0){
+      if(!this.isUpdateLanguage){
+        this.isUpdateLanguage = true;
+      }
+      this.store.dispatch(CandidateActions.updateSkillAtProfile({skill: skill, id:this.candidateToRender._id}));
+    }
+    else{
+      alert('Invalid date');
+    }
   }
 
   updateAvatar(){
@@ -360,7 +403,7 @@ export class ProfileComponent implements OnDestroy {
       this.store.dispatch(StorageActions.createAtProfile({fileName:fileName, file:this.file}));
     }
     else{
-      alert('Invalid date');
+      alert('Invalid image');
     }
   }
 
@@ -385,7 +428,7 @@ export class ProfileComponent implements OnDestroy {
       if(!this.isUpdateBasicInfo){
         this.isUpdateBasicInfo = true;
       }
-      this.store.dispatch(CandidateActions.updateBasicInfoAtProfile({basicInfo: basicInfo, id:'6610f3b7dc62116473071b2e'}));
+      this.store.dispatch(CandidateActions.updateBasicInfoAtProfile({basicInfo: basicInfo, id:this.candidateToRender._id}));
     }
 
   }
@@ -480,5 +523,6 @@ export class ProfileComponent implements OnDestroy {
       this.selectedImage = reader.result;
     };
     console.log(this.file);
+    this.isUpdateImage = true;
   }
 }

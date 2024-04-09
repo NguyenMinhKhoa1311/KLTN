@@ -159,7 +159,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateAvatarAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateAvatar(action.avatar, action.storage_id, action.id).pipe(
+         this.candidateService.updateAvatar( action.id, action.storage).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateAvatarAtProfileSuccess({candidate: item})

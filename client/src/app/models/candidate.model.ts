@@ -21,7 +21,7 @@ export interface Candidate{
      Experience: number,
      Education: Education[],
      WorkExperience: WorkExperience[],
-     Skills: CandidateSkill[],
+     Skills: string[],
      Languages: string[],
      DesiredJob: DesiredJob,
      Field: Field,
