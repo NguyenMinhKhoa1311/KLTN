@@ -98,26 +98,34 @@
                 </div>
             </div>
 
-            <div class="walfare_job">
+            <div class="welfare_job">
                 <div class="header">
                     <span class="title">Phúc lợi:</span>
                 </div>
                 <div class="body">
-                    <tui-multi-select
-                        placeholder="Ignored text"
-                        class="b-form"
-                        [editable]="false"
-                        [formControl]="Welfare"
-                        [tuiTextfieldLabelOutside]="true"
-                        [(search)]="search"
-                    >
-                        Chọn phúc lợi
-                        <tui-data-list-wrapper
-                            *tuiDataList
-                            tuiMultiSelectGroup
-                            [items]="filter(search)"
-                        ></tui-data-list-wrapper>
-                    </tui-multi-select>
+                    <div class="welfare_input">
+                        <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Welfare">
+                            Nhập tên Phúc lợi
+                            <input tuiTextfield type="text" />
+                        </tui-input>
+                        <button
+                            appearance="primary"
+                            tuiButton
+                            type="button"
+                            class="tui-space_right-3 tui-space_bottom-3"
+                            (click)="addWelfare()"
+                        >
+                            Thêm
+                        </button>
+                    </div>
+                    <div class="welfare_list">
+                        <div class="welfare_select" *ngFor="let welfare of welfareList; let i=index">
+                            <div>{{welfare}}</div>
+                            <span class="material-symbols-outlined" (click)="removeWelfare(i)">
+                                close
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
