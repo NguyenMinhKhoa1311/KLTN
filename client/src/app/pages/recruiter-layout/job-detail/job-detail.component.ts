@@ -17,15 +17,6 @@ import * as CareerActions from '../../../ngrx/actions/career.actions';
 import { Field } from '../../../models/field.model';
 import { Career } from '../../../models/career.model';
 
-const ITEMS: readonly string[] = [
-  'Luke Skywalker',
-  'Leia Organa Solo',
-  'Darth Vader',
-  'Han Solo',
-  'Obi-Wan Kenobi',
-  'Yoda',
-];
-
 @Component({
   selector: 'app-job-detail',
   standalone: true,
@@ -121,7 +112,7 @@ export class JobDetailComponent {
       Requirement: this.jobForm.value.Requirement,
       Career: this.jobForm.value.Career,
       Field: this.jobForm.value.Field,
-      Welfare: this.Welfare,
+      Welfare: this.welfareList,
       Tags: this.tagsList,
       StartDate: this.jobForm.value.DateStart,
       EndDate: this.jobForm.value.DateEnd,
@@ -153,7 +144,9 @@ export class JobDetailComponent {
     this.jobForm.controls.Requirement.setValue(job.Requirement);
     this.jobForm.controls.Career.setValue(job.Career._id);
     this.jobForm.controls.Field.setValue(job.Field._id);
-    this.Welfare.setValue(job.Welfare);
+    job.Welfare.forEach(element => {
+      this.welfareList.push(element);
+    });
     job.Tags.forEach(element => {
       this.tagsList.push(element);
     });
@@ -192,16 +185,13 @@ export class JobDetailComponent {
     DateStart: new FormControl(new TuiDay(this.year, this.month, this.day)),
     DateEnd: new FormControl(new TuiDay(this.year, this.month, this.day)),
     
-    Walfare: new FormControl('', [Validators.required]),
+    Welfare: new FormControl('', [Validators.required]),
     Tag: new FormControl('', [Validators.required]),
     ServicePakage: new FormControl('', [Validators.required]),
 
   });
 
   
-
-
-
   tagsList : string[] = [];
   addTag(){
     const newTag = this.jobForm.value.Tag;
@@ -230,12 +220,18 @@ export class JobDetailComponent {
     console.log(this.addressList);
   }
 
-  //Phúc lợi
-  search: string | null = '';
-  readonly Welfare = new FormControl([ITEMS[0]]);
-  @tuiPure
-  filter(search: string | null): readonly string[] {
-      return ITEMS.filter(item => TUI_DEFAULT_MATCHER(item, search || ''));
+  
+  welfareList : string[] = [];
+  addWelfare(){
+    const newWelfare = this.jobForm.value.Welfare;
+    if(newWelfare){
+      this.welfareList.push(newWelfare);
+      this.jobForm.controls.Welfare.setValue('');
+    }
+    console.log(this.welfareList);
   }
-  //
+  removeWelfare(index: number){
+    this.welfareList.splice(index, 1);
+    console.log(this.welfareList);
+  }
 }

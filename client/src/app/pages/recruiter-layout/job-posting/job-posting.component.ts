@@ -21,14 +21,7 @@ import { ServicePackage } from '../../../models/service-package.model';
 import { Job } from '../../../models/job.model';
 import { generateUuid } from '../../../../environments/environments';
 
-const ITEMS: readonly string[] = [
-  'Luke Skywalker',
-  'Leia Organa Solo',
-  'Darth Vader',
-  'Han Solo',
-  'Obi-Wan Kenobi',
-  'Yoda',
-];
+
 @Component({
   selector: 'app-job-posting',
   standalone: true,
@@ -83,7 +76,7 @@ export class JobPostingComponent implements OnDestroy{
     DateStart: new FormControl(new TuiDay(this.year, this.month, this.day)),
     DateEnd: new FormControl(new TuiDay(this.year, this.month, this.day)),
     
-    Walfare: new FormControl('', [Validators.required]),
+    Welfare: new FormControl('', [Validators.required]),
     Tag: new FormControl('', [Validators.required]),
     ServicePakage: new FormControl('', [Validators.required]),
 
@@ -181,7 +174,7 @@ export class JobPostingComponent implements OnDestroy{
       Company:"65fa88763dcc1153af38b190",
       Location: "Hồ Chí Minh",
       Salary: this.jobPostForm.value.Salary??"",
-      Welfare: this.Welfare.value??[],
+      Welfare: this.welfareList??[],
       Career: this.careers.find(career => career.Name == this.jobPostForm.value.Career)?._id??"",
       Field: this.fields.find(field => field.FieldName == this.jobPostForm.value.Field)?._id??"",
       StartDate: this.jobPostForm.value.DateStart??new Date(),
@@ -229,15 +222,21 @@ export class JobPostingComponent implements OnDestroy{
     console.log(this.addressList);
   }
 
-  //Phúc lợi
-  search: string | null = '';
-  readonly Welfare = new FormControl([ITEMS[0]]);
-  @tuiPure
-  filter(search: string | null): readonly string[] {
-      return ITEMS.filter(item => TUI_DEFAULT_MATCHER(item, search || ''));
-  }
-  //
+  
 
+  welfareList : string[] = [];
+  addWelfare(){
+    const newWelfare = this.jobPostForm.value.Welfare;
+    if(newWelfare){
+      this.welfareList.push(newWelfare);
+      this.jobPostForm.controls.Welfare.setValue('');
+    }
+    console.log(this.welfareList);
+  }
+  removeWelfare(index: number){
+    this.welfareList.splice(index, 1);
+    console.log(this.welfareList);
+  }
 }
 
 
