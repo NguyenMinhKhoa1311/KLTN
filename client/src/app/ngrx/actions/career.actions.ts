@@ -132,4 +132,35 @@ export const getByFieldAtCreateJobFailure = createAction(
     props<{error: string}>()
     );
 
-            
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByFieldAtJobDetail = createAction(
+    '[Career] Get By Field At Update Job',
+    props<{field: string}>()
+    );
+export const getByFieldAtJobDetailSuccess = createAction(
+    '[Career] Get By Field At Update Job Success',
+    props<{careers: Career[]}>()
+    );
+export const getByFieldAtJobDetailFailure = createAction(
+    '[Career] Get By Field At Update Job Failure',
+    props<{error: string}>()
+    );
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllAtJobDetail = createAction(
+    '[Career] Get All At Job Detail'
+    );
+export const getAllAtJobDetailSuccess = createAction(
+    '[Career] Get All At Job Detail Success',
+    props<{careers: Career[]}>()
+    );
+export const getAllAtJobDetailFailure = createAction(
+    '[Career] Get All At Job Detail Failure',
+    props<{error: string}>()
+    );
+    

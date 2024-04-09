@@ -25,6 +25,12 @@ export interface FieldState{
     isGetAllNoLimitAtProfileLoading: boolean;
     isGetAllNoLimitAtProfileSuccess: boolean;
     getAllNoLimitAtProfileError: string;
+
+
+    fieldNoLimitAtJobDetail: Field[];
+    isGetAllNoLimitAtJobDetailLoading: boolean;
+    isGetAllNoLimitAtJobDetailSuccess: boolean;
+    getAllNoLimitAtJobDetailError: string;
     
 
 }

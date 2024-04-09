@@ -41,7 +41,17 @@ export const initialState: CareerState = {
     isGetAllAtProfileLoading: false,
     isGetAllAtProfileSuccess: false,
     careersTakenByGetAllAtProfile: [],
-    getAllAtProfileError: ''
+    getAllAtProfileError: '',
+
+    isGetAllAtJobDetailLoading: false,
+    isGetAllAtJobDetailSuccess: false,
+    careersTakenByGetAllAtJobDetail: [],
+    getAllAtJobDetailError: '',
+
+    isGetByFieldAtJobDetailLoading: false,
+    isGetByFieldAtJobDetailSuccess: false,
+    careersTakenByGetByFieldAtJobDetail: [],
+    getByFieldAtJobDetailError: '',
 
 
 }
@@ -268,7 +278,66 @@ export const careerReducer = createReducer(
             isGetAllAtProfileSuccess: false,
             getAllAtProfileError: action.error
         }
-    })
+    }),
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CareerActions.getAllAtJobDetail,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAtJobDetailLoading: true,
+            isGetAllAtJobDetailSuccess: false,
+            getAllAtJobDetailError: ''
+        }
+    }),
+    on(CareerActions.getAllAtJobDetailSuccess,(state,action)=>{
+        return {
+            ...state,
+            careersTakenByGetAllAtJobDetail: action.careers,
+            isGetAllAtJobDetailLoading: false,
+            isGetAllAtJobDetailSuccess: true
+        }
+    }),
+    on(CareerActions.getAllAtJobDetailFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAtJobDetailLoading: false,
+            isGetAllAtJobDetailSuccess: false,
+            getAllAtJobDetailError: action.error
+        }
+    }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CareerActions.getByFieldAtJobDetail,(state,action)=>{
+        return {
+            ...state,
+            isGetByFieldAtJobDetailLoading: true,
+            isGetByFieldAtJobDetailSuccess: false,
+            getByFieldAtJobDetailError: ''
+        }
+    }),
+    on(CareerActions.getByFieldAtJobDetailSuccess,(state,action)=>{
+        return {
+            ...state,
+            careersTakenByGetByFieldAtJobDetail: action.careers,
+            isGetByFieldAtJobDetailLoading: false,
+            isGetByFieldAtJobDetailSuccess: true
+        }
+    }),
+    on(CareerActions.getByFieldAtJobDetailFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetByFieldAtJobDetailLoading: false,
+            isGetByFieldAtJobDetailSuccess: false,
+            getByFieldAtJobDetailError: action.error
+        }
+    }),
     
 
 )

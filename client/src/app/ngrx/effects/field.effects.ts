@@ -95,4 +95,20 @@ export class FieldEffects {
             catchError((error) => of(FieldActions.getAllNoLimitAtProfileFailure({err: error})))))
          )
     );
+    getAllNoLimitAtJobDetail$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(FieldActions.getAllNoLimitAtJobDetail),
+        exhaustMap(() =>
+         this.fieldService.getAllNoLimit().pipe(
+            map((fields)=>{
+                if(fields != undefined || fields != null){
+                    return FieldActions.getAllNoLimitAtJobDetailSuccess({fields: fields})
+                }
+                else{
+                    return FieldActions.getAllNoLimitAtJobDetailFailure({err: "Get All Fields No Limit At Job Detail Failure"})
+                }
+            }),
+            catchError((error) => of(FieldActions.getAllNoLimitAtJobDetailFailure({err: error})))))
+         )
+    );
 }

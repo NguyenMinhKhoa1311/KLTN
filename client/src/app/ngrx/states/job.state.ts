@@ -34,4 +34,22 @@ export interface jobState{
     isCreateJobAtCreateJobSuccess: boolean;
     isCreateJobAtCreateJobLoading: boolean;
     createJobAtCreateJobError: string;
+
+    isUpdateJobAtJobDetailSuccess: boolean;
+    isUpdateJobAtJobDetailLoading: boolean;
+    updateJobAtUJobDetailError: string;
+    jobUpdatedAtJobDetail: Job
+
+    isGetByRecruiterAtJobDetailSuccess: boolean;
+    isGetByRecruiterAtJobDetailLoading: boolean;
+    getByRecruiterAtJobDetailError: string;
+    jobsTakenByRecruiterAtJobDetail: Job[];
+
+    isGetByLocationAtJobLoading: boolean;
+    isGetByLocationAtJobSuccess: boolean;
+    getByLocationAtJobError: string;
+    jobsTakenByLocationAtJob: Job[];
+
+
+
 }

@@ -170,7 +170,7 @@ export class JobPostingComponent implements OnDestroy{
       this.jobPostForm.controls.Salary.setValue("Thỏa thuận");
     }
     else{
-      this.jobPostForm.controls.Salary.setValue(this.jobPostForm.value.SalaryStart + " - " + this.jobPostForm.value.SalaryEnd);
+      this.jobPostForm.controls.Salary.setValue(this.jobPostForm.value.SalaryStart + "-" + this.jobPostForm.value.SalaryEnd);
     }
     const jobToCreate: any={
       Name: this.jobPostForm.value.Name??"",

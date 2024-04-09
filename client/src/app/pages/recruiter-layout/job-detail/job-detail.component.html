@@ -4,37 +4,37 @@
             Bài đăng tuyển dụng
         </div>
         <div class="list_job">
-            <div class="job">
+            <div class="job" *ngFor="let job of listJobs">
                 <div class="job_box">
                     <div class="img_job">
                         <img src="../../../../assets/images/kinhdoanh.png" alt="">
                     </div>
                     <div class="info_job">
                         <div class="name_job">
-                            Chuyên viên đào tạo
+                            {{job.Name}}
                         </div>
                         <div class="company_job">
-                            Công ty TNHH ABC
+                            {{job.Company.Name}}
                         </div>
                         <div class="salary">
-                            10 000
+                            {{job.Salary}}
                         </div>
                         <div class="address">
-                            Hà Nội
+                            {{job.Location}}
                         </div>
                         <div class="time">
                             <div class="dateStart">
-                                2021-06-01
+                                {{job.StartDate}}
                             </div>
                             <div style="margin: 0 5px;">-</div>
                             <div class="dateEnd">
-                                2021-06-30
+                                {{job.EndDate}}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="edit">
-                    <span class="material-symbols-outlined" (click)="openJobDialog()">
+                    <span class="material-symbols-outlined" (click)="openJobDialog(job)">
                         edit
                     </span>
                 </div>
@@ -184,8 +184,8 @@
                         </div>
                         <div class="body">
                             <div class="custom-select"> 
-                                <select formControlName="Field">
-                                  <option class="select-item" *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
+                                <select formControlName="Field" (change)="onFieldChange($event)">
+                                  <option class="select-item" *ngFor="let field of fieldList" value="{{field._id}}" >{{field.FieldName}}</option>
                                 </select>
                             </div>
                         </div>
@@ -197,8 +197,8 @@
                         </div>
                         <div class="body">
                             <div class="custom-select"> 
-                                <select formControlName="Career">
-                                    <option *ngFor="let career of careerList" value="career._id" >{{career.name}}</option>
+                                <select formControlName="Career" >
+                                    <option *ngFor="let career of careerList" value="{{career._id}}" >{{career.Name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -285,7 +285,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="closeJobDialog()"
+                    <button appearance="primary" tuiButton type="button" (click)="updateJob()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>

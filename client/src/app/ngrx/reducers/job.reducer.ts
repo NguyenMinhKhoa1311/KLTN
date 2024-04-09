@@ -1,6 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { jobState } from "../states/job.state";
 import * as JobActions from "../actions/job.actions"
+import { Job } from "../../models/job.model";
 
 export const initialState: jobState = {
     jobTakenByFieldAtHome: [],
@@ -37,6 +38,22 @@ export const initialState: jobState = {
     isCreateJobAtCreateJobLoading: false,
     isCreateJobAtCreateJobSuccess: false,
     createJobAtCreateJobError: "",
+
+    isUpdateJobAtJobDetailSuccess: false,
+    isUpdateJobAtJobDetailLoading: false,
+    updateJobAtUJobDetailError: "",
+    jobUpdatedAtJobDetail: <Job>{},
+
+    isGetByRecruiterAtJobDetailSuccess: false,
+    isGetByRecruiterAtJobDetailLoading: false,
+    getByRecruiterAtJobDetailError: "",
+    jobsTakenByRecruiterAtJobDetail: [],
+
+    isGetByLocationAtJobLoading: false,
+    isGetByLocationAtJobSuccess: false,
+    getByLocationAtJobError: "",
+    jobsTakenByLocationAtJob: [],
+
 }
 
 export const jobReducer = createReducer(
@@ -133,23 +150,7 @@ export const jobReducer = createReducer(
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(JobActions.clearStateAtHome,(state,action)=>{
-        return{
-            ...state,
-            jobTakenByFieldAtHome: [],
-            isGetByFieldAtHomeLoading: false,
-            isGetByFieldAtHomeSuccess: false,
-            getByFieldAtHomeError: "",
-
-            jobTakenByCareerAtHome: [],
-            isGetByCareerAtHomeLoading: false,
-            isGetByCareerAtHomeSuccess: false,
-            getByCareerAtHomeError: "",
-
-            jobTakenByHotJobAtHome: [],
-            isGetByHotJobAtHomeLoading: false,
-            isGetByHotJobAtHomeSuccess: false,
-            getByHotJobAtHomeError: "",
-        }
+        return initialState;
     }),
 
 
@@ -267,6 +268,97 @@ export const jobReducer = createReducer(
             isCreateJobAtCreateJobLoading: false,
             isCreateJobAtCreateJobSuccess: false,
             createJobAtCreateJobError: action.error,
+        }
+    }),
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(JobActions.updateJobAtJobDetail,(state,action)=>{
+        return{
+            ...state,
+            isUpdateJobAtJobDetailLoading: true,
+            isUpdateJobAtJobDetailSuccess: false,
+            updateJobAtUJobDetailError: "",
+        }
+    }),
+    on(JobActions.updateJobAtJobDetailSuccess,(state,action)=>{
+        return{
+            ...state,
+            isUpdateJobAtJobDetailLoading: false,
+            isUpdateJobAtJobDetailSuccess: true,
+            updateJobAtUJobDetailError: "",
+            jobUpdatedAtJobDetail: action.job
+        }
+    }),
+    on(JobActions.updateJobAtJobDetailFailure,(state,action)=>{
+        return{
+            ...state,
+            isUpdateJobAtJobDetailLoading: false,
+            isUpdateJobAtJobDetailSuccess: false,
+            updateJobAtUJobDetailError: action.error,
+        }
+    }),
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(JobActions.getJobByRecruiterAtJobDetail,(state,action)=>{
+        return{
+            ...state,
+            isGetByRecruiterAtJobDetailLoading: true,
+            isGetByRecruiterAtJobDetailSuccess: false,
+            getByRecruiterAtJobDetailError: "",
+        }
+    }),
+    on(JobActions.getJobByRecruiterAtJobDetailSuccess,(state,action)=>{
+        return{
+            ...state,
+            jobsTakenByRecruiterAtJobDetail: action.jobs,
+            isGetByRecruiterAtJobDetailLoading: false,
+            isGetByRecruiterAtJobDetailSuccess: true,
+            getByRecruiterAtJobDetailError: "",
+        }
+    }),
+    on(JobActions.getJobByRecruiterAtJobDetailFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByRecruiterAtJobDetailLoading: false,
+            isGetByRecruiterAtJobDetailSuccess: false,
+            getByRecruiterAtJobDetailError: action.error,
+        }
+    }),
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(JobActions.getByLocationdWithKeywordsAtJob,(state,action)=>{
+        return{
+            ...state,
+            isGetByLocationAtJobLoading: true,
+            isGetByLocationAtJobSuccess: false,
+            getByLocationAtJobError: "",
+        }
+    }),
+    on(JobActions.getByLocationdWithKeywordsAtJobSuccess,(state,action)=>{
+        return{
+            ...state,
+            jobsTakenByLocationAtJob: action.jobs,
+            isGetByLocationAtJobLoading: false,
+            isGetByLocationAtJobSuccess: true,
+            getByLocationAtJobError: "",
+        }
+    }),
+    on(JobActions.getByLocationdWithKeywordsAtJobFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByLocationAtJobLoading: false,
+            isGetByLocationAtJobSuccess: false,
+            getByLocationAtJobError: action.error,
         }
     }),
 )

@@ -73,3 +73,19 @@ export const getAllNoLimitAtProfileFailure = createAction(
     '[Field] Get All No Limit At Profile Failure',
     props<{err: string}>()
     );
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllNoLimitAtJobDetail = createAction(
+    '[Field] Get All No Limit At Job Detail'
+    );
+export const getAllNoLimitAtJobDetailSuccess = createAction(
+    '[Field] Get All No Limit At Job Detail Success',
+    props<{fields: Field[]}>()
+    );
+export const getAllNoLimitAtJobDetailFailure = createAction(
+    '[Field] Get All No Limit At Job Detail Failure',
+    props<{err: string}>()
+    );

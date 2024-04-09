@@ -11,6 +11,7 @@ export interface Job{
      JobId: string,
      Name: string,
      Description: string,
+     Address: string
      Location: string,
      Requirement :string,
      Salary: string,

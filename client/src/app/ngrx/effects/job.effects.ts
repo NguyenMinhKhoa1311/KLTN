@@ -125,4 +125,54 @@ export class JobEffects {
         )
         )
 
+    updateJobAtJobDetail$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.updateJobAtJobDetail),
+            exhaustMap(action =>
+                this.jobService.update(action.job, action.job).pipe(
+                    map(() => {
+                        return JobActions.updateJobAtJobDetailSuccess({job: action.job})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.updateJobAtJobDetailFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getByRecruiterAtJobDetail$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getJobByRecruiterAtJobDetail),
+            exhaustMap(action =>
+                this.jobService.getByRecruiter(action.recruiter).pipe(
+                    map(jobs => {
+                        return JobActions.getJobByRecruiterAtJobDetailSuccess({jobs: jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getJobByRecruiterAtJobDetailFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+    getByLocationWithKeywordAtJob$= createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByLocationdWithKeywordsAtJob),
+            exhaustMap(action =>
+                this.jobService.getByLocation(action.location, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map(jobs => {
+                        return JobActions.getByLocationdWithKeywordsAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByLocationdWithKeywordsAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
 }

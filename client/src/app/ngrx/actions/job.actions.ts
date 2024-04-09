@@ -125,3 +125,56 @@ export const createJobAtJobFailure = createAction(
     props<{ error: string }>()
 );
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateJobAtJobDetail = createAction(
+    '[Job] Update Job',
+    props<{ job: any, id: string }>()
+);
+export const updateJobAtJobDetailFailure = createAction(
+    '[Job] Update Job Failure',
+    props<{ error: string }>()
+);
+export const updateJobAtJobDetailSuccess = createAction(
+    '[Job] Update Job Success',
+    props<{ job: Job }>()
+);
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getJobByRecruiterAtJobDetail = createAction(
+    '[Job] Get Job By Id',
+    props<{ recruiter: string }>()
+);
+export const getJobByRecruiterAtJobDetailFailure = createAction(
+    '[Job] Get Job By Id Failure',
+    props<{ error: string }>()
+);
+export const getJobByRecruiterAtJobDetailSuccess = createAction(
+    '[Job] Get Job By Id Success',
+    props<{ jobs: Job[] }>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByLocationdWithKeywordsAtJob = createAction(
+    '[Job] Get By Location With Keywords',
+    props<{ location: string, keywords: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+);
+export const getByLocationdWithKeywordsAtJobSuccess = createAction(
+    '[Job] Get By Location With Keywords Success',
+    props<{ jobs: Job[] }>()
+);
+export const getByLocationdWithKeywordsAtJobFailure = createAction(
+    '[Job] Get By Location With Keywords Failure',
+    props<{ error: string }>()
+);
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

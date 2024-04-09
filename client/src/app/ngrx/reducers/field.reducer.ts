@@ -26,7 +26,12 @@ export const initualState: FieldState = {
     fieldNoLimitAtProfile: [],
     isGetAllNoLimitAtProfileLoading: false,
     isGetAllNoLimitAtProfileSuccess: false,
-    getAllNoLimitAtProfileError: ''
+    getAllNoLimitAtProfileError: '',
+
+    fieldNoLimitAtJobDetail: [],
+    isGetAllNoLimitAtJobDetailLoading: false,
+    isGetAllNoLimitAtJobDetailSuccess: false,
+    getAllNoLimitAtJobDetailError: ''
 }
 
 export const fieldReducer = createReducer(
@@ -168,6 +173,33 @@ export const fieldReducer = createReducer(
             isGetAllNoLimitAtProfileLoading: false,
             isGetAllNoLimitAtProfileSuccess: false,
             getAllNoLimitAtProfileError: action.err
+        }
+    }),
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(FieldActions.getAllNoLimitAtJobDetail, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtJobDetailLoading: true,
+            isGetAllNoLimitAtJobDetailSuccess: false,
+            getAllNoLimitAtJobDetailError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtJobDetailSuccess, (state, action) =>{
+        return {
+            ...state,
+            fieldNoLimitAtJobDetail: action.fields,
+            isGetAllNoLimitAtJobDetailLoading: false,
+            isGetAllNoLimitAtJobDetailSuccess: true,
+            getAllNoLimitAtJobDetailError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtJobDetailFailure, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtJobDetailLoading: false,
+            isGetAllNoLimitAtJobDetailSuccess: false,
+            getAllNoLimitAtJobDetailError: action.err
         }
     })
 

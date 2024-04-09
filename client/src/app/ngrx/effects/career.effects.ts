@@ -146,6 +146,55 @@ export class CareerEffects{
         )
     )
 
+    getByFieldAtCreateJob$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getByFieldAtCreateJob),
+            exhaustMap((action)=>
+                this.careerService.getByField(action.field).pipe(
+                    map((careers)=>{
+                        return CareerActions.getByFieldAtCreateJobSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getByFieldAtCreateJobFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+    getAllAtJobDetail$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getAllAtJobDetail),
+            exhaustMap(()=>
+                this.careerService.getAll().pipe(
+                    map((careers)=>{
+                        return CareerActions.getAllAtJobDetailSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getAllAtJobDetailFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+    getByFieldAtJobDetail$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getByFieldAtJobDetail),
+            exhaustMap((action)=>
+                this.careerService.getByField(action.field).pipe(
+                    map((careers)=>{
+                        return CareerActions.getByFieldAtJobDetailSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getByFieldAtJobDetailFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+
 
 
 }

@@ -37,4 +37,15 @@ export class JobService {
   create(job:any){
     return this.httpClient.post(`${URL}/job/create`,job);
   }
+
+  update(job:any,id:string){
+    return this.httpClient.put<Job>(`${URL}/job/updateJob?id=${id}`,job);
+  }
+  getByRecruiter(recruiterId:string){
+    return this.httpClient.get<Job[]>(`${URL}/job/getByRecruiter?id=${recruiterId}`);
+  }
+  getByLocation(location:string,page:number,limit:number,sortBy:string,sortOrder:string){
+    return this.httpClient.get<Job[]>(`${URL}/job/getByLocationdWithKeyword?keyword=${location}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  }
 }
+

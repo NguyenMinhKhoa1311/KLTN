@@ -68,3 +68,11 @@ export function convertStringToDate(str: string): Date | null {
 
     return date;
 }
+
+export function extractNumbersRegex(str: string): [number, number] {
+  const match = str.match(/(\d+)-(\d+)/);
+  if (!match) {
+    return [0, 0];
+  }
+  return [parseInt(match[1]), parseInt(match[2])];
+}
