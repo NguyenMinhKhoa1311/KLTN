@@ -6,11 +6,11 @@ import { EducationService } from 'src/education/education.service';
 import { CreateEducationDto } from 'src/education/dto/create-education.dto';
 import { CreateWorkExperienceDto } from 'src/work-experience/dto/create-work-experience.dto';
 import { WorkExperienceService } from 'src/work-experience/work-experience.service';
-import { CreateCandidateSkillDto } from 'src/candidate-skill/dto/create-candidate-skill.dto';
-import { CandidateSkillService } from 'src/candidate-skill/candidate-skill.service';
 import { log } from 'console';
 import { DesiredJobService } from 'src/desired-job/desired-job.service';
 import { CreateDesiredJobDto } from 'src/desired-job/dto/create-desired-job.dto';
+import { storage } from 'firebase-admin';
+import { CreateStorageDto } from 'src/storage/dto/create-storage.dto';
 
 @Controller('candidate')
 export class CandidateController {
@@ -18,7 +18,7 @@ export class CandidateController {
     private readonly candidateService: CandidateService,
     private readonly educationService: EducationService,
     private readonly workExperienceService: WorkExperienceService,
-    private readonly candidateSkillService: CandidateSkillService,
+
     private readonly desiredJobService: DesiredJobService
     ) {}
 
@@ -102,16 +102,9 @@ export class CandidateController {
   }
 
   @Put('updateSkills')
-  async updateSkill(@Query('id') id: string, @Body()createCandidateSkillDto: CreateCandidateSkillDto){
+  async updateSkill(@Query('id') id: string, @Query('skill')skill: string){
     try{
-      const skill = await this.candidateSkillService.create(createCandidateSkillDto);
-      log(skill)
-      if(skill._id.toString()=="500"){
-        return {
-          _id: "500",
-        }
-      }
-      const candidate = await this.candidateService.updateSkill(id, skill._id.toString());
+      const candidate = await this.candidateService.updateSkill(id, skill);
       if(candidate._id.toString()!="500"){
         return candidate;
       }
@@ -130,9 +123,9 @@ export class CandidateController {
 
 
   @Put('updateAvatar')
-  async updateAvatar(@Query('id') id: string, @Query('avatar') avatar: string, @Query('storage_id') storage_id: string){
+  async updateAvatar(@Query('id') id: string, @Body() storage: any){
     try{
-      const candidate = await this.candidateService.updateAvatar(id, avatar, storage_id);
+      const candidate = await this.candidateService.updateAvatar(id, storage);
       if(candidate._id.toString()!="500"){
         return candidate;
       }
@@ -213,12 +206,14 @@ export class CandidateController {
   async updateDesiredJob(@Query('id') id: string, @Body() createDesiredJobDto: CreateDesiredJobDto){
     try{
       const desiredJob = await this.desiredJobService.create(createDesiredJobDto);
+      log(desiredJob)
       if(desiredJob._id.toString()=="500"){
         return {
           _id: "500",
         }
       }
       log(desiredJob._id.toString())
+      log(id)
       const candidate = await this.candidateService.updateDesiredJob(id, desiredJob._id.toString());
       if(candidate._id.toString()!="500"){
         return candidate;
@@ -259,11 +254,9 @@ export class CandidateController {
 
 
   @Put('DeleteSkills')
-  async deleteSkills(@Query('id') id: string, @Query('skill_id') skill_id: string){
+  async deleteSkills(@Query('id') id: string, @Query('skill') skill: string){
     try{
-      const result = await this.candidateSkillService.delete(skill_id);
-      if(result){
-        const candidate = await this.candidateService.deleteSkills(id, skill_id);
+        const candidate = await this.candidateService.deleteSkills(id, skill);
         if(candidate._id.toString()!="500"){
           return candidate;
         }
@@ -272,12 +265,6 @@ export class CandidateController {
             _id: "500",
           }
         }
-      }
-      else{
-        return {
-          _id: "500",
-        }
-      }
     }
     catch(error){
       return {

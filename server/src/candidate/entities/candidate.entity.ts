@@ -44,10 +44,8 @@ export class Candidate {
 
     @Prop({
         required: true,
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'CandidateSkill',
     })
-    Skills: [mongoose.Schema.Types.ObjectId];
+    Skills: string[];
 
     @Prop({
         required: true,

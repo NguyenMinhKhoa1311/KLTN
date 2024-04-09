@@ -9,8 +9,8 @@ import { Career } from 'src/career/entities/career.entity';
 import { Field } from 'src/field/entities/field.entity';
 import { Education } from 'src/education/entities/education.entity';
 import { WorkExperience } from 'src/work-experience/entities/work-experience.entity';
-import { CandidateSkill } from 'src/candidate-skill/entities/candidate-skill.entity';
 import { DesiredJob } from 'src/desired-job/entities/desired-job.entity';
+import { CreateStorageDto } from 'src/storage/dto/create-storage.dto';
 
 @Injectable()
 export class CandidateService {
@@ -20,7 +20,6 @@ export class CandidateService {
     @InjectModel(Field.name) private FieldModel: Model<Field>,
     @InjectModel(Education.name) private EducationModel: Model<Education>,
     @InjectModel(WorkExperience.name) private WorkExperienceModel: Model<WorkExperience>,
-    @InjectModel(CandidateSkill.name) private SkillModel: Model<CandidateSkill>,
     @InjectModel(DesiredJob.name) private DesiredJobModel: Model<DesiredJob>,
   ){}
   async create(createCandidateDto: CreateCandidateDto) {
@@ -38,7 +37,6 @@ export class CandidateService {
     try{
       return await this.CandidateModel.find()
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -53,7 +51,6 @@ export class CandidateService {
     try{
       const candidate = await this.CandidateModel.findOne({ User: user })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -88,7 +85,6 @@ export class CandidateService {
         $push: { Education: education_id }
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -106,6 +102,7 @@ export class CandidateService {
     catch(err){
       return{
         _id: "500",
+        err: err
       }
     }
   }
@@ -117,7 +114,6 @@ export class CandidateService {
         $push: { WorkExperience: workExperience_id }
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -139,14 +135,12 @@ export class CandidateService {
     }
   }
 
-  async updateSkill(id:string, skill_id:string){
+  async updateSkill(id:string, skill:string){
     try{
       const candidateAfterUpdate = await this.CandidateModel.findByIdAndUpdate(id, {
-        // Use $push operator to add to the Skill array
-        $push: { Skills: skill_id }
+        $push:  {Skills: skill}
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -173,7 +167,6 @@ export class CandidateService {
         $push:  {Languages: language}
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -196,14 +189,13 @@ export class CandidateService {
 
   }
 
-  async updateAvatar(id:string, avatar:string, storage_id:string){
+  async updateAvatar(id:string, storage: any){
     try{
       const candidateAfterUpdate = await this.CandidateModel.findByIdAndUpdate(id, {
-        Avatar: avatar,
-        Storage: storage_id
+        Avatar: storage.urls[0],
+        Storage: storage._id
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -221,6 +213,7 @@ export class CandidateService {
     catch(err){
       return{
         _id: "500",
+        err: err,
       }
     }
   }
@@ -232,7 +225,6 @@ export class CandidateService {
         $push: { FavoriteJobs: job_id }
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -269,7 +261,6 @@ export class CandidateService {
       },
       { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -297,12 +288,10 @@ export class CandidateService {
       },
       { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
-      log(candidateAfterUpdate)
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -329,7 +318,6 @@ export class CandidateService {
         $pull: { FavoriteJobs: job_id }
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
@@ -358,7 +346,6 @@ async deleteSkills(id:string, job_id :string){
       $pull: { Skills: job_id }
     }, { new: true })
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-    .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
@@ -387,7 +374,6 @@ async deleteEducation(id:string, job_id :string){
       $pull: { Education: job_id }
     }, { new: true })
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-    .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
@@ -416,7 +402,6 @@ async deleteWorkExperience(id:string, job_id :string){
       $pull: { WorkExperience: job_id }
     }, { new: true })
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-    .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
@@ -444,7 +429,6 @@ async deleteLanguage(id:string, language:string){
       $pull:  {Languages: language}
     }, { new: true })
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-    .populate('Skills', 'CandidateSkillId Name Proficiency ', this.SkillModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Career', 'CareerId Name', this.CareerModel)

@@ -16,7 +16,6 @@ import { JobModule } from './job/job.module';
 import { RecruitmentModule } from './recruitment/recruitment.module';
 import { StorageModule } from './storage/storage.module';
 import { EducationModule } from './education/education.module';
-import { CandidateSkillModule } from './candidate-skill/candidate-skill.module';
 import { WorkExperienceModule } from './work-experience/work-experience.module';
 import { SendMailModule } from './send-mail/send-mail.module';
 
@@ -38,7 +37,6 @@ import { SendMailModule } from './send-mail/send-mail.module';
     RecruitmentModule,
     StorageModule,
     EducationModule,
-    CandidateSkillModule,
     WorkExperienceModule,
     SendMailModule,
 
