@@ -200,7 +200,7 @@ export const updateBasicInfoAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteWorkExperienceAtProfile = createAction(
     "[Candidate] Delete Work Experience",
-    props<{id: string, workExperienceId: string}>()
+    props<{id: string, workExperience: string}>()
     );
 export const deleteWorkExperienceAtProfileSuccess = createAction(
     "[Candidate] Delete Work Experience Success",
@@ -210,6 +210,64 @@ export const deleteWorkExperienceAtProfileFailure = createAction(
     "[Candidate] Delete Work Experience Failure",
     props<{error: string}>()
     );
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const deleteEducationAtProfile = createAction(
+    "[Candidate] Delete Education",
+    props<{id: string, education: string}>()
+    );
+export const deleteEducationAtProfileSuccess = createAction(
+    "[Candidate] Delete Education Success",
+    props<{candidate: Candidate}>()
+    );
+export const deleteEducationAtProfileFailure = createAction(
+    "[Candidate] Delete Education Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const deleteLanguageAtProfile = createAction(
+    "[Candidate] Delete Language",
+    props<{id: string, language: string}>()
+    );
+export const deleteLanguageAtProfileSuccess = createAction(
+    "[Candidate] Delete Language Success",
+    props<{candidate: Candidate}>()
+    );
+export const deleteLanguageAtProfileFailure = createAction(
+    "[Candidate] Delete Language Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const deleteSkillAtProfile = createAction(
+    "[Candidate] Delete Skill",
+    props<{id: string, skill: string}>()
+    );
+export const deleteSkillAtProfileSuccess = createAction(
+    "[Candidate] Delete Skill Success",
+    props<{candidate: Candidate}>()
+    );
+export const deleteSkillAtProfileFailure = createAction(
+    "[Candidate] Delete Skill Failure",
+    props<{error: string}>()
+    );
+
 
 
 

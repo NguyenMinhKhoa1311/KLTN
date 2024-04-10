@@ -29,6 +29,7 @@ export class JobDetailComponent {
   jobDialog!: ElementRef<HTMLDialogElement>;
   cdr1 = inject(ChangeDetectorRef);
   //variable
+  jobToUpdate:Job = <Job>{};
   listJobs: Job[] = [];
   subscriptions: Subscription[] = [];
   careerList: Career[]=[];
@@ -36,6 +37,7 @@ export class JobDetailComponent {
 
   //ngrx of job
   jobGetByRecruiterATJobDetail$ = this.store.select('job','jobsTakenByRecruiterAtJobDetail')
+  jobUpdatedAtJobDetail$ = this.store.select('job','jobUpdatedAtJobDetail');
 
   //ngrx of field
   fieldNoLimitAtJobDetail$ = this.store.select('field', 'fieldNoLimitAtJobDetail');
@@ -91,6 +93,14 @@ export class JobDetailComponent {
         if(careers.length > 0){
           this.careerList = careers;
         }
+      }),
+      //theo dõi job dc update
+      this.jobUpdatedAtJobDetail$.subscribe(job => {
+        console.log(job);
+        if(job._id!='500'){
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5'}) );
+          this.closeJobDialog();
+        }
       })
     )
   }
@@ -120,11 +130,15 @@ export class JobDetailComponent {
 
     }
     console.log(jobData);
+    console.log(this.jobToUpdate._id);
+    
+    this.store.dispatch(JobActions.updateJobAtJobDetail({job: jobData, id: this.jobToUpdate._id}));
     
 
   }
   openJobDialog(job: Job) {
     console.log(job);
+    this.jobToUpdate = job;
     let [startSalary, endSalary] =[0,0]
     if(job.Salary != "Thỏa thuận"){
       [startSalary, endSalary] = extractNumbersRegex(job.Salary);

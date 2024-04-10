@@ -54,6 +54,29 @@ export const initialState: candidateState = {
     isUpdateBasicInfoAtProfileSuccess:  false,
     updateBasicInfoAtProfileError:  "",
     candidateUpdatedBasicInfoAtProfile: <Candidate>{},
+
+
+    isDeleteEducationAtProfileLoading: false,
+    isDeleteEducationAtProfileSuccess: false,
+    deleteEducationAtProfileError: "",
+    candidateDeletedEducationAtProfile: <Candidate>{},
+
+    isDeleteWorkExperienceAtProfileLoading: false,
+    isDeleteWorkExperienceAtProfileSuccess: false,
+    deleteWorkExperienceAtProfileError: "",
+    candidateDeletedWorkExperienceAtProfile: <Candidate>{},
+
+    isDeleteLanguageAtProfileLoading: false,
+    isDeleteLanguageAtProfileSuccess: false,
+    deleteLanguageAtProfileError: "",
+    candidateDeletedLanguageAtProfile: <Candidate>{},
+
+    isDeleteSkillAtProfileLoading: false,
+    isDeleteSkillAtProfileSuccess: false,
+    deleteSkillAtProfileError: "",
+    candidateDeletedSkillAtProfile: <Candidate>{},
+
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -369,6 +392,153 @@ on(CandidateActions.updateBasicInfoAtProfileFailure,(state, actions)=>{
         updateBasicInfoAtProfileError: actions.error,
     };
 }),
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.deleteEducationAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isDeleteEducationAtProfileLoading: true,
+        isDeleteEducationAtProfileSuccess: false,
+        deleteEducationAtProfileError: "",
+    };
+}),
+on(CandidateActions.deleteEducationAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isDeleteEducationAtProfileLoading: false,
+        isDeleteEducationAtProfileSuccess: true,
+        deleteEducationAtProfileError: "",
+        candidateDeletedEducationAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.deleteEducationAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isDeleteEducationAtProfileLoading: false,
+        isDeleteEducationAtProfileSuccess: false,
+        deleteEducationAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.deleteWorkExperienceAtProfile,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteWorkExperienceAtProfileLoading: true,
+            isDeleteWorkExperienceAtProfileSuccess: false,
+            deleteWorkExperienceAtProfileError: "",
+        };
+    }),
+    on(CandidateActions.deleteWorkExperienceAtProfileSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteWorkExperienceAtProfileLoading: false,
+            isDeleteWorkExperienceAtProfileSuccess: true,
+            deleteWorkExperienceAtProfileError: "",
+            candidateDeletedWorkExperienceAtProfile: actions.candidate,
+        };
+    }),
+    on(CandidateActions.deleteWorkExperienceAtProfileFailure,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteWorkExperienceAtProfileLoading: false,
+            isDeleteWorkExperienceAtProfileSuccess: false,
+            deleteWorkExperienceAtProfileError: actions.error,
+        };
+    }),
+
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.deleteLanguageAtProfile,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteLanguageAtProfileLoading: true,
+            isDeleteLanguageAtProfileSuccess: false,
+            deleteLanguageAtProfileError: "",
+        };
+    }),
+    on(CandidateActions.deleteLanguageAtProfileSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteLanguageAtProfileLoading: false,
+            isDeleteLanguageAtProfileSuccess: true,
+            deleteLanguageAtProfileError: "",
+            candidateDeletedLanguageAtProfile: actions.candidate,
+        };
+    }),
+    on(CandidateActions.deleteLanguageAtProfileFailure,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteLanguageAtProfileLoading: false,
+            isDeleteLanguageAtProfileSuccess: false,
+            deleteLanguageAtProfileError: actions.error,
+        };
+    }),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.deleteSkillAtProfile,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteSkillAtProfileLoading: true,
+            isDeleteSkillAtProfileSuccess: false,
+            deleteSkillAtProfileError: "",
+        };
+    }),
+    on(CandidateActions.deleteSkillAtProfileSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteSkillAtProfileLoading: false,
+            isDeleteSkillAtProfileSuccess: true,
+            deleteSkillAtProfileError: "",
+            candidateDeletedSkillAtProfile: actions.candidate,
+        };
+    }),
+    on(CandidateActions.deleteSkillAtProfileFailure,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteSkillAtProfileLoading: false,
+            isDeleteSkillAtProfileSuccess: false,
+            deleteSkillAtProfileError: actions.error,
+        };
+    }),
+    
+
+
+
+
 
     
 

@@ -39,4 +39,22 @@ export class CandidateService {
   updateBasicInfo(basicInfo: any,id:string){
     return this.httpClient.put<Candidate>(`${URL}/candidate/updateBasicInfo?id=${id}`, basicInfo);
   }
+
+  deleteSkill(id: string, skill: string)
+  {
+    return this.httpClient.put<Candidate>(`${URL}/candidate/DeleteSkills?id=${id}&skill=${skill}`,{});
+  }
+  deleteLanguage(id: string, language: string)
+  {
+    return this.httpClient.put<Candidate>(`${URL}/candidate/DeleteLanguage?id=${id}&language=${language}`,{});
+  }
+  deleteEducation(id: string, education: string)
+  {
+    return this.httpClient.put<Candidate>(`${URL}/candidate/DeleteEducation?id=${id}&education_id=${education}`,{});
+  }
+  deleteWorkExperience(id: string, workExperience: string)
+  {
+    return this.httpClient.put<Candidate>(`${URL}/candidate/DeleteWorkExperience?id=${id}&work_experience_id=${workExperience}`,{});
+  }
+
 }

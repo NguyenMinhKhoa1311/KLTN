@@ -199,6 +199,50 @@ export class ProfileComponent implements OnDestroy {
             }
         }
       }),
+      // theo dõi candidate dc delete skill
+      this.candidateDeletedSkillAtProfile$.subscribe((candidate) => {
+        if(this.isDeleteSkill){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.isDeleteSkill = false;
+            }
+        }
+      }),
+      // theo dõi candidate dc delete education
+      this.candidateDeletedEducationAtProfile$.subscribe((candidate) => {
+        if(this.isDeleteEducation){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.isDeleteEducation = false;
+            }
+        }
+      }),
+      // theo dõi candidate dc delete work experience
+      this.candidateDeletedWorkExperienceAtProfile$.subscribe((candidate) => {
+        if(this.isDeleteWorkExperience){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.isDeleteWorkExperience = false;
+            }
+        }
+      }),
+      // theo dõi candidate dc delete language
+      this.candidateDeletedLanguageAtProfile$.subscribe((candidate) => {
+        if(this.isDeleteLanguage){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.isDeleteLanguage = false;
+            }
+        }
+      })
     )
 
     
@@ -218,6 +262,10 @@ export class ProfileComponent implements OnDestroy {
   isUpdateBasicInfo: boolean = false;
   isUpdateImage: boolean = false;
   isUpdateImageOfCandidate: boolean = false;
+  isDeleteSkill: boolean = false;
+  isDeleteEducation: boolean = false;
+  isDeleteWorkExperience: boolean = false;
+  isDeleteLanguage: boolean = false;
   subscriptions: Subscription[] = [];
   candidateToRender: Candidate=<Candidate>{} ;
   foldernameCreatedAtProfile: string = "";
@@ -240,6 +288,10 @@ export class ProfileComponent implements OnDestroy {
   candidateUpdateBasicInfoAtProfile$ = this.store.select('candidate','candidateUpdatedBasicInfoAtProfile');
   candidateUpdateAdvatarAtProfile$ = this.store.select('candidate','candidateUpdatedAvatarAtProfile');
   candidateUpdateSkillAtProfile$ = this.store.select('candidate','candidateUpdatedSkillAtProfile');
+  candidateDeletedSkillAtProfile$ = this.store.select('candidate','candidateDeletedSkillAtProfile');
+  candidateDeletedLanguageAtProfile$ = this.store.select('candidate','candidateDeletedLanguageAtProfile');
+  candidateDeletedWorkExperienceAtProfile$ = this.store.select('candidate','candidateDeletedWorkExperienceAtProfile');
+  candidateDeletedEducationAtProfile$ = this.store.select('candidate','candidateDeletedEducationAtProfile');
 
 
 
@@ -296,7 +348,7 @@ export class ProfileComponent implements OnDestroy {
       EducationId: generateUuid(),
       Major: this.profileForm.value.Major,
       Degree: this.profileForm.value.Degree,
-      School:"Đại Học Hoa Sen",
+      School:this.profileForm.value.School,
       StartDate: convertStringToDate(this.profileForm.value.StartDay??""),
       EndDate: convertStringToDate(this.profileForm.value.EndDay??""),
     }
@@ -430,8 +482,42 @@ export class ProfileComponent implements OnDestroy {
       }
       this.store.dispatch(CandidateActions.updateBasicInfoAtProfile({basicInfo: basicInfo, id:this.candidateToRender._id}));
     }
-
   }
+
+  deleteSkill(skill: string){
+    console.log(skill);
+    if(!this.isDeleteSkill){
+      this.isDeleteSkill = true;
+    }
+    this.store.dispatch(CandidateActions.deleteSkillAtProfile({skill: skill, id: this.candidateToRender._id}));
+    
+  }
+  deleteEducation(education: string){
+    console.log(education);
+    if(!this.isDeleteEducation){
+      this.isDeleteEducation = true;
+    }
+    this.store.dispatch(CandidateActions.deleteEducationAtProfile({education: education, id: this.candidateToRender._id}));
+  }
+
+  deleteWorkExperience(workExperience: string){
+    console.log(workExperience);
+    if(!this.isDeleteWorkExperience){
+      this.isDeleteWorkExperience = true;
+    }
+    this.store.dispatch(CandidateActions.deleteWorkExperienceAtProfile({workExperience: workExperience, id: this.candidateToRender._id}));
+    
+  }
+
+  deleteLanguage(language: string){
+    console.log(language);
+    if(!this.isDeleteLanguage){
+      this.isDeleteLanguage = true;
+    }
+    this.store.dispatch(CandidateActions.deleteLanguageAtProfile({language: language, id: this.candidateToRender._id}));
+  }
+
+  
   
   @ViewChild('exprienceDialog', { static: true })
   exprienceDialog!: ElementRef<HTMLDialogElement>;

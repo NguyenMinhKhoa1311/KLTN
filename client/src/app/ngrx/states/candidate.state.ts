@@ -56,4 +56,31 @@ export interface candidateState{
     candidateUpdatedBasicInfoAtProfile: Candidate;
 
 
+
+
+    isDeleteSkillAtProfileLoading: boolean;
+    isDeleteSkillAtProfileSuccess: boolean;
+    deleteSkillAtProfileError: string;
+    candidateDeletedSkillAtProfile: Candidate;
+
+
+    isDeleteLanguageAtProfileLoading: boolean;
+    isDeleteLanguageAtProfileSuccess: boolean;
+    deleteLanguageAtProfileError: string;
+    candidateDeletedLanguageAtProfile: Candidate;
+
+
+
+    isDeleteEducationAtProfileLoading: boolean;
+    isDeleteEducationAtProfileSuccess: boolean;
+    deleteEducationAtProfileError: string;
+    candidateDeletedEducationAtProfile: Candidate;
+
+
+    isDeleteWorkExperienceAtProfileLoading: boolean;
+    isDeleteWorkExperienceAtProfileSuccess: boolean;
+    deleteWorkExperienceAtProfileError: string;
+    candidateDeletedWorkExperienceAtProfile: Candidate;
+
+
 }

@@ -39,6 +39,8 @@ export class JobService {
   }
 
   update(job:any,id:string){
+    console.log(id);
+    
     return this.httpClient.put<Job>(`${URL}/job/updateJob?id=${id}`,job);
   }
   getByRecruiter(recruiterId:string){

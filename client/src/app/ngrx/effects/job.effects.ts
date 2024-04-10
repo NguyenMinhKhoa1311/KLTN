@@ -129,7 +129,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.updateJobAtJobDetail),
             exhaustMap(action =>
-                this.jobService.update(action.job, action.job).pipe(
+                this.jobService.update(action.job, action.id).pipe(
                     map(() => {
                         return JobActions.updateJobAtJobDetailSuccess({job: action.job})
                     }),
@@ -174,5 +174,6 @@ export class JobEffects {
         )
         )
         )
+
 
 }

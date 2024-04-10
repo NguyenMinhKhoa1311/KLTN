@@ -162,7 +162,7 @@ export const getJobByRecruiterAtJobDetailSuccess = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByLocationdWithKeywordsAtJob = createAction(
     '[Job] Get By Location With Keywords',
-    props<{ location: string, keywords: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+    props<{ location: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
 );
 export const getByLocationdWithKeywordsAtJobSuccess = createAction(
     '[Job] Get By Location With Keywords Success',

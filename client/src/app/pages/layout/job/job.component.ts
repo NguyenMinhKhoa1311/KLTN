@@ -33,10 +33,10 @@ export class JobComponent {
   page: number = 0;
 
   // ngrx of job
-
   jobsTakenByAllAndSort$ = this.store.select('job', 'JobTakenBygetAllAndSortAtJob');
   jobTakenByFieldName$ = this.store.select('job', 'JobTakenByFieldNameAtJob');
   jobTakenByCareerName$ = this.store.select('job', 'JobTakenByCareerNameAtJob');
+  jobTakenByLocation$ = this.store.select('job', 'jobsTakenByLocationAtJob');
 
   // ngrx of field
   fieldNoLimitAtJob$ = this.store.select('field','fieldNoLimitAtJob');
@@ -105,6 +105,13 @@ export class JobComponent {
           
           this.careerList = careers.map(career => career.Name);
         }
+      }),
+
+      //subscribe to ngrx of getByLocationdWithKeywordsAtJob
+      this.jobTakenByLocation$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }
       })
       
     )
@@ -139,6 +146,15 @@ export class JobComponent {
     }
   }
   
+    locationValue = '';
+  locationValueChange(){
+    console.log("Giá trị đã chọn là: ", this.locationValue);
+    if(this.locationValue != null){
+      this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }else{
+      this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }
+  }
 
   nextJobs(){
     this.page++;
@@ -213,7 +229,7 @@ export class JobComponent {
     "Yên Bái"
   ];
 
-  locationValue = '';
+
 
   onSelectionChange(_id: string) {
     console.log("Giá trị đã chọn là: ", _id);

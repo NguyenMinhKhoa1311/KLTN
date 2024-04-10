@@ -187,4 +187,71 @@ export class CandidateEffects{
             catchError((error) => of(CandidateActions.updateBasicInfoAtProfileFailure({error: error})))))
          )
     );
+
+    deleteSkillAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.deleteSkillAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.deleteSkill(action.id, action.skill).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.deleteSkillAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.deleteSkillAtProfileFailure({error: "Delete Skill At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.deleteSkillAtProfileFailure({error: error})))))
+         )
+    );
+    delelanguageAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.deleteLanguageAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.deleteLanguage(action.id, action.language).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.deleteLanguageAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.deleteLanguageAtProfileFailure({error: "Delete Language At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.deleteLanguageAtProfileFailure({error: error})))))
+         )
+    );
+
+    deleteEducationAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.deleteEducationAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.deleteEducation(action.id, action.education).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.deleteEducationAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.deleteEducationAtProfileFailure({error: "Delete Education At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.deleteEducationAtProfileFailure({error: error})))))
+         )
+    );
+
+    deleteWorkExperienceAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.deleteWorkExperienceAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.deleteWorkExperience(action.id, action.workExperience).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.deleteWorkExperienceAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.deleteWorkExperienceAtProfileFailure({error: "Delete Work Experience At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.deleteWorkExperienceAtProfileFailure({error: error})))))
+         )
+    );
 }

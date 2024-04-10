@@ -122,7 +122,7 @@
                             edit
                         </span>
                     </div>
-                    <div class="delete">
+                    <div class="delete" (click)="deleteWorkExperience(experience._id)">
                         <span class="material-symbols-outlined">
                             delete
                         </span>
@@ -172,7 +172,7 @@
                             edit
                         </span>
                     </div>
-                    <div class="delete">
+                    <div class="delete" (click)="deleteEducation(learn._id)">
                         <span class="material-symbols-outlined">
                             delete
                         </span>
@@ -191,7 +191,7 @@
             </div>
             <div class="skill_select" *ngFor="let skill of candidateToRender.Skills">
                 <span>{{skill}}</span>
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined" (click)="deleteSkill(skill)">
                     delete
                 </span>
             </div>
@@ -207,7 +207,7 @@
             </div>
             <div class="language_select" *ngFor="let language of candidateToRender.Languages">
                 <span>{{language}}</span>
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined" (click)="deleteLanguage(language)">
                     delete
                 </span>
             </div>
