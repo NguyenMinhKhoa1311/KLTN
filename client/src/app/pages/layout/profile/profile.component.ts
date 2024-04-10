@@ -592,8 +592,6 @@ export class ProfileComponent implements OnDestroy {
     this.cdr6.detectChanges();
   }
   
-
-
   selectedImage: string | ArrayBuffer | null = null;
   formData: FormData = new FormData();
   file: any;
@@ -611,4 +609,31 @@ export class ProfileComponent implements OnDestroy {
     console.log(this.file);
     this.isUpdateImage = true;
   }
+
+  @ViewChild('updateLearnDialog', { static: true })
+  updateLearnDialog!: ElementRef<HTMLDialogElement>;
+  cdr7 = inject(ChangeDetectorRef);
+  openUpdateLearnDialog() {
+    this.updateLearnDialog.nativeElement.showModal();
+    this.cdr7.detectChanges();
+  }
+  closeUpdateLearnDialog() {
+    this.updateLearnDialog.nativeElement.close();
+    this.cdr7.detectChanges();
+  }
+
+  @ViewChild('updateExprienceDialog', { static: true })
+  updateExprienceDialog!: ElementRef<HTMLDialogElement>;
+  cdr8 = inject(ChangeDetectorRef);
+  openUpdateExprienceDialog() {
+    this.updateExprienceDialog.nativeElement.showModal();
+    this.cdr8.detectChanges();
+  }
+  closeUpdateExprienceDialog() {
+    this.updateExprienceDialog.nativeElement.close();
+    this.cdr8.detectChanges();
+  }
+
+  updateOnfEducation (){}
+  updateOneofWorkExperience (){}
 }
