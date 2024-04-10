@@ -146,7 +146,7 @@ export class JobComponent {
     }
   }
   
-    locationValue = '';
+  locationValue = '';
   locationValueChange(){
     console.log("Giá trị đã chọn là: ", this.locationValue);
     if(this.locationValue != null){
