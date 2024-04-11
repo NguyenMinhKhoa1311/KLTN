@@ -30,6 +30,25 @@ export class EducationService {
     };
   }
 
+  async update(updateEducation: any) {
+    try{
+      const education = await this.educationModel.findByIdAndUpdate(updateEducation._id, updateEducation,{new:true});
+      if(education._id.toString().length > 0){
+        return education;
+      }
+      else{
+        return {
+          _id: "500",
+        };
+      }
+    }
+    catch(err){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
   async delete(id: string){
     try{
       const education = await this.educationModel.findByIdAndDelete(id);

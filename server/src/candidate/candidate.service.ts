@@ -10,7 +10,8 @@ import { Field } from 'src/field/entities/field.entity';
 import { Education } from 'src/education/entities/education.entity';
 import { WorkExperience } from 'src/work-experience/entities/work-experience.entity';
 import { DesiredJob } from 'src/desired-job/entities/desired-job.entity';
-import { CreateStorageDto } from 'src/storage/dto/create-storage.dto';
+import { Skill } from 'src/skill/entities/skill.entity';
+import { Reference } from 'src/references/entities/reference.entity';
 
 @Injectable()
 export class CandidateService {
@@ -21,6 +22,8 @@ export class CandidateService {
     @InjectModel(Education.name) private EducationModel: Model<Education>,
     @InjectModel(WorkExperience.name) private WorkExperienceModel: Model<WorkExperience>,
     @InjectModel(DesiredJob.name) private DesiredJobModel: Model<DesiredJob>,
+    @InjectModel(Skill.name) private SkillModel: Model<Skill>,
+    @InjectModel(Reference.name) private ReferenceModel: Model<Reference>,
   ){}
   async create(createCandidateDto: CreateCandidateDto) {
     try {
@@ -73,6 +76,28 @@ export class CandidateService {
   }
 
 
+  async findById(id: string){
+    try{
+      const candidate = await this.CandidateModel.findById(id)
+      .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
+      .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('Field', 'FieldId Name', this.FieldModel);
+      if(candidate._id.toString.length > 0){
+        return candidate;
+      }else{
+        return {
+          _id: "500"
+        }
+      }
+    }
+    catch(err){
+      return {
+        _id: "500",
+      }
+    }
+  }
 
 
 

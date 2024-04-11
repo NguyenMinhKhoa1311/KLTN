@@ -28,6 +28,25 @@ export class WorkExperienceService {
     }
   }
 
+  async update(updateWorkExperience: any) {
+    try{
+      const workExperience = await this.workExperienceModel.findByIdAndUpdate(updateWorkExperience._id, updateWorkExperience,{new:true});
+      if(workExperience._id.toString().length > 0){
+        return workExperience;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(err){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
   async delete(id: string){
     try{
       const workExperience = await this.workExperienceModel.findByIdAndDelete(id);

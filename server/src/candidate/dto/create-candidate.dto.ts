@@ -20,6 +20,7 @@ export class CreateCandidateDto {
         public User: string,
         public DateOfBirth: Date,
         public FavoriteJobs: string[],
+        public References: string[],
         
         
     ){}

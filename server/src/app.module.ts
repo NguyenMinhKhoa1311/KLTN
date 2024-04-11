@@ -18,6 +18,8 @@ import { StorageModule } from './storage/storage.module';
 import { EducationModule } from './education/education.module';
 import { WorkExperienceModule } from './work-experience/work-experience.module';
 import { SendMailModule } from './send-mail/send-mail.module';
+import { SkillModule } from './skill/skill.module';
+import { ReferencesModule } from './references/references.module';
 
 
 @Module({
@@ -39,6 +41,8 @@ import { SendMailModule } from './send-mail/send-mail.module';
     EducationModule,
     WorkExperienceModule,
     SendMailModule,
+    SkillModule,
+    ReferencesModule,
 
 
 

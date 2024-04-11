@@ -20,6 +20,10 @@ import { StorageModule } from 'src/storage/storage.module';
 import { JobModule } from 'src/job/job.module';
 import { EducationModule } from 'src/education/education.module';
 import { WorkExperienceModule } from 'src/work-experience/work-experience.module';
+import { SkillSchema } from 'src/skill/entities/skill.entity';
+import { SkillModule } from 'src/skill/skill.module';
+import { ReferencesSchema } from 'src/references/entities/reference.entity';
+import { ReferencesModule } from 'src/references/references.module';
 
 
 @Module({
@@ -34,6 +38,8 @@ import { WorkExperienceModule } from 'src/work-experience/work-experience.module
       {name: 'Job', schema: JobSchema},
       {name: 'Education', schema: EducationSchema},
       {name: 'WorkExperience', schema: WorkExperienceSchema},
+      {name: 'Skill', schema: SkillSchema},
+      {name: 'Reference', schema: ReferencesSchema}
     ]),
     forwardRef(() => DesiredJobModule),
     forwardRef(() => UserModule),
@@ -43,6 +49,8 @@ import { WorkExperienceModule } from 'src/work-experience/work-experience.module
     forwardRef(() => JobModule),
     forwardRef(() =>EducationModule),
     forwardRef(() => WorkExperienceModule),
+    forwardRef(() => SkillModule),
+    forwardRef(() => ReferencesModule )
 
   ],
   controllers: [CandidateController],

@@ -301,6 +301,54 @@ export class CandidateController {
     }
   }
 
+  @Put('UpdateOneOfEducation')
+  async updateOneOfEducation(@Query('id') id: string, @Body() education: any){
+    try{
+      const educationAfterUpdate = await this.educationService.update(education);
+      if(educationAfterUpdate._id!="500"){
+        const candidate = await this.candidateService.findById(id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('UpdateOneOfWorkExperience')
+  async updateOneOfWorkExperience(@Query('id') id: string, @Body() workExperience: any){
+    try{
+      const workExperienceAfterUpdate = await this.workExperienceService.update(workExperience);
+      if(workExperienceAfterUpdate._id!="500"){
+        const candidate = await this.candidateService.findById(id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  
+
   @Put('DeleteEducation')
   async deleteEducation(@Query('id') id: string, @Query('education_id') education_id: string){
     try{
