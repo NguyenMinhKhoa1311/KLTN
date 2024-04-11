@@ -592,7 +592,41 @@
                     }
                 }
 
-                .career{}
+                .career, .field{
+                    margin-bottom: 10px;
+                    .custom-select{
+                        margin-top: 10px;
+                        width: 100%;
+                        position: relative;
+                        select{
+                            appearance: none;
+                            width: 100%;
+                            font-size: 14px;
+                            padding: 0.675em 6em 0.675em 1em;
+                            background-color: #fff;
+                            border: 1px solid #caced1;
+                            border-radius: 10px;
+                            color: #000;
+                            cursor: pointer;
+                            box-shadow: 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.1); 
+                        }
+                    }
+                    .custom-select::before,
+                    .custom-select::after {
+                    --size: 0.3rem;
+                    position: absolute;
+                    content: "";
+                    right: 1rem;
+                    pointer-events: none;
+                    }
+
+                    .custom-select::after {
+                    border-left: var(--size) solid transparent;
+                    border-right: var(--size) solid transparent;
+                    border-top: var(--size) solid black;
+                    top: 50%;
+                    }
+                }
             }
         }
         
