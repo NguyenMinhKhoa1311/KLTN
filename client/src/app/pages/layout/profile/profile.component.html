@@ -118,7 +118,7 @@
                 </div>
                 <div class="control">
                     <div class="edit">
-                        <span class="material-symbols-outlined" (click)="openUpdateExprienceDialog()">
+                        <span class="material-symbols-outlined" (click)="openUpdateExprienceDialog(experience)">
                             edit
                         </span>
                     </div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="control">
                     <div class="edit">
-                        <span class="material-symbols-outlined" (click)="openUpdateLearnDialog()">
+                        <span class="material-symbols-outlined" (click)="openUpdateLearnDialog(learn)">
                             edit
                         </span>
                     </div>
@@ -434,7 +434,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="updateOneofWorkExperience()"
+                    <button appearance="primary" tuiButton type="button" (click)="updateOneOfWorkExperience()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>
@@ -664,7 +664,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="updateOnfEducation()"
+                    <button appearance="primary" tuiButton type="button" (click)="updateOneOfEducation()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>

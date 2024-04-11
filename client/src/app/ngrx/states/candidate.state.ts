@@ -82,5 +82,15 @@ export interface candidateState{
     deleteWorkExperienceAtProfileError: string;
     candidateDeletedWorkExperienceAtProfile: Candidate;
 
+    isUpdateOneOfEducationAtProfileLoading: boolean;
+    isUpdateOneOfEducationAtProfileSuccess: boolean;
+    updateOneOfEducationAtProfileError: string;
+    candidateUpdatedOneOfEducationAtProfile: Candidate;
+
+    isUpdateOneOfWorkExperienceAtProfileLoading: boolean;
+    isUpdateOneOfWorkExperienceAtProfileSuccess: boolean;
+    updateOneOfWorkExperienceAtProfileError: string;
+    candidateUpdatedOneOfWorkExperienceAtProfile: Candidate;
+
 
 }

@@ -76,3 +76,18 @@ export function extractNumbersRegex(str: string): [number, number] {
   }
   return [parseInt(match[1]), parseInt(match[2])];
 }
+
+export function parseDate(date: Date) {
+  // Tạo đối tượng Date từ chuỗi ngày
+const dateObject = new Date(date.toString());
+
+// Lấy ngày, tháng và năm
+const day = dateObject.getUTCDate();
+const month = dateObject.getUTCMonth() + 1; // Tháng bắt đầu từ 0
+const year = dateObject.getUTCFullYear();
+const stringDay = day < 10 ? `0${day}` : day;
+const stringMonth = month < 10 ? `0${month}` : month;
+// Định dạng lại chuỗi ngày
+const formattedDate = `${stringDay}-${stringMonth}-${year}`;
+return formattedDate;
+}

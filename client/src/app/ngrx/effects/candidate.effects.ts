@@ -188,6 +188,40 @@ export class CandidateEffects{
          )
     );
 
+    UpdateOneOfEducationAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateOneOfEducationAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateOneOfEucation(action.id, action.education).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateOneOfEducationAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateOneOfEducationAtProfileFailure({error: "Update One Of Education At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateOneOfEducationAtProfileFailure({error: error})))))
+         )
+    );
+
+    UpdateOneOfWorkExperienceAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateOneOfWorkExperienceAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateOneOfWorkExperience(action.id, action.workExperience).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateOneOfWorkExperienceAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateOneOfWorkExperienceAtProfileFailure({error: "Update One Of Work Experience At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateOneOfWorkExperienceAtProfileFailure({error: error})))))
+         )
+    );
+
     deleteSkillAtProfile$ = createEffect(()=>
     this.action$.pipe(
         ofType(CandidateActions.deleteSkillAtProfile),

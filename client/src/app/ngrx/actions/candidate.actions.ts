@@ -197,6 +197,47 @@ export const updateBasicInfoAtProfileFailure = createAction(
 
 
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateOneOfEducationAtProfile = createAction(
+    "[Candidate] Update One Of Education",
+    props<{education: any, id:string}>()
+    );
+export const updateOneOfEducationAtProfileSuccess = createAction(
+    "[Candidate] Update One Of Education Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateOneOfEducationAtProfileFailure = createAction(
+    "[Candidate] Update One Of Education Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateOneOfWorkExperienceAtProfile = createAction(
+    "[Candidate] Update One Of Work Experience",
+    props<{workExperience: any, id:string}>()
+    );
+export const updateOneOfWorkExperienceAtProfileSuccess = createAction(
+    "[Candidate] Update One Of Work Experience Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateOneOfWorkExperienceAtProfileFailure = createAction(
+    "[Candidate] Update One Of Work Experience Failure",
+    props<{error: string}>()
+    );
+    
+
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteWorkExperienceAtProfile = createAction(
     "[Candidate] Delete Work Experience",

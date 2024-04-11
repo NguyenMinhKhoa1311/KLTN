@@ -76,6 +76,16 @@ export const initialState: candidateState = {
     deleteSkillAtProfileError: "",
     candidateDeletedSkillAtProfile: <Candidate>{},
 
+    isUpdateOneOfEducationAtProfileLoading: false,
+    isUpdateOneOfEducationAtProfileSuccess: false,
+    updateOneOfEducationAtProfileError: "",
+    candidateUpdatedOneOfEducationAtProfile: <Candidate>{},
+
+    isUpdateOneOfWorkExperienceAtProfileLoading: false,
+    isUpdateOneOfWorkExperienceAtProfileSuccess: false,
+    updateOneOfWorkExperienceAtProfileError: "",
+    candidateUpdatedOneOfWorkExperienceAtProfile: <Candidate>{},
+
 
 };
 
@@ -397,6 +407,69 @@ on(CandidateActions.updateBasicInfoAtProfileFailure,(state, actions)=>{
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateOneOfEducationAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfEducationAtProfileLoading: true,
+        isUpdateOneOfEducationAtProfileSuccess: false,
+        updateOneOfEducationAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateOneOfEducationAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfEducationAtProfileLoading: false,
+        isUpdateOneOfEducationAtProfileSuccess: true,
+        updateOneOfEducationAtProfileError: "",
+        candidateUpdatedOneOfEducationAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateOneOfEducationAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfEducationAtProfileLoading: false,
+        isUpdateOneOfEducationAtProfileSuccess: false,
+        updateOneOfEducationAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateOneOfWorkExperienceAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfWorkExperienceAtProfileLoading: true,
+        isUpdateOneOfWorkExperienceAtProfileSuccess: false,
+        updateOneOfWorkExperienceAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateOneOfWorkExperienceAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfWorkExperienceAtProfileLoading: false,
+        isUpdateOneOfWorkExperienceAtProfileSuccess: true,
+        updateOneOfWorkExperienceAtProfileError: "",
+        candidateUpdatedOneOfWorkExperienceAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateOneOfWorkExperienceAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfWorkExperienceAtProfileLoading: false,
+        isUpdateOneOfWorkExperienceAtProfileSuccess: false,
+        updateOneOfWorkExperienceAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
 
 
 
@@ -534,6 +607,8 @@ on(CandidateActions.deleteEducationAtProfileFailure,(state, actions)=>{
             deleteSkillAtProfileError: actions.error,
         };
     }),
+
+
     
 
 

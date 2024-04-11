@@ -56,5 +56,14 @@ export class CandidateService {
   {
     return this.httpClient.put<Candidate>(`${URL}/candidate/DeleteWorkExperience?id=${id}&work_experience_id=${workExperience}`,{});
   }
+  updateOneOfEucation(id: string, education: any)
+  {
+    return this.httpClient.put<Candidate>(`${URL}/candidate/UpdateOneOfEducation?id=${id}`, education);
+  }
+  updateOneOfWorkExperience(id: string, workExperience: any)
+  {
+    return this.httpClient.put<Candidate>(`${URL}/candidate/UpdateOneOfWorkExperience?id=${id}`, workExperience);
+  }
+
 
 }

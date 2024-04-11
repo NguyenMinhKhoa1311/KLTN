@@ -4,7 +4,7 @@ import { TaigaModule } from '../../../shared/taiga.module';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { candidateState } from '../../../ngrx/states/candidate.state';
-import { convertStringToDate, generateUuid } from '../../../../environments/environments';
+import { convertStringToDate, generateUuid, parseDate } from '../../../../environments/environments';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
@@ -18,6 +18,8 @@ import * as FieldActions from '../../../ngrx/actions/field.actions';
 import * as CareerActions from '../../../ngrx/actions/career.actions';
 import { Career } from '../../../models/career.model';
 import { Field } from '../../../models/field.model';
+import { Education } from '../../../models/education.model';
+import { WorkExperience } from '../../../models/work-experience.model';
 
 @Component({
   selector: 'app-profile',
@@ -242,7 +244,31 @@ export class ProfileComponent implements OnDestroy {
               this.isDeleteLanguage = false;
             }
         }
-      })
+      }),
+      // theo dõi candidate dc update one of education
+      this.candidateUpdatedOneOfEducationAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateOneOfEdcation){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.updateLearnDialog.nativeElement.close();
+              this.cdr7.detectChanges();
+            }
+        }
+      }),
+      // theo dõi candidate dc update one of work experience
+      this.candidateUpdatedOneOfWorkExperienceAtProfile$.subscribe((candidate) => {
+        if(this.isUpdateOneOfWorkExperience){
+            if(candidate._id!="500"){
+              console.log(candidate);
+              this.candidateToRender = candidate;
+              sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+              this.updateExprienceDialog.nativeElement.close();
+              this.cdr8.detectChanges();
+            }
+        }
+      }),
     )
 
     
@@ -268,6 +294,10 @@ export class ProfileComponent implements OnDestroy {
   isDeleteLanguage: boolean = false;
   subscriptions: Subscription[] = [];
   candidateToRender: Candidate=<Candidate>{} ;
+  isUpdateOneOfEdcation: boolean = false;
+  isUpdateOneOfWorkExperience: boolean = false;
+  educationToUpdate: Education=<Education>{};
+  workExperienceToUpdate: WorkExperience=<WorkExperience>{};
   foldernameCreatedAtProfile: string = "";
   careerList: Career[] = [];
   fieldList: Field[] = [];
@@ -292,6 +322,8 @@ export class ProfileComponent implements OnDestroy {
   candidateDeletedLanguageAtProfile$ = this.store.select('candidate','candidateDeletedLanguageAtProfile');
   candidateDeletedWorkExperienceAtProfile$ = this.store.select('candidate','candidateDeletedWorkExperienceAtProfile');
   candidateDeletedEducationAtProfile$ = this.store.select('candidate','candidateDeletedEducationAtProfile');
+  candidateUpdatedOneOfEducationAtProfile$ = this.store.select('candidate','candidateUpdatedOneOfEducationAtProfile');
+  candidateUpdatedOneOfWorkExperienceAtProfile$ = this.store.select('candidate','candidateUpdatedOneOfWorkExperienceAtProfile');
 
 
 
@@ -516,6 +548,55 @@ export class ProfileComponent implements OnDestroy {
     }
     this.store.dispatch(CandidateActions.deleteLanguageAtProfile({language: language, id: this.candidateToRender._id}));
   }
+  updateOneOfEducation (){
+    let updateOneOfEducationData = {
+      _id: this.educationToUpdate._id,
+      EducationId: this.educationToUpdate.EducationId,
+      Major: this.profileForm.value.Major,
+      Degree: this.profileForm.value.Degree,
+      School:this.profileForm.value.School,
+      StartDate: convertStringToDate(this.profileForm.value.StartDay??""),
+      EndDate: convertStringToDate(this.profileForm.value.EndDay??""),
+    }
+    console.log(updateOneOfEducationData);
+    
+    // níu dữ liệu lỗi thì cook
+    if(updateOneOfEducationData.StartDate==null || updateOneOfEducationData.EndDate ==null|| updateOneOfEducationData.Major==""||updateOneOfEducationData.Degree==""){
+      alert('Invalid date');
+    }
+    else{
+      if(!this.isUpdateOneOfEdcation){
+        this.isUpdateOneOfEdcation = true;
+      }
+      this.store.dispatch(CandidateActions.updateOneOfEducationAtProfile({education: updateOneOfEducationData, id: this.candidateToRender._id}));
+    }
+
+    
+  }
+  updateOneOfWorkExperience (){
+    let updateOneOfWorkExperienceData = {
+      _id: this.workExperienceToUpdate._id,
+      WorkExperienceId: this.workExperienceToUpdate.WorkExperienceId,
+      JobTitle: this.profileForm.value.JobTitle,
+      CompanyName: this.profileForm.value.Company,
+      StartDate: convertStringToDate(this.profileForm.value.StartDay??""),
+      EndDate: convertStringToDate(this.profileForm.value.EndDay??""),
+      Description: this.profileForm.value.Description,
+    }
+    console.log(updateOneOfWorkExperienceData);
+    
+    // níu dữ liệu lỗi thì cook
+    if(updateOneOfWorkExperienceData.StartDate==null || updateOneOfWorkExperienceData.EndDate ==null|| updateOneOfWorkExperienceData.JobTitle==""||updateOneOfWorkExperienceData.CompanyName==""||updateOneOfWorkExperienceData.Description==""){
+      alert('Invalid data');
+    }
+    else{
+      if(!this.isUpdateOneOfWorkExperience){
+        this.isUpdateOneOfWorkExperience = true;
+      }
+      this.store.dispatch(CandidateActions.updateOneOfWorkExperienceAtProfile({workExperience: updateOneOfWorkExperienceData, id:this.candidateToRender._id}));
+    }
+    
+  }
 
   
   
@@ -613,7 +694,13 @@ export class ProfileComponent implements OnDestroy {
   @ViewChild('updateLearnDialog', { static: true })
   updateLearnDialog!: ElementRef<HTMLDialogElement>;
   cdr7 = inject(ChangeDetectorRef);
-  openUpdateLearnDialog() {
+  openUpdateLearnDialog(education: Education) {
+    this.educationToUpdate = education;
+    this.profileForm.controls.School.setValue(education.School);
+    this.profileForm.controls.Major.setValue(education.Major);
+    this.profileForm.controls.StartDay.setValue(parseDate(education.StartDate));
+    this.profileForm.controls.EndDay.setValue(parseDate(education.EndDate));
+    this.profileForm.controls.Degree.setValue(education.Degree);
     this.updateLearnDialog.nativeElement.showModal();
     this.cdr7.detectChanges();
   }
@@ -625,7 +712,14 @@ export class ProfileComponent implements OnDestroy {
   @ViewChild('updateExprienceDialog', { static: true })
   updateExprienceDialog!: ElementRef<HTMLDialogElement>;
   cdr8 = inject(ChangeDetectorRef);
-  openUpdateExprienceDialog() {
+  openUpdateExprienceDialog(workExperience: WorkExperience) {
+    this.workExperienceToUpdate = workExperience;
+    this.profileForm.controls.Company.setValue(workExperience.CompanyName);
+    this.profileForm.controls.JobTitle.setValue(workExperience.JobTitle);
+    this.profileForm.controls.StartDay.setValue(parseDate(workExperience.StartDate));
+    this.profileForm.controls.EndDay.setValue(parseDate(workExperience.EndDate));
+    this.profileForm.controls.Description.setValue(workExperience.Description);
+
     this.updateExprienceDialog.nativeElement.showModal();
     this.cdr8.detectChanges();
   }
@@ -634,6 +728,5 @@ export class ProfileComponent implements OnDestroy {
     this.cdr8.detectChanges();
   }
 
-  updateOnfEducation (){}
-  updateOneofWorkExperience (){}
+
 }
