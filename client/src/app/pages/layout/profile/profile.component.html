@@ -92,12 +92,24 @@
                 </span>
                 <span>Thêm Mục Tiêu Nghề Nghiệp</span>
             </div>
-            <div class="language_select" *ngFor="let language of candidateToRender.Languages">
-                <span>{{language}}</span>
-                <span class="material-symbols-outlined">
-                    delete
-                </span>
+            <div class="target_select" *ngFor="let language of candidateToRender.Languages">
+                <div class="content">
+                    <span>{{language}}</span>
+                </div>
+                <div class="control">
+                    <div class="edit">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </div>
+                    <div class="delete">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </div>
+                </div>
             </div>
+            
         </div>
         <div class="work_experience">
             <h2>Kinh nghiệm làm việc</h2>
@@ -205,10 +217,21 @@
                 <span>Thêm Học Vấn</span>
             </div>
             <div class="skill_select" *ngFor="let skill of candidateToRender.Skills">
-                <span>{{skill}} (0/5)</span>
-                <span class="material-symbols-outlined" (click)="deleteSkill(skill)">
-                    delete
-                </span>
+                <div class="content">
+                    <span>{{skill}} (0/5)</span>
+                </div>
+                <div class="control">
+                    <div class="edit">
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </div>
+                    <div class="delete">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -238,10 +261,21 @@
             </div>
             <div class="reference_select" *ngFor="let language of candidateToRender.Languages">
                 <div class="name">
-                    <span>{{language}}</span>
-                    <span class="material-symbols-outlined">
-                        delete
-                    </span>
+                    <div class="content">
+                        <span>{{language}}</span>
+                    </div>
+                    <div class="control">
+                        <div class="edit">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </div>
+                        <div class="delete">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="position">
