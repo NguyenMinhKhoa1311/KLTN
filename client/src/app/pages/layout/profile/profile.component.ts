@@ -302,14 +302,6 @@ export class ProfileComponent implements OnDestroy {
   careerList: Career[] = [];
   fieldList: Field[] = [];
 
-  levelList=[
-    {_id: 1, name: 'level1'},
-    {_id: 2, name: 'level2'},
-    {_id: 3, name: 'level3'},
-    {_id: 4, name: 'level4'},
-    {_id: 5, name: 'level5'},
-  ];
-
   //ngrx of candidate
   candidateupdatedEducationAtProfile$ = this.store.select('candidate','candidateUpdatedEducationAtProfile');
   candidateupdatedWorkExperienceAtProfile$ = this.store.select('candidate','candidateUpdatedWorkExperienceAtProfile');
@@ -366,6 +358,12 @@ export class ProfileComponent implements OnDestroy {
 
     JobTitle: new FormControl('', Validators.required),
     School: new FormControl('', Validators.required),
+    Reference: new FormControl('', Validators.required),
+    NameReference: new FormControl('', Validators.required),
+    PositionReference: new FormControl('', Validators.required),
+    PhoneReference: new FormControl('', Validators.required),
+    CompanyReference: new FormControl('', Validators.required),
+    EmailReference: new FormControl('', Validators.required),
   });
 
   onFieldChange(event: any) {
@@ -728,5 +726,38 @@ export class ProfileComponent implements OnDestroy {
     this.cdr8.detectChanges();
   }
 
+  levelList=[
+    {_id: 1, name: 'level 1'},
+    {_id: 2, name: 'level 2'},
+    {_id: 3, name: 'level 3'},
+    {_id: 4, name: 'level 4'},
+    {_id: 5, name: 'level 5'},
+  ];
 
+  @ViewChild('targetDialog', { static: true })
+  targetDialog!: ElementRef<HTMLDialogElement>;
+  cdr9 = inject(ChangeDetectorRef);
+  openTargetDialog() {
+    this.targetDialog.nativeElement.showModal();
+    this.cdr9.detectChanges();
+  }
+  closeTargetDialog() {
+    this.targetDialog.nativeElement.close();
+    this.cdr9.detectChanges();
+  }
+
+  updateTarget(){}
+
+  @ViewChild('referenceDialog', { static: true })
+  referenceDialog!: ElementRef<HTMLDialogElement>;
+  cdr10 = inject(ChangeDetectorRef);
+  openreFerenceDialog() {
+    this.referenceDialog.nativeElement.showModal();
+    this.cdr10.detectChanges();
+  }
+  closereFerenceDialog() {
+    this.referenceDialog.nativeElement.close();
+    this.cdr10.detectChanges();
+  }
+  updateReference(){}
 }

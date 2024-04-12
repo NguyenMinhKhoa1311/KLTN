@@ -84,6 +84,21 @@
                 </div>
             </div>
         </div>
+        <div class="target">
+            <h2>Mục tiêu nghề nghiệp</h2>
+            <div class="add_text" (click)="openTargetDialog()">
+                <span class="material-symbols-outlined">
+                    add_circle
+                </span>
+                <span>Thêm Mục Tiêu Nghề Nghiệp</span>
+            </div>
+            <div class="language_select" *ngFor="let language of candidateToRender.Languages">
+                <span>{{language}}</span>
+                <span class="material-symbols-outlined">
+                    delete
+                </span>
+            </div>
+        </div>
         <div class="work_experience">
             <h2>Kinh nghiệm làm việc</h2>
             <span class="introduction">Mô tả kinh nghiệm làm việc của bạn càng chi tiết càng tốt, điều đó giúp bạn có cơ hội hiển thị nhiều hơn trong kết quả tìm kiếm</span>
@@ -190,7 +205,7 @@
                 <span>Thêm Học Vấn</span>
             </div>
             <div class="skill_select" *ngFor="let skill of candidateToRender.Skills">
-                <span>{{skill}}</span>
+                <span>{{skill}} (0/5)</span>
                 <span class="material-symbols-outlined" (click)="deleteSkill(skill)">
                     delete
                 </span>
@@ -210,6 +225,42 @@
                 <span class="material-symbols-outlined" (click)="deleteLanguage(language)">
                     delete
                 </span>
+            </div>
+        </div>
+
+        <div class="reference">
+            <h2>Người Tham Khảo</h2>
+            <div class="add_text" (click)="openreFerenceDialog()">
+                <span class="material-symbols-outlined">
+                    add_circle
+                </span>
+                <span>Thêm Người Tham Khảo</span>
+            </div>
+            <div class="reference_select" *ngFor="let language of candidateToRender.Languages">
+                <div class="name">
+                    <span>{{language}}</span>
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="position">
+                        Chức Danh
+                    </div>
+                    <div style="margin: 0 3px;">-</div>
+                    <div class="company">
+                        Công ty
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="email">
+                        Email
+                    </div>
+                    <div style="margin: 0 3px;">-</div>
+                    <div class="phone">
+                        Phone
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -701,6 +752,14 @@
                         />
                     </tui-input>
                 </div>
+                <div class="level">
+                    <span class="title">Mức độ</span>
+                    <div class="custom-select"> 
+                        <select formControlName="Level">
+                            <option *ngFor="let level of levelList" value="{{level._id}}" >{{level.name}}</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             
             <div class="a" style="width: 100%;
@@ -762,6 +821,54 @@
                 </div>
                 <div class="btn_Luu">
                     <button appearance="primary" tuiButton type="button" (click)="updateLanguage()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>
+
+<dialog id="target_dialog" style="color: #1f1a1c" #targetDialog>
+    <form [formGroup]="profileForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thêm Mục Tiêu Nghề Nghiệp</h4>
+            </div>
+            <div class="btnClose" (click)="closeTargetDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <div class="target_box" > 
+                    <span class="title">Mục Tiêu Nghề Nghiệp</span>
+                    <tui-input
+                        formControlName="Skill"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                    >
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+            </div>
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeTargetDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button" (click)="updateTarget()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>
@@ -979,3 +1086,109 @@
     </form>
 </dialog>
 
+<dialog id="reference_dialog" style="color: #1f1a1c" #referenceDialog>
+    <form [formGroup]="profileForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thêm Người Tham Khảo</h4>
+            </div>
+            <div class="btnClose" (click)="closereFerenceDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <div class="reference_box" > 
+                    <div class="row">
+                        <div class="name">
+                            <span class="title">Họ Và Tên</span>
+                            <tui-input
+                            formControlName="NameReference"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                        <div class="position">
+                            <span class="title">Chức Danh</span>
+                            <tui-input
+                            formControlName="PositionReference"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                    </div>
+                    <div class="company">
+                        <span class="title">Công ty</span>
+                        <tui-input
+                        formControlName="CompanyReference"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                        >
+                            <input
+                                tuiTextfield
+                                type="text"
+                            />
+                        </tui-input>
+                    </div>
+                    
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="email">
+                            <span class="title">Email</span>
+                            <tui-input
+                            formControlName="EmailReference"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                        <div class="phone">
+                            <span class="title">Số Điện Thoại</span>
+                            <tui-input
+                            formControlName="PhoneReference"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="number"
+                                />
+                            </tui-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closereFerenceDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button" (click)="updateReference()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>
