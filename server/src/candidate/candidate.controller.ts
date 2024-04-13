@@ -11,6 +11,10 @@ import { DesiredJobService } from 'src/desired-job/desired-job.service';
 import { CreateDesiredJobDto } from 'src/desired-job/dto/create-desired-job.dto';
 import { storage } from 'firebase-admin';
 import { CreateStorageDto } from 'src/storage/dto/create-storage.dto';
+import { SkillService } from 'src/skill/skill.service';
+import { CreateSkillDto } from 'src/skill/dto/create-skill.dto';
+import { ReferencesService } from 'src/references/references.service';
+import { CreateReferenceDto } from 'src/references/dto/create-reference.dto';
 
 @Controller('candidate')
 export class CandidateController {
@@ -18,8 +22,9 @@ export class CandidateController {
     private readonly candidateService: CandidateService,
     private readonly educationService: EducationService,
     private readonly workExperienceService: WorkExperienceService,
-
-    private readonly desiredJobService: DesiredJobService
+    private readonly skillService: SkillService,
+    private readonly desiredJobService: DesiredJobService,
+    private readonly referenceService: ReferencesService
     ) {}
 
   @Post('create')
@@ -75,6 +80,31 @@ export class CandidateController {
     }
   }
 
+  @Put('updateReference')
+  async updateReference(@Query('id') id: string, @Body() createReferenceDto: CreateReferenceDto){
+    try{
+      const reference = await this.referenceService.create(createReferenceDto);
+      log(reference)
+      if(reference._id!="500"){
+        const candidate = await this.candidateService.updateReference(id, reference._id.toString());
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+
+  }
+
   @Put('updateWorkExperience')
   async updateWorkExperience(@Query('id') id: string, @Body()createWorkExperienceDto: CreateWorkExperienceDto){
     try{
@@ -102,11 +132,14 @@ export class CandidateController {
   }
 
   @Put('updateSkills')
-  async updateSkill(@Query('id') id: string, @Query('skill')skill: string){
+  async updateSkills(@Query('id') id: string, @Body()createSkillDto:CreateSkillDto){
     try{
-      const candidate = await this.candidateService.updateSkill(id, skill);
-      if(candidate._id.toString()!="500"){
+      const skill = await this.skillService.create(createSkillDto);
+      if(skill._id!="500"){
+        const candidate = await this.candidateService.updateSkill(id, skill._id.toString());
+        if(candidate._id.toString()!="500"){
         return candidate;
+      }
       }
       else{
         return {
@@ -202,18 +235,35 @@ export class CandidateController {
     }
   }
 
+  @Put('updateCareerGoal')
+  async updateCareerGoal(@Query('id') id: string, @Query('career_goal') career_goal: string){
+    try{
+      const candidate = await this.candidateService.updateCareerGoal(id, career_goal);
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
   @Put('updateDesiredJob')
   async updateDesiredJob(@Query('id') id: string, @Body() createDesiredJobDto: CreateDesiredJobDto){
     try{
       const desiredJob = await this.desiredJobService.create(createDesiredJobDto);
-      log(desiredJob)
       if(desiredJob._id.toString()=="500"){
         return {
           _id: "500",
         }
       }
-      log(desiredJob._id.toString())
-      log(id)
       const candidate = await this.candidateService.updateDesiredJob(id, desiredJob._id.toString());
       if(candidate._id.toString()!="500"){
         return candidate;
@@ -224,75 +274,6 @@ export class CandidateController {
         }
       }
 
-    }
-    catch(error){
-      return {
-        _id: "500",
-      }
-    }
-  }
-
-  @Put('DeleteFavoriteJobs')
-  async deleteFavoriteJobs(@Query('id') id: string, @Query('job_id') job_id: string){
-    try{
-      const candidate = await this.candidateService.deleteFavoriteJobs(id, job_id);
-      if(candidate._id.toString()!="500"){
-        return candidate;
-      }
-      else{
-        return {
-          _id: "500",
-        }
-      }
-    }
-    catch(error){
-      return {
-        _id: "500",
-      }
-    }
-  }
-
-
-  @Put('DeleteSkills')
-  async deleteSkills(@Query('id') id: string, @Query('skill') skill: string){
-    try{
-        const candidate = await this.candidateService.deleteSkills(id, skill);
-        if(candidate._id.toString()!="500"){
-          return candidate;
-        }
-        else{
-          return {
-            _id: "500",
-          }
-        }
-    }
-    catch(error){
-      return {
-        _id: "500",
-      }
-    }
-  }
-
-  @Put('DeleteWorkExperience')
-  async deleteWorkExperience(@Query('id') id: string, @Query('work_experience_id') work_experience_id: string){
-    try{
-      const result = this.workExperienceService.delete(work_experience_id);
-      if(result){
-        const candidate = await this.candidateService.deleteWorkExperience(id, work_experience_id);
-        if(candidate._id.toString()!="500"){
-          return candidate;
-        }
-        else{
-          return {
-            _id: "500",
-          }
-        }
-      }
-      else{
-        return {
-          _id: "500",
-        }
-      }
     }
     catch(error){
       return {
@@ -346,9 +327,126 @@ export class CandidateController {
       }
     }
   }
+  @Put('UpdateOneOfSkill')
+  async updateOneOfSkill(@Query('id') id: string, @Body() skill: any){
+    try{
+      const skillAfterUpdate = await this.skillService.update(skill);
+      if(skillAfterUpdate._id!="500"){
+        const candidate = await this.candidateService.findById(id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
 
-  
+  @Put('UpdateOneOfReference')
+  async updateOneOfReference(@Query('id') id: string, @Body() reference: CreateReferenceDto){
+    try{
+      const referenceAfterUpdate = await this.referenceService.update(reference);
+      if(referenceAfterUpdate._id!="500"){
+        const candidate = await this.candidateService.findById(id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
 
+  @Put('DeleteFavoriteJobs')
+  async deleteFavoriteJobs(@Query('id') id: string, @Query('job_id') job_id: string){
+    try{
+      const candidate = await this.candidateService.deleteFavoriteJobs(id, job_id);
+      if(candidate._id.toString()!="500"){
+        return candidate;
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+
+  @Put('DeleteSkills')
+  async deleteSkills(@Query('id') id: string, @Query('skill') skill: string){
+    try{
+      const result = this.skillService.delete(skill);
+      if(result){
+        const candidate = await this.candidateService.deleteSkills(id, skill);
+        log(candidate)
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+      }
+      else{
+        return {
+        _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+  @Put('DeleteWorkExperience')
+  async deleteWorkExperience(@Query('id') id: string, @Query('work_experience_id') work_experience_id: string){
+    try{
+      const result = this.workExperienceService.delete(work_experience_id);
+      if(result){
+        const candidate = await this.candidateService.deleteWorkExperience(id, work_experience_id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
+
+ 
   @Put('DeleteEducation')
   async deleteEducation(@Query('id') id: string, @Query('education_id') education_id: string){
     try{
@@ -377,7 +475,33 @@ export class CandidateController {
       }
     }
   }
-
+  @Put('DeleteReference')
+  async deleteReference(@Query('id') id: string, @Query('reference_id') reference_id: string){
+    try{
+      const result = this.referenceService.delete(reference_id);
+      if(result){
+        const candidate = await this.candidateService.deleteReference(id, reference_id);
+        if(candidate._id.toString()!="500"){
+          return candidate;
+        }
+        else{
+          return {
+            _id: "500",
+          }
+        }
+      }
+      else{
+        return {
+          _id: "500",
+        }
+      }
+    }
+    catch(error){
+      return {
+        _id: "500",
+      }
+    }
+  }
   @Put('deleteLanguage')
   async deleteLanguage(@Query('id') id: string, @Query('language') language: string){
     try{

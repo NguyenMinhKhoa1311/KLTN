@@ -4,6 +4,7 @@ import { UpdateSkillDto } from './dto/update-skill.dto';
 import { Skill } from './entities/skill.entity';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { log } from 'console';
 
 @Injectable()
 export class SkillService {
@@ -16,6 +17,7 @@ export class SkillService {
 
   async create(createSkillDto: CreateSkillDto) {
     try{
+      log(createSkillDto)
        const skill = await new this.skillModel(createSkillDto).save();
        if(skill._id.toString().length > 0){
          return skill;
@@ -55,7 +57,9 @@ export class SkillService {
 
   async delete(id: string){
     try{
+      log(id);
       const skill = await this.skillModel.findByIdAndDelete(id);
+      log(skill)
       if(skill._id.toString().length > 0){
         return true;
       }

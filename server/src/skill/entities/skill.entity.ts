@@ -6,16 +6,14 @@ export type SkillDocument = HydratedDocument<Skill>
 @Schema({timestamps: true})
 export class Skill {
     @Prop({required: true, unique: true})
-    skillId: string;
+    SkillId: string;
 
     @Prop({required: true})
-    name: string;
+    Name: string;
+
 
     @Prop({required: true})
-    description: string;
-
-    @Prop({required: true})
-    level: number;
+    Level: number;
 }
 
 export const SkillSchema = SchemaFactory.createForClass(Skill);

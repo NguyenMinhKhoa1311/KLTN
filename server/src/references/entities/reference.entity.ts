@@ -6,22 +6,22 @@ export type ReferenceDocument = HydratedDocument<Reference>
 @Schema({timestamps: true})
 export class Reference {
     @Prop({required: true, unique: true})
-    referenceId: string;
+    ReferenceId: string;
 
     @Prop({required: true})
-    name: string;
+    Name: string;
 
     @Prop({required: true})
-    email: string;
+    Email: string;
 
     @Prop({required: true})
-    phone: string;
+    Phone: string;
 
     @Prop({required: true})
-    company: string;
+    Company: string;
 
     @Prop({required: true})
-    position: string;
+    Position: string;
 
 }
 

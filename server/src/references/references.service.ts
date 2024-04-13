@@ -4,6 +4,7 @@ import { UpdateReferenceDto } from './dto/update-reference.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Reference } from './entities/reference.entity';
 import { Model } from 'mongoose';
+import { log } from 'console';
 
 @Injectable()
 export class ReferencesService {

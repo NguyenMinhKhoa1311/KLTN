@@ -42,6 +42,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
     }
@@ -56,6 +58,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
@@ -82,8 +86,10 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel).exec();
       if(candidate._id.toString.length > 0){
         return candidate;
       }else{
@@ -112,6 +118,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -141,6 +149,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -168,6 +178,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -194,6 +206,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -214,6 +228,35 @@ export class CandidateService {
 
   }
 
+  async updateCareerGoal(id:string, careerGoal:string){
+    try{
+      const candidateAfterUpdate = await this.CandidateModel.findByIdAndUpdate(id, {
+        CareerGoal: careerGoal
+      }, { new: true })
+      .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
+      .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('Field', 'FieldId Name', this.FieldModel);
+      if(candidateAfterUpdate._id.toString().length > 0){
+        return candidateAfterUpdate;
+      }
+      else{
+        return {
+          _id: "500",
+        };
+      
+      }
+    }
+    catch(err){
+      return{
+        _id: "500",
+      }
+    }
+  }
+
   async updateAvatar(id:string, storage: any){
     try{
       const candidateAfterUpdate = await this.CandidateModel.findByIdAndUpdate(id, {
@@ -221,8 +264,10 @@ export class CandidateService {
         Storage: storage._id
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
-      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -252,6 +297,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -288,6 +335,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -315,6 +364,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -333,6 +384,34 @@ export class CandidateService {
       }
     }
   }
+  async updateReference(id:string, reference_id:string){
+    try{
+      const candidateAfterUpdate = await this.CandidateModel.findByIdAndUpdate(id, 
+      {$push: {References: reference_id}},
+      { new: true })
+      .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
+      .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+      .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('Field', 'FieldId Name', this.FieldModel);
+      if(candidateAfterUpdate._id.toString().length > 0){
+        return candidateAfterUpdate;
+      }
+      else{
+        return {
+          _id: "500",
+        };
+      
+      }
+    } catch(err){
+      return{
+        _id: "500",
+      }
+    }
+  }
+
 
 
   /// delete
@@ -345,6 +424,8 @@ export class CandidateService {
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+      .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel);
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -373,6 +454,37 @@ async deleteSkills(id:string, job_id :string){
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+    .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+    .populate('Career', 'CareerId Name', this.CareerModel)
+    .populate('Field', 'FieldId Name', this.FieldModel);
+    if(candidateAfterUpdate._id.toString().length > 0){
+      return candidateAfterUpdate;
+    }
+    else{
+      return {
+        _id: "500",
+      };
+    
+    }
+  }
+  catch(err){
+    return{
+      _id: "500",
+    }
+  }
+}
+
+async deleteReference(id:string, reference:string){
+  try{
+    const candidateAfterUpdate = await this.CandidateModel.findByIdAndUpdate(id, {
+      $pull:  {References: reference}
+    }, { new: true })
+    .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
+    .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
+    .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+    .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel);
     if(candidateAfterUpdate._id.toString().length > 0){
@@ -401,6 +513,8 @@ async deleteEducation(id:string, job_id :string){
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+    .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel);
     if(candidateAfterUpdate._id.toString().length > 0){
@@ -429,6 +543,8 @@ async deleteWorkExperience(id:string, job_id :string){
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+    .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel);
     if(candidateAfterUpdate._id.toString().length > 0){
@@ -456,6 +572,8 @@ async deleteLanguage(id:string, language:string){
     .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
+    .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel);
     if(candidateAfterUpdate._id.toString().length > 0){
