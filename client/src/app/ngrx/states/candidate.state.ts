@@ -92,5 +92,30 @@ export interface candidateState{
     updateOneOfWorkExperienceAtProfileError: string;
     candidateUpdatedOneOfWorkExperienceAtProfile: Candidate;
 
+    isUpdateReferenceAtProfileLoading: boolean;
+    isUpdateReferenceAtProfileSuccess: boolean;
+    updateReferenceAtProfileError: string;
+    candidateUpdatedReferenceAtProfile: Candidate;
+
+    isUpdateOneOfSkillAtProfileLoading: boolean;
+    isUpdateOneOfSkillAtProfileSuccess: boolean;
+    updateOneOfSkillAtProfileError: string;
+    candidateUpdatedOneOfSkillAtProfile: Candidate;
+
+    isUpdateCareerGoalAtProfileLoading: boolean;
+    isUpdateCareerGoalAtProfileSuccess: boolean;
+    updateCareerGoalAtProfileError: string;
+    candidateUpdatedCareerGoalAtProfile: Candidate;
+
+    isUpdateOneOfReferenceAtProfileLoading: boolean;
+    isUpdateOneOfReferenceAtProfileSuccess: boolean;
+    updateOneOfReferenceAtProfileError: string;
+    candidateUpdatedOneOfReferenceAtProfile: Candidate;
+
+    isDeleteReferenceAtProfileLoading: boolean;
+    isDeleteReferenceAtProfileSuccess: boolean;
+    deleteReferenceAtProfileError: string;
+    candidateDeletedReferenceAtProfile: Candidate;
+
 
 }

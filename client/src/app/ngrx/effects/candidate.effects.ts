@@ -288,4 +288,91 @@ export class CandidateEffects{
             catchError((error) => of(CandidateActions.deleteWorkExperienceAtProfileFailure({error: error})))))
          )
     );
+
+
+    updateReferenceAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateReferenceAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateReference(action.id, action.references).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateReferenceAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateReferenceAtProfileFailure({error: "Update Reference At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateReferenceAtProfileFailure({error: error})))))
+         )
+    );
+
+    updateOneOfSkillAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateOneOfSkillAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateOneOfSkill(action.id, action.skill).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateOneOfSkillAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateOneOfSkillAtProfileFailure({error: "Update One Of Skill At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateOneOfSkillAtProfileFailure({error: error})))))
+         )
+    );
+
+    updateCareerGoalAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateCareerGoalAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateCareerGoal(action.id, action.careerGoal).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateCareerGoalAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateCareerGoalAtProfileFailure({error: "Update Career Goal At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateCareerGoalAtProfileFailure({error: error})))))
+         )
+    );
+
+    updateOneOfReferenceAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateOneOfReferenceAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.updateOneOfReference(action.id, action.reference).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.updateOneOfReferenceAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateOneOfReferenceAtProfileFailure({error: "Update One Of Reference At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateOneOfReferenceAtProfileFailure({error: error})))))
+         )
+    );
+
+    deleteReferenceAtProfile$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.deleteReferenceAtProfile),
+        exhaustMap((action) =>
+         this.candidateService.deleteReference(action.id, action.reference).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.deleteReferenceAtProfileSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.deleteReferenceAtProfileFailure({error: "Delete Reference At Profile Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.deleteReferenceAtProfileFailure({error: error})))))
+         )
+    );
+    
 }

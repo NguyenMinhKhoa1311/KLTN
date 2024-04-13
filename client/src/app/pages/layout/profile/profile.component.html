@@ -87,26 +87,18 @@
         <div class="target">
             <h2>Mục tiêu nghề nghiệp</h2>
             <div class="add_text" (click)="openTargetDialog()">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined"*ngIf="candidateToRender.CareerGoal ==''">
                     add_circle
                 </span>
-                <span>Thêm Mục Tiêu Nghề Nghiệp</span>
+                <span class="material-symbols-outlined" *ngIf="candidateToRender.CareerGoal !=''">
+                    edit
+                    </span>
+                <span  *ngIf="candidateToRender.CareerGoal!=''">Chỉnh sửa Mục Tiêu Nghề Nghiệp</span>
+                <span  *ngIf="candidateToRender.CareerGoal==''">Thêm Mục Tiêu Nghề Nghiệp</span>
             </div>
-            <div class="target_select" *ngFor="let language of candidateToRender.Languages">
+            <div class="target_select" *ngIf="candidateToRender.CareerGoal !=''">
                 <div class="content">
-                    <span>{{language}}</span>
-                </div>
-                <div class="control">
-                    <div class="edit">
-                        <span class="material-symbols-outlined">
-                            edit
-                        </span>
-                    </div>
-                    <div class="delete">
-                        <span class="material-symbols-outlined">
-                            delete
-                        </span>
-                    </div>
+                    <span>{{candidateToRender.CareerGoal}}</span>
                 </div>
             </div>
             
@@ -210,7 +202,7 @@
         
         <div class="skill">
             <h2>Kỹ Năng</h2>
-            <div class="add_text" (click)="openSkillDialog()">
+            <div class="add_text" (click)="openSkillDialog(false,true,nullSkill)">
                 <span class="material-symbols-outlined">
                     add_circle
                 </span>
@@ -218,16 +210,16 @@
             </div>
             <div class="skill_select" *ngFor="let skill of candidateToRender.Skills">
                 <div class="content">
-                    <span>{{skill}} (0/5)</span>
+                    <span>{{skill.Name}} ({{skill.Level}}/5)</span>
                 </div>
                 <div class="control">
-                    <div class="edit">
-                        <span class="material-symbols-outlined">
+                    <div class="edit" (click)="openSkillDialog(true,false,skill)">
+                        <span class="material-symbols-outlined" >
                             edit
                         </span>
                     </div>
                     <div class="delete">
-                        <span class="material-symbols-outlined">
+                        <span class="material-symbols-outlined" (click)="deleteSkill(skill)">
                             delete
                         </span>
                     </div>
@@ -253,24 +245,25 @@
 
         <div class="reference">
             <h2>Người Tham Khảo</h2>
-            <div class="add_text" (click)="openreFerenceDialog()">
+            <div class="add_text" (click)="openreFerenceDialog(true,false,nullReference)">
                 <span class="material-symbols-outlined">
                     add_circle
                 </span>
+
                 <span>Thêm Người Tham Khảo</span>
             </div>
-            <div class="reference_select" *ngFor="let language of candidateToRender.Languages">
+            <div class="reference_select" *ngFor="let reference of candidateToRender.References">
                 <div class="name">
                     <div class="content">
-                        <span>{{language}}</span>
+                        <span>{{reference.Name}}</span>
                     </div>
                     <div class="control">
-                        <div class="edit">
+                        <div class="edit" (click)="openreFerenceDialog(false,true,reference)">
                             <span class="material-symbols-outlined">
                                 edit
                             </span>
                         </div>
-                        <div class="delete">
+                        <div class="delete" (click)="deleteReference(reference)">
                             <span class="material-symbols-outlined">
                                 delete
                             </span>
@@ -279,20 +272,20 @@
                 </div>
                 <div class="row">
                     <div class="position">
-                        Chức Danh
+                        Chức Danh : {{reference.Position}}
                     </div>
                     <div style="margin: 0 3px;">-</div>
                     <div class="company">
-                        Công ty
+                        Công ty: {{reference.Company}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="email">
-                        Email
+                        Email: {{reference.Email}}
                     </div>
                     <div style="margin: 0 3px;">-</div>
                     <div class="phone">
-                        Phone
+                        Phone: {{reference.Phone}}
                     </div>
                 </div>
             </div>
@@ -806,7 +799,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="updateSkill()"
+                    <button appearance="primary" tuiButton type="button" (click)="updateOrAddSkill(isUpdateSkillForDialog,isAddSkillForDialog)"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>
@@ -868,7 +861,8 @@
     <form [formGroup]="profileForm">
         <div id="top_dialog">
             <div class="title">
-                <h4>Thêm Mục Tiêu Nghề Nghiệp</h4>
+                <h4 *ngIf="candidateToRender.CareerGoal!=''">Chỉnh Sửa Mục Tiêu Nghề Nghiệp</h4>
+                <h4 *ngIf="candidateToRender.CareerGoal==''">Thêm Mục Tiêu Nghề Nghiệp</h4>
             </div>
             <div class="btnClose" (click)="closeTargetDialog()">
                 <span class="material-symbols-outlined">
@@ -881,7 +875,7 @@
                 <div class="target_box" > 
                     <span class="title">Mục Tiêu Nghề Nghiệp</span>
                     <tui-input
-                        formControlName="Skill"
+                        formControlName="CareerGoal"
                         [tuiTextfieldCleaner]="true"
                         [tuiTextfieldLabelOutside]="true"
                     >
@@ -902,7 +896,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="updateTarget()"
+                    <button appearance="primary" tuiButton type="button" (click)="updateCareerGoal()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>
@@ -1124,7 +1118,8 @@
     <form [formGroup]="profileForm">
         <div id="top_dialog">
             <div class="title">
-                <h4>Thêm Người Tham Khảo</h4>
+                <h4 *ngIf="isUpdateReference">Chỉnh sửa Người Tham Khảo</h4>
+                <h4 *ngIf="isAddReference">Thêm Người Tham Khảo</h4>
             </div>
             <div class="btnClose" (click)="closereFerenceDialog()">
                 <span class="material-symbols-outlined">
@@ -1193,16 +1188,13 @@
                         </div>
                         <div class="phone">
                             <span class="title">Số Điện Thoại</span>
-                            <tui-input
+                            <tui-input-phone
                             formControlName="PhoneReference"
                             [tuiTextfieldCleaner]="true"
                             [tuiTextfieldLabelOutside]="true"
                             >
-                                <input
-                                    tuiTextfield
-                                    type="number"
-                                />
-                            </tui-input>
+                                
+                            </tui-input-phone>
                         </div>
                     </div>
                 </div>
@@ -1217,7 +1209,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="updateReference()"
+                    <button appearance="primary" tuiButton type="button" (click)="updateAndAddReference(isUpdateReference,isAddReference)"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>

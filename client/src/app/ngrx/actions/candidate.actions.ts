@@ -138,7 +138,7 @@ export const updateDesiredJobAtProfileFailure = createAction(
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateSkillAtProfile = createAction(
     "[Candidate] Update Skill",
-    props<{skill: string, id:string}>()
+    props<{skill: any, id:string}>()
     );
 export const updateSkillAtProfileSuccess = createAction(
     "[Candidate] Update Skill Success",
@@ -189,6 +189,87 @@ export const updateBasicInfoAtProfileSuccess = createAction(
     );
 export const updateBasicInfoAtProfileFailure = createAction(
     "[Candidate] Update Basic Info Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const  updateCareerGoalAtProfile = createAction(
+    "[Candidate] Update Career Goal",
+    props<{careerGoal: string, id:string}>()
+    );
+export const updateCareerGoalAtProfileSuccess = createAction(
+    "[Candidate] Update Career Goal Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateCareerGoalAtProfileFailure = createAction(
+    "[Candidate] Update Career Goal Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateReferenceAtProfile = createAction(
+    "[Candidate] Update Reference",
+    props<{references: any, id:string}>()
+    );
+export const updateReferenceAtProfileSuccess = createAction(
+    "[Candidate] Update Reference Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateReferenceAtProfileFailure = createAction(
+    "[Candidate] Update Reference Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateOneOfReferenceAtProfile = createAction(
+    "[Candidate] Update One Of Reference",
+    props<{reference: any, id:string}>()
+    );
+export const updateOneOfReferenceAtProfileSuccess = createAction(
+    "[Candidate] Update One Of Reference Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateOneOfReferenceAtProfileFailure = createAction(
+    "[Candidate] Update One Of Reference Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateOneOfSkillAtProfile = createAction(
+    "[Candidate] Update One Of Skill",
+    props<{skill: any, id:string}>()
+    );
+export const updateOneOfSkillAtProfileSuccess = createAction(
+    "[Candidate] Update One Of Skill Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateOneOfSkillAtProfileFailure = createAction(
+    "[Candidate] Update One Of Skill Failure",
     props<{error: string}>()
     );
 
@@ -252,6 +333,24 @@ export const deleteWorkExperienceAtProfileFailure = createAction(
     props<{error: string}>()
     );
 
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const deleteReferenceAtProfile = createAction(
+    "[Candidate] Delete Reference",
+    props<{id: string, reference: string}>()
+    );
+export const deleteReferenceAtProfileSuccess = createAction(
+    "[Candidate] Delete Reference Success",
+    props<{candidate: Candidate}>()
+    );
+export const deleteReferenceAtProfileFailure = createAction(
+    "[Candidate] Delete Reference Failure",
+    props<{error: string}>()
+    );
 
 
 

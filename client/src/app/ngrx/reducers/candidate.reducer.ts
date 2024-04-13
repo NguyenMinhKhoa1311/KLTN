@@ -86,6 +86,32 @@ export const initialState: candidateState = {
     updateOneOfWorkExperienceAtProfileError: "",
     candidateUpdatedOneOfWorkExperienceAtProfile: <Candidate>{},
 
+    isUpdateReferenceAtProfileLoading: false,
+    isUpdateReferenceAtProfileSuccess: false,
+    updateReferenceAtProfileError: "",
+    candidateUpdatedReferenceAtProfile: <Candidate>{},
+
+    isUpdateOneOfSkillAtProfileLoading:  false,
+    isUpdateOneOfSkillAtProfileSuccess:  false,
+    updateOneOfSkillAtProfileError:  "",
+    candidateUpdatedOneOfSkillAtProfile: <Candidate>{},
+
+    isUpdateCareerGoalAtProfileLoading: false,
+    isUpdateCareerGoalAtProfileSuccess: false,
+    updateCareerGoalAtProfileError: "",
+    candidateUpdatedCareerGoalAtProfile: <Candidate>{},
+
+    isUpdateOneOfReferenceAtProfileLoading: false,
+    isUpdateOneOfReferenceAtProfileSuccess: false,
+    updateOneOfReferenceAtProfileError: "",
+    candidateUpdatedOneOfReferenceAtProfile: <Candidate>{},
+
+    isDeleteReferenceAtProfileLoading: false,
+    isDeleteReferenceAtProfileSuccess: false,
+    deleteReferenceAtProfileError: "",
+    candidateDeletedReferenceAtProfile: <Candidate>{},
+
+
 
 };
 
@@ -463,6 +489,168 @@ on(CandidateActions.updateOneOfWorkExperienceAtProfileFailure,(state, actions)=>
         isUpdateOneOfWorkExperienceAtProfileLoading: false,
         isUpdateOneOfWorkExperienceAtProfileSuccess: false,
         updateOneOfWorkExperienceAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateReferenceAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateReferenceAtProfileLoading: true,
+        isUpdateReferenceAtProfileSuccess: false,
+        updateReferenceAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateReferenceAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateReferenceAtProfileLoading: false,
+        isUpdateReferenceAtProfileSuccess: true,
+        updateReferenceAtProfileError: "",
+        candidateUpdatedReferenceAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateReferenceAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateReferenceAtProfileLoading: false,
+        isUpdateReferenceAtProfileSuccess: false,
+        updateReferenceAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateOneOfSkillAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfSkillAtProfileLoading: true,
+        isUpdateOneOfSkillAtProfileSuccess: false,
+        updateOneOfSkillAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateOneOfSkillAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfSkillAtProfileLoading: false,
+        isUpdateOneOfSkillAtProfileSuccess: true,
+        updateOneOfSkillAtProfileError: "",
+        candidateUpdatedOneOfSkillAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateOneOfSkillAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfSkillAtProfileLoading: false,
+        isUpdateOneOfSkillAtProfileSuccess: false,
+        updateOneOfSkillAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateCareerGoalAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateCareerGoalAtProfileLoading: true,
+        isUpdateCareerGoalAtProfileSuccess: false,
+        updateCareerGoalAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateCareerGoalAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateCareerGoalAtProfileLoading: false,
+        isUpdateCareerGoalAtProfileSuccess: true,
+        updateCareerGoalAtProfileError: "",
+        candidateUpdatedCareerGoalAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateCareerGoalAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateCareerGoalAtProfileLoading: false,
+        isUpdateCareerGoalAtProfileSuccess: false,
+        updateCareerGoalAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.updateOneOfReferenceAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfReferenceAtProfileLoading: true,
+        isUpdateOneOfReferenceAtProfileSuccess: false,
+        updateOneOfReferenceAtProfileError: "",
+    };
+}),
+on(CandidateActions.updateOneOfReferenceAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfReferenceAtProfileLoading: false,
+        isUpdateOneOfReferenceAtProfileSuccess: true,
+        updateOneOfReferenceAtProfileError: "",
+        candidateUpdatedOneOfReferenceAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.updateOneOfReferenceAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isUpdateOneOfReferenceAtProfileLoading: false,
+        isUpdateOneOfReferenceAtProfileSuccess: false,
+        updateOneOfReferenceAtProfileError: actions.error,
+    };
+}),
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.deleteReferenceAtProfile,(state, actions)=>{
+    return{
+        ...state,
+        isDeleteReferenceAtProfileLoading: true,
+        isDeleteReferenceAtProfileSuccess: false,
+        deleteReferenceAtProfileError: "",
+    };
+}),
+on(CandidateActions.deleteReferenceAtProfileSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isDeleteReferenceAtProfileLoading: false,
+        isDeleteReferenceAtProfileSuccess: true,
+        deleteReferenceAtProfileError: "",
+        candidateDeletedReferenceAtProfile: actions.candidate,
+    };
+}),
+on(CandidateActions.deleteReferenceAtProfileFailure,(state, actions)=>{
+    return{
+        ...state,
+        isDeleteReferenceAtProfileLoading: false,
+        isDeleteReferenceAtProfileSuccess: false,
+        deleteReferenceAtProfileError: actions.error,
     };
 }),
 

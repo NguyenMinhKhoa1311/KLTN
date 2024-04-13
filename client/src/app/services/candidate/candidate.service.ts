@@ -30,8 +30,8 @@ export class CandidateService {
   updateDesiredJob(desiredJob: any,id:string){
     return this.httpClient.put<Candidate>(`${URL}/candidate/updateDesiredJob?id=${id}`, desiredJob);
   }
-  updateSkill(skill: string,id:string){
-    return this.httpClient.put<Candidate>(`${URL}/candidate/updateSkills?id=${id}&skill=${skill}`, {});
+  updateSkill(skill: any,id:string){
+    return this.httpClient.put<Candidate>(`${URL}/candidate/updateSkills?id=${id}`, skill);
   }
   updateAvatar(id:string, storage: any){ 
     return this.httpClient.put<Candidate>(`${URL}/candidate/updateAvatar?id=${id}`, storage);
@@ -43,6 +43,10 @@ export class CandidateService {
   deleteSkill(id: string, skill: string)
   {
     return this.httpClient.put<Candidate>(`${URL}/candidate/DeleteSkills?id=${id}&skill=${skill}`,{});
+  }
+  updateOneOfSkill(id: string, skill: any)
+  {
+    return this.httpClient.put<Candidate>(`${URL}/candidate/UpdateOneOfSkill?id=${id}`, skill);
   }
   deleteLanguage(id: string, language: string)
   {
@@ -63,6 +67,20 @@ export class CandidateService {
   updateOneOfWorkExperience(id: string, workExperience: any)
   {
     return this.httpClient.put<Candidate>(`${URL}/candidate/UpdateOneOfWorkExperience?id=${id}`, workExperience);
+  }
+
+  updateReference(id: string, references: any){
+    return this.httpClient.put<Candidate>(`${URL}/candidate/updateReference?id=${id}`, references);
+  }
+  updateOneOfReference(id: string, reference: any){
+    return this.httpClient.put<Candidate>(`${URL}/candidate/UpdateOneOfReference?id=${id}`, reference);
+  }
+  deleteReference(id: string, reference: string)
+  {
+    return this.httpClient.put<Candidate>(`${URL}/candidate/DeleteReference?id=${id}&reference_id=${reference}`,{});
+  }
+  updateCareerGoal(id: string, careerGoal: string){
+    return this.httpClient.put<Candidate>(`${URL}/candidate/updateCareerGoal?id=${id}&career_goal=${careerGoal}`,{});
   }
 
 
