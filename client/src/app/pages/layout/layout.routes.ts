@@ -35,6 +35,11 @@ export const LAYOUT_ROUTERS: Routes = [
             path:'bestjob',
             loadChildren: () =>
               import('./bestjob/bestjob.routes').then((m) => m.BESTJOB_ROUTERS),
+          },
+          {
+            path:'pdf',
+            loadChildren: () =>
+              import('./pdf/pdf.routes').then((m) => m.PDF_ROUTERS),
           }
     ],
   },
