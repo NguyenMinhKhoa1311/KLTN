@@ -9,7 +9,7 @@ import { jobState } from '../../../ngrx/states/job.state';
 import * as JobActions from '../../../ngrx/actions/job.actions';
 import { Subscription } from 'rxjs';
 import { Job } from '../../../models/job.model';
-import { extractNumbersRegex } from '../../../../environments/environments';
+import { extractNumbersRegex, parseDate } from '../../../../environments/environments';
 import { FieldState } from '../../../ngrx/states/field.state';
 import { CareerState } from '../../../ngrx/states/career.state';
 import * as FieldActions from '../../../ngrx/actions/field.actions';
@@ -34,6 +34,19 @@ export class JobDetailComponent {
   subscriptions: Subscription[] = [];
   careerList: Career[]=[];
   fieldList: Field[] = [];
+  careerName: string = '';
+  fieldName: string = '';
+  isAgreeToRender: boolean = false;
+  salaryStart: number = 0;
+  salaryEnd: number = 0;
+  name: string = '';
+  description: string = '';
+  location: string = '';
+  address: string = '';
+  requirement: string = '';
+  dateEnd: string = '';
+  dateStart: string = '';
+
 
   //ngrx of job
   jobGetByRecruiterATJobDetail$ = this.store.select('job','jobsTakenByRecruiterAtJobDetail')
@@ -143,9 +156,6 @@ export class JobDetailComponent {
     if(job.Salary != "Thỏa thuận"){
       [startSalary, endSalary] = extractNumbersRegex(job.Salary);
     }
-    else{
-
-    }
     this.jobDialog.nativeElement.showModal();
     this.cdr1.detectChanges();
     this.jobForm.controls.Name.setValue(job.Name);
@@ -164,7 +174,6 @@ export class JobDetailComponent {
     job.Tags.forEach(element => {
       this.tagsList.push(element);
     });
-    // this.tagsList = job.Tags;
   }
   closeJobDialog() {
     this.jobDialog.nativeElement.close();
@@ -248,4 +257,60 @@ export class JobDetailComponent {
     this.welfareList.splice(index, 1);
     console.log(this.welfareList);
   }
+
+  
+
+  @ViewChild('visibilityDialog', { static: true })
+  visibilityDialog!: ElementRef<HTMLDialogElement>;
+  cdr2 = inject(ChangeDetectorRef);
+  openreVisibilityDialog(job:Job) {
+    console.log(job);
+    this.jobToUpdate = job;
+    let [startSalary, endSalary] =[0,0]
+    if(job.Salary != "Thỏa thuận"){
+      [startSalary, endSalary] = extractNumbersRegex(job.Salary);
+    }
+    this.fieldName = job.Field.FieldName;
+    this.careerName = job.Career.Name;
+    this.salaryStart = startSalary;
+    this.salaryEnd = endSalary;
+    this.name = job.Name;
+    this.description = job.Description;
+    this.location = job.Location;
+    this.address = job.Address;
+    this.requirement = job.Requirement;
+    this.dateStart = parseDate(job.StartDate);
+    this.dateEnd = parseDate(job.EndDate);
+    this.welfareList = [];
+    this.tagsList = [];
+    this.addressList = [];
+
+    if(job.Salary == "Thỏa thuận"){
+      this.isAgreeToRender = true;
+    }
+
+    this.visibilityDialog.nativeElement.showModal();
+    this.cdr2.detectChanges();
+    this.jobForm.controls.Name.setValue(job.Name);
+    this.jobForm.controls.Description.setValue(job.Description);
+    this.jobForm.controls.Location.setValue(job.Location);
+    this.jobForm.controls.Address.setValue(job.Address);
+    this.jobForm.controls.Salary.setValue(job.Salary);
+    this.jobForm.controls.SalaryStart.setValue(startSalary.toString());
+    this.jobForm.controls.SalaryEnd.setValue(endSalary.toString());
+    this.jobForm.controls.Requirement.setValue(job.Requirement);
+    this.jobForm.controls.Career.setValue(job.Career._id);
+    this.jobForm.controls.Field.setValue(job.Field.FieldName);
+    job.Welfare.forEach(element => {
+      this.welfareList.push(element);
+    });
+    job.Tags.forEach(element => {
+      this.tagsList.push(element);
+    });
+  }
+  closeVisibilityDialog() {
+    this.visibilityDialog.nativeElement.close();
+    this.cdr2.detectChanges();
+  }
 }
+

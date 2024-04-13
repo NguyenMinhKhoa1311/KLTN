@@ -33,10 +33,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="edit">
-                    <span class="material-symbols-outlined" (click)="openJobDialog(job)">
-                        edit
-                    </span>
+                <div class="control">
+                    <div class="visibility">
+                        <span class="material-symbols-outlined" (click)="openreVisibilityDialog(job)">
+                            visibility
+                        </span>
+                    </div>
+                    <div class="edit">
+                        <span class="material-symbols-outlined" (click)="openJobDialog(job)">
+                            edit
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -303,3 +310,175 @@
     </form>
 </dialog>
 
+<dialog id="visibility_dialog" style="color: #1f1a1c" #visibilityDialog>
+    <form [formGroup]="jobForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thông tin cơ bản</h4>
+            </div>
+            <div class="btnClose" (click)="closeVisibilityDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="job_box">
+                <form [formGroup]="jobForm">
+                    <div class="name_job">
+                        <div class="header">
+                            <span class="title">Tên công việc:</span>
+                        </div>
+                        <div class="body">
+                            <div class="name">{{name}}</div>
+                        </div>
+                    </div>
+                    <div class="description_job">
+                        <div class="header">
+                            <span class="title">Mô tả công việc:</span>
+                        </div>
+                        <div class="body">
+                            <div class="description">{{description}}</div>
+                        </div>
+                    </div>
+        
+                    <div class="location_job">
+                        <div class="header">
+                            <span class="title">Địa chỉ làm việc:</span>
+                        </div>
+                        <div class="body">
+                            <div class="location">{{location}}</div>
+                        </div>
+                    </div>
+        
+                    <div class="tag_job">
+                        <div class="header">
+                            <span class="title">Địa điểm làm việc:</span>
+                        </div>
+                        <div class="body">
+                            <div class="tag_list">
+                                <div class="tag_select" *ngFor="let address of addressList; let i=index">
+                                    <div>{{address}}</div>
+                                    <span class="material-symbols-outlined" (click)="removeAddress(i)">
+                                        close
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="salary_job">
+                        <div class="header">
+                            <span class="title">Lương công việc:</span>
+                        </div>
+                        <div class="body">
+                            <div class="salary_value" *ngIf="!isAgreeToRender">
+                                ${{salaryStart}} - ${{salaryEnd}}
+                            </div>
+                            <div class="salary_value" *ngIf="isAgreeToRender">
+                                Thỏa thuận
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="welfare_job">
+                        <div class="header">
+                            <span class="title">Phúc lợi:</span>
+                        </div>
+                        <div class="body">
+                            <div class="welfare_list">
+                                <div class="welfare_select" *ngFor="let welfare of welfareList; let i=index">
+                                    <div>{{welfare}}</div>
+                                    <span class="material-symbols-outlined">
+                                        done
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+        
+                    <div class="field_job">
+                        <div class="header">
+                            <span class="title">Lĩnh vực:</span>
+                        </div>
+                        <div class="body">
+                            <div class="field">
+                                {{fieldName}}
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="career_job">
+                        <div class="header">
+                            <span class="title">Ngành nghề:</span>
+                        </div>
+                        <div class="body">
+                            <div class="career">
+                                {{careerName}}
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="dateStart_job">
+                        <div class="header">
+                            <span class="title">Ngày bắt đầu:</span>
+                        </div>
+                        <div class="body">
+                            <div class="dateStart">
+                                {{dateStart}}
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="dateEnd_job">
+                        <div class="header">
+                            <span class="title">Ngày kết thúc:</span>
+                        </div>
+                        <div class="body">
+                            <div class="dateEnd">
+                                {{dateEnd}}
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="requirement_job">
+                        <div class="header">
+                            <span class="title">Yêu cầu:</span>
+                        </div>
+                        <div class="body">
+                            <div class="requirement">{{requirement}}</div>
+                        </div>
+                    </div>
+        
+                    <div class="tag_job">
+                        <div class="header">
+                            <span class="title">Tag:</span>
+                        </div>
+                        <div class="body">
+                            <div class="tag_list">
+                                <div class="tag_select" *ngFor="let tag of tagsList; let i=index">
+                                    <div>{{tag}}</div>
+                                    <span class="material-symbols-outlined">
+                                        done
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeVisibilityDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>

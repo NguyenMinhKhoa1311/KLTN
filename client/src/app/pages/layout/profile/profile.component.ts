@@ -22,6 +22,7 @@ import { Education } from '../../../models/education.model';
 import { WorkExperience } from '../../../models/work-experience.model';
 import { Skill } from '../../../models/skill.model';
 import { Reference } from '../../../models/reference.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -37,8 +38,8 @@ export class ProfileComponent implements OnDestroy {
       storage: StorageState,
       career: CareerState,
       field: FieldState
-
-    }>
+    }>,
+    private router: Router
   ) {
     //lấy user đã login và dùng
     let userLogged = sessionStorage.getItem('userLogged');
@@ -986,5 +987,9 @@ export class ProfileComponent implements OnDestroy {
   closereFerenceDialog() {
     this.referenceDialog.nativeElement.close();
     this.cdr10.detectChanges();
+  }
+
+  navigatePDF(){
+    this.router.navigate(['/pdf']);
   }
 }
