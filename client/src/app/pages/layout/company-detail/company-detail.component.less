@@ -1,0 +1,181 @@
+#detailcompany_container{
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+    background-color: #F8F9FA;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    #detailcompany_box{
+        width: 80%;
+        background-color: #ffffff;
+        border-radius: 12px;
+        .header{
+            width: calc(100% - 64px);
+            padding: 16px 32px;
+            .name{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                .img_company{
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    //padding: 16px;
+                    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 4px 0px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img{
+                        width: 70%;
+                        height: 70%;
+                        border-radius: 50%;
+                    }
+                }
+                .name_company{
+                    margin-left: 16px;
+                    //font-size: 24px;
+                    font-weight: bold;
+                }
+            }
+        }
+        .body{
+            width: calc(100% - 64px);
+            padding: 16px 32px;
+            display: flex;
+            flex-direction: column;
+            
+            .info{
+                padding: 12px 0;
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+                gap: 10px;
+                .field, .contact, .address{
+                    display: flex;
+                    flex-direction: row;
+                    //margin-bottom: 16px;
+                    font-size: 14px;
+                    .title_info{
+                        width: 150px;
+                        font-weight: bold;
+                    }
+                }
+                .description{
+                    font-size: 14px;
+                }
+            }
+            .title_recuiter{
+                display: flex;
+                flex-direction: row;
+                .job_quantity{
+                    color: #939393;
+                    margin-left: 5px;
+                }
+            }
+            .list_job{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .job{
+                    width: calc(100% - 40px);
+                    padding: 20px;
+                    border-radius: 12px;
+                    border: 1px solid rgb(241, 241, 241);
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    transition: all 0.25s ease 0s;
+                    .left{
+                        display: flex;
+                        flex-direction: row;
+                        .img_job{
+                            width: 108px;
+                            height: 108px;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 8px;
+                            }
+                        }
+                        .info_job{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            margin-left: 15px;
+                            .name{
+                                font-size: 16px;
+                                font-weight: 500;
+                            }
+                            .company{
+                                font-size: 14px;
+                            }
+                            .salayry_address{
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                font-size: 14px;
+                                .salary{
+                                    color: #FF7D55;
+                                    font-weight: 500;
+                                    
+                                }
+                                .gach{
+                                    height: 14px;
+                                    width: 1px;
+                                    background-color: rgb(201, 201, 201);
+                                    margin: 0px 6px;
+                                }
+                            }
+                            .tag{
+                                display: flex;
+                                flex-direction: row;
+                                .tag_item{
+                                    display: inline;
+                                    padding: 4px 8px;
+                                    border-radius: 8px;
+                                    background: rgba(201, 205, 214, 0.25);
+                                    color: rgb(107, 119, 146);
+                                    font-weight: 500;
+                                    font-size: 12px;
+                                    margin-right: 5px;
+                                    margin-top: 5px;
+                                }
+                            }
+                        }
+                        
+                    }
+                    .right{
+                        .control{
+                            cursor: pointer;
+                            
+                            .heart{
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50%;
+                                transition: background-color 0.25s ease 0s;
+                                display: grid;
+                                place-content: center;
+                                fill: rgb(163, 163, 163);
+                                position: relative;
+                                display: inline-flex;
+                                align-items: center;
+                                .material-symbols-outlined{
+                                    font-size: 30px;
+                                    color: #4D8CFF;
+                                }
+                            }
+                            .heart:hover{
+                                background-color: rgb(239, 245, 255);
+                            }
+                        }
+                    }
+                    
+                }
+                .job:hover{
+                    border: 1px solid rgb(160, 193, 255);
+                    background-color: rgb(249, 251, 255);
+                }
+            }
+        }
+    }
+}

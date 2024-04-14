@@ -1,0 +1,121 @@
+#detailcompany_container{
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+    background-color: #F8F9FA;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    #detailcompany_box{
+        width: calc(80% - 48px);
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 24px;
+        .job{
+            width: calc(100% - 32px);
+            padding: 16px;
+            background-color: #F8F9FA;
+            border-radius: 12px;
+            .name_job{
+                font-size: 24px;
+                font-weight: 500;
+                margin-bottom: 2rem;
+            }
+            .salary{
+                color: #FF7D55;
+                margin-bottom: 1rem;
+            }
+            .control{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-bottom: 1rem;
+                .extend, .location{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    .material-symbols-outlined{
+                        font-size: 16px;
+                        margin-right: 5px;
+                    }
+                }
+                .gach{
+                    height: 14px;
+                    width: 1px;
+                    background-color: rgb(201, 201, 201);
+                    margin: 0px 6px;
+                }
+            }
+            .btn{
+                display: flex;
+                flex-direction: row;
+                .btn_accept{
+                    width: 70%;
+                    height: 40px;
+                    background-color: #FF7D55;
+                    color: #ffffff;
+                    border-radius: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-weight: 500;
+                    font-size: 16px;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .info_job{
+            display: flex;
+            flex-direction: column;
+            .title_info{
+                font-size: 20px;
+                font-weight: 500;
+                margin-bottom: 1rem;
+            }
+            .info_box{
+                display: flex;
+                flex-direction: row;
+
+                .left, .right{
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    .date_post, .career, .field, .skill, .position{
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 0.5rem;
+                        .title2{
+                            font-size: 16px;
+                            font-weight: 500;
+                            margin-bottom: 0.3rem;
+                            color: #939393;
+                        }
+                    }
+                }
+                
+            }
+            
+            
+        }
+
+        .address{
+            .title_address{
+                font-size: 20px;
+                font-weight: 500;
+                margin-bottom: 1rem;
+            }
+            .address_box{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                .material-symbols-outlined{
+                    font-size: 16px;
+                    margin-right: 5px;
+                }
+                span{
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
