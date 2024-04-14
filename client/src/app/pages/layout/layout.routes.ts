@@ -40,6 +40,16 @@ export const LAYOUT_ROUTERS: Routes = [
             path:'pdf',
             loadChildren: () =>
               import('./pdf/pdf.routes').then((m) => m.PDF_ROUTERS),
+          },
+          {
+            path:'company-detail',
+            loadChildren: () =>
+              import('./company-detail/company-detail.routes').then((m) => m.COMPANYDETAIL_ROUTERS),
+          },
+          {
+            path:'job-detail',
+            loadChildren: () =>
+              import('./job-detail/job-detail.routes').then((m) => m.JOBDETAIL_ROUTERS),
           }
     ],
   },

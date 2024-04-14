@@ -148,8 +148,8 @@
                             display: flex;
                             flex-direction: row;
                             .img_logo {
-                                width: 100px;
-                                height: 100px;
+                                width: 120px;
+                                height: 120px;
                                 margin-right: 10px;
                                 img {
                                     width: 100%;
@@ -160,10 +160,10 @@
                             }
             
                             .item_content {
-                                width: 60%;
+                                //width: 60%;
                                 display: flex;
                                 flex-direction: column;
-            
+                                justify-content: center;
             
                                 gap: 4px;
             
@@ -181,6 +181,17 @@
             
                                 .job_name:hover {
                                     color: #FF7D55;
+                                }
+
+                                .hot_box {
+                                    width: 65px;
+                                    background-color: #FCEDED;
+                                    border-radius: 8px;
+                                    padding: 2px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: #DC362E;
                                 }
             
                                 .company_name {
@@ -225,6 +236,11 @@
                                 
                             }
                         }
+                    }
+
+                    .item_box:hover {
+                        background-color: #F9FBFF;
+                        
                     }
                 }
             }
