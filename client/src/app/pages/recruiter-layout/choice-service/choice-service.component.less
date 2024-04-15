@@ -1,0 +1,86 @@
+#service_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 32px);
+    width: calc(100vw - 32px);
+    background-color: #F8F9FA;
+    padding: 16px;
+    .service_box{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .header{
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .body{
+            width: 60%;
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .service_iteam{
+                padding: 12px;
+                width: calc(30% - 24px);
+                border-radius: 12px;
+                border: 1px solid #E9ECEF;
+                margin: 5px;
+                cursor: pointer;
+                background-color: #ffffff;
+                transition: background-color 0.3s;
+                .service_iteam_name{
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                .service_iteam_description{
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+            .selected {
+                border: 1px solid rgb(160, 193, 255);
+                background-color: rgb(249, 251, 255);
+            }
+            
+        }
+
+        .total_price{
+            width: 60%;
+            display: flex;
+            justify-content: flex-end;
+
+        }
+
+        .btn_contorl{
+            width: 60%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            .btn_cancel, .btn_accept{
+                width: 5rem;
+                height: 1.5rem;
+                padding: 10px;
+                border-radius: 12px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 600;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.1);
+            }
+            .btn_cancel{
+                background-color: #F1F2F4;
+                color: black;
+            }
+            .btn_accept{
+                background-color: #FD916F;
+                color: white;
+            }
+        }
+    }
+    
+}
