@@ -28,7 +28,23 @@ export class CompanyController {
 
   @Get('getBy_id')
   async getBy_id(@Query('id') id: string) {
-    return await this.companyService.getBy_id(id);
+    try{
+     const company = await this.companyService.getBy_id(id);
+     if(company._id.toString().length > 0){
+       return company;
+     }else{
+       return{
+        _id: "500"
+       }
+      }
+    }
+    catch (error) {
+     return{
+        _id: "500",
+        error: error
+
+     }
+    } 
   }
 
 

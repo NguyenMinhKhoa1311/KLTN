@@ -125,10 +125,17 @@ export class JobController {
   async getById(@Query('id') id: string) {
     try{
       const job = await this.jobService.getById(id);
+      if(job._id.toString().length>0){
       return job
+      }
+      else return{
+        _id: "500",
+      }
     }
     catch(err){
-      throw err
+      return{
+        _id: "500",
+      }
     }
   };
 
@@ -257,9 +264,14 @@ export class JobController {
   }
   
   @Get('getByRecruiter')
-  async getByRecruiter(@Query('id') id: string) {
+  async getByRecruiter(
+    @Query('id') id: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
     try{
-      const job = await this.jobService.getByRecruiter(id);
+      const job = await this.jobService.getByRecruiter(id, page, limit, sortBy, sortOrder);
       return job
     }
     catch(err){

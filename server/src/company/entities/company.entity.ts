@@ -57,5 +57,8 @@ export class Company {
     @Prop({required: true})
     JobQuantity: number;
 
+    @Prop({required: true})
+    Description: string;
+
 }
 export const CompanySchema = SchemaFactory.createForClass(Company);

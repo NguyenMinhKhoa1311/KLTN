@@ -12,5 +12,6 @@ export class CreateCompanyDto {
         public  Cover: string,
         public  JobQuantity: number,
         public  Career: string,
+        public  Description: string,
     ){}
 }

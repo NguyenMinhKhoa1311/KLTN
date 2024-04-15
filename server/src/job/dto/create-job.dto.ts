@@ -3,7 +3,8 @@ export class CreateJobDto {
         public JobId: string,
         public Name: string,
         public Description: string,
-        public Location: string,
+        public Address: string,
+        public Location: string[],
         public Requirement :string,
         public Salary: string,
         public Welfare: string[],
@@ -21,6 +22,7 @@ export class CreateJobDto {
         public ColorTitle: boolean,
         public Urgent: boolean,
         public Company: string,
+        public ImageOfCompany: string,
         
     ){}
 }

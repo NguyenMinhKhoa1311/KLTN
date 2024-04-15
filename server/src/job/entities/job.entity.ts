@@ -27,9 +27,12 @@ export class Job {
         ref: 'Recruiter'
     })
     Recruiter: string;
+
+    @Prop({required: true})
+    Address: string;
         
     @Prop({required: true})
-    Location: string;
+    Location: string[];
 
     @Prop({required: true})
     Salary: string;
@@ -92,6 +95,8 @@ export class Job {
         ref: 'Company'
     })
     Company: string;
+    @Prop({required: true})
+    ImageOfCompany: string;
 
 }
 
