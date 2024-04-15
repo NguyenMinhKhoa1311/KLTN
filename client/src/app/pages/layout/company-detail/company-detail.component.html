@@ -6,7 +6,7 @@
                     <img src="../../../../assets/images/avatar-user.jpg" alt="">
                 </div>
                 <div class="name_company">
-                    <h1>Company Name</h1>
+                    <h1>{{companyToRender.Name}}</h1>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                             Lĩnh vực
                         </div>
                         <div class="field_name">
-                            Ô tô
+                           {{companyToRender.Field}}
                         </div>
                     </div>
                     <div class="contact">
@@ -29,7 +29,7 @@
                             Liên hệ
                         </div>
                         <div class="contact_name">
-                            gmail
+                            {{companyToRender.Email}}
                         </div>
                     </div>
                     <div class="address">
@@ -37,47 +37,44 @@
                             Địa chỉ
                         </div>
                         <div class="contact_name">
-                            địa chỉ
+                            {{companyToRender.Address}}
                         </div>
                     </div>
                     <div class="description">
-                        mô tả
+                        {{companyToRender.Description}}
                     </div>
                 </div>
                 <div class="title_recuiter">
                     <h2>Vị trí đang tuyển dụng</h2>
                     <div class="job_quantity">
-                        <h2> (15 việc làm)</h2>
+                        <h2> {{companyToRender.JobQuantity}}</h2>
                     </div>
                 </div>
                 <div class="list_job">
-                    <div class="job">
+                    <div class="job" *ngFor="let job of jobsToRender">
                         <div class="left">
                             <div class="img_job">
                                 <img src="../../../../assets/images/avatar-user.jpg" alt="">
                             </div>
                             <div class="info_job">
                                 <div class="name">
-                                    Testing and Validation Engineer
+                                    {{job.Name}}
                                 </div>
                                 <div class="company">
-                                    Công ty TNHH Thương Mại Dịch Vụ Hàng Hải
+                                   {{job.Company.Name}}
                                 </div>
                                 <div class="salayry_address">
                                     <div class="salary">
-                                        Thương lượng
+                                        {{job.Salary}}
                                     </div>
                                     <div class="gach"></div>
                                     <div class="location">
-                                        Hà Nội
+                                        {{job.Address}}
                                     </div>
                                 </div>
                                 <div class="tag">
-                                    <div class="tag_item">
-                                        dsadas
-                                    </div>
-                                    <div class="tag_item">
-                                        dsadas
+                                    <div class="tag_item" *ngFor="let item of job.Tags">
+                                        item
                                     </div>
                                 </div>
                             </div>

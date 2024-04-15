@@ -49,7 +49,24 @@ export interface jobState{
     isGetByLocationAtJobSuccess: boolean;
     getByLocationAtJobError: string;
     jobsTakenByLocationAtJob: Job[];
+    
+    isGetByIdAtJobDetailOfCandidateLoading: boolean;
+    isGetByIdAtJobDetailOfCandidateSuccess: boolean;
+    getByIdAtJobDetailOfCandidateError: string;
+    jobTakenByIdAtJobDetailOfCandidate: Job;
 
+
+    isGetByCompanyAtCompanyDetailLoading: boolean;
+    isGetByCompanyAtCompanyDetailSuccess: boolean;
+    getByCompanyAtCompanyDetailError: string;
+    jobsTakenByCompanyAtCompanyDetail: Job[];
+    
+
+    isGetByFieldAtJobLoading: boolean;
+    isGetByFieldAtJobSuccess: boolean;
+    getByFieldAtJobError: string;
+    jobsTakenByFieldAtJob: Job[];
+    
 
 
 }

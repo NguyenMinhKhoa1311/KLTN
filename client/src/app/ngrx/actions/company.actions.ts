@@ -14,3 +14,23 @@ export const getAllAndSortAtHomeFailure = createAction(
     '[Company] Get All And Sort At Home Failure',
     props<{ error: string }>()
     );
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getBy_IdAtCmopanyDetail = createAction(
+    '[Company] Get By Id At Company Detail',
+    props<{ id: string }>()
+    );
+export const getBy_IdAtCmopanyDetailSuccess = createAction(
+    '[Company] Get By Id At Company Detail Success',
+    props<{ company: Company }>()
+    );
+export const getBy_IdAtCmopanyDetailFailure = createAction(
+    '[Company] Get By Id At Company Detail Failure',
+    props<{ error: string }>()
+    );

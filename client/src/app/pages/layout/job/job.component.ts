@@ -17,6 +17,7 @@ import { Job } from '../../../models/job.model';
 import { Field } from '../../../models/field.model';
 import { Career } from '../../../models/career.model';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -30,10 +31,15 @@ import { Subscription } from 'rxjs';
 export class JobComponent {
 
   subscriptions: Subscription[] = [];
+
+
+  //variables
   page: number = 0;
+  fieldId: string = "";
 
   // ngrx of job
   jobsTakenByAllAndSort$ = this.store.select('job', 'JobTakenBygetAllAndSortAtJob');
+  jobsTakenByField$ = this.store.select('job', 'jobsTakenByFieldAtJob');
   jobTakenByFieldName$ = this.store.select('job', 'JobTakenByFieldNameAtJob');
   jobTakenByCareerName$ = this.store.select('job', 'JobTakenByCareerNameAtJob');
   jobTakenByLocation$ = this.store.select('job', 'jobsTakenByLocationAtJob');
@@ -50,9 +56,18 @@ export class JobComponent {
   careerList: readonly string[] = [];
 
   constructor(
-    private store: Store<{ job: jobState, field : FieldState, career : CareerState }>
+    private store: Store<{ job: jobState, field : FieldState, career : CareerState }>,
+    private route: ActivatedRoute,
   ){
-    this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.fieldId = this.route.snapshot.paramMap.get('fieldId')??"";
+    if(this.fieldId.length > 0){
+      this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      
+    }else{
+      this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }
+
+
     this.store.dispatch(FieldActions.getAllNoLimit());
     this.store.dispatch(CareerActions.getAllAtJobs());
 
@@ -60,6 +75,11 @@ export class JobComponent {
 
       //subscribe to ngrx of getAllAndSortAtJob
       this.jobsTakenByAllAndSort$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }
+      }),
+      this.jobsTakenByField$.subscribe((jobs)=>{        
         if(jobs.length>0){
           this.jobToRender = jobs;
         }

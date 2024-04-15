@@ -54,6 +54,22 @@ export const initialState: jobState = {
     getByLocationAtJobError: "",
     jobsTakenByLocationAtJob: [],
 
+    isGetByIdAtJobDetailOfCandidateLoading: false,
+    isGetByIdAtJobDetailOfCandidateSuccess: false,
+    getByIdAtJobDetailOfCandidateError: "",
+    jobTakenByIdAtJobDetailOfCandidate: <Job>{},
+
+    isGetByCompanyAtCompanyDetailLoading: false,
+    isGetByCompanyAtCompanyDetailSuccess: false,
+    getByCompanyAtCompanyDetailError: "",
+    jobsTakenByCompanyAtCompanyDetail: [],
+
+    isGetByFieldAtJobLoading: false,
+    isGetByFieldAtJobSuccess: false,
+    getByFieldAtJobError: "",
+    jobsTakenByFieldAtJob: [],
+
+
 }
 
 export const jobReducer = createReducer(
@@ -307,6 +323,8 @@ export const jobReducer = createReducer(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(JobActions.getJobByRecruiterAtJobDetail,(state,action)=>{
+        console.log(action.type);
+        
         return{
             ...state,
             isGetByRecruiterAtJobDetailLoading: true,
@@ -315,6 +333,8 @@ export const jobReducer = createReducer(
         }
     }),
     on(JobActions.getJobByRecruiterAtJobDetailSuccess,(state,action)=>{
+        console.log(action.type);
+        
         return{
             ...state,
             jobsTakenByRecruiterAtJobDetail: action.jobs,
@@ -324,6 +344,8 @@ export const jobReducer = createReducer(
         }
     }),
     on(JobActions.getJobByRecruiterAtJobDetailFailure,(state,action)=>{
+        console.log(action.type);
+        
         return{
             ...state,
             isGetByRecruiterAtJobDetailLoading: false,
@@ -361,4 +383,101 @@ export const jobReducer = createReducer(
             getByLocationAtJobError: action.error,
         }
     }),
+
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(JobActions.getJobByIdAtJobDetailOfCandidate,(state,action)=>{
+        console.log(action.type);
+        return{
+            ...state,
+            isGetByIdAtJobDetailOfCandidateLoading: true,
+            isGetByIdAtJobDetailOfCandidateSuccess: false,
+            getByIdAtJobDetailOfCandidateError: "",
+        }
+    }),
+    on(JobActions.getJobByIdAtJobDetailOfCandidateSuccess,(state,action)=>{
+        console.log(action.type);
+        
+        return{
+            ...state,
+            jobTakenByIdAtJobDetailOfCandidate: action.job,
+            isGetByIdAtJobDetailOfCandidateLoading: false,
+            isGetByIdAtJobDetailOfCandidateSuccess: true,
+            getByIdAtJobDetailOfCandidateError: "",
+        }
+    }),
+    on(JobActions.getJobByIdAtJobDetailOfCandidateFailure,(state,action)=>{
+        console.log(action.type);
+        
+        return{
+            ...state,
+            isGetByIdAtJobDetailOfCandidateLoading: false,
+            isGetByIdAtJobDetailOfCandidateSuccess: false,
+            getByIdAtJobDetailOfCandidateError: action.error,
+        }
+    }),
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(JobActions.getByCompanyAtCompanyDetail,(state,action)=>{
+        return{
+            ...state,
+            isGetByCompanyAtCompanyDetailLoading: true,
+            isGetByCompanyAtCompanyDetailSuccess: false,
+            getByCompanyAtCompanyDetailError: "",
+        }
+    }),
+    on(JobActions.getByCompanyAtCompanyDetailSuccess,(state,action)=>{
+        return{
+            ...state,
+            jobsTakenByCompanyAtCompanyDetail: action.jobs,
+            isGetByCompanyAtCompanyDetailLoading: false,
+            isGetByCompanyAtCompanyDetailSuccess: true,
+            getByCompanyAtCompanyDetailError: "",
+        }
+    }),
+    on(JobActions.getByCompanyAtCompanyDetailFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByCompanyAtCompanyDetailLoading: false,
+            isGetByCompanyAtCompanyDetailSuccess: false,
+            getByCompanyAtCompanyDetailError: action.error,
+        }
+    }),
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(JobActions.getByFieldAtJob,(state,action)=>{
+        return{
+            ...state,
+            isGetByFieldAtJobLoading: true,
+            isGetByFieldAtJobSuccess: false,
+            getByFieldAtJobError: "",
+        }
+    }),
+    on(JobActions.getByFieldAtJobSuccess,(state,action)=>{
+        return{
+            ...state,
+            jobsTakenByFieldAtJob: action.jobs,
+            isGetByFieldAtJobLoading: false,
+            isGetByFieldAtJobSuccess: true,
+            getByFieldAtJobError: "",
+        }
+    }),
+    on(JobActions.getByFieldAtJobFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByFieldAtJobLoading: false,
+            isGetByFieldAtJobSuccess: false,
+            getByFieldAtJobError: action.error,
+        }
+    }),
+
 )

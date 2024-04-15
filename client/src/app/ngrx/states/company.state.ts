@@ -6,4 +6,10 @@ export interface CompanyState{
     getAllAndSortAtHomeError: string;
     companysTakenByGetAllAndSortAtHome: Company[];
 
+
+    isGetByIdAtCompanyDetailLoading: boolean;
+    isGetByIdAtCompanyDetailSuccess: boolean;
+    getByIdAtCompanyDetailError: string;
+    companyTakenByGetByIdAtCompanyDetail: Company;
+
 } 

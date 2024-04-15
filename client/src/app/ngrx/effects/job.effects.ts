@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { JobService } from "../../services/job/job.service";
-import { catchError, exhaustMap, map, of } from "rxjs";
+import { catchError, exhaustMap, map, of, switchMap } from "rxjs";
 import * as JobActions from "../actions/job.actions";
 
 @Injectable()
@@ -146,7 +146,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getJobByRecruiterAtJobDetail),
             exhaustMap(action =>
-                this.jobService.getByRecruiter(action.recruiter).pipe(
+                this.jobService.getByRecruiter(action.recruiter,action.page, action.limit, action.sortBy, action.sortOrder).pipe(
                     map(jobs => {
                         return JobActions.getJobByRecruiterAtJobDetailSuccess({jobs: jobs})
                     }),
@@ -174,6 +174,59 @@ export class JobEffects {
         )
         )
         )
+    getByJobIdAtJobDetailOfCandidate$= createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getJobByIdAtJobDetailOfCandidate),
+            switchMap(action =>
+                this.jobService.getByJobId(action.id).pipe(
+                    map(job => {                        
+                        console.log("job: ", job);
+                        return JobActions.getJobByIdAtJobDetailOfCandidateSuccess({job})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getJobByIdAtJobDetailOfCandidateFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getByCompanyAtCompanyDetail$= createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByCompanyAtCompanyDetail),
+            switchMap(action =>
+                this.jobService.getByCompany(action.company, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map(jobs => {
+                        return JobActions.getByCompanyAtCompanyDetailSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByCompanyAtCompanyDetailFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getByFieldAtJob$= createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByFieldAtJob),
+            switchMap(action =>
+                this.jobService.getByField(action.field, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map(jobs => {                        
+                        return JobActions.getByFieldAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByFieldAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    
 
 
 }

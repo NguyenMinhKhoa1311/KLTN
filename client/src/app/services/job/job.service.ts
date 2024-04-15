@@ -43,11 +43,19 @@ export class JobService {
     
     return this.httpClient.put<Job>(`${URL}/job/updateJob?id=${id}`,job);
   }
-  getByRecruiter(recruiterId:string){
-    return this.httpClient.get<Job[]>(`${URL}/job/getByRecruiter?id=${recruiterId}`);
+  getByRecruiter(recruiterId:string,page:number,limit:number,sortBy:string,sortOrder:string){
+    return this.httpClient.get<Job[]>(`${URL}/job/getByRecruiter?id=${recruiterId}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
   getByLocation(location:string,page:number,limit:number,sortBy:string,sortOrder:string){
     return this.httpClient.get<Job[]>(`${URL}/job/getByLocationdWithKeyword?keyword=${location}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  }
+
+  getByCompany(companyId:string,page:number,limit:number,sortBy:string,sortOrder:string){
+    return this.httpClient.get<Job[]>(`${URL}/job/getByCompany?companyId=${companyId}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+    }
+
+  getByJobId(jobId:string){
+    return this.httpClient.get<Job>(`${URL}/job/getById?id=${jobId}`);
   }
 }
 

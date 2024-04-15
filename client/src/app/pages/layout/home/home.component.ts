@@ -66,7 +66,8 @@ export class HomeComponent implements OnDestroy {
     private store : Store<{job: jobState, field: FieldState, company: CompanyState}>,
     private router: Router
   ){
-
+    console.log("HomeComponent");
+    
     this.store.dispatch(JobActions.getByCareerAtHome({career:"660274523564facdc8ccc2c0", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(JobActions.getByFieldAtHome({field:"660267f23564facdc8ccc270", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
@@ -210,6 +211,24 @@ export class HomeComponent implements OnDestroy {
         title: 'Image',
       },
     ];
+
+    navigateToJobDetail(jobId: string) {
+      this.router.navigate(['/job-detail',{
+        jobId: jobId
+      }]);
+    }
+
+    navigateToCompanyDetail(companyId: string) {
+      this.router.navigate(['/company-detail',{
+        companyId: companyId
+      }]);
+    }
+    navigateToJobs(fieldId: string) {
+      this.router.navigate(['/job',{
+        fieldId: fieldId
+      }]);
+    }
+
 
 
 

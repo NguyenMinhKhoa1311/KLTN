@@ -144,15 +144,15 @@ export const updateJobAtJobDetailSuccess = createAction(
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getJobByRecruiterAtJobDetail = createAction(
-    '[Job] Get Job By Id',
-    props<{ recruiter: string }>()
+    '[Job] Get Job By recruiter',
+    props<{ recruiter: string,page: number, limit: number, sortBy: string, sortOrder: string }>()
 );
 export const getJobByRecruiterAtJobDetailFailure = createAction(
-    '[Job] Get Job By Id Failure',
+    '[Job] Get JobBy recruiter Failure',
     props<{ error: string }>()
 );
 export const getJobByRecruiterAtJobDetailSuccess = createAction(
-    '[Job] Get Job By Id Success',
+    '[Job] Get Job By recruiter Success',
     props<{ jobs: Job[] }>()
 );
 
@@ -178,3 +178,54 @@ export const getByLocationdWithKeywordsAtJobFailure = createAction(
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getJobByIdAtJobDetailOfCandidate = createAction(
+    '[Job] Get Job By Id',
+    props<{ id: string }>()
+);
+export const getJobByIdAtJobDetailOfCandidateFailure = createAction(
+    '[Job] Get Job By Id Failure',
+    props<{ error: string }>()
+);
+export const getJobByIdAtJobDetailOfCandidateSuccess = createAction(
+    '[Job] Get Job By Id Success',
+    props<{ job: Job }>()
+);
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByCompanyAtCompanyDetail = createAction(
+    '[Job] Get By Company At Company Detail',
+    props<{ company: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+);
+export const getByCompanyAtCompanyDetailSuccess = createAction(
+    '[Job] Get By Company Success At Company Detail',
+    props<{ jobs: Job[] }>()
+);
+export const getByCompanyAtCompanyDetailFailure = createAction(
+    '[Job] Get By Company Failure At Company Detail',
+    props<{ error: string }>()
+);
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByFieldAtJob = createAction(
+    '[Job] Get By Field At Job',
+    props<{ field: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+);
+export const getByFieldAtJobSuccess = createAction(
+    '[Job] Get By Field At Job Success',
+    props<{ jobs: Job[] }>()
+);
+export const getByFieldAtJobFailure = createAction(
+    '[Job] Get By Field At Job Failure',
+    props<{ error: string }>()
+);

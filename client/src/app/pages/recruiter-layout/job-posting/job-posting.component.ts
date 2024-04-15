@@ -135,6 +135,9 @@ export class JobPostingComponent implements OnDestroy{
         this.isCreateJobAtJob$.subscribe((isSuccess) => {
           if(isSuccess){
             alert("Tạo công việc thành công");
+            this.tagsList = [];
+            this.locationList = [];
+            this.welfareList = [];
             //this.router.navigate(['recruiter/job-management']);
           }
         })
@@ -172,7 +175,8 @@ export class JobPostingComponent implements OnDestroy{
       Recruitment: [],
       Recruiter: "65fa893d3dcc1153af38b1a5",
       Company:"65fa88763dcc1153af38b190",
-      Location: "Hồ Chí Minh",
+      Address: this.jobPostForm.value.Address??"",
+      Location: this.locationList,
       Salary: this.jobPostForm.value.Salary??"",
       Welfare: this.welfareList??[],
       Career: this.careers.find(career => career.Name == this.jobPostForm.value.Career)?._id??"",
@@ -187,10 +191,13 @@ export class JobPostingComponent implements OnDestroy{
       Hot: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?.Hot??false,
       ColorTitle: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?.ColorTitle??false,
       Urgent: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?.Urgent??false,
+      ImageOfCompany: "https://media.istockphoto.com/id/1128180520/vi/anh/%C4%91%E1%BB%99i-ng%C5%A9-d%E1%BB%8Bch-v%E1%BB%A5-d%E1%BB%8Dn-d%E1%BA%B9p-chuy%C3%AAn-nghi%E1%BB%87p-l%C3%A0m-vi%E1%BB%87c-v%E1%BB%9Bi-thi%E1%BA%BFt-b%E1%BB%8B-v%E1%BB%87-sinh-trong-ph%C3%B2ng-kh%C3%A1i-ni%E1%BB%87m-d%E1%BB%8Bch.jpg?s=612x612&w=0&k=20&c=nks0Tp1BP71s-_WsPD5UzzD638zeFuR14oiTTn-60bE="
 
 
 
     }
+    console.log(jobToCreate);
+    
     this.store.dispatch(JobActions.createJobAtJob({job: jobToCreate}));
   }
   
@@ -208,18 +215,18 @@ export class JobPostingComponent implements OnDestroy{
     console.log(this.tagsList);
   }
 
-  addressList:string[]=[];
-  addAddress(){
-    const newLocation = this.jobPostForm.value.Address;
+  locationList:string[]=[];
+  addLocation(){
+    const newLocation = this.jobPostForm.value.Location;
     if(newLocation){
-      this.addressList.push(newLocation);
-      this.jobPostForm.controls.Address.setValue('');
+      this.locationList.push(newLocation);
+      this.jobPostForm.controls.Location.setValue('');
     }
-    console.log(this.addressList);
+    console.log(this.locationList);
   }
-  removeAddress(index: number){
-    this.addressList.splice(index, 1);
-    console.log(this.addressList);
+  removeLocation(index: number){
+    this.locationList.splice(index, 1);
+    console.log(this.locationList);
   }
 
   

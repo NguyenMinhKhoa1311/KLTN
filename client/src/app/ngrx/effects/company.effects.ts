@@ -26,4 +26,20 @@ export class CompanyEffects{
             })
         )
     })
+
+    getBy_IdAtCmopanyDetail$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(CompanyActions.getBy_IdAtCmopanyDetail),
+            switchMap((action)=>{
+                return this.companyService.getBy_Id(action.id).pipe(
+                    map((company)=>{
+                        return CompanyActions.getBy_IdAtCmopanyDetailSuccess({company: company});
+                    }),
+                    catchError((error)=>{
+                        return of(CompanyActions.getBy_IdAtCmopanyDetailFailure({error}));
+                    })
+                )
+            })
+        )
+    })
 }

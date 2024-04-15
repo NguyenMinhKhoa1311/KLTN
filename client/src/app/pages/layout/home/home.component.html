@@ -24,7 +24,7 @@
         <div class="carousel_home">
             <tui-carousel [duration]="100000" [(index)]="index" class="carousel_container">
                 <ng-container *ngFor="let company of companys">
-                    <tui-island *tuiItem class="carousel_item">
+                    <tui-island *tuiItem class="carousel_item" (click)="navigateToCompanyDetail(company._id)">
                         <div class="img_copany">
                             <img src={{company.Cover}} alt="">
                         </div>
@@ -66,8 +66,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span clickclass="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -95,8 +95,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -124,8 +124,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -169,7 +169,7 @@
             ></button>
         <div class="carousel">
             <div class="carousel_industries" *ngFor="let field of fields">
-                <div class="item_industries">
+                <div class="item_industries" (click)="navigateToJobs(field._id)">
                     <div class="logo_industries">
                         <img src="../../../../assets/images/kinhdoanh.png" alt="">
                     </div>
@@ -212,8 +212,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)" >{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -241,8 +241,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -270,8 +270,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -327,8 +327,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -356,8 +356,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -385,8 +385,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name">{{job.Name}}</span>
-                                        <span class="company_name">{{job.Company.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>

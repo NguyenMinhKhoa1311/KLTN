@@ -13,4 +13,8 @@ export class CompanyService {
   getAllAndSort(page: number, limit: number, sortBy: string, sortOrder: string){
     return this.httpClient.get<Company[]>(`${URL}/company/getAllWithLimit?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
+  getBy_Id(id: string){
+    return this.httpClient.get<Company>(`${URL}/company/getBy_id?id=${id}`);
+  }
+
 }

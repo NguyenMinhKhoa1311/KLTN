@@ -13,6 +13,8 @@ export interface Company{
       StorageAvatar: Storage,
       StorageCover: Storage,
       Cover: string,
+      Description: string
         createAt: Date;
         updateAt: Date;
+        JobQuantity: number;
 }

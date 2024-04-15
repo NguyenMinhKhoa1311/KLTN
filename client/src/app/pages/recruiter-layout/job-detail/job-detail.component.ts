@@ -41,7 +41,7 @@ export class JobDetailComponent {
   salaryEnd: number = 0;
   name: string = '';
   description: string = '';
-  location: string = '';
+  location: string[] = [];
   address: string = '';
   requirement: string = '';
   dateEnd: string = '';
@@ -67,7 +67,7 @@ export class JobDetailComponent {
 
   ){
     //get job theo recruiter
-    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5'}) );
+    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}) );
 
     //getAll field
     this.store.dispatch(FieldActions.getAllNoLimitAtJobDetail());
@@ -111,7 +111,7 @@ export class JobDetailComponent {
       this.jobUpdatedAtJobDetail$.subscribe(job => {
         console.log(job);
         if(job._id!='500'){
-          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5'}) );
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}) );
           this.closeJobDialog();
         }
       })
@@ -160,7 +160,7 @@ export class JobDetailComponent {
     this.cdr1.detectChanges();
     this.jobForm.controls.Name.setValue(job.Name);
     this.jobForm.controls.Description.setValue(job.Description);
-    this.jobForm.controls.Location.setValue(job.Location);
+    //this.jobForm.controls.Location.setValue(job.Location);
     this.jobForm.controls.Address.setValue(job.Address);
     this.jobForm.controls.Salary.setValue(job.Salary);
     this.jobForm.controls.SalaryStart.setValue(startSalary.toString());
@@ -293,7 +293,7 @@ export class JobDetailComponent {
     this.cdr2.detectChanges();
     this.jobForm.controls.Name.setValue(job.Name);
     this.jobForm.controls.Description.setValue(job.Description);
-    this.jobForm.controls.Location.setValue(job.Location);
+    //this.jobForm.controls.Location.setValue(job.Location);
     this.jobForm.controls.Address.setValue(job.Address);
     this.jobForm.controls.Salary.setValue(job.Salary);
     this.jobForm.controls.SalaryStart.setValue(startSalary.toString());

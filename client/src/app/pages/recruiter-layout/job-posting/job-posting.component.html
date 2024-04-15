@@ -31,11 +31,11 @@
                     <span class="title">Địa chỉ làm việc:</span>
                 </div>
                 <div class="body">
-                    <tui-input formControlName="Location" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
+                    <tui-input formControlName="Address" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
                         Nhập địa chỉ làm việc
                         <input tuiTextfield type="text" />
                     </tui-input>
-                    <tui-error formControlName="Location" [error]="[] | tuiFieldError | async"></tui-error>
+                    <tui-error formControlName="Address" [error]="[] | tuiFieldError | async"></tui-error>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                 </div>
                 <div class="body">
                     <div class="tag_input">
-                        <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Address">
+                        <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Location">
                             Nhập địa điểm
                             <input tuiTextfield type="text" />
                         </tui-input>
@@ -54,15 +54,15 @@
                             tuiButton
                             type="button"
                             class="tui-space_right-3 tui-space_bottom-3"
-                            (click)="addAddress()"
+                            (click)="addLocation()"
                         >
                             Thêm
                         </button>
                     </div>
                     <div class="tag_list">
-                        <div class="tag_select" *ngFor="let address of addressList; let i=index">
+                        <div class="tag_select" *ngFor="let address of locationList; let i=index">
                             <div>{{address}}</div>
-                            <span class="material-symbols-outlined" (click)="removeAddress(i)">
+                            <span class="material-symbols-outlined" (click)="removeLocation(i)">
                                 close
                             </span>
                         </div>
