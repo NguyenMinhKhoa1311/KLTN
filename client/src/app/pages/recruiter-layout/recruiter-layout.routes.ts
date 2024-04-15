@@ -20,6 +20,11 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         path: 'job-detail',
         loadChildren: () =>
           import('./job-detail/job-detail.routes').then((m) => m.JOBDETAIL_ROUTERS),
+      },
+      {
+        path:'choice-service',
+        loadChildren: () =>
+          import('./choice-service/choice-service.routes').then((m) => m.CHOICESERVICE_ROUTERS),
       }
     ],
   },

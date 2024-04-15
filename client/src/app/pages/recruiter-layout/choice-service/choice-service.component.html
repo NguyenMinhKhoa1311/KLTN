@@ -1,0 +1,36 @@
+<div id="service_container">
+    <div class="service_box">
+        <div class="header">
+            Chọn gói dịch vụ
+        </div>
+        <div class="body">
+            <div class="service_iteam" *ngFor="let a of item" (click)="toggleItem(a)" [class.selected]="isSelected(a)">
+                <div class="service_iteam_name">
+                    {{a.name}}
+                </div>
+                <div class="service_iteam_description">
+                    {{a.description}}
+                </div>
+                <div class="service_iteam_price">
+                    Giá: {{a.price}}
+                </div>
+            </div>
+        </div>
+        <!-- <div class="selected_items">
+            <div *ngFor="let selectedItem of selectedItems">
+                <div>{{ selectedItem.name }} - Giá: {{ selectedItem.price }}</div>
+            </div>
+        </div> -->
+        <div class="total_price">
+            Tổng giá tiền: {{ totalPrice }}
+        </div>
+        <div class="btn_contorl">
+            <div class="btn_cancel">
+                Hủy
+            </div>
+            <div class="btn_accept">
+                Tiếp tục
+            </div>
+        </div>
+    </div>
+</div>
