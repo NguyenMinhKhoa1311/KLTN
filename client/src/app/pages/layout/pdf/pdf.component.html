@@ -1,4 +1,4 @@
-<div class="container invoice" id="theContent">
+<!-- <div class="container invoice" id="theContent">
     <div class="invoice-header">
       <div class="row">
         <div class="col-xs-8">
@@ -214,4 +214,44 @@
     </div>
   </div>
 
-  <button (click)="generatePDF()">create</button>
+  <button (click)="generatePDF()">create</button> -->
+
+<div id="pdf_container">
+  <div id="pdf_box">
+    <div class="header">
+      <div class="back">
+        <span class="material-symbols-outlined">
+          keyboard_backspace
+        </span>
+        Quay lại
+      </div>
+      <div class="accept">
+        Áp dụng
+      </div>
+    </div>
+    <div class="body">
+      <div class="list_cv">
+        <div class="title_list">
+          DANH SÁCH MẪU CV
+        </div>
+        <div class="list_cv_box">
+          <div class="cv1">
+            <img src="../../../../assets/images/cv1.png" alt="">
+          </div>
+          <div class="cv1">
+            <img src="../../../../assets/images/cv1.png" alt="">
+          </div>
+          
+        </div>
+      </div>
+      <div class="review_cv">
+        <div class="title_review">
+          XEM TRƯỚC CV
+        </div>
+        <div class="cv_box">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

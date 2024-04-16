@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import  {jsPDF} from'jspdf';
 import html2canvas from 'html2canvas';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-pdf',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './pdf.component.html',
-  styleUrl: './pdf.component.scss'
+  styleUrl: './pdf.component.less'
 })
 export class PdfComponent {
   generatePDF() {
