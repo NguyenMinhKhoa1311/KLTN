@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit{
       this.activeItemIndex = 1;
     } else if (this.router.url.includes('/company')) {
       this.activeItemIndex = 2;
-    } else if (this.router.url.includes('/favorite')) {
+    } else if (this.router.url.includes('/profile')) {
       this.activeItemIndex = 3;
     } 
   }
@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit{
           this.activeItemIndex = 1;
         } else if (url.startsWith('/company')) {
           this.activeItemIndex = 2;
-        } else if (url.startsWith('/favorite')) {
+        } else if (url.startsWith('/profile')) {
           this.activeItemIndex = 3;
         } 
       }
@@ -70,7 +70,7 @@ export class NavbarComponent implements OnInit{
         this.router.navigate(['/company']); 
         break;
       case 'favorite':
-        this.router.navigate(['/favorites']); 
+        this.router.navigate(['/profile']); 
         break;
       default:
         console.warn('Invalid tab name:', tabName);

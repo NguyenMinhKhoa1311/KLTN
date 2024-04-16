@@ -13,7 +13,7 @@
           <button class="btn_tab" [disabled]="activeItemIndex === 2" [routerLink]="['company']" routerLinkActive tuiTab>
             <span class="material-symbols-rounded">Công ty</span>
           </button>
-          <button class="btn_tab" [disabled]="activeItemIndex === 3" [routerLink]="['favorite']" routerLinkActive tuiTab>
+          <button class="btn_tab" [disabled]="activeItemIndex === 3" [routerLink]="['profile']" routerLinkActive tuiTab>
             <span class="material-symbols-rounded">Hồ sơ & CV</span>
           </button>
           <!-- <button [disabled]="activeItemIndex === 4" [routerLink]="['profile']" routerLinkActive tuiTab>
@@ -43,9 +43,8 @@
           </div>
         </button>
         <div class="dropdown-content">
-          <a href="#">Đăng nhập</a>
-          <a href="#">Đăng kí</a>
           <a href="/profile">Hồ sơ</a>
+          <a href="">Thoát</a>
         </div>
       </div>
 
