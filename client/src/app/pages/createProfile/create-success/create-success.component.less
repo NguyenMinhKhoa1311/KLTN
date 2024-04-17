@@ -1,0 +1,41 @@
+#success_container{
+    width: 100vw;
+    height: 100vh;
+    .success_box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .img_success{
+            width: 40rem;
+            height: 35rem;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .title{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            h1{
+                font-weight: 500;
+            }
+        }
+        .btn_accept{
+            padding: 16px;
+            margin-top: 10px;
+            background-color: #FF5C01;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            &:hover{
+                background-color: #FF7A01;
+            }
+        }
+    }
+}
