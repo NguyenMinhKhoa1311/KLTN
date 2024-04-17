@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import  {jsPDF} from'jspdf';
 import html2canvas from 'html2canvas';
 import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pdf',
@@ -29,6 +30,15 @@ export class PdfComponent {
       
 
     });
+  }
+
+  constructor( private router:Router) {
+  }
+  cv1() {
+    this.router.navigate(['/pdf/cv1']);
+  }
+  cv2() {
+    this.router.navigate(['/pdf/cv2']);
   }
 
 }
