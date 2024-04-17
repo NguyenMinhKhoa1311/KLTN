@@ -15,7 +15,7 @@ import { Recruitment } from 'src/recruitment/entities/recruitment.entity';
 @Injectable()
 export class JobService {
 
- constructor(
+constructor(
   @InjectModel(Job.name) private JobModel: Model<Job>,
   @InjectModel(Recruiter.name) private recruiterModel: Model<Recruiter>,
   @InjectModel(Field.name) private fieldModel: Model<Field>,
@@ -24,7 +24,7 @@ export class JobService {
   @InjectModel(Company.name) private companyModel: Model<Company>,
   @InjectModel(Recruitment.name) private recruitertmentModel: Model<Recruitment>
 
- )
+)
 {}
   async create(createJobDto: CreateJobDto) {
     try{
@@ -348,6 +348,21 @@ export class JobService {
       return{
         _id: "500",
       }
+    }
+  }
+
+  async deleteJob(jobId:string){
+    try{
+      const deleteJob = await this.JobModel.findByIdAndDelete(jobId);
+      if(deleteJob._id.toString().length > 0){
+      return true;
+    }
+    else{
+      false
+    }
+    }
+    catch(error){
+      return false;
     }
   }
 

@@ -298,6 +298,19 @@ export class JobController {
   }
 
 
+  @Delete('deleteJob')
+  async deleteJob(@Query('id') id: string) {
+    try{
+      const result = await this.jobService.deleteJob(id);
+      if(result){
+        return false
+      }else return true
+    }
+    catch(err){
+      return false
+    }
+  }
+
 
 
 

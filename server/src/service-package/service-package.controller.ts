@@ -12,10 +12,20 @@ export class ServicePackageController {
   async create(@Body() createServicePackageDto: CreateServicePackageDto) {
     try {
       const servicePackage = await this.servicePackageService.create(createServicePackageDto);
-      return servicePackage;
+      if(servicePackage._id.toString().length > 0){
+        return servicePackage;
+      }
+      else{
+        return{
+          _id: '500',
+        }
+      }
     }
     catch(error){
-      throw error;
+      return{
+        _id: '500',
+        error: error
+      }
     }
   }
 
