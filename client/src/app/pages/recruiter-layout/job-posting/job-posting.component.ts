@@ -42,8 +42,8 @@ export class JobPostingComponent implements OnDestroy{
   //ngrx of field
   fieldNoLimitAtCreateJob$ = this.store.select('field', 'fieldNoLimitAtCreateJob');
 
-  //ngrx of field
-  servicePackageTakenByGetAllAtCreateJob$ = this.store.select('servicePackage', 'servicePackagesTakenByGetAllAtCreateJob');
+  //ngrx of service package
+  servicePackageCreatedAtPostJob$ = this.store.select('servicePackage', 'servicePackageCreatedAtPostJob');
 
   //ngrx of job
   isCreateJobAtJob$ = this.store.select('job', 'isCreateJobAtCreateJobSuccess');
@@ -82,13 +82,16 @@ export class JobPostingComponent implements OnDestroy{
 
   });
 
-
+//variables
   fields: Field[] = [];
   careers: Career[] = [];
   servicePackages: ServicePackage[] = [];
   nameOffields: readonly string[] = [];
   nameOfCareers: readonly string[] = [];
   nameOfServicePackages: readonly string[] = [];
+  servicePackageChoiced: any;
+  jobToCreate: any;
+  isCreateServicePackage: boolean = false;
 
 
 
@@ -101,10 +104,14 @@ export class JobPostingComponent implements OnDestroy{
       job: jobState;
     }>
     ) {
+      const servicePackage = sessionStorage.getItem('servicePackedChoiced');
+      if(servicePackage){
+        this.servicePackageChoiced = JSON.parse(servicePackage || '');
+        console.log(this.servicePackageChoiced);
+      }
       //get all career, field, servicePackage
       this.store.dispatch(CareerActions.getAllAtCreateJob())
       this.store.dispatch(FieldActions.getAllNoLimitAtCreateJob())
-      this.store.dispatch(ServicePackageActions.getAllAtCreatJob())
 
 
       this.subscriptions.push(
@@ -120,10 +127,13 @@ export class JobPostingComponent implements OnDestroy{
             this.nameOffields = fields.map(field => field.FieldName);
           }
         }),
-        this.servicePackageTakenByGetAllAtCreateJob$.subscribe((servicePackages) => {
-          if(servicePackages.length > 0){
-            this.servicePackages = servicePackages;
-            this.nameOfServicePackages = servicePackages.map(servicePackage => servicePackage.Name);
+        this.servicePackageCreatedAtPostJob$.subscribe((servicePackage) => {
+          if(this.isCreateServicePackage){
+            if(servicePackage._id.length > 0){
+              this.jobToCreate.ServicePackage = servicePackage._id;
+              console.log(this.jobToCreate);
+              this.store.dispatch(JobActions.createJobAtJob({job: this.jobToCreate}))
+            }
           }
         }),
         this.careerTakenByFieldAtCreateJob$.subscribe((careers) => {
@@ -142,7 +152,7 @@ export class JobPostingComponent implements OnDestroy{
           }
         })
       );
-     }
+    }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
@@ -184,7 +194,7 @@ export class JobPostingComponent implements OnDestroy{
       StartDate: this.jobPostForm.value.DateStart??new Date(),
       EndDate: this.jobPostForm.value.DateEnd??new Date(),
       Requirement: this.jobPostForm.value.Requirement??"",
-      ServicePackage: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?._id??"",
+      ServicePackage: "",
       Tags: this.tagsList??[],
       StatusPayment: false,
       Priority: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?.Priority??0,
@@ -197,8 +207,11 @@ export class JobPostingComponent implements OnDestroy{
 
     }
     console.log(jobToCreate);
-    
-    this.store.dispatch(JobActions.createJobAtJob({job: jobToCreate}));
+    this.jobToCreate = jobToCreate;
+    if(!this.isCreateServicePackage){
+      this.isCreateServicePackage = true;
+    }
+    this.store.dispatch(ServicePackageActions.createAtPostJob({servicePackage: this.servicePackageChoiced}));
   }
   
   tagsList : string[] = [];

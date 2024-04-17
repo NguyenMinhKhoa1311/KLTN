@@ -229,3 +229,21 @@ export const getByFieldAtJobFailure = createAction(
     '[Job] Get By Field At Job Failure',
     props<{ error: string }>()
 );
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const deleteAtJobDetailOfRecruiter = createAction(
+    '[Job] Delete Job',
+    props<{ id: string }>()
+);
+export const deleteAtJobDetailOfRecruiterSuccess = createAction(
+    '[Job] Delete Job Success',
+);
+export const deleteAtJobDetailOfRecruiterFailure = createAction(
+    '[Job] Delete Job Failure',
+    props<{ error: string }>()
+);

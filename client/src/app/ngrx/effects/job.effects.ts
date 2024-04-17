@@ -226,6 +226,26 @@ export class JobEffects {
         )
         )
 
+    deleteAtJobDetailOfRecruiter$= createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.deleteAtJobDetailOfRecruiter),
+            switchMap(action =>
+                this.jobService.deleteJob(action.id).pipe(
+                    map((result) => {
+                        if(result){
+                            return JobActions.deleteAtJobDetailOfRecruiterSuccess()
+                        }
+                        return JobActions.deleteAtJobDetailOfRecruiterFailure({error: "delete failed"})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.deleteAtJobDetailOfRecruiterFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
     
 
 

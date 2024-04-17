@@ -1,41 +1,36 @@
 import { createReducer, on } from "@ngrx/store";
 import { ServicePackageState } from "../states/service-package.state";
 import * as ServicePackageActions from "../actions/service-package.actions";
+import { ServicePackage } from "../../models/service-package.model";
 
 export const initialState: ServicePackageState = {
-    servicePackagesTakenByGetAllAtCreateJob: [],
-    isGetAllAtCreateJobSuccess: false,
-    isGetAllAtCreateJobLoading: false,
-    getAllAtCreateJobError: ''
+    isCreateAtPostJobLoading: false,
+    isCreateAtPostJobSuccess: false,
+    createAtPostJobError: '',
+    servicePackageCreatedAtPostJob: <ServicePackage>{}
 }
 
 
 export const servicePackageReducer = createReducer(
     initialState,
-    on(ServicePackageActions.getAllAtCreatJob, (state,action)=>{
-        return{
-            ...state,
-            isGetAllAtCreateJobLoading: true,
-            isGetAllAtCreateJobSuccess: false,
-            getAllAtCreateJobError: ''
-        }
-    }),
-    on(ServicePackageActions.getAllAtCreatJobSuccess, (state,action)=>{
-        return{
-            ...state,
-            servicePackagesTakenByGetAllAtCreateJob: action.servicvePackages,
-            isGetAllAtCreateJobLoading: false,
-            isGetAllAtCreateJobSuccess: true,
+    on(ServicePackageActions.createAtPostJob, (state) => ({
+        ...state,
+        isCreateAtPostJobLoading: true,
+        isCreateAtPostJobSuccess: false,
+        createAtPostJobError: ''
+    })),
+    on(ServicePackageActions.createAtPostJobSuccess, (state,action) => ({
+        ...state,
+        servicePackageCreatedAtPostJob: action.servicePackage,
+        isCreateAtPostJobLoading: false,
+        isCreateAtPostJobSuccess: true,
+        createAtPostJobError: ''
+    })),
+    on(ServicePackageActions.createAtPostJobFailure, (state, action) => ({
+        ...state,
+        isCreateAtPostJobLoading: false,
+        isCreateAtPostJobSuccess: false,
+        createAtPostJobError: action.error
+    }))
 
-            getAllAtCreateJobError: ''
-        }
-    }),
-    on(ServicePackageActions.getAllAtCreatJobFailure, (state,action)=>{
-        return{
-            ...state,
-            isGetAllAtCreateJobLoading: false,
-            isGetAllAtCreateJobSuccess: false,
-            getAllAtCreateJobError: action.error
-        }
-    })
 )

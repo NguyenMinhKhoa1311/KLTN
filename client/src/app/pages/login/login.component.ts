@@ -59,48 +59,42 @@ export class LoginComponent implements  OnDestroy {
     ) {
 
       this.subscriptions.push(
-             // kiểm tra login with google thành công hay chưa r gọi action getUserByGmailWithGoogleAtLogin
-             this.userFirebase$.subscribe(User=>{
+            // kiểm tra login with google thành công hay chưa r gọi action getUserByGmailWithGoogleAtLogin
+            this.userFirebase$.subscribe(User=>{
               if(User.email.length > 0){
-               console.log(User);
-               this.userLoginWithGoogle.Username = User.email ?? '';
-               this.userLoginWithGoogle.Password = "1234";
-               this.userLoginWithGoogle.Uid = User.uid;
-             this.store.dispatch(UserActions.getUserByGmailWithGoogleAtLogin({Username: User.email}));
+              console.log(User);
+              this.userLoginWithGoogle.Username = User.email ?? '';
+              this.userLoginWithGoogle.Password = "1234";
+              this.userLoginWithGoogle.Uid = User.uid;
+            this.store.dispatch(UserActions.getUserByGmailWithGoogleAtLogin({Username: User.email}));
               }
-             }),
-   
+            }),
          // Kiểm tra xem có user trong database k
-             this.userTakenByGmailWithGoogleAtLogin$.subscribe((user) => {
-               if(user.Username.length > 0){
-                 if (user.Username == "404 user not found" ) {
+            this.userTakenByGmailWithGoogleAtLogin$.subscribe((user) => {
+              if(user.Username.length > 0){
+                if (user.Username == "404 user not found" ) {
                    //không có user thì tạo user
-     
-                   console.log(user);
-                   this.store.dispatch(UserActions.createWithGoogleAtLogin({user: this.userLoginWithGoogle}));      
-                   
-                 }
-                 else{
+                  console.log(user);
+                  this.store.dispatch(UserActions.createWithGoogleAtLogin({user: this.userLoginWithGoogle}));      
+                }
+                else{
                       //có user thì kiểm tra user có profile chưa
                       console.log(user);
                       const userAsJsoBth = JSON.stringify(user);
                       sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
-                   this.store.dispatch(CandidateActions.getByUserWithGoogleAtLogin({user: user._id}))
+                      this.store.dispatch(CandidateActions.getByUserWithGoogleAtLogin({user: user._id}))
                       
-                 }
-               }
-             }),
-   
-   
+                }
+              }
+            }),
          // kiểm tra tạo user thành công hay chưa r chuyển qua trang register
-         this.isCreateUserWithGoogleAtLoginSuccess$.subscribe((isSuccess) => {
-           if (isSuccess) {
-             const userAsJsoBth = JSON.stringify(this.userLoginWithGoogle);
-             sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
-             this.router.navigate(['createProfile/personal-information']);
-           }
-         }),
-   
+        this.isCreateUserWithGoogleAtLoginSuccess$.subscribe((isSuccess) => {
+          if (isSuccess) {
+            const userAsJsoBth = JSON.stringify(this.userLoginWithGoogle);
+            sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
+            this.router.navigate(['createProfile/personal-information']);
+          }
+        }),
          // kiểm tra candidate nếu chưa có thì tạo, có r thì log vào home
         this.candidateTakenByUserWithGoogleAtLogin$.subscribe((candidate) => {
           if (candidate._id.length > 0) {

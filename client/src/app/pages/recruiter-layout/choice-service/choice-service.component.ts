@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareModule } from '../../../shared/shared.module';
+import { generateUuid } from '../../../../environments/environments';
 
 @Component({
   selector: 'app-choice-service',
@@ -14,39 +15,33 @@ export class ChoiceServiceComponent {
   totalPrice: number = 0; // Tổng giá tiền
 
 
-  constructor() {
+  constructor(private router: Router) {
     
   }
   item=[
     {
-      name:'Dịch vụ 1',
+      id:1,
+      name:'Nổi bật tiêu đề',
       price: 500000,
-      time:'30 ngày',
-      description:'Tiêu đề nổi bật',
+      description:'Tiêu đề in Đậm và Đỏ',
     },
     {
-      name:'Dịch vụ 2',
-      price: 1000000,
-      time:'30 ngày',
-      description:'Tiêu đề nổi bật',
+      id:2,
+      name:'Đăng tuyển gấp',
+      price: 500000,
+      description:'Tag tuyển gấp',
     },
     {
-      name:'Dịch vụ 3',
-      price: 1000000,
-      time:'30 ngày',
-      description:'Tiêu đề nổi bật',
+      id:3,
+      name:'Công việc hot',
+      price: 750000,
+      description:'Tag nổi bật',
     },
     {
-      name:'Dịch vụ 4',
+      id:4,
+      name:'Độ ưu tiên cao',
       price: 1000000,
-      time:'30 ngày',
-      description:'Tiêu đề nổi bật',
-    },
-    {
-      name:'Dịch vụ 5',
-      price: 1000000,
-      time:'30 ngày',
-      description:'Tiêu đề nổi bật',
+      description:'Độ ưu tiên cao',
     },
     
   ];
@@ -68,5 +63,87 @@ export class ChoiceServiceComponent {
   isSelected(item: any): boolean {
     // Kiểm tra xem một dịch vụ đã được chọn hay chưa
     return this.selectedItems.indexOf(item) !== -1;
+  }
+
+  //funtion use for find item selected
+  nameOfRecruiter: string ='';
+
+  nextStep(){
+    let servicePackage = {
+      Name:`Service Package of ${this.nameOfRecruiter}`,
+      ServicePackageId: generateUuid(),
+      Description:"none",
+      Price:0,
+      Priority:0,
+      Hot:false,
+      ColorTitle:false,
+      Urgent:false,      
+    }
+    this.selectedItems.forEach(item => {
+      switch(item.id){
+        case 1:
+          {
+            servicePackage.ColorTitle = true;
+            servicePackage.Price += item.price;
+            if(servicePackage.Description!="none"){
+              servicePackage.Description += `, ${item.description}`;
+            }
+            else{
+              servicePackage.Description = item.description;
+            }
+          }
+          break;
+        case 2:
+          {
+            servicePackage.Urgent = true;
+            servicePackage.Price += item.price;
+            if(servicePackage.Description!="none"){
+              servicePackage.Description += `, ${item.description}`;
+            }
+            else{
+              servicePackage.Description = item.description;
+            }
+          }
+          break;
+        case 3:
+          {
+            servicePackage.Hot = true;
+            servicePackage.Price += item.price;
+            if(servicePackage.Description!="none"){
+              servicePackage.Description += `, ${item.description}`;
+            }
+            else{
+              servicePackage.Description = item.description;
+            }
+          }
+          break;
+        case 4:
+          {
+            servicePackage.Priority = 1;
+            servicePackage.Price += item.price;
+            if(servicePackage.Description!="none"){
+              servicePackage.Description += `, ${item.description}`;
+            }
+            else{
+              servicePackage.Description = item.description;
+            }
+          }
+          break;
+      }
+    });
+    if(servicePackage.Price == 0){
+      alert("Bạn sẽ đăng công việc với giá 500000 và không sử dụng dịch vụ nào");
+      servicePackage.Price= 500000;
+      sessionStorage.setItem('servicePackedChoiced', JSON.stringify(servicePackage));
+      this.router.navigate(['/recruiterLayout/job-posting']);
+    }
+    else{
+      sessionStorage.setItem('servicePackedChoiced', JSON.stringify(servicePackage));
+      this.router.navigate(['/recruiterLayout/job-posting']);
+    }
+
+  }
+  returnHome(){
+    this.router.navigateByUrl('/home');
   }
 }

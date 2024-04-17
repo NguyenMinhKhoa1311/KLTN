@@ -100,7 +100,6 @@ export class BasicInformationComponent implements OnDestroy {
       console.log(careers);
       if(careers.length > 0){
         this.careerList = careers;
-       
       }
     }),
 

@@ -43,6 +43,8 @@ export class JobService {
     
     return this.httpClient.put<Job>(`${URL}/job/updateJob?id=${id}`,job);
   }
+
+
   getByRecruiter(recruiterId:string,page:number,limit:number,sortBy:string,sortOrder:string){
     return this.httpClient.get<Job[]>(`${URL}/job/getByRecruiter?id=${recruiterId}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
@@ -56,6 +58,11 @@ export class JobService {
 
   getByJobId(jobId:string){
     return this.httpClient.get<Job>(`${URL}/job/getById?id=${jobId}`);
+  }
+
+
+  deleteJob(jobId:string){
+    return this.httpClient.delete<Boolean>(`${URL}/job/deleteJob?id=${jobId}`);
   }
 }
 

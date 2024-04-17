@@ -69,6 +69,11 @@ export const initialState: jobState = {
     getByFieldAtJobError: "",
     jobsTakenByFieldAtJob: [],
 
+    isDeleteAtJobDetailfRecruiterLoading: false,
+    isDeleteAtJobDetailfRecruiterSuccess: false,
+    deleteAtJobDetailOfRecruiterError: "",
+
+
 
 }
 
@@ -479,5 +484,36 @@ export const jobReducer = createReducer(
             getByFieldAtJobError: action.error,
         }
     }),
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(JobActions.deleteAtJobDetailOfRecruiter,(state,action)=>{
+        return{
+            ...state,
+            isDeleteAtJobDetailfRecruiterLoading: true,
+            isDeleteAtJobDetailfRecruiterSuccess: false,
+            deleteAtJobDetailOfRecruiterError: "",
+        }
+    }),
+    on(JobActions.deleteAtJobDetailOfRecruiterSuccess,(state,action)=>{
+        return{
+            ...state,
+
+            isDeleteAtJobDetailfRecruiterLoading: false,
+            isDeleteAtJobDetailfRecruiterSuccess: true,
+            deleteAtJobDetailOfRecruiterError: "",
+        }
+    }),
+    on(JobActions.deleteAtJobDetailOfRecruiterFailure,(state,action)=>{
+        return{
+            ...state,
+            isDeleteAtJobDetailfRecruiterLoading: false,
+            isDeleteAtJobDetailfRecruiterSuccess: false,
+            deleteAtJobDetailOfRecruiterError: action.error,
+        }
+    }),
+
+
 
 )

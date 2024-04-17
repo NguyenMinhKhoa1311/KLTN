@@ -10,7 +10,7 @@ export class ServicePackageService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(){
-    return this.httpClient.get<ServicePackage[]>(`${URL}/service-package/getAll`);
+  create(servicePackage: any){
+    return this.httpClient.post<ServicePackage>(URL + '/service-package/create', servicePackage);
   }
 }

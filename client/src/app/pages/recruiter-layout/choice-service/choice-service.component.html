@@ -25,10 +25,10 @@
             Tổng giá tiền: {{ totalPrice }}
         </div>
         <div class="btn_contorl">
-            <div class="btn_cancel">
+            <div class="btn_cancel" (click)="returnHome()">
                 Hủy
             </div>
-            <div class="btn_accept">
+            <div class="btn_accept" (click)="nextStep()">
                 Tiếp tục
             </div>
         </div>
