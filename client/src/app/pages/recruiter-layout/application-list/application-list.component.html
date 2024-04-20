@@ -1,0 +1,112 @@
+<div id="application_container">
+    <div class="application_box">
+        <div class="head">
+            <h1>Danh sách tuyển dụng</h1>
+        </div>
+        <div class="body">
+            <div class="job_box">
+                <div class="control">
+                    <div class="position_title">
+                        Vị trí ứng tuyển
+                    </div>
+                    <div class="name_title">
+                        Tên ứng viên
+                    </div>
+                    <div class="career_field_title">
+                        Ngành nghề/ Lĩnh vực
+                    </div>
+                    <div class="email_title">
+                        Email
+                    </div>
+                    <div class="date_title">
+                        Ngày ứng tuyển
+                    </div>
+                    <div class="status_title">
+                        Trạng thái
+                    </div>  
+                </div>
+                <div class="candidate_list" (click)="openDetailDialog()">
+                    <div class="position">
+                        BackEnd Developer
+                    </div>
+                    <div class="name">
+                        Phung Minh Khoa
+                    </div>
+                    <div class="career_field">
+                        Phần mềm máy tính/ Công nghệ thông tin
+                    </div>
+                    <div class="email">
+                        Khoaphung.18072002gmail.com
+                    </div>
+                    <div class="date">
+                        19/04/2024
+                    </div>
+                    <div class="status">
+                        <div class="status_box_selected">
+                            Đã duyệt
+                        </div>
+                        <!-- <div class="status_box_processing">
+                            Đang chờ
+                        </div>
+                        <div class="status_box_rejected">
+                            Không duyệt
+                        </div> -->
+                    </div>
+                </div>
+                <div class="candidate_list">
+                    <div class="position">
+                        Vị trí ứng tuyển
+                    </div>
+                    <div class="name">
+                        Tên ứng viên
+                    </div>
+                    <div class="career_field">
+                        Ngành nghề/ Lĩnh vực
+                    </div>
+                    <div class="email">
+                        Email
+                    </div>
+                    <div class="date">
+                        Ngày ứng tuyển
+                    </div>
+                    <div class="status">
+                        Trạng thái
+                    </div>
+                </div>                   
+            </div>
+        </div>
+    </div>
+</div>
+
+<dialog id="detail_dialog" style="color: #1f1a1c" #detailDialog>
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Chi tiết ứng viên</h4>
+            </div>
+            <div class="btnClose" (click)="closeDetailDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeDetailDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button" (click)="closeDetailDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Chấp nhận
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+</dialog>
