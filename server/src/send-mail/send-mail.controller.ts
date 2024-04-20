@@ -8,7 +8,14 @@ export class SendMailController {
 
   @Post()
   async sendMail(@Body()mailOptions: MailOptions){
-    await this.sendMailService.sendMail(mailOptions);
+    const sentEmailInfo = await this.sendMailService.sendMail(mailOptions);
+    console.log('Email sent successfully:', sentEmailInfo);
+    if(sentEmailInfo){
+      return true
+    }
+    else{
+      return false
+    }
 }
   
 }

@@ -50,10 +50,15 @@ export class CompanyService {
         {$inc:{JobQuantity:1}},
         {new: true}
       )
-      return company
+      if(company._id.toString().length>0){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
     catch(error){
-      throw new HttpException(error.message, error.status);
+      return false;
     }
   }
 
@@ -61,7 +66,7 @@ export class CompanyService {
     try{
       const companyToUpdate = await this.CompanyModel.findById(id).exec();
       if(companyToUpdate.JobQuantity <= 0){
-        throw new HttpException('JobQuantity cannot be less than 0', 400);
+        return false;
       }
       else{
         const company = await this.CompanyModel.findByIdAndUpdate(
@@ -69,11 +74,16 @@ export class CompanyService {
           {$inc:{JobQuantity:-1}},
           {new: true}
         )
-        return company;
+        if(company._id.toString().length>0){
+          return true;
+        }
+        else{
+          return false;
+        }
       }
     }
     catch(error){
-      throw new HttpException(error.message, error.status);
+      return false;
     }
   }
 

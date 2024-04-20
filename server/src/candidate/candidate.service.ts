@@ -121,7 +121,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -152,7 +153,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -181,7 +183,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -209,7 +212,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -239,7 +243,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -269,7 +274,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -300,7 +306,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -338,7 +345,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -367,7 +375,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -395,7 +404,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -427,7 +437,8 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('Field', 'FieldId Name', this.FieldModel)
+      .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
         return candidateAfterUpdate;
       }
@@ -457,7 +468,8 @@ async deleteSkills(id:string, job_id :string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
-    .populate('Field', 'FieldId Name', this.FieldModel);
+    .populate('Field', 'FieldId Name', this.FieldModel)
+    .exec();
     if(candidateAfterUpdate._id.toString().length > 0){
       return candidateAfterUpdate;
     }
@@ -486,7 +498,8 @@ async deleteReference(id:string, reference:string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
-    .populate('Field', 'FieldId Name', this.FieldModel);
+    .populate('Field', 'FieldId Name', this.FieldModel)
+    .exec();
     if(candidateAfterUpdate._id.toString().length > 0){
       return candidateAfterUpdate;
     }
@@ -516,7 +529,8 @@ async deleteEducation(id:string, job_id :string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
-    .populate('Field', 'FieldId Name', this.FieldModel);
+    .populate('Field', 'FieldId Name', this.FieldModel)
+    .exec();
     if(candidateAfterUpdate._id.toString().length > 0){
       return candidateAfterUpdate;
     }
@@ -546,7 +560,8 @@ async deleteWorkExperience(id:string, job_id :string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
-    .populate('Field', 'FieldId Name', this.FieldModel);
+    .populate('Field', 'FieldId Name', this.FieldModel)
+    .exec();
     if(candidateAfterUpdate._id.toString().length > 0){
       return candidateAfterUpdate;
     }
@@ -575,7 +590,8 @@ async deleteLanguage(id:string, language:string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
-    .populate('Field', 'FieldId Name', this.FieldModel);
+    .populate('Field', 'FieldId Name', this.FieldModel)
+    .exec();
     if(candidateAfterUpdate._id.toString().length > 0){
       return candidateAfterUpdate;
     }

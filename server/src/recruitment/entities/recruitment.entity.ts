@@ -25,10 +25,30 @@ export class Recruitment {
 
     @Prop({
         required: true,
-         type: mongoose.Schema.Types.ObjectId,
-         ref:"Recruiter"
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Recruiter"
     })
     Recruiter: string;
+
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Company"
+    })
+    Company: string;
+
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Career"})
+    Career: string;
+
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Field"
+    })
+    Field: string;
 
     @Prop({required: true})
     StatusSeenOfRecruiter: boolean;

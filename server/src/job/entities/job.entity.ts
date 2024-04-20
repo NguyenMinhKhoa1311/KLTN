@@ -43,7 +43,11 @@ export class Job {
     Welfare: string[];
 
 
-    @Prop({required: true})
+    @Prop({
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Career',
+        required: true
+    })
     Career: string;
 
 

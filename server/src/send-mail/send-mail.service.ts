@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 const {EMAIL_USER, EMAIL_PASSWORD, EMAIL_HOST,EMAIL_PORT} = require('../../config/email.config');
 import { MailOptions } from './dto/mail-options.dto';
@@ -20,6 +20,12 @@ export class SendMailService {
         });
       }
         async sendMail(mailOptions: MailOptions) {
+          try{
             return await this.transporter.sendMail(mailOptions);
+          }
+          catch(err){
+            return false
+          }
+
         }
 }

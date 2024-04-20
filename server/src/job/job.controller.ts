@@ -6,6 +6,8 @@ import { log } from 'console';
 import { FieldService } from 'src/field/field.service';
 import { CareerService } from 'src/career/career.service';
 import { CompanyService } from 'src/company/company.service';
+import { CreateRecruitmentDto } from 'src/recruitment/dto/create-recruitment.dto';
+import { RecruitmentService } from 'src/recruitment/recruitment.service';
 
 
 @Controller('job')
@@ -14,7 +16,8 @@ export class JobController {
     private readonly jobService: JobService,
     private readonly fieldService: FieldService,
     private readonly careerService: CareerService,
-    private readonly companyService: CompanyService
+    private readonly companyService: CompanyService,
+    private readonly recruitmentService: RecruitmentService
     
     ) {}
 
@@ -299,15 +302,41 @@ export class JobController {
 
 
   @Delete('deleteJob')
-  async deleteJob(@Query('id') id: string) {
+  async deleteJob(@Query('id') id: string, @Query('carrerId') carrerId: string, @Query('fieldId') fieldId: string, @Query('companyId') companyId: string) {
     try{
-      const result = await this.jobService.deleteJob(id);
-      if(result){
-        return false
-      }else return true
+      let resultOfCareer = await this.careerService.decreaseQuantity(carrerId);
+      let resultOfField = await this.fieldService.decreaseQuantity(fieldId);
+      let resultOfCompany = await this.companyService.decreaseJobQuantity(companyId);
+      if(resultOfCareer && resultOfField && resultOfCompany){
+        const result = await this.jobService.deleteJob(id);
+      return result
+      } else{
+        return false;
+      }
     }
     catch(err){
       return false
+    }
+  }
+
+  @Put('updateRecruitment')
+  async updateRecruitment(@Query('id') id: string, @Body() recruitment: CreateRecruitmentDto) {
+    try{
+      const newRecruitment = await this.recruitmentService.create(recruitment);
+      if(newRecruitment._id.toString().length > 0){
+      const job = await this.jobService.updateRecruiment(newRecruitment._id.toString(),id);
+      if(job._id.toString().length > 0){
+        return job;
+      }
+      else return {
+        _id: "500",
+      };
+    }
+    }
+    catch(err){
+      return {
+        _id: "500",
+      }
     }
   }
 

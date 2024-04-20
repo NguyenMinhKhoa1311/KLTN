@@ -50,17 +50,22 @@ constructor(
         { $inc: { Quantity: 1 } },
         { new: true }
         );
-      return field;
+      if(field._id.toString().length>0){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
     catch(err){
-      throw new HttpException(err.message,err.status);
+      return false;
     }
   }
   async decreaseQuantity(id: string){
     try{
       const updateField = await this.FieldModel.findById(id).exec();
       if(updateField.Quantity === 0){
-        throw new HttpException('Quantity is 0',400);
+        return false;
       }
       else{
         const field = await this.FieldModel.findByIdAndUpdate(
@@ -68,12 +73,17 @@ constructor(
           { $inc: { Quantity: -1 } },
           { new: true }
           );
-        return field;
+        if(field._id.toString().length>0){
+          return true;
+        }
+        else{
+          return false;
+        }
       }
 
   }
     catch(err){
-      throw new HttpException(err.message,err.status);
+      return false;
     }
   }
 

@@ -40,11 +40,15 @@ export class CareerService {
         {$inc:{Quantity:1}},
         {new: true}
       )
-      return career
-
+      if(career._id.toString().length > 0){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
     catch(err){
-      throw new HttpException(err.message, err.status)
+      return false;
     }
   }
 
@@ -52,7 +56,7 @@ export class CareerService {
     try{
       const updateCareer = await this.careerModel.findById(id).exec();
       if(updateCareer.Quantity === 0){
-        throw new HttpException('Quantity is 0', 400)
+        return false;
       }
       else{
         const career = await this.careerModel.findByIdAndUpdate(
@@ -60,12 +64,16 @@ export class CareerService {
           {$inc:{Quantity:-1}},
           {new: true}
         )
-        return career
+        if(career._id.toString().length > 0){
+          return true;
+        }
+        else{
+          return false;
+        }
       }
-
     }
     catch(err){
-      throw new HttpException(err.message, err.status)
+      return false
     }
   }
 

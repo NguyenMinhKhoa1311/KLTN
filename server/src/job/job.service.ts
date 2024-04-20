@@ -334,6 +334,7 @@ constructor(
         .populate('Company','CompanyId Name Avatar', this.companyModel)
         .populate('Field','FieldId FieldName', this.fieldModel)
         .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+        .exec();
         
         if(updateJob._id.toString().length > 0){
           return updateJob;
@@ -353,7 +354,7 @@ constructor(
 
   async deleteJob(jobId:string){
     try{
-      const deleteJob = await this.JobModel.findByIdAndDelete(jobId);
+      const deleteJob = await this.JobModel.findByIdAndDelete(jobId).exec();
       if(deleteJob._id.toString().length > 0){
       return true;
     }
@@ -363,6 +364,49 @@ constructor(
     }
     catch(error){
       return false;
+    }
+  }
+
+  async updateRecruiment(recruiterationId:string, jobId: string){
+    try{
+      const updatedJob = await this.JobModel.findByIdAndUpdate(
+        jobId,
+        {
+          $push: { Recruitment: recruiterationId }
+        },
+        {new:true})
+      .exec();
+      if(updatedJob._id.toString().length > 0){
+        return updatedJob;
+      }else{
+        return {
+          _id: "",
+        }
+      }
+      
+    }
+    catch(error){
+      return {
+        _id: "",
+      }
+    }
+  }
+
+  async deleteRecruitment(recruitment: string, id:string){
+    try{
+      const job = await this.JobModel.findByIdAndUpdate(
+        id,
+        {
+          $pull: { Recruitment: recruitment }
+        },
+        {new:true}
+      ).exec();
+      return job;
+    }
+    catch(error){
+      return {
+        _id: "",
+      }
     }
   }
 
