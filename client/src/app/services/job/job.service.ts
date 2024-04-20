@@ -61,8 +61,8 @@ export class JobService {
   }
 
 
-  deleteJob(jobId:string){
-    return this.httpClient.delete<Boolean>(`${URL}/job/deleteJob?id=${jobId}`);
+  deleteJob(jobId:string, companyId:string, fieldId:string, carrerId:string){
+    return this.httpClient.delete<Boolean>(`${URL}/job/deleteJob?id=${jobId}&carrerId=${carrerId}&fieldId=${fieldId}&companyId=${companyId}`);
   }
 }
 

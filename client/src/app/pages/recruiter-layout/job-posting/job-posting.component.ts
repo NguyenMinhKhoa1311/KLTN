@@ -78,17 +78,14 @@ export class JobPostingComponent implements OnDestroy{
     
     Welfare: new FormControl('', [Validators.required]),
     Tag: new FormControl('', [Validators.required]),
-    ServicePakage: new FormControl('', [Validators.required]),
 
   });
 
 //variables
   fields: Field[] = [];
   careers: Career[] = [];
-  servicePackages: ServicePackage[] = [];
   nameOffields: readonly string[] = [];
   nameOfCareers: readonly string[] = [];
-  nameOfServicePackages: readonly string[] = [];
   servicePackageChoiced: any;
   jobToCreate: any;
   isCreateServicePackage: boolean = false;
@@ -197,10 +194,10 @@ export class JobPostingComponent implements OnDestroy{
       ServicePackage: "",
       Tags: this.tagsList??[],
       StatusPayment: false,
-      Priority: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?.Priority??0,
-      Hot: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?.Hot??false,
-      ColorTitle: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?.ColorTitle??false,
-      Urgent: this.servicePackages.find(servicePackage => servicePackage.Name == this.jobPostForm.value.ServicePakage)?.Urgent??false,
+      Priority: this.servicePackageChoiced?.Priority??0,
+      Hot: this.servicePackageChoiced?.Hot??false,
+      ColorTitle: this.servicePackageChoiced?.ColorTitle??"",
+      Urgent: this.servicePackageChoiced?.Urgent??false,
       ImageOfCompany: "https://media.istockphoto.com/id/1128180520/vi/anh/%C4%91%E1%BB%99i-ng%C5%A9-d%E1%BB%8Bch-v%E1%BB%A5-d%E1%BB%8Dn-d%E1%BA%B9p-chuy%C3%AAn-nghi%E1%BB%87p-l%C3%A0m-vi%E1%BB%87c-v%E1%BB%9Bi-thi%E1%BA%BFt-b%E1%BB%8B-v%E1%BB%87-sinh-trong-ph%C3%B2ng-kh%C3%A1i-ni%E1%BB%87m-d%E1%BB%8Bch.jpg?s=612x612&w=0&k=20&c=nks0Tp1BP71s-_WsPD5UzzD638zeFuR14oiTTn-60bE="
 
 

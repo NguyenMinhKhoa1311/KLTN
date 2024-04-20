@@ -25,32 +25,29 @@
                         Trạng thái
                     </div>  
                 </div>
-                <div class="candidate_list" (click)="openDetailDialog()">
+                <div class="candidate_list" *ngFor="let recrutment of recruitments" (click)="openDetailDialog()">
                     <div class="position">
-                        BackEnd Developer
+                        {{recrutment.Job.Name}}
                     </div>
                     <div class="name">
-                        Phung Minh Khoa
+                        {{recrutment.Candidate.Name}}
                     </div>
                     <div class="career_field">
-                        Phần mềm máy tính/ Công nghệ thông tin
+                        {{recrutment.Career.Name}}/ {{recrutment.Field.FieldName}}
                     </div>
                     <div class="email">
-                        Khoaphung.18072002gmail.com
+                        {{recrutment.Candidate.Email}}
                     </div>
                     <div class="date">
-                        19/04/2024
+                        {{parseDateInComponent(recrutment.DateApply)}}
                     </div>
                     <div class="status">
-                        <div class="status_box_selected">
+                        <div class="status_box_selected" *ngIf="recrutment.Status">
                             Đã duyệt
                         </div>
-                        <!-- <div class="status_box_processing">
+                        <div class="status_box_processing" *ngIf="!recrutment.Status">
                             Đang chờ
                         </div>
-                        <div class="status_box_rejected">
-                            Không duyệt
-                        </div> -->
                     </div>
                 </div>
                 <div class="candidate_list">

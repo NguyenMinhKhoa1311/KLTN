@@ -328,8 +328,6 @@ export const jobReducer = createReducer(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(JobActions.getJobByRecruiterAtJobDetail,(state,action)=>{
-        console.log(action.type);
-        
         return{
             ...state,
             isGetByRecruiterAtJobDetailLoading: true,
@@ -338,8 +336,6 @@ export const jobReducer = createReducer(
         }
     }),
     on(JobActions.getJobByRecruiterAtJobDetailSuccess,(state,action)=>{
-        console.log(action.type);
-        
         return{
             ...state,
             jobsTakenByRecruiterAtJobDetail: action.jobs,
@@ -349,8 +345,6 @@ export const jobReducer = createReducer(
         }
     }),
     on(JobActions.getJobByRecruiterAtJobDetailFailure,(state,action)=>{
-        console.log(action.type);
-        
         return{
             ...state,
             isGetByRecruiterAtJobDetailLoading: false,
@@ -397,7 +391,6 @@ export const jobReducer = createReducer(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(JobActions.getJobByIdAtJobDetailOfCandidate,(state,action)=>{
-        console.log(action.type);
         return{
             ...state,
             isGetByIdAtJobDetailOfCandidateLoading: true,
@@ -406,8 +399,6 @@ export const jobReducer = createReducer(
         }
     }),
     on(JobActions.getJobByIdAtJobDetailOfCandidateSuccess,(state,action)=>{
-        console.log(action.type);
-        
         return{
             ...state,
             jobTakenByIdAtJobDetailOfCandidate: action.job,
@@ -417,8 +408,6 @@ export const jobReducer = createReducer(
         }
     }),
     on(JobActions.getJobByIdAtJobDetailOfCandidateFailure,(state,action)=>{
-        console.log(action.type);
-        
         return{
             ...state,
             isGetByIdAtJobDetailOfCandidateLoading: false,
@@ -489,6 +478,7 @@ export const jobReducer = createReducer(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(JobActions.deleteAtJobDetailOfRecruiter,(state,action)=>{
+        console.log(action.type);
         return{
             ...state,
             isDeleteAtJobDetailfRecruiterLoading: true,
@@ -497,15 +487,16 @@ export const jobReducer = createReducer(
         }
     }),
     on(JobActions.deleteAtJobDetailOfRecruiterSuccess,(state,action)=>{
+        console.log(action.type);
         return{
             ...state,
-
             isDeleteAtJobDetailfRecruiterLoading: false,
             isDeleteAtJobDetailfRecruiterSuccess: true,
             deleteAtJobDetailOfRecruiterError: "",
         }
     }),
     on(JobActions.deleteAtJobDetailOfRecruiterFailure,(state,action)=>{
+        console.log(action.type);
         return{
             ...state,
             isDeleteAtJobDetailfRecruiterLoading: false,

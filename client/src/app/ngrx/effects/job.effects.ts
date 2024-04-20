@@ -15,7 +15,7 @@ export class JobEffects {
     this.actions$.pipe(
         ofType(JobActions.getByFieldAtHome),
         exhaustMap(action =>
-             this.jobService.getByField(action.field, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+            this.jobService.getByField(action.field, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
                 map(jobs =>{
                     return JobActions.getByFieldAtHomeSuccess({jobs})
                 }),
@@ -230,9 +230,11 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.deleteAtJobDetailOfRecruiter),
             switchMap(action =>
-                this.jobService.deleteJob(action.id).pipe(
+                this.jobService.deleteJob(action.id,action.companyId,action.fieldId,action.careerId).pipe(
                     map((result) => {
                         if(result){
+                            console.log("delete success");
+                            
                             return JobActions.deleteAtJobDetailOfRecruiterSuccess()
                         }
                         return JobActions.deleteAtJobDetailOfRecruiterFailure({error: "delete failed"})

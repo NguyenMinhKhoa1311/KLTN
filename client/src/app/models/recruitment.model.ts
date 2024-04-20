@@ -1,16 +1,22 @@
 import { Candidate } from "./candidate.model";
+import { Career } from "./career.model";
+import { Company } from "./company.model";
+import { Field } from "./field.model";
 import { Job } from "./job.model";
 import { Recruiter } from "./recruiter.model";
 
 export interface Recruitment{
     _id: string;
-     RecruitmentId: string,
-     Job: Job,
-     Candidate: Candidate,
-     Recruiter: Recruiter,
-     Status: boolean,
-     DateApply: Date,
-     DateInterview: Date,
+    RecruitmentId: string,
+    Job: Job,
+    Candidate: Candidate,
+    Recruiter: Recruiter,
+    Company: Company,
+    Status: boolean,
+    DateApply: Date,
+    Career: Career,
+    Field: Field,
+    DateInterview: Date,
     createAt: Date;
     updateAt: Date;
 }

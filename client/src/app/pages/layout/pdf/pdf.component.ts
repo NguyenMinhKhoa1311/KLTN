@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class PdfComponent {
   generatePDF() {
     const elementToprint: any = document.getElementById('theContent');
-    html2canvas(elementToprint, { scale: 2 }).then((canvas) => {
+    html2canvas(elementToprint,{ scale: 2,useCORS: true  }).then((canvas) => {
       const pdf = new jsPDF();
       pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
       pdf.setProperties(

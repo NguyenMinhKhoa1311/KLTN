@@ -51,6 +51,7 @@ export class JobDetailComponent {
   //ngrx of job
   jobGetByRecruiterATJobDetail$ = this.store.select('job','jobsTakenByRecruiterAtJobDetail')
   jobUpdatedAtJobDetail$ = this.store.select('job','jobUpdatedAtJobDetail');
+  isDeletedJobAtJobDetail$ = this.store.select('job','isDeleteAtJobDetailfRecruiterSuccess');
 
   //ngrx of field
   fieldNoLimitAtJobDetail$ = this.store.select('field', 'fieldNoLimitAtJobDetail');
@@ -113,6 +114,13 @@ export class JobDetailComponent {
         if(job._id!='500'){
           this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}) );
           this.closeJobDialog();
+        }
+      }),
+      //theo dõi job dc xóa
+      this.isDeletedJobAtJobDetail$.subscribe(result => {
+        if(result){
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}) );
+          alert("Xóa thành công");
         }
       })
     )
@@ -311,6 +319,13 @@ export class JobDetailComponent {
   closeVisibilityDialog() {
     this.visibilityDialog.nativeElement.close();
     this.cdr2.detectChanges();
+  }
+
+
+
+  //delete job
+  deleteJob(job: Job) {
+    this.store.dispatch(JobActions.deleteAtJobDetailOfRecruiter({id: job._id,careerId: job.Career._id, companyId:job.Company._id,fieldId: job.Field._id}));
   }
 }
 
