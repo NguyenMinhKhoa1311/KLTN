@@ -30,13 +30,13 @@
                         width: 15%;
                     }
                     .career_field_title{
-                        width: 20%;
+                        width: 25%;
                     }
                     .email_title{
                         width: 20%;
                     }
                     .date_title{
-                        width: 20%;
+                        width: 15%;
                     }
                     .status_title{
                         width: 10%;
@@ -64,13 +64,13 @@
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        width: 20%;
+                        width: 25%;
                     }
                     .email{
                         width: 20%;
                     }
                     .date{
-                        width: 20%;
+                        width: 15%;
                     }
                     .status{
                         width: 10%;
@@ -130,6 +130,149 @@
     }
     #body_dialog{
         margin-top: 20px;
+        font-size: 14px;
+        .info{
+            display: flex;
+            flex-direction: column;
+            .basic{
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 20px;
+                .avatar{
+                    width: 120px;
+                    height: 120px;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
+                }
+                .info_basic{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    
+                    margin-left: 20px;
+                    .name, .email, .phone, .address, .position{
+                        display: flex;
+                        flex-direction: row;
+                        .title{
+                            font-weight: 600;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            .experience, .education{
+                margin-bottom: 10px;
+                .title{
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                    font-size: 16px;
+                }
+                .experience_box, .education_box{
+                    display: flex;
+                    flex-direction: row;
+                    padding: 12px;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 8px;
+                    
+                    .h1, .h2{
+                        width: 50%;
+                        .company, .position, .date_start, .date_end, .school ,.major{
+                            display: flex;
+                            flex-direction: row;
+                            .title{
+                                font-weight: 600;
+                                margin-right: 5px;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            .skill{
+                margin-bottom: 10px;
+                .title{
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                    font-size: 16px;
+                }
+                .skill_box{
+                    padding: 12px 0;
+                    .skill_name{
+                        padding: 5px;
+                        border: 1px solid #e0e0e0;
+                        display: inline;
+                        border-radius: 8px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+        .row4{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            gap: 10px;
+            .btn_Huy, .btn_Luu{
+                .tui-space_right-3{
+                    margin-right: 0;
+                }
+                .tui-space_bottom-3{
+                    margin-bottom: 0;
+                }
+            }
+            .btn_Luu{
+                ::ng-deep [tuiWrapper][data-appearance=primary]{
+                    background-color: #fd916f;
+                    // border-color: #005aff;
+                    color: #fff;
+                }
+            }
+            .btn_Huy{
+                ::ng-deep [tuiWrapper][data-appearance=primary]{
+                    background-color: #f1f2f4;
+                    color: #000000;
+                }
+            }
+        }
+    }
+}
+
+
+#email_dialog{
+    width: 40%;
+    border: 1px solid #fff;
+    border-radius: 12px;
+    padding: 24px;
+    #top_dialog {
+        height: 7%;
+        width: 100%;
+        border-bottom: 1px solid #cac8c8;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .title{
+            h4{
+                font-size: 20px;
+                font-weight: 500;
+            }
+        }
+        .btnClose {
+            cursor: pointer;
+            .material-symbols-outlined {
+                font-size: 23px;
+                color: rgb(102,102, 102);
+            }
+        }
+    }
+    #body_dialog{
+        margin-top: 20px;
+        font-size: 14px;
+        
         .row4{
             margin-top: 20px;
             display: flex;

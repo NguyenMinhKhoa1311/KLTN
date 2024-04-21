@@ -68,4 +68,17 @@ export class ApplicationListComponent implements OnDestroy {
     this.detailDialog.nativeElement.close();
     this.cdr1.detectChanges();
   }
+  @ViewChild('emailDialog', { static: true })
+  emailDialog!: ElementRef<HTMLDialogElement>;
+  cdr2 = inject(ChangeDetectorRef);
+  openEmilDialog() {
+    this.emailDialog.nativeElement.showModal();
+    this.cdr2.detectChanges();
+  }
+  closeEmailDialog() {
+    this.emailDialog.nativeElement.close();
+    this.cdr2.detectChanges();
+    this.detailDialog.nativeElement.close();
+    this.cdr1.detectChanges();
+  }
 }
