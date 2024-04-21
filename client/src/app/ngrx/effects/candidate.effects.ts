@@ -29,6 +29,22 @@ export class CandidateEffects{
          )
     );
 
+    getByIdAtAplicationList$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.getByIdAtAplicationList),
+        exhaustMap((action) =>
+         this.candidateService.getById(action.id).pipe(
+            map((item)=>{
+                if(item._id.length>0){
+                    return CandidateActions.getByIdAtAplicationListSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.getByIdAtAplicationListFailure({error: "Get By Id At Aplication List Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.getByIdAtAplicationListFailure({error: error}))))))
+        );
+
     createCandidateAtRegister$ = createEffect(()=>
     this.action$.pipe(
         ofType(CandidateActions.createCandidateAtCreateProfile),

@@ -7,7 +7,15 @@ export const  initialState: RecruitmentState = {
     isGetByRecruiterLoading: false,
     isGetByRecruiterSuccess: false,
     getByRecruiterError: '',
-    recruitmentsTakenByRecruiter: []
+    recruitmentsTakenByRecruiter: [],
+
+    isUpdateStatusSeenLoading: false,
+    isUpdateStatusSeenSuccess: false,
+    updateStatusSeenError: '',
+
+    isUpdateStatusLoading: false,
+    isUpdateStatusSuccess: false,
+    updateStatusError: ''
 }
 
 export const recruitmentReducer = createReducer(
@@ -30,5 +38,51 @@ export const recruitmentReducer = createReducer(
         isGetByRecruiterLoading: false,
         isGetByRecruiterSuccess: false,
         getByRecruiterError: action.error
-    }))
+    })),
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruitmentActions.updateStatusSeenAtAplicationList, (state,action) => ({
+        ...state,
+        isUpdateStatusSeenLoading: true,
+        isUpdateStatusSeenSuccess: false,
+        updateStatusSeenError: ''
+    })),
+    on(RecruitmentActions.updateStatusSeenAtAplicationListSuccess, (state) => ({
+        ...state,
+        isUpdateStatusSeenLoading: false,
+        isUpdateStatusSeenSuccess: true,
+        updateStatusSeenError: ''
+    })),
+    on(RecruitmentActions.updateStatusSeenAtAplicationListFailure, (state,action) => ({
+        ...state,
+        isUpdateStatusSeenLoading: false,
+        isUpdateStatusSeenSuccess: false,
+        updateStatusSeenError: action.error
+    })),
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruitmentActions.updateStatusAtAplicationList, (state,action) => ({
+        ...state,
+        isUpdateStatusLoading: true,
+        isUpdateStatusSuccess: false,
+        updateStatusError: ''
+    })),
+    on(RecruitmentActions.updateStatusAtAplicationListSuccess, (state) => ({
+        ...state,
+        isUpdateStatusLoading: false,
+        isUpdateStatusSuccess: true,
+        updateStatusError: ''
+    })),
+    on(RecruitmentActions.updateStatusAtAplicationListFailure, (state,action) => ({
+        ...state,
+        isUpdateStatusLoading: false,
+        isUpdateStatusSuccess: false,
+        updateStatusError: action.error
+    })),
+
 )

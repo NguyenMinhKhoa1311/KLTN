@@ -27,4 +27,38 @@ export class RecruitmentEffects {
         )
         )
         )
+
+    updateStatusSeenAtAplicationList$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(RecruitmentActions.updateStatusSeenAtAplicationList),
+            exhaustMap(action =>
+                this.recruitmentService.updateStatusSeen(action.recruiter, action.status).pipe(
+                    map(() => {
+                        return RecruitmentActions.updateStatusSeenAtAplicationListSuccess()
+                    }),
+                    catchError((err) =>
+                        of(RecruitmentActions.updateStatusSeenAtAplicationListFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    updateStatusAtAplicationList$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(RecruitmentActions.updateStatusAtAplicationList),
+            exhaustMap(action =>
+                this.recruitmentService.updateStatus(action.recruiter, action.status).pipe(
+                    map(() => {
+                        return RecruitmentActions.updateStatusAtAplicationListSuccess()
+                    }),
+                    catchError((err) =>
+                        of(RecruitmentActions.updateStatusAtAplicationListFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
 }

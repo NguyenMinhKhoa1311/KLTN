@@ -117,5 +117,9 @@ export interface candidateState{
     deleteReferenceAtProfileError: string;
     candidateDeletedReferenceAtProfile: Candidate;
 
+    isGetByIdAtAplicationListLoading: boolean;
+    isGetByIdAtAplicationListSuccess: boolean;
+    getByIdAtAplicationListError: string;
+    candidateTakenByIdAtAplicationList: Candidate;
 
 }

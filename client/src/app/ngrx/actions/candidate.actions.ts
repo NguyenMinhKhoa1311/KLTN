@@ -410,6 +410,23 @@ export const deleteSkillAtProfileFailure = createAction(
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByIdAtAplicationList = createAction(
+    "[Candidate] Get By Id At Aplication List",
+    props<{id: string}>()
+    );
+export const getByIdAtAplicationListSuccess = createAction(
+    "[Candidate] Get By Id At Aplication List Success",
+    props<{candidate: Candidate}>()
+    );
+export const getByIdAtAplicationListFailure = createAction(
+    "[Candidate] Get By Id At Aplication List Failure",
+    props<{error: string}>()
+    );
+
+
+
+
 
 
 

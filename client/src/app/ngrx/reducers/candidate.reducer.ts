@@ -111,6 +111,11 @@ export const initialState: candidateState = {
     deleteReferenceAtProfileError: "",
     candidateDeletedReferenceAtProfile: <Candidate>{},
 
+    isGetByIdAtAplicationListLoading: false,
+    isGetByIdAtAplicationListSuccess: false,
+    getByIdAtAplicationListError: "",
+    candidateTakenByIdAtAplicationList: <Candidate>{},
+
 
 
 };
@@ -800,7 +805,32 @@ on(CandidateActions.deleteEducationAtProfileFailure,(state, actions)=>{
     
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.getByIdAtAplicationList,(state, actions)=>{
+    return{
+        ...state,
+        isGetByIdAtAplicationListLoading: true,
+        isGetByIdAtAplicationListSuccess: false,
+        getByIdAtAplicationListError: "",
+    };
+}),
+on(CandidateActions.getByIdAtAplicationListSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isGetByIdAtAplicationListLoading: false,
+        isGetByIdAtAplicationListSuccess: true,
+        getByIdAtAplicationListError: "",
+        candidateTakenByIdAtAplicationList: actions.candidate,
+    };
+}),
+on(CandidateActions.getByIdAtAplicationListFailure,(state, actions)=>{
+    return{
+        ...state,
+        isGetByIdAtAplicationListLoading: false,
+        isGetByIdAtAplicationListSuccess: false,
+        getByIdAtAplicationListError: actions.error,
+    };
+}),
 
 
     

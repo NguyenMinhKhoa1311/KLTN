@@ -13,4 +13,10 @@ export class RecruitmentService {
   getByRecruiter(recruiter: string, page: number, limit: number, sortBy = 'createdAt', sortOrder: string) {
     return this.httpClient.get<Recruitment[]>(`${URL}/recruitment/getByRecruiter?recruiter=${recruiter}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }
+  updateStatusSeen(recruiter: string , status: boolean){
+    return this.httpClient.put<boolean>(`${URL}/recruitment/updateStatusSeen?id=${recruiter}&status=${status}`, {});
+  }
+  updateStatus(recruiter: string , status: boolean){
+    return this.httpClient.put<boolean>(`${URL}/recruitment/updateStatus?id=${recruiter}&status=${status}`, {});
+  }
 }

@@ -6,4 +6,12 @@ export interface RecruitmentState {
     getByRecruiterError: string;
     recruitmentsTakenByRecruiter: Recruitment[];
 
+    isUpdateStatusSeenLoading: boolean;
+    isUpdateStatusSeenSuccess: boolean;
+    updateStatusSeenError: string;
+
+    isUpdateStatusLoading: boolean;
+    isUpdateStatusSuccess: boolean;
+    updateStatusError: string;
+
 }

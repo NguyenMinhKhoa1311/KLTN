@@ -25,7 +25,7 @@
                         Trạng thái
                     </div>  
                 </div>
-                <div class="candidate_list" *ngFor="let recrutment of recruitments" (click)="openDetailDialog()">
+                <div class="candidate_list" *ngFor="let recrutment of recruitments" (click)="openDetailDialog(recrutment.Candidate,recrutment)">
                     <div class="position">
                         {{recrutment.Job.Name}}
                     </div>
@@ -70,58 +70,61 @@
             <div class="info">
                 <div class="basic">
                     <div class="avatar">
-                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar">
+                        <img src="{{candidateToRender.Avatar}}" alt="avatar">
                     </div>
                     <div class="info_basic">
                         <div class="name">
                             <div class="title">
                                 Họ và Tên:
                             </div>
-                            Phung Minh Khoa
+                            {{candidateToRender.Name}}
                         </div>
                         <div class="position">
                             <div class="title">
-                                Chức danh hiện tại:
+                                Kinh nghiệm - Chức danh:
                             </div>
-                            Fresher - 4 năm 
+                            {{candidateToRender.Experience}} -{{candidateToRender.Position}}
                         </div>
                         <div class="email">
                             <div class="title">
                                 Gmail:
                             </div>
-                            Khoaphung.18072002gmail.com
+                            {{candidateToRender.Email}}
                         </div>
                         <div class="phone">
                             <div class="title">
                                 Số điện thoại:
                             </div>
-                            0981809724
+                            {{candidateToRender.Phone}}
                         </div>
                         <div class="address">
                             <div class="title">
                                 Địa chỉ:
                             </div>
-                            123/4/5 Đường 3/2, Phường 12, Quận 10, TP.HCM
+                            {{candidateToRender.Address}}
                         </div>
+                        
+
+
                     </div>
                 </div>
                 <div class="experience">
                     <div class="title">
                         Kinh nghiệm làm việc
                     </div>
-                    <div class="experience_box">
+                    <div class="experience_box" *ngFor="let workExp of candidateToRender.WorkExperience">
                         <div class="h1">
                             <div class="company">
                                 <div class="title">
                                     Công ty:
                                 </div>
-                                Công ty TNHH ABC
+                                {{workExp.CompanyName}}
                             </div>
                             <div class="position">
                                 <div class="title">
                                     Vị trí:
                                 </div>
-                                Nhân viên kinh doanh
+                                {{workExp.JobTitle}}
                             </div>
                         </div>
                         <div class="h2">
@@ -129,13 +132,13 @@
                                 <div class="title">
                                     Ngày bắt đầu:
                                 </div>
-                                20/10/2020
+                                {{parseDateInComponent(workExp.StartDate)}}
                             </div>
                             <div class="date_end">
                                 <div class="title">
                                     Ngày kết thúc:
                                 </div>
-                                21/10/2021
+                                {{parseDateInComponent(workExp.EndDate)}}
                             </div>
                         </div>
                     </div>                   
@@ -144,19 +147,19 @@
                     <div class="title">
                         Học vấn
                     </div>
-                    <div class="education_box">
+                    <div class="education_box" *ngFor="let education of candidateToRender.Education">
                         <div class="h1">
                             <div class="school">
                                 <div class="title">
                                     Đại học:
                                 </div>
-                                Đại học Hoa Sen
+                                {{education.School}}
                             </div>
                             <div class="major">
                                 <div class="title">
                                     Bằng cấp:
                                 </div>
-                                Cử nhân An toàn thông tin 
+                                {{education.Degree}} {{education.Major}}
                             </div>
                         </div>
                         <div class="h2">
@@ -164,27 +167,34 @@
                                 <div class="title">
                                     Ngày bắt đầu:
                                 </div>
-                                20/10/2020
+                                {{parseDateInComponent(education.StartDate)}}
                             </div>
                             <div class="date_end">
                                 <div class="title">
                                     Ngày kết thúc:
                                 </div>
-                                21/10/2021
+                                {{parseDateInComponent(education.EndDate)}}
                             </div>
                         </div>
                     </div>                   
                 </div>
                 <div class="skill">
                     <div class="title">
+                        Kỹ năng
+                    </div>
+                    <div class="skill_box">
+                        <div class="skill_name" *ngFor="let skill of candidateToRender.Skills">
+                            {{skill.Name}} - {{skill.Level}}/5
+                        </div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="title">
                         Ngoại ngữ
                     </div>
                     <div class="skill_box">
-                        <div class="skill_name">
-                            Tiếng Anh
-                        </div>
-                        <div class="skill_name">
-                            Tiếng Anh
+                        <div class="skill_name" *ngFor="let language of candidateToRender.Languages">
+                            {{language}}
                         </div>
                     </div>
                 </div>
@@ -200,7 +210,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="openEmilDialog()" 
+                    <button appearance="primary" tuiButton type="button" (click)="openEmailDialog()" 
                         class="tui-space_right-3 tui-space_bottom-3">
                         Chấp nhận
                     </button>
@@ -215,7 +225,7 @@
         <div class="title">
             <h4>Gửi Email</h4>
         </div>
-        <div class="btnClose" (click)="closeDetailDialog()">
+        <div class="btnClose" (click)="closeEmailDialog()">
             <span class="material-symbols-outlined">
                 close
             </span>
@@ -242,7 +252,7 @@
                 </button>
             </div>
             <div class="btn_Luu">
-                <button appearance="primary" tuiButton type="button" (click)="closeEmailDialog()" 
+                <button appearance="primary" tuiButton type="button" (click)="aceptCandidate()" 
                     class="tui-space_right-3 tui-space_bottom-3">
                     Chấp nhận
                 </button>
