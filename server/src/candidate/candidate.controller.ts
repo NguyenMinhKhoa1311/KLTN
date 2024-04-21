@@ -54,6 +54,17 @@ export class CandidateController {
     }
   }
 
+  @Get('getById')
+  async findById(@Query('id') id: string){
+    try{
+      const candidate = await this.candidateService.findById(id);
+      return candidate;
+    }
+    catch(error){
+      throw error;
+    }
+  }
+
   @Put('updateEducation')
   async updateEducation(@Body() createEducationDto: CreateEducationDto, @Query('id') id: string){
     try{
