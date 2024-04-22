@@ -46,7 +46,7 @@ export class RecruitmentService {
       .populate('Recruiter','RecruiterId Name Phone', this.RecruiterModel)
       .populate('Candidate','CandidateId Name Email Phone', this.CandidateModel)
       .populate('Job','JobId Name', this.JobModel)
-      .populate('Company','CompanyId Name', this.CompanyModel)
+      .populate('Company','CompanyId Name Address', this.CompanyModel)
       .populate('Career','CareerId Name', this.CareerModel)
       .populate('Field','FieldId FieldName', this.FieldModel)
       .sort(sortOptions)
@@ -68,8 +68,8 @@ export class RecruitmentService {
         .populate('Recruiter', 'RecruiterId Name Phone', this.RecruiterModel)
         .populate('Candidate', 'CandidateId Name Email Phone', this.CandidateModel)
         .populate('Job', 'JobId Name ', this.JobModel)
-        .populate('Company','CompanyId Name', this.CompanyModel)
-        .populate('Career','CareerId Name', this.CareerModel)
+        .populate('Company','CompanyId Name Address', this.CompanyModel)
+        .populate('Career','CareerId Name ', this.CareerModel)
         .populate('Field','FieldId FieldName', this.FieldModel)
         .sort(sortOptions)
         .skip(skip)
@@ -89,7 +89,7 @@ export class RecruitmentService {
       .populate('Recruiter','RecruiterId Name Phone', this.RecruiterModel)
       .populate('Candidate','CandidateId Name Email Phone', this.CandidateModel)
       .populate('Job','JobId Name ', this.JobModel)
-      .populate('Company','CompanyId Name', this.CompanyModel)
+      .populate('Company','CompanyId Name Address', this.CompanyModel)
       .populate('Career','CareerId Name', this.CareerModel)
       .populate('Field','FieldId FieldName', this.FieldModel)
       .sort(sortOptions)
@@ -103,7 +103,14 @@ export class RecruitmentService {
   }
   async updateStatusSeen(status: boolean, id: string){
     try{
-      return await this.RecruitmentModel.findByIdAndUpdate(id, {StatusSeenOfRecruiter: status}, {new: true}).exec();
+      return await this.RecruitmentModel.findByIdAndUpdate(id, {StatusSeenOfRecruiter: status}, {new: true})
+      .populate('Recruiter','RecruiterId Name Phone', this.RecruiterModel)
+      .populate('Candidate','CandidateId Name Email Phone', this.CandidateModel)
+      .populate('Job','JobId Name ', this.JobModel)
+      .populate('Company','CompanyId Name Address', this.CompanyModel)
+      .populate('Career','CareerId Name', this.CareerModel)
+      .populate('Field','FieldId FieldName', this.FieldModel)
+      .exec();
     }
     catch(error){
       return{
@@ -115,7 +122,33 @@ export class RecruitmentService {
 
   async updateStatus(status: boolean, id: string){
     try{
-      return await this.RecruitmentModel.findByIdAndUpdate(id, {Status: status}, {new: true}).exec();
+      return await this.RecruitmentModel.findByIdAndUpdate(id, {Status: status}, {new: true})
+      .populate('Recruiter','RecruiterId Name Phone', this.RecruiterModel)
+      .populate('Candidate','CandidateId Name Email Phone', this.CandidateModel)
+      .populate('Job','JobId Name ', this.JobModel)
+      .populate('Company','CompanyId Name Address', this.CompanyModel)
+      .populate('Career','CareerId Name', this.CareerModel)
+      .populate('Field','FieldId FieldName', this.FieldModel)
+      .exec();
+    }
+    catch(error){
+      return{
+        message: error.message,
+        _id:""
+      }
+    }
+  }
+
+  async updateDateInterview(id: string, date: Date){
+    try{
+      return await this.RecruitmentModel.findByIdAndUpdate(id, {DateInterview: date, Status: true}, {new: true})
+      .populate('Recruiter','RecruiterId Name Phone', this.RecruiterModel)
+      .populate('Candidate','CandidateId Name Email Phone', this.CandidateModel)
+      .populate('Job','JobId Name ', this.JobModel)
+      .populate('Company','CompanyId Name Address', this.CompanyModel)
+      .populate('Career','CareerId Name', this.CareerModel)
+      .populate('Field','FieldId FieldName', this.FieldModel)
+      .exec();
     }
     catch(error){
       return{

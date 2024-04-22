@@ -86,15 +86,19 @@ export class RecruitmentController {
 
       const recruitment = await this.recruitmentService.updateStatusSeen(status,id);
       if(recruitment._id.toString().length>0) {
-        return true;
+        return recruitment;
       }else{
-        return false;
+        return {
+          _id:"500"
+        }
       
       }
     }
     catch(err){
       log(err)
-      return false
+      return {
+        _id:"500"
+      }
     }
   }
 
@@ -106,15 +110,43 @@ export class RecruitmentController {
     try{
       const recruitment = await this.recruitmentService.updateStatus(status,id);
       if(recruitment._id.toString().length>0) {
-        return true;
+        return recruitment;
       }else{
-        return false;
+        return {
+          _id: '500'
+        };
       
       }
     }
     catch(err){
       log(err)
-      return false
+      return {
+        _id:"500"
+      }
+    }
+  }
+
+  @Put('updateDateInterview')
+  async updateDateInterview(
+    @Query('id') id: string,
+    @Query('date') date: Date
+  ) {
+    try{
+      const recruitment = await this.recruitmentService.updateDateInterview(id,date);
+      if(recruitment._id.toString().length>0) {
+        return recruitment;
+      }else{
+        return {
+          _id:"500"
+        }
+      
+      }
+    }
+    catch(err){
+      log(err)
+      return {
+        _id:"500"
+      }
     }
   }
 
