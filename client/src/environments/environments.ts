@@ -91,3 +91,35 @@ const stringMonth = month < 10 ? `0${month}` : month;
 const formattedDate = `${stringDay}-${stringMonth}-${year}`;
 return formattedDate;
 }
+
+
+export function convertToDate(dateString: string, timeString: string): Date {
+  // Hợp nhất chuỗi ngày và giờ
+  const combinedString = `${dateString} ${timeString}`;
+
+  // Chuyển đổi chuỗi kết hợp thành đối tượng Date
+  const date = new Date(combinedString);
+
+  // Kiểm tra xem chuỗi có thể được chuyển đổi thành ngày hợp lệ hay không
+  if (isNaN(date.getTime())) {
+    throw new Error('Invalid date or time string');
+  }
+
+  // Trả về đối tượng Date
+  return date;
+}
+
+
+export function getDatetimeFromIso(isoStr: string): Date {
+  return new Date(isoStr);
+}
+
+
+export function convertDayMonthYearYYYMMDD(strDate: string): { day: number, month: number, year: number } {
+  const parts = strDate.split('-');
+  return {
+    day: parseInt(parts[2]),
+    month: parseInt(parts[1]) + 1, // Tháng trong JavaScript bắt đầu từ 0
+    year: parseInt(parts[0]),
+  };
+}

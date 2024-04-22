@@ -25,15 +25,15 @@
                         Trạng thái
                     </div>  
                 </div>
-                <div class="candidate_list" (click)="openDetailDialog()">
+                <div class="candidate_list" *ngFor="let recrutment of recruitments" (click)="openDetailDialog()">
                     <div class="position">
-                        a
+                        {{recrutment.Job.Name}}
                     </div>
                     <div class="name">
                         a
                     </div>
                     <div class="career_field">
-                        a/ a
+                        {{recrutment.Career.Name}} / {{recrutment.Field.FieldName}}
                     </div>
                     <div class="email">
                         a
@@ -42,15 +42,15 @@
                         a
                     </div>
                     <div class="status">
-                        <div class="status_box_selected">
+                        <div class="status_box_selected"*ngIf="recrutment.Status&&recrutment.StatusSeenOfRecruiter">
                             Chấp nhận
                         </div>
-                        <!-- <div class="status_box_processing">
+                        <div class="status_box_processing" *ngIf="!recrutment.StatusSeenOfRecruiter && !recrutment.Status">
                             Đang chờ
-                        </div> -->
-                        <!-- <div class="status_box_processing">
+                        </div>
+                        <div class="status_box_processing"*ngIf="recrutment.StatusSeenOfRecruiter && !recrutment.Status">
                             Đã xem
-                        </div> -->
+                        </div>
                     </div>
                 </div>                  
             </div>
@@ -73,7 +73,7 @@
             <div class="info">
                 <div class="basic">
                     <div class="avatar">
-                        <img src="{../../../../../../assets/images/avatar-user.jpg" alt="avatar">
+                        <img src="../../../../../../assets/images/avatar-user.jpg" alt="avatar">
                     </div>
                     <div class="info_basic">
                         <div class="name">

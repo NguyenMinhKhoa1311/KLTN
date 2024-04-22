@@ -9,9 +9,23 @@ export interface RecruitmentState {
     isUpdateStatusSeenLoading: boolean;
     isUpdateStatusSeenSuccess: boolean;
     updateStatusSeenError: string;
+    recruitmentUpdatedStatusSeen: Recruitment;
 
     isUpdateStatusLoading: boolean;
     isUpdateStatusSuccess: boolean;
     updateStatusError: string;
+    recruitmentUpdatedStatus: Recruitment;
+
+    isGetByCandidateLoading: boolean;
+    isGetByCandidateSuccess: boolean;
+    getByCandidateError: string;
+    recruitmentsTakenByCandidate: Recruitment[];
+
+    isUpdateDateInterviewLoading: boolean;
+    isUpdateDateInterviewSuccess: boolean;
+    updateDateInterviewError: string;
+    recruitmentUpdatedDateInterview: Recruitment;
+    
+
 
 }

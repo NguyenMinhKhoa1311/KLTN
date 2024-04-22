@@ -13,6 +13,7 @@ export interface Recruitment{
     Recruiter: Recruiter,
     Company: Company,
     Status: boolean,
+    StatusSeenOfRecruiter: boolean,
     DateApply: Date,
     Career: Career,
     Field: Field,

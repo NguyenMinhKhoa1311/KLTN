@@ -1,6 +1,7 @@
 import { RecruitmentState } from "../states/recruitment.state";
 import * as RecruitmentActions from "../actions/recruitment.actions";
 import { createReducer, on } from "@ngrx/store";
+import { Recruitment } from "../../models/recruitment.model";
 
 
 export const  initialState: RecruitmentState = {
@@ -12,10 +13,22 @@ export const  initialState: RecruitmentState = {
     isUpdateStatusSeenLoading: false,
     isUpdateStatusSeenSuccess: false,
     updateStatusSeenError: '',
+    recruitmentUpdatedStatusSeen:<Recruitment>{} ,
 
     isUpdateStatusLoading: false,
     isUpdateStatusSuccess: false,
-    updateStatusError: ''
+    updateStatusError: '',
+    recruitmentUpdatedStatus:<Recruitment>{} ,
+
+    isGetByCandidateLoading: false,
+    isGetByCandidateSuccess: false,
+    getByCandidateError: '',
+    recruitmentsTakenByCandidate: [],
+
+    isUpdateDateInterviewLoading: false,
+    isUpdateDateInterviewSuccess: false,
+    updateDateInterviewError: '',
+    recruitmentUpdatedDateInterview:<Recruitment>{} ,
 }
 
 export const recruitmentReducer = createReducer(
@@ -50,11 +63,12 @@ export const recruitmentReducer = createReducer(
         isUpdateStatusSeenSuccess: false,
         updateStatusSeenError: ''
     })),
-    on(RecruitmentActions.updateStatusSeenAtAplicationListSuccess, (state) => ({
+    on(RecruitmentActions.updateStatusSeenAtAplicationListSuccess, (state,action) => ({
         ...state,
         isUpdateStatusSeenLoading: false,
         isUpdateStatusSeenSuccess: true,
-        updateStatusSeenError: ''
+        updateStatusSeenError: '',
+        recruitmentUpdatedStatusSeen: action.recruitment
     })),
     on(RecruitmentActions.updateStatusSeenAtAplicationListFailure, (state,action) => ({
         ...state,
@@ -72,17 +86,66 @@ export const recruitmentReducer = createReducer(
         isUpdateStatusSuccess: false,
         updateStatusError: ''
     })),
-    on(RecruitmentActions.updateStatusAtAplicationListSuccess, (state) => ({
+    on(RecruitmentActions.updateStatusAtAplicationListSuccess, (state, action) => ({
         ...state,
         isUpdateStatusLoading: false,
         isUpdateStatusSuccess: true,
-        updateStatusError: ''
+        updateStatusError: '',
+        recruitmentUpdatedStatus: action.recruitment
     })),
     on(RecruitmentActions.updateStatusAtAplicationListFailure, (state,action) => ({
         ...state,
         isUpdateStatusLoading: false,
         isUpdateStatusSuccess: false,
         updateStatusError: action.error
+    })),
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate, (state,action) => ({
+        ...state,
+        isGetByCandidateLoading: true,
+        isGetByCandidateSuccess: false,
+        getByCandidateError: ''
+    })),
+    on(RecruitmentActions.getByCandidasteAtAplicationListOfCandidateSuccess, (state,action) => ({
+        ...state,
+        isGetByCandidateLoading: false,
+        isGetByCandidateSuccess: true,
+        getByCandidateError: '',
+        recruitmentsTakenByCandidate: action.recruitments
+    })),
+    on(RecruitmentActions.getByCandidasteAtAplicationListOfCandidateFailure, (state,action) => ({
+        ...state,
+        isGetByCandidateLoading: false,
+        isGetByCandidateSuccess: false,
+        getByCandidateError: action.error
+    })),
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruitmentActions.updateDateInterviewAtAplicationList, (state,action) => ({
+        ...state,
+        isUpdateDateInterviewLoading: true,
+        isUpdateDateInterviewSuccess: false,
+        updateDateInterviewError: ''
+    })),
+    on(RecruitmentActions.updateDateInterviewAtAplicationListSuccess, (state,action) => ({
+        ...state,
+        isUpdateDateInterviewLoading: false,
+        isUpdateDateInterviewSuccess: true,
+        updateDateInterviewError: '',
+        recruitmentUpdatedDateInterview: action.recruitment
+    })),
+    on(RecruitmentActions.updateDateInterviewAtAplicationListFailure, (state,action) => ({
+        ...state,
+        isUpdateDateInterviewLoading: false,
+        isUpdateDateInterviewSuccess: false,
+        updateDateInterviewError: action.error
     })),
 
 )
