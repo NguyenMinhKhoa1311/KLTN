@@ -50,6 +50,11 @@ export const LAYOUT_ROUTERS: Routes = [
             path:'job-detail',
             loadChildren: () =>
               import('./job-detail/job-detail.routes').then((m) => m.JOBDETAIL_ROUTERS),
+          },
+          {
+            path:'job-apply',
+            loadChildren: () =>
+              import('./job-apply/job-apply.routes').then((m) => m.JOBAPPLY_ROUTERS),
           }
     ],
   },
