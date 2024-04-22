@@ -15,6 +15,7 @@ import { candidateState } from '../../../ngrx/states/candidate.state';
 import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 import { Candidate } from '../../../models/candidate.model';
 import { Mail } from '../../../models/mail.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-application-list',
@@ -116,6 +117,11 @@ export class ApplicationListComponent implements OnDestroy {
     }
     this.store.dispatch(MailActions.sendMailAtAplicationList({mail:mail}))
   }
+
+  emailForm = new FormGroup({
+    date_interview: new FormControl('', [Validators.required]),
+    time_interview: new FormControl('', [Validators.required])
+  });
 
 
   @ViewChild('detailDialog', { static: true })
