@@ -23,13 +23,13 @@
                 </div>
             </div>
             <div class="btn">
-                <div class="btn_accept">
+                <div class="btn_accept" (click)="openApplyDialog()">
                     Nộp đơn
                 </div>
             </div>
         </div>
         <div class="description">
-            {{jobToRender.Description}}
+            Mô tả công việc
         </div>
         <div class="info_job">
             <div class="title_info">
@@ -87,3 +87,94 @@
         </div>
     </div>
 </div>
+
+
+<dialog id="apply_dialog" style="color: #1f1a1c" #applyDialog>
+    <div id="top_dialog">
+        <div class="title">
+            <h4>Nộp hồ sơ ứng tuyển</h4>
+        </div>
+        <div class="btnClose" (click)="closeApplyDialog()">
+            <span class="material-symbols-outlined">
+                close
+            </span>
+        </div>
+    </div>
+    <div id="body_dialog">
+        <div class="info">
+            <div class="apply_cv">
+                <div class="title_apply_cv">Chọn CV để ứng tuyển</div>
+                <div class="pdf">
+                    <div class="upload_pdf">
+                        <div class="upload_box" (click)="filePdfInput.click()">
+                            <input type="file" accept="application/pdf" (change)="onFilePdfSelected($event) "
+                                #filePdfInput style="display: none"/>
+                            <span class="material-symbols-outlined">
+                                add_circle
+                            </span>
+                            <span>Chọn hoặc kéo thả hồ sơ từ máy của bạn</span>
+                        </div>
+                        <div class="title">
+                            Hỗ trợ định dạng .pdf có kích thước dưới 510KB.
+                        </div>
+                    </div>
+                    <div class="pdf_select" *ngIf="selectedPdfName">
+                        {{ selectedPdfName }}
+                    </div>
+                </div>
+            </div>
+            <div class="info_user">
+                <div class="title_info_user">Thông tin liên hệ của ứng viên</div>
+                <div class="info_box">
+                    <div class="name">
+                        <div class="title">Họ và Tên:</div>
+                        <div class="content">{{userLogged.Name}}</div>
+                    </div>
+                    <div class="email">
+                        <div class="title">Email:</div>
+                        <div class="content">{{userLogged.Email}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="info_job">
+                <div class="title_info_job">Thông tin việc làm</div>
+                <div class="info_box">
+                    <div class="job">
+                        <div class="title">Vị trí:</div>
+                        <div class="content">{{jobToRender.Name}}</div>
+                    </div>
+                    <div class="company">
+                        <div class="title">Công ty ứng tuyển:</div>
+                        <div class="content">{{jobToRender.Company.Name}}</div>
+                    </div>
+                    <div class="address">
+                        <div class="title">Nơi làm việc:</div>
+                        <div class="content">{{jobToRender.Address}}</div>
+                    </div>
+                    <div class="end_date">
+                        <div class="title">Hết hạn nộp:</div>
+                        <div class="content">{{parseDateInComponent(jobToRender.EndDate)}}</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="a" style="width: 100%;
+        border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+        <div class="row4">
+            <div class="btn_Huy">
+                <button appearance="primary" tuiButton type="button" (click)="closeApplyDialog()"
+                    class="tui-space_right-3 tui-space_bottom-3">
+                    Hủy
+                </button>
+            </div>
+            <div class="btn_Luu">
+                <button appearance="primary" tuiButton type="button" (click)="closeApplyDialog()" 
+                    class="tui-space_right-3 tui-space_bottom-3">
+                    Chấp nhận
+                </button>
+            </div>
+        </div>
+    </div>
+
+</dialog>
