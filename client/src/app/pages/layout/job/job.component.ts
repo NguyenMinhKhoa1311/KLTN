@@ -86,6 +86,8 @@ export class JobComponent {
       let userAfterParse = JSON.parse(userLogged) as Candidate;
       if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
         this.candidateLogged = userAfterParse;
+        console.log(this.candidateLogged);
+        
       }
     }
 
@@ -177,18 +179,45 @@ export class JobComponent {
     )
   }
 
-  updatedFavoriteJob(job: Job){
-    if(!this.isUpdatedFavoriteJob){
-      this.isUpdatedFavoriteJob = true;
+  checkFavoriteJob(job: Job){
+    let isFavorite = false;
+    if(this.candidateLogged.FavoriteJobs ==undefined){
+      return isFavorite;
     }
-    this.store.dispatch(CandidateActions.updateFavoriteJobsAtJob({id:this.candidateLogged._id,jobId: job._id}));
+    else{    
+      this.candidateLogged.FavoriteJobs.forEach(favoriteJob => {
+        if(favoriteJob._id == job._id){
+          isFavorite = true;
+        }
+      });
+      return isFavorite;
+    }
 
   }
-  deleteFavoriteJob(job: Job){
-    if(!this.isDeletedFavoriteJob){
-      this.isDeletedFavoriteJob = true;
+
+  updatedFavoriteJob(job: Job){
+    if(this.candidateLogged._id!=undefined){
+      console.log("JOB: ", job);
+      
+      if(!this.isUpdatedFavoriteJob){
+        this.isUpdatedFavoriteJob = true;
+      }
+      this.store.dispatch(CandidateActions.updateFavoriteJobsAtJob({id:this.candidateLogged._id,jobId: job._id}));
     }
-    this.store.dispatch(CandidateActions.deleteFavoriteJobAtJob({id:this.candidateLogged._id,jobId: job._id}));
+    else{
+      this.router.navigate(['/login']);
+    }
+  }
+  deleteFavoriteJob(job: Job){
+    if(this.candidateLogged._id!=undefined){
+      if(!this.isUpdatedFavoriteJob){
+        this.isUpdatedFavoriteJob = true;
+      }
+      this.store.dispatch(CandidateActions.deleteFavoriteJobAtJob({id:this.candidateLogged._id,jobId: job._id}));
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
   }
 
 
@@ -202,8 +231,6 @@ export class JobComponent {
       this.store.dispatch(CareerActions.getAllAtJobs());
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
-    
-  
   }
 
   careerValue:any;

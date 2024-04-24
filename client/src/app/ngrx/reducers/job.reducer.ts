@@ -78,6 +78,11 @@ export const initialState: jobState = {
     isDeleteAtJobDetailfRecruiterSuccess: false,
     deleteAtJobDetailOfRecruiterError: "",
 
+    isUpdateRecruitmentJobDetailLoading: false,
+    isUpdateRecruitmentJobDetailSuccess: false,
+    updateRecruitmentJobDetailError: "",
+    JobUpdatedRecruitment: <Job>{}
+
 
 
 }
@@ -536,6 +541,35 @@ export const jobReducer = createReducer(
             deleteAtJobDetailOfRecruiterError: action.error,
         }
     }),
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        on(JobActions.updateRecruitmentAtJobDetail,(state,action)=>{
+            return{
+                ...state,
+                isUpdateRecruitmentJobDetailLoading: true,
+                isUpdateRecruitmentJobDetailSuccess: false,
+                updateRecruitmentJobDetailError: "",
+            }
+        }),
+        on(JobActions.updateRecruitmentAtJobDetailSuccess,(state,action)=>{
+            return{
+                ...state,
+                isUpdateRecruitmentJobDetailLoading: false,
+                isUpdateRecruitmentJobDetailSuccess: true,
+                updateRecruitmentJobDetailError: "",
+                JobUpdatedRecruitment: action.job
+            }
+        }),
+        on(JobActions.updateRecruitmentAtJobDetailFailure,(state,action)=>{
+            return{
+                ...state,
+                isUpdateRecruitmentJobDetailLoading: false,
+                isUpdateRecruitmentJobDetailSuccess: false,
+                updateRecruitmentJobDetailError: action.error,
+            }
+        }),
 
 
 

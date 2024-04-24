@@ -81,10 +81,11 @@
                         </div>
         
                         <div class="item_hot" >
-                            <div class="heart">
-                                <span class="material-symbols-outlined">
-                                    favorite
-                                </span>
+                            <div class="heart" (click)="updatedFavoriteJob(job)">
+                                <tui-svg class="iconHeartNotFilled" *ngIf="!checkFavoriteJob(job)" src="tuiIconHeartLarge" ></tui-svg>
+                            </div>
+                            <div class="heart" (click)="deleteFavoriteJob(job)">
+                                <tui-svg class="iconHeartFilled" *ngIf="checkFavoriteJob(job)" src="tuiIconHeartLarge" ></tui-svg>
                             </div>
                             <!-- <div class="join_job">
                                 <span>Join</span>

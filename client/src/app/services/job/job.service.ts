@@ -64,5 +64,8 @@ export class JobService {
   deleteJob(jobId:string, companyId:string, fieldId:string, carrerId:string){
     return this.httpClient.delete<Boolean>(`${URL}/job/deleteJob?id=${jobId}&carrerId=${carrerId}&fieldId=${fieldId}&companyId=${companyId}`);
   }
+  updateRecrutment(recruitment:any,jobId:string){
+    return this.httpClient.put<Job>(`${URL}/job/updateRecruitment?id=${jobId}`,recruitment);
+  }
 }
 

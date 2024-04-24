@@ -265,6 +265,23 @@ export class JobEffects {
         )
         )
 
+        updateRecruitmentAtJobDetail$= createEffect(() =>
+            this.actions$.pipe(
+                ofType(JobActions.updateRecruitmentAtJobDetail),
+                switchMap(action =>
+                    this.jobService.updateRecrutment(action.recruitment, action.id).pipe(
+                        map((job) => {
+                            return JobActions.updateRecruitmentAtJobDetailSuccess({job: job})
+                        }),
+                        catchError((err) =>
+                            of(JobActions.updateRecruitmentAtJobDetailFailure({error: err})
+                        )
+                    )
+                )
+            )
+            )
+            )
+
     
 
 

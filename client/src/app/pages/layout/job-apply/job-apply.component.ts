@@ -53,6 +53,7 @@ export class JobApplyComponent implements OnDestroy{
     if(userLogged){
       let userAfterParse = JSON.parse(userLogged) as Candidate;
       if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
+        console.log(userAfterParse);
         this.store.dispatch(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate({ candidate: userAfterParse?._id,  page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc' }))
       }
     };
@@ -65,7 +66,10 @@ export class JobApplyComponent implements OnDestroy{
         }
       }),
       this.jobTakenByJobIdAtApplyJob$.subscribe((job) => {
-        if(this.isGetJobByApplyJob){
+        if(job.JobId!=undefined){
+          if(!this.isGetJobByApplyJob){
+            this.isGetJobByApplyJob = true;
+          }
           this.jobToRender = job;
           console.log(this.jobToRender);
         }
@@ -82,9 +86,6 @@ export class JobApplyComponent implements OnDestroy{
   detailDialog!: ElementRef<HTMLDialogElement>;
   cdr1 = inject(ChangeDetectorRef);
   openDetailDialog(job:Job) {
-    if(!this.isGetJobByApplyJob){
-      this.isGetJobByApplyJob = true;
-    }
     this.store.dispatch(JobActions.getByJobIdAtApplyJob({id: job.JobId}));
     //console.log(job);
     this.detailDialog.nativeElement.showModal();

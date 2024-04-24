@@ -54,5 +54,9 @@ export class JobDetailComponent implements OnDestroy {
     });
   }
 
+  applyJob(Job:String){
+    
+  }
+
 
 }

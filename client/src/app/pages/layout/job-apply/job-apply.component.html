@@ -13,7 +13,7 @@
                         Tên công ty
                     </div>
                     <div class="career_field_title">
-                        Giá cả
+                        Lương
                     </div>
                     <div class="email_title">
                         Địa chỉ
@@ -69,7 +69,7 @@
                 </span>
             </div>
         </div>
-        <div id="body_dialog">
+        <div id="body_dialog" *ngIf="isGetJobByApplyJob">
             <div class="info">
                 <div class="basic">
                     <div class="avatar">
@@ -86,26 +86,26 @@
                             <div class="title">
                                 Vị trí tuyển dụng:
                             </div>
-                            a
+                            {{jobToRender.Name}}
                         </div>
                         <div class="email">
                             <div class="title">
-                                Giá cả:
+                                Lương:
                             </div>
-                            a
+                            {{jobToRender.Salary}}
                         </div>
                         <div class="phone">
                             <div class="title">
                                 Địa chỉ:
                             </div>
-                            b
+                            {{jobToRender.Company.Address}}
                         </div>
-                        <div class="address">
+                        <!-- <div class="address">
                             <div class="title">
                                 Thời gian tuyển dụng:
                             </div>
-                            a - a
-                        </div>
+                            {{parseDateInComponent(jobToRender.StartDate)}} - {{parseDateInComponent(jobToRender.EndDate)}}
+                        </div> -->
                     </div>
                 </div>
                 <div class="info_job">
@@ -125,7 +125,7 @@
                                         NGÀY ĐĂNG
                                     </div>
                                     <div class="content_text">
-                                        a
+                                        {{parseDateInComponent(jobToRender.StartDate)}}
                                     </div>
                                 </div>
                             </div>
@@ -137,10 +137,10 @@
                                 </div>
                                 <div class="content">
                                     <div class="title_content">
-                                        KỸ NĂNG
+                                        Ngày kết thúc
                                     </div>
                                     <div class="content_text">
-                                        akhsdkjh auwy dsad qwjdiwjddsad asdasdas asd asdasd ada dá ád
+                                        {{parseDateInComponent(jobToRender.EndDate)}}
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                                         NGÀNH NGHỀ
                                     </div>
                                     <div class="content_text">
-                                        akhsdkjh auwy dsad qwjdiwjddsad asdasdas asd asdasd ada dá ád
+                                        {{jobToRender.Career.Name}}
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                                         LĨNH VỰC
                                     </div>
                                     <div class="content_text">
-                                        akhsdkjh auwy dsad qwjdiwjddsad asdasdas asd asdasd ada dá ád
+                                        {{jobToRender.Field.FieldName}}
                                     </div>
                                 </div>
                             </div>
@@ -184,7 +184,7 @@
                         Mô tả công việc
                     </div>
                     <div class="content">
-                        akhsdkjh auwy dsad qwjdiwjddsad asdasdas asd asdasd ada dá ád djsahdj jasdj d jhjashd d jsur qasdj wqieu kaslj
+                        {{jobToRender.Description}}
                     </div>
                 </div>
             </div>

@@ -256,3 +256,19 @@ export const deleteAtJobDetailOfRecruiterFailure = createAction(
     '[Job] Delete Job Failure',
     props<{ error: string }>()
 );
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateRecruitmentAtJobDetail = createAction(
+    '[Job] Update Recruitment At Job Detail',
+    props<{ recruitment: any, id: string }>()
+);
+export const updateRecruitmentAtJobDetailFailure = createAction(
+    '[Job] Update Recruitment At Job Detail Failure',
+    props<{ error: string }>()
+);
+
+export const updateRecruitmentAtJobDetailSuccess = createAction(
+    '[Job] Update Recruitment At Job Detail Success',
+    props<{ job: Job }>()
+);

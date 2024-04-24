@@ -76,5 +76,11 @@ export interface jobState{
     isDeleteAtJobDetailfRecruiterSuccess: boolean;
     deleteAtJobDetailOfRecruiterError: string;
 
+    
+    isUpdateRecruitmentJobDetailLoading: boolean;
+    isUpdateRecruitmentJobDetailSuccess: boolean;
+    updateRecruitmentJobDetailError: string;    
+    JobUpdatedRecruitment: Job;
+
 
 }

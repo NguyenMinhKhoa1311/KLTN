@@ -393,12 +393,12 @@ export class CandidateEffects{
 
     updateFavoriteJobAtJob$ = createEffect(()=>
     this.action$.pipe(
-        ofType(CandidateActions.deleteFavoriteJobAtJob),
+        ofType(CandidateActions.updateFavoriteJobsAtJob),
         exhaustMap((action) =>
          this.candidateService.updateFavoriteJob(action.id, action.jobId).pipe(
             map((item)=>{
                 if(item._id!="500"){
-                    return CandidateActions.deleteFavoriteJobAtJobSuccess({candidate: item})
+                    return CandidateActions.updateFavoriteJobsAtJobSuccess({candidate: item})
                 }
                 else{
                     return CandidateActions.updateFavoriteJobsAtJobFailure({error: "Update Favorite Job At Job Failure"})
