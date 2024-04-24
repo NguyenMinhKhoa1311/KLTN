@@ -179,6 +179,7 @@ export class JobComponent {
     )
   }
 
+  //check favorite
   checkFavoriteJob(job: Job){
     let isFavorite = false;
     if(this.candidateLogged.FavoriteJobs ==undefined){
