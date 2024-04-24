@@ -87,5 +87,13 @@ export class CandidateService {
     return this.httpClient.put<Candidate>(`${URL}/candidate/updateCareerGoal?id=${id}&career_goal=${careerGoal}`,{});
   }
 
+  updateFavoriteJob(id: string, job: string){
+    return this.httpClient.put<Candidate>(`${URL}/candidate/UpdateFavoriteJobs?id=${id}&job=${job}`,{});
+  }
+
+  deleteFavoriteJob(id: string, job: string){
+    return this.httpClient.put<Candidate>(`${URL}/candidate/DeleteFavoriteJobs?id=${id}&job=${job}`,{});
+  }
+
 
 }

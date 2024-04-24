@@ -390,5 +390,39 @@ export class CandidateEffects{
             catchError((error) => of(CandidateActions.deleteReferenceAtProfileFailure({error: error})))))
          )
     );
+
+    updateFavoriteJobAtJob$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.deleteFavoriteJobAtJob),
+        exhaustMap((action) =>
+         this.candidateService.updateFavoriteJob(action.id, action.jobId).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.deleteFavoriteJobAtJobSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateFavoriteJobsAtJobFailure({error: "Update Favorite Job At Job Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateFavoriteJobsAtJobFailure({error: error})))))
+         )
+    );
+
+    deleteFavoriteJobAtJob$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.deleteFavoriteJobAtJob),
+        exhaustMap((action) =>
+         this.candidateService.deleteFavoriteJob(action.id, action.jobId).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.deleteFavoriteJobAtJobSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.deleteFavoriteJobAtJobFailure({error: "Delete Favorite Job At Job Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.deleteFavoriteJobAtJobFailure({error: error})))))
+         )
+    );
     
 }

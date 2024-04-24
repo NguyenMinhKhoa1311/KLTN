@@ -12,6 +12,7 @@ import { WorkExperience } from 'src/work-experience/entities/work-experience.ent
 import { DesiredJob } from 'src/desired-job/entities/desired-job.entity';
 import { Skill } from 'src/skill/entities/skill.entity';
 import { Reference } from 'src/references/entities/reference.entity';
+import { Job } from 'src/job/entities/job.entity';
 
 @Injectable()
 export class CandidateService {
@@ -24,6 +25,7 @@ export class CandidateService {
     @InjectModel(DesiredJob.name) private DesiredJobModel: Model<DesiredJob>,
     @InjectModel(Skill.name) private SkillModel: Model<Skill>,
     @InjectModel(Reference.name) private ReferenceModel: Model<Reference>,
+    @InjectModel(Job.name) private JobModel: Model<Job>,
   ){}
   async create(createCandidateDto: CreateCandidateDto) {
     try {
@@ -45,7 +47,9 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('Field', 'FieldId Name', this.FieldModel);
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
+      .populate('Field', 'FieldId Name', this.FieldModel).exec();
+
     }
     catch(err){
       throw new HttpException(err.message,err.status);
@@ -61,6 +65,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(!candidate){
@@ -89,6 +94,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel).exec();
       if(candidate._id.toString.length > 0){
         return candidate;
@@ -121,6 +127,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -151,6 +158,7 @@ export class CandidateService {
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -183,6 +191,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -212,6 +221,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -243,6 +253,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -274,6 +285,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -297,7 +309,6 @@ export class CandidateService {
   async updateFavoriteJobs(id:string, job_id:string){
     try{
       const candidateAfterUpdate = await this.CandidateModel.findByIdAndUpdate(id, {
-        // Use $push operator to add to the FavoriteJobs array
         $push: { FavoriteJobs: job_id }
       }, { new: true })
       .populate('Education','EducationId School Degree StartDate EndDate Major', this.EducationModel)
@@ -306,6 +317,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -345,6 +357,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -375,6 +388,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -403,6 +417,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
@@ -435,6 +450,7 @@ export class CandidateService {
       .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
+      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -466,6 +482,7 @@ async deleteSkills(id:string, job_id :string){
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
@@ -496,6 +513,7 @@ async deleteReference(id:string, reference:string){
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
@@ -527,6 +545,7 @@ async deleteEducation(id:string, job_id :string){
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
@@ -558,6 +577,7 @@ async deleteWorkExperience(id:string, job_id :string){
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
@@ -588,6 +608,7 @@ async deleteLanguage(id:string, language:string){
     .populate('WorkExperience', 'WorkExperienceId CompanyName JobTitle Description StartDate EndDate', this.WorkExperienceModel)
     .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
+    .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)

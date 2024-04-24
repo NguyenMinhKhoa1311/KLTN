@@ -17,7 +17,10 @@ import { Job } from '../../../models/job.model';
 import { Field } from '../../../models/field.model';
 import { Career } from '../../../models/career.model';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { candidateState } from '../../../ngrx/states/candidate.state';
+import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
+import { Candidate } from '../../../models/candidate.model';
 
 
 @Component({
@@ -36,6 +39,13 @@ export class JobComponent {
   //variables
   page: number = 0;
   fieldId: string = "";
+  isUpdatedFavoriteJob: boolean = false;
+  isDeletedFavoriteJob: boolean = false;
+  jobToRender: Job[] = [];
+  fieldList: readonly string[] = [];
+  careerList: readonly string[] = [];
+  candidateLogged: Candidate = <Candidate>{};
+
 
   // ngrx of job
   jobsTakenByAllAndSort$ = this.store.select('job', 'JobTakenBygetAllAndSortAtJob');
@@ -51,13 +61,17 @@ export class JobComponent {
   careersTakenByGetAllAtJob$ = this.store.select('career','careersTakenByGetAllAtJob');  
   careerTakenByFieldName$ = this.store.select('career','careersTakenByGetByFieldNameAtJob')
 
-  jobToRender: Job[] = [];
-  fieldList: readonly string[] = [];
-  careerList: readonly string[] = [];
+  //ngrx of candidate
+  candidateUpdatedFavoriteJob$ = this.store.select('candidate','candidateUpdatedFavoriteJobAtJob');
+  candidateDeletedFavoriteJob$ = this.store.select('candidate','candidateDeletedFavoriteJobAtJob');
+
+
+
 
   constructor(
-    private store: Store<{ job: jobState, field : FieldState, career : CareerState }>,
+    private store: Store<{ job: jobState, field : FieldState, career : CareerState, candidate: candidateState }>,
     private route: ActivatedRoute,
+    private router: Router
   ){
     this.fieldId = this.route.snapshot.paramMap.get('fieldId')??"";
     if(this.fieldId.length > 0){
@@ -66,11 +80,17 @@ export class JobComponent {
     }else{
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
-
+    
+    let userLogged = sessionStorage.getItem('userLogged');
+    if(userLogged){
+      let userAfterParse = JSON.parse(userLogged) as Candidate;
+      if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
+        this.candidateLogged = userAfterParse;
+      }
+    }
 
     this.store.dispatch(FieldActions.getAllNoLimit());
     this.store.dispatch(CareerActions.getAllAtJobs());
-
     this.subscriptions.push(
 
       //subscribe to ngrx of getAllAndSortAtJob
@@ -132,12 +152,43 @@ export class JobComponent {
         if(jobs.length>0){
           this.jobToRender = jobs;
         }
+      }),
+
+      //subscribe to ngrx of candidateUpdatedFavoriteJobAtJob
+      this.candidateUpdatedFavoriteJob$.subscribe((candidate)=>{
+        if(this.isUpdatedFavoriteJob){
+          if(candidate._id !="500"){
+            this.candidateLogged = candidate;
+            sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+          }
+        }
+      }),
+
+      //subscribe to ngrx of candidateDeletedFavoriteJobAtJob
+      this.candidateDeletedFavoriteJob$.subscribe((candidate)=>{
+        if(this.isDeletedFavoriteJob){
+          if(candidate._id !="500"){
+            this.candidateLogged = candidate;
+            sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+          }
+        }
       })
       
     )
+  }
 
+  updatedFavoriteJob(job: Job){
+    if(!this.isUpdatedFavoriteJob){
+      this.isUpdatedFavoriteJob = true;
+    }
+    this.store.dispatch(CandidateActions.updateFavoriteJobsAtJob({id:this.candidateLogged._id,jobId: job._id}));
 
-
+  }
+  deleteFavoriteJob(job: Job){
+    if(!this.isDeletedFavoriteJob){
+      this.isDeletedFavoriteJob = true;
+    }
+    this.store.dispatch(CandidateActions.deleteFavoriteJobAtJob({id:this.candidateLogged._id,jobId: job._id}));
   }
 
 
@@ -249,6 +300,11 @@ export class JobComponent {
     "Yên Bái"
   ];
 
+  navigateToJobDetail(jobId: string) {
+    this.router.navigate(['/job-detail',{
+      jobId: jobId
+    }]);
+  }
 
 
   onSelectionChange(_id: string) {

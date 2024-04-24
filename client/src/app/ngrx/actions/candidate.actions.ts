@@ -42,6 +42,40 @@ export const createCandidateAtCreateProfileFailure = createAction(
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateFavoriteJobsAtJob = createAction(
+    "[Candidate] Update Favorite Jobs",
+    props<{id: string, jobId: string}>()
+    );
+export const updateFavoriteJobsAtJobSuccess = createAction(
+    "[Candidate] Update Favorite Jobs Success",
+    props<{candidate: Candidate}>()
+    );
+export const updateFavoriteJobsAtJobFailure = createAction(
+    "[Candidate] Update Favorite Jobs Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const deleteFavoriteJobAtJob = createAction(
+    "[Candidate] Delete Favorite Job",
+    props<{id: string, jobId: string}>()
+    );
+export const deleteFavoriteJobAtJobSuccess = createAction(
+    "[Candidate] Delete Favorite Job Success",
+    props<{candidate: Candidate}>()
+    );
+export const deleteFavoriteJobAtJobFailure = createAction(
+    "[Candidate] Delete Favorite Job Failure",
+    props<{error: string}>()
+    );
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByUserWithGoogleAtRegister = createAction(
