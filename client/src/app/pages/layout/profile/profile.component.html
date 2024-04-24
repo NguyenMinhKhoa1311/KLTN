@@ -88,16 +88,29 @@
         </div>
 
         <div class="pdf">
-            <div class="img_pdf">
-                <img src="../../../../assets/images/cv2.png" alt="">
-            </div>
             <div class="control_pdf">
                 <div class="change" (click)="navigatePDF()">
                     <span class="material-symbols-outlined">
-                        edit_document
+                        download
                     </span>
-                    Thay đổi mẫu hồ sơ
+                    Tải mẫu hồ sơ
                 </div>
+            </div>
+            <div class="upload_pdf">
+                <div class="upload_box" (click)="filePdfInput.click()">
+                    <input type="file" accept="application/pdf" (change)="onFilePdfSelected($event) "
+                        #filePdfInput style="display: none"/>
+                    <span class="material-symbols-outlined">
+                        add_circle
+                    </span>
+                    <span>Chọn hoặc kéo thả hồ sơ từ máy của bạn</span>
+                </div>
+                <div class="title">
+                    Hỗ trợ định dạng .pdf có kích thước dưới 510KB.
+                </div>
+            </div>
+            <div class="pdf_select" *ngIf="selectedPdfName">
+                {{ selectedPdfName }}
             </div>
         </div>
 

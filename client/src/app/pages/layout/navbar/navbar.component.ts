@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { Router,NavigationStart,RouterLink } from '@angular/router';
 import { ShareModule } from '../../../shared/shared.module';
+import { Candidate } from '../../../models/candidate.model';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,8 @@ export class NavbarComponent implements OnInit{
   selectedTab!: string; // Thuộc tính để lưu trữ tên của tab hiện đang được chọn
   activeItemIndex = 0;
   isLogin = false;
+  userLogged : Candidate = <Candidate>{};
+
   constructor (private router: Router) {
     if (this.router.url.includes('/home')) {
       this.activeItemIndex = 0;
@@ -36,7 +39,7 @@ export class NavbarComponent implements OnInit{
       if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
         console.log('userLogged',userLogged);
         this.isLogin = true;
-  
+        this.userLogged = userAfterParse;
       }
     }
 

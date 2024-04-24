@@ -6,8 +6,12 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Candidate } from '../../../models/candidate.model';
 import * as RecruitmentActions from '../../../ngrx/actions/recruitment.actions';
+import * as JobActions from '../../../ngrx/actions/job.actions';
 import { Subscription } from 'rxjs';
 import { Recruitment } from '../../../models/recruitment.model';
+import { parseDate } from '../../../../environments/environments';
+import { jobState } from '../../../ngrx/states/job.state';
+import { Job } from '../../../models/job.model';
 
 @Component({
   selector: 'app-job-apply',
@@ -24,15 +28,24 @@ export class JobApplyComponent implements OnDestroy{
   //variables
   page: number = 0;
   recruitments: Recruitment[] = [];
+  jobToRender: Job = <Job>{};
+  isGetJobByApplyJob: boolean = false;
+
   
-
-
   //ngrx of recruitment
   recruitmentGetByCandidate$ = this.store.select('recruitment','recruitmentsTakenByCandidate')
+  
+  //ngrx of job
+  jobTakenByJobIdAtApplyJob$ = this.store.select('job','jobTakenByJobIdAtApplyJob');
 
+  parseDateInComponent(date: Date) {
+    return parseDate(date);
+  }
+  
   constructor(
     private store: Store<{
       recruitment: RecruitmentState;
+      job: jobState;
     }>,
     private router: Router
   ){
@@ -50,6 +63,12 @@ export class JobApplyComponent implements OnDestroy{
           console.log(this.recruitments);
           
         }
+      }),
+      this.jobTakenByJobIdAtApplyJob$.subscribe((job) => {
+        if(this.isGetJobByApplyJob){
+          this.jobToRender = job;
+          console.log(this.jobToRender);
+        }
       })
     )
   }
@@ -62,7 +81,12 @@ export class JobApplyComponent implements OnDestroy{
   @ViewChild('detailDialog', { static: true })
   detailDialog!: ElementRef<HTMLDialogElement>;
   cdr1 = inject(ChangeDetectorRef);
-  openDetailDialog() {
+  openDetailDialog(job:Job) {
+    if(!this.isGetJobByApplyJob){
+      this.isGetJobByApplyJob = true;
+    }
+    this.store.dispatch(JobActions.getByJobIdAtApplyJob({id: job.JobId}));
+    //console.log(job);
     this.detailDialog.nativeElement.showModal();
     this.cdr1.detectChanges();
   }

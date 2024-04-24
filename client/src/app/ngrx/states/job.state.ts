@@ -67,6 +67,10 @@ export interface jobState{
     getByFieldAtJobError: string;
     jobsTakenByFieldAtJob: Job[];
     
+    isGetByJobIdAtApplyJobLoading: boolean;
+    isGetByJobIdAtApplyJobSuccess: boolean;
+    getByJobIdAtApplyJobError: string;
+    jobTakenByJobIdAtApplyJob: Job;
 
     isDeleteAtJobDetailfRecruiterLoading: boolean;
     isDeleteAtJobDetailfRecruiterSuccess: boolean;
