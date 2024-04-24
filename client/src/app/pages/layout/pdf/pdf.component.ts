@@ -27,8 +27,6 @@ export class PdfComponent {
       pdf.setFontSize(12);
       pdf.text('This is the title', 10, 10);
       pdf.save('file.pdf');
-      
-
     });
   }
 
@@ -39,6 +37,9 @@ export class PdfComponent {
   }
   cv2() {
     this.router.navigate(['/pdf/cv2']);
+  }
+  back(){
+    this.router.navigate(['/profile']);
   }
 
 }

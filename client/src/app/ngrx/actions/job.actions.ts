@@ -230,10 +230,19 @@ export const getByFieldAtJobFailure = createAction(
     props<{ error: string }>()
 );
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByJobIdAtApplyJob = createAction(
+    '[Job] Get By Job Id At Apply Job',
+    props<{ id: string }>()
+);
+export const getByJobIdAtApplyJobSuccess = createAction(
+    '[Job] Get By Job Id At Apply Job Success',
+    props<{ job: Job }>()
+);
+export const getByJobIdAtApplyJobFailure = createAction(
+    '[Job] Get By Job Id At Apply Job Failure',
+    props<{ error: string }>()
+);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteAtJobDetailOfRecruiter = createAction(

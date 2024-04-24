@@ -992,4 +992,25 @@ export class ProfileComponent implements OnDestroy {
   navigatePDF(){
     this.router.navigate(['/pdf']);
   }
+
+  selectedPdf: File | null = null;
+  selectedPdfName: string | null = null;
+  formPdf: FormData = new FormData();
+  filePdf: any;
+  @ViewChild('fileInput') filePdfInput!: ElementRef<HTMLInputElement>;
+
+  onFilePdfSelected(event: any) {
+    const filePdf: File = event.target.files[0];
+    if (filePdf.type.startsWith('application/pdf')) {
+      this.formPdf.append('pdf', filePdf, filePdf.name);
+      this.filePdf = filePdf;
+      this.selectedPdfName = filePdf.name;
+    }
+    else{
+      alert('Vui lòng chọn tệp PDF.');
+      return; // Thoát khỏi hàm nếu không phải PDF
+    }
+    console.log(this.filePdf);
+    // this.isUpdateImage = true;
+  }
 }

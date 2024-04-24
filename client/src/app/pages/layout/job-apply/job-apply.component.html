@@ -10,36 +10,36 @@
                         Vị trí ứng tuyển
                     </div>
                     <div class="name_title">
-                        Tên ứng viên
+                        Tên công ty
                     </div>
                     <div class="career_field_title">
-                        Ngành nghề/ Lĩnh vực
+                        Giá cả
                     </div>
                     <div class="email_title">
-                        Email
+                        Địa chỉ
                     </div>
                     <div class="date_title">
-                        Ngày ứng tuyển
+                        Ngày hết hạn
                     </div>
                     <div class="status_title">
                         Trạng thái
                     </div>  
                 </div>
-                <div class="candidate_list" *ngFor="let recrutment of recruitments" (click)="openDetailDialog()">
+                <div class="candidate_list" *ngFor="let recrutment of recruitments" (click)="openDetailDialog(recrutment.Job)">
                     <div class="position">
                         {{recrutment.Job.Name}}
                     </div>
                     <div class="name">
-                        a
+                        {{recrutment.Company.Name}}
                     </div>
                     <div class="career_field">
-                        {{recrutment.Career.Name}} / {{recrutment.Field.FieldName}}
+                        {{recrutment.Job.Salary}}
                     </div>
                     <div class="email">
-                        a
+                        {{recrutment.Company.Address}}
                     </div>
                     <div class="date">
-                        a
+                        {{parseDateInComponent(recrutment.Job.EndDate)}}
                     </div>
                     <div class="status">
                         <div class="status_box_selected"*ngIf="recrutment.Status&&recrutment.StatusSeenOfRecruiter">
@@ -61,7 +61,7 @@
 <dialog id="detail_dialog" style="color: #1f1a1c" #detailDialog>
         <div id="top_dialog">
             <div class="title">
-                <h4>Chi tiết ứng viên</h4>
+                <h4>Chi tiết công việc</h4>
             </div>
             <div class="btnClose" (click)="closeDetailDialog()">
                 <span class="material-symbols-outlined">
@@ -78,127 +78,115 @@
                     <div class="info_basic">
                         <div class="name">
                             <div class="title">
-                                Họ và Tên:
+                                Công ty:
                             </div>
-                            a
+                            {{jobToRender.Company.Name}}
                         </div>
                         <div class="position">
                             <div class="title">
-                                Kinh nghiệm - Chức danh:
+                                Vị trí tuyển dụng:
                             </div>
-                            a - a
+                            a
                         </div>
                         <div class="email">
                             <div class="title">
-                                Gmail:
+                                Giá cả:
                             </div>
                             a
                         </div>
                         <div class="phone">
                             <div class="title">
-                                Số điện thoại:
+                                Địa chỉ:
                             </div>
                             b
                         </div>
                         <div class="address">
                             <div class="title">
-                                Địa chỉ:
+                                Thời gian tuyển dụng:
                             </div>
-                            a
+                            a - a
                         </div>
                     </div>
                 </div>
-                <div class="experience">
+                <div class="info_job">
                     <div class="title">
-                        Kinh nghiệm làm việc
+                        Thông tin việc làm
                     </div>
-                    <div class="experience_box" >
+                    <div class="info_job_box">
                         <div class="h1">
-                            <div class="company">
-                                <div class="title">
-                                    Công ty:
+                            <div class="start_date">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined">
+                                        calendar_today
+                                    </span>
                                 </div>
-                                a
+                                <div class="content">
+                                    <div class="title_content">
+                                        NGÀY ĐĂNG
+                                    </div>
+                                    <div class="content_text">
+                                        a
+                                    </div>
+                                </div>
                             </div>
-                            <div class="position">
-                                <div class="title">
-                                    Vị trí:
+                            <div class="skill">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined">
+                                        app_registration
+                                    </span>
                                 </div>
-                                a
+                                <div class="content">
+                                    <div class="title_content">
+                                        KỸ NĂNG
+                                    </div>
+                                    <div class="content_text">
+                                        akhsdkjh auwy dsad qwjdiwjddsad asdasdas asd asdasd ada dá ád
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="h2">
-                            <div class="date_start">
-                                <div class="title">
-                                    Ngày bắt đầu:
+                            <div class="career">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined">
+                                        work
+                                    </span>
                                 </div>
-                                a
+                                <div class="content">
+                                    <div class="title_content">
+                                        NGÀNH NGHỀ
+                                    </div>
+                                    <div class="content_text">
+                                        akhsdkjh auwy dsad qwjdiwjddsad asdasdas asd asdasd ada dá ád
+                                    </div>
+                                </div>
                             </div>
-                            <div class="date_end">
-                                <div class="title">
-                                    Ngày kết thúc:
+                            <div class="field">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined">
+                                        dashboard
+                                    </span>
                                 </div>
-                                a
+                                <div class="content">
+                                    <div class="title_content">
+                                        LĨNH VỰC
+                                    </div>
+                                    <div class="content_text">
+                                        akhsdkjh auwy dsad qwjdiwjddsad asdasdas asd asdasd ada dá ád
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
-                <div class="education">
+                <div class="description">
                     <div class="title">
-                        Học vấn
+                        Mô tả công việc
                     </div>
-                    <div class="education_box" >
-                        <div class="h1">
-                            <div class="school">
-                                <div class="title">
-                                    Đại học:
-                                </div>
-                                a
-                            </div>
-                            <div class="major">
-                                <div class="title">
-                                    Bằng cấp:
-                                </div>
-                                a
-                            </div>
-                        </div>
-                        <div class="h2">
-                            <div class="date_start">
-                                <div class="title">
-                                    Ngày bắt đầu:
-                                </div>
-                                a
-                            </div>
-                            <div class="date_end">
-                                <div class="title">
-                                    Ngày kết thúc:
-                                </div>
-                                a
-                            </div>
-                        </div>
-                    </div>                   
-                </div>
-                <div class="skill">
-                    <div class="title">
-                        Kỹ năng
-                    </div>
-                    <div class="skill_box">
-                        <div class="skill_name" >
-                            a - a/5
-                        </div>
+                    <div class="content">
+                        akhsdkjh auwy dsad qwjdiwjddsad asdasdas asd asdasd ada dá ád djsahdj jasdj d jhjashd d jsur qasdj wqieu kaslj
                     </div>
                 </div>
-                <div class="skill">
-                    <div class="title">
-                        Ngoại ngữ
-                    </div>
-                    <div class="skill_box">
-                        <div class="skill_name">
-                            a
-                        </div>
-                    </div>
-                </div>
-                
             </div>
             <div class="a" style="width: 100%;
             border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>

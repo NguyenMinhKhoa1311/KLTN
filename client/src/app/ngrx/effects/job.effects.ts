@@ -192,6 +192,23 @@ export class JobEffects {
         )
         )
 
+    getByJobIdAtApplyJob$= createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByJobIdAtApplyJob),
+            switchMap(action =>
+                this.jobService.getByJobId(action.id).pipe(
+                    map(job => {
+                        return JobActions.getByJobIdAtApplyJobSuccess({job})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByJobIdAtApplyJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
     getByCompanyAtCompanyDetail$= createEffect(() =>
         this.actions$.pipe(
             ofType(JobActions.getByCompanyAtCompanyDetail),

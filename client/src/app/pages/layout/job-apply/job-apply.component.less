@@ -23,6 +23,7 @@
                     border-radius: 8px;
                     font-size: 14px;
                     font-weight: 600;
+                    
                     .position_title{
                         width: 15%;
                     }
@@ -171,51 +172,73 @@
                     }
                 }
             }
-            .experience, .education{
+            
+            .info_job{
                 margin-bottom: 10px;
                 .title{
                     font-weight: 600;
-                    margin-bottom: 5px;
                     font-size: 16px;
                 }
-                .experience_box, .education_box{
+                .info_job_box{
+                    padding: 10px 0;
                     display: flex;
-                    flex-direction: row;
-                    padding: 12px;
-                    border: 1px solid #e0e0e0;
-                    border-radius: 8px;
-                    margin-bottom: 5px;
-                    .h1, .h2{
-                        width: 50%;
-                        .company, .position, .date_start, .date_end, .school ,.major{
+                    flex-direction: column;
+                    //justify-content: space-between;
+                    gap: 10px;
+                    .h1,.h2{
+                        //width: 50%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        
+                        .start_date, .skill, .career, .field{
                             display: flex;
                             flex-direction: row;
-                            .title{
-                                font-weight: 600;
-                                margin-right: 5px;
-                                font-size: 14px;
+                            align-items: center;
+                            width: 50%;
+                            .icon{
+                                background: #F1F2F4;
+                                border-radius: 50%;
+                                width: 25px;
+                                height: 25px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                margin-right: 10px;
+                                .material-symbols-outlined{
+                                    font-size: 12px;
+                                    font-variation-settings:
+                                    'FILL' 1,
+                                    'wght' 400,
+                                    'GRAD' 0,
+                                    'opsz' 24
+                                }
                             }
+                            .content{
+                                display: flex;
+                                flex-direction: column;
+                                width: 270px;
+                                .title_content{
+                                    font-weight: 600;
+                                    color: grey;
+                                }
+                                .content_text{
+                                    width: 100%;
+                                    word-wrap: break-word;
+                                }
+                            }
+                            
                         }
                     }
-                    
                 }
             }
-            .skill{
+
+            .description{
                 margin-bottom: 10px;
                 .title{
                     font-weight: 600;
-                    margin-bottom: 5px;
                     font-size: 16px;
-                }
-                .skill_box{
-                    padding: 12px 0;
-                    .skill_name{
-                        padding: 5px;
-                        border: 1px solid #e0e0e0;
-                        display: inline;
-                        border-radius: 8px;
-                        margin-right: 5px;
-                    }
+                    margin-bottom: 5px;
                 }
             }
         }
