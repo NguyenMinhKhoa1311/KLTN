@@ -59,14 +59,14 @@
                     <div class="carousel">
                         <div class="item_carousel">
                             <div class="item_box_column">
-                                <div class="item_box"
-                                    *ngFor="let job of JobGetByHotJob.slice(0, 3)" >
+                                <div class="item_box "
+                                    *ngFor="let job of JobGetByHotJob.slice(0, 3)">
                                     <div class="img_logo">
                                         <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span clickclass="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                                         <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
