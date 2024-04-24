@@ -7,8 +7,8 @@
      <div class="resume_content">
        <div class="resume_item resume_info">
          <div class="title">
-           <p class="bold">stephen colbert</p>
-           <p class="regular">Designer</p>
+           <p class="bold">{{userLogged.Name}}</p>
+           <p class="regular">{{userLogged.Position}}</p>
          </div>
          <ul>
            <li>
@@ -16,7 +16,7 @@
                <i class="fas fa-map-signs"></i>
              </div>
              <div class="data">
-               21 Street, Texas <br /> USA
+               {{userLogged.Address}}
              </div>
            </li>
            <li>
@@ -24,7 +24,7 @@
                <i class="fas fa-mobile-alt"></i>
              </div>
              <div class="data">
-               +324 4445678
+                {{userLogged.Phone}}
              </div>
            </li>
            <li>
@@ -32,7 +32,7 @@
                <i class="fas fa-envelope"></i>
              </div>
              <div class="data">
-               stephengmail.com
+                {{userLogged.Email}}
              </div>
            </li>
          </ul>
@@ -42,50 +42,14 @@
            <p class="bold">Kỹ năng</p>
          </div>
          <ul>
-           <li>
+           <li *ngFor="let skill of userLogged.Skills">
              <div class="skill_name">
-               HTML
+               {{skill.Name}}
              </div>
              <div class="skill_progress">
-               <span style="width: 80%;"></span>
-             </div>
-             <div class="skill_per">80%</div>
-           </li>
-           <li>
-             <div class="skill_name">
-               CSS
-             </div>
-             <div class="skill_progress">
-               <span style="width: 70%;"></span>
-             </div>
-             <div class="skill_per">70%</div>
-           </li>
-           <li>
-             <div class="skill_name">
-               SASS
-             </div>
-             <div class="skill_progress">
-               <span style="width: 90%;"></span>
-             </div>
-             <div class="skill_per">90%</div>
-           </li>
-           <li>
-             <div class="skill_name">
-               JS
-             </div>
-             <div class="skill_progress">
-               <span style="width: 60%;"></span>
-             </div>
-             <div class="skill_per">60%</div>
-           </li>
-           <li>
-             <div class="skill_name">
-               JQUERY
-             </div>
-             <div class="skill_progress">
-               <span style="width: 88%;"></span>
-             </div>
-             <div class="skill_per">88%</div>
+              <span [style.width]="calculateWidth(skill.Level)"></span>
+            </div>
+            <div class="skill_per">{{calculatePercentage(skill.Level)}}%</div>
            </li>
          </ul>
        </div>
@@ -139,7 +103,7 @@
         <div class="title">
            <p class="bold">Giới thiệu bản thân</p>
          </div>
-        <p>ádvasdgv</p>
+        <p>{{userLogged}}</p>
     </div>
     <div class="resume_item resume_work">
         <div class="title">
@@ -153,20 +117,6 @@
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
                 </div>
             </li>
-            <!-- <li>
-              <div class="date">2015 - 2017</div>
-              <div class="info">
-                     <p class="semi-bold">Lorem ipsum dolor sit amet.</p> 
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
-                </div>
-            </li>
-            <li>
-              <div class="date">2017 - Present</div>
-              <div class="info">
-                     <p class="semi-bold">Lorem ipsum dolor sit amet.</p> 
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptatibus!</p>
-                </div>
-            </li> -->
         </ul>
     </div>
     <div class="resume_item resume_education">

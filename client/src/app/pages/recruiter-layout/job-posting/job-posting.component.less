@@ -98,11 +98,18 @@
                     margin-right: 0;
                 }
 
+                .welfare_list::-webkit-scrollbar {
+                    width: 8px;
+                    height: 8px;
+                }
+
                 .welfare_list {
                     height: calc(10rem - 24px);
                     border: 1px solid #ccc;
                     border-radius: 12px;
                     padding: 12px;
+                    overflow: auto;
+                    //position: fixed;
 
                     .welfare_select {
                         font-size: 14px;
@@ -171,11 +178,17 @@
                     margin-right: 0;
                 }
 
+                .tag_list::-webkit-scrollbar {
+                    width: 8px;
+                    height: 8px;
+                }
+
                 .tag_list {
                     height: calc(10rem - 24px);
                     border: 1px solid #ccc;
                     border-radius: 12px;
                     padding: 12px;
+                    overflow: auto;
 
                     .tag_select {
                         font-size: 14px;
