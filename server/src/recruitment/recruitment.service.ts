@@ -11,7 +11,7 @@ import { log } from 'console';
 import { Company } from 'src/company/entities/company.entity';
 import { Career } from 'src/career/entities/career.entity';
 import { Field } from 'src/field/entities/field.entity';
-import { populate } from 'dotenv';
+import { Storage } from 'src/storage/entities/storage.entity';
 
 @Injectable()
 export class RecruitmentService {
@@ -22,7 +22,7 @@ export class RecruitmentService {
     @InjectModel(Recruiter.name) private RecruiterModel: Model<Recruiter>,
     @InjectModel(Company.name) private CompanyModel: Model<Company>,
     @InjectModel(Career.name) private CareerModel: Model<Career>,
-    @InjectModel(Field.name) private FieldModel: Model<Field>
+    @InjectModel(Field.name) private FieldModel: Model<Field>,
 
   ){}
   async create(createRecruitmentDto: CreateRecruitmentDto) {

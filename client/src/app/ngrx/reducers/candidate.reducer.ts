@@ -126,6 +126,8 @@ export const initialState: candidateState = {
     deleteFavoriteJobAtJobError: "",
     candidateDeletedFavoriteJobAtJob: <Candidate>{},
 
+    isChangeState: false,
+
 
 
 };
@@ -827,6 +829,16 @@ on(CandidateActions.deleteEducationAtProfileFailure,(state, actions)=>{
             isDeleteFavoriteJobAtJobLoading: false,
             isDeleteFavoriteJobAtJobSuccess: false,
             deleteFavoriteJobAtJobError: actions.error,
+        };
+    }),
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////    
+    on(CandidateActions.changeState,(state, actions)=>{
+        return{
+            ...state,
+            isChangeState: actions.isChangeState,
         };
     }),
 

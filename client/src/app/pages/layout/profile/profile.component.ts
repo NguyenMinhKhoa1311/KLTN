@@ -140,6 +140,7 @@ export class ProfileComponent implements OnDestroy {
             console.log(candidate);
             this.candidateToRender = candidate;
             sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+            this.store.dispatch(CandidateActions.changeState({isChangeState: true}));
             this.isUpdateImage = false;
           }
         }

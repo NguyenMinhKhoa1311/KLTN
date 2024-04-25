@@ -81,8 +81,8 @@
                         </div>
         
                         <div class="item_hot" >
-                            <div class="{{checkFavoriteJob(job)}}" (click)="updatedFavoriteJob(job)">
-                                <tui-svg class="iconHeartNotFilled" src="tuiIconHeartLarge" ></tui-svg>
+                            <div class="heart1" (click)="updatedAndDeleteFavoriteJob(job)">
+                                <tui-svg class="{{checkFavoriteJob(job)}}" src="tuiIconHeartLarge" ></tui-svg>
                             </div>
                             <!-- <div class="heart2" (click)="deleteFavoriteJob(job)">
                                 <tui-svg class="iconHeartFilled" src="tuiIconHeartLarge" ></tui-svg>

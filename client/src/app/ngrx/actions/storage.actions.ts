@@ -30,7 +30,34 @@ export const getByFolderNameAtProfileFailure = createAction(
     '[Storage] Get By Folder Name At Profile Failure',
     props<{ error: string }>()
 );
-export function create(create: any): import("rxjs").OperatorFunction<import("@ngrx/store").Action, any> {
-    throw new Error("Function not implemented.");
-}
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const createAtJobDetails = createAction(
+    '[Storage] Create At Job Details',
+    props<{ file: File; fileName: string}>()
+);
+export const createAtJobDetailsSuccess = createAction(
+    '[Storage] Create At Job Details Success',
+);
+export const createAtJobDetailsFailure = createAction(
+    '[Storage] Create At Job Details Failure',
+    props<{ error: string }>()
+);
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByFolderNameAtJobDetail = createAction(
+    '[Storage] Get By Folder Name At Job Detail',
+    props<{ folderName: string }>()
+);
+export const getByFolderNameAtJobDetailSuccess = createAction(
+    '[Storage] Get By Folder Name At Job Detail Success',
+    props<{ files: Storage }>()
+);
+export const getByFolderNameAtJobDetailFailure = createAction(
+    '[Storage] Get By Folder Name At Job Detail Failure',
+    props<{ error: string }>()
+);

@@ -181,41 +181,41 @@ export class JobComponent {
 
   //check favorite
   checkFavoriteJob(job: Job){
-    let isFavorite = 'heart1';
+    let isFavorite = 'iconHeartNotFilled';
     if(this.candidateLogged.FavoriteJobs ==undefined){
       return isFavorite;
     }
     else{    
       this.candidateLogged.FavoriteJobs.forEach(favoriteJob => {
         if(favoriteJob._id == job._id){
-          isFavorite = 'heart2';
+          isFavorite = 'iconHeartFilled';
         }
-      });
+      });      
       return isFavorite;
     }
 
   }
 
-  updatedFavoriteJob(job: Job){
+  updatedAndDeleteFavoriteJob(job: Job){
     if(this.candidateLogged._id!=undefined){
       console.log("JOB: ", job);
       
       if(!this.isUpdatedFavoriteJob){
         this.isUpdatedFavoriteJob = true;
       }
-      this.store.dispatch(CandidateActions.updateFavoriteJobsAtJob({id:this.candidateLogged._id,jobId: job._id}));
-    }
-    else{
-      this.router.navigate(['/login']);
-    }
-  }
-  deleteFavoriteJob(job: Job){
-    if(this.candidateLogged._id!=undefined){
-      console.log("JOB: ", job);
-      if(!this.isUpdatedFavoriteJob){
-        this.isUpdatedFavoriteJob = true;
+      let result = this.checkFavoriteJob(job);
+      if(result == 'iconHeartFilled'){
+
+        if(!this.isDeletedFavoriteJob){
+          this.isDeletedFavoriteJob = true;
+        }
+        this.store.dispatch(CandidateActions.deleteFavoriteJobAtJob({id:this.candidateLogged._id,jobId: job._id}));
+      }else if(result == 'iconHeartNotFilled'){
+        if(this.isUpdatedFavoriteJob){
+          this.isUpdatedFavoriteJob = true;
+        }
+        this.store.dispatch(CandidateActions.updateFavoriteJobsAtJob({id:this.candidateLogged._id,jobId: job._id}));
       }
-      this.store.dispatch(CandidateActions.deleteFavoriteJobAtJob({id:this.candidateLogged._id,jobId: job._id}));
     }
     else{
       this.router.navigate(['/login']);

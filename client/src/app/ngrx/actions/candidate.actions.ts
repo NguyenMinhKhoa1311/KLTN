@@ -469,3 +469,11 @@ export const getByIdAtAplicationListFailure = createAction(
 export const resetState = createAction(
     "[Candidate] Reset State"
     );
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const changeState = createAction(
+    "[Candidate] Change State",
+    props<{isChangeState: boolean}>()
+    );

@@ -3,6 +3,9 @@ import { TaigaModule } from '../../../shared/taiga.module';
 import { Router,NavigationStart,RouterLink } from '@angular/router';
 import { ShareModule } from '../../../shared/shared.module';
 import { Candidate } from '../../../models/candidate.model';
+import { candidateState } from '../../../ngrx/states/candidate.state';
+import { Store } from '@ngrx/store';
+import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +19,13 @@ export class NavbarComponent implements OnInit{
   activeItemIndex = 0;
   isLogin = false;
   userLogged : Candidate = <Candidate>{};
+  //ngrx of candidate
+  isChangeState$ = this.store.select('candidate','isChangeState');
 
-  constructor (private router: Router) {
+  constructor (
+    private router: Router,
+    private store: Store<{ candidate: candidateState }>,
+  ) {
     if (this.router.url.includes('/home')) {
       this.activeItemIndex = 0;
     } else if (this.router.url.includes('/job')) {
@@ -27,6 +35,21 @@ export class NavbarComponent implements OnInit{
     } else if (this.router.url.includes('/profile')) {
       this.activeItemIndex = 3;
     } 
+
+    this.isChangeState$.subscribe((state) => {
+      if(state){
+        let userLogged = sessionStorage.getItem('userLogged');
+        if(userLogged){
+          let userAfterParse = JSON.parse(userLogged);
+          if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
+            console.log('userLogged',userLogged);
+            this.isLogin = true;
+            this.userLogged = userAfterParse;
+          }
+        }
+      }
+    });
+
   }
 
   ngOnInit(): void {

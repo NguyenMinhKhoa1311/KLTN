@@ -43,6 +43,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .exec();;
       return jobs
     }
@@ -60,6 +61,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name Priority Hot ColorTitle Urgent', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -81,6 +83,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -102,6 +105,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -123,6 +127,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -144,6 +149,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -163,6 +169,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .exec();
       return job
     }
@@ -215,6 +222,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -236,6 +244,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -257,7 +266,8 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
-      .populate('Recruitment','RecruitmentId Job', this.recruiterModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -279,6 +289,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -299,6 +310,7 @@ constructor(
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)
@@ -334,6 +346,7 @@ constructor(
         .populate('Company','CompanyId Name Avatar Address', this.companyModel)
         .populate('Field','FieldId FieldName', this.fieldModel)
         .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+        .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
         .exec();
         
         if(updateJob._id.toString().length > 0){

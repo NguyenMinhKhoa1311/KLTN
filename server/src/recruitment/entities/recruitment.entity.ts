@@ -62,6 +62,16 @@ export class Recruitment {
     @Prop()
     DateInterview: Date;
 
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Storage"
+    })
+    StorageCV: string;
+
+    @Prop({required: true})
+    CV: string;
+
 }
 
 export const RecruitmentSchema = SchemaFactory.createForClass(Recruitment);

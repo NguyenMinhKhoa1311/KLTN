@@ -80,7 +80,7 @@ export interface jobState{
     isUpdateRecruitmentJobDetailLoading: boolean;
     isUpdateRecruitmentJobDetailSuccess: boolean;
     updateRecruitmentJobDetailError: string;    
-    JobUpdatedRecruitment: Job;
+    JobUpdatedRecruitmentAtJobDetail: Job;
 
 
 }

@@ -81,7 +81,7 @@ export const initialState: jobState = {
     isUpdateRecruitmentJobDetailLoading: false,
     isUpdateRecruitmentJobDetailSuccess: false,
     updateRecruitmentJobDetailError: "",
-    JobUpdatedRecruitment: <Job>{}
+    JobUpdatedRecruitmentAtJobDetail: <Job>{}
 
 
 
@@ -559,7 +559,7 @@ export const jobReducer = createReducer(
                 isUpdateRecruitmentJobDetailLoading: false,
                 isUpdateRecruitmentJobDetailSuccess: true,
                 updateRecruitmentJobDetailError: "",
-                JobUpdatedRecruitment: action.job
+                JobUpdatedRecruitmentAtJobDetail: action.job
             }
         }),
         on(JobActions.updateRecruitmentAtJobDetailFailure,(state,action)=>{
@@ -569,6 +569,14 @@ export const jobReducer = createReducer(
                 isUpdateRecruitmentJobDetailSuccess: false,
                 updateRecruitmentJobDetailError: action.error,
             }
+        }),
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        on(JobActions.resetState,(state,action)=>{
+            return initialState;
         }),
 
 

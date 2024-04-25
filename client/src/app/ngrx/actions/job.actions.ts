@@ -272,3 +272,9 @@ export const updateRecruitmentAtJobDetailSuccess = createAction(
     '[Job] Update Recruitment At Job Detail Success',
     props<{ job: Job }>()
 );
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const resetState = createAction(
+    '[Job] Reset State'
+);

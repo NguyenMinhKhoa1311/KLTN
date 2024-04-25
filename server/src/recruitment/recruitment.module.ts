@@ -15,6 +15,8 @@ import { CareerSchema } from 'src/career/entities/career.entity';
 import { FieldSchema } from 'src/field/entities/field.entity';
 import { CareerModule } from 'src/career/career.module';
 import { FieldModule } from 'src/field/field.module';
+import { StorageSchema } from 'src/storage/entities/storage.entity';
+import { StorageModule } from 'src/storage/storage.module';
 
 @Module({
   imports:[
@@ -25,7 +27,8 @@ import { FieldModule } from 'src/field/field.module';
       {name: 'Company', schema: CompanySchema},
       { name: 'Job', schema: JobSchema},
       { name: 'Career', schema: CareerSchema},
-      { name: 'Field', schema: FieldSchema}
+      { name: 'Field', schema: FieldSchema},
+      { name: 'Storage', schema: StorageSchema}
     ]),
     forwardRef( ()=> RecruitmentModule),
     forwardRef(() => RecruiterModule),
@@ -33,7 +36,8 @@ import { FieldModule } from 'src/field/field.module';
     forwardRef(() => JobModule),
     forwardRef(() => CompanyModule),
     forwardRef(() => CareerModule),
-    forwardRef(() => FieldModule)
+    forwardRef(() => FieldModule),
+    forwardRef(() => StorageModule)
   ],
   controllers: [RecruitmentController],
   providers: [RecruitmentService],

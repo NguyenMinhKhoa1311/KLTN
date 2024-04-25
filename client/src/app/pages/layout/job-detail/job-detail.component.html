@@ -24,7 +24,8 @@
             </div>
             <div class="btn">
                 <div class="btn_accept" (click)="openApplyDialog()">
-                    Nộp đơn
+                    <div *ngIf="checkApply()">Bạn đã ứng tuyển công việc này</div>
+                    <div *ngIf="!checkApply()">Ứng tuyển ngay</div>
                 </div>
             </div>
         </div>
@@ -43,13 +44,13 @@
                         </div>
                         <span>{{jobToRender.StartDate}}</span>
                     </div>
-                    <div class="career">
+                    <div class="career" *ngIf="jobToRender.Career!=undefined">
                         <div class="title2">
                             NGÀNH NGHỀ
                         </div>
-                        <span>{{jobToRender.Career.Name}}</span>
+                        <span >{{jobToRender.Career.Name}}</span>
                     </div>
-                    <div class="field">
+                    <div class="field" *ngIf="jobToRender.Field!=undefined">
                         <div class="title2">
                             LĨNH VỰC
                         </div>
@@ -57,7 +58,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <div class="position">
+                    <div class="position" *ngIf="jobToRender.Company!=undefined">
                         <div class="title2">
                             Công ty
                         </div>
@@ -100,7 +101,7 @@
             </span>
         </div>
     </div>
-    <div id="body_dialog">
+    <div id="body_dialog" *ngIf="jobToRender._id!=undefined">
         <div class="info">
             <div class="apply_cv">
                 <div class="title_apply_cv">Chọn CV để ứng tuyển</div>
@@ -169,7 +170,7 @@
                 </button>
             </div>
             <div class="btn_Luu">
-                <button appearance="primary" tuiButton type="button" (click)="closeApplyDialog()" 
+                <button appearance="primary" tuiButton type="button" (click)="apply()" 
                     class="tui-space_right-3 tui-space_bottom-3">
                     Chấp nhận
                 </button>

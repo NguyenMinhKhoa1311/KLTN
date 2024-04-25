@@ -151,6 +151,7 @@ export class JobPostingComponent implements OnDestroy{
       );
     }
   ngOnDestroy(): void {
+    this.store.dispatch(JobActions.resetState());
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });

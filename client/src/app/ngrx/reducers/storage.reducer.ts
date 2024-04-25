@@ -11,7 +11,16 @@ export const initualState: StorageState = {
     isGetByFolderNameAtProfileLoading: false,
     isGetByFolderNameAtProfileSuccess: false,
     getByFolderNameAtProfileError: '',
-    fileTakenByFolderNameAtProfile: <Storage>{}
+    fileTakenByFolderNameAtProfile: <Storage>{},
+
+    isCreateAtJobDetailsLoading: false,
+    isCreateAtJobDetailsSuccess: false,
+    createAtJobDetailsError: '',
+
+    isGetByFolderNameAtJobDetailLoading: false,
+    isGetByFolderNameAtJobDetailSuccess: false,
+    getByFolderNameAtJobDetailError: '',
+    fileTakenByFolderNameAtJobDetail: <Storage>{}
 };
 
 export const storageReducer = createReducer(
@@ -57,5 +66,51 @@ export const storageReducer = createReducer(
         isGetByFolderNameAtProfileLoading: false,
         isGetByFolderNameAtProfileSuccess: false,
         getByFolderNameAtProfileError: action.error,
-    }))
+    })),
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(StorageAction.createAtJobDetails, (state,action) => ({
+        ...state,
+        isCreateAtJobDetailsLoading: true,
+        isCreateAtJobDetailsSuccess: false,
+        createAtJobDetailsError: ''
+    })),
+    on(StorageAction.createAtJobDetailsSuccess, (state,action) => ({
+        ...state,
+        isCreateAtJobDetailsLoading: false,
+        isCreateAtJobDetailsSuccess: true,
+        createAtJobDetailsError: ''
+    })),
+    on(StorageAction.createAtJobDetailsFailure, (state,action) => ({
+        ...state,
+        isCreateAtJobDetailsLoading: false,
+        isCreateAtJobDetailsSuccess: false,
+        createAtJobDetailsError: action.error
+    })),
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(StorageAction.getByFolderNameAtJobDetail, (state,action) => ({
+        ...state,
+        isGetByFolderNameAtJobDetailLoading: true,
+        isGetByFolderNameAtJobDetailSuccess: false,
+        getByFolderNameAtJobDetailError: ''
+    })),
+    on(StorageAction.getByFolderNameAtJobDetailSuccess, (state,action) => ({
+        ...state,
+        isGetByFolderNameAtJobDetailLoading: false,
+        isGetByFolderNameAtJobDetailSuccess: true,
+        getByFolderNameAtJobDetailError: '',
+        fileTakenByFolderNameAtJobDetail: action.files
+    })),
+    on(StorageAction.getByFolderNameAtJobDetailFailure, (state,action) => ({
+        ...state,
+        isGetByFolderNameAtJobDetailLoading: false,
+        isGetByFolderNameAtJobDetailSuccess: false,
+        getByFolderNameAtJobDetailError: action.error,
+    })),
 )

@@ -11,6 +11,8 @@ export class CreateRecruitmentDto {
         public Career: string,
         public Field: string,
         public DateInterview: Date,
+        public StorageCV : string,
+        public CV: string
 
     ){}
 }

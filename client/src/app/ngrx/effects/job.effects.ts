@@ -180,7 +180,7 @@ export class JobEffects {
             switchMap(action =>
                 this.jobService.getByJobId(action.id).pipe(
                     map(job => {                        
-                        console.log("job: ", job);
+
                         return JobActions.getJobByIdAtJobDetailOfCandidateSuccess({job})
                     }),
                     catchError((err) =>

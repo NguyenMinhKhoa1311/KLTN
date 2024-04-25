@@ -11,4 +11,15 @@ export interface StorageState{
     isGetByFolderNameAtProfileSuccess: boolean;
     getByFolderNameAtProfileError: string;
     fileTakenByFolderNameAtProfile: Storage;
+
+    isCreateAtJobDetailsLoading: boolean;
+    isCreateAtJobDetailsSuccess: boolean;
+    createAtJobDetailsError: string;
+
+    isGetByFolderNameAtJobDetailLoading: boolean;
+    isGetByFolderNameAtJobDetailSuccess: boolean;
+    getByFolderNameAtJobDetailError: string;
+    fileTakenByFolderNameAtJobDetail: Storage;
+
+    
 }
