@@ -36,15 +36,16 @@
                         width: 20%;
                     }
                     .date_title{
-                        width: 15%;
+                        width: 13%;
                     }
                     .status_title{
-                        width: 10%;
+                        width: 12%;
                     }
                 }
                 .candidate_list{
                     display: flex;
                     flex-direction: row;
+                    align-items: center;
                     padding: 10px 15px;
                     margin-top: 10px;
                     border: 1px solid #e0e0e0;
@@ -70,27 +71,36 @@
                         width: 20%;
                     }
                     .date{
-                        width: 15%;
+                        width: 13%;
                     }
                     .status{
-                        width: 10%;
-                        .status_box_selected, .status_box_processing, .status_box_rejected{
+                        width: 12%;
+                        .status_box_selected, .status_box_processing, .status_box_rejected, .status_box_seen{
                             font-weight: 500;
-                            padding: 5px 10px;
+                            padding: 5px 12px;
                             display: inline;
                             border-radius: 15px;
                         }
                         .status_box_selected{
+                            font-weight: 600;
                             background: #F5FFF7;
                             color: #27b944;
                         }
                         .status_box_processing{
+                            font-weight: 600;
                             background: #FFFAF5;
                             color: #EB7C42;
                         }
                         .status_box_rejected{
+                            font-weight: 600;
                             background: #FFF5F6;
                             color: #E35C69;
+                        }
+
+                        .status_box_seen{
+                            font-weight: 600;
+                            background: #ebeef4;
+                            color: #0059ff;
                         }
                     }
                 }
@@ -218,6 +228,17 @@
                     }
                 }
             }
+
+            .pdf{
+                a{
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                    color: #fd916f;
+                }
+            }
+
         }
         .row4{
             margin-top: 20px;

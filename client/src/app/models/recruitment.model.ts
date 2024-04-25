@@ -4,6 +4,8 @@ import { Company } from "./company.model";
 import { Field } from "./field.model";
 import { Job } from "./job.model";
 import { Recruiter } from "./recruiter.model";
+import { Storage } from "./storage.model";
+
 
 export interface Recruitment{
     _id: string;
@@ -20,4 +22,6 @@ export interface Recruitment{
     DateInterview: Date,
     createAt: Date;
     updateAt: Date;
+    CV: string;
+    StorageCV: Storage;
 }
