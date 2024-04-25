@@ -181,14 +181,14 @@ export class JobComponent {
 
   //check favorite
   checkFavoriteJob(job: Job){
-    let isFavorite = false;
+    let isFavorite = 'heart1';
     if(this.candidateLogged.FavoriteJobs ==undefined){
       return isFavorite;
     }
     else{    
       this.candidateLogged.FavoriteJobs.forEach(favoriteJob => {
         if(favoriteJob._id == job._id){
-          isFavorite = true;
+          isFavorite = 'heart2';
         }
       });
       return isFavorite;
@@ -211,6 +211,7 @@ export class JobComponent {
   }
   deleteFavoriteJob(job: Job){
     if(this.candidateLogged._id!=undefined){
+      console.log("JOB: ", job);
       if(!this.isUpdatedFavoriteJob){
         this.isUpdatedFavoriteJob = true;
       }
@@ -339,10 +340,11 @@ export class JobComponent {
     console.log("Giá trị đã chọn là: ", _id);
   }
 
-
   
-
   testForm = new FormGroup({
     testValue2: new FormControl(false),
   });
+
+
+ 
 }

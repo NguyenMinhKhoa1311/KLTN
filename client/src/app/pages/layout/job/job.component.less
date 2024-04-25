@@ -229,22 +229,18 @@
                             display: flex;
                             align-items: flex-start;
                             cursor: pointer;
+                            position: relative;
                             
-                            .heart{
+                            .heart1,.heart2{
                                 width: 40px;
                                 height: 40px;
                                 border-radius: 50%;
                                 transition: background-color 0.25s ease 0s;
-                                display: grid;
                                 place-content: center;
-                                fill: rgb(163, 163, 163);
+                                //fill: rgb(163, 163, 163);
                                 position: relative;
                                 display: inline-flex;
                                 align-items: center;
-                                .material-symbols-outlined{
-                                    font-size: 30px;
-                                    color: #4D8CFF;
-                                }
                                 .iconHeartFilled{
                                     color: #4D8CFF;
                                     fill: #4D8CFF;
@@ -255,9 +251,13 @@
                                     font-size: large;
                                 }
                             }
-                            .heart:hover{
-                                background-color: rgb(239, 245, 255);
-                            }
+                            // .hear1 ,.heart2{
+                            //     position: absolute; /* Đặt vị trí tuyệt đối cho các biểu tượng */
+                            //     top: 0; /* Đặt biểu tượng ở vị trí trên cùng */
+                            //     left: 0; /* Đặt biểu tượng ở vị trí bên trái */
+                            //     z-index: 1; /* Đảm bảo biểu tượng chồng lên trên */
+                            // }
+
                         }
                     }
 
