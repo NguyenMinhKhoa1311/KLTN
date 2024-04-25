@@ -42,11 +42,17 @@
                         {{parseDateInComponent(recrutment.DateApply)}}
                     </div>
                     <div class="status">
-                        <div class="status_box_selected" *ngIf="recrutment.Status">
-                            Đã duyệt
+                        <div class="status_box_selected" *ngIf="recrutment.Status && recrutment.StatusSeenOfRecruiter">
+                            Đã mời phỏng vấn
                         </div>
-                        <div class="status_box_processing" *ngIf="!recrutment.Status">
+                        <div class="status_box_processing" *ngIf="!recrutment.Status && !recrutment.StatusSeenOfRecruiter">
                             Đang chờ
+                        </div>
+                        <div class="status_box_rejected" *ngIf="recrutment.Status">
+                            Hủy ứng tuyển
+                        </div>
+                        <div class="status_box_seen" *ngIf="!recrutment.Status && recrutment.StatusSeenOfRecruiter">
+                            Đã xem
                         </div>
                     </div>
                 </div>                  
@@ -195,7 +201,12 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="pdf">
+                    <a href="{{recruitmentToAcept.CV}}" target="_blank">
+                        Bấm vào đây để xem CV của ứng viên
+                    </a>
+                </div>
+
             </div>
             <div class="a" style="width: 100%;
             border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>

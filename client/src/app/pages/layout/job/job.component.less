@@ -164,11 +164,11 @@
                             }
             
                             .item_content {
-                                //width: 60%;
+                                width: 80%;
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
-            
+                                
                                 gap: 4px;
             
                                 .job_name {
@@ -181,6 +181,7 @@
                                     /* Ẩn phần văn bản vượt quá phạm vi */
                                     text-overflow: ellipsis;
                                     /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                    width: 500px;
                                 }
             
                                 .job_name:hover {
@@ -223,13 +224,10 @@
                                 }
                             }
                         }
-                        
         
                         .item_hot {
                             display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
-                            align-items: center;
+                            align-items: flex-start;
                             cursor: pointer;
                             
                             .heart{
@@ -246,6 +244,15 @@
                                 .material-symbols-outlined{
                                     font-size: 30px;
                                     color: #4D8CFF;
+                                }
+                                .iconHeartFilled{
+                                    color: #4D8CFF;
+                                    fill: #4D8CFF;
+                                    font-size: large;
+                                }
+                                .iconHeartNotFilled{
+                                    color: #4D8CFF;
+                                    font-size: large;
                                 }
                             }
                             .heart:hover{
@@ -289,13 +296,3 @@
     }
 }
 
-.iconHeartFilled{
-    color: red;
-    fill: red;
-    font-size: large;
-}
-.iconHeartNotFilled{
-    color: red;
-    font-size: large;
-
-}

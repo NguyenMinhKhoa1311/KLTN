@@ -38,7 +38,7 @@ export class ApplicationListComponent implements OnDestroy {
   recruitmentToAcept:Recruitment = <Recruitment>{};
   dateInterview: string = "";
   isUpdatedDateInterView: boolean = false;
-
+  
   //ngrx of recruitment
   recruitmentsTakenByRecruiter$ = this.store.select('recruitment', 'recruitmentsTakenByRecruiter');
   recruitmentUpdatedInterviewDate$ = this.store.select('recruitment', 'recruitmentUpdatedDateInterview');
