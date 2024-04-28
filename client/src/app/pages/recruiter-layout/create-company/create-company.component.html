@@ -1,0 +1,82 @@
+<div id="register_container">
+    <div id="background_register"></div>    
+    <div id="register_box">
+        <div id="register_form_box">
+            <div class="header">
+            <span>ĐĂNG KÍ CÔNG TY CỦA NHÀ TUYỂN DỤNG</span>
+            </div>
+            <form [formGroup]="createCompanyForm">
+            <div class="body">
+                <div class="form_register">
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Tên Công Ty</label>
+                        <p>
+                            <tui-input
+                                formControlName="CompanyName"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                            >
+                                Nhập tên công cy
+                                <input
+                                    autocomplete="email"
+                                    tuiTextfield
+                                    type="email"
+                                />
+                            </tui-input>
+                        </p>
+                    </div>
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Địa chỉ Công Ty</label>
+                        <p>
+                            <tui-input
+                                formControlName="CompanyAddress"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                            >
+                                Nhập địa chỉ công ty
+                                <input
+                                    autocomplete="email"
+                                    tuiTextfield
+                                    type="email"
+                                />
+                            </tui-input>
+                        </p>
+                    </div>
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Ngành nghề</label>
+                        <div class="body">
+                            <div class="custom-select"> 
+                                <select formControlName="Field">
+                                  <option class="select-item" >dsd</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Lĩnh vực</label>
+                        <div class="body">
+                            <div class="custom-select"> 
+                                <select formControlName="Field">
+                                  <option class="select-item" >dsd</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div  class="btn_register">
+                        <button
+                        appearance="primary"
+                        tuiButton
+                        type="button"
+                        class="tui-space_right-3 tui-space_bottom-3"
+                        
+                    >
+                        Đăng ký
+                    </button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

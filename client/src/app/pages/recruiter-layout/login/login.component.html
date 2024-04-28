@@ -1,20 +1,20 @@
-<div id="register_container">
-    <div id="background_register"></div>    
-    <div id="register_box">
-        <div id="register_form_box">
+<div id="login_container">
+    <div id="background_register"></div>
+    <div id="login_box">
+        <div id="login_form_box">
             <div class="header">
-            <span>Đăng ký thành viên</span>
+            <span style="margin-bottom: 20px; text-align: center;">DÀNH CHO NHÀ TUYỂN DỤNG</span>
+            <span style="font-size: 14px; color: black; font-weight: normal; margin-top: 10px;">THÔNG TIN ĐĂNG NHẬP</span>
             </div>
-            <form [formGroup]="regisForm">
             <div class="body">
-                <div class="form_register">
-                    <div class="form_register_box">
-                        <label style="margin-top: 10px;">Email</label>
+                <form [formGroup]="recruiterLoginForm">
+                <div class="form_login">
+                    <div class="form_login_box">
                         <p>
                             <tui-input
-                                formControlName="Email"
                                 [tuiTextfieldCleaner]="true"
                                 [tuiTextfieldLabelOutside]="true"
+                                formControlName="Username"
                             >
                                 Email
                                 <input
@@ -26,8 +26,7 @@
                             </tui-input>
                         </p>
                     </div>
-                    <div class="form_register_box">
-                        <label style="margin-top: 10px;">Mật khẩu</label>
+                    <div class="form_login_box">
                         <p>
                             <tui-input-password
                                 formControlName="Password"
@@ -40,46 +39,34 @@
                             </tui-input-password>
                         </p>
                     </div>
-                    <div class="form_register_box">
-                        <label style="margin-top: 10px;">Xác nhận mật khẩu</label>
-                        <p>
-                            <tui-input-password
-                                formControlName="ConfirmPassword"
-                                class="tui-space_top-2"
-                                >
-                                Xác nhận mật khẩu
-                                <input
-                                    tuiTextfield
-                                />
-                            </tui-input-password>
-                        </p>
-                    </div>
                 </div>
-                
-                <div  class="btn_register">
-                        <button
+                <div class="reset_pass"  >
+                    <span >Quên mật khẩu</span>
+                </div>
+                <div class="btn_login">
+                    <button
                         appearance="primary"
                         tuiButton
                         type="button"
                         class="tui-space_right-3 tui-space_bottom-3"
-                        (click)="register()"
+                        
                     >
-                        Đăng ký
+                        Đăng nhập
                     </button>
                 </div>
-                <span class="register_option">Hoặc đăng nhập bằng</span>
-                <div class="register_google" (click)="registerWithGoogle()" >
+                <span class="login_option">Hoặc đăng nhập bằng</span>
+                <div class="login_google">
                     <div class="img_google">
                         <img src="../../../assets/images/icons8-google-30.png" alt="">
                     </div>
                     <span>Google</span>
                 </div>
                 <div class="register_box">
-                    <span>Bạn đã có tài khoản?</span>
-                    <span (click)="login()" style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng nhập ngay</span>
+                    <span>Bạn chưa có tài khoản?</span>
+                    <span style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng ký ngay</span>
                 </div>
+            </form>
             </div>
-        </form>
         </div>
     </div>
 </div>

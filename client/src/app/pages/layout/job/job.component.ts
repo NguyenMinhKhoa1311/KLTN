@@ -205,7 +205,6 @@ export class JobComponent {
       }
       let result = this.checkFavoriteJob(job);
       if(result == 'iconHeartFilled'){
-
         if(!this.isDeletedFavoriteJob){
           this.isDeletedFavoriteJob = true;
         }

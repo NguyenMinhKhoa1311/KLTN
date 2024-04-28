@@ -25,10 +25,11 @@
                 .job_box{
                     display: flex;
                     flex-direction: row;
+                    align-items: center;
                     .img_job{
                         width: 130px;
                         height: 130px;
-                        //border-radius: 8px;
+                        flex: 0 0 130px;
                         margin-right: 16px;
                         img{
                             width: 100%;
@@ -170,7 +171,6 @@
             
 
             .field_job, .career_job{
-                
                 display: flex;
                 flex-direction: row;
     
@@ -189,7 +189,6 @@
                         margin-right: 4px;
                     }
                 }
-    
                 .body {
                     width: 70%;
                     margin-bottom: 10px;
@@ -272,13 +271,18 @@
                     ::ng-deep .tui-space_right-3 {
                         margin-right: 0;
                     }
+
+                    .welfare_list::-webkit-scrollbar{
+                        width: 8px;
+                        height: 8px;
+                    }
     
                     .welfare_list {
                         height: calc(10rem - 24px);
                         border: 1px solid #ccc;
                         border-radius: 12px;
                         padding: 12px;
-    
+                        overflow: auto;
                         .welfare_select {
                             font-size: 14px;
                             display: inline-flex;

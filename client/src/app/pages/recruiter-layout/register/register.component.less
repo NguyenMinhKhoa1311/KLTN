@@ -1,0 +1,129 @@
+#register_container {
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    #background_register {
+        min-height: 188px;
+        width: 100vw;
+        background: linear-gradient(270deg, rgb(0, 90, 255) 0%, rgb(0, 23, 68) 100%);
+    }
+
+    #register_box {
+        width: calc(50% - 120px);
+        background-color: white;
+        padding: 40px;
+        position: absolute;
+        top: 15%;
+        border-radius: 10px;
+        box-shadow: 0px 0px 8px -1px rgba(124, 105, 105, 0.54);
+        -webkit-box-shadow: 0px 0px 8px -1px rgba(124, 105, 105, 0.54);
+        -moz-box-shadow: 0px 0px 8px -1px rgba(124, 105, 105, 0.54);
+        
+
+        #register_form_box {
+            width: 600px;
+            height: 100%;
+            margin: 0 auto;
+
+            .header {
+                display: flex;
+                justify-content: center;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #526ed3;
+                }
+            }
+
+            .body {
+                .form_register {
+                    .form_register_box {
+                        margin-top: 1rem;
+
+                        label {
+                            margin: 0;
+                            font-size: 14px;
+                        }
+                    }
+                }
+                .btn_register {
+                    display: flex;
+                    justify-content: center;
+
+                    .tui-space_bottom-3 {
+                        margin: 5px 0;
+                        width: 100%;
+                        height: 3rem;
+                        border-radius: 5px;
+                        font-weight: normal;
+                    }
+                }
+
+                .register_option {
+                    font-size: 14px;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    margin: 15px 0;
+                }
+
+                .register_google {
+                    font-size: 14px;
+                    padding: 14px;
+                    background-color: #E73B2F;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    border-radius: 5px;
+                    position: relative;
+                   
+                    .img_google{
+                        width: 20px;
+                        height: 20px;
+                        margin-right: 5px;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            
+                        }
+                    }
+
+                    span {
+                        color: white;
+                        font-weight: 600;
+                        display: flex;
+                        //justify-content: center;
+                    }
+                }
+
+                .register_google:hover::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #dfe3f3 !important;
+                    opacity: 0.2; /* Tùy chỉnh độ mờ */
+                }
+
+                .register_google:hover {
+                    cursor: pointer;
+                }
+                .register_box{
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 10px;
+                    span{
+                        font-size: 14px;
+                    }
+                    
+                }
+            }
+        }
+    }
+}

@@ -52,9 +52,9 @@ export const LAYOUT_ROUTERS: Routes = [
               import('./job-detail/job-detail.routes').then((m) => m.JOBDETAIL_ROUTERS),
           },
           {
-            path:'job-apply',
+            path:'apply-list',
             loadChildren: () =>
-              import('./job-apply/job-apply.routes').then((m) => m.JOBAPPLY_ROUTERS),
+              import('./apply-list/apply-list.routes').then((m) => m.APPLYLIST_ROUTERS),
           }
     ],
   },
