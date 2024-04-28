@@ -16,7 +16,7 @@
           <button class="btn_tab" [disabled]="activeItemIndex === 3" [routerLink]="['profile']" *ngIf="isLogin" routerLinkActive tuiTab>
             <span class="material-symbols-rounded">Hồ sơ & CV</span>
           </button>
-          <button class="btn_tab" [disabled]="activeItemIndex === 4" [routerLink]="['job-apply']" *ngIf="isLogin" routerLinkActive tuiTab>
+          <button class="btn_tab" [disabled]="activeItemIndex === 4" [routerLink]="['apply-list']" routerLinkActive tuiTab>
             <span class="material-symbols-rounded">Danh sách bài ứng tuyển</span>
           </button>
         </tui-tabs>
@@ -44,6 +44,9 @@
         </button>
         <div class="dropdown-content">
           <a href="/profile">Hồ sơ</a>
+          <a href="/job">Việc làm</a>
+          <a href="/company">Công ty</a>
+          <a href="/apply-list">Danh sách bài ứng tuyển</a>
           <a href="">Thoát</a>
         </div>
       </div>
@@ -58,11 +61,12 @@
           </span>
         </button>
         <div class="dropdown-content">
-          <a href="#">Đăng nhập</a>
-          <a href="#">Đăng kí</a>
+          <a href="/recruiterLayout/login">Đăng nhập</a>
+          <a href="/recruiterLayout/register">Đăng kí</a>
           <a href="/recruiterLayout/choice-service">Đăng tuyển dụng</a>
           <a href="/recruiterLayout/job-detail">Bài tuyển dụng</a>
           <a href="/recruiterLayout/application-list">Danh sách tuyển dụng</a>
+          
         </div>
       </div>
     </div>

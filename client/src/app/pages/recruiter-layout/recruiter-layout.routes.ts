@@ -6,11 +6,11 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
     path: '',
     component: RecruiterLayoutComponent,
     children: [
-    //   {
-    //     path: '',
-    //     redirectTo: 'personal-information',
-    //     pathMatch: 'full',
-    //   },
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
       {
         path: 'job-posting',
         loadChildren: () =>
@@ -30,6 +30,21 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         path:'application-list',
         loadChildren: () =>
           import('./application-list/application-list.routes').then((m) => m.APPLICATIONLIST_ROUTERS),
+      },
+      {
+        path:'login',
+        loadChildren: () =>
+          import('./login/login.routes').then((m) => m.LOGIN_ROUTERS),
+      },
+      {
+        path:'register',
+        loadChildren: () =>
+          import('./register/register.routes').then((m) => m.REGISTER_ROUTERS),
+      },
+      {
+        path:'create-company',
+        loadChildren: () =>
+          import('./create-company/create-company.routes').then((m) => m.CREATECOMPANY_ROUTERS),
       }
     ],
   },

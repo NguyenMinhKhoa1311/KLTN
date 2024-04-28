@@ -119,6 +119,39 @@
                         }
                     }
                 }
+                .company_information{
+                    display: flex;
+                    flex-direction: row;
+                    padding: 16px;
+                    width: calc(20% - 32px);
+                    height: calc(20% - 32px);
+                    .company_logo{
+                        width: 85px;
+                        height: 100%;
+                        margin-right: 10px;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 10px;
+                        }
+                    }
+                    .info_company{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        
+                        .company_name{
+                            font-size: 16px;
+                            color: white;
+                        }
+                        .company_address{
+                            font-size: 14px;
+                            color:#AEAEAE;
+                        
+                        }
+                    }
+                }
                 
             }
             .tui-island:not(.tui-island_hoverable):before {
@@ -218,10 +251,7 @@
                                     width: 60%;
                                     display: flex;
                                     flex-direction: column;
-
-
                                     gap: 4px;
-
                                     .job_name {
                                         font-size: 16px;
                                         font-weight: 600;
@@ -254,6 +284,12 @@
 
                                     .address {
                                         font-size: 14px;
+                                        white-space: nowrap;
+                                        /* Ngăn không cho văn bản ngắn xuống dòng */
+                                        overflow: hidden;
+                                        /* Ẩn phần văn bản vượt quá phạm vi */
+                                        text-overflow: ellipsis;
+                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
                                     }
                                 }
 
@@ -503,6 +539,12 @@
 
                                     .address {
                                         font-size: 14px;
+                                        white-space: nowrap;
+                                        /* Ngăn không cho văn bản ngắn xuống dòng */
+                                        overflow: hidden;
+                                        /* Ẩn phần văn bản vượt quá phạm vi */
+                                        text-overflow: ellipsis;
+                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
                                     }
                                 }
 

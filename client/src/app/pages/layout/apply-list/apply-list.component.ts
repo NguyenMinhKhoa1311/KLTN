@@ -14,15 +14,13 @@ import { jobState } from '../../../ngrx/states/job.state';
 import { Job } from '../../../models/job.model';
 
 @Component({
-  selector: 'app-job-apply',
+  selector: 'app-apply-list',
   standalone: true,
   imports: [TaigaModule, ShareModule],
-  templateUrl: './job-apply.component.html',
-  styleUrl: './job-apply.component.less'
+  templateUrl: './apply-list.component.html',
+  styleUrl: './apply-list.component.less'
 })
-
-export class JobApplyComponent implements OnDestroy{
-
+export class ApplyListComponent implements OnDestroy{
   subscriptions: Subscription[] = [];
 
   //variables

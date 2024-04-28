@@ -16,14 +16,20 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="selected_items">
-            <div *ngFor="let selectedItem of selectedItems">
-                <div>{{ selectedItem.name }} - Giá: {{ selectedItem.price }}</div>
+        <div class="total_box">
+            <div class="total">
+                <div class="price_basic">
+                    Giá cơ bản: 500 000
+                </div>
+                <div class="price_service">
+                    Tiền dịch vụ: {{totalPrice}}
+                </div>
+                <div class="total_price">
+                    Tổng giá tiền: {{totalPrice + 500000}}
+                </div>
             </div>
-        </div> -->
-        <div class="total_price">
-            Tổng giá tiền: {{ totalPrice }}
         </div>
+        
         <div class="btn_contorl">
             <div class="btn_cancel" (click)="returnHome()">
                 Hủy

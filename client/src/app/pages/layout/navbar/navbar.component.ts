@@ -34,6 +34,8 @@ export class NavbarComponent implements OnInit{
       this.activeItemIndex = 2;
     } else if (this.router.url.includes('/profile')) {
       this.activeItemIndex = 3;
+    } else if (this.router.url.includes('/apply-list')) {
+      this.activeItemIndex = 4;
     } 
 
     this.isChangeState$.subscribe((state) => {
@@ -78,7 +80,9 @@ export class NavbarComponent implements OnInit{
           this.activeItemIndex = 2;
         } else if (url.startsWith('/profile')) {
           this.activeItemIndex = 3;
-        } 
+        } else if (url.startsWith('/apply-list')) {
+          this.activeItemIndex = 4;
+        }
       }
     });
   }
@@ -95,8 +99,11 @@ export class NavbarComponent implements OnInit{
       case 'company':
         this.router.navigate(['/company']); 
         break;
-      case 'favorite':
+      case 'profile':
         this.router.navigate(['/profile']); 
+        break;
+      case'apply-list':
+        this.router.navigate(['/apply-list']);
         break;
       default:
         console.warn('Invalid tab name:', tabName);
