@@ -13,6 +13,7 @@ import * as AuthActions from '../../ngrx/actions/auth.actions';
 import { UserState } from '../../ngrx/states/user.state';
 import * as UserActions from '../../ngrx/actions/user.actions';
 import { Subscription } from 'rxjs';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-register',
@@ -58,44 +59,50 @@ export class RegisterComponent implements OnDestroy  {
         
       // kiểm tra login with google thành công hay chưa r gọi action getUserByGmailWithGoogleAtLogin
       this.userFirebase$.subscribe(User=>{
-        if(User.email.length > 0){
-          console.log(User);
-          this.userLoginWithGoogle.Username = User.email ?? '';
-          this.userLoginWithGoogle.Password = "1234";
-          this.userLoginWithGoogle.Uid = User.uid;
-          this.store.dispatch(UserActions.getUserByGmailWithGoogleAtRegister({username: this.userLoginWithGoogle.Username}));
+        if(User.email){
+          if(User.email.length > 0){
+            console.log(User);
+            this.userLoginWithGoogle.Username = User.email ?? '';
+            this.userLoginWithGoogle.Password = "1234";
+            this.userLoginWithGoogle.Uid = User.uid;
+            this.store.dispatch(UserActions.getUserByGmailWithGoogleAtRegister({username: this.userLoginWithGoogle.Username}));
+          }
         }
       }),
 
       this.userTakenByGmailWithGoogleAtRegister$.subscribe(user=>{
-        if(user.Username.length > 0){
-          if (user.Username == "404 user not found" ) {
-            //không có user thì tạo user
-            const userAsJsoBth = JSON.stringify(this.userLoginWithGoogle);
-            sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
-            console.log(user);
-            this.store.dispatch(UserActions.createWithGoogoleAtRegister({user: this.userLoginWithGoogle}));      
-            
-          }
-          else{
-               //có user thì kiểm tra user có profile chưa
-               console.log(user);
-               const userAsJsoBth = JSON.stringify(user);
-               sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
-            this.store.dispatch(CandidateActions.getByUserWithGoogleAtRegister({user: user._id}))
-
+        if(user.Username){
+          if(user.Username.length > 0){
+            if (user.Username == "404 user not found" ) {
+              //không có user thì tạo user
+              const userAsJsoBth = JSON.stringify(this.userLoginWithGoogle);
+              sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
+              console.log(user);
+              this.store.dispatch(UserActions.createWithGoogoleAtRegister({user: this.userLoginWithGoogle}));      
+              
+            }
+            else{
+                 //có user thì kiểm tra user có profile chưa
+                 console.log(user);
+                 const userAsJsoBth = JSON.stringify(user);
+                 sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
+              this.store.dispatch(CandidateActions.getByUserWithGoogleAtRegister({user: user._id}))
+  
+            }
           }
         }
       }),
 
       //Kiểm tra user có profile chưa
       this.candidateTakenByUserWithGoogleAtRegister$.subscribe(candidate=>{
-        if (candidate._id.length > 0) {
-          if (candidate._id == "404 candidate not found") {
-            this.router.navigate(['createProfile/personal-information']);
-          }
-          else{
-            this.router.navigate(['/home']);
+        if(candidate._id){
+          if (candidate._id.length > 0) {
+            if (candidate._id == "404 candidate not found") {
+              this.router.navigate(['createProfile/personal-information']);
+            }
+            else{
+              this.router.navigate(['/home']);
+            }
           }
         }
       }),

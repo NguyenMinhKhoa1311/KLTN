@@ -18,6 +18,17 @@ export const initialState: AuthState = {
     isLoginAtRegisterSuccessfull: false,
     loginAtRegisterErrorMessage: '',
     userAtregister: <UserFirebase>{},
+
+    isLoginOfRecruiterAtLoginLoading: false,
+    isLoginOfRecruiterAtLoginSuccessfull: false,
+    loginOfRecruiterAtLoginErrorMessage: '',
+    userOfRecruiterAtLogin: <UserFirebase>{},
+
+    isLoginOfRecruiterAtRegisterLoading: false,
+    isLoginOfRecruiterAtRegisterSuccessfull: false,
+    loginOfRecruiterAtRegisterErrorMessage: '',
+    userOfRecruiterAtRegister: <UserFirebase>{},
+
 };
 
 export const authReducer = createReducer(
@@ -139,5 +150,73 @@ export const authReducer = createReducer(
     on(LoginActions.resetState, (state, action) => {
 
       return initialState;
-    })
+    }),
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.loginOfRecruiterAtLogin, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isLoginOfRecruiterAtLoginLoading: true,
+        isLoginOfRecruiterAtLoginSuccessfull: false,
+        loginOfRecruiterAtLoginErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.loginOfRecruiterAtLoginSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        userOfRecruiterAtLogin: action.user,
+        isLoginOfRecruiterAtLoginLoading: false,
+        isLoginOfRecruiterAtLoginSuccessfull: true,
+        loginOfRecruiterAtLoginErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.loginOfRecruiterAtLoginFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isLoginOfRecruiterAtLoginLoading: false,
+        isLoginOfRecruiterAtLoginSuccessfull: false,
+        loginOfRecruiterAtLoginErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.loginOfRecruiterAtRegister, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isLoginOfRecruiterAtRegisterLoading: true,
+        isLoginOfRecruiterAtRegisterSuccessfull: false,
+        loginOfRecruiterAtRegisterErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.loginOfRecruiterAtRegisterSuccess, (state, action) => {
+      console.log(action.type);
+      let newState: AuthState = {
+        ...state,
+        userOfRecruiterAtRegister: action.user,
+        isLoginOfRecruiterAtRegisterLoading: false,
+        isLoginOfRecruiterAtRegisterSuccessfull: true,
+        loginOfRecruiterAtRegisterErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.loginOfRecruiterAtRegisterFailure, (state, action) => {
+      console.log(action.type);
+      
+      let newState: AuthState = {
+        ...state,
+        isLoginOfRecruiterAtRegisterLoading: false,
+        isLoginOfRecruiterAtRegisterSuccessfull: false,
+        loginOfRecruiterAtRegisterErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
   );

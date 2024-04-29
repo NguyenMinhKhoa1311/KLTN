@@ -53,7 +53,7 @@ export class LoginComponent implements  OnDestroy {
 
 
   constructor (
-    private auth:Auth,
+
     private store: Store<{ auth: AuthState, user: UserState, candidate: candidateState}>,
     private router: Router
     ) {
@@ -115,7 +115,8 @@ export class LoginComponent implements  OnDestroy {
             }
             else{
               console.log(user);
-              
+              const userAsJsoBth = JSON.stringify(user);
+              sessionStorage.setItem('userUseForLonginWothGoogle', userAsJsoBth);
               this.store.dispatch(CandidateActions.getByUserWithGoogleAtLogin({user: user._id}))
             }
           }
@@ -132,7 +133,6 @@ export class LoginComponent implements  OnDestroy {
   }
 
   loginWithAcouunt() {
-    // bỏ cái form user name vào ...... !!!!!!!!!!!!! bỏ password vào ....... !!!!!!!!!!!!!
     this.store.dispatch(UserActions.getUserByUsernameAndPasswordAtLogin({username: this.loginForm.value.Username??"", password: this.loginForm.value.Password??""}));
 
   }

@@ -38,6 +38,38 @@ export const initialState: UserState ={
     getByUsernameWithAccountAtRegisterError: '',
     userTakenByUsernameWithAccountAtRegister: <User>{},
 
+    isGetByUsernameOfRecruiterAtLoginLoading: false,
+    isGetByUsernameOfRecruiterAtLoginSuccess: false,
+    getByUsernameOfRecruiterAtLoginError: '',
+    userTakenByUsernameOfRecruiterAtLogin: <User>{},
+
+    isCreateUserOfRecruiterAtLoginSuccess: false,
+    isCreateUserOfRecruiterAtLoginLoading: false,
+    createUserOfRecruiterAtLoginError: '',
+    usercreatedOfRecruiterAtLogin: <User>{},
+
+    isGetByUsernameAndPasswordOfRecruiterAtLoginSuccess: false,
+    isGetByUsernameAndPasswordOfRecruiterAtLoginLoading: false,
+    getByUsernameAndPasswordOfRecruiterAtLoginError: '',
+    userTakenByUsernameAndPasswordOfRecruiterAtLogin: <User>{},
+
+    isGetByUsernameOfRecruiterAtRegisterLoading: false,
+    isGetByUsernameOfRecruiterAtRegisterSuccess: false,
+    getByUsernameOfRecruiterAtRegisterError: '',
+    userTakenByUsernameOfRecruiterAtRegister: <User>{},
+
+    isCreateUserOfRecruiterAtRegisterSuccess: false,
+    isCreateUserOfRecruiterAtRegisterLoading: false,
+    createUserOfRecruiterAtRegisterError: '',
+    usercreatedOfRecruiterAtRegister: <User>{},
+
+    isGetByUsernameOfRecruiterWithAccountAtRegisterLoading: false,
+    isGetByUsernameOfRecruiterWithAccountAtRegisterSuccess: false,
+    getByUsernameOfRecruiterWithAccountAtRegisterError: '',
+    userTakenByUsernameOfRecruiterWithAccountAtRegister: <User>{},
+
+
+
 };
 
 export const userReducer = createReducer(
@@ -309,4 +341,234 @@ export const userReducer = createReducer(
         return initialState;
     }),
 
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getByGmailOfRecruiterAtLogin, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterAtLoginLoading: true,
+            isGetByUsernameOfRecruiterAtLoginSuccess: false,
+            getByUsernameOfRecruiterAtLoginError: '',
+        };
+        return newState;
+    }),
+    on(UserActions.getByGmailOfRecruiterAtLoginSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterAtLoginLoading: false,
+            isGetByUsernameOfRecruiterAtLoginSuccess: true,
+            getByUsernameOfRecruiterAtLoginError: '',
+            userTakenByUsernameOfRecruiterAtLogin: action.user,
+        };
+        return newState;
+    }),
+    on(UserActions.getByGmailOfRecruiterAtLoginFailure, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterAtLoginLoading: false,
+            isGetByUsernameOfRecruiterAtLoginSuccess: false,
+            getByUsernameOfRecruiterAtLoginError: action.errorMessage,
+        };
+        return newState;
+    }),
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.createUserOfRecruiterAtLogin, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfRecruiterAtLoginLoading: true,
+            isCreateUserOfRecruiterAtLoginSuccess: false,
+            createUserOfRecruiterAtLoginError: '',
+        };
+        return newState;
+    }),
+    on(UserActions.createUserOfRecruiterAtLoginSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfRecruiterAtLoginLoading: false,
+            isCreateUserOfRecruiterAtLoginSuccess: true,
+            createUserOfRecruiterAtLoginError: '',
+            usercreatedOfRecruiterAtLogin: action.user,
+        };
+        return newState;
+    }),
+    on(UserActions.createUserOfRecruiterAtLoginFailure, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfRecruiterAtLoginLoading: false,
+            isCreateUserOfRecruiterAtLoginSuccess: false,
+            createUserOfRecruiterAtLoginError: action.errorMessage,
+        };
+        return newState;
+    }),
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getByUsernameAndPasswordOfRecruiterAtLogin, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAndPasswordOfRecruiterAtLoginLoading: true,
+            isGetByUsernameAndPasswordOfRecruiterAtLoginSuccess: false,
+            getByUsernameAndPasswordOfRecruiterAtLoginError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByUsernameAndPasswordOfRecruiterAtLoginSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAndPasswordOfRecruiterAtLoginLoading: false,
+            isGetByUsernameAndPasswordOfRecruiterAtLoginSuccess: true,
+            getByUsernameAndPasswordOfRecruiterAtLoginError: '',
+            userTakenByUsernameAndPasswordOfRecruiterAtLogin: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByUsernameAndPasswordOfRecruiterAtLoginFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAndPasswordOfRecruiterAtLoginLoading: false,
+            isGetByUsernameAndPasswordOfRecruiterAtLoginSuccess: false,
+            getByUsernameAndPasswordOfRecruiterAtLoginError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getByGmailOfRecruiterAtRegister, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterAtRegisterLoading: true,
+            isGetByUsernameOfRecruiterAtRegisterSuccess: false,
+            getByUsernameOfRecruiterAtRegisterError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByGmailOfRecruiterAtRegisterSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterAtRegisterLoading: false,
+            isGetByUsernameOfRecruiterAtRegisterSuccess: true,
+            getByUsernameOfRecruiterAtRegisterError: '',
+            userTakenByUsernameOfRecruiterAtRegister: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByGmailOfRecruiterAtRegisterFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterAtRegisterLoading: false,
+            isGetByUsernameOfRecruiterAtRegisterSuccess: false,
+            getByUsernameOfRecruiterAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.createUserOfRecruiterAtRegister, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfRecruiterAtRegisterLoading: true,
+            isCreateUserOfRecruiterAtRegisterSuccess: false,
+            createUserOfRecruiterAtRegisterError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.createUserOfRecruiterAtRegisterSuccess, (state, action) => {
+
+        
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfRecruiterAtRegisterLoading: false,
+            isCreateUserOfRecruiterAtRegisterSuccess: true,
+            createUserOfRecruiterAtRegisterError: '',
+            usercreatedOfRecruiterAtRegister: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.createUserOfRecruiterAtRegisterFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfRecruiterAtRegisterLoading: false,
+            isCreateUserOfRecruiterAtRegisterSuccess: false,
+            createUserOfRecruiterAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getByGmailOfRecruiterWithAccountAtRegister, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterWithAccountAtRegisterLoading: true,
+            isGetByUsernameOfRecruiterWithAccountAtRegisterSuccess: false,
+            getByUsernameOfRecruiterWithAccountAtRegisterError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByGmailOfRecruiterWithAccountAtRegisterSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterWithAccountAtRegisterLoading: false,
+            isGetByUsernameOfRecruiterWithAccountAtRegisterSuccess: true,
+            getByUsernameOfRecruiterWithAccountAtRegisterError: '',
+            userTakenByUsernameOfRecruiterWithAccountAtRegister: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByGmailOfRecruiterWithAccountAtRegisterFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfRecruiterWithAccountAtRegisterLoading: false,
+            isGetByUsernameOfRecruiterWithAccountAtRegisterSuccess: false,
+            getByUsernameOfRecruiterWithAccountAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+    
 )
