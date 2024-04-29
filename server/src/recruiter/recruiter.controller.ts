@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Query } from '@nestjs/common';
 import { RecruiterService } from './recruiter.service';
 import { CreateRecruiterDto } from './dto/create-recruiter.dto';
 import { UpdateRecruiterDto } from './dto/update-recruiter.dto';
@@ -12,10 +12,22 @@ export class RecruiterController {
   async create(@Body() createRecruiterDto: CreateRecruiterDto) {
     try{
       const newRecruiter = await this.recruiterService.create(createRecruiterDto)
-      return newRecruiter;
+      if(newRecruiter._id.toString().length > 0){
+        return newRecruiter;
+      }
+      else{
+        return{
+          _id: "500"
+        }
+      
+      }
     }
     catch(err){
-      throw err;
+      return{
+        _id: "500",
+        err: err
+
+      }
     }
   }
 
@@ -29,16 +41,30 @@ export class RecruiterController {
       throw err;
     }
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.recruiterService.findOne(+id);
+  @Get('getByUser')
+  async getByUser(@Query('_id') user: string) {
+    try{
+      const recruiter = await this.recruiterService.getByUser(user);
+      if(recruiter._id.toString().length > 0){
+        return recruiter
+      }
+      else{
+        return{
+          _id: "500"
+        }
+      
+      }
+    }
+    catch(err){
+      return{
+        _id: "500",
+        err: err
+      }
+    }
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecruiterDto: UpdateRecruiterDto) {
-    return this.recruiterService.update(+id, updateRecruiterDto);
-  }
+
+
 
   @Put('updateVoucher')
   async updateVoucher(@Body('id') id: string, @Body('voucher') voucher: ObjectId) {
@@ -49,10 +75,5 @@ export class RecruiterController {
     catch(err){
       throw err;
     }
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.recruiterService.remove(+id);
   }
 }
