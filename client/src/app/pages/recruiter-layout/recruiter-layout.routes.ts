@@ -45,6 +45,11 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         path:'create-company',
         loadChildren: () =>
           import('./create-company/create-company.routes').then((m) => m.CREATECOMPANY_ROUTERS),
+      },
+      {
+        path:'basic-information',
+        loadChildren: () =>
+          import('./basic-information/basic-information.routes').then((m) => m.BASICINFORMATION_ROUTERS),
       }
     ],
   },
