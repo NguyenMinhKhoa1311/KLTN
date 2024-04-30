@@ -88,6 +88,7 @@ export class JobDetailComponent implements OnDestroy {
               Company: this.jobToRender.Company._id,
               StatusSeenOfRecruiter: false,
               Status: false,
+              StatusCancel: false,
               DateApply: new Date(),
               Career: this.jobToRender.Career._id,
               Field: this.jobToRender.Field._id,

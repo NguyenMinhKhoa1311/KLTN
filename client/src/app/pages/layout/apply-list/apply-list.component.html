@@ -45,10 +45,10 @@
                         <div class="status_box_selected"*ngIf="recrutment.StatusSeenOfRecruiter && recrutment.Status">
                             Đã duyệt
                         </div> 
-                        <div class="status_box_processing" *ngIf="!recrutment.StatusSeenOfRecruiter && !recrutment.Status">
+                        <div class="status_box_processing" *ngIf="recrutment.StatusSeenOfRecruiter && !recrutment.Status">
                             Đang chờ
                         </div>
-                        <div class="status_box_rejected"*ngIf="!recrutment.StatusSeenOfRecruiter">
+                        <div class="status_box_rejected"*ngIf="recrutment.StatusCancel">
                             Hủy ứng tuyển
                         </div>
                     </div>

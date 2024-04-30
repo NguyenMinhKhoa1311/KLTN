@@ -325,7 +325,9 @@ export class JobComponent {
     "Tuyên Quang",
     "Vĩnh Long",
     "Vĩnh Phúc",
-    "Yên Bái"
+    "Yên Bái",
+    "Hà Nội",
+    "Hồ Chí Minh"
   ];
 
   navigateToJobDetail(jobId: string) {

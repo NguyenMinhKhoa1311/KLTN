@@ -234,6 +234,22 @@ export class JobController {
     }
   }
 
+  @Get('ByKeyword')
+  async getByKeyword(
+    @Query('keyword') keyword: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    try{
+      const job = await this.jobService.getByKeyword(keyword, page, limit, sortBy, sortOrder)
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
   @Get('getByTagsWithKeyword')
   async getByTagsWithKeyword(
     @Query('keyword') keyword: string,

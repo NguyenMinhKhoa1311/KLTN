@@ -53,7 +53,7 @@ constructor(
   }
   async getAllAndSort(page: number, limit: number ,sortBy ='createAt' , sortOrder: 'asc'|'desc' = 'desc'){
     try{
-      const sortOptions = { [sortBy]: sortOrder };
+      const sortOptions = { [sortBy]: sortOrder,["createAt"] : sortOrder  };
       const skip = page * limit;
       const jobs = await this.JobModel.find()
       .populate('Career','CareerId Name', this.careerModel)
@@ -62,7 +62,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name Priority Hot ColorTitle Urgent', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
@@ -84,7 +84,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
@@ -106,7 +106,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
@@ -150,7 +150,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
@@ -223,7 +223,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
@@ -245,7 +245,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
@@ -255,6 +255,29 @@ constructor(
       return [];
     }
   }
+
+  async getByKeyword(keyword: string, page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc'){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({ $or: [{"Name": {"$regex": keyword, "$options": "i"}},{"Tags": {"$regex": keyword, "$options": "i"}},{"Location": {"$regex": keyword, "$options": "i"}}] })
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .sort({"Priority": -1, "createdAt": -1})
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      return [];
+    }
+  }
+
 
   async getByTagsWithKeyword(keyword: string, page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc'){
     try{
@@ -267,8 +290,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
@@ -290,7 +312,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
@@ -311,7 +333,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort(sortOptions)
+      .sort({"Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();
