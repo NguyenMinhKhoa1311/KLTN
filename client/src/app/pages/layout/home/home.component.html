@@ -69,7 +69,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                                         <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
@@ -98,7 +99,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                                         <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
@@ -127,7 +129,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                                         <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
@@ -215,7 +218,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)" >{{job.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)" >{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)" >{{job.Name}}</span>
                                         <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
@@ -244,7 +248,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)" >{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)" >{{job.Name}}</span>
                                         <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
@@ -273,7 +278,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)" >{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)" >{{job.Name}}</span>
                                         <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
@@ -330,7 +336,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                                         <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
@@ -359,8 +366,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
-                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>
@@ -388,8 +395,8 @@
                                             alt="">
                                     </div>
                                     <div class="item_content">
-                                        <span class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
-                                        <span class="company_name" (click)="navigateToCompanyDetail(job.Company._id)">{{job.Company.Name}}</span>
+                                        <span *ngIf="!job.Hot" class="job_name" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
+                                        <span *ngIf="job.Hot" class="job_name_title" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                                         <span class="salary">{{job.Salary}}</span>
                                         <span class="address">{{job.Location}}</span>
                                     </div>

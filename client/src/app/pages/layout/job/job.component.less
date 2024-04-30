@@ -183,9 +183,28 @@
                                     /* Thêm dấu ba chấm cho văn bản đã ẩn */
                                     width: 500px;
                                 }
+
+                                .job_name_title {
+                                    font-size: 16px;
+                                    font-weight: bold;
+                                    cursor: pointer;
+                                    white-space: nowrap;
+                                    /* Ngăn không cho văn bản ngắn xuống dòng */
+                                    overflow: hidden;
+                                    /* Ẩn phần văn bản vượt quá phạm vi */
+                                    text-overflow: ellipsis;
+                                    /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                    width: 500px;
+                                    color: red;
+                                }
             
                                 .job_name:hover {
                                     color: #FF7D55;
+                                }
+
+
+                                .job_name_title:hover {
+                                    color: #e24444;
                                 }
 
                                 .status{
