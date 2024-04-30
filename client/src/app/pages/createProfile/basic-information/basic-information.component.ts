@@ -77,7 +77,6 @@ export class BasicInformationComponent implements OnDestroy {
     if(candidate){
       this.candidateSesion = JSON.parse(candidate || '');
       console.log(this.candidateSesion);
-      
     }
     const userAsJson = sessionStorage.getItem('userUseForLonginWothGoogle');
     console.log(userAsJson);

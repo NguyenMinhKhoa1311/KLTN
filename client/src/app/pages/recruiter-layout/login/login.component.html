@@ -43,7 +43,7 @@
                 <div class="reset_pass"  >
                     <span >Quên mật khẩu</span>
                 </div>
-                <div class="btn_login">
+                <div class="btn_login" (click)="loginWithAcouunt()">
                     <button
                         appearance="primary"
                         tuiButton
@@ -55,7 +55,7 @@
                     </button>
                 </div>
                 <span class="login_option">Hoặc đăng nhập bằng</span>
-                <div class="login_google">
+                <div class="login_google" (click)="loginWithGoogle()">
                     <div class="img_google">
                         <img src="../../../assets/images/icons8-google-30.png" alt="">
                     </div>

@@ -11,8 +11,6 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   getUserWithUserName(gmail: string){
-    console.log('gọi api nè'+ gmail);
-    
     return this.httpClient.get<User | any>(`${URL}/user/getByUserName/?userName=${gmail}`)
   }
   create(newUser: any){

@@ -7,6 +7,7 @@ import { Model, ObjectId } from 'mongoose';
 import { Company } from 'src/company/entities/company.entity';
 import { Voucher } from 'src/voucher/entities/voucher.entity';
 import { User } from 'src/user/entities/user.entity';
+import { log } from 'console';
 
 @Injectable()
 export class RecruiterService {
@@ -20,11 +21,14 @@ export class RecruiterService {
   
   async create(createRecruiterDto: CreateRecruiterDto) {
     try{
-      const newRecruiter = new this.RecruiterModel(createRecruiterDto);
-      return newRecruiter.save(); 
+      const recruiter = new this.RecruiterModel(createRecruiterDto);
+      const newRecruiter =  await recruiter.save(); 
+      return newRecruiter
     }
     catch(error){
-      throw new HttpException(error.message, error.status);
+      return{
+        _id: "500"
+      }
     }
   }
 
@@ -42,12 +46,26 @@ export class RecruiterService {
 
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} recruiter`;
-  }
-
-  update(id: number, updateRecruiterDto: UpdateRecruiterDto) {
-    return `This action updates a #${id} recruiter`;
+  async getByUser(user:string){
+    try{
+      const recruiter = await this.RecruiterModel.findOne({User: user})
+      .populate('Company','CompanyId Name', this.CompanyModel)
+      .populate('User','Uid Username Password', this.UserModel)
+      .populate('Voucher','VoucherId Name', this.VoucherModel)
+      .exec();
+      if(recruiter._id.toString().length >0){
+        return recruiter;
+      }else{
+        return{
+          _id: "500"
+        }
+      }
+    }catch(error){
+      return{
+        _id: "500",
+        err:error
+      }
+    }
   }
 
   async updateVoucher(id: string, voucher: ObjectId) {
@@ -58,9 +76,5 @@ export class RecruiterService {
     } catch (error) {
       throw new HttpException(error.message, error.status);
     }
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} recruiter`;
   }
 }

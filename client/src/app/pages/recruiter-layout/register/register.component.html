@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 
-                <div  class="btn_register">
+                <div  class="btn_register" (click)="registerWithAccount()">
                         <button
                         appearance="primary"
                         tuiButton
@@ -68,8 +68,8 @@
                     </button>
                 </div>
                 <span class="register_option">Hoặc đăng nhập bằng</span>
-                <div class="register_google" >
-                    <div class="img_google">
+                <div class="register_google" (click)="loginWithGoogle()">
+                    <div class="img_google" >
                         <img src="../../../assets/images/icons8-google-30.png" alt="">
                     </div>
                     <span>Google</span>

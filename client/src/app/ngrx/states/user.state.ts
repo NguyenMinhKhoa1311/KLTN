@@ -34,4 +34,39 @@ export interface UserState{
     isGetUserByUsernameAndPasswordAtLoginSuccess: boolean;
     getUserByUsernameAndPasswordAtLoginError: string;
     userTakenByUsernameAndPasswordAtLogin: User;
+
+    isGetByUsernameOfRecruiterAtLoginLoading: boolean;
+    isGetByUsernameOfRecruiterAtLoginSuccess: boolean;
+    getByUsernameOfRecruiterAtLoginError: string;
+    userTakenByUsernameOfRecruiterAtLogin: User;
+
+
+    isCreateUserOfRecruiterAtLoginSuccess: boolean;
+    isCreateUserOfRecruiterAtLoginLoading: boolean;
+    createUserOfRecruiterAtLoginError: string;
+    usercreatedOfRecruiterAtLogin: User;
+    
+
+    isGetByUsernameAndPasswordOfRecruiterAtLoginSuccess: boolean;
+    isGetByUsernameAndPasswordOfRecruiterAtLoginLoading: boolean;
+    getByUsernameAndPasswordOfRecruiterAtLoginError: string;
+    userTakenByUsernameAndPasswordOfRecruiterAtLogin: User;
+
+
+
+    isGetByUsernameOfRecruiterAtRegisterLoading: boolean;
+    isGetByUsernameOfRecruiterAtRegisterSuccess: boolean;
+    getByUsernameOfRecruiterAtRegisterError: string;
+    userTakenByUsernameOfRecruiterAtRegister: User;
+
+    isCreateUserOfRecruiterAtRegisterLoading: boolean;
+    isCreateUserOfRecruiterAtRegisterSuccess: boolean;
+    createUserOfRecruiterAtRegisterError: string;
+    usercreatedOfRecruiterAtRegister: User;
+
+    isGetByUsernameOfRecruiterWithAccountAtRegisterSuccess: boolean;
+    isGetByUsernameOfRecruiterWithAccountAtRegisterLoading: boolean;
+    getByUsernameOfRecruiterWithAccountAtRegisterError: string;
+    userTakenByUsernameOfRecruiterWithAccountAtRegister: User;
+
 }

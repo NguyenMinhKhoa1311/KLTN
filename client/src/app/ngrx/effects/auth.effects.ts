@@ -54,4 +54,33 @@ export class AuthEffects {
       )
     )
   );
+
+  loginOfRecruiterAtLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginOfRecruiterAtLogin),
+      exhaustMap(() =>
+        from(this.authService.loginWithGoogle()).pipe(
+          map((user) => AuthActions.loginOfRecruiterAtLoginSuccess({ user })),
+          catchError((error) =>
+            of(AuthActions.loginOfRecruiterAtLoginFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
+
+  loginOfRecruiterAtRegister$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginOfRecruiterAtRegister),
+      exhaustMap(() =>
+        from(this.authService.loginWithGoogle()).pipe(
+          map((user) => AuthActions.loginOfRecruiterAtRegisterSuccess({ user })),
+          catchError((error) =>
+            of(AuthActions.loginOfRecruiterAtRegisterFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
 }

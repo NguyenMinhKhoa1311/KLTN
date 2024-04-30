@@ -33,6 +33,24 @@ export const getUserByGmailWithGoogleAtLoginFailure = createAction(
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByGmailOfRecruiterAtLogin = createAction(
+    '[User] get by gmail of recruiter at login',
+    props<{ Username: string}>()
+);
+export const getByGmailOfRecruiterAtLoginSuccess = createAction(
+    '[User] get by gmail of recruiter at login success',
+    props<{ user: User}>()
+);
+export const getByGmailOfRecruiterAtLoginFailure = createAction(
+    '[User] get by gmail of recruiter at login failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const createWithGoogoleAtRegister = createAction(
     '[User] create with google at register',
     props<{ user: User}>()
@@ -109,6 +127,96 @@ export const getUserByUsernameAndPasswordAtLoginFailure = createAction(
     '[User] get user by username and password at login failure',
     props<{ errorMessage: string}>()
 );
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const createUserOfRecruiterAtLogin = createAction(
+    '[User] create user of recruiter at login',
+    props<{ user: User}>()
+);
+export const createUserOfRecruiterAtLoginSuccess = createAction(
+    '[User] create user of recruiter at login success',
+    props<{ user: User}>()
+);
+export const createUserOfRecruiterAtLoginFailure = createAction(
+    '[User] create user of recruiter at login failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByGmailOfRecruiterAtRegister = createAction(
+    '[User] get by gmail of recruiter at register',
+    props<{ Username: string}>()
+);
+export const getByGmailOfRecruiterAtRegisterSuccess = createAction(
+    '[User] get by gmail of recruiter at register success',
+    props<{ user: User}>()
+);
+export const getByGmailOfRecruiterAtRegisterFailure = createAction(
+    '[User] get by gmail of recruiter at register failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const createUserOfRecruiterAtRegister = createAction(
+    '[User] create user of recruiter at register',
+    props<{ user: User}>()
+);
+export const createUserOfRecruiterAtRegisterSuccess = createAction(
+    '[User] create user of recruiter at register success',
+    props<{ user: User}>()
+);
+export const createUserOfRecruiterAtRegisterFailure = createAction(
+    '[User] create user of recruiter at register failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByUsernameAndPasswordOfRecruiterAtLogin = createAction(
+    '[User] get by username and password of recruiter at login',
+    props<{ username: string, password: string}>()
+);
+export const getByUsernameAndPasswordOfRecruiterAtLoginSuccess = createAction(
+    '[User] get by username and password of recruiter at login success',
+    props<{ user: User}>()
+);
+export const getByUsernameAndPasswordOfRecruiterAtLoginFailure = createAction(
+    '[User] get by username and password of recruiter at login failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByGmailOfRecruiterWithAccountAtRegister = createAction(
+    '[User] get by gmail of recruiter with account at register',
+    props<{ username: string}>()
+);
+export const getByGmailOfRecruiterWithAccountAtRegisterSuccess = createAction(
+    '[User] get by gmail of recruiter with account at register success',
+    props<{ user: User}>()
+);
+
+export const getByGmailOfRecruiterWithAccountAtRegisterFailure = createAction(
+    '[User] get by gmail of recruiter with account at register failure',
+    props<{ errorMessage: string}>()
+);
+
 
 
 
