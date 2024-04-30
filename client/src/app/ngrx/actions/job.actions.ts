@@ -273,6 +273,19 @@ export const updateRecruitmentAtJobDetailSuccess = createAction(
     props<{ job: Job }>()
 );
 
+export const getByKeywordAtJob = createAction(
+    '[Job] Get by Keyword At Job',
+    props<{ keyword: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+)
+export const getByKeywordAtJobSuccess = createAction(
+    '[Job] Get by Keyword At Job Success',
+    props<{ jobs: Job[] }>()
+)
+export const getByKeywordAtJobFailure = createAction(
+    '[Job] Get by Keyword At Job Failure',
+    props<{ error: string }>()
+)
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const resetState = createAction(

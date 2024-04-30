@@ -282,6 +282,24 @@ export class JobEffects {
             )
             )
 
+
+        getByKeywordAtJob$ = createEffect(() =>
+            this.actions$.pipe(
+                ofType(JobActions.getByKeywordAtJob),
+                exhaustMap(action =>
+                    this.jobService.getByKeyWord(action.keyword, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                        map(jobs => {
+                            return JobActions.getByKeywordAtJobSuccess({jobs})
+                        }),
+                        catchError((err) =>
+                            of(JobActions.getByKeywordAtJobFailure({error: err})
+                        )
+                    )
+                )
+            )
+            )
+            )
+
     
 
 

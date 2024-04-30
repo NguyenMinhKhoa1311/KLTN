@@ -83,4 +83,11 @@ export interface jobState{
     JobUpdatedRecruitmentAtJobDetail: Job;
 
 
+    isGetByKeywordAtJobLoading: boolean;
+    isGetByKeywordAtJobSuccess: boolean;
+    getByKeywordAtJobError: string;
+    jobsTakenByKeywordAtJob: Job[];
+    
+
+
 }

@@ -81,7 +81,13 @@ export const initialState: jobState = {
     isUpdateRecruitmentJobDetailLoading: false,
     isUpdateRecruitmentJobDetailSuccess: false,
     updateRecruitmentJobDetailError: "",
-    JobUpdatedRecruitmentAtJobDetail: <Job>{}
+    JobUpdatedRecruitmentAtJobDetail: <Job>{},
+
+    isGetByKeywordAtJobLoading: false,
+    isGetByKeywordAtJobSuccess: false,
+    getByKeywordAtJobError: "",
+    jobsTakenByKeywordAtJob: [],
+
 
 
 
@@ -570,6 +576,39 @@ export const jobReducer = createReducer(
                 updateRecruitmentJobDetailError: action.error,
             }
         }),
+
+
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        on(JobActions.getByKeywordAtJob,(state,action)=>{
+            return{
+                ...state,
+                isGetByKeywordAtJobLoading: true,
+                isGetByKeywordAtJobSuccess: false,
+                getByKeywordAtJobError: "",
+            }
+        }),
+        on(JobActions.getByKeywordAtJobSuccess,(state,action)=>{
+            return{
+                ...state,
+                jobsTakenByKeywordAtJob: action.jobs,
+                isGetByKeywordAtJobLoading: false,
+                isGetByKeywordAtJobSuccess: true,
+                getByKeywordAtJobError: "",
+            }
+        }),
+        on(JobActions.getByKeywordAtJobFailure,(state,action)=>{
+            return{
+                ...state,
+                isGetByKeywordAtJobLoading: false,
+                isGetByKeywordAtJobSuccess: false,
+                getByKeywordAtJobError: action.error,
+            }
+        }),
+        
 
 
 

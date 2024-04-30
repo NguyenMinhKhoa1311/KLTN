@@ -1,8 +1,8 @@
-import { Component,ChangeDetectionStrategy } from '@angular/core';
+import { Component,ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ShareModule } from '../../../shared/shared.module';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { Store } from '@ngrx/store';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 import { jobState } from '../../../ngrx/states/job.state';
@@ -31,12 +31,25 @@ import { Candidate } from '../../../models/candidate.model';
   styleUrl: './job.component.less',
   
 })
-export class JobComponent {
+export class JobComponent implements OnDestroy{
 
   subscriptions: Subscription[] = [];
 
 
   //variables
+  isGetByLocation: boolean = false;
+  isGetByField: boolean = false;
+  isGetByFieldName: boolean = false;
+  isGetByCareer: boolean = false;
+  isGetAll: boolean = false;
+  isGetByKeyword: boolean = false;
+  isGetAllAndSortSuccess: boolean = false;
+  isGetByKeywordSuccess: boolean = false;
+  isGetByCareerSuccess: boolean = false;
+  isGetByFieldSuccess: boolean = false;
+  isGetByFieldNameSuccess: boolean = false;
+  isGetByLocationSuccess: boolean = false;
+
   page: number = 0;
   fieldId: string = "";
   isUpdatedFavoriteJob: boolean = false;
@@ -48,11 +61,18 @@ export class JobComponent {
 
 
   // ngrx of job
+  isGetAllAndSortAtJobSuccess$ = this.store.select('job', 'isGetAllAndSortAtJobSuccess');
   jobsTakenByAllAndSort$ = this.store.select('job', 'JobTakenBygetAllAndSortAtJob');
+  isGetByFieldSuccess$ = this.store.select('job', 'isGetByFieldAtJobSuccess');
   jobsTakenByField$ = this.store.select('job', 'jobsTakenByFieldAtJob');
+  isGetByFieldNameSuccess$ = this.store.select('job', 'isGetByFieldNameAtJobSuccess');
   jobTakenByFieldName$ = this.store.select('job', 'JobTakenByFieldNameAtJob');
+  isGetByCareerSuccess$ = this.store.select('job', 'isGetByCareerNameAtJobSuccess');
   jobTakenByCareerName$ = this.store.select('job', 'JobTakenByCareerNameAtJob');
+  isGetByLocationSuccess$ = this.store.select('job', 'isGetByLocationAtJobSuccess');
   jobTakenByLocation$ = this.store.select('job', 'jobsTakenByLocationAtJob');
+  isGetByKeywordSuccess$ = this.store.select('job', 'isGetByKeywordAtJobSuccess');
+  jobTakenByKeyword$ = this.store.select('job', 'jobsTakenByKeywordAtJob');
 
   // ngrx of field
   fieldNoLimitAtJob$ = this.store.select('field','fieldNoLimitAtJob');
@@ -66,6 +86,10 @@ export class JobComponent {
   candidateDeletedFavoriteJob$ = this.store.select('candidate','candidateDeletedFavoriteJobAtJob');
 
 
+  searchForm = new FormGroup({
+    Keyword: new FormControl('', Validators.required),
+  })
+
 
 
   constructor(
@@ -75,9 +99,18 @@ export class JobComponent {
   ){
     this.fieldId = this.route.snapshot.paramMap.get('fieldId')??"";
     if(this.fieldId.length > 0){
+      this.isGetAll = false;
+      this.isGetByField = true;
+      this.isGetByCareer = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
       this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-      
     }else{
+      this.isGetAll = true;
+      this.isGetByField = false;
+      this.isGetByCareer = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
     
@@ -94,16 +127,39 @@ export class JobComponent {
     this.store.dispatch(FieldActions.getAllNoLimit());
     this.store.dispatch(CareerActions.getAllAtJobs());
     this.subscriptions.push(
+      // subscribe to ngrx of isGetAllAndSortAtJobSuccess
+      this.isGetAllAndSortAtJobSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetAllAndSortSuccess = isSuccess;
+        }
+      }),
 
       //subscribe to ngrx of getAllAndSortAtJob
       this.jobsTakenByAllAndSort$.subscribe((jobs)=>{
         if(jobs.length>0){
           this.jobToRender = jobs;
+        }else if(this.isGetAll && this.isGetAllAndSortSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          alert("Không có công việc nào");
         }
       }),
+      //subscribe to ngrx of isGetByFieldAtJobSuccess
+      this.isGetByFieldSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByFieldSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of jobsTakenByFieldAtJob
       this.jobsTakenByField$.subscribe((jobs)=>{        
         if(jobs.length>0){
           this.jobToRender = jobs;
+        }else if(this.isGetByField&&this.isGetByFieldSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          alert("Không có công việc nào");
         }
       }),
       
@@ -123,18 +179,38 @@ export class JobComponent {
           this.careerList = careers.map(career => career.Name);
         }
       }),
-
+      //subscribe to ngrx of isGetByFieldNameAtJobSuccess
+      this.isGetByFieldNameSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByFieldNameSuccess = isSuccess;
+        }
+      }),
       //subscribe to ngrx of getByFieldNameAtJob
       this.jobTakenByFieldName$.subscribe((jobs)=>{
         if(jobs.length>0){
           this.jobToRender = jobs;
+        } else if(this.isGetByFieldName&&this.isGetByFieldNameSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          alert("Không có công việc nào");
         }
       }),
-
+      //subscribe to ngrx of isGetByCareerNameAtJobSuccess
+      this.isGetByCareerSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByCareerSuccess = isSuccess;
+        }
+      }),
       //subscribe to ngrx of getByCareerNameAtJob
       this.jobTakenByCareerName$.subscribe((jobs)=>{
         if(jobs.length>0){
           this.jobToRender = jobs;
+        } else if(this.isGetByCareer&&this.isGetByCareerSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          alert("Không có công việc nào");
         }
       }),
 
@@ -148,11 +224,21 @@ export class JobComponent {
           this.careerList = careers.map(career => career.Name);
         }
       }),
-
+      //subscribe to ngrx of isGetByLocationAtJobSuccess
+      this.isGetByLocationSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByLocation = isSuccess;
+        }
+      }),
       //subscribe to ngrx of getByLocationdWithKeywordsAtJob
       this.jobTakenByLocation$.subscribe((jobs)=>{
         if(jobs.length>0){
           this.jobToRender = jobs;
+        }else if(this.isGetByLocation&&this.isGetByLocationSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          alert("Không có công việc nào");
         }
       }),
 
@@ -174,9 +260,33 @@ export class JobComponent {
             sessionStorage.setItem('userLogged', JSON.stringify(candidate));
           }
         }
+      }),
+      //subscribe to ngrx of isGetByKeywordAtJobSuccess
+      this.isGetByKeywordSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByKeywordSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of getByKeywordAtJob
+      this.jobTakenByKeyword$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetByKeyword&&this.isGetByKeywordSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          alert("Không có công việc nào");
+        }
       })
+
       
     )
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    });
+    JobActions.resetState();
   }
 
   //check favorite
@@ -226,9 +336,27 @@ export class JobComponent {
   onFieldValueChange() {
     console.log("Giá trị đã chọn là: ", this.fieldValue);
     if(this.fieldValue != null){
+      this.isGetAll = false;
+      this.isGetByField = false;
+      this.isGetByFieldName = true;
+      this.isGetByCareer = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
+      if(this.page>0){
+        this.page = 0;
+      }
       this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
       this.store.dispatch(CareerActions.getByFieldNameAtJob({fieldName: this.fieldValue}));
     }else{
+      this.isGetAll = true;
+      this.isGetByField = false;
+      this.isGetByCareer = false;
+      this.isGetByFieldName = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
+      if(this.page>0){
+        this.page = 0;
+      }
       this.store.dispatch(CareerActions.getAllAtJobs());
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
@@ -238,8 +366,26 @@ export class JobComponent {
   onCareerValueChange(){
     console.log("Giá trị đã chọn là: ", this.careerValue);
     if(this.careerValue != null){
+      this.isGetAll = false;
+      this.isGetByField = false;
+      this.isGetByCareer = true;
+      this.isGetByFieldName = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
+      if(this.page>0){
+        this.page = 0;
+      }
       this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }else{
+      this.isGetAll = true;
+      this.isGetByField = false;
+      this.isGetByCareer = false;
+      this.isGetByFieldName = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
+      if(this.page>0){
+        this.page = 0;
+      }
       this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
 
     }
@@ -249,21 +395,76 @@ export class JobComponent {
   locationValueChange(){
     console.log("Giá trị đã chọn là: ", this.locationValue);
     if(this.locationValue != null){
+      this.isGetAll = false;
+      this.isGetByField = false;
+      this.isGetByFieldName = false;
+      this.isGetByCareer = false;
+      this.isGetByLocation = true;
+      this.isGetByKeyword = false;
+      if(this.page>0){
+        this.page = 0;
+      }
       this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }else{
+      if(this.page>0){
+        this.page = 0;
+      }
+      this.isGetAll = true;
+      this.isGetByField = false;
+      this.isGetByFieldName = false;
+      this.isGetByCareer = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
   }
 
+  searchByKeyword():void {
+    this.isGetAll = false;
+    this.isGetByField = false;
+    this.isGetByFieldName = false;
+    this.isGetByCareer = false;
+    this.isGetByLocation = false;
+    this.isGetByKeyword = true;
+    if(this.page>0){
+      this.page = 0;
+    }
+    this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+  }
+
   nextJobs(){
     this.page++;
-    this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    if(this.isGetByCareer){
+      this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }else if(this.isGetByField){
+      this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    } else if(this.isGetByLocation){
+      this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }else if(this.isGetByKeyword){
+      this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }else if(this.isGetAll){
+      this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    } else if(this.isGetByFieldName){
+      this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }
 
   }
   previousJobs(){
     if(this.page > 0){
       this.page--;
-      this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      if(this.isGetByCareer){
+        this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }else if(this.isGetByField){
+        this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      } else if(this.isGetByLocation){
+        this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      } else if(this.isGetByKeyword){
+        this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }else if(this.isGetAll){
+        this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }else if(this.isGetByFieldName){
+        this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
     }
 
   }
@@ -347,5 +548,4 @@ export class JobComponent {
   });
 
 
- 
 }
