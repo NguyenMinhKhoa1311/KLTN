@@ -193,7 +193,6 @@ export class JobComponent {
       });      
       return isFavorite;
     }
-
   }
 
   updatedAndDeleteFavoriteJob(job: Job){
