@@ -303,7 +303,6 @@ export class JobComponent implements OnDestroy{
       });      
       return isFavorite;
     }
-
   }
 
   updatedAndDeleteFavoriteJob(job: Job){
