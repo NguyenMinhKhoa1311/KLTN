@@ -78,8 +78,6 @@ export class HomeComponent implements OnDestroy {
             this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
             this.store.dispatch(JobActions.getByFieldAtHome({field:this.candidateToRender.Field._id, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
             this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-
-          
           }
         }
         else{
@@ -248,18 +246,6 @@ export class HomeComponent implements OnDestroy {
       }]);
     }
 
-
-
-
-    readonly zxc = [
-      {
-        name: 'KINH DOANH',
-        quantity: 1662,
-      },
-      {
-        name: 'KINH DOANH',
-        quantity: 1662,
-      }
-    ];
+    
     
 }
