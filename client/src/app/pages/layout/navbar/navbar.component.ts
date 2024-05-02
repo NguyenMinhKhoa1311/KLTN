@@ -117,4 +117,9 @@ export class NavbarComponent implements OnInit{
   register(){
     this.router.navigate(['/register']);
   }
+
+  job_post(){
+    this.router.navigate(['/recruiterLayout/choice-service']);
+  }
+
 }

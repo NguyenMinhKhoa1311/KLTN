@@ -24,7 +24,7 @@
                 <tui-combo-box class="b-form" [(ngModel)]="careerValue" (ngModelChange)="onCareerValueChange()" [tuiTextfieldCleaner]="true">
                     Chọn ngành nghề
                     <input tuiTextfield [attr.ng-reflect-focus]="false"/>
-                    <tui-data-list-wrapper *tuiDataList [items]="careerList"></tui-data-list-wrapper>
+                    <tui-data-list-wrapper *tuiDataList [items]="careerList | tuiFilterByInput"></tui-data-list-wrapper>
                 </tui-combo-box>
             </div>
             <div class="search_field">
@@ -32,7 +32,7 @@
                     Chọn lĩnh vực công ty
                     <input tuiTextfield (input)="fieldValue"/>
                     
-                    <tui-data-list-wrapper *tuiDataList [items]="fieldList"></tui-data-list-wrapper>
+                    <tui-data-list-wrapper *tuiDataList [items]="fieldList | tuiFilterByInput"></tui-data-list-wrapper>
                 </tui-combo-box>
             </div>
             <div class="urgent_recruitment">
