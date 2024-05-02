@@ -415,8 +415,6 @@ export class ProfileComponent implements OnDestroy {
   candidateDeletedReferenceAtProfile$ = this.store.select('candidate','candidateDeletedReferenceAtProfile');
 
 
-
-
   //ngrx of storage
   isCreateAtProfileSuccess$ = this.store.select('storage','isCreateAtProfileSuccess');
   fileTakenByFolderNameAtProfile$ = this.store.select('storage','fileTakenByFolderNameAtProfile');

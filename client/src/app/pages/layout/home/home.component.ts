@@ -19,6 +19,7 @@ import { Field } from '../../../models/field.model';
 import { Subscription } from 'rxjs';
 import { Company } from '../../../models/company.model';
 import { Candidate } from '../../../models/candidate.model';
+import { LoadingComponent } from '../../loading/loading.component';
 
 
 
@@ -26,7 +27,7 @@ import { Candidate } from '../../../models/candidate.model';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [TaigaModule,ShareModule],
+  imports: [TaigaModule,ShareModule,LoadingComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.less',
   
@@ -50,6 +51,8 @@ export class HomeComponent implements OnDestroy {
   //ngrx for company
   compantTakenByGetAllAndSortAtHome$ = this.store.select('company', 'companysTakenByGetAllAndSortAtHome');
 
+  //test
+  isGetByFieldAtHomeLoading$ = this.store.select('job', 'isGetByFieldAtHomeLoading');
 
 //variables
   JobGetByHotJob: Job[] = [];
@@ -63,6 +66,7 @@ export class HomeComponent implements OnDestroy {
   pageOfField: number = 0;
   candidateToRender: Candidate = <Candidate>{} ;
 
+  isloading : boolean = true;
 
   constructor(
     private store : Store<{job: jobState, field: FieldState, company: CompanyState}>,
@@ -144,7 +148,12 @@ export class HomeComponent implements OnDestroy {
         })
 
     )
+
+    setTimeout(() => {
+      this.isloading = false;
+    }, 3000);
     
+
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {
