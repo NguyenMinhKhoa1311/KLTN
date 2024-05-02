@@ -21,6 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { candidateState } from '../../../ngrx/states/candidate.state';
 import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 import { Candidate } from '../../../models/candidate.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -95,7 +96,8 @@ export class JobComponent implements OnDestroy{
   constructor(
     private store: Store<{ job: jobState, field : FieldState, career : CareerState, candidate: candidateState }>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ){
     this.fieldId = this.route.snapshot.paramMap.get('fieldId')??"";
     if(this.fieldId.length > 0){
@@ -142,7 +144,7 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          alert("Không có công việc nào");
+          this.openSnackBar("Không còn công việc nào phù hợp");
         }
       }),
       //subscribe to ngrx of isGetByFieldAtJobSuccess
@@ -159,7 +161,7 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          alert("Không có công việc nào");
+          this.openSnackBar("Không còn công việc nào phù hợp");
         }
       }),
       
@@ -193,7 +195,7 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          alert("Không có công việc nào");
+          this.openSnackBar("Không còn công việc nào phù hợp");
         }
       }),
       //subscribe to ngrx of isGetByCareerNameAtJobSuccess
@@ -210,7 +212,7 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          alert("Không có công việc nào");
+          this.openSnackBar("Không còn công việc nào phù hợp");
         }
       }),
 
@@ -238,7 +240,7 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          alert("Không có công việc nào");
+          this.openSnackBar("Không có công việc nào");
         }
       }),
 
@@ -275,7 +277,7 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          alert("Không có công việc nào");
+          this.openSnackBar("Không có công việc nào");
         }
       })
 
@@ -466,6 +468,15 @@ export class JobComponent implements OnDestroy{
       }
     }
 
+  }
+
+  openSnackBar(message: any) {
+    this._snackBar.open(message, '', {
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      duration: 3000,
+      panelClass: ['snackbar'], 
+    });
   }
 
   readonly locationList = [

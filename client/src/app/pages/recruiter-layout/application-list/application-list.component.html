@@ -42,13 +42,13 @@
                         {{parseDateInComponent(recrutment.DateApply)}}
                     </div>
                     <div class="status">
-                        <div class="status_box_selected" *ngIf="recrutment.Status && recrutment.StatusSeenOfRecruiter">
+                        <div class="status_box_selected" *ngIf="recrutment.Status && recrutment.StatusSeenOfRecruiter && !recrutment.StatusCancel">
                             Đã mời phỏng vấn
                         </div>
-                        <div class="status_box_processing" *ngIf="!recrutment.Status && !recrutment.StatusSeenOfRecruiter">
+                        <div class="status_box_processing" *ngIf="!recrutment.Status && !recrutment.StatusSeenOfRecruiter && !recrutment.StatusCancel">
                             Đang chờ
                         </div>
-                        <div class="status_box_rejected" *ngIf="recrutment.Status">
+                        <div class="status_box_rejected" *ngIf="recrutment.StatusCancel">
                             Hủy ứng tuyển
                         </div>
                         <div class="status_box_seen" *ngIf="!recrutment.Status && recrutment.StatusSeenOfRecruiter">
