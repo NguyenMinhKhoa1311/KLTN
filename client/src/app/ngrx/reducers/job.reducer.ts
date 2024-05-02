@@ -1,4 +1,4 @@
-import { createReducer, on } from "@ngrx/store";
+import { State, createReducer, on } from "@ngrx/store";
 import { jobState } from "../states/job.state";
 import * as JobActions from "../actions/job.actions"
 import { Job } from "../../models/job.model";

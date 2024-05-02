@@ -246,7 +246,7 @@
             flex-direction: row;
             justify-content: flex-end;
             gap: 10px;
-            .btn_Huy, .btn_Luu{
+            .btn_Huy, .btn_Luu, .btn_Tuchoi{
                 .tui-space_right-3{
                     margin-right: 0;
                 }
@@ -257,6 +257,13 @@
             .btn_Luu{
                 ::ng-deep [tuiWrapper][data-appearance=primary]{
                     background-color: #fd916f;
+                    // border-color: #005aff;
+                    color: #fff;
+                }
+            }
+            .btn_Tuchoi{
+                ::ng-deep [tuiWrapper][data-appearance=primary]{
+                    background-color: #ed5d5d;
                     // border-color: #005aff;
                     color: #fff;
                 }
