@@ -160,7 +160,7 @@ export class JobDetailComponent implements OnDestroy {
 
   apply(){
     if(this.isHavePdf){
-      this.folderName = "CV of"+this.userLogged.Name;
+      this.folderName = "CV of "+this.userLogged.Name;
       this.store.dispatch(StorageActions.createAtJobDetails({file: this.filePdf, fileName: this.folderName}));
     }
 
