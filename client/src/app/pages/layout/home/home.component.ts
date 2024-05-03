@@ -53,6 +53,7 @@ export class HomeComponent implements OnDestroy {
 
   //test
   isGetByFieldAtHomeLoading$ = this.store.select('job', 'isGetByFieldAtHomeLoading');
+  
 
 //variables
   JobGetByHotJob: Job[] = [];
