@@ -87,6 +87,8 @@ export class JobComponent implements OnDestroy{
   candidateDeletedFavoriteJob$ = this.store.select('candidate','candidateDeletedFavoriteJobAtJob');
 
 
+
+
   searchForm = new FormGroup({
     Keyword: new FormControl('', Validators.required),
   })
@@ -280,8 +282,6 @@ export class JobComponent implements OnDestroy{
           this.openSnackBar("Không có công việc nào");
         }
       })
-
-      
     )
   }
   ngOnDestroy(): void {
