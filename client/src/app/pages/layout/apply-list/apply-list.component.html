@@ -42,10 +42,10 @@
                         {{parseDateInComponent(recrutment.Job.EndDate)}}
                     </div>
                     <div class="status">
-                        <div class="status_box_selected"*ngIf="recrutment.StatusSeenOfRecruiter && recrutment.Status">
-                            Đã duyệt
+                        <div class="status_box_selected"*ngIf=" recrutment.Status && !recrutment.StatusCancel">
+                            Đã chấp nhận
                         </div> 
-                        <div class="status_box_processing" *ngIf="recrutment.StatusSeenOfRecruiter && !recrutment.Status">
+                        <div class="status_box_processing" *ngIf=" !recrutment.Status && !recrutment.StatusCancel">
                             Đang chờ
                         </div>
                         <div class="status_box_rejected"*ngIf="recrutment.StatusCancel">

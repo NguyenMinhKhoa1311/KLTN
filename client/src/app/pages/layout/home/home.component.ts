@@ -79,6 +79,8 @@ export class HomeComponent implements OnDestroy {
         if(userLogged){
           let userAfterParse = JSON.parse(userLogged) as Candidate;
           if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
+            console.log(userAfterParse);
+            
             this.candidateToRender = userAfterParse;
             this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
             this.store.dispatch(JobActions.getByFieldAtHome({field:this.candidateToRender.Field._id, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
@@ -177,25 +179,25 @@ export class HomeComponent implements OnDestroy {
 
   nextPageByField(): void {
     this.pageByField += 1;
-    this.store.dispatch(JobActions.getByFieldAtHome({field:"66011c19ec4d9c3cc6e74ac2", page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByFieldAtHome({field: this.candidateToRender.Field._id, page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
   }
 
   previousPageByField(): void {
     if (this.pageByField > 0) {
       this.pageByField -= 1;
-      this.store.dispatch(JobActions.getByFieldAtHome({field:"66011c19ec4d9c3cc6e74ac2", page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      this.store.dispatch(JobActions.getByFieldAtHome({field:this.candidateToRender.Field._id, page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
   }
 
   nextPageByCareer(): void {
     this.pageByCareer += 1;
-    this.store.dispatch(JobActions.getByCareerAtHome({career:"660269823564facdc8ccc27e", page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
   }
 
   previousPageByCareer(): void {
     if (this.pageByCareer > 0) {
       this.pageByCareer -= 1;
-      this.store.dispatch(JobActions.getByCareerAtHome({career:"660269823564facdc8ccc27e", page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
     }
   }
 

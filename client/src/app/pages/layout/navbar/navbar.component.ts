@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { Router,NavigationStart,RouterLink } from '@angular/router';
 import { ShareModule } from '../../../shared/shared.module';
 import { Candidate } from '../../../models/candidate.model';
 import { candidateState } from '../../../ngrx/states/candidate.state';
 import { Store } from '@ngrx/store';
-import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
+import * as AuthActions from '../../../ngrx/actions/auth.actions';
+import { AuthState } from '../../../ngrx/states/auth.state';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +16,11 @@ import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.less'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit, OnDestroy{
+
+  subscriptions: Subscription[] = [];
+
+  //variables
   selectedTab!: string; // Thuộc tính để lưu trữ tên của tab hiện đang được chọn
   activeItemIndex = 0;
   isLogin = false;
@@ -22,9 +28,15 @@ export class NavbarComponent implements OnInit{
   //ngrx of candidate
   isChangeState$ = this.store.select('candidate','isChangeState');
 
+
+  //ngrx of auth
+  isLogoutSuccess$ = this.store.select('auth','isLogoutSuccessfull');
+
+  
+
   constructor (
     private router: Router,
-    private store: Store<{ candidate: candidateState }>,
+    private store: Store<{ candidate: candidateState,auth: AuthState }>,
   ) {
     if (this.router.url.includes('/home')) {
       this.activeItemIndex = 0;
@@ -38,20 +50,33 @@ export class NavbarComponent implements OnInit{
       this.activeItemIndex = 4;
     } 
 
-    this.isChangeState$.subscribe((state) => {
-      if(state){
-        let userLogged = sessionStorage.getItem('userLogged');
-        if(userLogged){
-          let userAfterParse = JSON.parse(userLogged);
-          if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
-            console.log('userLogged',userLogged);
-            this.isLogin = true;
-            this.userLogged = userAfterParse;
+    this.subscriptions.push(
+      this.isChangeState$.subscribe((state) => {
+        if(state){
+          let userLogged = sessionStorage.getItem('userLogged');
+          if(userLogged){
+            let userAfterParse = JSON.parse(userLogged);
+            if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
+              console.log('userLogged',userLogged);
+              this.isLogin = true;
+              this.userLogged = userAfterParse;
+            }
           }
         }
-      }
-    });
+      }),
+      this.isLogoutSuccess$.subscribe((state) => {
+        if(state){
+          sessionStorage.removeItem('userLogged');
+          this.isLogin = false;
+          this.userLogged = <Candidate>{};
+          this.store.dispatch(AuthActions.resetState());
+        }
+      })
+    )
 
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   ngOnInit(): void {
@@ -108,6 +133,10 @@ export class NavbarComponent implements OnInit{
       default:
         console.warn('Invalid tab name:', tabName);
     }
+  }
+  
+  logout() {
+    this.store.dispatch(AuthActions.logout());
   }
 
   login(){

@@ -138,6 +138,7 @@ export class ChoiceServiceComponent {
       this.router.navigate(['/recruiterLayout/job-posting']);
     }
     else{
+      servicePackage.Priority = this.selectedItems.length;
       sessionStorage.setItem('servicePackedChoiced', JSON.stringify(servicePackage));
       this.router.navigate(['/recruiterLayout/job-posting']);
     }
