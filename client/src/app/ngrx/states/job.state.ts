@@ -87,7 +87,52 @@ export interface jobState{
     isGetByKeywordAtJobSuccess: boolean;
     getByKeywordAtJobError: string;
     jobsTakenByKeywordAtJob: Job[];
-    
+
+    isGetByTagAtJobLoading: boolean;
+    isGetByTagAtJobSuccess: boolean;
+    getByTagAtJobError: string;
+    jobsTakenByTagAtJob: Job[];
+
+    isGetByTagWithUrgentAtJobLoading: boolean;
+    isGetByTagWithUrgentAtJobSuccess: boolean;
+    getByTagWithUrgentAtJobError: string;
+    jobsTakenByTagWithUrgentAtJob: Job[];
+
+
+    isGetByKeywordWithUrgentAtJobLoading: boolean;
+    isGetByKeywordWithUrgentAtJobSuccess: boolean;
+    getByKeywordWithUrgentAtJobError: string;
+    jobsTakenByKeywordWithUrgentAtJob: Job[];
+
+
+    isGetByFieldNameWithUrgentAtJobLoading: boolean;
+    isGetByFieldNameWithUrgentAtJobSuccess: boolean;
+    getByFieldNameWithUrgentAtJobError: string;
+    jobsTakenByFieldNameWithUrgentAtJob: Job[];
+
+
+    isGetByCareerNameWithUrgentAtJobLoading: boolean;
+    isGetByCareerNameWithUrgentAtJobSuccess: boolean;
+    getByCareerNameWithUrgentAtJobError: string;
+    jobsTakenByCareerNameWithUrgentAtJob: Job[];
+
+    isGetByFieldWithUrgentAtJobLoading: boolean;
+    isGetByFieldWithUrgentAtJobSuccess: boolean;
+    getByFieldWithUrgentAtJobError: string;
+    jobsTakenByFieldWithUrgentAtJob: Job[];
+
+
+    isGetByLocationWithUrgentAtJobLoading: boolean;
+    isGetByLocationWithUrgentAtJobSuccess: boolean;
+    getByLocationWithUrgentAtJobError: string;
+    jobsTakenByLocationWithUrgentAtJob: Job[];
+
+
+    isGetAllAndSortWithUrgentAtJobLoading: boolean;
+    isGetAllAndSortWithUrgentAtJobSuccess: boolean;
+    getAllAndSortWithUrgentAtJobError: string;
+    jobsTakenByAllAndSortWithUrgentAtJob: Job[];
+
 
 
 }

@@ -75,6 +75,7 @@ export class JobEffects {
         )
         )
 
+
     getByFieldNameAtJob$ = createEffect(() =>
         this.actions$.pipe(
             ofType(JobActions.getByFieldNameAtJob),
@@ -108,6 +109,143 @@ export class JobEffects {
         )
         )
         )
+
+    getByTagAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByTagAtJob),
+            exhaustMap(action =>
+                this.jobService.getByTag(action.tag, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map(jobs => {
+                        return JobActions.getByTagAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByTagAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getByTagWithUrgentAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByTagWithUrgentAtJob),
+            exhaustMap(action =>
+                this.jobService.getByTagWithUrgent(action.tag, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                    map(jobs => {
+                        return JobActions.getByTagWithUrgentAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByTagWithUrgentAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getByKeywordWithUrgentAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByKeywordWithUrgentAtJob),
+            exhaustMap(action =>
+                this.jobService.getByKeywordWithUrgent(action.keyword, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                    map(jobs => {
+                        return JobActions.getByKeywordWithUrgentAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByKeywordWithUrgentAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getByLocationWithKeywordAndUrgentAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByLocationdWithKeywordsWithUrgentAtJob),
+            exhaustMap(action =>
+                this.jobService.getByLocationWithUrgent(action.location, action.page, action.limit, action.sortBy, action.sortOrder,action.urgent).pipe(
+                    map(jobs => {
+                        return JobActions.getByLocationdWithKeywordsWithUrgentAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByLocationdWithKeywordsWithUrgentAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getByCareerNameWithUrgentAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByCareerNameWithUrgentAtJob),
+            exhaustMap(action =>
+                this.jobService.getByCareerNameWithUrgent(action.careerName, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                    map(jobs => {
+                        return JobActions.getByCareerNameWithUrgentAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByCareerNameWithUrgentAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+    
+    getByFieldNameWithUrgentAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByFieldNameWithUrgentAtJob),
+            exhaustMap(action =>
+                this.jobService.getByFieldNameWithUrgent(action.fieldName, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                    map(jobs => {
+                        return JobActions.getByFieldNameWithUrgentAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByFieldNameWithUrgentAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getByFieldWithUrgentAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByFieldWithUrgentAtJob),
+            exhaustMap(action =>
+                this.jobService.getByFieldWithUrgent(action.field, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                    map(jobs => {
+                        return JobActions.getByFieldWithUrgentAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByFieldWithUrgentAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
+    getAllAndSortWithUrgentAtJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getAllAndSortWithUrgentAtJob),
+            exhaustMap(action =>
+                this.jobService.getAllAndSortWithUrgent(action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                    map(jobs => {
+                        return JobActions.getAllAndSortWithUrgentAtJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getAllAndSortWithUrgentAtJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
     createJobAtJob$ = createEffect(() =>
         this.actions$.pipe(
             ofType(JobActions.createJobAtJob),

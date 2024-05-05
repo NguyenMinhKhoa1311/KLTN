@@ -273,6 +273,9 @@ export const updateRecruitmentAtJobDetailSuccess = createAction(
     props<{ job: Job }>()
 );
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByKeywordAtJob = createAction(
     '[Job] Get by Keyword At Job',
     props<{ keyword: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
@@ -290,4 +293,138 @@ export const getByKeywordAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const resetState = createAction(
     '[Job] Reset State'
+);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByTagAtJob = createAction(
+    '[Job] Get By Tag At Job',
+    props<{ tag: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+)
+export const getByTagAtJobSuccess = createAction(
+    '[Job] Get By Tag At Job Success',
+    props<{ jobs: Job[] }>()
+)
+export const getByTagAtJobFailure = createAction(
+    '[Job] Get By Tag At Job Failure',
+    props<{ error: string }>()
+)
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByCareerNameWithUrgentAtJob = createAction(
+    '[Job] Get By Career Name With Urgent At Job',
+    props<{ careerName: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+)
+export const getByCareerNameWithUrgentAtJobSuccess = createAction(
+    '[Job] Get By Career Name With Urgent At Job Success',
+    props<{ jobs: Job[] }>()
+)
+export const getByCareerNameWithUrgentAtJobFailure = createAction(
+    '[Job] Get By Career Name With Urgent At Job Failure',
+    props<{ error: string }>()
+)
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByFieldWithUrgentAtJob = createAction(
+    '[Job] Get By Field With Urgent At Job',
+    props<{ field: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+)
+export const getByFieldWithUrgentAtJobSuccess = createAction(
+    '[Job] Get By Field With Urgent At Job Success',
+    props<{ jobs: Job[] }>()
+)
+export const getByFieldWithUrgentAtJobFailure = createAction(
+    '[Job] Get By Field With Urgent At Job Failure',
+    props<{ error: string }>()
+)
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByFieldNameWithUrgentAtJob = createAction(
+    '[Job] Get By Field Name With Urgent At Job',
+    props<{ fieldName: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+)
+export const getByFieldNameWithUrgentAtJobSuccess = createAction(
+    '[Job] Get By Field Name With Urgent At Job Success',
+    props<{ jobs: Job[] }>()
+)
+export const getByFieldNameWithUrgentAtJobFailure = createAction(
+    '[Job] Get By Field Name With Urgent At Job Failure',
+    props<{ error: string }>()
+)
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByLocationdWithKeywordsWithUrgentAtJob = createAction(
+    '[Job] Get By Location With Keywords With Urgent At Job',
+    props<{ location: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+)
+export const getByLocationdWithKeywordsWithUrgentAtJobSuccess = createAction(
+    '[Job] Get By Location With Keywords With Urgent At Job Success',
+    props<{ jobs: Job[] }>()
+)
+export const getByLocationdWithKeywordsWithUrgentAtJobFailure = createAction(
+    '[Job] Get By Location With Keywords With Urgent At Job Failure',
+    props<{ error: string }>()
+)
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByKeywordWithUrgentAtJob = createAction(
+    '[Job] Get by Keyword With Urgent At Job',
+    props<{ keyword: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+)
+export const getByKeywordWithUrgentAtJobSuccess = createAction(
+    '[Job] Get by Keyword With Urgent At Job Success',
+    props<{ jobs: Job[] }>()
+)
+export const getByKeywordWithUrgentAtJobFailure = createAction(
+    '[Job] Get by Keyword With Urgent At Job Failure',
+    props<{ error: string }>()
+)
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByTagWithUrgentAtJob = createAction(
+    '[Job] Get By Tag With Urgent At Job',
+    props<{ tag: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+)
+export const getByTagWithUrgentAtJobSuccess = createAction(
+    '[Job] Get By Tag With Urgent At Job Success',
+    props<{ jobs: Job[] }>()
+)
+export const getByTagWithUrgentAtJobFailure = createAction(
+    '[Job] Get By Tag With Urgent At Job Failure',
+    props<{ error: string }>()
+)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllAndSortWithUrgentAtJob = createAction(
+    '[Job] Get All And Sort With Urgent At Job',
+    props<{ page: number; limit: number; sortBy: string; sortOrder: string, urgent: boolean }>()
+);
+export const getAllAndSortWithUrgentAtJobSuccess = createAction(
+    '[Job] Get All And Sort With Urgent At Job Success',
+    props<{ jobs: Job[] }>()
+);
+export const getAllAndSortWithUrgentAtJobFailure = createAction(
+    '[Job] Get All And Sort With Urgent At Job Failure',
+    props<{ error: string }>()
 );

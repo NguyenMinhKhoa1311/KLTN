@@ -50,6 +50,13 @@ export class JobComponent implements OnDestroy{
   isGetByFieldSuccess: boolean = false;
   isGetByFieldNameSuccess: boolean = false;
   isGetByLocationSuccess: boolean = false;
+  isGetByKeywordWithUrgentSuccess: boolean = false;
+  isGetByLocationWithUrgentSuccess: boolean = false;
+  isGetByFieldWithUrgentSuccess: boolean = false;
+  isGetByFieldNameWithUrgentSuccess: boolean = false;
+  isGetByCareerWithUrgentSuccess: boolean = false;
+  isGetAllAndSortWithUrgentSuccess: boolean = false;
+
 
   page: number = 0;
   fieldId: string = "";
@@ -74,6 +81,19 @@ export class JobComponent implements OnDestroy{
   jobTakenByLocation$ = this.store.select('job', 'jobsTakenByLocationAtJob');
   isGetByKeywordSuccess$ = this.store.select('job', 'isGetByKeywordAtJobSuccess');
   jobTakenByKeyword$ = this.store.select('job', 'jobsTakenByKeywordAtJob');
+  isGetByKeywordWithUrgentSuccess$ = this.store.select('job', 'isGetByKeywordWithUrgentAtJobSuccess');
+  jobTakenByKeywordWithUrgent$ = this.store.select('job', 'jobsTakenByKeywordWithUrgentAtJob');
+  isGetByLocationWithUrgentSuccess$ = this.store.select('job', 'isGetByLocationWithUrgentAtJobSuccess');
+  jobTakenByLocationWithUrgent$ = this.store.select('job', 'jobsTakenByLocationWithUrgentAtJob');
+  isGetByFieldWithUrgentSuccess$ = this.store.select('job', 'isGetByFieldWithUrgentAtJobSuccess');
+  jobTakenByFieldWithUrgent$ = this.store.select('job', 'jobsTakenByFieldWithUrgentAtJob');
+  isGetByFieldNameWithUrgentSuccess$ = this.store.select('job', 'isGetByFieldNameWithUrgentAtJobSuccess');
+  jobTakenByFieldNameWithUrgent$ = this.store.select('job', 'jobsTakenByFieldNameWithUrgentAtJob');
+  isGetByCareerWithUrgentSuccess$ = this.store.select('job', 'isGetByCareerNameWithUrgentAtJobSuccess');
+  jobTakenByCareerNameWithUrgent$ = this.store.select('job', 'jobsTakenByCareerNameWithUrgentAtJob');
+  isGetAllAndSortWithUrgentSuccess$ = this.store.select('job', 'isGetAllAndSortWithUrgentAtJobSuccess');
+  jobsTakenByAllAndSortWithUrgent$ = this.store.select('job', 'jobsTakenByAllAndSortWithUrgentAtJob');
+
 
   // ngrx of field
   fieldNoLimitAtJob$ = this.store.select('field','fieldNoLimitAtJob');
@@ -281,6 +301,108 @@ export class JobComponent implements OnDestroy{
           }
           this.openSnackBar("Không có công việc nào");
         }
+      }),
+      //subscribe to ngrx of isGetByKeywordWithUrgentAtJobSuccess
+      this.isGetByKeywordWithUrgentSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByKeywordWithUrgentSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of getByKeywordWithUrgentAtJob
+      this.jobTakenByKeywordWithUrgent$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetByKeyword&&this.isGetByKeywordWithUrgentSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          this.openSnackBar("Không có công việc nào");
+        }
+      }),
+      //subscribe to ngrx of isGetByLocationWithUrgentAtJobSuccess
+      this.isGetByLocationWithUrgentSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByLocationWithUrgentSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of getByLocationWithUrgentAtJob
+      this.jobTakenByLocationWithUrgent$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetByLocation&&this.isGetByLocationWithUrgentSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          this.openSnackBar("Không có công việc nào");
+        }
+      }),
+      //subscribe to ngrx of isGetByFieldWithUrgentAtJobSuccess
+      this.isGetByFieldWithUrgentSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByFieldWithUrgentSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of getByFieldWithUrgentAtJob
+      this.jobTakenByFieldWithUrgent$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetByField&&this.isGetByFieldWithUrgentSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          this.openSnackBar("Không có công việc nào");
+        }
+      }),
+      //subscribe to ngrx of isGetByFieldNameWithUrgentAtJobSuccess
+      this.isGetByFieldNameWithUrgentSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByFieldNameWithUrgentSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of getByFieldNameWithUrgentAtJob
+      this.jobTakenByFieldNameWithUrgent$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetByFieldName&&this.isGetByFieldNameWithUrgentSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          this.openSnackBar("Không có công việc nào");
+        }
+      }),
+      //subscribe to ngrx of isGetByCareerNameWithUrgentAtJobSuccess
+      this.isGetByCareerWithUrgentSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByCareerWithUrgentSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of getByCareerNameWithUrgentAtJob
+      this.jobTakenByCareerNameWithUrgent$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetByCareer&&this.isGetByCareerWithUrgentSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          this.openSnackBar("Không có công việc nào");
+        }
+      }),
+      //subscribe to ngrx of isGetAllAndSortWithUrgentAtJobSuccess
+      this.isGetAllAndSortWithUrgentSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetAllAndSortWithUrgentSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of jobsTakenByAllAndSortWithUrgentAtJob
+      this.jobsTakenByAllAndSortWithUrgent$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetAll&&this.isGetAllAndSortWithUrgentSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          this.openSnackBar("Không có công việc nào");
+        }
       })
     )
   }
@@ -346,7 +468,12 @@ export class JobComponent implements OnDestroy{
       if(this.page>0){
         this.page = 0;
       }
+      if(this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+      else{
       this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
       this.store.dispatch(CareerActions.getByFieldNameAtJob({fieldName: this.fieldValue}));
     }else{
       this.isGetAll = true;
@@ -359,7 +486,11 @@ export class JobComponent implements OnDestroy{
         this.page = 0;
       }
       this.store.dispatch(CareerActions.getAllAtJobs());
+      if(this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }else{
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
     }
   }
 
@@ -376,7 +507,12 @@ export class JobComponent implements OnDestroy{
       if(this.page>0){
         this.page = 0;
       }
-      this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      if(this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByCareerNameWithUrgentAtJob({careerName: this.careerValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+      else{
+        this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
     }else{
       this.isGetAll = true;
       this.isGetByField = false;
@@ -387,7 +523,12 @@ export class JobComponent implements OnDestroy{
       if(this.page>0){
         this.page = 0;
       }
-      this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      if(this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }else{
+        this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
+
 
     }
   }
@@ -405,7 +546,11 @@ export class JobComponent implements OnDestroy{
       if(this.page>0){
         this.page = 0;
       }
-      this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      if(this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByLocationdWithKeywordsWithUrgentAtJob({location: this.locationValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }else{
+        this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
     }else{
       if(this.page>0){
         this.page = 0;
@@ -416,7 +561,11 @@ export class JobComponent implements OnDestroy{
       this.isGetByCareer = false;
       this.isGetByLocation = false;
       this.isGetByKeyword = false;
-      this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      if(this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }else{
+        this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
     }
   }
 
@@ -430,41 +579,80 @@ export class JobComponent implements OnDestroy{
     if(this.page>0){
       this.page = 0;
     }
-    this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    if(this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getByKeywordWithUrgentAtJob({keyword: this.searchForm.value.Keyword??"", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+    }else{
+      this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    }
   }
 
   nextJobs(){
     this.page++;
-    if(this.isGetByCareer){
+    if(this.isGetByCareer && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-    }else if(this.isGetByField){
+    }else if(this.isGetByField && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-    } else if(this.isGetByLocation){
+    } else if(this.isGetByLocation && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-    }else if(this.isGetByKeyword){
+    }else if(this.isGetByKeyword && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-    }else if(this.isGetAll){
+    }else if(this.isGetAll && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-    } else if(this.isGetByFieldName){
+    } else if(this.isGetByFieldName && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    } else if(this.isGetByCareer && this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getByCareerNameWithUrgentAtJob({careerName: this.careerValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+    } else if(this.isGetByField && this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getByFieldWithUrgentAtJob({field: this.fieldId, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+    } else if(this.isGetByLocation && this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getByLocationdWithKeywordsWithUrgentAtJob({location: this.locationValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+    } else if(this.isGetByKeyword && this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getByKeywordWithUrgentAtJob({keyword: this.searchForm.value.Keyword??"", page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+    } else if(this.isGetAll && this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+    } else if(this.isGetByFieldName && this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
     }
 
   }
   previousJobs(){
     if(this.page > 0){
       this.page--;
-      if(this.isGetByCareer){
+      if(this.isGetByCareer && !this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-      }else if(this.isGetByField){
+      }
+      else if(this.isGetByField && !this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-      } else if(this.isGetByLocation){
+      } 
+      else if(this.isGetByLocation && !this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-      } else if(this.isGetByKeyword){
+      } 
+      else if(this.isGetByKeyword && !this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-      }else if(this.isGetAll){
+      }
+      else if(this.isGetAll && !this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-      }else if(this.isGetByFieldName){
+      }
+      else if(this.isGetByFieldName && !this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
+      else if(this.isGetByCareer && this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByCareerNameWithUrgentAtJob({careerName: this.careerValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+      else if(this.isGetByField && this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByFieldWithUrgentAtJob({field: this.fieldId, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      } 
+      else if(this.isGetByLocation && this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByLocationdWithKeywordsWithUrgentAtJob({location: this.locationValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      } 
+      else if(this.isGetByKeyword && this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByKeywordWithUrgentAtJob({keyword: this.searchForm.value.Keyword??"", page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      } 
+      else if(this.isGetAll && this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      } 
+      else if(this.isGetByFieldName && this.UrgentForm.value.checked){
+        this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
       }
     }
 
@@ -552,9 +740,56 @@ export class JobComponent implements OnDestroy{
     console.log("Giá trị đã chọn là: ", _id);
   }
 
-  
-  testForm = new FormGroup({
-    testValue2: new FormControl(false),
+  checked(){
+    if(!this.UrgentForm.value.checked){
+      this.UrgentForm.setControl('checked', new FormControl(true));
+      if(this.isGetAll){
+        this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+      else if(this.isGetByField){
+        this.store.dispatch(JobActions.getByFieldWithUrgentAtJob({field: this.fieldId, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+      else if(this.isGetByFieldName){
+        this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+      else if(this.isGetByCareer){
+        this.store.dispatch(JobActions.getByCareerNameWithUrgentAtJob({careerName: this.careerValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+      else if(this.isGetByLocation){
+        this.store.dispatch(JobActions.getByLocationdWithKeywordsWithUrgentAtJob({location: this.locationValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+      else if(this.isGetByKeyword){
+        this.store.dispatch(JobActions.getByKeywordWithUrgentAtJob({keyword: this.searchForm.value.Keyword??"", page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc", urgent: true}));
+      }
+    }
+    else{
+      this.UrgentForm.setControl('checked', new FormControl(false));
+      if(this.isGetAll){
+        this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
+      else if(this.isGetByField){
+        this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
+      else if(this.isGetByFieldName){
+        this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
+      else if(this.isGetByCareer){
+        this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
+      else if(this.isGetByLocation){
+        this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
+      else if(this.isGetByKeyword){
+        this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: this.page, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      }
+      
+      
+    }
+    
+  }
+
+  UrgentForm = new FormGroup({
+    checked: new FormControl(false),
   });
 
 

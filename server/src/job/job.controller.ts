@@ -56,6 +56,22 @@ export class JobController {
       throw err
     }
   }
+  @Get('getAllAndSortWithUrgent')
+  async getAllAndSortWithUrgent(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('urgent') urgent: boolean
+  ) {
+    try{
+      const job = await this.jobService.getAllAndSortWithUrgent(page, limit, sortBy, sortOrder,urgent);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
   @Get('getByField')
   async getByField(
     @Query('page') page: number,
@@ -66,6 +82,25 @@ export class JobController {
     ) {
     try{
       const job = await this.jobService.getByField(page, limit, sortBy, sortOrder,field);
+      
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
+  @Get('getByFieldWithUrgent')
+  async getByFieldWithUrgent(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('field') field: string,
+    @Query('urgent') urgent: boolean
+    ) {
+    try{
+      const job = await this.jobService.getByFieldWithUrgent(page, limit, sortBy, sortOrder,field,urgent);
       
       return job
     }
@@ -183,6 +218,27 @@ export class JobController {
     }
   }
 
+  @Get('getByFieldNameWithUrgent')
+  async getByFieldNameWithUrgent(
+    @Query('fieldName') fieldName: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('urgent') urgent: boolean
+  ) {
+    try{
+      const field = await this.fieldService.getByFieldName(fieldName)
+      log(field)
+      const job = await this.jobService.getByFieldWithUrgent(page, limit, sortBy, sortOrder,  field._id.toString(),urgent)
+
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
   @Get('getByCareerName')
   async getByCareerName(
   @Query('careerName') careerName: string,
@@ -194,6 +250,26 @@ export class JobController {
       const career = await this.careerService.getByCareerName(careerName)
       log(career)
       const job = await this.jobService.getByCareer(page, limit, sortBy, sortOrder, career._id.toString())
+
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+  @Get('getByCareerNameWithUrgent')
+  async getByCareerNameWithUrgent(
+  @Query('careerName') careerName: string,
+  @Query('page') page: number,
+  @Query('limit') limit: number,
+  @Query('sortBy') sortBy = 'Priority',
+  @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+  @Query('urgent') urgent: boolean
+){
+    try{
+      const career = await this.careerService.getByCareerName(careerName)
+      log(career)
+      const job = await this.jobService.getByCareerWithUrgent(page, limit, sortBy, sortOrder, career._id.toString(),urgent)
 
       return job
     }
@@ -249,6 +325,23 @@ export class JobController {
       throw err
     }
   }
+  @Get('ByKeywordWithUrgent')
+  async getByKeywordWithUrgent(
+    @Query('keyword') keyword: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('urgent') urgent: boolean
+  ){
+    try{
+      const job = await this.jobService.getByKeywordWithUrgent(keyword, page, limit, sortBy, sortOrder,urgent)
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
 
   @Get('getByTagsWithKeyword')
   async getByTagsWithKeyword(
@@ -266,6 +359,25 @@ export class JobController {
     }
   }
 
+  @Get('getByTagsWithKeywordAndUrgent')
+  async getByTagsWithKeywordAndUrgent(
+    @Query('keyword') keyword: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('urgent') urgent: boolean
+  ){
+    try{
+      const job = await this.jobService.getByTagsWithKeywordUrgent(keyword, page, limit, sortBy, sortOrder,urgent)
+      return job
+    }
+    catch(err){
+      return []
+    }
+  }
+  
+
   @Get('getByLocationdWithKeyword')
   async getByLocationdWithKeyword(
     @Query('keyword') keyword: string,
@@ -275,6 +387,23 @@ export class JobController {
     @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
     try{
       const job = await this.jobService.getByLocationWithKeyWord(keyword, page, limit, sortBy, sortOrder)
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+  @Get('getByLocationdWithKeywordAndUrgent')
+  async getByLocationdWithKeywordAndUrgent(
+    @Query('keyword') keyword: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'Priority',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+    @Query('urgent') urgent: boolean
+  ){
+    try{
+      const job = await this.jobService.getByLocationWithKeyWordAndUrgent(keyword, page, limit, sortBy, sortOrder,urgent)
       return job
     }
     catch(err){
