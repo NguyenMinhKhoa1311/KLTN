@@ -45,11 +45,9 @@ export class JobController {
   async getAllAndSort(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'createdAt',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
   ) {
     try{
-      const job = await this.jobService.getAllAndSort(page, limit, sortBy, sortOrder);
+      const job = await this.jobService.getAllAndSort(page, limit);
       return job
     }
     catch(err){
@@ -60,12 +58,10 @@ export class JobController {
   async getAllAndSortWithUrgent(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'createdAt',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     @Query('urgent') urgent: boolean
   ) {
     try{
-      const job = await this.jobService.getAllAndSortWithUrgent(page, limit, sortBy, sortOrder,urgent);
+      const job = await this.jobService.getAllAndSortWithUrgent(page, limit, urgent);
       return job
     }
     catch(err){
@@ -76,12 +72,11 @@ export class JobController {
   async getByField(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'createdAt',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+
     @Query('field') field: string
     ) {
     try{
-      const job = await this.jobService.getByField(page, limit, sortBy, sortOrder,field);
+      const job = await this.jobService.getByField(page, limit, field);
       
       return job
     }
@@ -94,13 +89,11 @@ export class JobController {
   async getByFieldWithUrgent(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'createdAt',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     @Query('field') field: string,
     @Query('urgent') urgent: boolean
     ) {
     try{
-      const job = await this.jobService.getByFieldWithUrgent(page, limit, sortBy, sortOrder,field,urgent);
+      const job = await this.jobService.getByFieldWithUrgent(page, limit,field,urgent);
       
       return job
     }
@@ -113,12 +106,10 @@ export class JobController {
   async getByCareer(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'createdAt',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     @Query('career') career: string
     ) {
     try{
-      const job = await this.jobService.getByCareer(page, limit, sortBy, sortOrder, career);
+      const job = await this.jobService.getByCareer(page, limit, career);
       return job
     }
     catch(err){
@@ -130,12 +121,10 @@ export class JobController {
   async getByPriority(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     @Query('priority') priority: number
     ) {
     try{
-      const job = await this.jobService.getByPriority(page, limit, sortBy, sortOrder,priority);
+      const job = await this.jobService.getByPriority(page, limit, priority);
       return job
     }
     catch(err){
@@ -147,11 +136,9 @@ export class JobController {
   async getByHotJob(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     ) {
     try{
-      const job = await this.jobService.getByHotJob(page, limit, sortBy, sortOrder);
+      const job = await this.jobService.getByHotJob(page, limit);
       return job
     }
     catch(err){
@@ -203,13 +190,11 @@ export class JobController {
   async getByFieldName(
     @Query('fieldName') fieldName: string,
     @Query('page') page: number,
-    @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    @Query('limit') limit: number) {
     try{
       const field = await this.fieldService.getByFieldName(fieldName)
       log(field)
-      const job = await this.jobService.getByField(page, limit, sortBy, sortOrder,  field._id.toString())
+      const job = await this.jobService.getByField(page, limit, field._id.toString())
 
       return job
     }
@@ -223,14 +208,12 @@ export class JobController {
     @Query('fieldName') fieldName: string,
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     @Query('urgent') urgent: boolean
   ) {
     try{
       const field = await this.fieldService.getByFieldName(fieldName)
       log(field)
-      const job = await this.jobService.getByFieldWithUrgent(page, limit, sortBy, sortOrder,  field._id.toString(),urgent)
+      const job = await this.jobService.getByFieldWithUrgent(page, limit, field._id.toString(),urgent)
 
       return job
     }
@@ -243,13 +226,11 @@ export class JobController {
   async getByCareerName(
   @Query('careerName') careerName: string,
   @Query('page') page: number,
-  @Query('limit') limit: number,
-  @Query('sortBy') sortBy = 'Priority',
-  @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+  @Query('limit') limit: number) {
     try{
       const career = await this.careerService.getByCareerName(careerName)
       log(career)
-      const job = await this.jobService.getByCareer(page, limit, sortBy, sortOrder, career._id.toString())
+      const job = await this.jobService.getByCareer(page, limit, career._id.toString())
 
       return job
     }
@@ -262,14 +243,12 @@ export class JobController {
   @Query('careerName') careerName: string,
   @Query('page') page: number,
   @Query('limit') limit: number,
-  @Query('sortBy') sortBy = 'Priority',
-  @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
   @Query('urgent') urgent: boolean
 ){
     try{
       const career = await this.careerService.getByCareerName(careerName)
       log(career)
-      const job = await this.jobService.getByCareerWithUrgent(page, limit, sortBy, sortOrder, career._id.toString(),urgent)
+      const job = await this.jobService.getByCareerWithUrgent(page, limit, career._id.toString(),urgent)
 
       return job
     }
@@ -282,11 +261,9 @@ export class JobController {
   async getByCompany(
     @Query('companyId') companyId: string,
     @Query('page') page: number,
-    @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    @Query('limit') limit: number) {
     try{
-      const job = await this.jobService.getByCompany(companyId, page, limit, sortBy, sortOrder)
+      const job = await this.jobService.getByCompany(companyId, page, limit)
       return job
     }
     catch(err){
@@ -298,11 +275,9 @@ export class JobController {
   async getByNameWithKeyword(
     @Query('keyword') keyword: string,
     @Query('page') page: number,
-    @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    @Query('limit') limit: number) {
     try{
-      const job = await this.jobService.getByNameWithKeyword(keyword, page, limit, sortBy, sortOrder)
+      const job = await this.jobService.getByNameWithKeyword(keyword, page, limit)
       return job
     }
     catch(err){
@@ -314,11 +289,9 @@ export class JobController {
   async getByKeyword(
     @Query('keyword') keyword: string,
     @Query('page') page: number,
-    @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    @Query('limit') limit: number) {
     try{
-      const job = await this.jobService.getByKeyword(keyword, page, limit, sortBy, sortOrder)
+      const job = await this.jobService.getByKeyword(keyword, page, limit)
       return job
     }
     catch(err){
@@ -330,12 +303,10 @@ export class JobController {
     @Query('keyword') keyword: string,
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     @Query('urgent') urgent: boolean
   ){
     try{
-      const job = await this.jobService.getByKeywordWithUrgent(keyword, page, limit, sortBy, sortOrder,urgent)
+      const job = await this.jobService.getByKeywordWithUrgent(keyword, page, limit, urgent)
       return job
     }
     catch(err){
@@ -347,11 +318,9 @@ export class JobController {
   async getByTagsWithKeyword(
     @Query('keyword') keyword: string,
     @Query('page') page: number,
-    @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    @Query('limit') limit: number,) {
     try{
-      const job = await this.jobService.getByTagsWithKeyword(keyword, page, limit, sortBy, sortOrder)
+      const job = await this.jobService.getByTagsWithKeyword(keyword, page, limit)
       return job
     }
     catch(err){
@@ -364,12 +333,10 @@ export class JobController {
     @Query('keyword') keyword: string,
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     @Query('urgent') urgent: boolean
   ){
     try{
-      const job = await this.jobService.getByTagsWithKeywordUrgent(keyword, page, limit, sortBy, sortOrder,urgent)
+      const job = await this.jobService.getByTagsWithKeywordUrgent(keyword, page, limit, urgent)
       return job
     }
     catch(err){
@@ -382,11 +349,9 @@ export class JobController {
   async getByLocationdWithKeyword(
     @Query('keyword') keyword: string,
     @Query('page') page: number,
-    @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    @Query('limit') limit: number) {
     try{
-      const job = await this.jobService.getByLocationWithKeyWord(keyword, page, limit, sortBy, sortOrder)
+      const job = await this.jobService.getByLocationWithKeyWord(keyword, page, limit)
       return job
     }
     catch(err){
@@ -398,12 +363,10 @@ export class JobController {
     @Query('keyword') keyword: string,
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
     @Query('urgent') urgent: boolean
   ){
     try{
-      const job = await this.jobService.getByLocationWithKeyWordAndUrgent(keyword, page, limit, sortBy, sortOrder,urgent)
+      const job = await this.jobService.getByLocationWithKeyWordAndUrgent(keyword, page, limit, urgent)
       return job
     }
     catch(err){
@@ -415,11 +378,9 @@ export class JobController {
   async getByRecruiter(
     @Query('id') id: string,
     @Query('page') page: number,
-    @Query('limit') limit: number,
-    @Query('sortBy') sortBy = 'Priority',
-    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc') {
+    @Query('limit') limit: number,) {
     try{
-      const job = await this.jobService.getByRecruiter(id, page, limit, sortBy, sortOrder);
+      const job = await this.jobService.getByRecruiter(id, page, limit);
       return job
     }
     catch(err){
