@@ -53,6 +53,7 @@ export class HomeComponent implements OnDestroy {
 
   //test
   isGetByFieldAtHomeLoading$ = this.store.select('job', 'isGetByFieldAtHomeLoading');
+  isGetFieldAtHomeLoading$ = this.store.select('field', 'isGetFieldAtHomeLoading');
 
 //variables
   JobGetByHotJob: Job[] = [];
@@ -203,6 +204,7 @@ export class HomeComponent implements OnDestroy {
   nextPageOfField(): void {
     this.pageOfField += 1;
     this.store.dispatch(FieldActions.getFieldAtHome({page: this.pageOfField, limit: 5}));
+    
   }
 
   previousPageOfField(): void {
