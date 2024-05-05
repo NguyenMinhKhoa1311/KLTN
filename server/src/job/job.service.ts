@@ -72,6 +72,27 @@ constructor(
       throw new HttpException(error.message, error.status);
     }
   }
+  async getAllAndSortWithUrgent(page: number, limit: number ,sortBy ='createAt' , sortOrder: 'asc'|'desc' = 'desc',urgent: boolean){
+    try{
+      const sortOptions = { [sortBy]: sortOrder,["createAt"] : sortOrder  };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({Urgent: urgent})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name ', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name Priority Hot ColorTitle Urgent', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .sort({"Priority": -1, "createdAt": -1})
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
+  }
 
   async getByCareer(page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc', careerId: string){
     try{
@@ -94,12 +115,54 @@ constructor(
       throw new HttpException(error.message, error.status);
     }
   }
+  async getByCareerWithUrgent(page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc', careerId: string,urgent: boolean){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({Career: careerId,Urgent:urgent})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name ', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .sort({"Priority": -1, "createdAt": -1})
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
+  }
 
   async getByField(page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc', fieldId: string){
     try{
       const sortOptions = { [sortBy]: sortOrder };
       const skip = page * limit;
       const jobs = await this.JobModel.find({Field: fieldId})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .sort({"Priority": -1, "createdAt": -1})
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      throw new HttpException(error.message, error.status);
+    }
+  }
+  async getByFieldWithUrgent(page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc', fieldId: string,urgent: boolean){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({Field: fieldId,Urgent: urgent})
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -277,6 +340,27 @@ constructor(
       return [];
     }
   }
+  async getByKeywordWithUrgent(keyword: string, page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc',urgent: boolean){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({ $or: [{"Name": {"$regex": keyword, "$options": "i"}},{"Tags": {"$regex": keyword, "$options": "i"}},{"Location": {"$regex": keyword, "$options": "i"}}], Urgent: urgent})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .sort({"Priority": -1, "createdAt": -1})
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      return [];
+    }
+  }
 
 
   async getByTagsWithKeyword(keyword: string, page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc'){
@@ -300,12 +384,54 @@ constructor(
       return [];
     }
   }
+  async getByTagsWithKeywordUrgent(keyword: string, page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc',urgent){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({"Tags": {"$regex": keyword, "$options": "i"}, Urgent: urgent})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .sort({"Priority": -1, "createdAt": -1})
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      return [];
+    }
+  }
 
   async getByLocationWithKeyWord(keyword: string, page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc'){
     try{
       const sortOptions = { [sortBy]: sortOrder };
       const skip = page * limit;
       const jobs = await this.JobModel.find({"Location": {"$regex": keyword, "$options": "i"}})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .sort({"Priority": -1, "createdAt": -1})
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+    }
+    catch(error){
+      return [];
+    }
+  }
+  async getByLocationWithKeyWordAndUrgent(keyword: string, page: number, limit: number ,sortBy ='Priority' , sortOrder: 'asc'|'desc' = 'desc',urgent: boolean){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({"Location": {"$regex": keyword, "$options": "i"},Urgent: urgent})
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
