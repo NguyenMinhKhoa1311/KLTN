@@ -15,7 +15,7 @@ export class JobEffects {
     this.actions$.pipe(
         ofType(JobActions.getByFieldAtHome),
         exhaustMap(action =>
-            this.jobService.getByField(action.field, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+            this.jobService.getByField(action.field, action.page, action.limit).pipe(
                 map(jobs =>{
                     return JobActions.getByFieldAtHomeSuccess({jobs})
                 }),
@@ -30,7 +30,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByCareerAtHome),
             exhaustMap(action =>
-                this.jobService.getByCareer(action.career, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByCareer(action.career, action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getByCareerAtHomeSuccess({jobs})
                     }),
@@ -46,7 +46,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByHotJobAtHome),
             exhaustMap(action =>
-                this.jobService.getByHotJob( action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByHotJob( action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getByHotJobAtHomeSuccess({jobs})
                     }),
@@ -62,7 +62,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getAllAndSortAtJob),
             exhaustMap(action =>
-                this.jobService.getAllAndSort(action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getAllAndSort(action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getAllAndSortAtJobSuccess({jobs})
                     }),
@@ -80,7 +80,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByFieldNameAtJob),
             exhaustMap(action =>
-                this.jobService.getByFieldName(action.fieldName, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByFieldName(action.fieldName, action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getByFieldNameAtJobSuccess({jobs})
                     }),
@@ -97,7 +97,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByCareerNameAtJob),
             exhaustMap(action =>
-                this.jobService.getByCareerName(action.careerName, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByCareerName(action.careerName, action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getByCareerNameAtJobSuccess({jobs})
                     }),
@@ -114,7 +114,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByTagAtJob),
             exhaustMap(action =>
-                this.jobService.getByTag(action.tag, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByTag(action.tag, action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getByTagAtJobSuccess({jobs})
                     }),
@@ -131,7 +131,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByTagWithUrgentAtJob),
             exhaustMap(action =>
-                this.jobService.getByTagWithUrgent(action.tag, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                this.jobService.getByTagWithUrgent(action.tag, action.page, action.limit, action.urgent).pipe(
                     map(jobs => {
                         return JobActions.getByTagWithUrgentAtJobSuccess({jobs})
                     }),
@@ -148,7 +148,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByKeywordWithUrgentAtJob),
             exhaustMap(action =>
-                this.jobService.getByKeywordWithUrgent(action.keyword, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                this.jobService.getByKeywordWithUrgent(action.keyword, action.page, action.limit, action.urgent).pipe(
                     map(jobs => {
                         return JobActions.getByKeywordWithUrgentAtJobSuccess({jobs})
                     }),
@@ -165,7 +165,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByLocationdWithKeywordsWithUrgentAtJob),
             exhaustMap(action =>
-                this.jobService.getByLocationWithUrgent(action.location, action.page, action.limit, action.sortBy, action.sortOrder,action.urgent).pipe(
+                this.jobService.getByLocationWithUrgent(action.location, action.page, action.limit,action.urgent).pipe(
                     map(jobs => {
                         return JobActions.getByLocationdWithKeywordsWithUrgentAtJobSuccess({jobs})
                     }),
@@ -182,7 +182,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByCareerNameWithUrgentAtJob),
             exhaustMap(action =>
-                this.jobService.getByCareerNameWithUrgent(action.careerName, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                this.jobService.getByCareerNameWithUrgent(action.careerName, action.page, action.limit, action.urgent).pipe(
                     map(jobs => {
                         return JobActions.getByCareerNameWithUrgentAtJobSuccess({jobs})
                     }),
@@ -199,7 +199,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByFieldNameWithUrgentAtJob),
             exhaustMap(action =>
-                this.jobService.getByFieldNameWithUrgent(action.fieldName, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                this.jobService.getByFieldNameWithUrgent(action.fieldName, action.page, action.limit, action.urgent).pipe(
                     map(jobs => {
                         return JobActions.getByFieldNameWithUrgentAtJobSuccess({jobs})
                     }),
@@ -216,7 +216,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByFieldWithUrgentAtJob),
             exhaustMap(action =>
-                this.jobService.getByFieldWithUrgent(action.field, action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                this.jobService.getByFieldWithUrgent(action.field, action.page, action.limit, action.urgent).pipe(
                     map(jobs => {
                         return JobActions.getByFieldWithUrgentAtJobSuccess({jobs})
                     }),
@@ -233,7 +233,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getAllAndSortWithUrgentAtJob),
             exhaustMap(action =>
-                this.jobService.getAllAndSortWithUrgent(action.page, action.limit, action.sortBy, action.sortOrder, action.urgent).pipe(
+                this.jobService.getAllAndSortWithUrgent(action.page, action.limit,  action.urgent).pipe(
                     map(jobs => {
                         return JobActions.getAllAndSortWithUrgentAtJobSuccess({jobs})
                     }),
@@ -284,7 +284,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getJobByRecruiterAtJobDetail),
             exhaustMap(action =>
-                this.jobService.getByRecruiter(action.recruiter,action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByRecruiter(action.recruiter,action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getJobByRecruiterAtJobDetailSuccess({jobs: jobs})
                     }),
@@ -300,7 +300,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByLocationdWithKeywordsAtJob),
             exhaustMap(action =>
-                this.jobService.getByLocation(action.location, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByLocation(action.location, action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getByLocationdWithKeywordsAtJobSuccess({jobs})
                     }),
@@ -351,7 +351,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByCompanyAtCompanyDetail),
             switchMap(action =>
-                this.jobService.getByCompany(action.company, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByCompany(action.company, action.page, action.limit).pipe(
                     map(jobs => {
                         return JobActions.getByCompanyAtCompanyDetailSuccess({jobs})
                     }),
@@ -368,7 +368,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.getByFieldAtJob),
             switchMap(action =>
-                this.jobService.getByField(action.field, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                this.jobService.getByField(action.field, action.page, action.limit).pipe(
                     map(jobs => {                        
                         return JobActions.getByFieldAtJobSuccess({jobs})
                     }),
@@ -425,7 +425,7 @@ export class JobEffects {
             this.actions$.pipe(
                 ofType(JobActions.getByKeywordAtJob),
                 exhaustMap(action =>
-                    this.jobService.getByKeyWord(action.keyword, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    this.jobService.getByKeyWord(action.keyword, action.page, action.limit).pipe(
                         map(jobs => {
                             return JobActions.getByKeywordAtJobSuccess({jobs})
                         }),

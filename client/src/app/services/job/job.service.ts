@@ -10,54 +10,54 @@ export class JobService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getByField(field: string, page: number, limit: number, sortBy: string, sortOrder: string) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByField?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&field=${field}`);
+  getByField(field: string, page: number, limit: number) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByField?page=${page}&limit=${limit}&field=${field}`);
   }
-  getByFieldWithUrgent(field: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByField?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&field=${field}&urgent=${urgent}`);
-  }
-
-  getByCareer(career: string, page: number, limit: number, sortBy: string, sortOrder: string) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareer?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&career=${career}`);
+  getByFieldWithUrgent(field: string, page: number, limit: number, urgent: boolean) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByField?page=${page}&limit=${limit}&field=${field}&urgent=${urgent}`);
   }
 
-  getByHotJob( page: number, limit: number, sortBy: string, sortOrder: string) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByHotJob?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  getByCareer(career: string, page: number, limit: number) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareer?page=${page}&limit=${limit}&career=${career}`);
   }
 
-  getAllAndSort(page: number, limit: number, sortBy: string, sortOrder: string) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getAllAndSort?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
-  }
-  getAllAndSortWithUrgent(page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getAllAndSortWithUrgent?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&urgent=${urgent}`);
+  getByHotJob( page: number, limit: number) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByHotJob?page=${page}&limit=${limit}`);
   }
 
-  getByFieldName( fieldName: string, page: number,limit: number,  sortBy: string, sortOrder: string) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByFieldName?fieldName=${fieldName}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  getAllAndSort(page: number, limit: number) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getAllAndSort?page=${page}&limit=${limit}`);
   }
-  getByFieldNameWithUrgent( fieldName: string, page: number,limit: number,  sortBy: string, sortOrder: string, urgent: boolean) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByFieldNameWithUrgent?fieldName=${fieldName}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&urgent=${urgent}`);
+  getAllAndSortWithUrgent(page: number, limit: number, urgent: boolean) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getAllAndSortWithUrgent?page=${page}&limit=${limit}&urgent=${urgent}`);
   }
-  getByCareerName(CareerName: string, page: number, limit: number, sortBy: string, sortOrder: string) {
+
+  getByFieldName( fieldName: string, page: number,limit: number) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByFieldName?fieldName=${fieldName}&page=${page}&limit=${limit}`);
+  }
+  getByFieldNameWithUrgent( fieldName: string, page: number,limit: number, urgent: boolean) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByFieldNameWithUrgent?fieldName=${fieldName}&page=${page}&limit=${limit}&urgent=${urgent}`);
+  }
+  getByCareerName(CareerName: string, page: number, limit: number) {
     console.log(CareerName);
     
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareerName?careerName=${CareerName}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareerName?careerName=${CareerName}&page=${page}&limit=${limit}`);
   }
-  getByCareerNameWithUrgent(CareerName: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareerNameWithUrgent?careerName=${CareerName}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&urgent=${urgent}`);
+  getByCareerNameWithUrgent(CareerName: string, page: number, limit: number, urgent: boolean) {
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByCareerNameWithUrgent?careerName=${CareerName}&page=${page}&limit=${limit}&urgent=${urgent}`);
   }
 
-  getByKeyWord(keyword: string, page: number, limit: number, sortBy: string, sortOrder: string){
-    return this.httpClient.get<Job[] | any>(`${URL}/job/ByKeyword?keyword=${keyword}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  getByKeyWord(keyword: string, page: number, limit: number){
+    return this.httpClient.get<Job[] | any>(`${URL}/job/ByKeyword?keyword=${keyword}&page=${page}&limit=${limit}`);
   }
-  getByKeywordWithUrgent(keyword: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean){
-    return this.httpClient.get<Job[] | any>(`${URL}/job/ByKeywordWithUrgent?keyword=${keyword}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&urgent=${urgent}`);
+  getByKeywordWithUrgent(keyword: string, page: number, limit: number, urgent: boolean){
+    return this.httpClient.get<Job[] | any>(`${URL}/job/ByKeywordWithUrgent?keyword=${keyword}&page=${page}&limit=${limit}&urgent=${urgent}`);
   }
-  getByTag(tag: string, page: number, limit: number, sortBy: string, sortOrder: string){
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByTagsWithKeyword?tag=${tag}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  getByTag(tag: string, page: number, limit: number){
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByTagsWithKeyword?tag=${tag}&page=${page}&limit=${limit}`);
   }
-  getByTagWithUrgent(tag: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean){
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByTagsWithKeywordAndUrgent?tag=${tag}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&urgent=${urgent}`);
+  getByTagWithUrgent(tag: string, page: number, limit: number, urgent: boolean){
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByTagsWithKeywordAndUrgent?tag=${tag}&page=${page}&limit=${limit}&urgent=${urgent}`);
   }
   create(job:any){
     return this.httpClient.post(`${URL}/job/create`,job);
@@ -69,18 +69,18 @@ export class JobService {
   }
 
 
-  getByRecruiter(recruiterId:string,page:number,limit:number,sortBy:string,sortOrder:string){
-    return this.httpClient.get<Job[]>(`${URL}/job/getByRecruiter?id=${recruiterId}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  getByRecruiter(recruiterId:string,page:number,limit:number){
+    return this.httpClient.get<Job[]>(`${URL}/job/getByRecruiter?id=${recruiterId}&page=${page}&limit=${limit}`);
   }
-  getByLocation(location:string,page:number,limit:number,sortBy:string,sortOrder:string){
-    return this.httpClient.get<Job[]>(`${URL}/job/getByLocationdWithKeyword?keyword=${location}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  getByLocation(location:string,page:number,limit:number){
+    return this.httpClient.get<Job[]>(`${URL}/job/getByLocationdWithKeyword?keyword=${location}&page=${page}&limit=${limit}`);
   }
-  getByLocationWithUrgent(location:string,page:number,limit:number,sortBy:string,sortOrder:string,urgent:boolean){
-    return this.httpClient.get<Job[]>(`${URL}/job/getByLocationdWithKeywordAndUrgent?keyword=${location}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}&urgent=${urgent}`);
+  getByLocationWithUrgent(location:string,page:number,limit:number,urgent:boolean){
+    return this.httpClient.get<Job[]>(`${URL}/job/getByLocationdWithKeywordAndUrgent?keyword=${location}&page=${page}&limit=${limit}&urgent=${urgent}`);
   }
 
-  getByCompany(companyId:string,page:number,limit:number,sortBy:string,sortOrder:string){
-    return this.httpClient.get<Job[]>(`${URL}/job/getByCompany?companyId=${companyId}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  getByCompany(companyId:string,page:number,limit:number){
+    return this.httpClient.get<Job[]>(`${URL}/job/getByCompany?companyId=${companyId}&page=${page}&limit=${limit}`);
     }
 
   getByJobId(jobId:string){

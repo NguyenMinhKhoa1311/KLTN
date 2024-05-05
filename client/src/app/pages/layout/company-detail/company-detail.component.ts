@@ -45,7 +45,7 @@ export class CompanyDetailComponent implements OnDestroy {
     this.companyId =this.route.snapshot.paramMap.get('companyId')??"";
     console.log("companyId: ", this.companyId);
     this.store.dispatch(CompanyActions.getBy_IdAtCmopanyDetail({ id: this.companyId }));
-    this.store.dispatch(JobActions.getByCompanyAtCompanyDetail({ company: this.companyId,page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByCompanyAtCompanyDetail({ company: this.companyId,page: 0, limit: 9}));
 
     this.subscriptions.push(
       this.companyTakenByGetByIdAtCompanyDetail$.subscribe((company) => {

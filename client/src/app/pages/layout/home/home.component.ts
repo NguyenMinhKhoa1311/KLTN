@@ -82,15 +82,15 @@ export class HomeComponent implements OnDestroy {
             console.log(userAfterParse);
             
             this.candidateToRender = userAfterParse;
-            this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-            this.store.dispatch(JobActions.getByFieldAtHome({field:this.candidateToRender.Field._id, page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-            this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+            this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: 0, limit: 9}));
+            this.store.dispatch(JobActions.getByFieldAtHome({field:this.candidateToRender.Field._id, page: 0, limit: 9}));
+            this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9}));
           }
         }
         else{
-          this.store.dispatch(JobActions.getByCareerAtHome({career:"660269823564facdc8ccc27e", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-          this.store.dispatch(JobActions.getByFieldAtHome({field:"66011c19ec4d9c3cc6e74ac2", page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
-          this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+          this.store.dispatch(JobActions.getByCareerAtHome({career:"660269823564facdc8ccc27e", page: 0, limit: 9}));
+          this.store.dispatch(JobActions.getByFieldAtHome({field:"66011c19ec4d9c3cc6e74ac2", page: 0, limit: 9}));
+          this.store.dispatch(JobActions.getByHotJobAtHome({ page: 0, limit: 9}));
 
         }
     
@@ -168,36 +168,36 @@ export class HomeComponent implements OnDestroy {
 
   nextPageHotJob(): void {
     this.pageHotJob += 1;
-    this.store.dispatch(JobActions.getByHotJobAtHome({ page: this.pageHotJob, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByHotJobAtHome({ page: this.pageHotJob, limit: 9}));
   }
   previousPageHotJob(): void {
     if (this.pageHotJob > 0) {
       this.pageHotJob -= 1;
-      this.store.dispatch(JobActions.getByHotJobAtHome({ page: this.pageHotJob, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      this.store.dispatch(JobActions.getByHotJobAtHome({ page: this.pageHotJob, limit: 9}));
     }
   }
 
   nextPageByField(): void {
     this.pageByField += 1;
-    this.store.dispatch(JobActions.getByFieldAtHome({field: this.candidateToRender.Field._id, page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByFieldAtHome({field: this.candidateToRender.Field._id, page: this.pageByField, limit: 9}));
   }
 
   previousPageByField(): void {
     if (this.pageByField > 0) {
       this.pageByField -= 1;
-      this.store.dispatch(JobActions.getByFieldAtHome({field:this.candidateToRender.Field._id, page: this.pageByField, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      this.store.dispatch(JobActions.getByFieldAtHome({field:this.candidateToRender.Field._id, page: this.pageByField, limit: 9}));
     }
   }
 
   nextPageByCareer(): void {
     this.pageByCareer += 1;
-    this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+    this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: this.pageByCareer, limit: 9}));
   }
 
   previousPageByCareer(): void {
     if (this.pageByCareer > 0) {
       this.pageByCareer -= 1;
-      this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: this.pageByCareer, limit: 9, sortBy: "createdAt", sortOrder: "desc"}));
+      this.store.dispatch(JobActions.getByCareerAtHome({career:this.candidateToRender.Career._id, page: this.pageByCareer, limit: 9}));
     }
   }
 

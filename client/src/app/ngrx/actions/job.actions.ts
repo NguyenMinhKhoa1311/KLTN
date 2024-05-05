@@ -3,7 +3,7 @@ import { Job } from "../../models/job.model";
 
 export const getByFieldAtHome = createAction(
     '[Job] Get By Field At Home',
-    props<{ field: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
+    props<{ field: string; page: number; limit: number }>()
 );
 export const getByFieldAtHomeSuccess = createAction(
     '[Job] Get By Field At Home Success',
@@ -23,7 +23,7 @@ export const getByFieldAtHomeFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByCareerAtHome = createAction(
     '[Job] Get By Career At Home',
-    props<{ career: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
+    props<{ career: string; page: number; limit: number}>()
 );
 export const getByCareerAtHomeSuccess = createAction(
     '[Job] Get By Career At Home Success',
@@ -41,7 +41,7 @@ export const getByCareerAtHomeFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByHotJobAtHome = createAction(
     '[Job] Get By Hot Job At Home',
-    props<{ page: number; limit: number; sortBy: string; sortOrder: string }>()
+    props<{ page: number; limit: number}>()
 );
 export const getByHotJobAtHomeSuccess = createAction(
     '[Job] Get By Hot Job At Home Success',
@@ -66,7 +66,7 @@ export const clearStateAtHome = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getAllAndSortAtJob = createAction(
     '[Job] Get All And Sort At Job',
-    props<{ page: number; limit: number; sortBy: string; sortOrder: string }>()
+    props<{ page: number; limit: number}>()
 );
 export const getAllAndSortAtJobSuccess = createAction(
     '[Job] Get All And Sort At Job Success',
@@ -82,7 +82,7 @@ export const getAllAndSortAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByFieldNameAtJob = createAction(
     '[Job] Get By Field Name At Job',
-    props<{ fieldName: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
+    props<{ fieldName: string; page: number; limit: number }>()
 );
 export const getByFieldNameAtJobSuccess = createAction(
     '[Job] Get By Field Name At Job Success',
@@ -99,7 +99,7 @@ export const getByFieldNameAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByCareerNameAtJob = createAction(
     '[Job] Get By Career Name At Job',
-    props<{ careerName: string; page: number; limit: number; sortBy: string; sortOrder: string }>()
+    props<{ careerName: string; page: number; limit: number }>()
 );
 export const getByCareerNameAtJobSuccess = createAction(
     '[Job] Get By Career Name At Job Success',
@@ -145,7 +145,7 @@ export const updateJobAtJobDetailSuccess = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getJobByRecruiterAtJobDetail = createAction(
     '[Job] Get Job By recruiter',
-    props<{ recruiter: string,page: number, limit: number, sortBy: string, sortOrder: string }>()
+    props<{ recruiter: string,page: number, limit: number }>()
 );
 export const getJobByRecruiterAtJobDetailFailure = createAction(
     '[Job] Get JobBy recruiter Failure',
@@ -162,7 +162,7 @@ export const getJobByRecruiterAtJobDetailSuccess = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByLocationdWithKeywordsAtJob = createAction(
     '[Job] Get By Location With Keywords',
-    props<{ location: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+    props<{ location: string, page: number, limit: number}>()
 );
 export const getByLocationdWithKeywordsAtJobSuccess = createAction(
     '[Job] Get By Location With Keywords Success',
@@ -200,7 +200,7 @@ export const getJobByIdAtJobDetailOfCandidateSuccess = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByCompanyAtCompanyDetail = createAction(
     '[Job] Get By Company At Company Detail',
-    props<{ company: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+    props<{ company: string, page: number, limit: number }>()
 );
 export const getByCompanyAtCompanyDetailSuccess = createAction(
     '[Job] Get By Company Success At Company Detail',
@@ -219,7 +219,7 @@ export const getByCompanyAtCompanyDetailFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByFieldAtJob = createAction(
     '[Job] Get By Field At Job',
-    props<{ field: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+    props<{ field: string, page: number, limit: number}>()
 );
 export const getByFieldAtJobSuccess = createAction(
     '[Job] Get By Field At Job Success',
@@ -278,7 +278,7 @@ export const updateRecruitmentAtJobDetailSuccess = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByKeywordAtJob = createAction(
     '[Job] Get by Keyword At Job',
-    props<{ keyword: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+    props<{ keyword: string, page: number, limit: number }>()
 )
 export const getByKeywordAtJobSuccess = createAction(
     '[Job] Get by Keyword At Job Success',
@@ -300,7 +300,7 @@ export const resetState = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByTagAtJob = createAction(
     '[Job] Get By Tag At Job',
-    props<{ tag: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+    props<{ tag: string, page: number, limit: number }>()
 )
 export const getByTagAtJobSuccess = createAction(
     '[Job] Get By Tag At Job Success',
@@ -318,7 +318,7 @@ export const getByTagAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByCareerNameWithUrgentAtJob = createAction(
     '[Job] Get By Career Name With Urgent At Job',
-    props<{ careerName: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+    props<{ careerName: string, page: number, limit: number, urgent: boolean }>()
 )
 export const getByCareerNameWithUrgentAtJobSuccess = createAction(
     '[Job] Get By Career Name With Urgent At Job Success',
@@ -335,7 +335,7 @@ export const getByCareerNameWithUrgentAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByFieldWithUrgentAtJob = createAction(
     '[Job] Get By Field With Urgent At Job',
-    props<{ field: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+    props<{ field: string, page: number, limit: number, urgent: boolean }>()
 )
 export const getByFieldWithUrgentAtJobSuccess = createAction(
     '[Job] Get By Field With Urgent At Job Success',
@@ -351,7 +351,7 @@ export const getByFieldWithUrgentAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByFieldNameWithUrgentAtJob = createAction(
     '[Job] Get By Field Name With Urgent At Job',
-    props<{ fieldName: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+    props<{ fieldName: string, page: number, limit: number, urgent: boolean }>()
 )
 export const getByFieldNameWithUrgentAtJobSuccess = createAction(
     '[Job] Get By Field Name With Urgent At Job Success',
@@ -368,7 +368,7 @@ export const getByFieldNameWithUrgentAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByLocationdWithKeywordsWithUrgentAtJob = createAction(
     '[Job] Get By Location With Keywords With Urgent At Job',
-    props<{ location: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+    props<{ location: string, page: number, limit: number, urgent: boolean }>()
 )
 export const getByLocationdWithKeywordsWithUrgentAtJobSuccess = createAction(
     '[Job] Get By Location With Keywords With Urgent At Job Success',
@@ -386,7 +386,7 @@ export const getByLocationdWithKeywordsWithUrgentAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByKeywordWithUrgentAtJob = createAction(
     '[Job] Get by Keyword With Urgent At Job',
-    props<{ keyword: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+    props<{ keyword: string, page: number, limit: number, urgent: boolean }>()
 )
 export const getByKeywordWithUrgentAtJobSuccess = createAction(
     '[Job] Get by Keyword With Urgent At Job Success',
@@ -403,7 +403,7 @@ export const getByKeywordWithUrgentAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByTagWithUrgentAtJob = createAction(
     '[Job] Get By Tag With Urgent At Job',
-    props<{ tag: string, page: number, limit: number, sortBy: string, sortOrder: string, urgent: boolean }>()
+    props<{ tag: string, page: number, limit: number, urgent: boolean }>()
 )
 export const getByTagWithUrgentAtJobSuccess = createAction(
     '[Job] Get By Tag With Urgent At Job Success',
@@ -418,7 +418,7 @@ export const getByTagWithUrgentAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getAllAndSortWithUrgentAtJob = createAction(
     '[Job] Get All And Sort With Urgent At Job',
-    props<{ page: number; limit: number; sortBy: string; sortOrder: string, urgent: boolean }>()
+    props<{ page: number; limit: number; urgent: boolean }>()
 );
 export const getAllAndSortWithUrgentAtJobSuccess = createAction(
     '[Job] Get All And Sort With Urgent At Job Success',

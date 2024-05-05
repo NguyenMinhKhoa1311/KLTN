@@ -68,7 +68,7 @@ export class JobDetailComponent {
 
   ){
     //get job theo recruiter
-    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}) );
+    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
 
     //getAll field
     this.store.dispatch(FieldActions.getAllNoLimitAtJobDetail());
@@ -112,14 +112,14 @@ export class JobDetailComponent {
       this.jobUpdatedAtJobDetail$.subscribe(job => {
         console.log(job);
         if(job._id!='500'){
-          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}) );
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
           this.closeJobDialog();
         }
       }),
       //theo dõi job dc xóa
       this.isDeletedJobAtJobDetail$.subscribe(result => {
         if(result){
-          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}) );
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
           alert("Xóa thành công");
         }
       })
