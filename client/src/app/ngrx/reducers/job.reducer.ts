@@ -87,9 +87,46 @@ export const initialState: jobState = {
     isGetByKeywordAtJobSuccess: false,
     getByKeywordAtJobError: "",
     jobsTakenByKeywordAtJob: [],
+    
+    isGetByTagAtJobLoading: false,
+    isGetByTagAtJobSuccess: false,
+    getByTagAtJobError: "",
+    jobsTakenByTagAtJob: [],
 
+    isGetByCareerNameWithUrgentAtJobLoading: false,
+    isGetByCareerNameWithUrgentAtJobSuccess: false,
+    getByCareerNameWithUrgentAtJobError: "",
+    jobsTakenByCareerNameWithUrgentAtJob: [],
 
+    isGetByFieldNameWithUrgentAtJobLoading: false,
+    isGetByFieldNameWithUrgentAtJobSuccess: false,
+    getByFieldNameWithUrgentAtJobError: "",
+    jobsTakenByFieldNameWithUrgentAtJob: [],
 
+    isGetByKeywordWithUrgentAtJobLoading: false,
+    isGetByKeywordWithUrgentAtJobSuccess: false,
+    getByKeywordWithUrgentAtJobError: "",
+    jobsTakenByKeywordWithUrgentAtJob: [],
+
+    isGetByTagWithUrgentAtJobLoading: false,
+    isGetByTagWithUrgentAtJobSuccess: false,
+    getByTagWithUrgentAtJobError: "",
+    jobsTakenByTagWithUrgentAtJob: [],
+
+    isGetByFieldWithUrgentAtJobLoading: false,
+    isGetByFieldWithUrgentAtJobSuccess: false,
+    getByFieldWithUrgentAtJobError: "",
+    jobsTakenByFieldWithUrgentAtJob: [],
+
+    isGetByLocationWithUrgentAtJobLoading: false,
+    isGetByLocationWithUrgentAtJobSuccess: false,
+    getByLocationWithUrgentAtJobError: "",
+    jobsTakenByLocationWithUrgentAtJob: [],
+
+    isGetAllAndSortWithUrgentAtJobLoading: false,
+    isGetAllAndSortWithUrgentAtJobSuccess: false,
+    getAllAndSortWithUrgentAtJobError: "",
+    jobsTakenByAllAndSortWithUrgentAtJob: [],
 
 }
 
@@ -618,6 +655,238 @@ export const jobReducer = createReducer(
             return initialState;
         }),
 
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByTagAtJob,(state,action)=>{
+    return{
+        ...state,
+        isGetByTagAtJobLoading: true,
+        isGetByTagAtJobSuccess: false,
+        getByTagAtJobError: "",
+    }
+}),
+on(JobActions.getByTagAtJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByTagAtJob: action.jobs,
+        isGetByTagAtJobLoading: false,
+        isGetByTagAtJobSuccess: true,
+        getByTagAtJobError: "",
+    }
+}),
+on(JobActions.getByTagAtJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByTagAtJobLoading: false,
+        isGetByTagAtJobSuccess: false,
+        getByTagAtJobError: action.error,
+    }
+}),
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByCareerNameWithUrgentAtJob,(state,action)=>{
+    return{
+        ...state,
+        isGetByCareerNameWithUrgentAtJobLoading: true,
+        isGetByCareerNameWithUrgentAtJobSuccess: false,
+        getByCareerNameWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByCareerNameWithUrgentAtJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByCareerNameWithUrgentAtJob: action.jobs,
+        isGetByCareerNameWithUrgentAtJobLoading: false,
+        isGetByCareerNameWithUrgentAtJobSuccess: true,
+        getByCareerNameWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByCareerNameWithUrgentAtJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByCareerNameWithUrgentAtJobLoading: false,
+        isGetByCareerNameWithUrgentAtJobSuccess: false,
+        getByCareerNameWithUrgentAtJobError: action.error,
+    }
+}),
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByFieldNameWithUrgentAtJob,(state,action)=>{
+    return{
+        ...state,
+        isGetByFieldNameWithUrgentAtJobLoading: true,
+        isGetByFieldNameWithUrgentAtJobSuccess: false,
+        getByFieldNameWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByFieldNameWithUrgentAtJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByFieldNameWithUrgentAtJob: action.jobs,
+        isGetByFieldNameWithUrgentAtJobLoading: false,
+        isGetByFieldNameWithUrgentAtJobSuccess: true,
+        getByFieldNameWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByFieldNameWithUrgentAtJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByFieldNameWithUrgentAtJobLoading: false,
+        isGetByFieldNameWithUrgentAtJobSuccess: false,
+        getByFieldNameWithUrgentAtJobError: action.error,
+    }
+}),
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByKeywordWithUrgentAtJob,(state,action)=>{
+    return{
+        ...state,
+        isGetByKeywordWithUrgentAtJobLoading: true,
+        isGetByKeywordWithUrgentAtJobSuccess: false,
+        getByKeywordWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByKeywordWithUrgentAtJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByKeywordWithUrgentAtJob: action.jobs,
+        isGetByKeywordWithUrgentAtJobLoading: false,
+        isGetByKeywordWithUrgentAtJobSuccess: true,
+        getByKeywordWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByKeywordWithUrgentAtJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByKeywordWithUrgentAtJobLoading: false,
+        isGetByKeywordWithUrgentAtJobSuccess: false,
+        getByKeywordWithUrgentAtJobError: action.error,
+    }
+}),
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByTagWithUrgentAtJob,(state,action)=>{
+    return{
+        ...state,
+        isGetByTagWithUrgentAtJobLoading: true,
+        isGetByTagWithUrgentAtJobSuccess: false,
+        getByTagWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByTagWithUrgentAtJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByTagWithUrgentAtJob: action.jobs,
+        isGetByTagWithUrgentAtJobLoading: false,
+        isGetByTagWithUrgentAtJobSuccess: true,
+        getByTagWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByTagWithUrgentAtJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByTagWithUrgentAtJobLoading: false,
+        isGetByTagWithUrgentAtJobSuccess: false,
+        getByTagWithUrgentAtJobError: action.error,
+    }
+}),
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByFieldWithUrgentAtJob,(state,action)=>{
+    return{
+        ...state,
+        isGetByFieldWithUrgentAtJobLoading: true,
+        isGetByFieldWithUrgentAtJobSuccess: false,
+        getByFieldWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByFieldWithUrgentAtJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByFieldWithUrgentAtJob: action.jobs,
+        isGetByFieldWithUrgentAtJobLoading: false,
+        isGetByFieldWithUrgentAtJobSuccess: true,
+        getByFieldWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByFieldWithUrgentAtJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByFieldWithUrgentAtJobLoading: false,
+        isGetByFieldWithUrgentAtJobSuccess: false,
+        getByFieldWithUrgentAtJobError: action.error,
+    }
+}),
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByLocationdWithKeywordsWithUrgentAtJob,(state,action)=>{
+    return{
+        ...state,
+        isGetByLocationWithUrgentAtJobLoading: true,
+        isGetByLocationWithUrgentAtJobSuccess: false,
+        getByLocationWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByLocationdWithKeywordsWithUrgentAtJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByLocationWithUrgentAtJob: action.jobs,
+        isGetByLocationWithUrgentAtJobLoading: false,
+        isGetByLocationWithUrgentAtJobSuccess: true,
+        getByLocationWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getByLocationdWithKeywordsWithUrgentAtJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByLocationWithUrgentAtJobLoading: false,
+        isGetByLocationWithUrgentAtJobSuccess: false,
+        getByLocationWithUrgentAtJobError: action.error,
+    }
+}),
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getAllAndSortWithUrgentAtJob,(state,action)=>{
+    return{
+        ...state,
+        isGetAllAndSortWithUrgentAtJobLoading: true,
+        isGetAllAndSortWithUrgentAtJobSuccess: false,
+        getAllAndSortWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getAllAndSortWithUrgentAtJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByAllAndSortWithUrgentAtJob: action.jobs,
+        isGetAllAndSortWithUrgentAtJobLoading: false,
+        isGetAllAndSortWithUrgentAtJobSuccess: true,
+        getAllAndSortWithUrgentAtJobError: "",
+    }
+}),
+on(JobActions.getAllAndSortWithUrgentAtJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetAllAndSortWithUrgentAtJobLoading: false,
+        isGetAllAndSortWithUrgentAtJobSuccess: false,
+        getAllAndSortWithUrgentAtJobError: action.error,
+    }
+}),
 
 
 )
