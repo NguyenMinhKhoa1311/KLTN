@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareModule } from '../../../shared/shared.module';
 import { generateUuid } from '../../../../environments/environments';
+import { TaigaModule } from '../../../shared/taiga.module';
+
 
 @Component({
   selector: 'app-choice-service',
   standalone: true,
-  imports: [ShareModule],
+  imports: [ShareModule, TaigaModule],
   templateUrl: './choice-service.component.html',
   styleUrl: './choice-service.component.less'
 })
@@ -46,7 +48,6 @@ export class ChoiceServiceComponent {
     
   ];
 
-  // Phương thức này được gọi khi một mục được chọn hoặc hủy
   toggleItem(item: any) {
     const index = this.selectedItems.indexOf(item);
     if (index > -1) {
@@ -58,8 +59,11 @@ export class ChoiceServiceComponent {
       this.selectedItems.push(item);
       this.totalPrice += item.price;
     }
+    this.expanded = this.isSelected(item); // Mở rộng nếu mục được chọn
   }
-
+  
+  expanded = false;
+  
   isSelected(item: any): boolean {
     // Kiểm tra xem một dịch vụ đã được chọn hay chưa
     return this.selectedItems.indexOf(item) !== -1;
@@ -147,4 +151,6 @@ export class ChoiceServiceComponent {
   returnHome(){
     this.router.navigateByUrl('/home');
   }
+
+  
 }
