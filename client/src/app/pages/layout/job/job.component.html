@@ -76,7 +76,11 @@
                                 
                                 <span class="company_name">{{job.Company.Name}}</span>
                                 <span class="salary">Thương lượng</span>
-                                <span class="tag" *ngFor="let tag of job.Tags">{{tag}}</span>
+
+                                <div class="tag">
+                                    <div class="tag_box" *ngFor="let tag of job.Tags">#{{tag}}</div>
+                                </div>
+                                
                                 <span class="address">{{job.Location}}</span>
                             </div>
                         </div>
