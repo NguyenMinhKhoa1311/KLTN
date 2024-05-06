@@ -23,6 +23,7 @@ export class CreateJobDto {
         public Urgent: boolean,
         public Company: string,
         public ImageOfCompany: string,
-        
+        public StartSalary: number,
+        public EndSalary: number,
     ){}
 }

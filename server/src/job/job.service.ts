@@ -452,7 +452,7 @@ constructor(
       return[]
     }
   }
-  async getAllAndSortByTagAndSalary(page: number, limit: number){
+  async geAllAndSortByWelFareAndSalare(page: number, limit: number){
     try{
       const skip = page * limit;
       const jobs = await this.JobModel.find()
@@ -462,7 +462,7 @@ constructor(
       .populate('Field','FieldId FieldName', this.fieldModel)
       .populate('ServicePackage','ServicePackageId Name Priority Hot ColorTitle Urgent', this.servicePackageModel)
       .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
-      .sort({"Tags": -1, "Salary": -1,})
+      .sort({"Welfare": -1, "EndSalary": -1, "Priority": -1, "createdAt": -1})
       .skip(skip)
       .limit(limit)
       .exec();

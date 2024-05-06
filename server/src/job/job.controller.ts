@@ -203,6 +203,20 @@ export class JobController {
     }
   }
 
+  @Get('geAllAndSortByWelFareAndSalare')
+  async geAllAndSortByWelFareAndSalare(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ) {
+    try{
+      const job = await this.jobService.geAllAndSortByWelFareAndSalare(page, limit);
+      return job
+    }
+    catch(err){
+      throw err
+    }
+  }
+
   @Get('getByFieldNameWithUrgent')
   async getByFieldNameWithUrgent(
     @Query('fieldName') fieldName: string,

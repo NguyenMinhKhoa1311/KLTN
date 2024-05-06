@@ -102,6 +102,12 @@ export class Job {
     @Prop({required: true})
     ImageOfCompany: string;
 
+    @Prop({required: true})
+    StartSalary: number;
+
+    @Prop({required: true})
+    EndSalary: number;
+
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);
