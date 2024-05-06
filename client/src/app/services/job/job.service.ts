@@ -54,11 +54,16 @@ export class JobService {
     return this.httpClient.get<Job[] | any>(`${URL}/job/ByKeywordWithUrgent?keyword=${keyword}&page=${page}&limit=${limit}&urgent=${urgent}`);
   }
   getByTag(tag: string, page: number, limit: number){
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByTagsWithKeyword?tag=${tag}&page=${page}&limit=${limit}`);
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByTagsWithKeyword?keyword=${tag}&page=${page}&limit=${limit}`);
   }
   getByTagWithUrgent(tag: string, page: number, limit: number, urgent: boolean){
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByTagsWithKeywordAndUrgent?tag=${tag}&page=${page}&limit=${limit}&urgent=${urgent}`);
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByTagsWithKeywordAndUrgent?keyword=${tag}&page=${page}&limit=${limit}&urgent=${urgent}`);
   }
+
+  getAllAndSortByWelfareAndSalary(page: number, limit: number){
+    return this.httpClient.get<Job[] | any>(`${URL}/job/geAllAndSortByWelFareAndSalare?page=${page}&limit=${limit}`);
+  }
+
   create(job:any){
     return this.httpClient.post(`${URL}/job/create`,job);
   }

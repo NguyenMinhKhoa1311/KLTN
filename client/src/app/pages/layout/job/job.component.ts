@@ -44,18 +44,23 @@ export class JobComponent implements OnDestroy{
   isGetByCareer: boolean = false;
   isGetAll: boolean = false;
   isGetByKeyword: boolean = false;
+  isGetByTag: boolean = false;
   isGetAllAndSortSuccess: boolean = false;
   isGetByKeywordSuccess: boolean = false;
   isGetByCareerSuccess: boolean = false;
   isGetByFieldSuccess: boolean = false;
   isGetByFieldNameSuccess: boolean = false;
   isGetByLocationSuccess: boolean = false;
+  isGetByTagSuccess: boolean = false;
   isGetByKeywordWithUrgentSuccess: boolean = false;
   isGetByLocationWithUrgentSuccess: boolean = false;
   isGetByFieldWithUrgentSuccess: boolean = false;
   isGetByFieldNameWithUrgentSuccess: boolean = false;
   isGetByCareerWithUrgentSuccess: boolean = false;
   isGetAllAndSortWithUrgentSuccess: boolean = false;
+  isGetByTagWithUrgentSuccess: boolean = false;
+  tagValue: string = "";
+
 
 
   page: number = 0;
@@ -81,6 +86,8 @@ export class JobComponent implements OnDestroy{
   jobTakenByLocation$ = this.store.select('job', 'jobsTakenByLocationAtJob');
   isGetByKeywordSuccess$ = this.store.select('job', 'isGetByKeywordAtJobSuccess');
   jobTakenByKeyword$ = this.store.select('job', 'jobsTakenByKeywordAtJob');
+  isGetByTagSuccess$ = this.store.select('job', 'isGetByTagAtJobSuccess');
+  jobTakenByTag$ = this.store.select('job', 'jobsTakenByTagAtJob');
   isGetByKeywordWithUrgentSuccess$ = this.store.select('job', 'isGetByKeywordWithUrgentAtJobSuccess');
   jobTakenByKeywordWithUrgent$ = this.store.select('job', 'jobsTakenByKeywordWithUrgentAtJob');
   isGetByLocationWithUrgentSuccess$ = this.store.select('job', 'isGetByLocationWithUrgentAtJobSuccess');
@@ -93,6 +100,8 @@ export class JobComponent implements OnDestroy{
   jobTakenByCareerNameWithUrgent$ = this.store.select('job', 'jobsTakenByCareerNameWithUrgentAtJob');
   isGetAllAndSortWithUrgentSuccess$ = this.store.select('job', 'isGetAllAndSortWithUrgentAtJobSuccess');
   jobsTakenByAllAndSortWithUrgent$ = this.store.select('job', 'jobsTakenByAllAndSortWithUrgentAtJob');
+  isGetByTagWithUrgentSuccess$ = this.store.select('job', 'isGetByTagWithUrgentAtJobSuccess');
+  jobTakenByTagWithUrgent$ = this.store.select('job', 'jobsTakenByTagWithUrgentAtJob');
 
 
   // ngrx of field
@@ -251,7 +260,7 @@ export class JobComponent implements OnDestroy{
       //subscribe to ngrx of isGetByLocationAtJobSuccess
       this.isGetByLocationSuccess$.subscribe((isSuccess)=>{
         if(isSuccess){
-          this.isGetByLocation = isSuccess;
+          this.isGetByLocationSuccess = isSuccess;
         }
       }),
       //subscribe to ngrx of getByLocationdWithKeywordsAtJob
@@ -265,6 +274,25 @@ export class JobComponent implements OnDestroy{
           this.openSnackBar("Không có công việc nào");
         }
       }),
+
+      //subscribe to ngrx of isGetByTagAtJobSuccess
+      this.isGetByTagSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByTagSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of getByTagAtJob
+      this.jobTakenByTag$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetByTag&&this.isGetByTagSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          this.openSnackBar("Không có công việc nào");
+        }
+      }),
+
 
       //subscribe to ngrx of candidateUpdatedFavoriteJobAtJob
       this.candidateUpdatedFavoriteJob$.subscribe((candidate)=>{
@@ -302,6 +330,7 @@ export class JobComponent implements OnDestroy{
           this.openSnackBar("Không có công việc nào");
         }
       }),
+
       //subscribe to ngrx of isGetByKeywordWithUrgentAtJobSuccess
       this.isGetByKeywordWithUrgentSuccess$.subscribe((isSuccess)=>{
         if(isSuccess){
@@ -330,6 +359,23 @@ export class JobComponent implements OnDestroy{
         if(jobs.length>0){
           this.jobToRender = jobs;
         }else if(this.isGetByLocation&&this.isGetByLocationWithUrgentSuccess){
+          if(this.page>0){
+            this.page--;
+          }
+          this.openSnackBar("Không có công việc nào");
+        }
+      }),
+      //subscribe to ngrx of isGetByTagWithUrgentAtJobSuccess
+      this.isGetByTagWithUrgentSuccess$.subscribe((isSuccess)=>{
+        if(isSuccess){
+          this.isGetByTagWithUrgentSuccess = isSuccess;
+        }
+      }),
+      //subscribe to ngrx of getByTagWithUrgentAtJob
+      this.jobTakenByTagWithUrgent$.subscribe((jobs)=>{
+        if(jobs.length>0){
+          this.jobToRender = jobs;
+        }else if(this.isGetByTag&&this.isGetByTagWithUrgentSuccess){
           if(this.page>0){
             this.page--;
           }
@@ -451,6 +497,22 @@ export class JobComponent implements OnDestroy{
     }
     else{
       this.router.navigate(['/login']);
+    }
+  }
+
+  getByTag(tag: string){
+    if(this.UrgentForm.value.checked){
+      if(!this.isGetByTag){
+        this.isGetByTag = true;
+      }
+      this.tagValue = tag;
+      this.store.dispatch(JobActions.getByTagWithUrgentAtJob({tag: tag, page: 0, limit: 9, urgent: true}));
+    }else{
+      if(!this.isGetByTag){
+        this.isGetByTag = true;
+      }
+      this.tagValue = tag;
+      this.store.dispatch(JobActions.getByTagAtJob({tag: tag, page: 0, limit: 9}));
     }
   }
 
@@ -600,6 +662,8 @@ export class JobComponent implements OnDestroy{
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9}));
     } else if(this.isGetByFieldName && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9}));
+    }else if(this.isGetByTag && !this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getByTagAtJob({tag: this.tagValue, page: this.page, limit: 9}));
     } else if(this.isGetByCareer && this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByCareerNameWithUrgentAtJob({careerName: this.careerValue, page: this.page, limit: 9, urgent: true}));
     } else if(this.isGetByField && this.UrgentForm.value.checked){
@@ -612,6 +676,8 @@ export class JobComponent implements OnDestroy{
       this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: this.page, limit: 9, urgent: true}));
     } else if(this.isGetByFieldName && this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, urgent: true}));
+    } else if(this.isGetByTag && this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getByTagWithUrgentAtJob({tag: this.tagValue, page: this.page, limit: 9, urgent: true}));
     }
 
   }

@@ -133,6 +133,11 @@ export interface jobState{
     getAllAndSortWithUrgentAtJobError: string;
     jobsTakenByAllAndSortWithUrgentAtJob: Job[];
 
+    isGetAllAndSortByWelfareAndSalaryAtHomeLoading: boolean;
+    isGetAllAndSortByWelfareAndSalaryAtHomeSuccess: boolean;
+    getAllAndSortByWelfareAndSalaryAtHomeError: string;
+    jobsTakenByAllAndSortByWelfareAndSalaryAtHome: Job[];
+
 
 
 }

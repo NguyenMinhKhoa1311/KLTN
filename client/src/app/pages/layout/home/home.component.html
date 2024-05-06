@@ -214,14 +214,10 @@
                 <div class="item_box">
                     <div tuiCarouselButtons class="wrapper">
                         <div class="carousel">
-                            @if (isGetByFieldAtHomeLoading$ | async){
-                                <app-loading></app-loading>
-                            } 
-                            @else{
                             <div class="item_carousel">
                                 <div class="item_box_column">
                                     <div class="item_box"
-                                        *ngFor="let job of JobGetByField.slice(0, 3)">
+                                        *ngFor="let job of JobGetByAllAndSortByWelfareAndSalary.slice(0, 3)">
                                         <div class="img_logo">
                                             <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                                 alt="">
@@ -237,7 +233,7 @@
                                 </div>
                                 <div class="item_box_column">
                                     <div class="item_box"
-                                        *ngFor="let job of JobGetByField.slice(3, 6)">
+                                        *ngFor="let job of JobGetByAllAndSortByWelfareAndSalary.slice(3, 6)">
                                         <div class="img_logo">
                                             <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                                 alt="">
@@ -253,7 +249,7 @@
                                 </div>
                                 <div class="item_box_column">
                                     <div class="item_box"
-                                        *ngFor="let job of JobGetByField.slice(6, 9)">
+                                        *ngFor="let job of JobGetByAllAndSortByWelfareAndSalary.slice(6, 9)">
                                         <div class="img_logo">
                                             <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
                                                 alt="">
@@ -268,7 +264,6 @@
                                     </div>
                                 </div>
                             </div>
-                            }
                         </div>
                     </div>
                 </div>
@@ -284,12 +279,12 @@
     </div>
 </div>
 
-<div class="career_jobs">
+<div class="career_jobs" *ngIf="isLogin">
     <div class="best_work_box">
         <div class="header">
             <div class="title_box">
-                <span class="title">Việc làm nổi bật</span>
-                <span class="hightLight">Ngành nghề</span>
+                <span class="title">Việc làm ngành</span>
+                <span class="hightLight">{{candidateToRender.Career.Name}}</span>
             </div>
             <span class="see_more"> Xem tất cả</span>
         </div>

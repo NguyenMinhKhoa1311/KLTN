@@ -437,6 +437,23 @@ export class JobEffects {
             )
             )
             )
+        
+        getAllAndSortByWelfareAndSalaryAtHome$ = createEffect(() =>
+            this.actions$.pipe(
+                ofType(JobActions.getAllAndSortByWelfareAndSalaryAtHome),
+                exhaustMap(action =>
+                    this.jobService.getAllAndSortByWelfareAndSalary(action.page, action.limit).pipe(
+                        map(jobs => {
+                            return JobActions.getAllAndSortByWelfareAndSalaryAtHomeSuccess({jobs})
+                        }),
+                        catchError((err) =>
+                            of(JobActions.getAllAndSortByWelfareAndSalaryAtHomeFailure({error: err})
+                        )
+                    )
+                )
+            )
+            )
+            )
 
     
 

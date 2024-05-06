@@ -428,3 +428,22 @@ export const getAllAndSortWithUrgentAtJobFailure = createAction(
     '[Job] Get All And Sort With Urgent At Job Failure',
     props<{ error: string }>()
 );
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllAndSortByWelfareAndSalaryAtHome = createAction(
+    '[Job] Get All And Sort By Welfare And Salary At Home',
+    props<{ page: number; limit: number }>()
+);
+export const getAllAndSortByWelfareAndSalaryAtHomeSuccess = createAction(
+    '[Job] Get All And Sort By Welfare And Salary At Home Success',
+    props<{ jobs: Job[] }>()
+);
+export const getAllAndSortByWelfareAndSalaryAtHomeFailure = createAction(
+    '[Job] Get All And Sort By Welfare And Salary At Home Failure',
+    props<{ error: string }>()
+);

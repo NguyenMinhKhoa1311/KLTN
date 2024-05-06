@@ -128,6 +128,12 @@ export const initialState: jobState = {
     getAllAndSortWithUrgentAtJobError: "",
     jobsTakenByAllAndSortWithUrgentAtJob: [],
 
+    isGetAllAndSortByWelfareAndSalaryAtHomeLoading: false,
+    isGetAllAndSortByWelfareAndSalaryAtHomeSuccess: false,
+    getAllAndSortByWelfareAndSalaryAtHomeError: "",
+    jobsTakenByAllAndSortByWelfareAndSalaryAtHome: [],
+
+
 }
 
 export const jobReducer = createReducer(
@@ -885,6 +891,35 @@ on(JobActions.getAllAndSortWithUrgentAtJobFailure,(state,action)=>{
         isGetAllAndSortWithUrgentAtJobLoading: false,
         isGetAllAndSortWithUrgentAtJobSuccess: false,
         getAllAndSortWithUrgentAtJobError: action.error,
+    }
+}),
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getAllAndSortByWelfareAndSalaryAtHome,(state,action)=>{
+    return{
+        ...state,
+        isGetAllAndSortByWelfareAndSalaryAtHomeLoading: true,
+        isGetAllAndSortByWelfareAndSalaryAtHomeSuccess: false,
+        getAllAndSortByWelfareAndSalaryAtHomeError: "",
+    }
+}),
+on(JobActions.getAllAndSortByWelfareAndSalaryAtHomeSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByAllAndSortByWelfareAndSalaryAtHome: action.jobs,
+        isGetAllAndSortByWelfareAndSalaryAtHomeLoading: false,
+        isGetAllAndSortByWelfareAndSalaryAtHomeSuccess: true,
+        getAllAndSortByWelfareAndSalaryAtHomeError: "",
+    }
+}),
+on(JobActions.getAllAndSortByWelfareAndSalaryAtHomeFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetAllAndSortByWelfareAndSalaryAtHomeLoading: false,
+        isGetAllAndSortByWelfareAndSalaryAtHomeSuccess: false,
+        getAllAndSortByWelfareAndSalaryAtHomeError: action.error,
     }
 }),
 

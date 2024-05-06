@@ -199,6 +199,8 @@ export class JobPostingComponent implements OnDestroy{
       Hot: this.servicePackageChoiced?.Hot??false,
       ColorTitle: this.servicePackageChoiced?.ColorTitle??"",
       Urgent: this.servicePackageChoiced?.Urgent??false,
+      StartSalary: this.jobPostForm.value.SalaryStart??0,
+      EndSalary: this.jobPostForm.value.SalaryEnd??0,
       ImageOfCompany: "https://media.istockphoto.com/id/1128180520/vi/anh/%C4%91%E1%BB%99i-ng%C5%A9-d%E1%BB%8Bch-v%E1%BB%A5-d%E1%BB%8Dn-d%E1%BA%B9p-chuy%C3%AAn-nghi%E1%BB%87p-l%C3%A0m-vi%E1%BB%87c-v%E1%BB%9Bi-thi%E1%BA%BFt-b%E1%BB%8B-v%E1%BB%87-sinh-trong-ph%C3%B2ng-kh%C3%A1i-ni%E1%BB%87m-d%E1%BB%8Bch.jpg?s=612x612&w=0&k=20&c=nks0Tp1BP71s-_WsPD5UzzD638zeFuR14oiTTn-60bE="
 
 
