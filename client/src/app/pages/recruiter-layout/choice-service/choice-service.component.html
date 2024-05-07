@@ -11,10 +11,18 @@
                 <div class="service_iteam_description">
                     {{a.description}}
                 </div>
-                <div class="service_iteam_price">
+                <div class="service_iteam_price" >
                     Giá: {{a.price}}
                 </div>
+                <tui-expand [expanded]="isSelected(a)">
+                    <ng-template tuiExpandContent>
+                        <p>NOBODY expects the Spanish Inquisition!</p>
+                    </ng-template>
+                </tui-expand>
             </div>
+        </div>
+        <div class="notice_box">
+            <div class="notice">* Bạn đăng kí nhiều dịch vụ độ ưu tiên sẽ được tăng cao</div>
         </div>
         <div class="total_box">
             <div class="total">
