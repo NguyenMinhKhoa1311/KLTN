@@ -11,21 +11,7 @@ export class JobEffects {
     private jobService: JobService
   ) {}
 
-  getByFieldAtHome$ = createEffect(() => 
-    this.actions$.pipe(
-        ofType(JobActions.getByFieldAtHome),
-        exhaustMap(action =>
-            this.jobService.getByField(action.field, action.page, action.limit).pipe(
-                map(jobs =>{
-                    return JobActions.getByFieldAtHomeSuccess({jobs})
-                }),
-                catchError((err) => 
-                    of(JobActions.getByFieldAtHomeFailure({error: err}))
-                )
-            )
-        ) 
-        )
-        );
+
    getByCareerAtHome$ = createEffect(() =>
         this.actions$.pipe(
             ofType(JobActions.getByCareerAtHome),
@@ -364,22 +350,6 @@ export class JobEffects {
         )
         )
 
-    getByFieldAtJob$= createEffect(() =>
-        this.actions$.pipe(
-            ofType(JobActions.getByFieldAtJob),
-            switchMap(action =>
-                this.jobService.getByField(action.field, action.page, action.limit).pipe(
-                    map(jobs => {                        
-                        return JobActions.getByFieldAtJobSuccess({jobs})
-                    }),
-                    catchError((err) =>
-                        of(JobActions.getByFieldAtJobFailure({error: err})
-                    )
-                )
-            )
-        )
-        )
-        )
 
     deleteAtJobDetailOfRecruiter$= createEffect(() =>
         this.actions$.pipe(

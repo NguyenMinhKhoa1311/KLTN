@@ -51,7 +51,7 @@
                         <div class="status_box_rejected" *ngIf="recrutment.StatusCancel">
                             Hủy ứng tuyển
                         </div>
-                        <div class="status_box_seen" *ngIf="!recrutment.Status && recrutment.StatusSeenOfRecruiter">
+                        <div class="status_box_seen" *ngIf="!recrutment.Status && recrutment.StatusSeenOfRecruiter && !recrutment.StatusCancel">
                             Đã xem
                         </div>
                     </div>

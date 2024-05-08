@@ -25,8 +25,8 @@
                         Trạng thái
                     </div>  
                 </div>
-                <div class="candidate_list" *ngFor="let recrutment of recruitments" (click)="openDetailDialog(recrutment.Job)">
-                    <div class="position">
+                <div class="candidate_list" *ngFor="let recrutment of recruitments" >
+                    <div class="position" (click)="openDetailDialog(recrutment.Job)">
                         {{recrutment.Job.Name}}
                     </div>
                     <div class="name">
@@ -52,8 +52,8 @@
                             Hủy ứng tuyển
                         </div>
                     </div>
-                    <div class="delete_btn">
-                        <span class="material-symbols-outlined">
+                    <div class="delete_btn" >
+                        <span class="material-symbols-outlined" (click)="cancelRecruitment(recrutment._id)">
                             delete
                         </span>
                     </div>     

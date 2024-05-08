@@ -26,6 +26,8 @@ export interface RecruitmentState {
     updateDateInterviewError: string;
     recruitmentUpdatedDateInterview: Recruitment;
     
-
+    isUpdateStatusCancelAtApplyJobLoading: boolean;
+    isUpdateStatusCancelAtApplyJobSuccess: boolean;
+    updateStatusCancelAtApplyJobError: string;
 
 }

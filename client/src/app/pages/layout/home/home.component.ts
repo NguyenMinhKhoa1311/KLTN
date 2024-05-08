@@ -45,26 +45,31 @@ export class HomeComponent implements OnDestroy {
   jobsTakenByHotJob$ = this.store.select('job', 'jobTakenByHotJobAtHome');
   jobsTakenByCareer$ = this.store.select('job', 'jobTakenByCareerAtHome');
   jobTakenByGetAllAndSortByWelfareAndSalary$ = this.store.select('job', "jobsTakenByAllAndSortByWelfareAndSalaryAtHome")
-
+  isGetAllAndSortByWelfareAndSalarySuccess$ = this.store.select('job', 'isGetAllAndSortByWelfareAndSalaryAtHomeSuccess');
+  isGetByHotJobSuccess$ = this.store.select('job', 'isGetByHotJobAtHomeSuccess');
+  isGetByCareerSuccess$ = this.store.select('job', 'isGetByCareerAtHomeSuccess');
 
   //ngrx for field
   fieldsTakenAtHome$ = this.store.select('field', 'fieldAtHome');
+  isGetFieldAtHomeSuccess$ = this.store.select('field', 'isGetFieldAtHomeSuccess');
 
 
   //ngrx for company
   compantTakenByGetAllAndSortAtHome$ = this.store.select('company', 'companysTakenByGetAllAndSortAtHome');
   //test
-  isGetByFieldAtHomeLoading$ = this.store.select('job', 'isGetByFieldAtHomeLoading');
   isGetFieldAtHomeLoading$ = this.store.select('field', 'isGetFieldAtHomeLoading');
 
 //variables
   JobGetByHotJob: Job[] = [];
   JobGetByCareer: Job[] = [];
   JobGetByAllAndSortByWelfareAndSalary: Job[] = [];
+  isGetJobByCareerSuccess: boolean = false;
+  isGetJobByHotJobSuccess: boolean = false;
+  isGetJobByAllAndSortByWelfareAndSalarySuccess: boolean = false;
   fields: Field[] = [];
   companys: Company[] = [];
   pageHotJob: number = 0;
-  pageByField: number = 0;
+  pageByWelfareAndSalary: number = 0;
   pageByCareer: number = 0;
   pageOfField: number = 0;
   candidateToRender: Candidate = <Candidate>{} ;
@@ -101,23 +106,33 @@ export class HomeComponent implements OnDestroy {
     
 
     this.subscriptions.push(
+    // isGetByCareerSuccess$
+        this.isGetByCareerSuccess$.subscribe((isSuccess) => {
+          this.isGetJobByCareerSuccess = isSuccess;
+        }),
     //job taken by career
-
         this.jobsTakenByCareer$.subscribe((jobs) => {
           if(jobs.length>0){
             console.log(jobs);
             this.JobGetByCareer = jobs;
+          }else if(this.isGetJobByCareerSuccess){
+            this.pageByCareer--;
           }
 
         }),
 
-
+    // isGetByHotJobSuccess$
+        this.isGetByHotJobSuccess$.subscribe((isSuccess) => {
+          this.isGetJobByHotJobSuccess = isSuccess;
+        }),
     //job taken by hot job
 
         this.jobsTakenByHotJob$.subscribe((jobs) => {
           if(jobs.length>0){
           console.log(jobs);
           this.JobGetByHotJob = jobs;
+          }else if(this.isGetJobByHotJobSuccess){
+            this.pageHotJob--;
           }
         }),
 
@@ -127,6 +142,8 @@ export class HomeComponent implements OnDestroy {
           if(fields.length>0){
             console.log(fields);
             this.fields = fields;
+          }else{
+            this.pageOfField--;
           }
 
         }),
@@ -139,12 +156,17 @@ export class HomeComponent implements OnDestroy {
             this.companys = companys;
           }
         }),
-
+    // isGetAllAndSortByWelfareAndSalarySuccess$
+        this.isGetAllAndSortByWelfareAndSalarySuccess$.subscribe((isSuccess) => {
+          this.isGetJobByAllAndSortByWelfareAndSalarySuccess = isSuccess;
+        }),
     // job taken by get all and sort by welfare and salary
       
           this.jobTakenByGetAllAndSortByWelfareAndSalary$.subscribe((jobs) => {
             if(jobs.length>0){
               this.JobGetByAllAndSortByWelfareAndSalary = jobs;
+            }else if(this.isGetJobByAllAndSortByWelfareAndSalarySuccess){
+              this.pageByWelfareAndSalary--;
             }
           }),
 
@@ -175,15 +197,15 @@ export class HomeComponent implements OnDestroy {
     }
   }
 
-  nextPageByField(): void {
-    this.pageByField += 1;
-    this.store.dispatch(JobActions.getByFieldAtHome({field: this.candidateToRender.Field._id, page: this.pageByField, limit: 9}));
+  nextPageWithGetAllAndSortByWelfareAndSalary(): void {
+    this.pageByWelfareAndSalary += 1;
+    this.store.dispatch(JobActions.getAllAndSortByWelfareAndSalaryAtHome({ page: this.pageByWelfareAndSalary, limit: 9}));
   }
 
-  previousPageByField(): void {
-    if (this.pageByField > 0) {
-      this.pageByField -= 1;
-      this.store.dispatch(JobActions.getByFieldAtHome({field:this.candidateToRender.Field._id, page: this.pageByField, limit: 9}));
+  previousPageWithGetAllAndSortByWelfareAndSalary(): void {
+    if (this.pageByWelfareAndSalary > 0) {
+      this.pageByWelfareAndSalary -= 1;
+      this.store.dispatch(JobActions.getAllAndSortByWelfareAndSalaryAtHome({ page: this.pageByWelfareAndSalary, limit: 9}));
     }
   }
 
@@ -251,9 +273,14 @@ export class HomeComponent implements OnDestroy {
         companyId: companyId
       }]);
     }
-    navigateToJobs(fieldId: string) {
+    navigateToJobs(field: string) {
       this.router.navigate(['/job',{
-        fieldId: fieldId
+        field: field
+      }]);
+    }
+    navigateToJoByCareer(career: string) {
+      this.router.navigate(['/job',{
+        career: career
       }]);
     }
 

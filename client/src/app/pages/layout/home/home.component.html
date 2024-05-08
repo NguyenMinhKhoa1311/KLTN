@@ -181,7 +181,7 @@
             ></button>
         <div class="carousel">
             <div class="carousel_industries" *ngFor="let field of fields">
-                <div class="item_industries" (click)="navigateToJobs(field._id)">
+                <div class="item_industries" (click)="navigateToJobs(field.FieldName)">
                     <div class="logo_industries">
                         <img src="../../../../assets/images/kinhdoanh.png" alt="">
                     </div>
@@ -271,9 +271,9 @@
             
 
             <div class="control_item">
-                <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" (click)="previousPageByField()"></button>
+                <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" (click)="previousPageWithGetAllAndSortByWelfareAndSalary()"></button>
                 <tui-pagination size="s" class="pagination" [length]="5" [(index)]="index_item"></tui-pagination>
-                <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button" (click)="nextPageByField()"></button>
+                <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button" (click)="nextPageWithGetAllAndSortByWelfareAndSalary()"></button>
             </div>
         </div>
     </div>
@@ -286,7 +286,7 @@
                 <span class="title">Việc làm ngành</span>
                 <span class="hightLight">{{candidateToRender.Career.Name}}</span>
             </div>
-            <span class="see_more"> Xem tất cả</span>
+            <span class="see_more" (click)="navigateToJoByCareer(candidateToRender.Career.Name)"> Xem tất cả</span>
         </div>
         <div class="body">
             <div class="item_box">

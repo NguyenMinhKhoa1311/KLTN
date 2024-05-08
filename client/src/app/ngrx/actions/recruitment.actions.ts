@@ -82,3 +82,23 @@ export const updateDateInterviewAtAplicationListFailure = createAction(
     '[Recruitment] Update Date Interview At Aplication List Failure',
     props<{error: string}>(),
 );
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateStatusCancelAtApplyJob = createAction(
+    '[Recruitment] Update Status Cancel At Apply Job',
+    props<{id: string, status: boolean}>(),
+);
+export const updateStatusCancelAtApplyJobSuccess = createAction(
+    '[Recruitment] Update Status Cancel Success At Apply Job',
+    props<{recruitment:Recruitment}>(),
+);
+export const updateStatusCancelAtApplyJobFailure = createAction(
+    '[Recruitment] Update Status Cancel Failure At Apply Job',
+    props<{error: string}>(),
+);
+
+
+

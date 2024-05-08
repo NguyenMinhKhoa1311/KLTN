@@ -28,10 +28,12 @@ export class ApplyListComponent implements OnDestroy{
   recruitments: Recruitment[] = [];
   jobToRender: Job = <Job>{};
   isGetJobByApplyJob: boolean = false;
+  candidateLogin: Candidate = <Candidate>{};
 
   
   //ngrx of recruitment
   recruitmentGetByCandidate$ = this.store.select('recruitment','recruitmentsTakenByCandidate')
+  isUpdateStatusCancelSuccess$ = this.store.select('recruitment','isUpdateStatusCancelAtApplyJobSuccess');
   
   //ngrx of job
   jobTakenByJobIdAtApplyJob$ = this.store.select('job','jobTakenByJobIdAtApplyJob');
@@ -52,6 +54,7 @@ export class ApplyListComponent implements OnDestroy{
       let userAfterParse = JSON.parse(userLogged) as Candidate;
       if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
         console.log(userAfterParse);
+        this.candidateLogin = userAfterParse;
         this.store.dispatch(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate({ candidate: userAfterParse?._id,  page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc' }))
       }
     };
@@ -70,6 +73,11 @@ export class ApplyListComponent implements OnDestroy{
           }
           this.jobToRender = job;
           console.log(this.jobToRender);
+        }
+      }),
+      this.isUpdateStatusCancelSuccess$.subscribe((isSuccess) => {
+        if(isSuccess){
+          this.store.dispatch(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate({ candidate: this.candidateLogin?._id,  page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc' }))
         }
       })
     )
@@ -92,5 +100,8 @@ export class ApplyListComponent implements OnDestroy{
   closeDetailDialog() {
     this.detailDialog.nativeElement.close();
     this.cdr1.detectChanges();
+  }
+  cancelRecruitment(jobId: string){
+    this.store.dispatch(RecruitmentActions.updateStatusCancelAtApplyJob({id: jobId, status: true}));
   }
 }

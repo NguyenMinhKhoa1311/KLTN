@@ -1,18 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { Job } from "../../models/job.model";
 
-export const getByFieldAtHome = createAction(
-    '[Job] Get By Field At Home',
-    props<{ field: string; page: number; limit: number }>()
-);
-export const getByFieldAtHomeSuccess = createAction(
-    '[Job] Get By Field At Home Success',
-    props<{ jobs: Job[] }>()
-);
-export const getByFieldAtHomeFailure = createAction(
-    '[Job] Get By Field At Home Failure',
-    props<{ error: string }>()
-);
+
 
 
 
@@ -215,20 +204,6 @@ export const getByCompanyAtCompanyDetailFailure = createAction(
 
 
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const getByFieldAtJob = createAction(
-    '[Job] Get By Field At Job',
-    props<{ field: string, page: number, limit: number}>()
-);
-export const getByFieldAtJobSuccess = createAction(
-    '[Job] Get By Field At Job Success',
-    props<{ jobs: Job[] }>()
-);
-export const getByFieldAtJobFailure = createAction(
-    '[Job] Get By Field At Job Failure',
-    props<{ error: string }>()
-);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByJobIdAtApplyJob = createAction(

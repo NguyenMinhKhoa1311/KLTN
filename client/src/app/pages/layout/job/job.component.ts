@@ -39,7 +39,6 @@ export class JobComponent implements OnDestroy{
 
   //variables
   isGetByLocation: boolean = false;
-  isGetByField: boolean = false;
   isGetByFieldName: boolean = false;
   isGetByCareer: boolean = false;
   isGetAll: boolean = false;
@@ -48,7 +47,6 @@ export class JobComponent implements OnDestroy{
   isGetAllAndSortSuccess: boolean = false;
   isGetByKeywordSuccess: boolean = false;
   isGetByCareerSuccess: boolean = false;
-  isGetByFieldSuccess: boolean = false;
   isGetByFieldNameSuccess: boolean = false;
   isGetByLocationSuccess: boolean = false;
   isGetByTagSuccess: boolean = false;
@@ -61,10 +59,13 @@ export class JobComponent implements OnDestroy{
   isGetByTagWithUrgentSuccess: boolean = false;
   tagValue: string = "";
 
+  isGetByFieldNameAddNavigate: boolean = false;
+
 
 
   page: number = 0;
-  fieldId: string = "";
+  field: string = "";
+  career: string = "";
   isUpdatedFavoriteJob: boolean = false;
   isDeletedFavoriteJob: boolean = false;
   jobToRender: Job[] = [];
@@ -76,8 +77,6 @@ export class JobComponent implements OnDestroy{
   // ngrx of job
   isGetAllAndSortAtJobSuccess$ = this.store.select('job', 'isGetAllAndSortAtJobSuccess');
   jobsTakenByAllAndSort$ = this.store.select('job', 'JobTakenBygetAllAndSortAtJob');
-  isGetByFieldSuccess$ = this.store.select('job', 'isGetByFieldAtJobSuccess');
-  jobsTakenByField$ = this.store.select('job', 'jobsTakenByFieldAtJob');
   isGetByFieldNameSuccess$ = this.store.select('job', 'isGetByFieldNameAtJobSuccess');
   jobTakenByFieldName$ = this.store.select('job', 'JobTakenByFieldNameAtJob');
   isGetByCareerSuccess$ = this.store.select('job', 'isGetByCareerNameAtJobSuccess');
@@ -130,22 +129,41 @@ export class JobComponent implements OnDestroy{
     private router: Router,
     private _snackBar: MatSnackBar
   ){
-    this.fieldId = this.route.snapshot.paramMap.get('fieldId')??"";
-    if(this.fieldId.length > 0){
+    this.field = this.route.snapshot.paramMap.get('field')??"";
+    this.career = this.route.snapshot.paramMap.get('career')??"";
+    if(this.field.length > 0){
+      this.isGetByFieldNameAddNavigate = true;
       this.isGetAll = false;
-      this.isGetByField = true;
+      this.isGetByFieldName = true;
       this.isGetByCareer = false;
       this.isGetByLocation = false;
       this.isGetByKeyword = false;
-      this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: 0, limit: 9}));
-    }else{
+      this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.field, page: 0, limit: 9}));
+    }else if(this.career.length == 0){
       this.isGetAll = true;
-      this.isGetByField = false;
+      this.isGetByFieldName = false;
       this.isGetByCareer = false;
       this.isGetByLocation = false;
       this.isGetByKeyword = false;
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9}));
     }
+    if(this.career.length > 0){
+      this.isGetAll = false;
+      this.isGetByFieldName = false;
+      this.isGetByCareer = true;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
+      this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.career, page: 0, limit: 9}));
+    }else if(this.field.length == 0){
+      this.isGetAll = true;
+      this.isGetByFieldName = false;
+      this.isGetByCareer = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = false;
+      this.store.dispatch(CareerActions.getAllAtJobs());
+      this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9}));
+    }
+
     
     let userLogged = sessionStorage.getItem('userLogged');
     if(userLogged){
@@ -172,23 +190,6 @@ export class JobComponent implements OnDestroy{
         if(jobs.length>0){
           this.jobToRender = jobs;
         }else if(this.isGetAll && this.isGetAllAndSortSuccess){
-          if(this.page>0){
-            this.page--;
-          }
-          this.openSnackBar("Không còn công việc nào phù hợp");
-        }
-      }),
-      //subscribe to ngrx of isGetByFieldAtJobSuccess
-      this.isGetByFieldSuccess$.subscribe((isSuccess)=>{
-        if(isSuccess){
-          this.isGetByFieldSuccess = isSuccess;
-        }
-      }),
-      //subscribe to ngrx of jobsTakenByFieldAtJob
-      this.jobsTakenByField$.subscribe((jobs)=>{        
-        if(jobs.length>0){
-          this.jobToRender = jobs;
-        }else if(this.isGetByField&&this.isGetByFieldSuccess){
           if(this.page>0){
             this.page--;
           }
@@ -382,23 +383,6 @@ export class JobComponent implements OnDestroy{
           this.openSnackBar("Không có công việc nào");
         }
       }),
-      //subscribe to ngrx of isGetByFieldWithUrgentAtJobSuccess
-      this.isGetByFieldWithUrgentSuccess$.subscribe((isSuccess)=>{
-        if(isSuccess){
-          this.isGetByFieldWithUrgentSuccess = isSuccess;
-        }
-      }),
-      //subscribe to ngrx of getByFieldWithUrgentAtJob
-      this.jobTakenByFieldWithUrgent$.subscribe((jobs)=>{
-        if(jobs.length>0){
-          this.jobToRender = jobs;
-        }else if(this.isGetByField&&this.isGetByFieldWithUrgentSuccess){
-          if(this.page>0){
-            this.page--;
-          }
-          this.openSnackBar("Không có công việc nào");
-        }
-      }),
       //subscribe to ngrx of isGetByFieldNameWithUrgentAtJobSuccess
       this.isGetByFieldNameWithUrgentSuccess$.subscribe((isSuccess)=>{
         if(isSuccess){
@@ -522,7 +506,6 @@ export class JobComponent implements OnDestroy{
     console.log("Giá trị đã chọn là: ", this.fieldValue);
     if(this.fieldValue != null){
       this.isGetAll = false;
-      this.isGetByField = false;
       this.isGetByFieldName = true;
       this.isGetByCareer = false;
       this.isGetByLocation = false;
@@ -539,7 +522,6 @@ export class JobComponent implements OnDestroy{
       this.store.dispatch(CareerActions.getByFieldNameAtJob({fieldName: this.fieldValue}));
     }else{
       this.isGetAll = true;
-      this.isGetByField = false;
       this.isGetByCareer = false;
       this.isGetByFieldName = false;
       this.isGetByLocation = false;
@@ -561,7 +543,6 @@ export class JobComponent implements OnDestroy{
     console.log("Giá trị đã chọn là: ", this.careerValue);
     if(this.careerValue != null){
       this.isGetAll = false;
-      this.isGetByField = false;
       this.isGetByCareer = true;
       this.isGetByFieldName = false;
       this.isGetByLocation = false;
@@ -577,7 +558,6 @@ export class JobComponent implements OnDestroy{
       }
     }else{
       this.isGetAll = true;
-      this.isGetByField = false;
       this.isGetByCareer = false;
       this.isGetByFieldName = false;
       this.isGetByLocation = false;
@@ -600,7 +580,6 @@ export class JobComponent implements OnDestroy{
     console.log("Giá trị đã chọn là: ", this.locationValue);
     if(this.locationValue != null){
       this.isGetAll = false;
-      this.isGetByField = false;
       this.isGetByFieldName = false;
       this.isGetByCareer = false;
       this.isGetByLocation = true;
@@ -618,7 +597,6 @@ export class JobComponent implements OnDestroy{
         this.page = 0;
       }
       this.isGetAll = true;
-      this.isGetByField = false;
       this.isGetByFieldName = false;
       this.isGetByCareer = false;
       this.isGetByLocation = false;
@@ -633,7 +611,6 @@ export class JobComponent implements OnDestroy{
 
   searchByKeyword():void {
     this.isGetAll = false;
-    this.isGetByField = false;
     this.isGetByFieldName = false;
     this.isGetByCareer = false;
     this.isGetByLocation = false;
@@ -652,8 +629,6 @@ export class JobComponent implements OnDestroy{
     this.page++;
     if(this.isGetByCareer && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: this.page, limit: 9}));
-    }else if(this.isGetByField && !this.UrgentForm.value.checked){
-      this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: this.page, limit: 9}));
     } else if(this.isGetByLocation && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: this.page, limit: 9}));
     }else if(this.isGetByKeyword && !this.UrgentForm.value.checked){
@@ -661,13 +636,16 @@ export class JobComponent implements OnDestroy{
     }else if(this.isGetAll && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9}));
     } else if(this.isGetByFieldName && !this.UrgentForm.value.checked){
-      this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9}));
+      if(this.isGetByFieldNameAddNavigate){
+        this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.field, page: this.page, limit: 9}));
+      }else{
+        this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9}));
+      }
+
     }else if(this.isGetByTag && !this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByTagAtJob({tag: this.tagValue, page: this.page, limit: 9}));
     } else if(this.isGetByCareer && this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByCareerNameWithUrgentAtJob({careerName: this.careerValue, page: this.page, limit: 9, urgent: true}));
-    } else if(this.isGetByField && this.UrgentForm.value.checked){
-      this.store.dispatch(JobActions.getByFieldWithUrgentAtJob({field: this.fieldId, page: this.page, limit: 9, urgent: true}));
     } else if(this.isGetByLocation && this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByLocationdWithKeywordsWithUrgentAtJob({location: this.locationValue, page: this.page, limit: 9, urgent: true}));
     } else if(this.isGetByKeyword && this.UrgentForm.value.checked){
@@ -675,7 +653,11 @@ export class JobComponent implements OnDestroy{
     } else if(this.isGetAll && this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: this.page, limit: 9, urgent: true}));
     } else if(this.isGetByFieldName && this.UrgentForm.value.checked){
-      this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, urgent: true}));
+      if(this.isGetByFieldNameAddNavigate){
+        this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.field, page: this.page, limit: 9, urgent: true}));
+      }else{
+        this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, urgent: true}));
+      }
     } else if(this.isGetByTag && this.UrgentForm.value.checked){
       this.store.dispatch(JobActions.getByTagWithUrgentAtJob({tag: this.tagValue, page: this.page, limit: 9, urgent: true}));
     }
@@ -687,9 +669,6 @@ export class JobComponent implements OnDestroy{
       if(this.isGetByCareer && !this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: this.page, limit: 9}));
       }
-      else if(this.isGetByField && !this.UrgentForm.value.checked){
-        this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: this.page, limit: 9}));
-      } 
       else if(this.isGetByLocation && !this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByLocationdWithKeywordsAtJob({location: this.locationValue, page: this.page, limit: 9}));
       } 
@@ -700,14 +679,15 @@ export class JobComponent implements OnDestroy{
         this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9}));
       }
       else if(this.isGetByFieldName && !this.UrgentForm.value.checked){
-        this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9}));
+        if(this.isGetByFieldNameAddNavigate){
+          this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.field, page: this.page, limit: 9}));
+        }else{
+          this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9}));
+        }
       }
       else if(this.isGetByCareer && this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByCareerNameWithUrgentAtJob({careerName: this.careerValue, page: this.page, limit: 9, urgent: true}));
       }
-      else if(this.isGetByField && this.UrgentForm.value.checked){
-        this.store.dispatch(JobActions.getByFieldWithUrgentAtJob({field: this.fieldId, page: this.page, limit: 9, urgent: true}));
-      } 
       else if(this.isGetByLocation && this.UrgentForm.value.checked){
         this.store.dispatch(JobActions.getByLocationdWithKeywordsWithUrgentAtJob({location: this.locationValue, page: this.page, limit: 9, urgent: true}));
       } 
@@ -718,7 +698,11 @@ export class JobComponent implements OnDestroy{
         this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: this.page, limit: 9, urgent: true}));
       } 
       else if(this.isGetByFieldName && this.UrgentForm.value.checked){
-        this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, urgent: true}));
+        if(this.isGetByFieldNameAddNavigate){
+          this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.field, page: this.page, limit: 9, urgent: true}));
+        }else{
+          this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, urgent: true}));
+        }
       }
     }
 
@@ -812,11 +796,12 @@ export class JobComponent implements OnDestroy{
       if(this.isGetAll){
         this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: this.page, limit: 9, urgent: true}));
       }
-      else if(this.isGetByField){
-        this.store.dispatch(JobActions.getByFieldWithUrgentAtJob({field: this.fieldId, page: this.page, limit: 9, urgent: true}));
-      }
       else if(this.isGetByFieldName){
-        this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, urgent: true}));
+        if(this.isGetByFieldNameAddNavigate){
+          this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.field, page: this.page, limit: 9, urgent: true}));
+        }else{
+          this.store.dispatch(JobActions.getByFieldNameWithUrgentAtJob({fieldName: this.fieldValue, page: this.page, limit: 9, urgent: true}));
+        }
       }
       else if(this.isGetByCareer){
         this.store.dispatch(JobActions.getByCareerNameWithUrgentAtJob({careerName: this.careerValue, page: this.page, limit: 9, urgent: true}));
@@ -833,11 +818,12 @@ export class JobComponent implements OnDestroy{
       if(this.isGetAll){
         this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9}));
       }
-      else if(this.isGetByField){
-        this.store.dispatch(JobActions.getByFieldAtJob({field: this.fieldId, page: this.page, limit: 9}));
-      }
       else if(this.isGetByFieldName){
-        this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9}));
+        if(this.isGetByFieldNameAddNavigate){
+          this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.field, page: this.page, limit: 9}));
+        }else{
+          this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.fieldValue, page: this.page, limit: 9}));
+        }
       }
       else if(this.isGetByCareer){
         this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.careerValue, page: this.page, limit: 9}));
