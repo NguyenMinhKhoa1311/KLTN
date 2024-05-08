@@ -81,6 +81,26 @@ export class RecruitmentService {
     }
   }
 
+  async updateStatusCancel(jobId:string, status: boolean){
+    try{
+      const updateJob = await this.RecruitmentModel.findByIdAndUpdate(
+        jobId,
+        {
+          StatusCancel: status
+        },
+        {new:true}
+      ).exec();
+      console.log(updateJob);
+      
+      if(updateJob._id.toString().length > 0){
+        return true;
+      }
+      else false;
+    }catch(error){
+      return false;
+    }
+  }
+
   async findByCandidate(candidate: string,page: number, limit: number ,sortBy ='createAt' , sortOrder: 'asc'|'desc' = 'desc'){
     try{
       const sortOptions = { [sortBy]: sortOrder };

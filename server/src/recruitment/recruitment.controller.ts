@@ -59,6 +59,17 @@ export class RecruitmentController {
     }
   }
 
+  @Put('updateStatusCancel')
+  async updateStatusCancel(@Query('id') id: string, @Query('status') status: boolean) {
+    try{
+      const result = await this.recruitmentService.updateStatusCancel(id, status);
+      return result;
+    }
+    catch(err){
+      return false;
+    }
+  }
+
   @Get('getByRecruiter')
   async getByRecruiter(
     @Query('recruiter') recruiter: string,

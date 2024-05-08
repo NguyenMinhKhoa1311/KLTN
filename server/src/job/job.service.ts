@@ -517,6 +517,8 @@ constructor(
     }
   }
 
+
+
   async deleteJob(jobId:string){
     try{
       const deleteJob = await this.JobModel.findByIdAndDelete(jobId).exec();
