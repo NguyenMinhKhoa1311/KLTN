@@ -55,6 +55,11 @@ export const LAYOUT_ROUTERS: Routes = [
             path:'apply-list',
             loadChildren: () =>
               import('./apply-list/apply-list.routes').then((m) => m.APPLYLIST_ROUTERS),
+          },
+          {
+            path:'job-all',
+            loadChildren: () =>
+              import('./job-all/job-all.routes').then((m) => m.JOBALL_ROUTERS),
           }
     ],
   },

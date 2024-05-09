@@ -3,6 +3,7 @@ import { ShareModule } from '../../../shared/shared.module';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { Store } from '@ngrx/store';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {TuiAlertService} from '@taiga-ui/core';
 
 
 import { jobState } from '../../../ngrx/states/job.state';
@@ -128,7 +129,8 @@ export class JobComponent implements OnDestroy{
     private store: Store<{ job: jobState, field : FieldState, career : CareerState, candidate: candidateState }>,
     private route: ActivatedRoute,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private readonly alerts: TuiAlertService
   ){
     this.fieldId = this.route.snapshot.paramMap.get('fieldId')??"";
     if(this.fieldId.length > 0){
@@ -175,7 +177,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không còn công việc nào phù hợp");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       //subscribe to ngrx of isGetByFieldAtJobSuccess
@@ -192,7 +196,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không còn công việc nào phù hợp");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       
@@ -226,7 +232,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không còn công việc nào phù hợp");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       //subscribe to ngrx of isGetByCareerNameAtJobSuccess
@@ -243,7 +251,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không còn công việc nào phù hợp");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
 
@@ -271,7 +281,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
 
@@ -289,7 +301,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
 
@@ -327,7 +341,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
 
@@ -345,7 +361,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       //subscribe to ngrx of isGetByLocationWithUrgentAtJobSuccess
@@ -362,7 +380,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       //subscribe to ngrx of isGetByTagWithUrgentAtJobSuccess
@@ -379,7 +399,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       //subscribe to ngrx of isGetByFieldWithUrgentAtJobSuccess
@@ -396,7 +418,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       //subscribe to ngrx of isGetByFieldNameWithUrgentAtJobSuccess
@@ -413,7 +437,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       //subscribe to ngrx of isGetByCareerNameWithUrgentAtJobSuccess
@@ -430,7 +456,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       }),
       //subscribe to ngrx of isGetAllAndSortWithUrgentAtJobSuccess
@@ -447,7 +475,9 @@ export class JobComponent implements OnDestroy{
           if(this.page>0){
             this.page--;
           }
-          this.openSnackBar("Không có công việc nào");
+          this.alerts
+            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .subscribe();
         }
       })
     )
