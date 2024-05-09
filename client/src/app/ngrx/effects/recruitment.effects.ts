@@ -95,4 +95,20 @@ export class RecruitmentEffects {
         )
         )
         )
+        updateStatusCancelAtApplyJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(RecruitmentActions.updateStatusCancelAtApplyJob),
+            exhaustMap(action =>
+                this.recruitmentService.updateStatusCancel(action.id, action.status).pipe(
+                    map((recruitment) => {
+                        return RecruitmentActions.updateStatusCancelAtApplyJobSuccess({recruitment:recruitment})
+                    }),
+                    catchError((err) =>
+                        of(RecruitmentActions.updateStatusCancelAtApplyJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
 }

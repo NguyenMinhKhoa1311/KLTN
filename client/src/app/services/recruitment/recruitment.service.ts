@@ -25,5 +25,9 @@ export class RecruitmentService {
   updateDateInterview(id: string, date: string){
     return this.httpClient.put<Recruitment>(`${URL}/recruitment/updateDateInterview?id=${id}&date=${date}`, {});
   }
+
+  updateStatusCancel(id: string, status: boolean){
+    return this.httpClient.put<Recruitment>(`${URL}/recruitment/updateStatusCancel?id=${id}&status=${status}`, {});
+  }
   
 }

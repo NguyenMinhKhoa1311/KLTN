@@ -29,6 +29,11 @@ export const  initialState: RecruitmentState = {
     isUpdateDateInterviewSuccess: false,
     updateDateInterviewError: '',
     recruitmentUpdatedDateInterview:<Recruitment>{} ,
+
+    isUpdateStatusCancelAtApplyJobLoading: false,
+    isUpdateStatusCancelAtApplyJobSuccess: false,
+    updateStatusCancelAtApplyJobError: '',
+
 }
 
 export const recruitmentReducer = createReducer(
@@ -146,6 +151,28 @@ export const recruitmentReducer = createReducer(
         isUpdateDateInterviewLoading: false,
         isUpdateDateInterviewSuccess: false,
         updateDateInterviewError: action.error
+    })),
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruitmentActions.updateStatusCancelAtApplyJob, (state,action) => ({
+        ...state,
+        isUpdateStatusCancelAtApplyJobLoading: true,
+        isUpdateStatusCancelAtApplyJobSuccess: false,
+        updateStatusCancelAtApplyJobError: ''
+    })),
+    on(RecruitmentActions.updateStatusCancelAtApplyJobSuccess, (state,action) => ({
+        ...state,
+        isUpdateStatusCancelAtApplyJobLoading: false,
+        isUpdateStatusCancelAtApplyJobSuccess: true,
+        updateStatusCancelAtApplyJobError: ''
+    })),
+    on(RecruitmentActions.updateStatusCancelAtApplyJobFailure, (state,action) => ({
+        ...state,
+        isUpdateStatusCancelAtApplyJobLoading: false,
+        isUpdateStatusCancelAtApplyJobSuccess: false,
+        updateStatusCancelAtApplyJobError: action.error
     })),
 
 )

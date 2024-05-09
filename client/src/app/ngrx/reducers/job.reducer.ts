@@ -4,10 +4,7 @@ import * as JobActions from "../actions/job.actions"
 import { Job } from "../../models/job.model";
 
 export const initialState: jobState = {
-    jobTakenByFieldAtHome: [],
-    isGetByFieldAtHomeLoading: false,
-    isGetByFieldAtHomeSuccess: false,
-    getByFieldAtHomeError: "",
+
 
     jobTakenByCareerAtHome: [],
     isGetByCareerAtHomeLoading: false,
@@ -64,10 +61,7 @@ export const initialState: jobState = {
     getByCompanyAtCompanyDetailError: "",
     jobsTakenByCompanyAtCompanyDetail: [],
 
-    isGetByFieldAtJobLoading: false,
-    isGetByFieldAtJobSuccess: false,
-    getByFieldAtJobError: "",
-    jobsTakenByFieldAtJob: [],
+
 
     isGetByJobIdAtApplyJobLoading: false,
     isGetByJobIdAtApplyJobSuccess: false,
@@ -138,31 +132,6 @@ export const initialState: jobState = {
 
 export const jobReducer = createReducer(
     initialState,
-    on(JobActions.getByFieldAtHome,(state,action)=>{
-        return{
-            ...state,
-            isGetByFieldAtHomeLoading: true,
-            isGetByFieldAtHomeSuccess: false,
-            getByFieldAtHomeError: "",
-        }
-    }),
-    on(JobActions.getByFieldAtHomeSuccess,(state,action)=>{
-        return{
-            ...state,
-            jobTakenByFieldAtHome: action.jobs,
-            isGetByFieldAtHomeLoading: false,
-            isGetByFieldAtHomeSuccess: true,
-            getByFieldAtHomeError: "",
-        }
-    }),
-    on(JobActions.getByFieldAtHomeFailure,(state,action)=>{
-        return{
-            ...state,
-            isGetByFieldAtHomeLoading: false,
-            isGetByFieldAtHomeSuccess: false,
-            getByFieldAtHomeError: action.error,
-        }
-    }),
 
 
 
@@ -506,32 +475,6 @@ export const jobReducer = createReducer(
 
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    on(JobActions.getByFieldAtJob,(state,action)=>{
-        return{
-            ...state,
-            isGetByFieldAtJobLoading: true,
-            isGetByFieldAtJobSuccess: false,
-            getByFieldAtJobError: "",
-        }
-    }),
-    on(JobActions.getByFieldAtJobSuccess,(state,action)=>{
-        return{
-            ...state,
-            jobsTakenByFieldAtJob: action.jobs,
-            isGetByFieldAtJobLoading: false,
-            isGetByFieldAtJobSuccess: true,
-            getByFieldAtJobError: "",
-        }
-    }),
-    on(JobActions.getByFieldAtJobFailure,(state,action)=>{
-        return{
-            ...state,
-            isGetByFieldAtJobLoading: false,
-            isGetByFieldAtJobSuccess: false,
-            getByFieldAtJobError: action.error,
-        }
-    }),
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(JobActions.getByJobIdAtApplyJob,(state,action)=>{

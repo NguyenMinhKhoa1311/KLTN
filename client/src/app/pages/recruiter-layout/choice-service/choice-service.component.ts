@@ -26,24 +26,28 @@ export class ChoiceServiceComponent {
       name:'Nổi bật tiêu đề',
       price: 500000,
       description:'Tiêu đề in Đậm và Đỏ',
+      detailedDescription:"Tên của công việc tuyển dụng được tô đậm và đỏ ở Trang Kết Quả Tìm Kiếm theo nhóm ngành nghề, nghề nghiệp chuyên môn và lĩnh vực kinh doanh.Thu hút ứng viên chất lượng nhờ hiệu ứng tô đậm đỏ bắt mắt, nổi bật."
     },
     {
       id:2,
       name:'Đăng tuyển gấp',
       price: 500000,
       description:'Tag tuyển gấp',
+      detailedDescription:"Tiêu đề tin đăng tuyển được hiển thị với tag “Urgent”. Hiển thị trong danh sách các công việc cần tuyển gấp khi ứng viên lọc theo “Việc cần tuyển gấp” trên đầu trang kết quả tìm kiếm."
     },
     {
       id:3,
       name:'Công việc hot',
       price: 750000,
       description:'Tag nổi bật',
+      detailedDescription:"Tiêu đề tin đăng tuyển được hiển thị với tag Hot. Hiển thị trong danh sách các công việc nổi bật tại Homepage"
     },
     {
       id:4,
       name:'Độ ưu tiên cao',
       price: 1000000,
       description:'Độ ưu tiên cao',
+      detailedDescription:"Công việc tuyển dụng được tăng 1 bậc đô ưu tiên. Công việc sẽ dễ được ứng viên tìm thấy."
     },
     
   ];

@@ -1,11 +1,6 @@
 import { Job } from "../../models/job.model";
 
 export interface jobState{
-    jobTakenByFieldAtHome: Job[];
-    isGetByFieldAtHomeLoading: boolean;
-    isGetByFieldAtHomeSuccess: boolean;
-    getByFieldAtHomeError: string;
-
     jobTakenByCareerAtHome: Job[];
     isGetByCareerAtHomeLoading: boolean;
     isGetByCareerAtHomeSuccess: boolean;
@@ -62,11 +57,7 @@ export interface jobState{
     jobsTakenByCompanyAtCompanyDetail: Job[];
     
 
-    isGetByFieldAtJobLoading: boolean;
-    isGetByFieldAtJobSuccess: boolean;
-    getByFieldAtJobError: string;
-    jobsTakenByFieldAtJob: Job[];
-    
+
     isGetByJobIdAtApplyJobLoading: boolean;
     isGetByJobIdAtApplyJobSuccess: boolean;
     getByJobIdAtApplyJobError: string;
