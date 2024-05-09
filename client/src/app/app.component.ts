@@ -8,7 +8,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet, TuiRootModule, TuiDialogModule, TuiAlertModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.less',
+  styleUrl: './app.component.scss',
     providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}]
 })
 export class AppComponent {
