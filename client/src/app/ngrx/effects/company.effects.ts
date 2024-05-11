@@ -42,4 +42,20 @@ export class CompanyEffects{
             })
         )
     })
+
+    getAllAndSortAtCompany$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(CompanyActions.getAllAndSortAtCompany),
+            switchMap((action)=>{
+                return this.companyService.getAllAndSort(action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map((companys)=>{
+                        return CompanyActions.getAllAndSortAtCompanySuccess({companys: companys});
+                    }),
+                    catchError((error)=>{
+                        return of(CompanyActions.getAllAndSortAtCompanyFailure({error}));
+                    })
+                )
+            })
+        )
+    })
 }

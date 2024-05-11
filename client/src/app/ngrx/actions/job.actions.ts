@@ -202,6 +202,41 @@ export const getByCompanyAtCompanyDetailFailure = createAction(
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllAndSortByWelfareAndSalaryAtSeeAll = createAction(
+    '[Job] Get All And Sort At See All',
+    props<{ page: number, limit: number }>()
+);
+export const getAllAndSortByWelfareAndSalaryAtSeeAllSuccess = createAction(
+    '[Job] Get All And Sort At See All Success',
+    props<{ jobs: Job[] }>()
+);
+export const getAllAndSortByWelfareAndSalaryAtSeeAllFailure = createAction(
+    '[Job] Get All And Sort At See All Failure',
+    props<{ error: string }>()
+);
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByHotJobAtSeeAll = createAction(
+    '[Job] Get By Hot Job At See All',
+    props<{ page: number, limit: number }>()
+);
+export const getByHotJobAtSeeAllSuccess = createAction(
+    '[Job] Get By Hot Job At See All Success',
+    props<{ jobs: Job[] }>()
+);
+export const getByHotJobAtSeeAllFailure = createAction(
+    '[Job] Get By Hot Job At See All Failure',
+    props<{ error: string }>()
+);
+
+
+
+
+
+
 
 
 

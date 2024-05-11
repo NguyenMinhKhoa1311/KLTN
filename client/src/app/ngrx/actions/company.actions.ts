@@ -8,8 +8,8 @@ export const getAllAndSortAtHome = createAction(
 
 export const getAllAndSortAtHomeSuccess = createAction(
     '[Company] Get AllAnd Sort At Home Success',
-     props<{ companys: Company[] }>()
-     );
+    props<{ companys: Company[] }>()
+    );
 export const getAllAndSortAtHomeFailure = createAction(
     '[Company] Get All And Sort At Home Failure',
     props<{ error: string }>()
@@ -32,5 +32,23 @@ export const getBy_IdAtCmopanyDetailSuccess = createAction(
     );
 export const getBy_IdAtCmopanyDetailFailure = createAction(
     '[Company] Get By Id At Company Detail Failure',
+    props<{ error: string }>()
+    );
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllAndSortAtCompany = createAction(
+    '[Company] Get All And Sort At Home',
+    props<{ page: number, limit: number, sortBy: string, sortOrder: string }>()
+    );
+export const getAllAndSortAtCompanySuccess = createAction(
+    '[Company] Get AllAnd Sort At Home Success',
+    props<{ companys: Company[] }>()
+    );
+export const getAllAndSortAtCompanyFailure = createAction(
+    '[Company] Get All And Sort At Home Failure',
     props<{ error: string }>()
     );

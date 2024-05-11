@@ -127,6 +127,16 @@ export const initialState: jobState = {
     getAllAndSortByWelfareAndSalaryAtHomeError: "",
     jobsTakenByAllAndSortByWelfareAndSalaryAtHome: [],
 
+    isGetAllAndSortByWelfareAndSalaryAtSeeAllLoading: false,
+    isGetAllAndSortByWelfareAndSalaryAtSeeAllSuccess: false,
+    getAllAndSortByWelfareAndSalaryAtSeeAllError: "",
+    jobsTakenByAllAndSortByWelfareAndSalaryAtSeeAll: [],
+
+    isGetByHotJobAtSeeAllLoading: false,
+    isGetByHotJobAtSeeAllSuccess: false,
+    getByHotJobAtSeeAllError: "",
+    jobsTakenByHotJobAtSeeAll: [],
+
 
 }
 
@@ -865,6 +875,67 @@ on(JobActions.getAllAndSortByWelfareAndSalaryAtHomeFailure,(state,action)=>{
         getAllAndSortByWelfareAndSalaryAtHomeError: action.error,
     }
 }),
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getAllAndSortByWelfareAndSalaryAtSeeAll,(state,action)=>{
+    return{
+        ...state,
+        isGetAllAndSortByWelfareAndSalaryAtSeeAllLoading: true,
+        isGetAllAndSortByWelfareAndSalaryAtSeeAllSuccess: false,
+        getAllAndSortByWelfareAndSalaryAtSeeAllError: "",
+    }
+}),
+on(JobActions.getAllAndSortByWelfareAndSalaryAtSeeAllSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByAllAndSortByWelfareAndSalaryAtSeeAll: action.jobs,
+        isGetAllAndSortByWelfareAndSalaryAtSeeAllLoading: false,
+        isGetAllAndSortByWelfareAndSalaryAtSeeAllSuccess: true,
+        getAllAndSortByWelfareAndSalaryAtSeeAllError: "",
+    }
+}),
+on(JobActions.getAllAndSortByWelfareAndSalaryAtSeeAllFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetAllAndSortByWelfareAndSalaryAtSeeAllLoading: false,
+        isGetAllAndSortByWelfareAndSalaryAtSeeAllSuccess: false,
+        getAllAndSortByWelfareAndSalaryAtSeeAllError: action.error,
+    }
+}),
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByHotJobAtSeeAll,(state,action)=>{
+    return{
+        ...state,
+        isGetByHotJobAtSeeAllLoading: true,
+        isGetByHotJobAtSeeAllSuccess: false,
+        getByHotJobAtSeeAllError: "",
+    }
+}),
+on(JobActions.getByHotJobAtSeeAllSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByHotJobAtSeeAll: action.jobs,
+        isGetByHotJobAtSeeAllLoading: false,
+        isGetByHotJobAtSeeAllSuccess: true,
+        getByHotJobAtSeeAllError: "",
+    }
+}),
+on(JobActions.getByHotJobAtSeeAllFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByHotJobAtSeeAllLoading: false,
+        isGetByHotJobAtSeeAllSuccess: false,
+        getByHotJobAtSeeAllError: action.error,
+    }
+}),
+
 
 
 )

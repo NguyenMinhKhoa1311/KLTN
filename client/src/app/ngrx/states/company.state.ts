@@ -12,4 +12,11 @@ export interface CompanyState{
     getByIdAtCompanyDetailError: string;
     companyTakenByGetByIdAtCompanyDetail: Company;
 
+
+
+    isGetAllAndSortAtCompanyLoading: boolean;
+    isGetAllAndSortAtCompanySuccess: boolean;
+    getAllAndSortAtCompanyError: string;
+    companysTakenByGetAllAndSortAtCompany: Company[];
+    
 } 

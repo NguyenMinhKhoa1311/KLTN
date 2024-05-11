@@ -333,6 +333,40 @@ export class JobEffects {
         )
         )
 
+    getByHotJobAtSeeAll$= createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByHotJobAtSeeAll),
+            switchMap(action =>
+                this.jobService.getByHotJob(action.page, action.limit).pipe(
+                    map(jobs => {
+                        return JobActions.getByHotJobAtSeeAllSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByHotJobAtSeeAllFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+    
+    getAllAndSortByWelfareAndSalaryAtSeeAll$= createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getAllAndSortByWelfareAndSalaryAtSeeAll),
+            switchMap(action =>
+                this.jobService.getAllAndSortByWelfareAndSalary(action.page, action.limit).pipe(
+                    map(jobs => {
+                        return JobActions.getAllAndSortByWelfareAndSalaryAtSeeAllSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getAllAndSortByWelfareAndSalaryAtSeeAllFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
     getByCompanyAtCompanyDetail$= createEffect(() =>
         this.actions$.pipe(
             ofType(JobActions.getByCompanyAtCompanyDetail),
@@ -372,6 +406,7 @@ export class JobEffects {
         )
         )
         )
+
 
         updateRecruitmentAtJobDetail$= createEffect(() =>
             this.actions$.pipe(

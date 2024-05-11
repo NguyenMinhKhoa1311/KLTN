@@ -13,7 +13,12 @@ export const initualState: CompanyState = {
     isGetByIdAtCompanyDetailLoading: false,
     isGetByIdAtCompanyDetailSuccess: false,
     getByIdAtCompanyDetailError: '',
-    companyTakenByGetByIdAtCompanyDetail: <Company>{}
+    companyTakenByGetByIdAtCompanyDetail: <Company>{},
+
+    isGetAllAndSortAtCompanyLoading: false,
+    isGetAllAndSortAtCompanySuccess: false,
+    getAllAndSortAtCompanyError: '',
+    companysTakenByGetAllAndSortAtCompany: []
 
 };
 
@@ -72,5 +77,35 @@ export const companyReducer = createReducer(
             getByIdAtCompanyDetailError: action.error
         }
     }),
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CompanyActions.getAllAndSortAtCompany,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAndSortAtCompanyLoading: true,
+            isGetAllAndSortAtCompanySuccess: false,
+            getAllAndSortAtCompanyError: ''
+        }
+    }),
+    on(CompanyActions.getAllAndSortAtCompanySuccess,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAndSortAtCompanyLoading: false,
+            isGetAllAndSortAtCompanySuccess: true,
+            companysTakenByGetAllAndSortAtCompany: action.companys
+        }
+    }),
+    on(CompanyActions.getAllAndSortAtCompanyFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAndSortAtCompanyLoading: false,
+            isGetAllAndSortAtCompanySuccess: false,
+            getAllAndSortAtCompanyError: action.error
+        }
+    })
     
 )

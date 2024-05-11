@@ -130,5 +130,17 @@ export interface jobState{
     jobsTakenByAllAndSortByWelfareAndSalaryAtHome: Job[];
 
 
+    isGetAllAndSortByWelfareAndSalaryAtSeeAllLoading: boolean;
+    isGetAllAndSortByWelfareAndSalaryAtSeeAllSuccess: boolean;
+    getAllAndSortByWelfareAndSalaryAtSeeAllError: string;
+    jobsTakenByAllAndSortByWelfareAndSalaryAtSeeAll: Job[];
+
+
+    isGetByHotJobAtSeeAllLoading: boolean;
+    isGetByHotJobAtSeeAllSuccess: boolean;
+    getByHotJobAtSeeAllError: string;
+    jobsTakenByHotJobAtSeeAll: Job[];
+
+
 
 }
