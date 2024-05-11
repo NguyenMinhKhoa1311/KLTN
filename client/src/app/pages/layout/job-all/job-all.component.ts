@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './job-all.component.html',
-  styleUrl: './job-all.component.scss'
+  styleUrl: './job-all.component.less'
 })
 export class JobAllComponent {
 
