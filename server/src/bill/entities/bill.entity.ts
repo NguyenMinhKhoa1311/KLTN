@@ -40,6 +40,13 @@ export class Bill {
 
     @Prop({required: true})
     DatePayment: Date;
+
+    @Prop({
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Recruiter'
+    })
+    Recruiter: string;
 }
 
 export const BillSchema = SchemaFactory.createForClass(Bill);
