@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -20,6 +20,10 @@ import { WorkExperienceModule } from './work-experience/work-experience.module';
 import { SendMailModule } from './send-mail/send-mail.module';
 import { SkillModule } from './skill/skill.module';
 import { ReferencesModule } from './references/references.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthMiddleware } from './auth/auth.middleware';
+import { JobController } from './job/job.controller';
+import { FieldController } from './field/field.controller';
 
 
 @Module({
@@ -43,6 +47,7 @@ import { ReferencesModule } from './references/references.module';
     SendMailModule,
     SkillModule,
     ReferencesModule,
+    AuthModule,
 
 
 
@@ -50,4 +55,27 @@ import { ReferencesModule } from './references/references.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+ //export class AppModule {} //no middleware
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    // Áp dụng middleware cho tất cả các đường dẫn ngoại trừ '/public'
+    consumer
+      .apply(AuthMiddleware)
+      .exclude(
+        // { path: 'candidate', method: RequestMethod.GET },
+        // { path: 'bill', method: RequestMethod.ALL },
+        // { path: 'recruitment', method: RequestMethod.ALL },
+        // { path: 'storage', method: RequestMethod.ALL },
+        // { path: 'education', method: RequestMethod.ALL },
+        // { path: 'work-experience', method: RequestMethod.ALL },
+        // { path: 'send-mail', method: RequestMethod.ALL },
+        // { path: 'skill', method: RequestMethod.ALL },
+        // { path: 'references', method: RequestMethod.ALL },
+        // { path: 'auth', method: RequestMethod.ALL },
+
+      )
+      .forRoutes(
+        
+      );
+  }
+} // with middleware

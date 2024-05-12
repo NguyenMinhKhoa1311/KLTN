@@ -56,7 +56,7 @@ export class Candidate {
     })
     References: [mongoose.Schema.Types.ObjectId];
 
-    @Prop({required: true})
+    @Prop()
     CareerGoal: string;
 
     @Prop({
