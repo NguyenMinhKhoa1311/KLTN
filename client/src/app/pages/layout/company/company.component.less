@@ -1,0 +1,127 @@
+#company_container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: calc(100% - 24px);
+    background-color: #f5f5f5;
+    padding: 12px;
+
+    .company_box {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            margin-top: 20px;
+
+            .title_main {
+                color: rgb(0, 44, 85);
+                font-size: 40px;
+                font-weight: 600;
+                margin-bottom: 8px;
+            }
+
+            .title_sub {
+                margin: 20px 0;
+                font-size: 14px;
+            }
+        }
+
+        .search {
+            display: flex;
+            flex-direction: row;
+            .search_information {
+                background-color: #ffffff;
+                height: 100%;
+                width: 50%;
+                display: flex;
+                flex-direction: row;
+                padding: 10px;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                .search_img {
+                    width: 4%;
+                    height: 100%;
+                    //margin: 0 0 0 0.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    svg {
+                        width: 1.2rem;
+                        height: 1.2rem;
+                    }
+                }
+
+                .search {
+                    width: 100%;
+                    height: 100%;
+                    margin-left: 5px;
+                    input {
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                        font-size: 1rem;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+            }
+            .search_btn{
+                background-color: rgb(253, 145, 111) !important;
+                border: 2px solid rgb(253, 145, 111) !important;
+                border-radius: 8px;
+                margin-left: 15px;
+                width: 8%;
+                color: white;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+        }
+        .company_item{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            .item_box{
+                display: flex;
+                flex-direction: row;
+                padding: 15px;
+                background-color: white;
+                border-radius: 8px;
+                .item_img{
+                    width: 100px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
+                }
+                .item_info{
+                    margin-left: 12px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    .name{
+                        font-size: 20px;
+                    }
+                    .field{
+                        font-size: 16px;
+                    }
+                    .contact, .address{
+                        font-size: 14px;
+                        color: #666;
+                    }
+                }
+            }
+        }
+    }
+}
