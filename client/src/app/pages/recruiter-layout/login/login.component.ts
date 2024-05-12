@@ -34,6 +34,7 @@ export class LoginComponent implements OnDestroy {
 
   //ngrx state for auth
   userFirebase$ = this.store.select('auth', 'userOfRecruiterAtLogin',);
+  tokenTakenAtLoginOfRecruiter$ = this.store.select('auth', 'tokenAtLoginOfRecruiter');
 
   //ngrx of user
   userTakenByGmail$ = this.store.select('user','userTakenByUsernameOfRecruiterAtLogin')
@@ -99,9 +100,21 @@ export class LoginComponent implements OnDestroy {
             }
             else{
               sessionStorage.setItem('recruiterLoged', JSON.stringify(recruiter));
-              this.router.navigate(['recruiterLayout/job-detail']);
+              const userToGetToken: any = {
+                username: this.userLoged.Username,
+                password: this.userLoged.Password,
+              }
+              this.store.dispatch(AuthAcitons.getTokenAtLoginOfRecruiter({ user: userToGetToken }));
+              
             }
           }
+        }
+      }),
+      this.tokenTakenAtLoginOfRecruiter$.subscribe((res) => {
+        if (res.token) {
+          console.log('tokenOfRecruiter', res);
+          sessionStorage.setItem('tokenOfRecruiter', res.token);
+          this.router.navigate(['recruiterLayout/job-detail']);
         }
       }),
       this.userTakenByUsernameAndPassword$.subscribe((user) => {

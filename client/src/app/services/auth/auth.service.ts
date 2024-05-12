@@ -7,13 +7,18 @@ import {
 } from '@angular/fire/auth';
 import { from } from 'rxjs';
 import { UserFirebase } from '../../models/userFirebase.model';
+import { HttpClient } from '@angular/common/http';
+import { URL } from '../../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth:Auth) { }
+  constructor(
+    private auth:Auth,
+    private httpClient: HttpClient
+  ) { }
 
   async loginWithGoogle() {
     const userFirebase: UserFirebase = <UserFirebase>{}
@@ -34,5 +39,9 @@ export class AuthService {
   logout() {
     console.log('logout');
     return from(this.auth.signOut());
+  }
+
+  getToken(user: any) {
+    return this.httpClient.post<any>(`${URL}/auth/login`, user); 
   }
 }

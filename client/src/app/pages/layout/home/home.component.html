@@ -60,7 +60,7 @@
     <div class="best_work_box">
         <div class="header">
             <span class="title">Việc làm nổi bật</span>
-            <span class="see_more"> Xem tất cả</span>
+            <span class="see_more" (click)="navigateToSeeAll('viec-lam-noi-bat')"> Xem tất cả</span>
         </div>
         <div class="body">
             <div class="item_box">
@@ -174,7 +174,7 @@
 
 <div class="key_industries">
     <div>
-        <span class="title">Ngành nghề trọng điểm</span>
+        <span class="title">Lĩnh vực trọng điểm</span>
     </div>
     <div tuiCarouselButtons class="wrapper">
         <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" (click)="previousPageOfField()" style="margin: auto 0;"
@@ -207,7 +207,7 @@
             <div class="title_box">
                 <span class="title">Việc làm tốt nhất</span>
             </div>
-            <span class="see_more"> Xem tất cả</span>
+            <span class="see_more" (click)="navigateToSeeAll('viec-lam-tot-nhat')"> Xem tất cả</span>
         </div>
         <div class="body">
             

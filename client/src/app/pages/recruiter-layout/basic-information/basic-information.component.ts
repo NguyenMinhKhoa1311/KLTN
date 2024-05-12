@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { generateUuid } from '../../../../environments/environments';
 import * as RecruiterActions from '../../../ngrx/actions/recruiter.actions';
+import * as AuthActions from '../../../ngrx/actions/auth.actions';
+import { AuthState } from '../../../ngrx/states/auth.state';
 
 
 @Component({
@@ -24,6 +26,10 @@ export class BasicInformationComponent implements OnDestroy {
   //variables
   user: any ={}
 
+  //ngrx of auth
+  tokenTakenAtRegisterOfRecruiter$ = this.store.select('auth', 'tokenAtRegisterOfRecruiter');
+
+
   //ngrx of recruiter
   recruiterCreated$ = this.store.select('recruiter','recruiterCreatedAtRegister')
 
@@ -33,7 +39,7 @@ export class BasicInformationComponent implements OnDestroy {
     Address: new FormControl('', [Validators.required]),
   });
   constructor(
-    private store: Store<{ recruiter: RecruiterState}>,
+    private store: Store<{ recruiter: RecruiterState, auth: AuthState}>,
     private router: Router
   ) {
     const userAsJson = sessionStorage.getItem('userOfRecruiterLogged');
@@ -47,8 +53,18 @@ export class BasicInformationComponent implements OnDestroy {
       this.recruiterCreated$.subscribe((recruiter) => {
           if(recruiter._id){
             sessionStorage.setItem('recruiterLoged', JSON.stringify(recruiter));
-            this.router.navigate(['recruiterLayout/job-detail']);
+            const userToGetToken : any = {
+              username: this.user.Username,
+              password: this.user.Password
+            }
+            this.store.dispatch(AuthActions.getTokenAtRegisterOfRecruiter({user: userToGetToken}));
           }
+      }),
+      this.tokenTakenAtRegisterOfRecruiter$.subscribe((token) => {
+        if(token.token){
+          sessionStorage.setItem('tokenOfRecruiter', token.token);
+          this.router.navigate(['recruiterLayout/job-detail']);
+        }
       })
     );
   }

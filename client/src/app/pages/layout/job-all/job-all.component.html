@@ -1,35 +1,37 @@
 <div class="job_all_container">
     <div class="job_all_box">
-        <div class="title">
+        <div class="title" *ngIf="isHotJob">
+            Việc làm nổi bật
+        </div>
+        <div class="title" *ngIf="isBestJob">
             Việc làm tốt nhất
         </div>
         <div class="item_box">
-            <div class="item">
+            <div class="item" *ngFor="let job of jobToRender">
                 <div class="main">
                     <div class="avt">
-                        <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                        <img src="{{job.Company.Avatar}}" alt="">
                     </div>
                     <div class="info">
-                        <div class="name">
-                            Game Center
+                        <div class="name" (click)="navigateToJobDetail(job.JobId)">
+                            {{job.Name}}
                         </div>
                         <div class="company">
-                            Công ty TNHH Game Center
+                            {{job.Company.Name}}
                         </div>
                         <div class="address">
-                            Thành phố HCM
+                            {{job.Address}}
                         </div>
                         <div class="date">
-                            Ngày đâng: 12/12/2020
+                            Ngày đăng: {{job.StartDate}}
                         </div>
-                        <div class="tag">
-                            <div class="tag_box" >#qưerty</div>
+                        <div class="tag"*ngFor="let tag of job.Tags">
+                            <div class="tag_box" (click)="navigateToJobs(tag)">#{{tag}}</div>
                         </div>
                     </div>
                 </div>
                 <div class="salary">
-                    <!-- $1000 - $2000 -->
-                    Thương lượng
+                    {{job.Salary}}
                 </div>
             </div>
         </div>

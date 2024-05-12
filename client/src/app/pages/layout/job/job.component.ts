@@ -133,6 +133,7 @@ export class JobComponent implements OnDestroy{
   ){
     this.field = this.route.snapshot.paramMap.get('field')??"";
     this.career = this.route.snapshot.paramMap.get('career')??"";
+    this.tagValue = this.route.snapshot.paramMap.get('tag')??"";
     if(this.field.length > 0){
       this.isGetByFieldNameAddNavigate = true;
       this.isGetAll = false;
@@ -140,21 +141,23 @@ export class JobComponent implements OnDestroy{
       this.isGetByCareer = false;
       this.isGetByLocation = false;
       this.isGetByKeyword = false;
+      this.isGetByTag = false
       this.store.dispatch(JobActions.getByFieldNameAtJob({fieldName: this.field, page: 0, limit: 9}));
-    }else if(this.career.length == 0){
-      this.isGetAll = true;
+    }else if(this.tagValue.length > 0){
+      this.isGetAll = false;
       this.isGetByFieldName = false;
       this.isGetByCareer = false;
       this.isGetByLocation = false;
       this.isGetByKeyword = false;
-      this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9}));
-    }
-    if(this.career.length > 0){
+      this.isGetByTag = true;
+      this.store.dispatch(JobActions.getByTagAtJob({tag:this.tagValue,page: this.page, limit: 9}));
+    } else if(this.career.length > 0){
       this.isGetAll = false;
       this.isGetByFieldName = false;
       this.isGetByCareer = true;
       this.isGetByLocation = false;
       this.isGetByKeyword = false;
+      this.isGetByTag = false;
       this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.career, page: 0, limit: 9}));
     }else if(this.field.length == 0){
       this.isGetAll = true;
@@ -162,6 +165,7 @@ export class JobComponent implements OnDestroy{
       this.isGetByCareer = false;
       this.isGetByLocation = false;
       this.isGetByKeyword = false;
+      this.isGetByTag = false;
       this.store.dispatch(CareerActions.getAllAtJobs());
       this.store.dispatch(JobActions.getAllAndSortAtJob({page: this.page, limit: 9}));
     }

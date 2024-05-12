@@ -59,8 +59,11 @@ export class ProfileComponent implements OnDestroy {
         this.profileForm.controls.Image.setValue(this.candidateToRender.Avatar);
         this.profileForm.controls.Position.setValue(this.candidateToRender.Position);
         this.profileForm.controls.Location.setValue(this.candidateToRender.DesiredJob.Location);
-        this.profileForm.controls.Salary.setValue(this.candidateToRender.DesiredJob.Salary.toString());
+        if(this.candidateToRender.DesiredJob.Salary){
+          this.profileForm.controls.Salary.setValue(this.candidateToRender.DesiredJob.Salary.toString());
 
+        }
+        
         
       }
     }

@@ -51,9 +51,11 @@ export class NavbarComponent implements OnInit, OnDestroy{
     } 
 
     this.subscriptions.push(
+      
       this.isChangeState$.subscribe((state) => {
         if(state){
           let userLogged = sessionStorage.getItem('userLogged');
+
           if(userLogged){
             let userAfterParse = JSON.parse(userLogged);
             if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){

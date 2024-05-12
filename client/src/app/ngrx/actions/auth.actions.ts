@@ -30,6 +30,69 @@ export const loginAtRegisterFailure = createAction(
 );
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtLoginOfCandidate = createAction(
+  '[Auth] get token At Login Of Candidate',
+  props<{ user: any }>()
+);
+export const getTokenAtLoginOfCandidateSuccess = createAction(
+  '[Auth] get token At Login Of Candidate success',
+  props<{ res: any }>()
+);
+
+export const getTokenAtLoginOfCandidateFailure = createAction(
+  '[Auth] get token At Login Of Candidate failure',
+  props<{ errorMessage: string }>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtLoginOfRecruiter = createAction(
+  '[Auth] get token At Login Of Recruiter',
+  props<{ user: any }>()
+);
+export const getTokenAtLoginOfRecruiterSuccess = createAction(
+  '[Auth] get token At Login Of Recruiter success',
+  props<{ res: any }>()
+);
+export const getTokenAtLoginOfRecruiterFailure = createAction(
+  '[Auth] get token At Login Of Recruiter failure',
+  props<{ errorMessage: string }>()
+);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtRegisterOfRecruiter = createAction(
+  '[Auth] get token At Register Of Recruiter',
+  props<{ user: any }>()
+);
+export const getTokenAtRegisterOfRecruiterSuccess = createAction(
+  '[Auth] get token At Register Of Recruiter success',
+  props<{ res: any }>()
+);
+export const getTokenAtRegisterOfRecruiterFailure = createAction(
+  '[Auth] get token At Register Of Recruiter failure',
+  props<{ errorMessage: string }>()
+);
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtRegisterOfCandidate = createAction(
+  '[Auth] get token At Register Of Candidate',
+  props<{ user: any }>()
+);
+export const getTokenAtRegisterOfCandidateSuccess = createAction(
+  '[Auth] get token At Register Of Candidate success',
+  props<{ res: any }>()
+);
+export const getTokenAtRegisterOfCandidateFailure = createAction(
+  '[Auth] get token At Register Of Candidate failure',
+  props<{ errorMessage: string }>()
+);
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

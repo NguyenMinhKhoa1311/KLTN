@@ -83,6 +83,11 @@ export class HomeComponent implements OnDestroy {
     console.log("HomeComponent");
         //lấy user đã login và dùng
         let userLogged = sessionStorage.getItem('userLogged');
+        let token = sessionStorage.getItem('tokenOfCandidate');
+        if(token){
+          console.log(token);
+          
+        }
         if(userLogged){
           let userAfterParse = JSON.parse(userLogged) as Candidate;
           if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
@@ -271,6 +276,11 @@ export class HomeComponent implements OnDestroy {
     navigateToCompanyDetail(companyId: string) {
       this.router.navigate(['/company-detail',{
         companyId: companyId
+      }]);
+    }
+    navigateToSeeAll(type: string) {
+      this.router.navigate(['/job-all', {
+        type: type
       }]);
     }
     navigateToJobs(field: string) {

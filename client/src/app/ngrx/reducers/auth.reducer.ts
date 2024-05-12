@@ -29,6 +29,26 @@ export const initialState: AuthState = {
     loginOfRecruiterAtRegisterErrorMessage: '',
     userOfRecruiterAtRegister: <UserFirebase>{},
 
+    isGetTokenAtLoginOfCandidateLoading: false,
+    isGetTokenAtLoginOfCandidateSuccessfull: false,
+    getTokenAtLoginOfCandidateErrorMessage: '',
+    tokenAtLoginOfCandidate: {},
+
+    isGetTokenAtLoginOfRecruiterLoading: false,
+    isGetTokenAtLoginOfRecruiterSuccessfull: false,
+    getTokenAtLoginOfRecruiterErrorMessage: '',
+    tokenAtLoginOfRecruiter: {},
+
+    isGetTokenAtRegisterOfRecruiterLoading: false,
+    isGetTokenAtRegisterOfRecruiterSuccessfull: false,
+    getTokenAtRegisterOfRecruiterErrorMessage: '',
+    tokenAtRegisterOfRecruiter: {},
+
+    isGetTokenAtRegisterOfCandidateLoading: false,
+    isGetTokenAtRegisterOfCandidateSuccessfull: false,
+    getTokenAtRegisterOfCandidateErrorMessage: '',
+    tokenAtRegisterOfCandidate: {},
+
 };
 
 export const authReducer = createReducer(
@@ -218,5 +238,132 @@ export const authReducer = createReducer(
       return newState;
     }),
 
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtLoginOfCandidate, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtLoginOfCandidateLoading: true,
+        isGetTokenAtLoginOfCandidateSuccessfull: false,
+        getTokenAtLoginOfCandidateErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtLoginOfCandidateSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtLoginOfCandidate: action.res,
+        isGetTokenAtLoginOfCandidateLoading: false,
+        isGetTokenAtLoginOfCandidateSuccessfull: true,
+        getTokenAtLoginOfCandidateErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtLoginOfCandidateFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtLoginOfCandidateLoading: false,
+        isGetTokenAtLoginOfCandidateSuccessfull: false,
+        getTokenAtLoginOfCandidateErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtLoginOfRecruiter, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtLoginOfRecruiterLoading: true,
+        isGetTokenAtLoginOfRecruiterSuccessfull: false,
+        getTokenAtLoginOfRecruiterErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtLoginOfRecruiterSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtLoginOfRecruiter: action.res,
+        isGetTokenAtLoginOfRecruiterLoading: false,
+        isGetTokenAtLoginOfRecruiterSuccessfull: true,
+        getTokenAtLoginOfRecruiterErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtLoginOfRecruiterFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtLoginOfRecruiterLoading: false,
+        isGetTokenAtLoginOfRecruiterSuccessfull: false,
+        getTokenAtLoginOfRecruiterErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtRegisterOfRecruiter, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtRegisterOfRecruiterLoading: true,
+        isGetTokenAtRegisterOfRecruiterSuccessfull: false,
+        getTokenAtRegisterOfRecruiterErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtRegisterOfRecruiterSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtRegisterOfRecruiter: action.res,
+        isGetTokenAtRegisterOfRecruiterLoading: false,
+        isGetTokenAtRegisterOfRecruiterSuccessfull: true,
+        getTokenAtRegisterOfRecruiterErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtRegisterOfRecruiterFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtRegisterOfRecruiterLoading: false,
+        isGetTokenAtRegisterOfRecruiterSuccessfull: false,
+        getTokenAtRegisterOfRecruiterErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtRegisterOfCandidate, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtRegisterOfCandidateLoading: true,
+        isGetTokenAtRegisterOfCandidateSuccessfull: false,
+        getTokenAtRegisterOfCandidateErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtRegisterOfCandidateSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtRegisterOfCandidate: action.res,
+        isGetTokenAtRegisterOfCandidateLoading: false,
+        isGetTokenAtRegisterOfCandidateSuccessfull: true,
+        getTokenAtRegisterOfCandidateErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtRegisterOfCandidateFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtRegisterOfCandidateLoading: false,
+        isGetTokenAtRegisterOfCandidateSuccessfull: false,
+        getTokenAtRegisterOfCandidateErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
 
   );

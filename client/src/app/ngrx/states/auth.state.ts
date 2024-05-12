@@ -27,4 +27,25 @@ export interface AuthState {
   isLoginOfRecruiterAtRegisterSuccessfull: boolean;
   loginOfRecruiterAtRegisterErrorMessage: string;
   userOfRecruiterAtRegister: UserFirebase;
+
+  isGetTokenAtLoginOfCandidateLoading: boolean,
+  isGetTokenAtLoginOfCandidateSuccessfull: boolean,
+  getTokenAtLoginOfCandidateErrorMessage: string,
+  tokenAtLoginOfCandidate: any,
+
+  isGetTokenAtLoginOfRecruiterLoading: boolean,
+  isGetTokenAtLoginOfRecruiterSuccessfull: boolean,
+  getTokenAtLoginOfRecruiterErrorMessage: string,
+  tokenAtLoginOfRecruiter: any,
+
+  isGetTokenAtRegisterOfRecruiterLoading: boolean,
+  isGetTokenAtRegisterOfRecruiterSuccessfull: boolean,
+  getTokenAtRegisterOfRecruiterErrorMessage: string,
+  tokenAtRegisterOfRecruiter: any,
+
+  isGetTokenAtRegisterOfCandidateLoading: boolean,
+  isGetTokenAtRegisterOfCandidateSuccessfull: boolean,
+  getTokenAtRegisterOfCandidateErrorMessage: string,
+  tokenAtRegisterOfCandidate: any,
+
 }

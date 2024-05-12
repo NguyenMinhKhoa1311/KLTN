@@ -23,6 +23,8 @@ import { candidateState } from '../../../ngrx/states/candidate.state';
 import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 import { generateUuid } from '../../../../environments/environments';
 import { Subscription } from 'rxjs';
+import { AuthState } from '../../../ngrx/states/auth.state';
+import * as AuthActions from '../../../ngrx/actions/auth.actions';
 
 
 @Component({
@@ -52,6 +54,10 @@ export class BasicInformationComponent implements OnDestroy {
   candidateCreatedAtCreateProfile$ = this.store.select('candidate', 'candidateCreatedAtCreateProfile');
 
 
+  //ngrx of auth
+  tokenTakenAtRegisterOfCandidate$ = this.store.select('auth', 'tokenAtRegisterOfCandidate');
+
+
   fieldList:  Field[] = [];
   careerList:  Career[] = [];
   user: User= <User>{}
@@ -66,7 +72,7 @@ export class BasicInformationComponent implements OnDestroy {
   });
 
   constructor(
-    private store : Store<{ field: FieldState, career: CareerState, user: UserState, candidate: candidateState}>,
+    private store : Store<{ field: FieldState, career: CareerState, user: UserState, candidate: candidateState, auth: AuthState}>,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ){
@@ -131,9 +137,21 @@ export class BasicInformationComponent implements OnDestroy {
       if(candidate._id.length > 0){
         console.log('create candidate success');
         sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+        const userToGetToken : any = {
+          username: this.user.Username,
+          password: this.user.Password
+        }
+        this.store.dispatch(AuthActions.getTokenAtRegisterOfCandidate({user: userToGetToken}));
+      }
+    }),
+    this.tokenTakenAtRegisterOfCandidate$.subscribe(token=>{
+      console.log(token);
+      
+      if(token.token){
+        sessionStorage.setItem('tokenOfCandidate', token.token);
         this.router.navigate(['createProfile/create-success']);
       }
-    })
+    }),
     )
   }
   ngOnDestroy(): void {

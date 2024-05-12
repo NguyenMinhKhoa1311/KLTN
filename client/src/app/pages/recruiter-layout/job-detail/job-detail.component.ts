@@ -67,6 +67,11 @@ export class JobDetailComponent {
     private store: Store<{job: jobState, field: FieldState, career: CareerState}>,
 
   ){
+    let token = sessionStorage.getItem('tokenOfRecruiter');
+    
+    if(token){
+      console.log(token);
+    }
     //get job theo recruiter
     this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
 

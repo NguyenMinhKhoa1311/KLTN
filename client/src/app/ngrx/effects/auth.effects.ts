@@ -83,4 +83,60 @@ export class AuthEffects {
       )
     )
   );
+
+  getTokenAtLoginOfCandidate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtLoginOfCandidate),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtLoginOfCandidateSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtLoginOfCandidateFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
+  getTokenAtLoginOfRecruiter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtLoginOfRecruiter),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtLoginOfRecruiterSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtLoginOfRecruiterFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
+  getTokenAtRegisterOfRecruiter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtRegisterOfRecruiter),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtRegisterOfRecruiterSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtRegisterOfRecruiterFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
+  getTokenAtRegisterOfCandidate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtRegisterOfCandidate),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtRegisterOfCandidateSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtRegisterOfCandidateFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
 }
