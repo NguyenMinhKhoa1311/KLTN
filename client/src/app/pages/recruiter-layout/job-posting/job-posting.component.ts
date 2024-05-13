@@ -89,6 +89,7 @@ export class JobPostingComponent implements OnDestroy{
   servicePackageChoiced: any;
   jobToCreate: any;
   isCreateServicePackage: boolean = false;
+  token: string = "";
 
 
 
@@ -101,6 +102,11 @@ export class JobPostingComponent implements OnDestroy{
       job: jobState;
     }>
     ) {
+      let token = sessionStorage.getItem('tokenOfCandidate');
+    
+    if(token){
+      this.token = token;
+    }
       const servicePackage = sessionStorage.getItem('servicePackedChoiced');
       if(servicePackage){
         this.servicePackageChoiced = JSON.parse(servicePackage || '');
@@ -129,7 +135,7 @@ export class JobPostingComponent implements OnDestroy{
             if(servicePackage._id.length > 0){
               this.jobToCreate.ServicePackage = servicePackage._id;
               console.log(this.jobToCreate);
-              this.store.dispatch(JobActions.createJobAtJob({job: this.jobToCreate}))
+              this.store.dispatch(JobActions.createJobAtJob({job: this.jobToCreate,token: this.token}))
             }
           }
         }),
@@ -172,6 +178,8 @@ export class JobPostingComponent implements OnDestroy{
   createJob(){
     if(this.jobPostForm.value.Negotiate){
       this.jobPostForm.controls.Salary.setValue("Thỏa thuận");
+      this.jobPostForm.controls.SalaryStart.setValue("0");
+      this.jobPostForm.controls.SalaryEnd.setValue("0");
     }
     else{
       this.jobPostForm.controls.Salary.setValue(this.jobPostForm.value.SalaryStart + "-" + this.jobPostForm.value.SalaryEnd);

@@ -104,7 +104,7 @@ export const getByCareerNameAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const createJobAtJob = createAction(
     '[Job] Create Job',
-    props<{ job: any }>()
+    props<{ job: any,token: string }>()
 );
 export const createJobAtJobSuccess = createAction(
     '[Job] Create Job Success'
@@ -119,7 +119,7 @@ export const createJobAtJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateJobAtJobDetail = createAction(
     '[Job] Update Job',
-    props<{ job: any, id: string }>()
+    props<{ job: any, id: string,token:string }>()
 );
 export const updateJobAtJobDetailFailure = createAction(
     '[Job] Update Job Failure',
@@ -257,7 +257,7 @@ export const getByJobIdAtApplyJobFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteAtJobDetailOfRecruiter = createAction(
     '[Job] Delete Job',
-    props<{ id: string, companyId: string, careerId: string, fieldId: string }>()
+    props<{ id: string, companyId: string, careerId: string, fieldId: string,token: string }>()
 );
 export const deleteAtJobDetailOfRecruiterSuccess = createAction(
     '[Job] Delete Job Success',
@@ -271,7 +271,7 @@ export const deleteAtJobDetailOfRecruiterFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateRecruitmentAtJobDetail = createAction(
     '[Job] Update Recruitment At Job Detail',
-    props<{ recruitment: any, id: string }>()
+    props<{ recruitment: any, id: string, token: string }>()
 );
 export const updateRecruitmentAtJobDetailFailure = createAction(
     '[Job] Update Recruitment At Job Detail Failure',

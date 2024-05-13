@@ -18,5 +18,11 @@ export interface CompanyState{
     isGetAllAndSortAtCompanySuccess: boolean;
     getAllAndSortAtCompanyError: string;
     companysTakenByGetAllAndSortAtCompany: Company[];
+
+    isGetByNameWithKeywordAtCompanyLoading: boolean;
+    isGetByNameWithKeywordAtCompanySuccess: boolean;
+    getByNameWithKeywordAtCompanyError: string;
+    companysTakenByGetByNameWithKeywordAtCompany: Company[];
+    
     
 } 

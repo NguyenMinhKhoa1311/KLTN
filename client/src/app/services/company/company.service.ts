@@ -16,5 +16,8 @@ export class CompanyService {
   getBy_Id(id: string){
     return this.httpClient.get<Company>(`${URL}/company/getBy_id?id=${id}`);
   }
+  getByNameWithKeyword(keyword: string, page: number, limit: number, sortBy: string, sortOrder: string){
+    return this.httpClient.get<Company[]>(`${URL}/company/getByNameWithKeyword?keyword=${keyword}&page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
+  }
 
 }

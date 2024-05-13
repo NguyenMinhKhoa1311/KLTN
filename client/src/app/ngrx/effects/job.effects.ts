@@ -236,7 +236,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.createJobAtJob),
             exhaustMap(action =>
-                this.jobService.create(action.job).pipe(
+                this.jobService.create(action.job,action.token).pipe(
                     map(() => {
                         return JobActions.createJobAtJobSuccess()
                     }),
@@ -253,7 +253,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.updateJobAtJobDetail),
             exhaustMap(action =>
-                this.jobService.update(action.job, action.id).pipe(
+                this.jobService.update(action.job, action.id,action.token).pipe(
                     map(() => {
                         return JobActions.updateJobAtJobDetailSuccess({job: action.job})
                     }),
@@ -389,7 +389,7 @@ export class JobEffects {
         this.actions$.pipe(
             ofType(JobActions.deleteAtJobDetailOfRecruiter),
             switchMap(action =>
-                this.jobService.deleteJob(action.id,action.companyId,action.fieldId,action.careerId).pipe(
+                this.jobService.deleteJob(action.id,action.companyId,action.fieldId,action.careerId,action.token).pipe(
                     map((result) => {
                         if(result){
                             console.log("delete success");
@@ -412,7 +412,7 @@ export class JobEffects {
             this.actions$.pipe(
                 ofType(JobActions.updateRecruitmentAtJobDetail),
                 switchMap(action =>
-                    this.jobService.updateRecrutment(action.recruitment, action.id).pipe(
+                    this.jobService.updateRecrutment(action.recruitment, action.id,action.token).pipe(
                         map((job) => {
                             return JobActions.updateRecruitmentAtJobDetailSuccess({job: job})
                         }),

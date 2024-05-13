@@ -52,3 +52,19 @@ export const getAllAndSortAtCompanyFailure = createAction(
     '[Company] Get All And Sort At Home Failure',
     props<{ error: string }>()
     );
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByNameWithKeywordAtCompany = createAction(
+    '[Company] Get By Name With Keyword At Company',
+    props<{ keyword: string, page: number, limit: number, sortBy: string, sortOrder: string }>()
+    );
+export const getByNameWithKeywordAtCompanySuccess = createAction(
+    '[Company] Get By Name With Keyword At Company Success',
+    props<{ companys: Company[] }>()
+    );
+export const getByNameWithKeywordAtCompanyFailure = createAction(
+    '[Company] Get By Name With Keyword At Company Failure',
+    props<{ error: string }>()
+    );
+    

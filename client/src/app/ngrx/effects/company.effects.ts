@@ -58,4 +58,20 @@ export class CompanyEffects{
             })
         )
     })
+
+    getByNameWithKeywordAtCompany$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(CompanyActions.getByNameWithKeywordAtCompany),
+            switchMap((action)=>{
+                return this.companyService.getByNameWithKeyword(action.keyword, action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map((companys)=>{
+                        return CompanyActions.getByNameWithKeywordAtCompanySuccess({companys: companys});
+                    }),
+                    catchError((error)=>{
+                        return of(CompanyActions.getByNameWithKeywordAtCompanyFailure({error}));
+                    })
+                )
+            })
+        )
+    })
 }
