@@ -42,6 +42,21 @@ export class CompanyService {
     .populate('Career', 'CareerId CareerName', this.careerModel)
     .exec();
   }
+  async getByNameWithKeyword(keyword: string, page: number, limit: number,sortBy ='createAt' , sortOrder: 'asc'|'desc' = 'desc'){
+    try{
+      const sortOptions = { [sortBy]: sortOrder };
+      const skip = page * limit;
+      const companies = await this.CompanyModel.find({"Name": {"$regex": keyword, "$options": "i"}})
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return companies;
+    }
+    catch(error){
+      return []
+    }
+  }
 
   async increaseJobQuantity(id: string){
     try{
