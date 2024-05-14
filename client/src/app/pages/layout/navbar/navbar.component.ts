@@ -48,6 +48,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
       this.activeItemIndex = 3;
     } else if (this.router.url.includes('/apply-list')) {
       this.activeItemIndex = 4;
+    } else if (this.router.url.includes('/favourite-job')) {
+      this.activeItemIndex = 5;
     } 
 
     this.subscriptions.push(
@@ -94,7 +96,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
         this.userLogged = userAfterParse;
       }
     }
-
+    
     this.router.events.subscribe((event) => {
       ('navigation')
       if (event instanceof NavigationStart) {
@@ -109,6 +111,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
           this.activeItemIndex = 3;
         } else if (url.startsWith('/apply-list')) {
           this.activeItemIndex = 4;
+        } else if (url.startsWith('/favourite-job')) {
+          this.activeItemIndex = 5;
         }
       }
     });
@@ -131,6 +135,9 @@ export class NavbarComponent implements OnInit, OnDestroy{
         break;
       case'apply-list':
         this.router.navigate(['/apply-list']);
+        break;
+      case'favourite-job':
+        this.router.navigate(['/favourite-job']);
         break;
       default:
         console.warn('Invalid tab name:', tabName);
