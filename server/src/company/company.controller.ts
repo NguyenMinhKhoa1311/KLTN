@@ -46,6 +46,17 @@ export class CompanyController {
      }
     } 
   }
+  @Get('getByNameWithKeyword')
+  async getByNameWithKeyword(
+    @Query('keyword') keyword: string,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Query('sortBy') sortBy = 'createdAt',
+    @Query('sortOrder') sortOrder: 'asc' | 'desc' = 'desc',
+  ) {
+    return await this.companyService.getByNameWithKeyword(keyword, page, limit, sortBy, sortOrder);
+  }
+  
 
 
 }

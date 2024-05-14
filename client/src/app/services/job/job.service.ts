@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Job } from '../../models/job.model';
 import { URL } from '../../../environments/environments';
@@ -64,13 +64,19 @@ export class JobService {
     return this.httpClient.get<Job[] | any>(`${URL}/job/geAllAndSortByWelFareAndSalare?page=${page}&limit=${limit}`);
   }
 
-  create(job:any){
-    return this.httpClient.post(`${URL}/job/create`,job);
+  create(job:any,token:string){
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.httpClient.post(`${URL}/job/create`,job,{ headers });
   }
 
-  update(job:any,id:string){
+  update(job:any,id:string,token:string){
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
     console.log(id);
-    return this.httpClient.put<Job>(`${URL}/job/updateJob?id=${id}`,job);
+    return this.httpClient.put<Job>(`${URL}/job/updateJob?id=${id}`,job,{ headers });
   }
 
 
@@ -93,11 +99,17 @@ export class JobService {
   }
 
 
-  deleteJob(jobId:string, companyId:string, fieldId:string, carrerId:string){
-    return this.httpClient.delete<Boolean>(`${URL}/job/deleteJob?id=${jobId}&carrerId=${carrerId}&fieldId=${fieldId}&companyId=${companyId}`);
+  deleteJob(jobId:string, companyId:string, fieldId:string, carrerId:string, token:string){
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.httpClient.delete<Boolean>(`${URL}/job/deleteJob?id=${jobId}&carrerId=${carrerId}&fieldId=${fieldId}&companyId=${companyId}`,{ headers });
   }
-  updateRecrutment(recruitment:any,jobId:string){
-    return this.httpClient.put<Job>(`${URL}/job/updateRecruitment?id=${jobId}`,recruitment);
+  updateRecrutment(recruitment:any,jobId:string,token:string){
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.httpClient.put<Job>(`${URL}/job/updateRecruitment?id=${jobId}`,recruitment,{ headers });
   }
 }
 

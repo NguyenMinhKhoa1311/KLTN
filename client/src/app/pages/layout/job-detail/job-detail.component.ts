@@ -30,6 +30,7 @@ export class JobDetailComponent implements OnDestroy {
   jobToRender: Job = <Job>{};
   isHavePdf : boolean = false;
   folderName: string = "";
+  token: string = "";
 
   //ngrx of jobs
   jobTakenByIdAtJobDetailOfCandidate$ = this.store.select('job', 'jobTakenByIdAtJobDetailOfCandidate');
@@ -50,6 +51,11 @@ export class JobDetailComponent implements OnDestroy {
     private route: ActivatedRoute,
     private store : Store<{job: jobState, storage: StorageState}>,
     ) {
+      let token = sessionStorage.getItem('tokenOfCandidate');
+    
+      if(token){
+        this.token = token;
+      }
     this.jobId = this.route.snapshot.paramMap.get('jobId')??"";
     console.log("jobId: ", this.jobId);
     this.store.dispatch(JobActions.getJobByIdAtJobDetailOfCandidate({id: this.jobId}));
@@ -98,7 +104,7 @@ export class JobDetailComponent implements OnDestroy {
 
             }
             console.log("storage: ", storage);
-            this.store.dispatch(JobActions.updateRecruitmentAtJobDetail({recruitment: recruitmentToCreate,id: this.jobToRender._id}));
+            this.store.dispatch(JobActions.updateRecruitmentAtJobDetail({recruitment: recruitmentToCreate,id: this.jobToRender._id,token: this.token}));
           }
         }
       }),

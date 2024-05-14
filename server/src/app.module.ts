@@ -62,20 +62,35 @@ export class AppModule implements NestModule {
     consumer
       .apply(AuthMiddleware)
       .exclude(
-        // { path: 'candidate', method: RequestMethod.GET },
-        // { path: 'bill', method: RequestMethod.ALL },
-        // { path: 'recruitment', method: RequestMethod.ALL },
-        // { path: 'storage', method: RequestMethod.ALL },
-        // { path: 'education', method: RequestMethod.ALL },
-        // { path: 'work-experience', method: RequestMethod.ALL },
-        // { path: 'send-mail', method: RequestMethod.ALL },
-        // { path: 'skill', method: RequestMethod.ALL },
-        // { path: 'references', method: RequestMethod.ALL },
-        // { path: 'auth', method: RequestMethod.ALL },
+
+        { path: 'job/getAllAndSort', method: RequestMethod.GET },
+        { path: 'job/getAll', method: RequestMethod.GET },
+        { path: 'job/getAllAndSortWithUrgent', method: RequestMethod.GET },
+        { path: 'job/getByField', method: RequestMethod.GET },
+        { path: 'job/getByFieldWithUrgent', method: RequestMethod.GET },
+        { path: 'job/getByCareer', method: RequestMethod.GET },
+        { path: 'job/getByPriority', method: RequestMethod.GET },
+        { path: 'job/getByHotJob', method: RequestMethod.GET },
+        { path: 'job/getById', method: RequestMethod.GET },
+        { path: 'job/getByFieldName', method: RequestMethod.GET },
+        { path: 'job/geAllAndSortByWelFareAndSalare', method: RequestMethod.GET },
+        { path: 'job/getByFieldNameWithUrgent', method: RequestMethod.GET },
+        { path: 'job/getByCareerName', method: RequestMethod.GET },
+        { path: 'job/getByCareerNameWithUrgent', method: RequestMethod.GET },
+        { path: 'job/getByCompany', method: RequestMethod.GET },
+        { path: 'job/getByNameWithKeyword', method: RequestMethod.GET },
+        { path: 'job/ByKeyword', method: RequestMethod.GET },
+        { path: 'job/ByKeywordWithUrgent', method: RequestMethod.GET },
+        { path: 'job/getByTagsWithKeyword', method: RequestMethod.GET },
+        { path: 'job/getByTagsWithKeywordAndUrgent', method: RequestMethod.GET },
+        { path: 'job/getByRecruiter', method: RequestMethod.GET },
+
+
 
       )
       .forRoutes(
-        
-      );
+        JobController
+      )
+      ;
   }
 } // with middleware

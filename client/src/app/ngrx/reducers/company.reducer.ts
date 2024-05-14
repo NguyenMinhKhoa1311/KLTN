@@ -18,7 +18,13 @@ export const initualState: CompanyState = {
     isGetAllAndSortAtCompanyLoading: false,
     isGetAllAndSortAtCompanySuccess: false,
     getAllAndSortAtCompanyError: '',
-    companysTakenByGetAllAndSortAtCompany: []
+    companysTakenByGetAllAndSortAtCompany: [],
+
+    isGetByNameWithKeywordAtCompanyLoading: false,
+    isGetByNameWithKeywordAtCompanySuccess: false,
+    getByNameWithKeywordAtCompanyError: '',
+    companysTakenByGetByNameWithKeywordAtCompany: []
+
 
 };
 
@@ -105,6 +111,32 @@ export const companyReducer = createReducer(
             isGetAllAndSortAtCompanyLoading: false,
             isGetAllAndSortAtCompanySuccess: false,
             getAllAndSortAtCompanyError: action.error
+        }
+    }),
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CompanyActions.getByNameWithKeywordAtCompany,(state,action)=>{
+        return {
+            ...state,
+            isGetByNameWithKeywordAtCompanyLoading: true,
+            isGetByNameWithKeywordAtCompanySuccess: false,
+            getByNameWithKeywordAtCompanyError: ''
+        }
+    }),
+    on(CompanyActions.getByNameWithKeywordAtCompanySuccess,(state,action)=>{
+        return {
+            ...state,
+            isGetByNameWithKeywordAtCompanyLoading: false,
+            isGetByNameWithKeywordAtCompanySuccess: true,
+            companysTakenByGetByNameWithKeywordAtCompany: action.companys
+        }
+    }),
+    on(CompanyActions.getByNameWithKeywordAtCompanyFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetByNameWithKeywordAtCompanyLoading: false,
+            isGetByNameWithKeywordAtCompanySuccess: false,
+            getByNameWithKeywordAtCompanyError: action.error
         }
     })
     

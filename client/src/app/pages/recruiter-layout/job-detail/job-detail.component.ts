@@ -46,6 +46,7 @@ export class JobDetailComponent {
   requirement: string = '';
   dateEnd: string = '';
   dateStart: string = '';
+  token: string = '';
 
 
   //ngrx of job
@@ -70,7 +71,7 @@ export class JobDetailComponent {
     let token = sessionStorage.getItem('tokenOfRecruiter');
     
     if(token){
-      console.log(token);
+      this.token = token;
     }
     //get job theo recruiter
     this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
@@ -158,7 +159,7 @@ export class JobDetailComponent {
     console.log(jobData);
     console.log(this.jobToUpdate._id);
     
-    this.store.dispatch(JobActions.updateJobAtJobDetail({job: jobData, id: this.jobToUpdate._id}));
+    this.store.dispatch(JobActions.updateJobAtJobDetail({job: jobData, id: this.jobToUpdate._id,token:this.token}));
     
 
   }
@@ -330,7 +331,7 @@ export class JobDetailComponent {
 
   //delete job
   deleteJob(job: Job) {
-    this.store.dispatch(JobActions.deleteAtJobDetailOfRecruiter({id: job._id,careerId: job.Career._id, companyId:job.Company._id,fieldId: job.Field._id}));
+    this.store.dispatch(JobActions.deleteAtJobDetailOfRecruiter({id: job._id,careerId: job.Career._id, companyId:job.Company._id,fieldId: job.Field._id,token: this.token}));
   }
 }
 
