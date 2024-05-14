@@ -1,0 +1,21 @@
+<div id="statistical_container">
+    <div class="title">Thống kê</div>
+    <div class="tab">
+        <tui-tabs [(activeItemIndex)]="activeItemIndex">
+            <button tuiTab>
+                Tuần
+            </button>
+            <button tuiTab>
+                Tháng
+            </button>
+            <button tuiTab>
+                Năm
+            </button>
+        </tui-tabs>
+    </div>
+    <div class="chart">
+        <tui-axes class="axes" [axisXLabels]="labelsX" [axisYLabels]="labelsY">
+            <tui-bar-chart [max]="10000" [value]="value"></tui-bar-chart>
+        </tui-axes>
+    </div>
+</div>
