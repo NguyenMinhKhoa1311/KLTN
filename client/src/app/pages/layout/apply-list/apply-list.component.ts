@@ -104,4 +104,6 @@ export class ApplyListComponent implements OnDestroy{
   cancelRecruitment(jobId: string){
     this.store.dispatch(RecruitmentActions.updateStatusCancelAtApplyJob({id: jobId, status: true}));
   }
+
+  index_item = 0;
 }

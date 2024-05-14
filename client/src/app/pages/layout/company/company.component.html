@@ -27,28 +27,28 @@
         </div>
         <div class="company_item">
             <div class="item_box" *ngFor="let company of compamiesToRender">
-                <div class="item_img">
-                    <img src="{{company.Avatar}}" alt="">
+                <div class="img_cover">
+                    <img src="../../../../assets/images/avatar-user.jpg" alt="">
                 </div>
-                <div class="item_info">
-                    <div class="name">
-                        {{company.Name}}
+                <div class="info">
+                    <div class="img_company">
+                        <img src="../../../../assets/images/avatar-user.jpg" alt="">
                     </div>
-                    <div class="field">
-                        {{company.Field.FieldName}}
-                    </div>
-                    <div class="contact">
-                        {{company.Phone}}
-                    </div>
-                    <div class="address">
-                        {{company.Address}}
-                    </div>
-                    <div class="quantityjob">
-                        {{company.JobQuantity}} công việc
+                    <div class="info_company">
+                        <div class="name_company">
+                            {{company.Name}}
+                        </div>
+                        <div class="address_company">
+                            {{company.Address}}
+                        </div>
                     </div>
                 </div>
             </div>
-            
+        </div>
+        <div class="control_item">
+            <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" ></button>
+            <tui-pagination size="s" class="pagination" [length]="5" [(index)]="index_item"></tui-pagination>
+            <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button"></button>
         </div>
     </div>
 </div>

@@ -1,3 +1,6 @@
+
+import { TaigaModule } from '../../../shared/taiga.module';
+
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -11,7 +14,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-company',
   standalone: true,
-  imports: [ShareModule ],
+  imports: [TaigaModule,ShareModule],
   templateUrl: './company.component.html',
   styleUrl: './company.component.less'
 })
@@ -56,4 +59,5 @@ export class CompanyComponent implements OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+  index_item = 0;
 }
