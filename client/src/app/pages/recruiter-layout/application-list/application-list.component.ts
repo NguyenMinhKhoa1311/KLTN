@@ -184,4 +184,6 @@ export class ApplicationListComponent implements OnDestroy {
     this.detailDialog.nativeElement.close();
     this.cdr1.detectChanges();
   }
+
+  index_item = 0;
 }

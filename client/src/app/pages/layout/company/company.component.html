@@ -27,25 +27,33 @@
         </div>
         <div class="company_item">
             <div class="item_box">
-                <div class="item_img">
+                <div class="img_cover">
                     <img src="../../../../assets/images/avatar-user.jpg" alt="">
                 </div>
-                <div class="item_info">
-                    <div class="name">
-                        Công Ty Cổ Phần Công Nghệ Và Truyền Thông Việt Nam
+                <div class="info">
+                    <div class="img_company">
+                        <img src="../../../../assets/images/avatar-user.jpg" alt="">
                     </div>
-                    <div class="field">
-                        Công Nghệ Thông Tin
-                    </div>
-                    <div class="contact">
-                        09818098723
-                    </div>
-                    <div class="address">
-                        Hồ Chí Minh
+                    <div class="info_company">
+                        <div class="name_company">
+                            Công Ty Cổ Phần Tập Đoàn Vingroup
+                        </div>
+                        <div class="address_company">
+                            Hồ Chí Minh
+                        </div>
                     </div>
                 </div>
             </div>
             
+            
+            
+            
+            
+        </div>
+        <div class="control_item">
+            <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" ></button>
+            <tui-pagination size="s" class="pagination" [length]="5" [(index)]="index_item"></tui-pagination>
+            <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button"></button>
         </div>
     </div>
 </div>
