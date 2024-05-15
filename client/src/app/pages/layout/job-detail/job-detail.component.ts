@@ -11,6 +11,7 @@ import { generateUuid, parseDate } from '../../../../environments/environments';
 import { Candidate } from '../../../models/candidate.model';
 import { StorageState } from '../../../ngrx/states/storage.state';
 import * as StorageActions from '../../../ngrx/actions/storage.actions';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-job-detail',
@@ -50,6 +51,7 @@ export class JobDetailComponent implements OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private store : Store<{job: jobState, storage: StorageState}>,
+    private readonly alerts: TuiAlertService,
     ) {
       let token = sessionStorage.getItem('tokenOfCandidate');
     
@@ -111,7 +113,9 @@ export class JobDetailComponent implements OnDestroy {
       this.jobUpdatedRecruitment$.subscribe(job => {
         if(job._id!=undefined){
           if(job._id != "500"){
-            alert("Ứng tuyển thành công!");
+            this.alerts
+            .open('', {label: 'Không còn đơn ứng tuyển nào !!!',status:'info'})
+            .subscribe();
             this.closeApplyDialog();
           }
         }

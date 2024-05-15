@@ -457,8 +457,22 @@ export const getByIdAtAplicationListFailure = createAction(
     "[Candidate] Get By Id At Aplication List Failure",
     props<{error: string}>()
     );
+    
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByIdAtFavoriteJob = createAction(
+    "[Candidate] Get By Id At Favorite Job",
+    props<{id: string}>()
+    );
+export const getByIdAtFavoriteJobSuccess = createAction(
+    "[Candidate] Get By Id At Favorite Job Success",
+    props<{candidate: Candidate}>()
+    );
+export const getByIdAtFavoriteJobFailure = createAction(
+    "[Candidate] Get By Id At Favorite Job Failure",
+    props<{error: string}>()
+    );
 
 
 

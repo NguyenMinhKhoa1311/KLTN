@@ -12,6 +12,7 @@ import * as RecruiterActions from '../../../ngrx/actions/recruiter.actions';
 import * as AuthAcitons from '../../../ngrx/actions/auth.actions';
 import { RecruiterState } from '../../../ngrx/states/recruiter.state';
 import { generateUuid } from '../../../../environments/environments';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-login',
@@ -51,7 +52,8 @@ export class LoginComponent implements OnDestroy {
 
   constructor(
     private store: Store<{ auth: AuthState, user: UserState, recruiter: RecruiterState}>,
-    private router: Router
+    private router: Router,
+    private readonly alerts: TuiAlertService,
   ) {
     this.subscriptions.push(
       this.userFirebase$.subscribe((user) => {
@@ -125,7 +127,9 @@ export class LoginComponent implements OnDestroy {
             this.store.dispatch(RecruiterActions.getByUserAtLogin({ user: user._id }));
           }
           else{
-            alert("Sai tài khoản hoặc mật khẩu")
+            this.alerts
+            .open('', {label: 'Sai tài khoản hoặc mật khẩu !!!',status:'error'})
+            .subscribe();
           }
         }
       })

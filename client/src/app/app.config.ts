@@ -38,6 +38,8 @@ import { MaillEffects } from "./ngrx/effects/mail.effects";
 import { mailReducer } from "./ngrx/reducers/mail.reducer";
 import { RecruiterEffects } from "./ngrx/effects/recruiter.effects";
 import { recruiterReducer } from "./ngrx/reducers/recruiter.reducer";
+import { billReducer } from "./ngrx/reducers/bill.reducer";
+import { BillEffects } from "./ngrx/effects/bill.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -65,6 +67,7 @@ export const appConfig: ApplicationConfig = {
     provideState({name:'recruitment', reducer: recruitmentReducer}),
     provideState({name:'mail', reducer: mailReducer}),
     provideState({name:'recruiter', reducer: recruiterReducer}),
+    provideState({name:'bill', reducer: billReducer}),
     provideEffects([
       AuthEffects,
       UserEffects,
@@ -77,7 +80,8 @@ export const appConfig: ApplicationConfig = {
       StorageEffects,
       RecruitmentEffects,
       MaillEffects,
-      RecruiterEffects
+      RecruiterEffects,
+      BillEffects
 
     ]),
     provideHttpClient(), provideAnimationsAsync(),

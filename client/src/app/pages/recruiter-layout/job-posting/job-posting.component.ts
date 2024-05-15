@@ -20,6 +20,7 @@ import { Career } from '../../../models/career.model';
 import { ServicePackage } from '../../../models/service-package.model';
 import { Job } from '../../../models/job.model';
 import { generateUuid } from '../../../../environments/environments';
+import { TuiAlertService } from '@taiga-ui/core';
 
 
 @Component({
@@ -95,6 +96,7 @@ export class JobPostingComponent implements OnDestroy{
 
   constructor(
     private router: Router,
+    private readonly alerts: TuiAlertService,
     private store: Store<{
       field: FieldState;
       career: CareerState;
@@ -147,7 +149,9 @@ export class JobPostingComponent implements OnDestroy{
         }),
         this.isCreateJobAtJob$.subscribe((isSuccess) => {
           if(isSuccess){
-            alert("Tạo công việc thành công");
+            this.alerts
+          .open('', {label: 'Tạo công việc thành công ',status:'success'})
+          .subscribe();
             this.tagsList = [];
             this.locationList = [];
             this.welfareList = [];

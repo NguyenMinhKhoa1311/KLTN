@@ -200,7 +200,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -236,7 +236,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -255,7 +255,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -285,7 +285,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -305,7 +305,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -345,7 +345,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -365,7 +365,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -384,7 +384,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -403,7 +403,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -422,7 +422,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -441,7 +441,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       }),
@@ -460,7 +460,7 @@ export class JobComponent implements OnDestroy{
             this.page--;
           }
           this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công việc nào!',status:'info'})
             .subscribe();
         }
       })

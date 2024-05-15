@@ -14,6 +14,7 @@ import { User } from '../../models/user.model';
 import { candidateState } from '../../ngrx/states/candidate.state';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-login',
@@ -62,7 +63,8 @@ export class LoginComponent implements  OnDestroy {
   constructor (
 
     private store: Store<{ auth: AuthState, user: UserState, candidate: candidateState}>,
-    private router: Router
+    private router: Router,
+    private readonly alerts: TuiAlertService,
     ) {
 
       this.subscriptions.push(
@@ -132,7 +134,9 @@ export class LoginComponent implements  OnDestroy {
           if(user.Username){
             if(user.Username.length > 0){
               if(user.Username == "404 user not found"){
-                alert("Sai tài khoản hoặc mật khẩu")
+                this.alerts
+                .open('', {label: 'Sai tài khoản hoặc mật khẩu !!!',status:'info'})
+                .subscribe();
               }
               else{
                 this.userLogged.username = user.Username;

@@ -98,6 +98,8 @@ export const companyReducer = createReducer(
         }
     }),
     on(CompanyActions.getAllAndSortAtCompanySuccess,(state,action)=>{
+        console.log("companys", action.companys);
+        
         return {
             ...state,
             isGetAllAndSortAtCompanyLoading: false,

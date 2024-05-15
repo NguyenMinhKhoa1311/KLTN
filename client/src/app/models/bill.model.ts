@@ -1,4 +1,5 @@
 import { Job } from "./job.model";
+import { Recruiter } from "./recruiter.model";
 import { ServicePackage } from "./service-package.model";
 import { Voucher } from "./voucher.model";
 
@@ -14,5 +15,6 @@ export interface Bill{
      DatePayment: Date,
      createAt: Date;
      updateAt: Date;
+     Recruiter: Recruiter;
 
 }

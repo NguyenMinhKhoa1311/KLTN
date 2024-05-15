@@ -16,6 +16,7 @@ import * as FieldActions from '../../../ngrx/actions/field.actions';
 import * as CareerActions from '../../../ngrx/actions/career.actions';
 import { Field } from '../../../models/field.model';
 import { Career } from '../../../models/career.model';
+import { Recruiter } from '../../../models/recruiter.model';
 
 @Component({
   selector: 'app-job-detail',
@@ -47,6 +48,11 @@ export class JobDetailComponent {
   dateEnd: string = '';
   dateStart: string = '';
   token: string = '';
+  userLogged: Recruiter = <Recruiter>{};
+
+  parseDateInComponent(date: Date) {
+    return parseDate(date);
+  }
 
 
   //ngrx of job
@@ -69,12 +75,17 @@ export class JobDetailComponent {
 
   ){
     let token = sessionStorage.getItem('tokenOfRecruiter');
-    
+    let userLogged = sessionStorage.getItem('recruiterLoged');
+    if(userLogged){
+      let userAfterParse = JSON.parse(userLogged) as Recruiter;
+      if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
+        this.userLogged = userAfterParse;
+      }}
     if(token){
       this.token = token;
     }
     //get job theo recruiter
-    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
+    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: 0, limit: 5}) );
 
     //getAll field
     this.store.dispatch(FieldActions.getAllNoLimitAtJobDetail());

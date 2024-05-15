@@ -126,6 +126,11 @@ export const initialState: candidateState = {
     deleteFavoriteJobAtJobError: "",
     candidateDeletedFavoriteJobAtJob: <Candidate>{},
 
+    isGetByIdAtFavoriteJobLoading: false,
+    isGetByIdAtFavoriteJobSuccess: false,
+    getByIdAtFavoriteJobError: "",
+    candidateTakenByIdAtFavoriteJob: <Candidate>{},
+
     isChangeState: false,
 
 
@@ -908,7 +913,33 @@ on(CandidateActions.getByIdAtAplicationListFailure,(state, actions)=>{
 }),
 
 
-    
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.getByIdAtFavoriteJob,(state, actions)=>{
+    return{
+        ...state,
+        isGetByIdAtFavoriteJobLoading: true,
+        isGetByIdAtFavoriteJobSuccess: false,
+        getByIdAtFavoriteJobError: "",
+    };
+}),
+on(CandidateActions.getByIdAtFavoriteJobSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isGetByIdAtFavoriteJobLoading: false,
+        isGetByIdAtFavoriteJobSuccess: true,
+        getByIdAtFavoriteJobError: "",
+        candidateTakenByIdAtFavoriteJob: actions.candidate,
+    };
+}),
+on(CandidateActions.getByIdAtFavoriteJobFailure,(state, actions)=>{
+    return{
+        ...state,
+        isGetByIdAtFavoriteJobLoading: false,
+        isGetByIdAtFavoriteJobSuccess: false,
+        getByIdAtFavoriteJobError: actions.error,
+    };
+}),
 
 
 

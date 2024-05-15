@@ -8,7 +8,7 @@
 
     <div class="body">
         <div class="body_box">
-            <div class="item_box">
+            <div class="item_box" *ngFor="let job of candidateToRender.FavoriteJobs.slice(start,end)">
                 <div class="item_both">
                     <div class="img_logo">
                         <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg" alt="">
@@ -16,7 +16,7 @@
                     <div class="item_content">
                         <!-- <span *ngIf="!job.Hot" class="job_name">{{job.Name}}</span>
                                 <span *ngIf="job.Hot" class="job_name_title">{{job.Name}}</span> -->
-                        <span class="job_name_title">a</span>
+                        <span class="job_name_title" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                         <div class="status">
                             <div class="hot_box">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -39,13 +39,13 @@
                         </div>
 
                         <span class="company_name">2</span>
-                        <span class="salary">Thương lượng</span>
+                        <span class="salary">{{job.Salary}}</span>
 
-                        <div class="tag">
-                            <div class="tag_box">#</div>
+                        <div class="tag" *ngFor="let tag of job.Tags">
+                            <div class="tag_box" (click)="navigateToJobs(tag)">#{{tag}}</div>
                         </div>
 
-                        <span class="address">a</span>
+                        <span class="address">{{job.Address}}</span>
                     </div>
                 </div>
 
@@ -55,53 +55,7 @@
                             </div>
                         </div> -->
             </div>
-            <div class="item_box">
-                <div class="item_both">
-                    <div class="img_logo">
-                        <img src="https://photo.znews.vn/w660/Uploaded/mdf_eioxrd/2021_07_06/2.jpg" alt="">
-                    </div>
-                    <div class="item_content">
-                        <!-- <span *ngIf="!job.Hot" class="job_name">{{job.Name}}</span>
-                                <span *ngIf="job.Hot" class="job_name_title">{{job.Name}}</span> -->
-                        <span class="job_name_title">a</span>
-                        <div class="status">
-                            <div class="hot_box">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M5.36645 1.1665C5.25679 1.16655 5.15064 1.20521 5.06663 1.27572C4.98263 1.34622 4.92614 1.44405 4.90708 1.55205L3.51619 7.57497L3.5171 7.57588C3.50579 7.61623 3.49997 7.65793 3.49979 7.69984C3.49979 7.8236 3.54895 7.9423 3.63647 8.02982C3.72399 8.11734 3.84269 8.1665 3.96645 8.1665H6.53312L5.84223 12.7402C5.83609 12.7708 5.83304 12.802 5.83312 12.8332C5.83312 12.9569 5.88229 13.0756 5.9698 13.1632C6.05732 13.2507 6.17602 13.2998 6.29979 13.2998C6.38458 13.2997 6.46774 13.2765 6.54033 13.2326C6.61291 13.1888 6.67218 13.126 6.71177 13.051H6.71268L9.94289 7.04176L9.93833 7.03356C9.99357 6.95689 10.0331 6.86815 10.0331 6.7665C10.0331 6.5089 9.82405 6.29984 9.56645 6.29984H6.99979L8.5921 1.82458C8.61915 1.76439 8.63313 1.69915 8.63312 1.63317C8.63312 1.5094 8.58395 1.3907 8.49644 1.30319C8.40892 1.21567 8.29022 1.1665 8.16645 1.1665H5.36645Z"
-                                        fill="#FD7D55"></path>
-                                </svg>
-                                <span>Urgent</span>
-                            </div>
-                            <div class="hot_box">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6.06668 0.93335C5.94291 0.93335 5.82421 0.982516 5.73669 1.07003C5.64918 1.15755 5.60001 1.27625 5.60001 1.40002C5.60001 3.75995 2.33334 5.60002 2.33334 8.86668C2.33334 11.3483 5.02297 12.9528 5.97006 13.0567C6.00183 13.0634 6.03421 13.0667 6.06668 13.0667C6.19044 13.0667 6.30914 13.0175 6.39666 12.93C6.48418 12.8425 6.53334 12.7238 6.53334 12.6C6.53331 12.5307 6.51783 12.4622 6.48803 12.3997C6.45823 12.3371 6.41487 12.2819 6.36108 12.2382V12.2373C5.93641 11.8929 5.13334 10.8937 5.13334 9.9814C5.13334 8.48386 6.53334 7.93335 6.53334 7.93335C5.73488 10.192 8.35121 10.4649 8.87761 12.7012H8.87853C8.90152 12.8047 8.9591 12.8973 9.04177 12.9638C9.12444 13.0302 9.22728 13.0665 9.33334 13.0667C9.43162 13.0664 9.52731 13.0352 9.60678 12.9774C9.6152 12.9713 9.6234 12.9649 9.63139 12.9582C9.70734 12.9089 11.6667 11.613 11.6667 8.86668C11.6667 7.74546 11.1059 5.81958 10.7024 4.96655L10.7014 4.96382L10.7005 4.962C10.6662 4.87494 10.6064 4.80023 10.5291 4.74757C10.4517 4.69491 10.3603 4.66673 10.2667 4.66668C10.1577 4.66679 10.0522 4.70503 9.96843 4.77479C9.88469 4.84454 9.82801 4.94141 9.80821 5.04858V5.05041C9.80707 5.05551 9.59273 6.00743 8.86668 6.53335C8.86668 4.33459 7.27925 2.06344 6.4422 1.12384C6.42964 1.10683 6.41593 1.09069 6.40118 1.07554C6.35777 1.03067 6.3058 0.994962 6.24834 0.970538C6.19088 0.946115 6.12911 0.933469 6.06668 0.93335Z"
-                                        fill="#DC362E"></path>
-                                </svg>
-                                <span>Hot</span>
-                            </div>
-                        </div>
 
-                        <span class="company_name">2</span>
-                        <span class="salary">Thương lượng</span>
-
-                        <div class="tag">
-                            <div class="tag_box">#</div>
-                        </div>
-
-                        <span class="address">a</span>
-                    </div>
-                </div>
-
-                <!-- <div class="item_hot" >
-                            <div class="heart" (click)="updatedAndDeleteFavoriteJob(job)">
-                                <tui-svg class="{{checkFavoriteJob(job)}}" src="tuiIconHeartLarge" ></tui-svg>
-                            </div>
-                        </div> -->
-            </div>
 
 
 
@@ -114,9 +68,9 @@
 
     </div>
     <div class="control_item">
-        <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button"></button>
+        <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" (click)="previousPage()"></button>
         <!-- <tui-pagination size="s" class="pagination" [length]="5"></tui-pagination> -->
-        <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button"></button>
+        <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button" (click)="nextPage()"></button>
     </div>
 
 </div>

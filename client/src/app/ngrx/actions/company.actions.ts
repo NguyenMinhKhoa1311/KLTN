@@ -41,15 +41,15 @@ export const getBy_IdAtCmopanyDetailFailure = createAction(
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getAllAndSortAtCompany = createAction(
-    '[Company] Get All And Sort At Home',
+    '[Company] Get All And Sort At Company',
     props<{ page: number, limit: number, sortBy: string, sortOrder: string }>()
     );
 export const getAllAndSortAtCompanySuccess = createAction(
-    '[Company] Get AllAnd Sort At Home Success',
+    '[Company] Get AllAnd Sort At Company Success',
     props<{ companys: Company[] }>()
     );
 export const getAllAndSortAtCompanyFailure = createAction(
-    '[Company] Get All And Sort At Home Failure',
+    '[Company] Get All And Sort At Company Failure',
     props<{ error: string }>()
     );
 

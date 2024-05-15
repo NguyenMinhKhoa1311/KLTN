@@ -408,6 +408,23 @@ export class CandidateEffects{
          )
     );
 
+    getByIdAtFavoriteJob$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.getByIdAtFavoriteJob),
+        exhaustMap((action) =>
+         this.candidateService.getById(action.id).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.getByIdAtFavoriteJobSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.getByIdAtFavoriteJobFailure({error: "Get By Id At Favorite Job Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.getByIdAtFavoriteJobFailure({error: error})))))
+         )
+    );
+
     deleteFavoriteJobAtJob$ = createEffect(()=>
     this.action$.pipe(
         ofType(CandidateActions.deleteFavoriteJobAtJob),

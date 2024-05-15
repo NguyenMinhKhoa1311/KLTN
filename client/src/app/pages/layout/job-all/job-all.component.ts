@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import * as JobActions from '../../../ngrx/actions/job.actions';
 import { Job } from '../../../models/job.model';
 import { ShareModule } from '../../../shared/shared.module';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-job-all',
@@ -34,7 +35,8 @@ export class JobAllComponent implements OnDestroy {
   constructor(
     private store: Store<{ job: jobState }>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private readonly alerts: TuiAlertService,
   ) {
     this.type = this.route.snapshot.paramMap.get('type') ?? '';
     if(this.type == 'viec-lam-tot-nhat'){
@@ -55,7 +57,9 @@ export class JobAllComponent implements OnDestroy {
           this.jobToRender = jobs;
         } else if(this.isGetAllAndSortSuccess){
           this.page--;
-          alert('Không còn việc làm nào');
+          this.alerts
+          .open('', {label: 'Không còn công việc nào',status:'error'})
+          .subscribe();
         }
       }),
       this.isGetByHotJobSuccess$.subscribe((res) => {
@@ -66,7 +70,9 @@ export class JobAllComponent implements OnDestroy {
           this.jobToRender = jobs;
         } else if(this.isGetByHotJobSuccess){
           this.page--;
-          alert('Không còn việc làm nào');
+          this.alerts
+          .open('', {label: 'Không còn công việc nào',status:'error'})
+          .subscribe();
         }
       }),
 

@@ -16,6 +16,8 @@ import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 import { Candidate } from '../../../models/candidate.model';
 import { Mail } from '../../../models/mail.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TuiAlertService } from '@taiga-ui/core';
+import { Recruiter } from '../../../models/recruiter.model';
 
 @Component({
   selector: 'app-application-list',
@@ -32,14 +34,18 @@ export class ApplicationListComponent implements OnDestroy {
   //variables
   page: number = 0;
   recruitments: Recruitment[] = [];
-  isGetRecruitment: boolean = false;
+  isGetRecruitmentSuccess: boolean = false;
   candidateToRender: Candidate = <Candidate>{};
   isGetCandidate: boolean = false;
   recruitmentToAcept:Recruitment = <Recruitment>{};
   dateInterview: string = "";
   isUpdatedDateInterView: boolean = false;
+  token: string = '';
+  userLogged: Recruiter = <Recruiter>{};
+
   
   //ngrx of recruitment
+  isGetByRecruiterAtAplicationListSuccess$ = this.store.select('recruitment', 'isGetByRecruiterSuccess');
   recruitmentsTakenByRecruiter$ = this.store.select('recruitment', 'recruitmentsTakenByRecruiter');
   recruitmentUpdatedInterviewDate$ = this.store.select('recruitment', 'recruitmentUpdatedDateInterview');
 
@@ -60,23 +66,47 @@ export class ApplicationListComponent implements OnDestroy {
       recruitment: RecruitmentState;
       mail: MailState;
       candidate: candidateState;
-
     }>,
+    private readonly alerts: TuiAlertService,
     private router: Router
   ) {
-    this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: '65fa893d3dcc1153af38b1a5', page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
+    let token = sessionStorage.getItem('tokenOfRecruiter');
+    let userLogged = sessionStorage.getItem('recruiterLoged');
+    if(userLogged){
+      let userAfterParse = JSON.parse(userLogged) as Recruiter;
+      if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
+        this.userLogged = userAfterParse;
+      }}
+    if(token){
+      this.token = token;
+    }
+    this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: this.userLogged._id, page: 0, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
     
     this.subscriptions.push(
-      this.recruitmentsTakenByRecruiter$.subscribe((recruitments) => {
-        console.log(recruitments);
-        this.recruitments = recruitments;
+      // theo dõi việc lấy thông tin recruitments thành công hay không
+      this.isGetByRecruiterAtAplicationListSuccess$.subscribe((isSuccess) => {
+        this.isGetRecruitmentSuccess = isSuccess;
       }),
+      // theo dõi việc lấy thông tin recruitments
+      this.recruitmentsTakenByRecruiter$.subscribe((recruitments) => {
+        if(recruitments.length){
+          this.recruitments = recruitments;
+        }else if(this.isGetRecruitmentSuccess){
+          this.page--;
+          this.alerts
+          .open('', {label: 'Không còn đơn ứng tuyển nào !!!',status:'info'})
+          .subscribe();
+        }
+        
+      }),
+      // theo dõi việc lấy thông tin ứng viên
       this.candidateTakenById$.subscribe((candidate) => {
         if(this.isGetCandidate){
           this.candidateToRender = candidate;
         }
 
       }),
+      // theo dõi việc gửi mail
       this.isSenMailSuccess$.subscribe((isSuccess) => {
         if(isSuccess){
           // this.closeEmailDialog();
@@ -90,9 +120,9 @@ export class ApplicationListComponent implements OnDestroy {
         console.log(newRecruitment);
         if(this.isUpdatedDateInterView){
           if(newRecruitment._id != "500" ){
-            console.log(newRecruitment);
-            
-            alert('Đã thông báo cho ứng viên');
+            this.alerts
+            .open('', {label: 'Đã thông báo cho ứng viên',status:'success'})
+            .subscribe();
             this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: '65fa893d3dcc1153af38b1a5', page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
             this.closeEmailDialog();
           }
@@ -104,6 +134,17 @@ export class ApplicationListComponent implements OnDestroy {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
+  }
+
+  nextPage(){
+    this.page++;
+    this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: '65fa893d3dcc1153af38b1a5', page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
+  }
+  previousPage(){
+    if(this.page > 0){
+      this.page--;
+      this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: '65fa893d3dcc1153af38b1a5', page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
+    }
   }
 
   aceptCandidate(){
