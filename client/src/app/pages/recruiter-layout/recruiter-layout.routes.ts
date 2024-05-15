@@ -50,6 +50,11 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         path:'basic-information',
         loadChildren: () =>
           import('./basic-information/basic-information.routes').then((m) => m.BASICINFORMATION_ROUTERS),
+      },
+      {
+        path:'statistical',
+        loadChildren: () =>
+          import('./statistical/statistical.routes').then((m) => m.STATISTICAL_ROUTERS),
       }
     ],
   },
