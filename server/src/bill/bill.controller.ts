@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { BillService } from './bill.service';
 import { CreateBillDto } from './dto/create-bill.dto';
 import { UpdateBillDto } from './dto/update-bill.dto';
@@ -17,24 +17,33 @@ export class BillController {
       throw err;
     }
   }
-
-  @Get()
-  findAll() {
-    return this.billService.findAll();
+  @Get('getByMonth')
+  async getByMonth(@Query('recruiter') recruiter: string,@Query('month') month: number, @Query('year') year: number){
+    try{
+      return await this.billService.getByMonth(month, year,recruiter);
+    }
+    catch(err){
+      return []
+    }
+  }
+  @Get('getByYear')
+  async getByYear(@Query('recruiter') recruiter: string, @Query('year') year: number){
+    try{
+      return await this.billService.getByYear(year,recruiter);
+    }
+    catch(err){
+      return []
+    }
+  }
+  @Get('getByDate')
+  async getByDate(@Query('recruiter') recruiter: string,@Query('date') date: Date){
+    try{
+      return await this.billService.getByDate(date,recruiter);
+    }
+    catch(err){
+      return []
+    }
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.billService.findOne(+id);
-  }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBillDto: UpdateBillDto) {
-    return this.billService.update(+id, updateBillDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.billService.remove(+id);
-  }
 }

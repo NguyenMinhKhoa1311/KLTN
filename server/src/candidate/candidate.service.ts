@@ -94,7 +94,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
-      .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
+      .populate('FavoriteJobs', 'JobId Name Salary Tags Address', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel).exec();
       if(candidate._id.toString.length > 0){
         return candidate;

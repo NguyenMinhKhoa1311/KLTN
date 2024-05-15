@@ -9,7 +9,6 @@ export class Bill {
     BillId: string;
 
     @Prop({
-        required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Voucher'
     })
