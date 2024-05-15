@@ -65,6 +65,11 @@ export const LAYOUT_ROUTERS: Routes = [
             path:'favourite-job',
             loadChildren: () =>
               import('./favourite-job/favourite-job.routes').then((m) => m.FAVOURITEJOB_ROUTERS),
+          },
+          {
+            path:'statistical',
+            loadChildren: () =>
+              import('./statistical/statistical.routes').then((m) => m.STATISTICAL_ROUTERS),
           }
     ],
   },
