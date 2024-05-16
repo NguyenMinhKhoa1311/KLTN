@@ -94,7 +94,7 @@ export class ApplicationListComponent implements OnDestroy {
         }else if(this.isGetRecruitmentSuccess){
           this.page--;
           this.alerts
-          .open('', {label: 'Không còn đơn ứng tuyển nào !!!',status:'info'})
+          .open('', {label: 'Không có đơn ứng tuyển nào !!!',status:'info'})
           .subscribe();
         }
         
