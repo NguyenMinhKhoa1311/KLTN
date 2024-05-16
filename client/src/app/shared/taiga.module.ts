@@ -17,6 +17,7 @@ import {
   TuiSortCountriesPipeModule,
   TuiStringifyContentPipeModule,
   TuiTabsModule,
+  TuiInputYearModule 
 } from '@taiga-ui/kit';
 import {
   TuiActiveZoneModule,
@@ -136,7 +137,7 @@ const TaigaModules = [
   TuiLoaderModule,
   TuiNotificationModule,
   TuiLabelModule,
-
+  TuiInputYearModule,
   TuiTextfieldControllerModule,
   TuiPrimitiveTextfieldModule,
   TuiFieldErrorPipeModule,

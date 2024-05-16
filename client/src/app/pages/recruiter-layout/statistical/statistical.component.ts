@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { ShareModule } from '../../../shared/shared.module';
-import { TuiAxesModule, TuiBarChartModule } from '@taiga-ui/addon-charts';
+import { TuiAxesModule, TuiBarChartModule,TuiLegendItemModule,TuiRingChartModule } from '@taiga-ui/addon-charts';
+import {TuiMoneyModule} from '@taiga-ui/addon-commerce';
+import {tuiSum} from '@taiga-ui/cdk';
+
 import {TuiAlertService} from '@taiga-ui/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -10,11 +13,12 @@ import { Router } from '@angular/router';
 import { Recruiter } from '../../../models/recruiter.model';
 import { Bill } from '../../../models/bill.model';
 import * as BillActions from '../../../ngrx/actions/bill.actions';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-statistical',
   standalone: true,
-  imports: [TaigaModule,ShareModule, TuiBarChartModule, TuiAxesModule],
+  imports: [TaigaModule,ShareModule, TuiBarChartModule, TuiAxesModule,TuiLegendItemModule,TuiRingChartModule,TuiMoneyModule],
   templateUrl: './statistical.component.html',
   styleUrl: './statistical.component.less'
 })
@@ -96,6 +100,27 @@ export class StatisticalComponent {
   readonly labelsX = ['Jan 2019', 'Feb', 'Mar'];
   readonly labelsY = ['0','500.000','1.000.000', '1.500.000', '2.000.000', '2.500.000', '3.000.000', '3.250.000'];
 
+  data = new FormGroup({
+    date: new FormControl('', Validators.required),
+    month: new FormControl('', Validators.required),
+    year: new FormControl('', Validators.required)
+  });
 
 
+  activeItemIndexLegend = NaN;
+ 
+    readonly value = [13769, 12367, 10172, 3018, 2592];
+    readonly labels = ['Food', 'Cafe', 'OSS', 'Taxi', 'Other'];
+ 
+    isItemActive(index: number): boolean {
+        return this.activeItemIndex === index;
+    }
+ 
+    onHover(index: number, hovered: boolean): void {
+        this.activeItemIndex = hovered ? index : 0;
+    }
+ 
+    getColor(index: number): string {
+        return `var(--tui-chart-${index})`;
+    }
 }

@@ -12,10 +12,12 @@
         }
         .list_job{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            flex-wrap: wrap;
             gap: 15px;
+            justify-content: space-between;
             .job{
-                width: calc(50% - 32px);
+                width: calc(49% - 32px);
                 border-radius: 12px;
                 padding: 16px;
                 background-color: #fff;
@@ -84,18 +86,19 @@
                 
             }
         }
-        .control_item{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
+        
+    }
+    .control_item{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
 
-            button {
-                border-radius: 50%;
-                height: 35px;
-                width: 35px;
-                margin: 10px 20px 20px 20px;
-            }
+        button {
+            border-radius: 50%;
+            height: 35px;
+            width: 35px;
+            margin: 10px 20px 20px 20px;
         }
     }
 }
