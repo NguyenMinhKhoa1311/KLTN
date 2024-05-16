@@ -115,9 +115,9 @@ export class StatisticalComponent {
   readonly labelsY = ['0','500.000','1.000.000', '1.500.000', '2.000.000', '2.500.000', '3.000.000', '3.250.000'];
 
   data = new FormGroup({
-    date: new FormControl('', Validators.required),
-    month: new FormControl('', Validators.required),
-    year: new FormControl('', Validators.required)
+    date: new FormControl(null),
+    month: new FormControl(null),
+    year: new FormControl(null)
   });
 
 
@@ -136,5 +136,11 @@ export class StatisticalComponent {
  
     getColor(index: number): string {
         return `var(--tui-chart-${index})`;
+    }
+    
+    thongke(){
+      console.log('Date:', this.data.get('date')?.value);
+      console.log('Month:', this.data.get('month')?.value);
+      console.log('Year:', this.data.get('year')?.value);
     }
 }
