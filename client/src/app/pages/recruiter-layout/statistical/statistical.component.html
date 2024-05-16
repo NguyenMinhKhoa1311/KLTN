@@ -6,12 +6,12 @@
                 Danh sách thanh toán
             </div>
             <div class="list_job_box">
-                <div class="job">
+                <div class="job" *ngFor="let bill of billsToRender ">
                     <div class="name">
-                        Dịch vụ
+                        {{bill.Job.Name}}
                     </div>
                     <div class="salary">
-                        $1000 - $2000
+                        {{bill.GrandTotal}}
                     </div>
                 </div>
             </div>
@@ -82,15 +82,17 @@
         <div class="box">
             <div class="wrapper">
                 <tui-ring-chart
-                    [value]="value"
+                    [value]="grandTotals"
                     [(activeItemIndex)]="activeItemIndexLegend"
                 >
+                <tui-money
+                [singleColor]="true"
+                [value]="total"></tui-money>
                     <div>Total</div>
                 </tui-ring-chart>
-             
                 <div class="legend">
                     <tui-legend-item
-                        *ngFor="let label of labels; let index = index"
+                        *ngFor="let label of jobs; let index = index"
                         size="s"
                         class="item"
                         [active]="isItemActive(index)"
@@ -100,7 +102,7 @@
                     >
                         <tui-money
                             [singleColor]="true"
-                            [value]="value[index]"
+                            [value]="grandTotals[index]"
                         ></tui-money>
                     </tui-legend-item>
                 </div>

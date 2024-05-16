@@ -31,6 +31,8 @@ export class StatisticalComponent {
   userLogged: Recruiter = <Recruiter>{};
   grandTotals:number[] = [];
   jobs: string[] = [];
+  billsToRender: Bill[] = [];
+  total: number = 0;
   isGetByMonthSuccess: boolean = false;
   isGetByYearSuccess: boolean = false;
   isGetByDateSuccess: boolean = false;
@@ -74,20 +76,32 @@ export class StatisticalComponent {
       }),
       this.billsTakenByMonth$.subscribe((bills) => {
         if(bills.length){
+          this.billsToRender = bills;
           this.grandTotals = bills.map(item => item.GrandTotal);
           this.jobs = bills.map(item => item.Job.Name);
+          this.total = this.grandTotals.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue;
+          }, 0);
         }
       }),
       this.billsTakenByYear$.subscribe((bills) => {
         if(bills.length){
+          this.billsToRender = bills;
           this.grandTotals = bills.map(item => item.GrandTotal);
           this.jobs = bills.map(item => item.Job.Name);
+          this.total = this.grandTotals.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue;
+          }, 0);
         }
       }),
       this.billsTakenByDate$.subscribe((bills) => {
         if(bills.length){
+          this.billsToRender = bills;
           this.grandTotals = bills.map(item => item.GrandTotal);
           this.jobs = bills.map(item => item.Job.Name);
+          this.total = this.grandTotals.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue;
+          }, 0);
         }
       })
   );
