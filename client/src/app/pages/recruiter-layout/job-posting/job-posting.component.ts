@@ -21,6 +21,7 @@ import { ServicePackage } from '../../../models/service-package.model';
 import { Job } from '../../../models/job.model';
 import { generateUuid } from '../../../../environments/environments';
 import { TuiAlertService } from '@taiga-ui/core';
+import { Recruiter } from '../../../models/recruiter.model';
 
 
 @Component({
@@ -91,6 +92,7 @@ export class JobPostingComponent implements OnDestroy{
   jobToCreate: any;
   isCreateServicePackage: boolean = false;
   token: string = "";
+  userLogged: Recruiter = <Recruiter>{};
 
 
 
@@ -104,10 +106,18 @@ export class JobPostingComponent implements OnDestroy{
       job: jobState;
     }>
     ) {
-      let token = sessionStorage.getItem('tokenOfCandidate');
+      let token = sessionStorage.getItem('tokenOfRecruiter');
+      let userLogged = sessionStorage.getItem('recruiterLoged');
+      if(userLogged){
+        let userAfterParse = JSON.parse(userLogged) as Recruiter;
+        if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
+          this.userLogged = userAfterParse;
+        }}
     
     if(token){
       this.token = token;
+      console.log(this.token);
+      
     }
       const servicePackage = sessionStorage.getItem('servicePackedChoiced');
       if(servicePackage){
@@ -193,8 +203,8 @@ export class JobPostingComponent implements OnDestroy{
       JobId: generateUuid(),
       Description: this.jobPostForm.value.Description??"",
       Recruitment: [],
-      Recruiter: "65fa893d3dcc1153af38b1a5",
-      Company:"65fa88763dcc1153af38b190",
+      Recruiter: this.userLogged._id??"",
+      Company:this.userLogged.Company._id??"",
       Address: this.jobPostForm.value.Address??"",
       Location: this.locationList,
       Salary: this.jobPostForm.value.Salary??"",

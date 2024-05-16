@@ -45,7 +45,7 @@ export const createCandidateAtCreateProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateFavoriteJobsAtJob = createAction(
     "[Candidate] Update Favorite Jobs",
-    props<{id: string, jobId: string}>()
+    props<{id: string, jobId: string,token:string}>()
     );
 export const updateFavoriteJobsAtJobSuccess = createAction(
     "[Candidate] Update Favorite Jobs Success",
@@ -63,7 +63,7 @@ export const updateFavoriteJobsAtJobFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteFavoriteJobAtJob = createAction(
     "[Candidate] Delete Favorite Job",
-    props<{id: string, jobId: string}>()
+    props<{id: string, jobId: string,token:string}>()
     );
 export const deleteFavoriteJobAtJobSuccess = createAction(
     "[Candidate] Delete Favorite Job Success",
@@ -97,7 +97,7 @@ export const getByUserWithGoogleAtRegisterFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateEducationAtProfile = createAction(
     "[Candidate] Update Education",
-    props<{education: any, id:string}>()
+    props<{education: any, id:string,token:string}>()
     );
 export const updateEducationAtProfileSuccess = createAction(
     "[Candidate] Update Education Success",
@@ -116,7 +116,7 @@ export const updateEducationAtProfileFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateWorkExperienceAtProfile = createAction(
     "[Candidate] Update Work Experience",
-    props<{workExperience: any, id:string}>()
+    props<{workExperience: any, id:string,token:string}>()
     );
 export const updateWorkExperienceAtProfileSuccess = createAction(
     "[Candidate] Update Work Experience Success",
@@ -135,7 +135,7 @@ export const updateWorkExperienceAtProfileFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateLanguageAtProfile = createAction(
     "[Candidate] Update Language",
-    props<{language: string, id:string}>()
+    props<{language: string, id:string,token:string}>()
     );
 
 export const updateLanguageAtProfileSuccess = createAction(
@@ -156,7 +156,7 @@ export const updateLanguageAtProfileFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateDesiredJobAtProfile = createAction(
     "[Candidate] Update Desired Job",
-    props<{desiredJob: any, id:string}>()
+    props<{desiredJob: any, id:string,token:string}>()
     );
 export const updateDesiredJobAtProfileSuccess = createAction(
     "[Candidate] Update Desired Job Success",
@@ -172,7 +172,7 @@ export const updateDesiredJobAtProfileFailure = createAction(
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateSkillAtProfile = createAction(
     "[Candidate] Update Skill",
-    props<{skill: any, id:string}>()
+    props<{skill: any, id:string,token:string}>()
     );
 export const updateSkillAtProfileSuccess = createAction(
     "[Candidate] Update Skill Success",
@@ -194,7 +194,7 @@ export const updateSkillAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateAvatarAtProfile = createAction(
     "[Candidate] Update Avatar",
-    props<{id:string, storage: any}>()
+    props<{id:string, storage: any,token:string}>()
     );
 export const updateAvatarAtProfileSuccess = createAction(
     "[Candidate] Update Avatar Success",
@@ -214,7 +214,7 @@ export const updateAvatarAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateBasicInfoAtProfile = createAction(
     "[Candidate] Update Basic Info",
-    props<{basicInfo: any, id:string}>()
+    props<{basicInfo: any, id:string,token:string}>()
     );
 
 export const updateBasicInfoAtProfileSuccess = createAction(
@@ -241,7 +241,7 @@ export const updateBasicInfoAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const  updateCareerGoalAtProfile = createAction(
     "[Candidate] Update Career Goal",
-    props<{careerGoal: string, id:string}>()
+    props<{careerGoal: string, id:string,token:string}>()
     );
 export const updateCareerGoalAtProfileSuccess = createAction(
     "[Candidate] Update Career Goal Success",
@@ -261,7 +261,7 @@ export const updateCareerGoalAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateReferenceAtProfile = createAction(
     "[Candidate] Update Reference",
-    props<{references: any, id:string}>()
+    props<{references: any, id:string,token:string}>()
     );
 export const updateReferenceAtProfileSuccess = createAction(
     "[Candidate] Update Reference Success",
@@ -279,7 +279,7 @@ export const updateReferenceAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateOneOfReferenceAtProfile = createAction(
     "[Candidate] Update One Of Reference",
-    props<{reference: any, id:string}>()
+    props<{reference: any, id:string,token:string}>()
     );
 export const updateOneOfReferenceAtProfileSuccess = createAction(
     "[Candidate] Update One Of Reference Success",
@@ -296,7 +296,7 @@ export const updateOneOfReferenceAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateOneOfSkillAtProfile = createAction(
     "[Candidate] Update One Of Skill",
-    props<{skill: any, id:string}>()
+    props<{skill: any, id:string,token:string}>()
     );
 export const updateOneOfSkillAtProfileSuccess = createAction(
     "[Candidate] Update One Of Skill Success",
@@ -316,7 +316,7 @@ export const updateOneOfSkillAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateOneOfEducationAtProfile = createAction(
     "[Candidate] Update One Of Education",
-    props<{education: any, id:string}>()
+    props<{education: any, id:string,token:string}>()
     );
 export const updateOneOfEducationAtProfileSuccess = createAction(
     "[Candidate] Update One Of Education Success",
@@ -336,7 +336,7 @@ export const updateOneOfEducationAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateOneOfWorkExperienceAtProfile = createAction(
     "[Candidate] Update One Of Work Experience",
-    props<{workExperience: any, id:string}>()
+    props<{workExperience: any, id:string,token:string}>()
     );
 export const updateOneOfWorkExperienceAtProfileSuccess = createAction(
     "[Candidate] Update One Of Work Experience Success",
@@ -356,7 +356,7 @@ export const updateOneOfWorkExperienceAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteWorkExperienceAtProfile = createAction(
     "[Candidate] Delete Work Experience",
-    props<{id: string, workExperience: string}>()
+    props<{id: string, workExperience: string,token: string}>()
     );
 export const deleteWorkExperienceAtProfileSuccess = createAction(
     "[Candidate] Delete Work Experience Success",
@@ -375,7 +375,7 @@ export const deleteWorkExperienceAtProfileFailure = createAction(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteReferenceAtProfile = createAction(
     "[Candidate] Delete Reference",
-    props<{id: string, reference: string}>()
+    props<{id: string, reference: string,token:string}>()
     );
 export const deleteReferenceAtProfileSuccess = createAction(
     "[Candidate] Delete Reference Success",
@@ -392,7 +392,7 @@ export const deleteReferenceAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteEducationAtProfile = createAction(
     "[Candidate] Delete Education",
-    props<{id: string, education: string}>()
+    props<{id: string, education: string,token:string}>()
     );
 export const deleteEducationAtProfileSuccess = createAction(
     "[Candidate] Delete Education Success",
@@ -410,7 +410,7 @@ export const deleteEducationAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteLanguageAtProfile = createAction(
     "[Candidate] Delete Language",
-    props<{id: string, language: string}>()
+    props<{id: string, language: string,token:string}>()
     );
 export const deleteLanguageAtProfileSuccess = createAction(
     "[Candidate] Delete Language Success",
@@ -431,7 +431,7 @@ export const deleteLanguageAtProfileFailure = createAction(
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const deleteSkillAtProfile = createAction(
     "[Candidate] Delete Skill",
-    props<{id: string, skill: string}>()
+    props<{id: string, skill: string,token:string}>()
     );
 export const deleteSkillAtProfileSuccess = createAction(
     "[Candidate] Delete Skill Success",

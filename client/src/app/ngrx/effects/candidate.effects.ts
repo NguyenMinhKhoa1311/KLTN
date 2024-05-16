@@ -91,7 +91,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateEducationAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateEducation(action.education, action.id).pipe(
+         this.candidateService.updateEducation(action.education, action.id,action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateEducationAtProfileSuccess({candidate: item})
@@ -108,7 +108,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateWorkExperienceAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateWorkExperience(action.workExperience, action.id).pipe(
+         this.candidateService.updateWorkExperience(action.workExperience, action.id, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateWorkExperienceAtProfileSuccess({candidate: item})
@@ -125,7 +125,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateLanguageAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateLanguage(action.language, action.id).pipe(
+         this.candidateService.updateLanguage(action.language, action.id, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateLanguageAtProfileSuccess({candidate: item})
@@ -143,7 +143,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateDesiredJobAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateDesiredJob(action.desiredJob, action.id).pipe(
+         this.candidateService.updateDesiredJob(action.desiredJob, action.id, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateDesiredJobAtProfileSuccess({candidate: item})
@@ -159,7 +159,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateSkillAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateSkill(action.skill, action.id).pipe(
+         this.candidateService.updateSkill(action.skill, action.id, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateSkillAtProfileSuccess({candidate: item})
@@ -175,7 +175,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateAvatarAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateAvatar( action.id, action.storage).pipe(
+         this.candidateService.updateAvatar( action.id, action.storage, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateAvatarAtProfileSuccess({candidate: item})
@@ -191,7 +191,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateBasicInfoAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateBasicInfo(action.basicInfo, action.id).pipe(
+         this.candidateService.updateBasicInfo(action.basicInfo, action.id, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateBasicInfoAtProfileSuccess({candidate: item})
@@ -208,7 +208,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateOneOfEducationAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateOneOfEucation(action.id, action.education).pipe(
+         this.candidateService.updateOneOfEucation(action.id, action.education, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateOneOfEducationAtProfileSuccess({candidate: item})
@@ -225,7 +225,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateOneOfWorkExperienceAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateOneOfWorkExperience(action.id, action.workExperience).pipe(
+         this.candidateService.updateOneOfWorkExperience(action.id, action.workExperience, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateOneOfWorkExperienceAtProfileSuccess({candidate: item})
@@ -242,7 +242,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.deleteSkillAtProfile),
         exhaustMap((action) =>
-         this.candidateService.deleteSkill(action.id, action.skill).pipe(
+         this.candidateService.deleteSkill(action.id, action.skill, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.deleteSkillAtProfileSuccess({candidate: item})
@@ -258,7 +258,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.deleteLanguageAtProfile),
         exhaustMap((action) =>
-         this.candidateService.deleteLanguage(action.id, action.language).pipe(
+         this.candidateService.deleteLanguage(action.id, action.language, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.deleteLanguageAtProfileSuccess({candidate: item})
@@ -275,7 +275,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.deleteEducationAtProfile),
         exhaustMap((action) =>
-         this.candidateService.deleteEducation(action.id, action.education).pipe(
+         this.candidateService.deleteEducation(action.id, action.education, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.deleteEducationAtProfileSuccess({candidate: item})
@@ -292,7 +292,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.deleteWorkExperienceAtProfile),
         exhaustMap((action) =>
-         this.candidateService.deleteWorkExperience(action.id, action.workExperience).pipe(
+         this.candidateService.deleteWorkExperience(action.id, action.workExperience, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.deleteWorkExperienceAtProfileSuccess({candidate: item})
@@ -310,7 +310,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateReferenceAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateReference(action.id, action.references).pipe(
+         this.candidateService.updateReference(action.id, action.references, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateReferenceAtProfileSuccess({candidate: item})
@@ -327,7 +327,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateOneOfSkillAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateOneOfSkill(action.id, action.skill).pipe(
+         this.candidateService.updateOneOfSkill(action.id, action.skill, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateOneOfSkillAtProfileSuccess({candidate: item})
@@ -344,7 +344,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateCareerGoalAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateCareerGoal(action.id, action.careerGoal).pipe(
+         this.candidateService.updateCareerGoal(action.id, action.careerGoal, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateCareerGoalAtProfileSuccess({candidate: item})
@@ -361,7 +361,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateOneOfReferenceAtProfile),
         exhaustMap((action) =>
-         this.candidateService.updateOneOfReference(action.id, action.reference).pipe(
+         this.candidateService.updateOneOfReference(action.id, action.reference, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateOneOfReferenceAtProfileSuccess({candidate: item})
@@ -378,7 +378,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.deleteReferenceAtProfile),
         exhaustMap((action) =>
-         this.candidateService.deleteReference(action.id, action.reference).pipe(
+         this.candidateService.deleteReference(action.id, action.reference, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.deleteReferenceAtProfileSuccess({candidate: item})
@@ -395,7 +395,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.updateFavoriteJobsAtJob),
         exhaustMap((action) =>
-         this.candidateService.updateFavoriteJob(action.id, action.jobId).pipe(
+         this.candidateService.updateFavoriteJob(action.id, action.jobId, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.updateFavoriteJobsAtJobSuccess({candidate: item})
@@ -429,7 +429,7 @@ export class CandidateEffects{
     this.action$.pipe(
         ofType(CandidateActions.deleteFavoriteJobAtJob),
         exhaustMap((action) =>
-         this.candidateService.deleteFavoriteJob(action.id, action.jobId).pipe(
+         this.candidateService.deleteFavoriteJob(action.id, action.jobId, action.token).pipe(
             map((item)=>{
                 if(item._id!="500"){
                     return CandidateActions.deleteFavoriteJobAtJobSuccess({candidate: item})

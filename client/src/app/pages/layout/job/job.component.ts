@@ -73,6 +73,7 @@ export class JobComponent implements OnDestroy{
   fieldList: readonly string[] = [];
   careerList: readonly string[] = [];
   candidateLogged: Candidate = <Candidate>{};
+  token: string = "";
 
 
   // ngrx of job
@@ -131,6 +132,10 @@ export class JobComponent implements OnDestroy{
     private _snackBar: MatSnackBar,
     private readonly alerts: TuiAlertService
   ){
+    let token = sessionStorage.getItem('tokenOfRecruiter');
+    if(token){
+      this.token = token;
+    }
     this.field = this.route.snapshot.paramMap.get('field')??"";
     this.career = this.route.snapshot.paramMap.get('career')??"";
     this.tagValue = this.route.snapshot.paramMap.get('tag')??"";
@@ -501,12 +506,12 @@ export class JobComponent implements OnDestroy{
         if(!this.isDeletedFavoriteJob){
           this.isDeletedFavoriteJob = true;
         }
-        this.store.dispatch(CandidateActions.deleteFavoriteJobAtJob({id:this.candidateLogged._id,jobId: job._id}));
+        this.store.dispatch(CandidateActions.deleteFavoriteJobAtJob({id:this.candidateLogged._id,jobId: job._id, token: this.token}));
       }else if(result == 'iconHeartNotFilled'){
         if(this.isUpdatedFavoriteJob){
           this.isUpdatedFavoriteJob = true;
         }
-        this.store.dispatch(CandidateActions.updateFavoriteJobsAtJob({id:this.candidateLogged._id,jobId: job._id}));
+        this.store.dispatch(CandidateActions.updateFavoriteJobsAtJob({id:this.candidateLogged._id,jobId: job._id, token: this.token}));
       }
     }
     else{

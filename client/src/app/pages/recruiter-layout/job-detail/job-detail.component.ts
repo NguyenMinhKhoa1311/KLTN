@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareModule } from '../../../shared/shared.module';
 import { TaigaModule } from '../../../shared/taiga.module';
@@ -17,6 +17,7 @@ import * as CareerActions from '../../../ngrx/actions/career.actions';
 import { Field } from '../../../models/field.model';
 import { Career } from '../../../models/career.model';
 import { Recruiter } from '../../../models/recruiter.model';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-job-detail',
@@ -25,7 +26,7 @@ import { Recruiter } from '../../../models/recruiter.model';
   templateUrl: './job-detail.component.html',
   styleUrl: './job-detail.component.less'
 })
-export class JobDetailComponent {
+export class JobDetailComponent implements OnDestroy {
   @ViewChild('jobDialog', { static: true })
   jobDialog!: ElementRef<HTMLDialogElement>;
   cdr1 = inject(ChangeDetectorRef);
@@ -54,11 +55,17 @@ export class JobDetailComponent {
     return parseDate(date);
   }
 
+  //variables
+  page: number = 0;
+  isGetByRecruiterAtJobDetailSuccess: boolean = false;
+
 
   //ngrx of job
+
   jobGetByRecruiterATJobDetail$ = this.store.select('job','jobsTakenByRecruiterAtJobDetail')
   jobUpdatedAtJobDetail$ = this.store.select('job','jobUpdatedAtJobDetail');
   isDeletedJobAtJobDetail$ = this.store.select('job','isDeleteAtJobDetailfRecruiterSuccess');
+  isGetByRecruiterAtJobDetailSuccess$ = this.store.select('job','isGetByRecruiterAtJobDetailSuccess');
 
   //ngrx of field
   fieldNoLimitAtJobDetail$ = this.store.select('field', 'fieldNoLimitAtJobDetail');
@@ -72,6 +79,7 @@ export class JobDetailComponent {
 
   constructor(
     private store: Store<{job: jobState, field: FieldState, career: CareerState}>,
+    private readonly alerts: TuiAlertService,
 
   ){
     let token = sessionStorage.getItem('tokenOfRecruiter');
@@ -96,12 +104,21 @@ export class JobDetailComponent {
 
     //theo dõi ngrx
     this.subscriptions.push(
+          //is get job by recruiter success
+    this.isGetByRecruiterAtJobDetailSuccess$.subscribe(result => {
+      this.isGetByRecruiterAtJobDetailSuccess = result;
+    }),
 
       //theo dõi job lấy bởi recruiter
       this.jobGetByRecruiterATJobDetail$.subscribe(jobs => {
-        if(jobs.length > 0){
+        if(jobs.length){
           console.log(jobs);
           this.listJobs = jobs;
+        }else if(this.isGetByRecruiterAtJobDetailSuccess){
+          this.page--;
+          this.alerts
+          .open('', {label: 'Không có công việc nào !!!',status:'info'})
+          .subscribe();
         }
       }),
       //theo dõi field dc getAll
@@ -131,16 +148,25 @@ export class JobDetailComponent {
         if(job._id!='500'){
           this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
           this.closeJobDialog();
+          this.alerts
+          .open('', {label: 'Cập nhật công việc thành công !!!',status:'success'})
+          .subscribe();
         }
       }),
       //theo dõi job dc xóa
       this.isDeletedJobAtJobDetail$.subscribe(result => {
         if(result){
           this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
-          alert("Xóa thành công");
+          this.alerts
+          .open('', {label: 'Xóa công việc thành công !!!',status:'success'})
+          .subscribe();
         }
       })
     )
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(JobActions.resetState());
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   onFieldChange(event: any) {
@@ -154,8 +180,8 @@ export class JobDetailComponent {
     let jobData = {
       Name: this.jobForm.value.Name,
       Description: this.jobForm.value.Description,
-      Location: this.jobForm.value.Location,
-      Address: this.addressList,
+      Location: this.addressList,
+      Address: this.jobForm.value.Location,
       Salary: this.jobForm.value.Salary,
       Requirement: this.jobForm.value.Requirement,
       Career: this.jobForm.value.Career,
@@ -164,8 +190,6 @@ export class JobDetailComponent {
       Tags: this.tagsList,
       StartDate: this.jobForm.value.DateStart,
       EndDate: this.jobForm.value.DateEnd,
-
-
     }
     console.log(jobData);
     console.log(this.jobToUpdate._id);
@@ -193,6 +217,9 @@ export class JobDetailComponent {
     this.jobForm.controls.Requirement.setValue(job.Requirement);
     this.jobForm.controls.Career.setValue(job.Career._id);
     this.jobForm.controls.Field.setValue(job.Field._id);
+    job.Location.forEach(element => {
+      this.addressList.push(element);
+    });
     job.Welfare.forEach(element => {
       this.welfareList.push(element);
     });
@@ -203,6 +230,9 @@ export class JobDetailComponent {
   closeJobDialog() {
     this.jobDialog.nativeElement.close();
     this.cdr1.detectChanges();
+    this.addressList = [];
+    this.welfareList = [];
+    this.tagsList = [];
   }
 
   // Lấy timestamp hiện tại
@@ -256,10 +286,10 @@ export class JobDetailComponent {
 
   addressList:string[]=[];
   addAddress(){
-    const newLocation = this.jobForm.value.Address;
+    const newLocation = this.jobForm.value.Location;
     if(newLocation){
       this.addressList.push(newLocation);
-      this.jobForm.controls.Address.setValue('');
+      this.jobForm.controls.Location.setValue('');
     }
     console.log(this.addressList);
   }
@@ -326,6 +356,9 @@ export class JobDetailComponent {
     this.jobForm.controls.Requirement.setValue(job.Requirement);
     this.jobForm.controls.Career.setValue(job.Career._id);
     this.jobForm.controls.Field.setValue(job.Field.FieldName);
+    job.Location.forEach(element => {
+      this.addressList.push(element);
+    });
     job.Welfare.forEach(element => {
       this.welfareList.push(element);
     });
@@ -336,8 +369,21 @@ export class JobDetailComponent {
   closeVisibilityDialog() {
     this.visibilityDialog.nativeElement.close();
     this.cdr2.detectChanges();
+    this.welfareList = [];
+    this.tagsList = [];
+    this.addressList = [];
   }
 
+  nextPage(){
+    this.page++;
+    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: this.page, limit: 5}));
+  }
+  prevPage(){
+    if(this.page > 0){
+      this.page--;
+    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: this.page, limit: 5}));
+    }
+  }
 
 
   //delete job

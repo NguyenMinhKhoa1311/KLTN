@@ -53,9 +53,9 @@
             </div>
         </div>
         <div class="control_item">
-            <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" ></button>
+            <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" (click)="prevPage()"></button>
             <!-- <tui-pagination size="s" class="pagination" [length]="5" [(index)]="index_item"></tui-pagination> -->
-            <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button"></button>
+            <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button" (click)="nextPage()"></button>
         </div>
     </div>
 </div>
@@ -104,11 +104,11 @@
                             <span class="title">Địa chỉ làm việc:</span>
                         </div>
                         <div class="body">
-                            <tui-input formControlName="Location" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
+                            <tui-input formControlName="Address" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
                                 Nhập địa chỉ làm việc
                                 <input tuiTextfield type="text" />
                             </tui-input>
-                            <tui-error formControlName="Location" [error]="[] | tuiFieldError | async"></tui-error>
+                            <tui-error formControlName="Address" [error]="[] | tuiFieldError | async"></tui-error>
                         </div>
                     </div>
         
@@ -118,7 +118,7 @@
                         </div>
                         <div class="body">
                             <div class="tag_input">
-                                <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Address">
+                                <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Location">
                                     Nhập địa điểm
                                     <input tuiTextfield type="text" />
                                 </tui-input>
@@ -357,7 +357,7 @@
                             <span class="title">Địa chỉ làm việc:</span>
                         </div>
                         <div class="body">
-                            <div class="location">{{location}}</div>
+                            <div class="location">{{address}}</div>
                         </div>
                     </div>
         
