@@ -4,6 +4,7 @@ import { UpdateWorkExperienceDto } from './dto/update-work-experience.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { WorkExperience } from './entities/work-experience.entity';
 import { Model } from 'mongoose';
+import { log } from 'console';
 
 @Injectable()
 export class WorkExperienceService {
@@ -30,17 +31,21 @@ export class WorkExperienceService {
 
   async update(updateWorkExperience: any) {
     try{
-      const workExperience = await this.workExperienceModel.findByIdAndUpdate(updateWorkExperience._id, updateWorkExperience,{new:true});
+      log("service"+updateWorkExperience);
+      const workExperience = await this.workExperienceModel.findByIdAndUpdate(updateWorkExperience._id, updateWorkExperience,{new:true}).exec();
+      log("service 2"+workExperience);
       if(workExperience._id.toString().length > 0){
         return workExperience;
       }
       else{
+        log("service 2"+workExperience);
         return {
           _id: "500",
         }
       }
     }
     catch(err){
+      log("service 2"+err);
       return {
         _id: "500",
       }

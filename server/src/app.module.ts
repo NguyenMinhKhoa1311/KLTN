@@ -90,6 +90,27 @@ export class AppModule implements NestModule {
       )
       .forRoutes(
         JobController,
+        { path: 'candidate/updateEducation', method: RequestMethod.PUT },
+        { path: 'candidate/updateWorkExperience', method: RequestMethod.PUT },
+        { path: 'candidate/updateLanguage', method: RequestMethod.PUT },
+        { path: 'candidate/updateDesiredJob', method: RequestMethod.PUT },
+        { path: 'candidate/updateSkills', method: RequestMethod.PUT },
+        { path: 'candidate/updateAvatar', method: RequestMethod.PUT },
+        { path: 'candidate/updateBasicInfo', method: RequestMethod.PUT },
+        { path: 'candidate/DeleteSkills', method: RequestMethod.PUT },
+        { path: 'candidate/UpdateOneOfSkill', method: RequestMethod.PUT },
+        { path: 'candidate/DeleteLanguage', method: RequestMethod.PUT },
+        { path: 'candidate/DeleteEducation', method: RequestMethod.PUT },
+        { path: 'candidate/DeleteWorkExperience', method: RequestMethod.PUT },
+        { path: 'candidate/UpdateOneOfEducation', method: RequestMethod.PUT },
+        { path: 'candidate/UpdateOneOfWorkExperience', method: RequestMethod.PUT },
+        { path: 'candidate/updateReference', method: RequestMethod.PUT },
+        { path: 'candidate/UpdateOneOfReference', method: RequestMethod.PUT },
+        { path: 'candidate/DeleteReference', method: RequestMethod.PUT },
+        { path: 'candidate/updateCareerGoal', method: RequestMethod.PUT },
+        { path: 'candidate/UpdateFavoriteJobs', method: RequestMethod.PUT },
+        { path: 'candidate/DeleteFavoriteJobs', method: RequestMethod.PUT },
+
         
       )
       ;

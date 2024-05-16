@@ -319,7 +319,10 @@ export class CandidateController {
   @Put('UpdateOneOfWorkExperience')
   async updateOneOfWorkExperience(@Query('id') id: string, @Body() workExperience: any){
     try{
+      log(workExperience)
       const workExperienceAfterUpdate = await this.workExperienceService.update(workExperience);
+      console.log(workExperienceAfterUpdate);
+      
       if(workExperienceAfterUpdate._id!="500"){
         const candidate = await this.candidateService.findById(id);
         if(candidate._id.toString()!="500"){
