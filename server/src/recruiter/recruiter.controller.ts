@@ -3,17 +3,28 @@ import { RecruiterService } from './recruiter.service';
 import { CreateRecruiterDto } from './dto/create-recruiter.dto';
 import { UpdateRecruiterDto } from './dto/update-recruiter.dto';
 import { ObjectId } from 'mongoose';
+import { CreateCompanyDto } from 'src/company/dto/create-company.dto';
+import { CompanyService } from 'src/company/company.service';
 
 @Controller('recruiter')
 export class RecruiterController {
-  constructor(private readonly recruiterService: RecruiterService) {}
+  constructor(
+    private readonly recruiterService: RecruiterService,
+    private readonly companyService: CompanyService
+  ) {}
 
   @Post('create')
-  async create(@Body() createRecruiterDto: CreateRecruiterDto) {
+  async create(@Body('recruiter') createRecruiterDto: CreateRecruiterDto,@Body('company') createCompanyDto: CreateCompanyDto){
     try{
-      const newRecruiter = await this.recruiterService.create(createRecruiterDto)
-      if(newRecruiter._id.toString().length > 0){
+      
+      const newCompany = await this.companyService.create(createCompanyDto);
+      if(newCompany._id!= "500"){
+        const newRecruiter = await this.recruiterService.create(createRecruiterDto)
+      if(newRecruiter._id!="500"){
         return newRecruiter;
+      }else return{
+        _id: "500"
+      }
       }
       else{
         return{

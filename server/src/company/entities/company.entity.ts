@@ -27,12 +27,6 @@ export class Company {
     })
     Field: string;
 
-    @Prop({
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Career',
-        required: true
-    })
-    Career: string;
 
     @Prop({required: true})
     Avatar: string;

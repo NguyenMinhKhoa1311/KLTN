@@ -25,6 +25,7 @@
                             formControlName="date"
                             tuiTextfieldSize="m"
                             [tuiTextfieldCleaner]="true"
+                            *ngIf="isGetByDate"
                         >
                             Choose a date
                         </tui-input-date>
@@ -34,6 +35,7 @@
                             formControlName="month"
                             tuiTextfieldSize="m"
                             [tuiTextfieldCleaner]="true"
+                            *ngIf="isGetByMonth"
                         >
                             Choose a month
                             <input
@@ -47,10 +49,11 @@
                             formControlName="year"
                             tuiTextfieldSize="m"
                             [tuiTextfieldCleaner]="true"
+                            *ngIf="isGetByYear"
                         >
                             Choose a year
                             <input
-                                placeholder="Not 2022 please"
+                                placeholder="{{currentYear}}"
                                 tuiTextfield
                             />
                         </tui-input-year>
@@ -60,7 +63,7 @@
                             tuiButton
                             type="button"
                             size="m"
-                            (click)="thongke()"
+                            (click)="statistical()"
                         >
                             Thống kê
                         </button>
@@ -68,21 +71,21 @@
                 </form>
                 <div class="choose">
                     <tui-tabs [(activeItemIndex)]="activeItemIndex">
-                        <button tuiTab>
-                            Tuần
+                        <button tuiTab (click)="changeMode(true,false,false)">
+                            Ngày
                         </button>
-                        <button tuiTab>
+                        <button tuiTab (click)="changeMode(false,true,false)">
                             Tháng
                         </button>
-                        <button tuiTab>
+                        <button tuiTab (click)="changeMode(false,false,true)">
                             Năm
                         </button>
                     </tui-tabs>
                 </div>
             </div>
             <div class="chart">
-                <tui-axes class="axes" [axisXLabels]="jobs" [axisYLabels]="labelsY">
-                    <tui-bar-chart [max]="3250000" [value]="[grandTotals]"></tui-bar-chart>
+                <tui-axes class="axes" [axisXLabels]="fields" [axisYLabels]="labelsY">
+                    <tui-bar-chart [max]="totalOfLegend" [value]="[grandTotals]"></tui-bar-chart>
                 </tui-axes>
             </div>
         </div>
@@ -97,17 +100,17 @@
                 >
                 <tui-money
                 [singleColor]="true"
-                [value]="total"></tui-money>
+                [value]="totalOfLegend"></tui-money>
                     <div>Total</div>
                 </tui-ring-chart>
                 <div class="legend">
                     <tui-legend-item
-                        *ngFor="let label of jobs; let index = index"
+                        *ngFor="let field of fields; let index = index"
                         size="s"
                         class="item"
                         [active]="isItemActive(index)"
                         [color]="getColor(index)"
-                        [text]="label"
+                        [text]="field"
                         (tuiHoveredChange)="onHover(index, true)"
                     >
                         <tui-money

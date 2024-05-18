@@ -15,7 +15,7 @@ export class RecruiterEffects {
         this.actions$.pipe(
             ofType(RecruiterActions.createRecruiterAtRegister),
             exhaustMap(action =>
-                this.recruiterService.createRecruiter(action.recruiter).pipe(
+                this.recruiterService.createRecruiter(action.recruiter,action.company).pipe(
                     map((result) => {
                         if(result._id!="500"){
                             return RecruiterActions.createRecruiterAtRegisterSuccess({recruiter: result})

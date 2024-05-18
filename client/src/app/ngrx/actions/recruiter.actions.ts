@@ -37,7 +37,7 @@ export const getByUserAtRegisterFailure = createAction(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const createRecruiterAtRegister = createAction(
     '[Recruiter] Create Recruiter',
-    props<{ recruiter: Recruiter }>()
+    props<{ recruiter: any, company: any }>()
 )
 export const createRecruiterAtRegisterSuccess = createAction(
     '[Recruiter] Create Recruiter Success',

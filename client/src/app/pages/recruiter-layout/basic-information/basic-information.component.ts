@@ -10,6 +10,8 @@ import { generateUuid } from '../../../../environments/environments';
 import * as RecruiterActions from '../../../ngrx/actions/recruiter.actions';
 import * as AuthActions from '../../../ngrx/actions/auth.actions';
 import { AuthState } from '../../../ngrx/states/auth.state';
+import { CompanyState } from '../../../ngrx/states/company.state';
+import * as CompanyActions from '../../../ngrx/actions/company.actions';
 
 
 @Component({
@@ -25,9 +27,12 @@ export class BasicInformationComponent implements OnDestroy {
 
   //variables
   user: any ={}
+  company: any = {}
 
   //ngrx of auth
   tokenTakenAtRegisterOfRecruiter$ = this.store.select('auth', 'tokenAtRegisterOfRecruiter');
+
+  
 
 
   //ngrx of recruiter
@@ -39,7 +44,7 @@ export class BasicInformationComponent implements OnDestroy {
     Address: new FormControl('', [Validators.required]),
   });
   constructor(
-    private store: Store<{ recruiter: RecruiterState, auth: AuthState}>,
+    private store: Store<{ recruiter: RecruiterState, auth: AuthState,company: CompanyState}>,
     private router: Router
   ) {
     const userAsJson = sessionStorage.getItem('userOfRecruiterLogged');
@@ -49,6 +54,13 @@ export class BasicInformationComponent implements OnDestroy {
       console.log(this.user);
       
     }
+    const companyAsJson = sessionStorage.getItem('companyToRegister');
+    console.log(companyAsJson);
+    if(companyAsJson){
+      this.company = JSON.parse(companyAsJson || '');
+      console.log(this.company);
+    }
+
     this.subscriptions.push(
       this.recruiterCreated$.subscribe((recruiter) => {
           if(recruiter._id){
@@ -82,7 +94,7 @@ export class BasicInformationComponent implements OnDestroy {
       Storage:"65fa87ac3dcc1153af38b18d"
   }
     console.log(recruiterToCreate);
-    this.store.dispatch(RecruiterActions.createRecruiterAtRegister({recruiter: recruiterToCreate}))
+    this.store.dispatch(RecruiterActions.createRecruiterAtRegister({recruiter: recruiterToCreate, company: this.company}))
     
   }
   ngOnDestroy(): void {

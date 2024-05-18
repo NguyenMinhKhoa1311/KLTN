@@ -40,7 +40,7 @@ export class BillService {
         },
         Recruiter: recruiter
       })
-      .populate('Job', 'Name').exec();
+      .populate('Job', 'Name Field Career').exec();
     }
     catch(error){
       return []
@@ -57,7 +57,7 @@ export class BillService {
         },
         Recruiter: recruiter
       })
-      .populate('Job', 'Name').exec();;
+      .populate('Job', 'Name Field').exec();;
     }
     catch(error){
       return []
@@ -71,7 +71,7 @@ export class BillService {
         DatePayment: date,
         Recruiter: recruiter
       })
-      .populate('Job', 'Name').exec();;
+      .populate('Job', 'Name Field').exec();;
     }
     catch(error){
       return []

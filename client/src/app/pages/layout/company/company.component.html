@@ -34,7 +34,7 @@
                     <div class="img_company">
                         <img src="{{company.Avatar}}" alt="">
                     </div>
-                    <div class="info_company">
+                    <div class="info_company" (click)="navigateToCompanyDetail(company._id)">
                         <div class="name_company">
                             {{company.Name}}
                         </div>

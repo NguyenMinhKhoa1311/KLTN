@@ -84,7 +84,7 @@ export class LoginComponent implements OnDestroy {
               
               const userAsJson = JSON.stringify(user);
               sessionStorage.setItem('userOfRecruiterLogged', userAsJson);
-              this.router.navigate(['recruiterLayout/basic-information']);
+              this.router.navigate(['recruiterLayout/create-company']);
               
             }
         }
@@ -95,7 +95,7 @@ export class LoginComponent implements OnDestroy {
             console.log('recruiter', recruiter);
             
             if (recruiter._id == "500") {
-              this.router.navigate(['recruiterLayout/basic-information']);
+              this.router.navigate(['recruiterLayout/create-company']);
               console.log('recruiter', recruiter);
               sessionStorage.setItem('userOfRecruiterLogged', JSON.stringify(this.userLoged));
               

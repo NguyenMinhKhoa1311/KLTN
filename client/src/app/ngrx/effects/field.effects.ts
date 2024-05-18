@@ -111,4 +111,38 @@ export class FieldEffects {
             catchError((error) => of(FieldActions.getAllNoLimitAtJobDetailFailure({err: error})))))
          )
     );
+
+    getAllNoLimitAtStatistical$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(FieldActions.getAllNoLimitAtStatistical),
+        exhaustMap(() =>
+         this.fieldService.getAllNoLimit().pipe(
+            map((fields)=>{
+                if(fields != undefined || fields != null){
+                    return FieldActions.getAllNoLimitAtStatisticalSuccess({fields: fields})
+                }
+                else{
+                    return FieldActions.getAllNoLimitAtStatisticalFailure({err: "Get All Fields No Limit At Statistical Failure"})
+                }
+            }),
+            catchError((error) => of(FieldActions.getAllNoLimitAtStatisticalFailure({err: error})))))
+         )
+    );
+
+    getAllNoLimitAtCreateCompany$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(FieldActions.getAllNoLimitAtCreateCompany),
+        exhaustMap(() =>
+         this.fieldService.getAllNoLimit().pipe(
+            map((fields)=>{
+                if(fields != undefined || fields != null){
+                    return FieldActions.getAllNoLimitAtCreateCompanySuccess({fields: fields})
+                }
+                else{
+                    return FieldActions.getAllNoLimitAtCreateCompanyFailure({err: "Get All Fields No Limit At Create Company Failure"})
+                }
+            }),
+            catchError((error) => of(FieldActions.getAllNoLimitAtCreateCompanyFailure({err: error})))))
+         )
+    );
 }

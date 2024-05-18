@@ -89,3 +89,33 @@ export const getAllNoLimitAtJobDetailFailure = createAction(
     '[Field] Get All No Limit At Job Detail Failure',
     props<{err: string}>()
     );
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllNoLimitAtStatistical = createAction(
+    '[Field] Get All No Limit At Statistical'
+    );
+export const getAllNoLimitAtStatisticalSuccess = createAction(
+    '[Field] Get All No Limit At Statistical Success',
+    props<{fields: Field[]}>()
+    );
+export const getAllNoLimitAtStatisticalFailure = createAction(
+    '[Field] Get All No Limit At Statistical Failure',
+    props<{err: string}>()
+    );
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllNoLimitAtCreateCompany = createAction(
+    '[Field] Get All No Limit At Create Company'
+    );
+export const getAllNoLimitAtCreateCompanySuccess = createAction(
+    '[Field] Get All No Limit At Create Company Success',
+    props<{fields: Field[]}>()
+    );
+export const getAllNoLimitAtCreateCompanyFailure = createAction(
+    '[Field] Get All No Limit At Create Company Failure',
+    props<{err: string}>()
+    );
+    

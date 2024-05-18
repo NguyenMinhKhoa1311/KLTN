@@ -11,7 +11,11 @@ export class RecruiterService {
 
   constructor(private httpClient: HttpClient) {}
 
-  createRecruiter(data: any){
+  createRecruiter(recruiter: any, company: any){
+    const data = {
+      recruiter: recruiter,
+      company: company
+    }
     return this.httpClient.post<Recruiter>(`${URL}/recruiter/create`, data);
   }
 
