@@ -1,123 +1,138 @@
 <div id="statistical_container">
     <div class="title">Thống kê</div>
-    <div class="statistical_box">
-        <div class="list_job">
-            <div class="title_job">
-                Danh sách thanh toán
-            </div>
-            <div class="list_job_box">
-                <div class="job" *ngFor="let bill of billsToRender ">
-                    <div class="name">
-                        {{bill.Job.Name}}
-                    </div>
-                    <div class="salary">
-                        {{bill.GrandTotal}}
+    <div class="box1">
+        <div class="statistical_box1">
+            <div class="list_job">
+                <div class="title_job">
+                    Danh sách thanh toán
+                </div>
+                <div class="list_job_box">
+                    <div class="job" *ngFor="let bill of billsToRender ">
+                        <div class="name">
+                            {{bill.Job.Name}}
+                        </div>
+                        <div class="salary">
+                            {{bill.GrandTotal}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="chart_box">
-            <div class="tab">
-                <form [formGroup]="data">
-                    <div class="input">
-                        <tui-input-date
-                            class="b-form"
-                            formControlName="date"
-                            tuiTextfieldSize="m"
-                            [tuiTextfieldCleaner]="true"
-                            *ngIf="isGetByDate"
-                        >
-                            Choose a date
-                        </tui-input-date>
-
-                        <tui-input-month
-                            class="b-form"
-                            formControlName="month"
-                            tuiTextfieldSize="m"
-                            [tuiTextfieldCleaner]="true"
-                            *ngIf="isGetByMonth"
-                        >
-                            Choose a month
-                            <input
-                                placeholder="Not September please"
-                                tuiTextfield
-                            />
-                        </tui-input-month>
-
-                        <tui-input-year
-                            class="b-form"
-                            formControlName="year"
-                            tuiTextfieldSize="m"
-                            [tuiTextfieldCleaner]="true"
-                            *ngIf="isGetByYear"
-                        >
-                            Choose a year
-                            <input
-                                placeholder="{{currentYear}}"
-                                tuiTextfield
-                            />
-                        </tui-input-year>
-
-                        <button
-                            appearance="accent"
-                            tuiButton
-                            type="button"
-                            size="m"
-                            (click)="statistical()"
-                        >
-                            Thống kê
-                        </button>
+        <div class="statistical_box2">
+            <div class="chart_box">
+                <div class="tab">
+                    <form [formGroup]="data">
+                        <div class="input">
+                            <tui-input-date
+                                class="b-form"
+                                formControlName="date"
+                                tuiTextfieldSize="m"
+                                [tuiTextfieldCleaner]="true"
+                                *ngIf="isGetByDate"
+                            >
+                                Choose a date
+                            </tui-input-date>
+    
+                            <tui-input-month
+                                class="b-form"
+                                formControlName="month"
+                                tuiTextfieldSize="m"
+                                [tuiTextfieldCleaner]="true"
+                                *ngIf="isGetByMonth"
+                            >
+                                Choose a month
+                                <input
+                                    placeholder="Not September please"
+                                    tuiTextfield
+                                />
+                            </tui-input-month>
+    
+                            <tui-input-year
+                                class="b-form"
+                                formControlName="year"
+                                tuiTextfieldSize="m"
+                                [tuiTextfieldCleaner]="true"
+                                *ngIf="isGetByYear"
+                            >
+                                Choose a year
+                                <input
+                                    placeholder="Not 2022 please"
+                                    tuiTextfield
+                                />
+                            </tui-input-year>
+    
+                            <button
+                                appearance="accent"
+                                tuiButton
+                                type="button"
+                                size="m"
+                                (click)="statistical()"
+                            >
+                                Thống kê
+                            </button>
+                        </div>
+                    </form>
+                    <div class="choose">
+                        <tui-tabs [(activeItemIndex)]="activeItemIndex">
+                            <button tuiTab (click)="changeMode(true,false,false)">
+                                Tuần
+                            </button>
+                            <button tuiTab (click)="changeMode(false,true,false)"> 
+                                Tháng
+                            </button>
+                            <button tuiTab (click)="changeMode(false,false,true)">
+                                Năm
+                            </button>
+                        </tui-tabs>
                     </div>
-                </form>
-                <div class="choose">
-                    <tui-tabs [(activeItemIndex)]="activeItemIndex">
-                        <button tuiTab (click)="changeMode(true,false,false)">
-                            Ngày
-                        </button>
-                        <button tuiTab (click)="changeMode(false,true,false)">
-                            Tháng
-                        </button>
-                        <button tuiTab (click)="changeMode(false,false,true)">
-                            Năm
-                        </button>
-                    </tui-tabs>
+                </div>
+                <div class="chart">
+                    <tui-axes class="axes" [axisXLabels]="fields" [axisYLabels]="labelsY">
+                        <tui-bar-chart [max]="totalOfLegend" [value]="[grandTotals]"></tui-bar-chart>
+                    </tui-axes>
                 </div>
             </div>
-            <div class="chart">
-                <tui-axes class="axes" [axisXLabels]="fields" [axisYLabels]="labelsY">
-                    <tui-bar-chart [max]="totalOfLegend" [value]="[grandTotals]"></tui-bar-chart>
-                </tui-axes>
+            <div class="btn">
+                <div class="field_btn">
+                    <button appearance="primary" tuiButton type="button">
+                        ngành nghề
+                    </button>
+                </div>
+                <div class="career_btn">
+                    <button appearance="primary" tuiButton type="button">
+                        Lĩnh vực
+                    </button>
+                </div>
             </div>
-        </div>
-        
-    </div>
-    <div class="legend_box">
-        <div class="box">
-            <div class="wrapper">
-                <tui-ring-chart
-                    [value]="grandTotals"
-                    [(activeItemIndex)]="activeItemIndexLegend"
-                >
-                <tui-money
-                [singleColor]="true"
-                [value]="totalOfLegend"></tui-money>
-                    <div>Total</div>
-                </tui-ring-chart>
-                <div class="legend">
-                    <tui-legend-item
-                        *ngFor="let field of fields; let index = index"
-                        size="s"
-                        class="item"
-                        [active]="isItemActive(index)"
-                        [color]="getColor(index)"
-                        [text]="field"
-                        (tuiHoveredChange)="onHover(index, true)"
-                    >
+            <div class="legend_box">
+                <div class="box">
+                    <div class="wrapper">
+                        <tui-ring-chart
+                            [value]="grandTotals"
+                            [(activeItemIndex)]="activeItemIndexLegend"
+                        >
                         <tui-money
-                            [singleColor]="true"
-                            [value]="grandTotals[index]"
-                        ></tui-money>
-                    </tui-legend-item>
+                        [singleColor]="true"
+                        [value]="totalOfLegend"></tui-money>
+                            <div>Total</div>
+                        </tui-ring-chart>
+                        <div class="legend">
+                            <tui-legend-item
+                                *ngFor="let field of fields; let index = index"
+                                size="s"
+                                class="item"
+                                [active]="isItemActive(index)"
+                                [color]="getColor(index)"
+                                [text]="field"
+                                (tuiHoveredChange)="onHover(index, true)"
+                            >
+                                <tui-money
+                                    [singleColor]="true"
+                                    [value]="grandTotals[index]"
+                                ></tui-money>
+                            </tui-legend-item>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

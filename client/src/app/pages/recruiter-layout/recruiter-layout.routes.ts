@@ -55,6 +55,16 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         path:'statistical',
         loadChildren: () =>
           import('./statistical/statistical.routes').then((m) => m.STATISTICAL_ROUTERS),
+      },
+      {
+        path:'payment',
+        loadChildren: () =>
+          import('./payment/payment.routes').then((m) => m.PAYMENT_ROUTERS),
+      },
+      {
+        path:'payment-success',
+        loadChildren: () =>
+          import('./payment-success/payment-success.routes').then((m) => m.PAYMENTSUCCESS_ROUTERS),
       }
     ],
   },
