@@ -31,7 +31,18 @@ export const initualState: FieldState = {
     fieldNoLimitAtJobDetail: [],
     isGetAllNoLimitAtJobDetailLoading: false,
     isGetAllNoLimitAtJobDetailSuccess: false,
-    getAllNoLimitAtJobDetailError: ''
+    getAllNoLimitAtJobDetailError: '',
+
+    fieldNoLimitAtStatistical: [],
+    isGetAllNoLimitAtStatisticalLoading: false,
+    isGetAllNoLimitAtStatisticalSuccess: false,
+    getAllNoLimitAtStatisticalError: '',
+
+    fieldNoLimitAtCreateCompany: [],
+    isGetAllNoLimitAtCreateCompanyLoading: false,
+    isGetAllNoLimitAtCreateCompanySuccess: false,
+    getAllNoLimitAtCreateCompanyError: ''
+
 }
 
 export const fieldReducer = createReducer(
@@ -201,7 +212,64 @@ export const fieldReducer = createReducer(
             isGetAllNoLimitAtJobDetailSuccess: false,
             getAllNoLimitAtJobDetailError: action.err
         }
+    }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(FieldActions.getAllNoLimitAtStatistical, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtStatisticalLoading: true,
+            isGetAllNoLimitAtStatisticalSuccess: false,
+            getAllNoLimitAtStatisticalError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtStatisticalSuccess, (state, action) =>{
+        return {
+            ...state,
+            fieldNoLimitAtStatistical: action.fields,
+            isGetAllNoLimitAtStatisticalLoading: false,
+            isGetAllNoLimitAtStatisticalSuccess: true,
+            getAllNoLimitAtStatisticalError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtStatisticalFailure, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtStatisticalLoading: false,
+            isGetAllNoLimitAtStatisticalSuccess: false,
+            getAllNoLimitAtStatisticalError: action.err
+        }
+    }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(FieldActions.getAllNoLimitAtCreateCompany, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtCreateCompanyLoading: true,
+            isGetAllNoLimitAtCreateCompanySuccess: false,
+            getAllNoLimitAtCreateCompanyError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtCreateCompanySuccess, (state, action) =>{
+        return {
+            ...state,
+            fieldNoLimitAtCreateCompany: action.fields,
+            isGetAllNoLimitAtCreateCompanyLoading: false,
+            isGetAllNoLimitAtCreateCompanySuccess: true,
+            getAllNoLimitAtCreateCompanyError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtCreateCompanyFailure, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtCreateCompanyLoading: false,
+            isGetAllNoLimitAtCreateCompanySuccess: false,
+            getAllNoLimitAtCreateCompanyError: action.err
+        }
     })
+    
 
 
 )

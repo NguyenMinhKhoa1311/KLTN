@@ -31,6 +31,18 @@ export interface FieldState{
     isGetAllNoLimitAtJobDetailLoading: boolean;
     isGetAllNoLimitAtJobDetailSuccess: boolean;
     getAllNoLimitAtJobDetailError: string;
+
+    fieldNoLimitAtStatistical: Field[];
+    isGetAllNoLimitAtStatisticalLoading: boolean;
+    isGetAllNoLimitAtStatisticalSuccess: boolean;
+    getAllNoLimitAtStatisticalError: string;
+
+    fieldNoLimitAtCreateCompany: Field[];
+    isGetAllNoLimitAtCreateCompanyLoading: boolean;
+    isGetAllNoLimitAtCreateCompanySuccess: boolean;
+    getAllNoLimitAtCreateCompanyError: string;
+    
+    
     
 
 }

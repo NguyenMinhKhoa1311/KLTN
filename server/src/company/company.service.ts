@@ -6,6 +6,7 @@ import { Company } from './entities/company.entity';
 import { Model } from 'mongoose';
 import { Field } from 'src/field/entities/field.entity';
 import { Career } from 'src/career/entities/career.entity';
+import { log } from 'console';
 
 @Injectable()
 export class CompanyService {
@@ -18,11 +19,24 @@ export class CompanyService {
 
   async create(createCompanyDto: CreateCompanyDto) {
     try{
-      const newCompany = new this.CompanyModel(createCompanyDto);
-      return newCompany.save();
+      const newCompany = await new this.CompanyModel(createCompanyDto).save();
+      console.log(newCompany);
+      
+      if(newCompany._id.toString().length>0){
+        return newCompany;
+      }else{
+        return {
+          _id:"500"
+        }
+      }
+
     }
     catch(error){
-      throw error;
+      log(error);
+      return{
+        _id:"500",
+        error:error
+      }
     }
   }
 
@@ -39,7 +53,6 @@ export class CompanyService {
   async getBy_id(id: string){
     return await this.CompanyModel.findById(id)
     .populate('Field', 'FieldId FieldName', this.fieldModel)
-    .populate('Career', 'CareerId CareerName', this.careerModel)
     .exec();
   }
   async getByNameWithKeyword(keyword: string, page: number, limit: number,sortBy ='createAt' , sortOrder: 'asc'|'desc' = 'desc'){

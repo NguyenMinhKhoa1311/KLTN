@@ -15,7 +15,7 @@ export class BillService {
   getByYear(year: number,recruiter: string){
     return this.httpClient.get<Bill[]>(`${URL}/bill/getByYear?recruiter=${recruiter}&year=${year}`);
   }
-  getByDate(date: Date,recruiter: string){
+  getByDate(date: string,recruiter: string){
     return this.httpClient.get<Bill[]>(`${URL}/bill/getByDate?recruiter=${recruiter}&date=${date}`);
   }
 }

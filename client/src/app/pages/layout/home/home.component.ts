@@ -107,7 +107,7 @@ export class HomeComponent implements OnDestroy {
     
 
     this.store.dispatch(FieldActions.getFieldAtHome({page: 0, limit: 5}))
-    this.store.dispatch(CompanyActions.getAllAndSortAtHome({page: 0, limit: 5, sortBy: "createdAt", sortOrder: "desc"}))
+    this.store.dispatch(CompanyActions.getAllAndSortAtHome({page: 0, limit: 6, sortBy: "createdAt", sortOrder: "desc"}))
     
 
     this.subscriptions.push(

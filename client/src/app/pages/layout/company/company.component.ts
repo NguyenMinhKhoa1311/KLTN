@@ -58,7 +58,7 @@ export class CompanyComponent implements OnDestroy{
             
             this.page--;
             this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công ty nào !!!',status:'warning'})
             .subscribe();
           }
       }),
@@ -73,7 +73,7 @@ export class CompanyComponent implements OnDestroy{
             
             this.page--;
             this.alerts
-            .open('', {label: 'Không có công việc nào!',status:'warning'})
+            .open('', {label: 'Không có công ty nào !!!',status:'warning'})
             .subscribe();
         }
     })
@@ -116,6 +116,12 @@ export class CompanyComponent implements OnDestroy{
       this.store.dispatch(CompanyActions.getAllAndSortAtCompany({page: this.page, limit: 6, sortBy: "createdAt", sortOrder: "desc"}));
     }
     }
+  }
+
+  navigateToCompanyDetail(companyId: string) {
+    this.router.navigate(['/company-detail',{
+      companyId: companyId
+    }]);
   }
 
 

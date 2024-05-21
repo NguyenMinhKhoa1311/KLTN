@@ -37,7 +37,7 @@ export const getByYearAtStatisticalFailure = createAction(
 //////////////////////////////////////////////////////////////////////////////////////////////////////  
 export const getByDateAtStatistical = createAction(
     '[Bill] Get By Date At Statistical',
-    props<{date: Date,recruiter: string}>()
+    props<{date: string,recruiter: string}>()
     );
 export const getByDateAtStatisticalSuccess = createAction(
     '[Bill] Get By Date At Statistical Success',
