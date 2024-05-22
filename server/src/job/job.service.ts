@@ -54,7 +54,13 @@ constructor(
   async getAllAndSort(page: number, limit: number){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find()
+      const jobs = await this.JobModel.find({
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+  })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name ', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -74,7 +80,14 @@ constructor(
   async getAllAndSortWithUrgent(page: number, limit: number,urgent: boolean){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({Urgent: urgent})
+      const jobs = await this.JobModel.find({
+        Urgent: urgent,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name ', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -95,7 +108,14 @@ constructor(
   async getByCareer(page: number, limit: number, careerId: string){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({Career: careerId})
+      const jobs = await this.JobModel.find({
+        Career: careerId,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+          ],
+          StatusPayment: true
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name ', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -115,7 +135,15 @@ constructor(
   async getByCareerWithUrgent(page: number, limit: number, careerId: string,urgent: boolean){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({Career: careerId,Urgent:urgent})
+      const jobs = await this.JobModel.find({
+        Career: careerId,
+        Urgent:urgent,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name ', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -136,7 +164,14 @@ constructor(
   async getByField(page: number, limit: number, fieldId: string){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({Field: fieldId})
+      const jobs = await this.JobModel.find({
+        Field: fieldId,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+    })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -156,7 +191,14 @@ constructor(
   async getByFieldWithUrgent(page: number, limit: number, fieldId: string,urgent: boolean){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({Field: fieldId,Urgent: urgent})
+      const jobs = await this.JobModel.find({
+        Field: fieldId,Urgent: urgent,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+  })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -198,7 +240,14 @@ constructor(
   async getByHotJob(page: number, limit: number ){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({Hot: true})
+      const jobs = await this.JobModel.find({
+        Hot: true,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -215,7 +264,25 @@ constructor(
       throw new HttpException(error.message, error.status);
     }
   }
-
+  async getBy_id(id: string){
+    try{
+      const job = await this.JobModel.findById(id)
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name Price', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .exec();
+      return job
+    }
+    catch(error){
+      return{
+        _id: "500",
+        error: error
+      }
+    }
+  }
   async getById(id: string){
     try{
       const job = await this.JobModel.findOne({JobId: id})
@@ -238,23 +305,35 @@ constructor(
 
   async updateStatusPayment(id: String, status: boolean) {
     try{
-        const updateJob = await this.JobModel.findOneAndUpdate(
-          {JobId: id},
-          { StatusPayment: status,
-            StatusRecruitment: status
+
+        const updateJob = await this.JobModel.findByIdAndUpdate(
+          id,
+          { 
+            StatusPayment: status,
           },
           {new:true}
           );
-          return updateJob;
+          if(updateJob._id){
+            return updateJob;
+          }else{
+            return {
+              _id: "500",
+            }
+          }
+
     }
     catch(error){
-      throw new HttpException(error.message, error.status);
+      return{
+        _id: "500",
+        error: error
+        
+      }
     }
   }
   async updateStatusRecruitment(id: String, status: boolean) {
     try{
-        const updateJob = await this.JobModel.findOneAndUpdate(
-          {JobId: id},
+        const updateJob = await this.JobModel.findByIdAndUpdate(
+          id,
           { 
             StatusRecruitment: true
           },
@@ -270,7 +349,15 @@ constructor(
   async getByCompany(companyId: String,page: number, limit: number ){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({Company: companyId})
+      const jobs = await this.JobModel.find({
+        Company: companyId,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true 
+        
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -291,7 +378,14 @@ constructor(
   async getByNameWithKeyword(keyword: string, page: number, limit: number){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({"Name": {"$regex": keyword, "$options": "i"}})
+      const jobs = await this.JobModel.find({
+        "Name": {"$regex": keyword, "$options": "i",
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+        }})
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -312,7 +406,17 @@ constructor(
   async getByKeyword(keyword: string, page: number, limit: number ){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({ $or: [{"Name": {"$regex": keyword, "$options": "i"}},{"Tags": {"$regex": keyword, "$options": "i"}},{"Location": {"$regex": keyword, "$options": "i"}}] })
+      const jobs = await this.JobModel.find({ 
+        $or: [
+          {"Name": {"$regex": keyword, "$options": "i"}},
+          {"Tags": {"$regex": keyword, "$options": "i"}},
+          {"Location": {"$regex": keyword, "$options": "i"}}],
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+        })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -332,7 +436,19 @@ constructor(
   async getByKeywordWithUrgent(keyword: string, page: number, limit: number ,urgent: boolean){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({ $or: [{"Name": {"$regex": keyword, "$options": "i"}},{"Tags": {"$regex": keyword, "$options": "i"}},{"Location": {"$regex": keyword, "$options": "i"}}], Urgent: urgent})
+      const jobs = await this.JobModel.find({ 
+        $or: [
+          {"Name": {"$regex": keyword, "$options": "i"}},
+          {"Tags": {"$regex": keyword, "$options": "i"}},
+          {"Location": {"$regex": keyword, "$options": "i"}}
+        ], 
+        Urgent: urgent,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -354,7 +470,14 @@ constructor(
   async getByTagsWithKeyword(keyword: string, page: number, limit: number){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({"Tags": {"$regex": keyword, "$options": "i"}})
+      const jobs = await this.JobModel.find({
+        "Tags": {"$regex": keyword,"$options": "i"},
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -374,7 +497,16 @@ constructor(
   async getByTagsWithKeywordUrgent(keyword: string, page: number, limit: number, urgent: boolean){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({"Tags": {"$regex": keyword, "$options": "i"}, Urgent: urgent})
+      const jobs = await this.JobModel.find({
+        "Tags": {"$regex": keyword, "$options": "i"},
+        Urgent: urgent,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+        
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -395,7 +527,14 @@ constructor(
   async getByLocationWithKeyWord(keyword: string, page: number, limit: number){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({"Location": {"$regex": keyword, "$options": "i"}})
+      const jobs = await this.JobModel.find({
+        "Address": {"$regex": keyword, "$options": "i"},
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true 
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -415,7 +554,15 @@ constructor(
   async getByLocationWithKeyWordAndUrgent(keyword: string, page: number, limit: number, urgent: boolean){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find({"Location": {"$regex": keyword, "$options": "i"},Urgent: urgent})
+      const jobs = await this.JobModel.find({
+        "Location": {"$regex": keyword, "$options": "i"},
+        Urgent: urgent,
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name Company', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)
@@ -455,7 +602,13 @@ constructor(
   async geAllAndSortByWelFareAndSalare(page: number, limit: number){
     try{
       const skip = page * limit;
-      const jobs = await this.JobModel.find()
+      const jobs = await this.JobModel.find({
+        "$and": [
+          {"StartDate": {"$lte": new Date()}},
+          {"EndDate": {"$gte": new Date()}},
+        ],
+        StatusPayment: true
+      })
       .populate('Career','CareerId Name', this.careerModel)
       .populate('Recruiter','RecruiterId Name', this.recruiterModel)
       .populate('Company','CompanyId Name Avatar Address', this.companyModel)

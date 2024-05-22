@@ -25,4 +25,7 @@ export class ServicePackageService {
   async getAll() {
     return this.ServicePackageModel.find();
   }
+  async getById(id: string) {
+    return await this.ServicePackageModel.findById(id).exec();
+  }
 }

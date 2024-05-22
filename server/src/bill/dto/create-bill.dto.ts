@@ -9,5 +9,8 @@ export class CreateBillDto {
         public GrandTotal: number,
         public DatePayment: Date,
         public Recruiter: string,
+        public Field: string,
+        public Career: string,
+        public Company: string
     ){}
 }

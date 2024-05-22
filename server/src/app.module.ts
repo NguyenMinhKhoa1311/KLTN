@@ -24,6 +24,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthMiddleware } from './auth/auth.middleware';
 import { JobController } from './job/job.controller';
 import { FieldController } from './field/field.controller';
+import { PaymentModule } from './payment/payment.module';
 
 
 @Module({
@@ -48,6 +49,7 @@ import { FieldController } from './field/field.controller';
     SkillModule,
     ReferencesModule,
     AuthModule,
+    PaymentModule,
 
 
 
@@ -84,6 +86,8 @@ export class AppModule implements NestModule {
         { path: 'job/getByTagsWithKeyword', method: RequestMethod.GET },
         { path: 'job/getByTagsWithKeywordAndUrgent', method: RequestMethod.GET },
         { path: 'job/getByRecruiter', method: RequestMethod.GET },
+        { path: 'job/getByLocationdWithKeyword', method: RequestMethod.GET },
+        { path: 'job/getByLocationdWithKeywordAndUrgent', method: RequestMethod.GET },
 
 
 

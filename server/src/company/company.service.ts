@@ -77,7 +77,8 @@ export class CompanyService {
         id,
         {$inc:{JobQuantity:1}},
         {new: true}
-      )
+      ).exec();
+      log(company);
       if(company._id.toString().length>0){
         return true;
       }
@@ -86,6 +87,7 @@ export class CompanyService {
       }
     }
     catch(error){
+      log(error);
       return false;
     }
   }
@@ -111,6 +113,7 @@ export class CompanyService {
       }
     }
     catch(error){
+      log(error);
       return false;
     }
   }

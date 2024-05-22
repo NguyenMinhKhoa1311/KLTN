@@ -58,7 +58,7 @@ export class JobController {
   async getAllAndSortWithUrgent(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('urgent') urgent: boolean
+    @Query('urgent') urgent: boolean,
   ) {
     try{
       const job = await this.jobService.getAllAndSortWithUrgent(page, limit, urgent);
@@ -72,8 +72,7 @@ export class JobController {
   async getByField(
     @Query('page') page: number,
     @Query('limit') limit: number,
-
-    @Query('field') field: string
+    @Query('field') field: string,
     ) {
     try{
       const job = await this.jobService.getByField(page, limit, field);
@@ -90,7 +89,7 @@ export class JobController {
     @Query('page') page: number,
     @Query('limit') limit: number,
     @Query('field') field: string,
-    @Query('urgent') urgent: boolean
+    @Query('urgent') urgent: boolean,
     ) {
     try{
       const job = await this.jobService.getByFieldWithUrgent(page, limit,field,urgent);
@@ -106,7 +105,7 @@ export class JobController {
   async getByCareer(
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('career') career: string
+    @Query('career') career: string,
     ) {
     try{
       const job = await this.jobService.getByCareer(page, limit, career);
@@ -190,7 +189,8 @@ export class JobController {
   async getByFieldName(
     @Query('fieldName') fieldName: string,
     @Query('page') page: number,
-    @Query('limit') limit: number) {
+    @Query('limit') limit: number,
+  ) {
     try{
       const field = await this.fieldService.getByFieldName(fieldName)
       log(field)
@@ -224,7 +224,7 @@ export class JobController {
     @Query('fieldName') fieldName: string,
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('urgent') urgent: boolean
+    @Query('urgent') urgent: boolean,
   ) {
     try{
       const field = await this.fieldService.getByFieldName(fieldName)
@@ -242,7 +242,8 @@ export class JobController {
   async getByCareerName(
   @Query('careerName') careerName: string,
   @Query('page') page: number,
-  @Query('limit') limit: number) {
+  @Query('limit') limit: number,
+  ){
     try{
       const career = await this.careerService.getByCareerName(careerName)
       log(career)
@@ -259,7 +260,7 @@ export class JobController {
   @Query('careerName') careerName: string,
   @Query('page') page: number,
   @Query('limit') limit: number,
-  @Query('urgent') urgent: boolean
+  @Query('urgent') urgent: boolean,
 ){
     try{
       const career = await this.careerService.getByCareerName(careerName)
@@ -305,7 +306,8 @@ export class JobController {
   async getByKeyword(
     @Query('keyword') keyword: string,
     @Query('page') page: number,
-    @Query('limit') limit: number) {
+    @Query('limit') limit: number,
+  ) {
     try{
       const job = await this.jobService.getByKeyword(keyword, page, limit)
       return job
@@ -319,7 +321,7 @@ export class JobController {
     @Query('keyword') keyword: string,
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('urgent') urgent: boolean
+    @Query('urgent') urgent: boolean,
   ){
     try{
       const job = await this.jobService.getByKeywordWithUrgent(keyword, page, limit, urgent)
@@ -334,7 +336,8 @@ export class JobController {
   async getByTagsWithKeyword(
     @Query('keyword') keyword: string,
     @Query('page') page: number,
-    @Query('limit') limit: number,) {
+    @Query('limit') limit: number,
+  ){
     try{
       const job = await this.jobService.getByTagsWithKeyword(keyword, page, limit)
       return job
@@ -349,7 +352,7 @@ export class JobController {
     @Query('keyword') keyword: string,
     @Query('page') page: number,
     @Query('limit') limit: number,
-    @Query('urgent') urgent: boolean
+    @Query('urgent') urgent: boolean,
   ){
     try{
       const job = await this.jobService.getByTagsWithKeywordUrgent(keyword, page, limit, urgent)

@@ -32,6 +32,22 @@ export class RecruiterService {
     }
   }
 
+  async getBy_id(id: string){
+    try{
+      return await this.RecruiterModel.findById(id)
+      .populate('Company','CompanyId Name', this.CompanyModel)
+      .populate('User','Uid Username Password', this.UserModel)
+      .populate('Voucher','VoucherId Name', this.VoucherModel)
+      .exec();
+    }
+    catch(error){
+      return{
+        _id: "500",
+        error: error
+      }
+    }
+  }
+
   async findAll() {
     try{
       return await this.RecruiterModel.find()
