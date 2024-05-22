@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
 import { Company } from '../../../models/company.model';
 import { Candidate } from '../../../models/candidate.model';
 import { LoadingComponent } from '../../loading/loading.component';
+import { TuiAlertService } from '@taiga-ui/core';
 
 
 
@@ -66,6 +67,7 @@ export class HomeComponent implements OnDestroy {
   isGetJobByCareerSuccess: boolean = false;
   isGetJobByHotJobSuccess: boolean = false;
   isGetJobByAllAndSortByWelfareAndSalarySuccess: boolean = false;
+  isGetAllFieldSuccess: boolean = false;
   fields: Field[] = [];
   companys: Company[] = [];
   pageHotJob: number = 0;
@@ -78,7 +80,8 @@ export class HomeComponent implements OnDestroy {
 
   constructor(
     private store : Store<{job: jobState, field: FieldState, company: CompanyState}>,
-    private router: Router
+    private router: Router,
+    private readonly alerts: TuiAlertService,
   ){
     console.log("HomeComponent");
         //lấy user đã login và dùng
@@ -122,6 +125,9 @@ export class HomeComponent implements OnDestroy {
             this.JobGetByCareer = jobs;
           }else if(this.isGetJobByCareerSuccess){
             this.pageByCareer--;
+            this.alerts
+            .open('', {label: 'Không còn công việc nào',status:'info'})
+            .subscribe();
           }
 
         }),
@@ -138,17 +144,25 @@ export class HomeComponent implements OnDestroy {
           this.JobGetByHotJob = jobs;
           }else if(this.isGetJobByHotJobSuccess){
             this.pageHotJob--;
+            this.alerts
+            .open('', {label: 'Không còn công việc nào',status:'info'})
+            .subscribe();
           }
         }),
-
+    // isGetFieldAtHomeSuccess
+        this.isGetFieldAtHomeSuccess$.subscribe((isSuccess) => {
+          this.isGetAllFieldSuccess = isSuccess;
+        }),
     // all field
-
         this.fieldsTakenAtHome$.subscribe((fields) => {
           if(fields.length>0){
             console.log(fields);
             this.fields = fields;
-          }else{
+          }else if(this.isGetAllFieldSuccess){
             this.pageOfField--;
+            this.alerts
+            .open('', {label: 'Không còn lĩnh vực nào',status:'info'})
+            .subscribe();
           }
 
         }),
@@ -172,6 +186,9 @@ export class HomeComponent implements OnDestroy {
               this.JobGetByAllAndSortByWelfareAndSalary = jobs;
             }else if(this.isGetJobByAllAndSortByWelfareAndSalarySuccess){
               this.pageByWelfareAndSalary--;
+              this.alerts
+              .open('', {label: 'Không còn công việc nào',status:'info'})
+              .subscribe();
             }
           }),
 
@@ -268,30 +285,30 @@ export class HomeComponent implements OnDestroy {
     ];
 
     navigateToJobDetail(jobId: string) {
-      this.router.navigate(['/job-detail',{
-        jobId: jobId
-      }]);
+    this.router.navigate(['/job-detail'], {
+      queryParams: { job: jobId }
+    });
     }
 
     navigateToCompanyDetail(companyId: string) {
-      this.router.navigate(['/company-detail',{
-        companyId: companyId
-      }]);
+      this.router.navigate(['/company-detail'], {
+        queryParams: { company: companyId }
+      });
     }
     navigateToSeeAll(type: string) {
-      this.router.navigate(['/job-all', {
-        type: type
-      }]);
+      this.router.navigate(['/job-all'], {
+        queryParams: { type: type }
+      });
     }
     navigateToJobs(field: string) {
-      this.router.navigate(['/job',{
-        field: field
-      }]);
+      this.router.navigate(['/job'], {
+        queryParams: { field: field }
+      });
     }
     navigateToJoByCareer(career: string) {
-      this.router.navigate(['/job',{
-        career: career
-      }]);
+      this.router.navigate(['/job'], {
+        queryParams: { career: career }
+      });
     }
 
     

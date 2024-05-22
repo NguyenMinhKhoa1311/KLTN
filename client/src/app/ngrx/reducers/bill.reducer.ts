@@ -1,6 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { BillState } from "../states/bill.state";
 import * as BillActions from "../actions/bill.actions";
+import { Bill } from "../../models/bill.model";
 
 const initizaState: BillState = {
     billsTakenByGetByMonthAtStatistical: [],
@@ -17,6 +18,11 @@ const initizaState: BillState = {
     isGetByDateAtStatisticalLoading: false,
     isGetByDateAtStatisticalSuccess: false,
     getByDateAtStatisticalError: "",
+
+    billCreatedAtPaymentSuccess: <Bill>{},
+    isCreateAtPaymentSuccessLoading: false,
+    isCreateAtPaymentSuccessSuccess: false,
+    createAtPaymentSuccessError: "",
 };
 
 export const billReducer = createReducer(
@@ -97,6 +103,32 @@ export const billReducer = createReducer(
             isGetByYearAtStatisticalLoading: false,
             isGetByYearAtStatisticalSuccess: false,
             getByYearAtStatisticalError: action.error,
+        };
+    }),
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(BillActions.createAtPaymentSuccess, (state, action) => {
+        return {
+            ...state,
+            isCreateAtPaymentSuccessLoading: true,
+            isCreateAtPaymentSuccessSuccess: false,
+            createAtPaymentSuccessError: "",
+        };
+    }),
+    on(BillActions.createAtPaymentSuccessSuccess, (state, action) => {
+        return {
+            ...state,
+            isCreateAtPaymentSuccessLoading: false,
+            isCreateAtPaymentSuccessSuccess: true,
+            billCreatedAtPaymentSuccess: action.bill,
+        };
+    }),
+    on(BillActions.createAtPaymentSuccessFailure, (state, action) => {
+        return {
+            ...state,
+            isCreateAtPaymentSuccessLoading: false,
+            isCreateAtPaymentSuccessSuccess: false,
+            createAtPaymentSuccessError: action.error,
         };
     }),
 );

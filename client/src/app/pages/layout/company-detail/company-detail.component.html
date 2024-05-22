@@ -3,7 +3,7 @@
         <div class="header">
             <div class="name">
                 <div class="img_company">
-                    <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                    <img src="{{companyToRender.Avatar}}" alt="">
                 </div>
                 <div class="name_company">
                     <h1>{{companyToRender.Name}}</h1>
@@ -20,8 +20,8 @@
                         <div class="title_info">
                             Lĩnh vực
                         </div>
-                        <div class="field_name">
-                           {{companyToRender.Field}}
+                        <div class="field_name"*ngIf="companyToRender.Field">
+                        {{companyToRender.Field.FieldName}}
                         </div>
                     </div>
                     <div class="contact">
@@ -54,14 +54,14 @@
                     <div class="job" *ngFor="let job of jobsToRender">
                         <div class="left">
                             <div class="img_job">
-                                <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                                <img src="{{job.ImageOfCompany}}" alt="">
                             </div>
                             <div class="info_job">
-                                <div class="name">
+                                <div class="name" (click)="navigateToJobDetail(job.JobId)">
                                     {{job.Name}}
                                 </div>
                                 <div class="company">
-                                   {{job.Company.Name}}
+                                    {{job.Company.Name}}
                                 </div>
                                 <div class="salayry_address">
                                     <div class="salary">
@@ -73,18 +73,18 @@
                                     </div>
                                 </div>
                                 <div class="tag">
-                                    <div class="tag_item" *ngFor="let item of job.Tags">
-                                        item
+                                    <div class="tag_item" *ngFor="let tag of job.Tags">
+                                        <div (click)="navigateToJobs(tag)">{{tag}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="right">
                             <div class="control">
-                                <div class="heart">
-                                    <span class="material-symbols-outlined">
-                                        favorite
-                                    </span>
+                                <div class="item_hot" >
+                                    <div class="heart" (click)="updatedAndDeleteFavoriteJob(job)">
+                                        <tui-svg class="{{checkFavoriteJob(job)}}" src="tuiIconHeartLarge" ></tui-svg>
+                                    </div>
                                 </div>
                                 
                             </div>

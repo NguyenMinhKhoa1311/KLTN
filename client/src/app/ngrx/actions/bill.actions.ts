@@ -49,4 +49,17 @@ export const getByDateAtStatisticalFailure = createAction(
     );
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+export const createAtPaymentSuccess = createAction(
+    '[Bill] Create At PaymentSuccess',
+    props<{bill:any}>()
+    );
+export const createAtPaymentSuccessFailure = createAction(
+    '[Bill] Create At PaymentSuccess Failure',
+    props<{error: string}>()
+    );
+export const createAtPaymentSuccessSuccess = createAction(
+    '[Bill] Create At PaymentSuccess Success',
+    props<{bill: Bill}>()
+    );
 

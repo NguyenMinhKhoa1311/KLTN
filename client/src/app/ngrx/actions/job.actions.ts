@@ -457,3 +457,18 @@ export const getAllAndSortByWelfareAndSalaryAtHomeFailure = createAction(
     '[Job] Get All And Sort By Welfare And Salary At Home Failure',
     props<{ error: string }>()
 );
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByJobIdAtPayment= createAction(
+    '[Job] Get By Job Id At Payment',
+    props<{ id: string }>()
+);
+export const getByJobIdAtPaymentSuccess = createAction(
+    '[Job] Get By Job Id At Payment Success',
+    props<{ job: Job }>()
+);
+export const getByJobIdAtPaymentFailure = createAction(
+    '[Job] Get By Job Id At Payment Failure',
+    props<{ error: string }>()
+);

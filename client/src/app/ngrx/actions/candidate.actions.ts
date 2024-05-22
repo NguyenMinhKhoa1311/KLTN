@@ -58,6 +58,22 @@ export const updateFavoriteJobsAtJobFailure = createAction(
 
 
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    export const updateFavoriteJobsAtCompanyDetail = createAction(
+        "[Candidate] Update Favorite Jobs At Company Detail",
+        props<{id: string, jobId: string,token:string}>()
+        );
+    export const updateFavoriteJobsAtCompanyDetailSuccess = createAction(
+        "[Candidate] Update Favorite Jobs At Company Detail Success",
+        props<{candidate: Candidate}>()
+        );
+    export const updateFavoriteJobsAtCompanyDetailFailure = createAction(
+        "[Candidate] Update Favorite Jobs At Company Detail Failure",
+        props<{error: string}>()
+        );
+
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,6 +87,25 @@ export const deleteFavoriteJobAtJobSuccess = createAction(
     );
 export const deleteFavoriteJobAtJobFailure = createAction(
     "[Candidate] Delete Favorite Job Failure",
+    props<{error: string}>()
+    );
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const deleteFavoriteJobAtCompanyDetail = createAction(
+    "[Candidate] Delete Favorite Job At Company Detail",
+    props<{id: string, jobId: string,token:string}>()
+    );
+export const deleteFavoriteJobAtCompanyDetailSuccess = createAction(
+    "[Candidate] Delete Favorite Job At Company Detail Success",
+    props<{candidate: Candidate}>()
+    );
+export const deleteFavoriteJobAtCompanyDetailFailure = createAction(
+    "[Candidate] Delete Favorite Job At Company Detail Failure",
     props<{error: string}>()
     );
 

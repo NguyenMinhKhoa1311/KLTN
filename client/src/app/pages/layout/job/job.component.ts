@@ -132,13 +132,13 @@ export class JobComponent implements OnDestroy{
     private _snackBar: MatSnackBar,
     private readonly alerts: TuiAlertService
   ){
-    let token = sessionStorage.getItem('tokenOfRecruiter');
+    let token = sessionStorage.getItem('tokenOfCandidate');
     if(token){
       this.token = token;
     }
-    this.field = this.route.snapshot.paramMap.get('field')??"";
-    this.career = this.route.snapshot.paramMap.get('career')??"";
-    this.tagValue = this.route.snapshot.paramMap.get('tag')??"";
+    this.field = this.route.snapshot.queryParamMap.get('field')??"";
+    this.career = this.route.snapshot.queryParamMap.get('career')??"";
+    this.tagValue = this.route.snapshot.queryParamMap.get('tag')??"";
     if(this.field.length > 0){
       this.isGetByFieldNameAddNavigate = true;
       this.isGetAll = false;

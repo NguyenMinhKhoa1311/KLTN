@@ -137,16 +137,16 @@ export const initialState: jobState = {
     getByHotJobAtSeeAllError: "",
     jobsTakenByHotJobAtSeeAll: [],
 
+    isGetByIdAtPaymentLoading: false,
+    isGetByIdAtPaymentSuccess: false,
+    getByIdAtPaymentError: "",
+    jobTakenByIdAtPayment: <Job>{},
+
 
 }
 
 export const jobReducer = createReducer(
     initialState,
-
-
-
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -453,6 +453,36 @@ export const jobReducer = createReducer(
             getByIdAtJobDetailOfCandidateError: action.error,
         }
     }),
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(JobActions.getByJobIdAtPayment,(state,action)=>{
+        return{
+            ...state,
+            isGetByIdAtPaymentLoading: true,
+            isGetByIdAtPaymentSuccess: false,
+            getByIdAtPaymentError: "",
+        }
+    }),
+    on(JobActions.getByJobIdAtPaymentSuccess,(state,action)=>{
+        return{
+            ...state,
+            jobTakenByIdAtPayment: action.job,
+            isGetByIdAtPaymentLoading: false,
+            isGetByIdAtPaymentSuccess: true,
+            getByIdAtPaymentError: "",
+        }
+    }),
+    on(JobActions.getByJobIdAtPaymentFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetByIdAtPaymentLoading: false,
+            isGetByIdAtPaymentSuccess: false,
+            getByIdAtPaymentError: action.error,
+        }
+    }),
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

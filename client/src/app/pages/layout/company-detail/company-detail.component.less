@@ -179,3 +179,35 @@
         }
     }
 }
+
+.item_hot {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    position: relative;
+    
+    .heart{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: background-color 0.25s ease 0s;
+        place-content: center;
+        //fill: rgb(163, 163, 163);
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        .iconHeartFilled{
+            color: #4D8CFF;
+            fill: #4D8CFF;
+            font-size: large;
+        }
+        .iconHeartNotFilled{
+            color: #4D8CFF;
+            font-size: large;
+        }
+    }
+    .heart:hover{
+        background-color: #e6edfb;
+    }
+
+}

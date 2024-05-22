@@ -460,6 +460,23 @@ export class JobEffects {
             )
             )
 
+        getByIdAtPayment$ = createEffect(() =>
+            this.actions$.pipe(
+                ofType(JobActions.getByJobIdAtPayment),
+                exhaustMap(action =>
+                    this.jobService.getByJobId(action.id).pipe(
+                        map(job => {
+                            return JobActions.getByJobIdAtPaymentSuccess({job})
+                        }),
+                        catchError((err) =>
+                            of(JobActions.getByJobIdAtPaymentFailure({error: err})
+                        )
+                    )
+                )
+            )
+            )
+            )
+
     
 
 

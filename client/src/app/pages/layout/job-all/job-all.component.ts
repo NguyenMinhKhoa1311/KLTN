@@ -38,7 +38,7 @@ export class JobAllComponent implements OnDestroy {
     private router: Router,
     private readonly alerts: TuiAlertService,
   ) {
-    this.type = this.route.snapshot.paramMap.get('type') ?? '';
+    this.type = this.route.snapshot.queryParamMap.get('type') ?? '';
     if(this.type == 'viec-lam-tot-nhat'){
       this.isBestJob = true;
       this.store.dispatch(JobActions.getAllAndSortByWelfareAndSalaryAtSeeAll({ page: this.page, limit: 9 }));
@@ -58,7 +58,7 @@ export class JobAllComponent implements OnDestroy {
         } else if(this.isGetAllAndSortSuccess){
           this.page--;
           this.alerts
-          .open('', {label: 'Không còn công việc nào',status:'error'})
+          .open('', {label: 'Không còn công việc nào',status:'info'})
           .subscribe();
         }
       }),
@@ -71,7 +71,7 @@ export class JobAllComponent implements OnDestroy {
         } else if(this.isGetByHotJobSuccess){
           this.page--;
           this.alerts
-          .open('', {label: 'Không còn công việc nào',status:'error'})
+          .open('', {label: 'Không còn công việc nào',status:'info'})
           .subscribe();
         }
       }),
@@ -102,14 +102,14 @@ export class JobAllComponent implements OnDestroy {
 
 
   navigateToJobDetail(jobId: string) {
-    this.router.navigate(['/job-detail',{
-      jobId: jobId
-    }]);
+    this.router.navigate(['/job-detail'], {
+      queryParams: { job: jobId }
+    });
   }
   navigateToJobs(tag: string) {
-    this.router.navigate(['/job',{
-      tag: tag
-    }]);
+    this.router.navigate(['/job'], {
+      queryParams: { tag: tag }
+    });
   }
 
   ngOnDestroy(): void {

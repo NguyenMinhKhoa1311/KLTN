@@ -132,6 +132,16 @@ export interface candidateState{
     deleteFavoriteJobAtJobError: string;
     candidateDeletedFavoriteJobAtJob: Candidate;
 
+    isUpdateFavoriteJobAtCompanyDetailLoading: boolean;
+    isUpdateFavoriteJobAtCompanyDetailSuccess: boolean;
+    updateFavoriteJobAtCompanyDetailError: string;
+    candidateUpdatedFavoriteJobAtCompanyDetail: Candidate;
+
+    isDeleteFavoriteJobAtCompanyDetailLoading: boolean;
+    isDeleteFavoriteJobAtCompanyDetailSuccess: boolean;
+    deleteFavoriteJobAtCompanyDetailError: string;
+    candidateDeletedFavoriteJobAtCompanyDetail: Candidate;
+
     isGetByIdAtFavoriteJobLoading: boolean;
     isGetByIdAtFavoriteJobSuccess: boolean;
     getByIdAtFavoriteJobError: string;

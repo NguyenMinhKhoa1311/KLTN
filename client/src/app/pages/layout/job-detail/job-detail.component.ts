@@ -58,7 +58,7 @@ export class JobDetailComponent implements OnDestroy {
       if(token){
         this.token = token;
       }
-    this.jobId = this.route.snapshot.paramMap.get('jobId')??"";
+    this.jobId =  this.route.snapshot.queryParamMap.get('job') ?? "";
     console.log("jobId: ", this.jobId);
     this.store.dispatch(JobActions.getJobByIdAtJobDetailOfCandidate({id: this.jobId}));
     let userLogged = sessionStorage.getItem('userLogged');

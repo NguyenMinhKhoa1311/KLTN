@@ -68,3 +68,10 @@ export const getByNameWithKeywordAtCompanyFailure = createAction(
     props<{ error: string }>()
     );
     
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const resetState = createAction(
+    '[Company] Reset State'
+    );

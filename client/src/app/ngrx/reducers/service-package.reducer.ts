@@ -7,7 +7,11 @@ export const initialState: ServicePackageState = {
     isCreateAtPostJobLoading: false,
     isCreateAtPostJobSuccess: false,
     createAtPostJobError: '',
-    servicePackageCreatedAtPostJob: <ServicePackage>{}
+    servicePackageCreatedAtPostJob: <ServicePackage>{},
+    isGetByIdAtPaymentLoading: false,
+    isGetByIdAtPaymentSuccess: false,
+    getByIdAtPaymentError: '',
+    servicePackageAtPayment: <ServicePackage>{}
 }
 
 
@@ -31,6 +35,28 @@ export const servicePackageReducer = createReducer(
         isCreateAtPostJobLoading: false,
         isCreateAtPostJobSuccess: false,
         createAtPostJobError: action.error
+    })),
+
+
+    ///----------------------------------------------------------------------------------------------------------------
+    on(ServicePackageActions.getByIdAtPayment, (state) => ({
+        ...state,
+        isGetByIdAtPaymentLoading: true,
+        isGetByIdAtPaymentSuccess: false,
+        getByIdAtPaymentError: ''
+    })),
+    on(ServicePackageActions.getByIdAtPaymentSuccess, (state,action) => ({
+        ...state,
+        servicePackageAtPayment: action.servicePackage,
+        isGetByIdAtPaymentLoading: false,
+        isGetByIdAtPaymentSuccess: true,
+        getByIdAtPaymentError: ''
+    })),
+    on(ServicePackageActions.getByIdAtPaymentFailure, (state, action) => ({
+        ...state,
+        isGetByIdAtPaymentLoading: false,
+        isGetByIdAtPaymentSuccess: false,
+        getByIdAtPaymentError: action.error
     }))
 
 )

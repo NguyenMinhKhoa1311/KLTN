@@ -165,7 +165,9 @@ export class JobPostingComponent implements OnDestroy{
             this.tagsList = [];
             this.locationList = [];
             this.welfareList = [];
-            //this.router.navigate(['recruiter/job-management']);
+            this.router.navigate(['recruiterLayout/payment'], {
+              queryParams: { job: this.jobToCreate.JobId }
+            });
           }
         })
       );

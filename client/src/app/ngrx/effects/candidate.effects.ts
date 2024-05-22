@@ -441,5 +441,43 @@ export class CandidateEffects{
             catchError((error) => of(CandidateActions.deleteFavoriteJobAtJobFailure({error: error})))))
          )
     );
+
+    updateFavoriteJobAtCompanyDetail$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.updateFavoriteJobsAtCompanyDetail),
+        exhaustMap((action) =>
+         this.candidateService.updateFavoriteJob(action.id, action.jobId, action.token).pipe(
+            map((item)=>{
+                console.log(item);
+                
+                if(item._id!="500"){
+                    
+                    return CandidateActions.updateFavoriteJobsAtCompanyDetailSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.updateFavoriteJobsAtCompanyDetailFailure({error: "Update One Of Favorite Job At Company Detail Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.updateFavoriteJobsAtCompanyDetailFailure({error: error})))))
+         )
+    );
+    deleteFavoriteJobAtCompanyDetail$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.deleteFavoriteJobAtCompanyDetail),
+        exhaustMap((action) =>
+         this.candidateService.deleteFavoriteJob(action.id, action.jobId, action.token).pipe(
+            map((item)=>{
+                if(item._id!="500"){
+                    return CandidateActions.deleteFavoriteJobAtCompanyDetailSuccess({candidate: item})
+                }
+                else{
+                    return CandidateActions.deleteFavoriteJobAtCompanyDetailFailure({error: "Delete Favorite Job At Company Detail Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.deleteFavoriteJobAtCompanyDetailFailure({error: error})))))
+         )
+    );
+    
+
     
 }

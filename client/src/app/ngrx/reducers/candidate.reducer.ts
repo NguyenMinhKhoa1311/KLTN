@@ -131,6 +131,17 @@ export const initialState: candidateState = {
     getByIdAtFavoriteJobError: "",
     candidateTakenByIdAtFavoriteJob: <Candidate>{},
 
+    isDeleteFavoriteJobAtCompanyDetailLoading: false,
+    isDeleteFavoriteJobAtCompanyDetailSuccess: false,
+    deleteFavoriteJobAtCompanyDetailError: "",
+    candidateDeletedFavoriteJobAtCompanyDetail: <Candidate>{},
+
+    isUpdateFavoriteJobAtCompanyDetailLoading: false,
+    isUpdateFavoriteJobAtCompanyDetailSuccess: false,
+    updateFavoriteJobAtCompanyDetailError: "",
+    candidateUpdatedFavoriteJobAtCompanyDetail: <Candidate>{},
+
+
     isChangeState: false,
 
 
@@ -836,6 +847,70 @@ on(CandidateActions.deleteEducationAtProfileFailure,(state, actions)=>{
             deleteFavoriteJobAtJobError: actions.error,
         };
     }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.updateFavoriteJobsAtCompanyDetail,(state, actions)=>{
+        console.log(state);
+        
+        return{
+            ...state,
+            isUpdateFavoriteJobAtCompanyDetailLoading: true,
+            isUpdateFavoriteJobAtCompanyDetailSuccess: false,
+            updateFavoriteJobAtCompanyDetailError: "",
+        };
+    }),
+    on(CandidateActions.updateFavoriteJobsAtCompanyDetailSuccess,(state, actions)=>{
+        console.log(state);
+        return{
+            ...state,
+            isUpdateFavoriteJobAtCompanyDetailLoading: false,
+            isUpdateFavoriteJobAtCompanyDetailSuccess: true,
+            updateFavoriteJobAtCompanyDetailError: "",
+            candidateUpdatedFavoriteJobAtCompanyDetail: actions.candidate,
+        };
+    }),
+    on(CandidateActions.updateFavoriteJobsAtCompanyDetailFailure,(state, actions)=>{
+        console.log(state);
+        return{
+            ...state,
+            isUpdateFavoriteJobAtCompanyDetailLoading: false,
+            isUpdateFavoriteJobAtCompanyDetailSuccess: false,
+            updateFavoriteJobAtCompanyDetailError: actions.error,
+        };
+    }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CandidateActions.deleteFavoriteJobAtCompanyDetail,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteFavoriteJobAtCompanyDetailLoading: true,
+            isDeleteFavoriteJobAtCompanyDetailSuccess: false,
+            deleteFavoriteJobAtCompanyDetailError: "",
+        };
+    }),
+    on(CandidateActions.deleteFavoriteJobAtCompanyDetailSuccess,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteFavoriteJobAtCompanyDetailLoading: false,
+            isDeleteFavoriteJobAtCompanyDetailSuccess: true,
+            deleteFavoriteJobAtCompanyDetailError: "",
+            candidateDeletedFavoriteJobAtCompanyDetail: actions.candidate,
+        };
+    }),
+    on(CandidateActions.deleteFavoriteJobAtCompanyDetailFailure,(state, actions)=>{
+        return{
+            ...state,
+            isDeleteFavoriteJobAtCompanyDetailLoading: false,
+            isDeleteFavoriteJobAtCompanyDetailSuccess: false,
+            deleteFavoriteJobAtCompanyDetailError: actions.error,
+        };
+    }),
+
+
 
 
 

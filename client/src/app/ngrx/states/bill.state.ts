@@ -16,4 +16,9 @@ export interface BillState{
     isGetByDateAtStatisticalSuccess: boolean;
     getByDateAtStatisticalError: string;
 
+    billCreatedAtPaymentSuccess: Bill;
+    isCreateAtPaymentSuccessLoading: boolean;
+    isCreateAtPaymentSuccessSuccess: boolean;
+    createAtPaymentSuccessError: string;
+
 }

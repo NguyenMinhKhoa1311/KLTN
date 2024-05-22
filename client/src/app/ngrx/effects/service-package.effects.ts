@@ -27,5 +27,23 @@ export class ServicePackageEffects{
             )
         )
     )
-)
+    )
+    getByIdAtPayment$ = createEffect(() => // Create a new effect called 'getByIdAtPayment$'
+        this.action$.pipe( // Use the 'pipe' method to combine multiple operators into a single function
+            ofType(ServicePackageActions.getByIdAtPayment), // Use the 'ofType' operator to filter the actions emitted by the 'action$' observable
+            exhaustMap(action => // Use the 'exhaustMap' operator to handle the action and return a new observable
+                this.servicePackageService.getById(action.id).pipe( // Call the 'getById' method of the 'servicePackageService' service and return the observable
+                    map((service) => {
+                        if(service._id !='500'){
+                            return ServicePackageActions.getByIdAtPaymentSuccess({servicePackage:service}) // Use the 'map' operator to map the successful response to the 'getByIdAtPaymentSuccess' action
+                        }else{
+                            return ServicePackageActions.getByIdAtPaymentFailure({error: 'Failed to get service package'}) // Use the 'map' operator to map the failed response to the 'getByIdAtPaymentFailure' action
+                        }
+                    }, // Use the 'map' operator to map the successful response to the 'getByIdAtPaymentSuccess' action
+                    catchError(error => of(ServicePackageActions.getByIdAtPaymentFailure({error}))) // Use the 'catchError' operator to handle errors and map them to the 'getByIdAtPaymentFailure' action
+                )
+            )
+        )
+    )
+    )
 }

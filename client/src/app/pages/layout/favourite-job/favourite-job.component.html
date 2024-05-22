@@ -18,7 +18,7 @@
                                 <span *ngIf="job.Hot" class="job_name_title">{{job.Name}}</span> -->
                         <span class="job_name_title" (click)="navigateToJobDetail(job.JobId)">{{job.Name}}</span>
                         <div class="status">
-                            <div class="hot_box">
+                            <div class="hot_box" *ngIf="job.Urgent">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -27,7 +27,7 @@
                                 </svg>
                                 <span>Urgent</span>
                             </div>
-                            <div class="hot_box">
+                            <div class="hot_box" *ngIf="job.Hot">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path

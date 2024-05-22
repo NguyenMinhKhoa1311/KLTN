@@ -10,13 +10,13 @@
             <div class="payment_service_content">
                 <div class="payment_service_item">
                     <div class="service_iteam_name">
-                        a
+                        {{servicePackageAtPayment.Name}}
                     </div>
                     <div class="service_iteam_description">
-                        a
+                        {{servicePackageAtPayment.Description}}
                     </div>
                     <div class="service_iteam_price" >
-                        Giá: a
+                        Giá: {{servicePackageAtPayment.Price}}
                     </div>
                 </div>
             </div>
@@ -62,39 +62,41 @@
                             Tag:
                         </div>
                     </div>
-                    <div class="job_right">
+                    <div class="job_right" *ngIf="isGetJobSuccess">
                         <div class="job_name">
-                            a
+                            {{jobToRender.Name}}
                         </div>
                         <div class="job_description">
-                            a
+                            {{jobToRender.Description}}
                         </div>
                         <div class="job_address">
-                            a
+                            {{jobToRender.Address}}
                         </div>
                         <div class="job_location">
-                            a
+                            <div *ngFor="let location of jobToRender.Location">{{location}}</div>
                         </div>
                         <div class="job_salary">
-                            a
+                            {{jobToRender.Salary}}
                         </div>
                         <div class="job_welfare">
-                            a
+                            <div *ngIf="jobToRender.Welfare.length==0">Không có phúc lợi</div>
+                            <div *ngFor="let welfare of jobToRender.Welfare">{{welfare}}</div>
                         </div>
-                        <div class="job_field">
-                            a
+                        <div class="job_field" >
+                            {{jobToRender.Field.FieldName}}
                         </div>
                         <div class="job_career">
-                            a
+                            {{jobToRender.Career.Name}}
                         </div>
                         <div class="job_date">
-                            a
+                            {{parseDate(jobToRender.StartDate)}}
                         </div>
                         <div class="job_requirement">
-                            a
+                            {{jobToRender.Requirement}}
                         </div>
                         <div class="job_tag">
-                            a
+                            <div *ngIf="jobToRender.Tags.length==0">Không có tag</div>
+                            <div *ngFor="let tag of jobToRender.Tags">{{tag}}</div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +107,7 @@
         border-bottom: 1px solid #cac8c8;margin-top: 30px;">
     </div>
     <div class="payment_total">
-        <button appearance="primary" tuiButton type="button">
+        <button appearance="primary" tuiButton type="button" (click)="payment()">
             Thanh toán
         </button>
     </div>

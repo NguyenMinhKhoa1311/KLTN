@@ -14,7 +14,7 @@ export class JobService {
     return this.httpClient.get<Job[] | any>(`${URL}/job/getByField?page=${page}&limit=${limit}&field=${field}`);
   }
   getByFieldWithUrgent(field: string, page: number, limit: number, urgent: boolean) {
-    return this.httpClient.get<Job[] | any>(`${URL}/job/getByField?page=${page}&limit=${limit}&field=${field}&urgent=${urgent}`);
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByFieldWithUrgent?page=${page}&limit=${limit}&field=${field}&urgent=${urgent}`);
   }
 
   getByCareer(career: string, page: number, limit: number) {

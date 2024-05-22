@@ -6,4 +6,9 @@ export interface ServicePackageState{
     isCreateAtPostJobSuccess: boolean;
     createAtPostJobError: string;
     servicePackageCreatedAtPostJob: ServicePackage;
+
+    isGetByIdAtPaymentLoading: boolean;
+    isGetByIdAtPaymentSuccess: boolean;
+    getByIdAtPaymentError: string;
+    servicePackageAtPayment: ServicePackage;
 }

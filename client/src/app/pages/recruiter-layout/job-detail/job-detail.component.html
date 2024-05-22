@@ -7,28 +7,31 @@
             <div class="job" *ngFor="let job of listJobs">
                 <div class="job_box">
                     <div class="img_job">
-                        <img src="../../../../assets/images/kinhdoanh.png" alt="">
+                        <img src="{{job.Company.Avatar}}" alt="">
                     </div>
                     <div class="info_job">
                         <div class="name_job">
                             {{job.Name}}
                         </div>
                         <div class="company_job">
-                            {{job.Company.Name}}
+                            Công ty: {{job.Company.Name}}
                         </div>
                         <div class="salary">
-                            {{job.Salary}}
+                            Lương: {{job.Salary}}
                         </div>
                         <div class="address">
-                            {{job.Location}}
+                            Địa chỉ: {{job.Location}}
+                        </div>
+                        <div class="address">
+                            Trạng thái: <p *ngIf="job.StatusPayment">Đã thanh toán</p> <p *ngIf="!job.StatusPayment">Chưa thanh toán</p>
                         </div>
                         <div class="time">
                             <div class="dateStart">
-                                {{parseDateInComponent(job.StartDate)}}
+                                Ngày bắt đầu: {{parseDateInComponent(job.StartDate)}}
                             </div>
                             <div style="margin: 0 5px;">-</div>
                             <div class="dateEnd">
-                                {{parseDateInComponent(job.EndDate)}}
+                                Ngày kết thúc: {{parseDateInComponent(job.EndDate)}}
                             </div>
                         </div>
                     </div>

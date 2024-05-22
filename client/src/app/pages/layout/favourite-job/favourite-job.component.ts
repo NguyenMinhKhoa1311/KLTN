@@ -45,7 +45,11 @@ export class FavouriteJobComponent implements OnDestroy{
         }
       })
     )
-  }}
+  }}else{
+    this.alerts
+    .open('', {label: 'Vui lòng đăng nhập',status:'info'})
+    .subscribe();
+  }
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
@@ -68,13 +72,13 @@ export class FavouriteJobComponent implements OnDestroy{
     this.end -= this.skip;
   }
   navigateToJobDetail(jobId: string) {
-    this.router.navigate(['/job-detail',{
-      jobId: jobId
-    }]);
+    this.router.navigate(['/job-detail'], {
+      queryParams: { job: jobId }
+    });
   }
   navigateToJobs(tag: string) {
-    this.router.navigate(['/job',{
-      tag: tag
-    }]);
+    this.router.navigate(['/job'], {
+      queryParams: { tag: tag }
+    });
   }
 }

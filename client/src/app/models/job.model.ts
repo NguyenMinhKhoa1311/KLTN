@@ -33,6 +33,6 @@ export interface Job{
     Company: Company,
     StartSalary: number,
     EndSalary: number,
-        createAt: Date;
+        createdAt: Date;
         updateAt: Date;
 }

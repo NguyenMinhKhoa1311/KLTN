@@ -12,6 +12,7 @@ import { Recruitment } from '../../../models/recruitment.model';
 import { parseDate } from '../../../../environments/environments';
 import { jobState } from '../../../ngrx/states/job.state';
 import { Job } from '../../../models/job.model';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-apply-list',
@@ -29,9 +30,11 @@ export class ApplyListComponent implements OnDestroy{
   jobToRender: Job = <Job>{};
   isGetJobByApplyJob: boolean = false;
   candidateLogin: Candidate = <Candidate>{};
+  isGetRecruitmentByCandidateSuccess: boolean = false;
 
   
   //ngrx of recruitment
+  isGetRecruitmentByCandidateSuccess$ = this.store.select('recruitment','isGetByCandidateSuccess');
   recruitmentGetByCandidate$ = this.store.select('recruitment','recruitmentsTakenByCandidate')
   isUpdateStatusCancelSuccess$ = this.store.select('recruitment','isUpdateStatusCancelAtApplyJobSuccess');
   
@@ -47,7 +50,8 @@ export class ApplyListComponent implements OnDestroy{
       recruitment: RecruitmentState;
       job: jobState;
     }>,
-    private router: Router
+    private router: Router,
+    private readonly alerts: TuiAlertService,
   ){
     let userLogged = sessionStorage.getItem('userLogged');
     if(userLogged){
@@ -57,15 +61,29 @@ export class ApplyListComponent implements OnDestroy{
         this.candidateLogin = userAfterParse;
         this.store.dispatch(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate({ candidate: userAfterParse?._id,  page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc' }))
       }
+    }else{
+      this.alerts
+      .open('', {label: 'Vui lòng đăng nhập',status:'info'})
+      .subscribe();
     };
     this.subscriptions.push(
+      // theo dõi trạng thái lấy recruitment thành công
+      this.isGetRecruitmentByCandidateSuccess$.subscribe((res) => {
+        this.isGetRecruitmentByCandidateSuccess = res;
+      }),
+      // theo dõi recruiterment của candidate
       this.recruitmentGetByCandidate$.subscribe((recruitments) => {
         if(recruitments.length > 0){
           this.recruitments = recruitments;
           console.log(this.recruitments);
-          
+        }else if(this.isGetRecruitmentByCandidateSuccess){
+          this.page--;
+          this.alerts
+          .open('', {label: 'Không còn công việc nào',status:'info'})
+          .subscribe();
         }
       }),
+      // theo dõi việc làm của creacruitment
       this.jobTakenByJobIdAtApplyJob$.subscribe((job) => {
         if(job.JobId!=undefined){
           if(!this.isGetJobByApplyJob){
@@ -75,6 +93,7 @@ export class ApplyListComponent implements OnDestroy{
           console.log(this.jobToRender);
         }
       }),
+      // theo dõi cập nhật trạng thái hủy recruitment
       this.isUpdateStatusCancelSuccess$.subscribe((isSuccess) => {
         if(isSuccess){
           this.store.dispatch(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate({ candidate: this.candidateLogin?._id,  page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc' }))
@@ -87,6 +106,18 @@ export class ApplyListComponent implements OnDestroy{
       subscription.unsubscribe();
     });
   }
+
+  nextpage(){
+    this.page++;
+    this.store.dispatch(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate({ candidate: this.candidateLogin?._id,  page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc' }))
+  }
+  prevPage(){
+    if(this.page > 0){
+      this.page--;
+      this.store.dispatch(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate({ candidate: this.candidateLogin?._id,  page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc' }))
+    }
+  }
+    
 
   @ViewChild('detailDialog', { static: true })
   detailDialog!: ElementRef<HTMLDialogElement>;

@@ -13,4 +13,9 @@ export class ServicePackageService {
   create(servicePackage: any){
     return this.httpClient.post<ServicePackage>(URL + '/service-package/create', servicePackage);
   }
+
+  getById(id: string){
+    return this.httpClient.get<ServicePackage>(URL + `/service-package/getById?id=${id}`);
+  }
+
 }

@@ -59,4 +59,21 @@ export class BillEffects{
 
         )
     )
+
+    createAtPayment$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(BillActions.createAtPaymentSuccess),
+            exhaustMap((action)=>
+                this.billService.create(action.bill).pipe(
+                    map((bill)=>{
+                        return BillActions.createAtPaymentSuccessSuccess({bill: bill})
+                    }),
+                    catchError((error)=>{
+                        return of(BillActions.createAtPaymentSuccessFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
 }

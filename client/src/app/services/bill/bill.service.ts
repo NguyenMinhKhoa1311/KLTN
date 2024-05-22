@@ -18,4 +18,7 @@ export class BillService {
   getByDate(date: string,recruiter: string){
     return this.httpClient.get<Bill[]>(`${URL}/bill/getByDate?recruiter=${recruiter}&date=${date}`);
   }
+  create(bill: any){
+    return this.httpClient.post<Bill>(`${URL}/bill/create`, bill);
+  }
 }

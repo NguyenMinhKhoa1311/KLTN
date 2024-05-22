@@ -119,9 +119,9 @@ export class CompanyComponent implements OnDestroy{
   }
 
   navigateToCompanyDetail(companyId: string) {
-    this.router.navigate(['/company-detail',{
-      companyId: companyId
-    }]);
+    this.router.navigate(['/company-detail'], {
+      queryParams: { company: companyId }
+    });
   }
 
 

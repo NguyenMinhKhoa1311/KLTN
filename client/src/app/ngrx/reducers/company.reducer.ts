@@ -140,6 +140,12 @@ export const companyReducer = createReducer(
             isGetByNameWithKeywordAtCompanySuccess: false,
             getByNameWithKeywordAtCompanyError: action.error
         }
+    }),
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on (CompanyActions.resetState, (state, action) => {
+        return {
+            ...initualState
+        }
     })
-    
 )

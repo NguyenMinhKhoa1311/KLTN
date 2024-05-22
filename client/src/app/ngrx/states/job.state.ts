@@ -50,6 +50,12 @@ export interface jobState{
     getByIdAtJobDetailOfCandidateError: string;
     jobTakenByIdAtJobDetailOfCandidate: Job;
 
+    isGetByIdAtPaymentLoading: boolean;
+    isGetByIdAtPaymentSuccess: boolean;
+    getByIdAtPaymentError: string;
+    jobTakenByIdAtPayment: Job;
+    
+
 
     isGetByCompanyAtCompanyDetailLoading: boolean;
     isGetByCompanyAtCompanyDetailSuccess: boolean;
