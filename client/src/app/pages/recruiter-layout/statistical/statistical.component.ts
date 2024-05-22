@@ -193,7 +193,14 @@ export class StatisticalComponent {
       this.totalOfLegend = 0;
       this.totalOfBar = 0;
       this.labelsY = [];
-      
+  }
+  clearData(){
+    this.fields = [];
+    this.grandTotals = [];
+    this.statisticalData = [];
+    this.totalOfLegend = 0;
+    this.totalOfBar = 0;
+    this.labelsY = [];
 
   }
 
@@ -233,8 +240,6 @@ export class StatisticalComponent {
         console.log('Year:', year);
         this.store.dispatch(BillActions.getByYearAtStatistical({year: year??2024,recruiter: this.userLogged._id}));
       }
-
-      
-      
+      this.clearData();
     }
 }
