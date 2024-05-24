@@ -4,52 +4,52 @@
             Bài đăng tuyển dụng
         </div>
         <div class="list_job">
-            <div class="job" *ngFor="let job of listJobs">
+            <div class="job">
                 <div class="job_box">
                     <div class="img_job">
-                        <img src="{{job.Company.Avatar}}" alt="">
+                        <img src="../../../../assets/images/avatar-user.jpg" alt="">
                     </div>
                     <div class="info_job">
                         <div class="name_job">
-                            {{job.Name}}
+                            a
                         </div>
                         <div class="company_job">
-                            Công ty: {{job.Company.Name}}
+                            Công ty: a
                         </div>
                         <div class="salary">
-                            Lương: {{job.Salary}}
+                            Lương: a
                         </div>
                         <div class="address">
-                            Địa chỉ: {{job.Location}}
+                            Địa chỉ: a
                         </div>
                         
                         <div class="time">
                             <div class="dateStart">
-                                Ngày bắt đầu: {{parseDateInComponent(job.StartDate)}}
+                                Ngày bắt đầu: a
                             </div>
                             <div style="margin: 0 5px;">-</div>
                             <div class="dateEnd">
-                                Ngày kết thúc: {{parseDateInComponent(job.EndDate)}}
+                                Ngày kết thúc: a
                             </div>
                         </div>
-                        <div class="status">
+                        <!-- <div class="status">
                             Trạng thái: <p *ngIf="job.StatusPayment" style="margin-left: 5px;">Đã thanh toán</p> <p *ngIf="!job.StatusPayment"  style="margin-left: 5px;">Chưa thanh toán</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="control">
                     <div class="visibility">
-                        <span class="material-symbols-outlined" (click)="openreVisibilityDialog(job)">
+                        <span class="material-symbols-outlined" >
                             visibility
                         </span>
                     </div>
                     <div class="edit">
-                        <span class="material-symbols-outlined" (click)="openJobDialog(job)">
+                        <span class="material-symbols-outlined" >
                             edit
                         </span>
                     </div>
                     <div class="delete">
-                        <span class="material-symbols-outlined" (click)="deleteJob(job)">
+                        <span class="material-symbols-outlined">
                             delete
                         </span>
                     </div>
@@ -57,14 +57,14 @@
             </div>
         </div>
         <div class="control_item">
-            <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" (click)="prevPage()"></button>
+            <button icon="tuiIconChevronLeftLarge" title="Previous" tuiIconButton type="button" ></button>
             <!-- <tui-pagination size="s" class="pagination" [length]="5" [(index)]="index_item"></tui-pagination> -->
-            <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button" (click)="nextPage()"></button>
+            <button icon="tuiIconChevronRightLarge" title="Next" tuiIconButton type="button" ></button>
         </div>
     </div>
 </div>
 
-<dialog id="job_dialog" style="color: #1f1a1c" #jobDialog>
+<!-- <dialog id="job_dialog" style="color: #1f1a1c" #jobDialog>
     <form [formGroup]="jobForm">
         <div id="top_dialog">
             <div class="title">
@@ -495,4 +495,4 @@
             </div>
         </div>
     </form>
-</dialog>
+</dialog> -->
