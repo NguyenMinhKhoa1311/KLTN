@@ -30,5 +30,10 @@ export const routes: Routes = [
         path: 'recruiterLayout',
         loadChildren: () =>
           import('./pages/recruiter-layout/recruiter-layout.routes').then((m) => m.RECRUITERLAYOUT_ROUTERS),
+    },
+    {
+        path: 'admin',
+        loadChildren: () =>
+          import('./pages/admin/admin.routes').then((m) => m.ADMIN_ROUTERS),
     }
 ];
