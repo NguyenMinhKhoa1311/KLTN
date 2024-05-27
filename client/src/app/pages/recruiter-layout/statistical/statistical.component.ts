@@ -29,6 +29,7 @@ import { Career } from '../../../models/career.model';
   styleUrl: './statistical.component.less'
 })
 export class StatisticalComponent {
+  
 
   
   subscriptions: Subscription[] =[]
@@ -61,6 +62,7 @@ export class StatisticalComponent {
   currentYear: number = new Date().getFullYear();
   currentMonth: number = new Date().getMonth() + 1;
   currentDay: number = new Date().getDate();
+  isHover: boolean = false;
 
   //ngrx of bill
   isGetByMonthSuccess$ = this.store.select('bill', 'isGetByMonthAtStatisticalSuccess');
@@ -76,7 +78,6 @@ export class StatisticalComponent {
   //ngrx of career
   careerAll$ = this.store.select('career', 'careersTakenByGetAllAtStatistical');
 
-  
   
 
   constructor(
@@ -103,22 +104,25 @@ export class StatisticalComponent {
     this.store.dispatch(BillActions.getByYearAtStatistical({year: new Date().getFullYear(),recruiter: this.userLogged._id}));
     this.data.get('date')?.valueChanges.subscribe(value => {
       if (value) {
-        console.log('Date selected:', value);
-        // Your logic here
+        let {day,month,year} = this.data.get('date')?.value ?? {day:0,month:0,year:0};
+      console.log('Date:', day,month,year);
+      this.store.dispatch(BillActions.getByDateAtStatistical({date: `${year}-0${month+1}-${day}`,recruiter: this.userLogged._id}));
       }
     }),
 
     this.data.get('month')?.valueChanges.subscribe(value => {
       if (value) {
-        console.log('Month selected:', value);
-        // Your logic here
+          let {month,year} = this.data.get('month')?.value ?? {month:0,year:0};
+          console.log('Month:', month,year);
+          this.store.dispatch(BillActions.getByMonthAtStatistical({month: month+1, year: year,recruiter: this.userLogged._id}));
       }
     }),
 
     this.data.get('year')?.valueChanges.subscribe(value => {
       if (value) {
-        console.log('Year selected:', value);
-        // Your logic here
+        let year = this.data.get('year')?.value;
+      console.log('Year:', year);
+      this.store.dispatch(BillActions.getByYearAtStatistical({year: year??2024,recruiter: this.userLogged._id}));
       }
     }),
     this.subscriptions.push(
@@ -194,6 +198,8 @@ export class StatisticalComponent {
           console.log('Grand totals of career:', this.grandTotalsOfCareer);
           console.log('Labels Y:', this.labelsY);
         }else if(this.isGetByMonthSuccess){
+          this.clearDataCareer();
+          this.clearDataOfField();
           this.alerts
           .open('', {label: 'Không có hóa đơn nào',status:'info'})
           .subscribe();
@@ -253,6 +259,8 @@ export class StatisticalComponent {
           console.log('Grand totals of career:', this.grandTotalsOfCareer);
           console.log('Labels Y:', this.labelsY);
         }else if(this.isGetByYearSuccess){
+          this.clearDataCareer();
+          this.clearDataOfField();
           this.alerts
           .open('', {label: 'Không có hóa đơn nào',status:'info'})
           .subscribe();
@@ -311,6 +319,8 @@ export class StatisticalComponent {
           console.log('Grand totals of career:', this.grandTotalsOfCareer);
           console.log('Labels Y:', this.labelsY);
         }else if(this.isGetByDateSuccess){
+          this.clearDataCareer();
+          this.clearDataOfField();
           this.alerts
           .open('', {label: 'Không có hóa đơn nào',status:'info'})
           .subscribe();
@@ -395,18 +405,25 @@ export class StatisticalComponent {
       this.isGetByMonth = isMonth;
       this.isGetByYear = isYear
       this.isGetByDate = isDay;
+      if(isYear){
+        this.store.dispatch(BillActions.getByYearAtStatistical({year: new Date().getFullYear(),recruiter: this.userLogged._id}));
+      }
   }
 
   appearance = 'onDark';
 
   readonly hint = ({ $implicit }: TuiContextWithImplicit<number>): string => {
+    this.isHover = true;
     console.log({ $implicit });
     this.statisticalByField(this.statisticalDataOfField[$implicit].FieldId);
     return this.statisticalDataOfField[$implicit].GrandTotal.toString();
   };
   onHoverOut(): void {
-    this.clearDataCareer();
-    this.statisticalCurrent();
+    if(this.isHover){
+      this.clearDataCareer();
+      this.statisticalCurrent();
+      this.isHover = false;
+    }
   }
   
 
@@ -435,24 +452,5 @@ getColor(index: number): string {
 }
 
     
-    statistical(){
-      console.log('Date:', this.data.get('date')?.value);
-      console.log('Month:', this.data.get('month')?.value);
-      console.log('Year:', this.data.get('year')?.value);
-      if(this.isGetByDate){
-        let {day,month,year} = this.data.get('date')?.value ?? {day:0,month:0,year:0};
-        console.log('Date:', day,month,year);
-        this.store.dispatch(BillActions.getByDateAtStatistical({date: `${year}-0${month+1}-${day}`,recruiter: this.userLogged._id}));
-      }
-      if(this.isGetByMonth){
-        let {month,year} = this.data.get('month')?.value ?? {month:0,year:0};
-        console.log('Month:', month,year);
-        this.store.dispatch(BillActions.getByMonthAtStatistical({month: month+1, year: year,recruiter: this.userLogged._id}));
-      }
-      if(this.isGetByYear){
-        let year = this.data.get('year')?.value;
-        console.log('Year:', year);
-        this.store.dispatch(BillActions.getByYearAtStatistical({year: year??2024,recruiter: this.userLogged._id}));
-      }
-    }
+
 }
