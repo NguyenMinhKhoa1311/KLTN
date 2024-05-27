@@ -17,23 +17,23 @@
     </div>
     <div id="option_user">
         
-      <div class="login" (click)="navigateToLogin()">
+      <div class="login" (click)="navigateToLogin()" *ngIf="!isLogin">
         Đăng nhập
       </div>
-      <div class="register" (click)="navigateToRegister()">
+      <div class="register" (click)="navigateToRegister()" *ngIf="!isLogin">
         Đăng ký
       </div>
 
       
       <div class="gach"></div>
 
-      <div class="user_dropdown">
+      <div class="user_dropdown" *ngIf="isLogin">
         <button class="user_dropbtn">
           <div class="user_box">
             <div class="img_user">
-              <img src="../../../../assets/images/avatar-user.jpg" alt="">
+              <img src="{{userLogged.Avatar}}" alt="">
             </div>
-            <span>aaa</span>
+            <span>{{userLogged.Name}}</span>
             <span class="material-symbols-outlined">
               expand_more
             </span>

@@ -21,4 +21,9 @@ export interface BillState{
     isCreateAtPaymentSuccessSuccess: boolean;
     createAtPaymentSuccessError: string;
 
+    billCreatedAtJobConfirm: Bill;
+    isCreateAtJobConfirmLoading: boolean;
+    isCreateAtJobConfirmSuccess: boolean;
+    createAtJobConfirmError: string;
+
 }

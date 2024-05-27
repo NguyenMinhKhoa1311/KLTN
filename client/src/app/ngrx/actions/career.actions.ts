@@ -50,6 +50,22 @@ export const getAllAtCreateProfileFailure = createAction(
 
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllAtStatistical = createAction(
+    '[Career] Get All At Statistical'
+    );
+export const getAllAtStatisticalSuccess = createAction(
+    '[Career] Get All At Statistical Success',
+    props<{careers: Career[]}>()
+    );
+export const getAllAtStatisticalFailure = createAction(
+    '[Career] Get All At Statistical Failure',
+    props<{error: string}>()
+    );
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getByFieldAtProfile = createAction(
     '[Career] Get By Field At Profile',

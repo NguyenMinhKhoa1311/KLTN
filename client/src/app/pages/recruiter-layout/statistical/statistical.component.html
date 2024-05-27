@@ -1,25 +1,28 @@
 <div id="statistical_container">
-    <div class="title">Thống kê</div>
+    <div class="title">Thống kê chi phí đã bỏ ra cho các công việc</div>
     <div class="box1">
         <div class="statistical_box1">
             <div class="list_job">
                 <div class="title_job">
-                    Danh sách thanh toán
-                </div>
-                <div class="list_job_box">
-                    <div class="job" *ngFor="let bill of billsToRender ">
-                        <div class="name">
-                            {{bill.Job.Name}}
-                        </div>
-                        <div class="salary">
-                            {{bill.GrandTotal}}
-                        </div>
-                    </div>
+                    Tổng số tiền đã thanh toán: {{ totalOfField }}
                 </div>
             </div>
         </div>
         <div class="statistical_box2">
             <div class="chart_box">
+                <div class="choose">
+                    <tui-tabs [(activeItemIndex)]="activeItemIndexOfChoose">
+                        <button tuiTab (click)="changeModeOfTime(true,false,false)">
+                            Ngày
+                        </button>
+                        <button tuiTab (click)="changeModeOfTime(false,true,false)"> 
+                            Tháng
+                        </button>
+                        <button tuiTab (click)="changeModeOfTime(false,false,true)">
+                            Năm
+                        </button>
+                    </tui-tabs>
+                </div>
                 <div class="tab">
                     <form [formGroup]="data">
                         <div class="input">
@@ -72,63 +75,50 @@
                             </button>
                         </div>
                     </form>
-                    <div class="choose">
-                        <tui-tabs [(activeItemIndex)]="activeItemIndex">
-                            <button tuiTab (click)="changeMode(true,false,false)">
-                                Ngày
-                            </button>
-                            <button tuiTab (click)="changeMode(false,true,false)"> 
-                                Tháng
-                            </button>
-                            <button tuiTab (click)="changeMode(false,false,true)">
-                                Năm
-                            </button>
-                        </tui-tabs>
-                    </div>
                 </div>
                 <div class="chart">
                     <tui-axes class="axes" [axisXLabels]="fields" [axisYLabels]="labelsY">
-                        <tui-bar-chart [max]="totalOfLegend" [value]="[grandTotals]"></tui-bar-chart>
+                        <tui-bar-chart
+                        [max]="totalOfField" 
+                        [value]="[grandTotalsOfField]"
+                        [tuiHintAppearance]="appearance"
+                        [tuiHintContent]="hint"
+                        (mouseleave)="onHoverOut()"
+                        ></tui-bar-chart>
                     </tui-axes>
-                </div>
-            </div>
-            <div class="btn">
-                <div class="field_btn">
-                    <button appearance="primary" tuiButton type="button">
-                        ngành nghề
-                    </button>
-                </div>
-                <div class="career_btn">
-                    <button appearance="primary" tuiButton type="button">
-                        Lĩnh vực
-                    </button>
                 </div>
             </div>
             <div class="legend_box">
                 <div class="box">
                     <div class="wrapper">
                         <tui-ring-chart
-                            [value]="grandTotals"
-                            [(activeItemIndex)]="activeItemIndexLegend"
+                            class="tui-ring-chart"
+                            [value]="grandTotalsOfCareer"
+                            [(activeItemIndex)]="activeItemIndex"
                         >
-                        <tui-money
-                        [singleColor]="true"
-                        [value]="totalOfLegend"></tui-money>
-                            <div>Total</div>
+                            <tui-money
+                                class="tui-money"
+                                [singleColor]="true"
+                                [value]="sum"
+                            ></tui-money>
+                            <div>{{label}}</div>
                         </tui-ring-chart>
+                        
                         <div class="legend">
                             <tui-legend-item
-                                *ngFor="let field of fields; let index = index"
+                                *ngFor="let career of careers; let index = index"
                                 size="s"
-                                class="item"
+                                class="item legend-item"
                                 [active]="isItemActive(index)"
                                 [color]="getColor(index)"
-                                [text]="field"
+                                [text]="career"
                                 (tuiHoveredChange)="onHover(index, true)"
                             >
                                 <tui-money
+                                    class="tui-money"
                                     [singleColor]="true"
-                                    [value]="grandTotals[index]"
+                                    [value]="percentOfGrandTotals[index]"
+                                    currency="%"
                                 ></tui-money>
                             </tui-legend-item>
                         </div>

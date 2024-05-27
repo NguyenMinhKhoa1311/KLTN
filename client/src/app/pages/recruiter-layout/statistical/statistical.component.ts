@@ -3,9 +3,9 @@ import { TaigaModule } from '../../../shared/taiga.module';
 import { ShareModule } from '../../../shared/shared.module';
 import { TuiAxesModule, TuiBarChartModule,TuiLegendItemModule,TuiRingChartModule } from '@taiga-ui/addon-charts';
 import {TuiMoneyModule} from '@taiga-ui/addon-commerce';
-import {tuiSum} from '@taiga-ui/cdk';
+import {TuiContextWithImplicit, tuiSum} from '@taiga-ui/cdk';
 
-import {TuiAlertService} from '@taiga-ui/core';
+import {TuiAlertService, tuiFormatNumber} from '@taiga-ui/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { BillState } from '../../../ngrx/states/bill.state';
@@ -14,9 +14,12 @@ import { Recruiter } from '../../../models/recruiter.model';
 import { Bill } from '../../../models/bill.model';
 import * as BillActions from '../../../ngrx/actions/bill.actions';
 import * as FieldActions from '../../../ngrx/actions/field.actions';
+import * as CareerActions from '../../../ngrx/actions/career.actions';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FieldState } from '../../../ngrx/states/field.state';
 import { Field } from '../../../models/field.model';
+import { CareerState } from '../../../ngrx/states/career.state';
+import { Career } from '../../../models/career.model';
 
 @Component({
   selector: 'app-statistical',
@@ -26,26 +29,35 @@ import { Field } from '../../../models/field.model';
   styleUrl: './statistical.component.less'
 })
 export class StatisticalComponent {
-  activeItemIndex = 2;
+
+  
   subscriptions: Subscription[] =[]
 
   //variables
+  activeItemIndexOfChoose = 2;
   token: string = '';
   userLogged: Recruiter = <Recruiter>{};
-  grandTotals:number[] = [];
   fields: string[] = [];
-  jobs: string[] = [];
-  statisticalData: any[] = [];
-  billsToRender: Bill[] = [];
+  careers: string[] = [];
   fieldAll: Field[] = [];
-  totalOfLegend: number = 0;
-  totalOfBar: number = 0;
+  careerAll: Career[] = [];
+  statisticalDataOfField: any[] = [];
+  statisticalDataOfCareer: any[] = [];
+  grandTotalsOfField:number[] = [];
+  grandTotalsOfCareer:number[] = [];
+  totalOfField: number = 0;
+  totalOfCareer: number = 0;
+  billsCurrent: Bill[] = [];
+  labelsY: string[]= [];
+  percentOfGrandTotals: number[] = [];
   isGetByMonthSuccess: boolean = false;
   isGetByYearSuccess: boolean = false;
   isGetByDateSuccess: boolean = false;
   isGetByMonth: boolean = false;
   isGetByYear: boolean = true;
   isGetByDate: boolean = false;
+  isGetByField: boolean = true;
+  isGetByCareer: boolean = false;
   currentYear: number = new Date().getFullYear();
   currentMonth: number = new Date().getMonth() + 1;
   currentDay: number = new Date().getDate();
@@ -61,13 +73,17 @@ export class StatisticalComponent {
   //ngrx of field
   fieldAll$ = this.store.select('field', 'fieldNoLimitAtStatistical');
 
+  //ngrx of career
+  careerAll$ = this.store.select('career', 'careersTakenByGetAllAtStatistical');
+
   
   
 
   constructor(
     private store: Store<{
       bill: BillState,
-      field: FieldState
+      field: FieldState,
+      career: CareerState
     }>,
     private readonly alerts: TuiAlertService,
     private router: Router
@@ -83,11 +99,37 @@ export class StatisticalComponent {
       this.token = token;
     }
     this.store.dispatch(FieldActions.getAllNoLimitAtStatistical());
+    this.store.dispatch(CareerActions.getAllAtStatistical());
     this.store.dispatch(BillActions.getByYearAtStatistical({year: new Date().getFullYear(),recruiter: this.userLogged._id}));
+    this.data.get('date')?.valueChanges.subscribe(value => {
+      if (value) {
+        console.log('Date selected:', value);
+        // Your logic here
+      }
+    }),
+
+    this.data.get('month')?.valueChanges.subscribe(value => {
+      if (value) {
+        console.log('Month selected:', value);
+        // Your logic here
+      }
+    }),
+
+    this.data.get('year')?.valueChanges.subscribe(value => {
+      if (value) {
+        console.log('Year selected:', value);
+        // Your logic here
+      }
+    }),
     this.subscriptions.push(
       this.fieldAll$.subscribe((fields) => {
         if(fields.length){
           this.fieldAll = fields;
+        }
+      }),
+      this.careerAll$.subscribe((careers) => {
+        if(careers.length){
+          this.careerAll = careers
         }
       }),
       this.isGetByMonthSuccess$.subscribe((isGetByMonthSuccess) => {
@@ -99,73 +141,179 @@ export class StatisticalComponent {
       this.isGetByDateSuccess$.subscribe((isGetByDateSuccess) => {
         this.isGetByDateSuccess = isGetByDateSuccess;
       }),
+
       this.billsTakenByMonth$.subscribe((bills) => {
         if(bills.length){
-          this.billsToRender = bills;
+          this.clearDataCareer();
+          this.clearDataOfField();
           bills.forEach((bill) => {
-            let statisticalItem = this.statisticalData.find(item => item._id == bill.Job.Field);
-            if(statisticalItem){
-              statisticalItem.GrandTotal += bill.GrandTotal;
-            }else{
-              let fieldOfBill = this.fieldAll.find(item => item._id == bill.Job.Field.toString());
-              this.statisticalData.push({FieldName: fieldOfBill?.FieldName, GrandTotal: bill.GrandTotal, _id: bill.Job.Field});
+            this.billsCurrent = bills;
+            //statistical data of field
+            let statisticalItemOfField = this.statisticalDataOfField.find((data) => data.FieldId == bill.Job.Field);
+            if(statisticalItemOfField){
+              statisticalItemOfField.GrandTotal += bill.GrandTotal;
             }
-          });
-          this.grandTotals = this.statisticalData.map(item => item.GrandTotal);
-          this.fields = this.statisticalData.map(item => item.FieldName);
-          this.totalOfLegend = this.grandTotals.reduce((accumulator, currentValue) => {
+            else{
+              let field = this.fieldAll.find(item => item._id == bill.Job.Field.toString());
+              this.statisticalDataOfField.push({field: field?.FieldName, GrandTotal: bill.GrandTotal, FieldId: field?._id});
+            }
+            this.fields = this.statisticalDataOfField.map(item => item.field);
+            //statistical data of career
+            let statisticalDataOfCareer = this.statisticalDataOfCareer.find((data) => data.CareerId == bill.Job.Career);
+            if(statisticalDataOfCareer){
+              statisticalDataOfCareer.GrandTotal += bill.GrandTotal;
+            }
+            else{
+              let career = this.careerAll.find(item => item._id == bill.Job.Career.toString());
+              this.statisticalDataOfCareer.push({career: career?.Name, GrandTotal: bill.GrandTotal, CareerId: career?._id});
+            }
+            this.careers = this.statisticalDataOfCareer.map(item => item.career);
+          })
+          // caculate total of field
+          this.grandTotalsOfField = this.statisticalDataOfField.map(item => item.GrandTotal);
+          this.totalOfField = this.grandTotalsOfField.reduce((accumulator, currentValue) => {
             return accumulator + currentValue;
           }, 0);
-          this.totalOfBar= this.totalOfLegend;
+          // caculate total of career
+          this.grandTotalsOfCareer = this.statisticalDataOfCareer.map(item => item.GrandTotal);
+          this.totalOfCareer = this.grandTotalsOfCareer.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue;
+          }, 0);
+          this.percentOfGrandTotals = this.grandTotalsOfCareer.map(item => Math.round(item/this.totalOfCareer*100));
+          this.labelsY = [];
           for(let i = 0; i <= 10; i++){
-            this.labelsY.push(`${this.totalOfBar/10*i}`);
+            this.labelsY.push(`${this.totalOfField/10*i}`);
           }
+          console.log('Statistical data of field:', this.statisticalDataOfField);
+          console.log('Statistical data of career:', this.statisticalDataOfCareer);
+          console.log('Total of field:', this.totalOfField);
+          console.log('Total of career:', this.totalOfCareer);
+          console.log('Fields:', this.fields);
+          console.log('Careers:', this.careers);
+          console.log('Grand totals of field:', this.grandTotalsOfField);
+          console.log('Grand totals of career:', this.grandTotalsOfCareer);
+          console.log('Labels Y:', this.labelsY);
+        }else if(this.isGetByMonthSuccess){
+          this.alerts
+          .open('', {label: 'Không có hóa đơn nào',status:'info'})
+          .subscribe();
         }
       }),
+
+      
       this.billsTakenByYear$.subscribe((bills) => {
         if(bills.length){
-          this.billsToRender = bills;
+          this.clearDataCareer();
+          this.clearDataOfField();
           bills.forEach((bill) => {
-            let statisticalItem = this.statisticalData.find(item => item._id == bill.Job.Field);
-            if(statisticalItem){
-              statisticalItem.GrandTotal += bill.GrandTotal;
-            }else{
-              let fieldOfBill = this.fieldAll.find(item => item._id == bill.Job.Field.toString());
-              this.statisticalData.push({FieldName: fieldOfBill?.FieldName, GrandTotal: bill.GrandTotal, _id: bill.Job.Field});
+            this.billsCurrent = bills;
+            //statistical data of field
+            let statisticalItemOfField = this.statisticalDataOfField.find((data) => data.FieldId == bill.Job.Field);
+            if(statisticalItemOfField){
+              statisticalItemOfField.GrandTotal += bill.GrandTotal;
             }
-          });
-          this.grandTotals = this.statisticalData.map(item => item.GrandTotal);
-          this.fields = this.statisticalData.map(item => item.FieldName);
-          this.totalOfLegend = this.grandTotals.reduce((accumulator, currentValue) => {
+            else{
+              let field = this.fieldAll.find(item => item._id == bill.Job.Field.toString());
+              this.statisticalDataOfField.push({field: field?.FieldName, GrandTotal: bill.GrandTotal, FieldId: field?._id});
+            }
+            this.fields = this.statisticalDataOfField.map(item => item.field);
+            //statistical data of career
+            let statisticalDataOfCareer = this.statisticalDataOfCareer.find((data) => data.CareerId == bill.Job.Career);
+            if(statisticalDataOfCareer){
+              statisticalDataOfCareer.GrandTotal += bill.GrandTotal;
+            }
+            else{
+              let career = this.careerAll.find(item => item._id == bill.Job.Career.toString());
+              this.statisticalDataOfCareer.push({career: career?.Name, GrandTotal: bill.GrandTotal, CareerId: career?._id});
+            }
+            this.careers = this.statisticalDataOfCareer.map(item => item.career);
+          })
+          // caculate total of field
+          this.grandTotalsOfField = this.statisticalDataOfField.map(item => item.GrandTotal);
+          this.totalOfField = this.grandTotalsOfField.reduce((accumulator, currentValue) => {
             return accumulator + currentValue;
           }, 0);
-          this.totalOfBar= this.totalOfLegend;
+          // caculate total of career
+          this.grandTotalsOfCareer = this.statisticalDataOfCareer.map(item => item.GrandTotal);
+          this.totalOfCareer = this.grandTotalsOfCareer.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue;
+          }, 0);
+          this.percentOfGrandTotals = this.grandTotalsOfCareer.map(item => Math.round(item/this.totalOfCareer*100));
+          this.labelsY = [];
           for(let i = 0; i <= 10; i++){
-            this.labelsY.push(`${this.totalOfBar/10*i}`);
+            this.labelsY.push(`${this.totalOfField/10*i}`);
           }
+          console.log('Statistical data of field:', this.statisticalDataOfField);
+          console.log('Statistical data of career:', this.statisticalDataOfCareer);
+          console.log('Total of field:', this.totalOfField);
+          console.log('Total of career:', this.totalOfCareer);
+          console.log('Fields:', this.fields);
+          console.log('Careers:', this.careers);
+          console.log('Grand totals of field:', this.grandTotalsOfField);
+          console.log('Grand totals of career:', this.grandTotalsOfCareer);
+          console.log('Labels Y:', this.labelsY);
+        }else if(this.isGetByYearSuccess){
+          this.alerts
+          .open('', {label: 'Không có hóa đơn nào',status:'info'})
+          .subscribe();
         }
       }),
+
       this.billsTakenByDate$.subscribe((bills) => {
+        this.clearDataOfField();
+        this.clearDataCareer();
         if(bills.length){
-          this.billsToRender = bills;
+          this.billsCurrent = bills;
           bills.forEach((bill) => {
-            let statisticalItem = this.statisticalData.find(item => item._id == bill.Job.Field);
-            if(statisticalItem){
-              statisticalItem.GrandTotal += bill.GrandTotal;
-            }else{
-              let fieldOfBill = this.fieldAll.find(item => item._id == bill.Job.Field.toString());
-              this.statisticalData.push({FieldName: fieldOfBill?.FieldName, GrandTotal: bill.GrandTotal, _id: bill.Job.Field});
+            //statistical data of field
+            let statisticalItemOfField = this.statisticalDataOfField.find((data) => data.FieldId == bill.Job.Field);
+            if(statisticalItemOfField){
+              statisticalItemOfField.GrandTotal += bill.GrandTotal;
             }
-          });
-          this.grandTotals = this.statisticalData.map(item => item.GrandTotal);
-          this.fields = this.statisticalData.map(item => item.FieldName);
-          this.totalOfLegend = this.grandTotals.reduce((accumulator, currentValue) => {
+            else{
+              let field = this.fieldAll.find(item => item._id == bill.Job.Field.toString());
+              this.statisticalDataOfField.push({field: field?.FieldName, GrandTotal: bill.GrandTotal, FieldId: field?._id});
+            }
+            this.fields = this.statisticalDataOfField.map(item => item.field);
+            //statistical data of career
+            let statisticalDataOfCareer = this.statisticalDataOfCareer.find((data) => data.CareerId == bill.Job.Career);
+            if(statisticalDataOfCareer){
+              statisticalDataOfCareer.GrandTotal += bill.GrandTotal;
+            }
+            else{
+              let career = this.careerAll.find(item => item._id == bill.Job.Career.toString());
+              this.statisticalDataOfCareer.push({career: career?.Name, GrandTotal: bill.GrandTotal, CareerId: career?._id});
+            }
+            this.careers = this.statisticalDataOfCareer.map(item => item.career);
+          })
+          // caculate total of field
+          this.grandTotalsOfField = this.statisticalDataOfField.map(item => item.GrandTotal);
+          this.totalOfField = this.grandTotalsOfField.reduce((accumulator, currentValue) => {
             return accumulator + currentValue;
           }, 0);
-          this.totalOfBar= this.totalOfLegend;
+          // caculate total of career
+          this.grandTotalsOfCareer = this.statisticalDataOfCareer.map(item => item.GrandTotal);
+          this.totalOfCareer = this.grandTotalsOfCareer.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue;
+          }, 0);
+          this.percentOfGrandTotals = this.grandTotalsOfCareer.map(item => Math.round(item/this.totalOfCareer*100));
+          this.labelsY = [];
           for(let i = 0; i <= 10; i++){
-            this.labelsY.push(`${this.totalOfBar/10*i}`);
+            this.labelsY.push(`${this.totalOfField/10*i}`);
           }
+          console.log('Statistical data of field:', this.statisticalDataOfField);
+          console.log('Statistical data of career:', this.statisticalDataOfCareer);
+          console.log('Total of field:', this.totalOfField);
+          console.log('Total of career:', this.totalOfCareer);
+          console.log('Fields:', this.fields);
+          console.log('Careers:', this.careers);
+          console.log('Grand totals of field:', this.grandTotalsOfField);
+          console.log('Grand totals of career:', this.grandTotalsOfCareer);
+          console.log('Labels Y:', this.labelsY);
+        }else if(this.isGetByDateSuccess){
+          this.alerts
+          .open('', {label: 'Không có hóa đơn nào',status:'info'})
+          .subscribe();
         }
       })
   );
@@ -173,53 +321,119 @@ export class StatisticalComponent {
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
+  
+  statisticalByField(_id: string){
+    this.clearDataCareer();
+    let billGetByField = this.billsCurrent.filter(bill => bill.Job.Field.toString() == _id );
+    console.log('Bill get by field:', billGetByField);
+    billGetByField.forEach(bill => {
+      //statistical data of career
+      let statisticalDataOfCareer = this.statisticalDataOfCareer.find((data) => data.CareerId == bill.Job.Career);
+      if(statisticalDataOfCareer){
+        statisticalDataOfCareer.GrandTotal += bill.GrandTotal;
+      }
+      else{
+        let career = this.careerAll.find(item => item._id == bill.Job.Career.toString());
+        this.statisticalDataOfCareer.push({career: career?.Name, GrandTotal: bill.GrandTotal, CareerId: career?._id});
+      }
+      this.careers = this.statisticalDataOfCareer.map(item => item.career);
+    });
+      // caculate total of career
+      this.grandTotalsOfCareer = this.statisticalDataOfCareer.map(item => item.GrandTotal);
+      this.totalOfCareer = this.grandTotalsOfCareer.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      }, 0);
+      this.percentOfGrandTotals = this.grandTotalsOfCareer.map(item => Math.round(item/this.totalOfCareer*100));
 
+    
+  }
 
+  statisticalCurrent(){
+    this.billsCurrent.forEach(bill => {
+      //statistical data of career
+      let statisticalDataOfCareer = this.statisticalDataOfCareer.find((data) => data.CareerId == bill.Job.Career);
+      if(statisticalDataOfCareer){
+        statisticalDataOfCareer.GrandTotal += bill.GrandTotal;
+      }
+      else{
+        let career = this.careerAll.find(item => item._id == bill.Job.Career.toString());
+        this.statisticalDataOfCareer.push({career: career?.Name, GrandTotal: bill.GrandTotal, CareerId: career?._id});
+      }
+      this.careers = this.statisticalDataOfCareer.map(item => item.career);
+    });
+      // caculate total of career
+      this.grandTotalsOfCareer = this.statisticalDataOfCareer.map(item => item.GrandTotal);
+      this.totalOfCareer = this.grandTotalsOfCareer.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      }, 0);
+      this.percentOfGrandTotals = this.grandTotalsOfCareer.map(item => Math.round(item/this.totalOfCareer*100));
+  }
 
-  labelsY: string[]= [];
+  clearDataCareer(){
+    this.statisticalDataOfCareer = [];
+    this.careers = [];
+    this.grandTotalsOfCareer = [];
+    this.totalOfCareer = 0;
+
+  }
+  clearDataOfField(){
+    this.statisticalDataOfField = [];
+    this.fields = [];
+    this.grandTotalsOfField = [];
+    this.totalOfField = 0;
+  }
+
 
   data = new FormGroup({
     date: new FormControl(null),
     month: new FormControl(null),
     year: new FormControl(this.currentYear)
   });
-  changeMode(isDay:boolean,isMonth:boolean,isYear:boolean){
+  changeModeOfTime(isDay:boolean,isMonth:boolean,isYear:boolean){
+      this.clearDataCareer();
+      this.clearDataOfField();
       this.isGetByMonth = isMonth;
       this.isGetByYear = isYear
       this.isGetByDate = isDay;
-      this.fields = [];
-      this.grandTotals = [];
-      this.statisticalData = [];
-      this.totalOfLegend = 0;
-      this.totalOfBar = 0;
-      this.labelsY = [];
-  }
-  clearData(){
-    this.fields = [];
-    this.grandTotals = [];
-    this.statisticalData = [];
-    this.totalOfLegend = 0;
-    this.totalOfBar = 0;
-    this.labelsY = [];
-
   }
 
-  activeItemIndexLegend = NaN;
- 
-    readonly value = [13769, 12367, 10172, 3018, 2592];
-    readonly labels = ['Food', 'Cafe', 'OSS', 'Taxi', 'Other'];
- 
-    isItemActive(index: number): boolean {
-        return this.activeItemIndex === index;
-    }
- 
-    onHover(index: number, hovered: boolean): void {
-        this.activeItemIndex = hovered ? index : 0;
-    }
- 
-    getColor(index: number): string {
-        return `var(--tui-chart-${index})`;
-    }
+  appearance = 'onDark';
+
+  readonly hint = ({ $implicit }: TuiContextWithImplicit<number>): string => {
+    console.log({ $implicit });
+    this.statisticalByField(this.statisticalDataOfField[$implicit].FieldId);
+    return this.statisticalDataOfField[$implicit].GrandTotal.toString();
+  };
+  onHoverOut(): void {
+    this.clearDataCareer();
+    this.statisticalCurrent();
+  }
+  
+
+  get sum(): number {
+      return Number.isNaN(this.activeItemIndex) ? this.totalOfCareer : this.grandTotalsOfCareer[this.activeItemIndex];
+  }
+
+  get label(): string {
+      return Number.isNaN(this.activeItemIndex) ? 'Total' : this.careers[this.activeItemIndex];
+  }
+
+
+  activeItemIndex = NaN;
+  isItemActive(index: number): boolean {
+    return this.activeItemIndex === index;
+}
+
+onHover(index: number, hovered: boolean): void {
+    console.log('index:', index);
+    
+    this.activeItemIndex = hovered ? index : 0;
+}
+
+getColor(index: number): string {
+    return `var(--tui-chart-${index})`;
+}
+
     
     statistical(){
       console.log('Date:', this.data.get('date')?.value);
@@ -233,13 +447,12 @@ export class StatisticalComponent {
       if(this.isGetByMonth){
         let {month,year} = this.data.get('month')?.value ?? {month:0,year:0};
         console.log('Month:', month,year);
-        this.store.dispatch(BillActions.getByMonthAtStatistical({month: month, year: year,recruiter: this.userLogged._id}));
+        this.store.dispatch(BillActions.getByMonthAtStatistical({month: month+1, year: year,recruiter: this.userLogged._id}));
       }
       if(this.isGetByYear){
         let year = this.data.get('year')?.value;
         console.log('Year:', year);
         this.store.dispatch(BillActions.getByYearAtStatistical({year: year??2024,recruiter: this.userLogged._id}));
       }
-      this.clearData();
     }
 }

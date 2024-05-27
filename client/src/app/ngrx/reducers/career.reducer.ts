@@ -53,6 +53,11 @@ export const initialState: CareerState = {
     careersTakenByGetByFieldAtJobDetail: [],
     getByFieldAtJobDetailError: '',
 
+    isGetAllAtStatisticalLoading: false,
+    isGetAllAtStatisticalSuccess: false,
+    careersTakenByGetAllAtStatistical: [],
+    getAllAtStatisticalError: ''
+
 
 }
 
@@ -336,6 +341,34 @@ export const careerReducer = createReducer(
             isGetByFieldAtJobDetailLoading: false,
             isGetByFieldAtJobDetailSuccess: false,
             getByFieldAtJobDetailError: action.error
+        }
+    }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CareerActions.getAllAtStatistical,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAtStatisticalLoading: true,
+            isGetAllAtStatisticalSuccess: false,
+            getAllAtStatisticalError: ''
+        }
+    }),
+    on(CareerActions.getAllAtStatisticalSuccess,(state,action)=>{
+        return {
+            ...state,
+            careersTakenByGetAllAtStatistical: action.careers,
+            isGetAllAtStatisticalLoading: false,
+            isGetAllAtStatisticalSuccess: true
+        }
+    }),
+    on(CareerActions.getAllAtStatisticalFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAtStatisticalLoading: false,
+            isGetAllAtStatisticalSuccess: false,
+            getAllAtStatisticalError: action.error
         }
     }),
     

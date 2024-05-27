@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShareModule } from '../../../shared/shared.module';
 import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { TaigaModule } from '../../../shared/taiga.module';
+import { Recruiter } from '../../../models/recruiter.model';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,11 @@ export class NavbarComponent implements OnInit{
   selectedTab!: string; // Thuộc tính để lưu trữ tên của tab hiện đang được chọn
   activeItemIndex = 0;
 
+  //variables
+  isLogin = false;
+  userLogged: Recruiter = <Recruiter>{};
+
+
   constructor (
     private router: Router,
   ) {
@@ -25,10 +31,22 @@ export class NavbarComponent implements OnInit{
     } else if (this.router.url.includes('/application-list')) {
       this.activeItemIndex = 2;
     } 
+
   }
 
   ngOnInit(): void {
     console.log('navigation');
+    let userLogged = sessionStorage.getItem('recruiterLoged');
+    console.log('userOfRecruiterLogged',userLogged);
+    
+    if(userLogged){
+      let userAfterParse = JSON.parse(userLogged);
+      if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
+        console.log('userOfRecruiterLogged',userLogged);
+        this.isLogin = true;
+        this.userLogged = userAfterParse;
+      }
+    }
 
     this.router.events.subscribe((event) => {
       ('navigation')

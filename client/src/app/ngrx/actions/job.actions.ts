@@ -102,6 +102,22 @@ export const getByCareerNameAtJobFailure = createAction(
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByStatusPaymentAtConfirmJob = createAction(
+    '[Job] Get By Status Payment At Confirm Job',
+    props<{ status: boolean; page: number; limit: number }>()
+);
+export const getByStatusPaymentAtConfirmJobSuccess = createAction(
+    '[Job] Get By Status Payment At Confirm Job Success',
+    props<{ jobs: Job[] }>()
+);
+export const getByStatusPaymentAtConfirmJobFailure = createAction(
+    '[Job] Get By Status Payment At Confirm Job Failure',
+    props<{ error: string }>()
+);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const createJobAtJob = createAction(
     '[Job] Create Job',
     props<{ job: any,token: string }>()

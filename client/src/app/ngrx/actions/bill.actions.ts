@@ -63,3 +63,19 @@ export const createAtPaymentSuccessSuccess = createAction(
     props<{bill: Bill}>()
     );
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+export const createAtJobConfirm = createAction(
+    '[Bill] Create At Job Confirm',
+    props<{bill:any}>()
+    );
+export const createAtJobConfirmSuccess = createAction(
+    '[Bill] Create At Job Confirm Success',
+    props<{bill: Bill}>()
+    );
+export const createAtJobConfirmFailure = createAction(
+    '[Bill] Create At Job Confirm Failure',
+    props<{error: string}>()
+    );
+

@@ -164,6 +164,23 @@ export class JobEffects {
         )
         )
 
+    getByStatusPaymentAtConfirmJob$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(JobActions.getByStatusPaymentAtConfirmJob),
+            exhaustMap(action =>
+                this.jobService.getByStatusPayment(action.status, action.page, action.limit).pipe(
+                    map(jobs => {
+                        return JobActions.getByStatusPaymentAtConfirmJobSuccess({jobs})
+                    }),
+                    catchError((err) =>
+                        of(JobActions.getByStatusPaymentAtConfirmJobFailure({error: err})
+                    )
+                )
+            )
+        )
+        )
+        )
+
     getByCareerNameWithUrgentAtJob$ = createEffect(() =>
         this.actions$.pipe(
             ofType(JobActions.getByCareerNameWithUrgentAtJob),

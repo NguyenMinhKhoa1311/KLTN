@@ -4,32 +4,32 @@
             Bài đăng tuyển dụng
         </div>
         <div class="list_job">
-            <div class="job">
+            <div class="job" *ngFor="let job of jobsToRender">
                 <div class="job_box">
                     <div class="img_job">
-                        <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                        <img src="{{job.Company.Avatar}}" alt="">
                     </div>
                     <div class="info_job">
                         <div class="name_job">
-                            a
+                            {{job.Name}}
                         </div>
                         <div class="company_job">
-                            Công ty: a
+                            Công ty: {{job.Company.Name}}
                         </div>
                         <div class="salary">
-                            Lương: a
+                            Lương: {{job.Salary}}
                         </div>
                         <div class="address">
-                            Địa chỉ: a
+                            Địa chỉ: {{job.Address}}
                         </div>
                         
                         <div class="time">
                             <div class="dateStart">
-                                Ngày bắt đầu: a
+                                Ngày bắt đầu: {{parseDateInComponent(job.StartDate)}}
                             </div>
                             <div style="margin: 0 5px;">-</div>
                             <div class="dateEnd">
-                                Ngày kết thúc: a
+                                Ngày kết thúc: {{parseDateInComponent(job.EndDate)}}
                             </div>
                         </div>
                         <!-- <div class="status">
@@ -38,20 +38,15 @@
                     </div>
                 </div>
                 <div class="control">
-                    <div class="visibility">
-                        <span class="material-symbols-outlined" >
+                    <!-- <div class="visibility">
+                        <span class="material-symbols-outlined" (click)="seeDetailJob(job)">
                             visibility
                         </span>
-                    </div>
-                    <div class="edit">
-                        <span class="material-symbols-outlined" >
-                            edit
-                        </span>
-                    </div>
+                    </div> -->
                     <div class="delete">
-                        <span class="material-symbols-outlined">
-                            delete
-                        </span>
+                        <span class="material-symbols-outlined" (click)="seeDetailJob(job)">
+                            check
+                            </span>
                     </div>
                 </div>
             </div>
@@ -64,268 +59,9 @@
     </div>
 </div>
 
-<!-- <dialog id="job_dialog" style="color: #1f1a1c" #jobDialog>
-    <form [formGroup]="jobForm">
-        <div id="top_dialog">
-            <div class="title">
-                <h4>Thông tin cơ bản</h4>
-            </div>
-            <div class="btnClose" (click)="closeJobDialog()">
-                <span class="material-symbols-outlined">
-                    close
-                </span>
-            </div>
-        </div>
-        <div id="body_dialog">
-            <div class="job_box">
-                <form [formGroup]="jobForm">
-                    <div class="name_job">
-                        <div class="header">
-                            <span class="title">Tên công việc:</span>
-                        </div>
-                        <div class="body">
-                            <tui-input formControlName="Name" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
-                                Nhập tên công việc
-                                <input tuiTextfield type="text" />
-                            </tui-input>
-                            <tui-error formControlName="Name" [error]="[] | tuiFieldError | async"></tui-error>
-                        </div>
-                    </div>
-                    <div class="description_job">
-                        <div class="header">
-                            <span class="title">Mô tả công việc:</span>
-                        </div>
-                        <div class="body">
-                            <tui-textarea formControlName="Description" [tuiTextfieldCleaner]="true">
-                                Nhập mô tả công việc
-                            </tui-textarea>
-                            <tui-error formControlName="Description" [error]="[] | tuiFieldError | async"></tui-error>
-                        </div>
-                    </div>
-        
-                    <div class="location_job">
-                        <div class="header">
-                            <span class="title">Địa chỉ làm việc:</span>
-                        </div>
-                        <div class="body">
-                            <tui-input formControlName="Address" [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true">
-                                Nhập địa chỉ làm việc
-                                <input tuiTextfield type="text" />
-                            </tui-input>
-                            <tui-error formControlName="Address" [error]="[] | tuiFieldError | async"></tui-error>
-                        </div>
-                    </div>
-        
-                    <div class="tag_job">
-                        <div class="header">
-                            <span class="title">Địa điểm làm việc:</span>
-                        </div>
-                        <div class="body">
-                            <div class="tag_input">
-                                <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Location">
-                                    Nhập địa điểm
-                                    <input tuiTextfield type="text" />
-                                </tui-input>
-                                <button
-                                    appearance="primary"
-                                    tuiButton
-                                    type="button"
-                                    class="tui-space_right-3 tui-space_bottom-3"
-                                    (click)="addAddress()"
-                                >
-                                    Thêm
-                                </button>
-                            </div>
-                            <div class="tag_list">
-                                <div class="tag_select" *ngFor="let address of addressList; let i=index">
-                                    <div>{{address}}</div>
-                                    <span class="material-symbols-outlined" (click)="removeAddress(i)">
-                                        close
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="salary_job">
-                        <div class="header">
-                            <span class="title">Lương công việc:</span>
-                        </div>
-                        <div class="body">
-                            <div class="salary_value">
-                                <span>Từ</span>
-                                <tui-input-number formControlName="SalaryStart" class="salary_input">
-                                </tui-input-number>
-                                <tui-error formControlName="SalaryStart" [error]="[] | tuiFieldError | async"></tui-error>
-            
-                                <span>Đến</span>
-                                <tui-input-number formControlName="SalaryEnd" class="salary_input">
-                                </tui-input-number>
-                                <tui-error formControlName="SalaryEnd" [error]="[] | tuiFieldError | async"></tui-error>
-                            
-                                <div class="check_salary">
-                                    <tui-checkbox
-                                        formControlName="Negotiate"
-                                        class="tui-space_bottom-3"
-                                    ></tui-checkbox>
-                                    <span>Thương lượng</span>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="welfare_job">
-                        <div class="header">
-                            <span class="title">Phúc lợi:</span>
-                        </div>
-                        <div class="body">
-                            <div class="welfare_input">
-                                <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Welfare">
-                                    Nhập tên Phúc lợi
-                                    <input tuiTextfield type="text" />
-                                </tui-input>
-                                <button
-                                    appearance="primary"
-                                    tuiButton
-                                    type="button"
-                                    class="tui-space_right-3 tui-space_bottom-3"
-                                    (click)="addWelfare()"
-                                >
-                                    Thêm
-                                </button>
-                            </div>
-                            <div class="welfare_list">
-                                <div class="welfare_select" *ngFor="let welfare of welfareList; let i=index">
-                                    <div>{{welfare}}</div>
-                                    <span class="material-symbols-outlined" (click)="removeWelfare(i)">
-                                        close
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        
-        
-                    <div class="field_job">
-                        <div class="header">
-                            <span class="title">Lĩnh vực:</span>
-                        </div>
-                        <div class="body">
-                            <div class="custom-select"> 
-                                <select formControlName="Field" (change)="onFieldChange($event)">
-                                  <option class="select-item" *ngFor="let field of fieldList" value="{{field._id}}" >{{field.FieldName}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="career_job">
-                        <div class="header">
-                            <span class="title">Ngành nghề:</span>
-                        </div>
-                        <div class="body">
-                            <div class="custom-select"> 
-                                <select formControlName="Career" >
-                                    <option *ngFor="let career of careerList" value="{{career._id}}" >{{career.Name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="dateStart_job">
-                        <div class="header">
-                            <span class="title">Ngày bắt đầu:</span>
-                        </div>
-                        <div class="body">
-                            <tui-input-date class="b-form" formControlName="DateStart">
-                                Choose a date
-                                <input autocomplete="bday" tuiTextfield />
-                            </tui-input-date>
-                            <tui-error formControlName="DateStart" [error]="[] | tuiFieldError | async"></tui-error>
-                        </div>
-                    </div>
-        
-                    <div class="dateEnd_job">
-                        <div class="header">
-                            <span class="title">Ngày kết thúc:</span>
-                        </div>
-                        <div class="body">
-                            <tui-input-date class="b-form" formControlName="DateEnd">
-                                Choose a date
-                                <input autocomplete="bday" tuiTextfield />
-                            </tui-input-date>
-                            <tui-error formControlName="DateEnd" [error]="[] | tuiFieldError | async"></tui-error>
-                        </div>
-                    </div>
-        
-                    <div class="requirement_job">
-                        <div class="header">
-                            <span class="title">Yêu cầu:</span>
-                        </div>
-                        <div class="body">
-                            <tui-textarea formControlName="Requirement" [tuiTextfieldCleaner]="true">
-                            Nhập yêu cầu công việc
-                        </tui-textarea>
-                        <tui-error formControlName="Requirement" [error]="[] | tuiFieldError | async"></tui-error>
-                        </div>
-                    </div>
-        
-                    <div class="tag_job">
-                        <div class="header">
-                            <span class="title">Tag:</span>
-                        </div>
-                        <div class="body">
-                            <div class="tag_input">
-                                <tui-input [tuiTextfieldCleaner]="true" [tuiTextfieldLabelOutside]="true" formControlName="Tag">
-                                    Nhập tên Tag
-                                    <input tuiTextfield type="text" />
-                                </tui-input>
-                                <button
-                                    appearance="primary"
-                                    tuiButton
-                                    type="button"
-                                    class="tui-space_right-3 tui-space_bottom-3"
-                                    (click)="addTag()"
-                                >
-                                    Thêm
-                                </button>
-                            </div>
-                            <div class="tag_list">
-                                <div class="tag_select" *ngFor="let tag of tagsList; let i=index">
-                                    <div>{{tag}}</div>
-                                    <span class="material-symbols-outlined" (click)="removeTag(i)">
-                                        close
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            
-            <div class="a" style="width: 100%;
-            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
-            <div class="row4">
-                <div class="btn_Huy">
-                    <button appearance="primary" tuiButton type="button" (click)="closeJobDialog()"
-                        class="tui-space_right-3 tui-space_bottom-3">
-                        Hủy
-                    </button>
-                </div>
-                <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button" (click)="updateJob()"
-                        class="tui-space_right-3 tui-space_bottom-3">
-                        Lưu
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
-</dialog>
+
 
 <dialog id="visibility_dialog" style="color: #1f1a1c" #visibilityDialog>
-    <form [formGroup]="jobForm">
         <div id="top_dialog">
             <div class="title">
                 <h4>Thông tin cơ bản</h4>
@@ -336,15 +72,14 @@
                 </span>
             </div>
         </div>
-        <div id="body_dialog">
+        <div id="body_dialog" *ngIf="isOpenDialog">
             <div class="job_box">
-                <form [formGroup]="jobForm">
                     <div class="name_job">
                         <div class="header">
                             <span class="title">Tên công việc:</span>
                         </div>
                         <div class="body">
-                            <div class="name">{{name}}</div>
+                            <div class="name">{{jobToRender.Name}}</div>
                         </div>
                     </div>
                     <div class="description_job">
@@ -352,7 +87,7 @@
                             <span class="title">Mô tả công việc:</span>
                         </div>
                         <div class="body">
-                            <div class="description">{{description}}</div>
+                            <div class="description">{{jobToRender.Description}}</div>
                         </div>
                     </div>
         
@@ -361,7 +96,7 @@
                             <span class="title">Địa chỉ làm việc:</span>
                         </div>
                         <div class="body">
-                            <div class="location">{{address}}</div>
+                            <div class="location">{{jobToRender.Address}}</div>
                         </div>
                     </div>
         
@@ -371,11 +106,8 @@
                         </div>
                         <div class="body">
                             <div class="tag_list">
-                                <div class="tag_select" *ngFor="let address of addressList; let i=index">
-                                    <div>{{address}}</div>
-                                    <span class="material-symbols-outlined" (click)="removeAddress(i)">
-                                        close
-                                    </span>
+                                <div class="tag_select" *ngFor="let location of jobToRender.Location">
+                                    <div>{{location}}</div>
                                 </div>
                             </div>
                         </div>
@@ -386,10 +118,10 @@
                             <span class="title">Lương công việc:</span>
                         </div>
                         <div class="body">
-                            <div class="salary_value" *ngIf="!isAgreeToRender">
-                                ${{salaryStart}} - ${{salaryEnd}}
+                            <div class="salary_value" *ngIf="jobToRender.Salary!='Thỏa thuận'">
+                                ${{jobToRender.StartSalary}} - ${{jobToRender.EndSalary}}
                             </div>
-                            <div class="salary_value" *ngIf="isAgreeToRender">
+                            <div class="salary_value" *ngIf="jobToRender.Salary" >
                                 Thỏa thuận
                             </div>
                         </div>
@@ -401,7 +133,7 @@
                         </div>
                         <div class="body">
                             <div class="welfare_list">
-                                <div class="welfare_select" *ngFor="let welfare of welfareList; let i=index">
+                                <div class="welfare_select" *ngFor="let welfare of jobToRender.Welfare">
                                     <div>{{welfare}}</div>
                                     <span class="material-symbols-outlined">
                                         done
@@ -418,7 +150,7 @@
                         </div>
                         <div class="body">
                             <div class="field">
-                                {{fieldName}}
+                                {{jobToRender.Field.FieldName}}
                             </div>
                         </div>
                     </div>
@@ -429,7 +161,7 @@
                         </div>
                         <div class="body">
                             <div class="career">
-                                {{careerName}}
+                                {{jobToRender.Career.Name}}
                             </div>
                         </div>
                     </div>
@@ -440,7 +172,7 @@
                         </div>
                         <div class="body">
                             <div class="dateStart">
-                                {{dateStart}}
+                                {{jobToRender.StartDate}}
                             </div>
                         </div>
                     </div>
@@ -451,7 +183,7 @@
                         </div>
                         <div class="body">
                             <div class="dateEnd">
-                                {{dateEnd}}
+                                {{jobToRender.EndDate}}
                             </div>
                         </div>
                     </div>
@@ -461,7 +193,7 @@
                             <span class="title">Yêu cầu:</span>
                         </div>
                         <div class="body">
-                            <div class="requirement">{{requirement}}</div>
+                            <div class="requirement">{{jobToRender.Requirement}}</div>
                         </div>
                     </div>
         
@@ -471,7 +203,7 @@
                         </div>
                         <div class="body">
                             <div class="tag_list">
-                                <div class="tag_select" *ngFor="let tag of tagsList; let i=index">
+                                <div class="tag_select" *ngFor="let tag of jobToRender.Tags; let i=index">
                                     <div>{{tag}}</div>
                                     <span class="material-symbols-outlined">
                                         done
@@ -480,12 +212,17 @@
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
             
             <div class="a" style="width: 100%;
             border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
             <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeVisibilityDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3" (click)="confirmJob()">
+                        Xác nhận công việc
+                    </button>
+                </div>
                 <div class="btn_Huy">
                     <button appearance="primary" tuiButton type="button" (click)="closeVisibilityDialog()"
                         class="tui-space_right-3 tui-space_bottom-3">
@@ -494,5 +231,4 @@
                 </div>
             </div>
         </div>
-    </form>
-</dialog> -->
+</dialog>

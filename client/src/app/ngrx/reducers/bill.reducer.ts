@@ -23,6 +23,12 @@ const initizaState: BillState = {
     isCreateAtPaymentSuccessLoading: false,
     isCreateAtPaymentSuccessSuccess: false,
     createAtPaymentSuccessError: "",
+
+    billCreatedAtJobConfirm: <Bill>{},
+    isCreateAtJobConfirmLoading: false,
+    isCreateAtJobConfirmSuccess: false,
+    createAtJobConfirmError: "",
+
 };
 
 export const billReducer = createReducer(
@@ -131,4 +137,32 @@ export const billReducer = createReducer(
             createAtPaymentSuccessError: action.error,
         };
     }),
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(BillActions.createAtJobConfirm, (state, action) => {
+        return {
+            ...state,
+            isCreateAtJobConfirmLoading: true,
+            isCreateAtJobConfirmSuccess: false,
+            createAtJobConfirmError: "",
+        };
+    }),
+    on(BillActions.createAtJobConfirmSuccess, (state, action) => {
+        return {
+            ...state,
+            isCreateAtJobConfirmLoading: false,
+            isCreateAtJobConfirmSuccess: true,
+            billCreatedAtJobConfirm: action.bill,
+        };
+    }),
+    on(BillActions.createAtJobConfirmFailure, (state, action) => {
+        return {
+            ...state,
+            isCreateAtJobConfirmLoading: false,
+            isCreateAtJobConfirmSuccess: false,
+            createAtJobConfirmError: action.error,
+        };
+    }),
+    
 );

@@ -61,6 +61,10 @@ export const initialState: jobState = {
     getByCompanyAtCompanyDetailError: "",
     jobsTakenByCompanyAtCompanyDetail: [],
 
+    isGetByStatusPaymentAtConfirmJobLoading: false,
+    isGetByStatusPaymentAtConfirmJobSuccess: false,
+    getByStatusPaymentAtConfirmJobError: "",
+    jobsTakenByStatusPaymentAtConfirmJob: [],
 
 
     isGetByJobIdAtApplyJobLoading: false,
@@ -965,6 +969,36 @@ on(JobActions.getByHotJobAtSeeAllFailure,(state,action)=>{
         getByHotJobAtSeeAllError: action.error,
     }
 }),
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(JobActions.getByStatusPaymentAtConfirmJob,(state,action)=>{
+    return{
+        ...state,
+        isGetByStatusPaymentAtConfirmJobLoading: true,
+        isGetByStatusPaymentAtConfirmJobSuccess: false,
+        getByStatusPaymentAtConfirmJobError: "",
+    }
+}),
+on(JobActions.getByStatusPaymentAtConfirmJobSuccess,(state,action)=>{
+    return{
+        ...state,
+        jobsTakenByStatusPaymentAtConfirmJob: action.jobs,
+        isGetByStatusPaymentAtConfirmJobLoading: false,
+        isGetByStatusPaymentAtConfirmJobSuccess: true,
+        getByStatusPaymentAtConfirmJobError: "",
+    }
+}),
+on(JobActions.getByStatusPaymentAtConfirmJobFailure,(state,action)=>{
+    return{
+        ...state,
+        isGetByStatusPaymentAtConfirmJobLoading: false,
+        isGetByStatusPaymentAtConfirmJobSuccess: false,
+        getByStatusPaymentAtConfirmJobError: action.error,
+    }
+}),
+
 
 
 

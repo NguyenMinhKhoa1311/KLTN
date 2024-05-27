@@ -93,7 +93,7 @@ export class JobDetailComponent implements OnDestroy {
       this.token = token;
     }
     //get job theo recruiter
-    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: 0, limit: 5}) );
+    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: 0, limit: 6}) );
 
     //getAll field
     this.store.dispatch(FieldActions.getAllNoLimitAtJobDetail());
@@ -146,7 +146,7 @@ export class JobDetailComponent implements OnDestroy {
       this.jobUpdatedAtJobDetail$.subscribe(job => {
         console.log(job);
         if(job._id!='500'){
-          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 6}) );
           this.closeJobDialog();
           this.alerts
           .open('', {label: 'Cập nhật công việc thành công !!!',status:'success'})
@@ -156,7 +156,7 @@ export class JobDetailComponent implements OnDestroy {
       //theo dõi job dc xóa
       this.isDeletedJobAtJobDetail$.subscribe(result => {
         if(result){
-          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 5}) );
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 6}) );
           this.alerts
           .open('', {label: 'Xóa công việc thành công !!!',status:'success'})
           .subscribe();
@@ -376,12 +376,12 @@ export class JobDetailComponent implements OnDestroy {
 
   nextPage(){
     this.page++;
-    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: this.page, limit: 5}));
+    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: this.page, limit: 6}));
   }
   prevPage(){
     if(this.page > 0){
       this.page--;
-    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: this.page, limit: 5}));
+    this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: this.page, limit: 6}));
     }
   }
 

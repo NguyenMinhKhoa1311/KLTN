@@ -96,6 +96,23 @@ export class CareerEffects{
         )
     )
 
+    getAllAtStatistical$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(CareerActions.getAllAtStatistical),
+            exhaustMap(()=>
+                this.careerService.getAll().pipe(
+                    map((careers)=>{
+                        return CareerActions.getAllAtStatisticalSuccess({careers: careers})
+                    }),
+                    catchError((error)=>{
+                        return of(CareerActions.getAllAtStatisticalFailure({error}))
+                    })
+                )
+            )
+
+        )
+    )
+
     getByFieldAtJob$ = createEffect(()=>
         this.actions$.pipe(
             ofType(CareerActions.getByFieldAtCreateJob),

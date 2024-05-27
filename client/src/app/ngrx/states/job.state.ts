@@ -56,6 +56,10 @@ export interface jobState{
     jobTakenByIdAtPayment: Job;
     
 
+    isGetByStatusPaymentAtConfirmJobLoading: boolean;
+    isGetByStatusPaymentAtConfirmJobSuccess: boolean;
+    getByStatusPaymentAtConfirmJobError: string;
+    jobsTakenByStatusPaymentAtConfirmJob: Job[];
 
     isGetByCompanyAtCompanyDetailLoading: boolean;
     isGetByCompanyAtCompanyDetailSuccess: boolean;

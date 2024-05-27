@@ -64,6 +64,10 @@ export class JobService {
     return this.httpClient.get<Job[] | any>(`${URL}/job/geAllAndSortByWelFareAndSalare?page=${page}&limit=${limit}`);
   }
 
+  getByStatusPayment(status: boolean, page: number, limit: number){
+    return this.httpClient.get<Job[] | any>(`${URL}/job/getByStatusPayment?status=${status}&page=${page}&limit=${limit}`);
+  }
+
   create(job:any,token:string){
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,

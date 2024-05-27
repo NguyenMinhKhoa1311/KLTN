@@ -52,6 +52,11 @@ export interface CareerState{
     careersTakenByGetByFieldAtJobDetail: Career[];
     getByFieldAtJobDetailError: string;
     
+    isGetAllAtStatisticalLoading: boolean;
+    isGetAllAtStatisticalSuccess: boolean;
+    careersTakenByGetAllAtStatistical: Career[];
+    getAllAtStatisticalError: string;
+    
 
 
 

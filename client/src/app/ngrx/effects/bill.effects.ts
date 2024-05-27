@@ -76,4 +76,20 @@ export class BillEffects{
 
         )
     )
+
+    createAtJobConfirm$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(BillActions.createAtJobConfirm),
+            exhaustMap((action)=>
+                this.billService.create(action.bill).pipe(
+                    map((bill)=>{
+                        return BillActions.createAtJobConfirmSuccess({bill: bill})
+                    }),
+                    catchError((error)=>{
+                        return of(BillActions.createAtJobConfirmFailure({error}))
+                    })
+                )
+            )
+        )
+    )
 }
