@@ -216,6 +216,20 @@ export class JobController {
       throw err
     }
   }
+  @Get('getByStatusPayment')
+  async getByStatusPayment(
+    @Query('status') status: boolean,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ) {
+    try{
+      const job = await this.jobService.getByStatusPayment(status, page, limit);
+      return job
+    }
+    catch(err){
+      return[]
+    }
+  }
 
 
 

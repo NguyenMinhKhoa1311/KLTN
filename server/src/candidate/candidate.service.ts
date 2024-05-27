@@ -48,11 +48,20 @@ export class CandidateService {
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
-      .populate('Field', 'FieldId Name', this.FieldModel).exec();
+      .populate('Field', 'FieldId FieldName', this.FieldModel).exec();
 
     }
     catch(err){
       throw new HttpException(err.message,err.status);
+    }
+  }
+
+  async findAllNoPopulate() {
+    try{
+      return await this.CandidateModel.find().exec();
+    }
+    catch(err){
+      return []
     }
   }
 

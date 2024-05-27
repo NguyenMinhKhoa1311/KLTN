@@ -24,6 +24,7 @@ export class SendMailService {
             return await this.transporter.sendMail(mailOptions);
           }
           catch(err){
+            log(err)
             return false
           }
 

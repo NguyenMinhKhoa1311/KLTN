@@ -25,11 +25,15 @@ import { AuthMiddleware } from './auth/auth.middleware';
 import { JobController } from './job/job.controller';
 import { FieldController } from './field/field.controller';
 import { PaymentModule } from './payment/payment.module';
+import { CronJobModule } from './cron-job/cron-job.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb+srv://nguyenminhkhoa1311:cn4ABLLOwrbH4m4z@cluster0.bj8qqej.mongodb.net/'),
+    // ScheduleModule.forRoot(),
+    // CronJobModule,
     UserModule,
     CandidateModule,
     FieldModule,
@@ -50,6 +54,7 @@ import { PaymentModule } from './payment/payment.module';
     ReferencesModule,
     AuthModule,
     PaymentModule,
+
 
 
 
@@ -88,6 +93,7 @@ export class AppModule implements NestModule {
         { path: 'job/getByRecruiter', method: RequestMethod.GET },
         { path: 'job/getByLocationdWithKeyword', method: RequestMethod.GET },
         { path: 'job/getByLocationdWithKeywordAndUrgent', method: RequestMethod.GET },
+        { path: 'job/getByStatusPayment', method: RequestMethod.GET },
 
 
 

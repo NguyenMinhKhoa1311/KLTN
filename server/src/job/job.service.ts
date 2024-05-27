@@ -163,6 +163,7 @@ constructor(
 
   async getByField(page: number, limit: number, fieldId: string){
     try{
+      log(fieldId)
       const skip = page * limit;
       const jobs = await this.JobModel.find({
         Field: fieldId,
@@ -624,8 +625,26 @@ constructor(
     catch(error){
       return []
     }
-
   }
+  async getByStatusPayment(status: boolean, page: number, limit: number){
+    try{
+      const skip = page * limit;
+      const jobs = await this.JobModel.find({StatusPayment: status})
+      .populate('Career','CareerId Name', this.careerModel)
+      .populate('Recruiter','RecruiterId Name', this.recruiterModel)
+      .populate('Company','CompanyId Name Avatar Address', this.companyModel)
+      .populate('Field','FieldId FieldName', this.fieldModel)
+      .populate('ServicePackage','ServicePackageId Name Priority Hot ColorTitle Urgent Price', this.servicePackageModel)
+      .populate('Recruitment','RecruitmentId Candidate Job Recruiter Company Career Field ', this.recruitertmentModel)
+      .sort({"createdAt": -1})
+      .skip(skip)
+      .limit(limit)
+      .exec();
+      return jobs
+  }catch{
+    return []
+  }
+}
 
   
   async updateJob(jobId: string, updateJobDto: UpdateJobDto) {
