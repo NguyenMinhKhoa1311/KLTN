@@ -1,617 +1,632 @@
-#home_container {
-    width: 100vw;
-    height: 100vh;
-    background-color: #003699;
-
-    //padding-top: 4rem;
-    .home_box {
-        width: calc(85% + 20px);
-        height: 45rem;
-        margin: 0 auto;
-
-        .search_home {
-            height: 10%;
-            padding: 0 20px;
-
-            .search_box {
-                border-radius: 68px;
-                //width: 100%;
-                height: 3rem;
-                background-color: #002466;
-                display: flex;
-                padding: 10px;
-
-                .search_information {
-                    background-color: #ffffff;
-                    height: 100%;
-                    width: 100%;
+.box{
+    padding-bottom: 18px;
+    #home_container {
+        width: 100vw;
+        height: 100vh;
+        background-color: #003699;
+    
+        //padding-top: 4rem;
+        .home_box {
+            width: calc(85% + 20px);
+            height: 45rem;
+            margin: 0 auto;
+    
+            .search_home {
+                height: 10%;
+                padding: 0 20px;
+    
+                .search_box {
                     border-radius: 68px;
+                    //width: 100%;
+                    height: 3rem;
+                    background-color: #002466;
                     display: flex;
-                    flex-direction: row;
-
-                    .search_img {
-                        width: 4%;
+                    padding: 10px;
+    
+                    .search_information {
+                        background-color: #ffffff;
                         height: 100%;
-                        //margin: 0 0 0 0.5rem;
+                        width: 100%;
+                        border-radius: 68px;
                         display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        svg {
-                            width: 1.5rem;
-                            height: 1.5rem;
-                        }
-                    }
-
-                    .search {
-                        width: 80%;
-                        height: 100%;
-
-                        input {
-                            width: 100%;
+                        flex-direction: row;
+    
+                        .search_img {
+                            width: 4%;
                             height: 100%;
-                            border: none;
-                            font-size: 1rem;
-
-                            &:focus {
-                                outline: none;
-                            }
-                        }
-                    }
-
-                    .search_btn {
-                        width: 18%;
-                        height: 100%;
-                        //margin: 0 0.5rem 0 0;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        .search_btn_box {
-                            width: 80%;
-                            height: 60%;
-                            padding: 5px;
-                            background-color: #005AFF;
-                            border-radius: 68px;
+                            //margin: 0 0 0 0.5rem;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            cursor: pointer;
-
-                            span {
-
+    
+                            svg {
+                                width: 1.5rem;
+                                height: 1.5rem;
+                            }
+                        }
+    
+                        .search {
+                            width: 80%;
+                            height: 100%;
+    
+                            input {
+                                width: 100%;
+                                height: 100%;
+                                border: none;
                                 font-size: 1rem;
+    
+                                &:focus {
+                                    outline: none;
+                                }
+                            }
+                        }
+    
+                        .search_btn {
+                            width: 18%;
+                            height: 100%;
+                            //margin: 0 0.5rem 0 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+    
+                            .search_btn_box {
+                                width: 80%;
+                                height: 60%;
+                                padding: 5px;
+                                background-color: #005AFF;
+                                border-radius: 68px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+    
+                                span {
+    
+                                    font-size: 1rem;
+                                    color: white;
+                                }
+                            }
+    
+                            :hover {
+                                background-color: #347BFF;
+                            }
+                        }
+    
+                    }
+                }
+            }
+    
+            .carousel_home {
+                width: 100%;
+                height: 90%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                .carousel_container {
+                    .carousel_item {
+                        height: 35rem;
+                        padding: 0;
+                        border: none !important;
+                        background-color: #00266B;
+                        .img_copany {
+                            width: 100%;
+                            height: 80%;
+    
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 10px;
+                            }
+                        }
+                    }
+                    .company_information{
+                        display: flex;
+                        flex-direction: row;
+                        padding: 16px;
+                        width: calc(20% - 32px);
+                        height: calc(20% - 32px);
+                        .company_logo{
+                            width: 85px;
+                            height: 100%;
+                            margin-right: 10px;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 10px;
+                            }
+                        }
+                        .info_company{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            
+                            .company_name{
+                                font-size: 16px;
                                 color: white;
                             }
-                        }
-
-                        :hover {
-                            background-color: #347BFF;
+                            .company_address{
+                                font-size: 14px;
+                                color:#AEAEAE;
+                            
+                            }
                         }
                     }
-
+                    
+                }
+                .tui-island:not(.tui-island_hoverable):before {
+                    border: none !important;
+                }
+    
+                .pagination {
+                    margin: 5px 0 0 0;
+                    color: black;
+                }
+    
+            }
+    
+        }
+    }
+    
+    .best_work {
+        width: 100vw;
+        height: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    
+        .best_work_box {
+            width: calc(85% - 20px);
+            //height: 1rem;
+            border: 1px solid #ccdeff;
+            border-radius: 6px;
+    
+            .header {
+                //width: 100%;
+                //height: 5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 25px 20px;
+                background-color: #F2F7FF;
+                border-radius: 6px 6px 0 0;
+    
+                .title {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+    
+                .see_more {
+                    font-size: 1rem;
+                    color: #005AFF;
+                    cursor: pointer;
                 }
             }
-        }
-
-        .carousel_home {
-            width: 100%;
-            height: 90%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            .carousel_container {
-                .carousel_item {
-                    height: 35rem;
-                    padding: 0;
-                    border: none !important;
-                    background-color: #00266B;
-                    .img_copany {
-                        width: 100%;
-                        height: 80%;
-
-                        img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                            border-radius: 10px;
+    
+            .body {
+    
+                //background-color: bisque;
+                display: flex;
+                flex-direction: column;
+    
+                .wrapper {
+                    padding: 0 !important;
+    
+                    .carousel {
+                        .item_carousel {
+                            display: flex;
+                            flex-direction: row;
+                            
+    
+                            .item_box_column {
+                                display: flex;
+                                flex-direction: column;
+                                height: 26rem;
+                                padding: 8.5px;
+                                gap: 8px;
+    
+                                .item_box {
+                                    width: 23.5rem;
+                                    border: 1px solid rgb(207, 224, 255);
+                                    margin: 5px;
+                                    border-radius: 12px;
+                                    padding: 16px 12px;
+                                    display: flex;
+                                    justify-content: space-between;
+    
+                                    .img_logo {
+                                        width: 27%;
+                                        height: 100%;
+    
+                                        img {
+                                            width: 100%;
+                                            height: 100%;
+                                            object-fit: cover;
+                                            border-radius: 12px;
+                                        }
+                                    }
+    
+                                    .item_content {
+                                        width: 60%;
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 4px;
+                                        .job_name {
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            cursor: pointer;
+                                            white-space: nowrap;
+                                            /* Ngăn không cho văn bản ngắn xuống dòng */
+                                            overflow: hidden;
+                                            /* Ẩn phần văn bản vượt quá phạm vi */
+                                            text-overflow: ellipsis;
+                                            /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                        }
+    
+                                        .job_name_title{
+                                            color: red;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            cursor: pointer;
+                                            white-space: nowrap;
+                                            /* Ngăn không cho văn bản ngắn xuống dòng */
+                                            overflow: hidden;
+                                            /* Ẩn phần văn bản vượt quá phạm vi */
+                                            text-overflow: ellipsis;
+                                            /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                        }
+    
+                                        .job_name:hover {
+                                            color: #FF7D55;
+                                        }
+    
+                                        .company_name {
+                                            font-size: 14px;
+                                            cursor: pointer;
+                                            white-space: nowrap;
+                                            /* Ngăn không cho văn bản ngắn xuống dòng */
+                                            overflow: hidden;
+                                            /* Ẩn phần văn bản vượt quá phạm vi */
+                                            text-overflow: ellipsis;
+                                            /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                        }
+    
+                                        .company_name:hover {
+                                            color: #FF7D55;
+                                        }
+    
+                                        .salary {
+                                            font-size: 14px;
+                                            color: #FF7D55;
+                                        }
+    
+                                        .address {
+                                            font-size: 14px;
+                                            white-space: nowrap;
+                                            /* Ngăn không cho văn bản ngắn xuống dòng */
+                                            overflow: hidden;
+                                            /* Ẩn phần văn bản vượt quá phạm vi */
+                                            text-overflow: ellipsis;
+                                            /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                        }
+                                    }
+    
+                                    .item_hot {
+                                        //width: 10%;
+                                        height: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        .hot_box {
+                                            width: 100%;
+                                            background-color: #FCEDED;
+                                            border-radius: 8px;
+                                            padding: 2px;
+                                            display: flex;
+                                            align-items: center;
+                                            color: #DC362E;
+                                        }
+                                        .join_job{
+                                            cursor: pointer;
+                                            
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-                .company_information{
+    
+                .control_item {
                     display: flex;
                     flex-direction: row;
-                    padding: 16px;
-                    width: calc(20% - 32px);
-                    height: calc(20% - 32px);
-                    .company_logo{
-                        width: 85px;
-                        height: 100%;
-                        margin-right: 10px;
-                        img{
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                            border-radius: 10px;
-                        }
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 50px;
+                    button {
+                        border-radius: 50%;
+                        height: 35px;
+                        width: 35px;
+                        margin: 10px 20px 20px 20px;
                     }
-                    .info_company{
+                }
+            }
+        }
+    }
+    
+    .key_industries {
+        margin-top: 50px;
+        width: 100vw;
+        height: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+    
+        .wrapper {
+            width: 92%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 20px;
+    
+            .carousel {
+                border: none !important;
+                border-radius: 12px;
+                display: flex;
+                gap: 20px;
+                
+                .carousel_industries {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    cursor: pointer;
+        
+                    .item_industries {
+                        width: calc(15rem - 40px);
+                        height: calc(13rem - 40px);
+                        background-color: #F2F7FF;
+                        border-radius: 12px;
+                        padding: 20px;
                         display: flex;
                         flex-direction: column;
-                        justify-content: center;
-                        
-                        .company_name{
-                            font-size: 16px;
-                            color: white;
-                        }
-                        .company_address{
-                            font-size: 14px;
-                            color:#AEAEAE;
-                        
-                        }
-                    }
-                }
-                
-            }
-            .tui-island:not(.tui-island_hoverable):before {
-                border: none !important;
-            }
-
-            .pagination {
-                margin: 5px 0 0 0;
-                color: black;
-            }
-
-        }
-
-    }
-}
-
-.best_work {
-    width: 100vw;
-    height: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-
-    .best_work_box {
-        width: calc(85% - 20px);
-        //height: 1rem;
-        border: 1px solid #ccdeff;
-        border-radius: 6px;
-
-        .header {
-            //width: 100%;
-            //height: 5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 20px;
-            background-color: #F2F7FF;
-            border-radius: 6px 6px 0 0;
-
-            .title {
-                font-size: 1.5rem;
-                font-weight: bold;
-            }
-
-            .see_more {
-                font-size: 1rem;
-                color: #005AFF;
-                cursor: pointer;
-            }
-        }
-
-        .body {
-
-            //background-color: bisque;
-            display: flex;
-            flex-direction: column;
-
-            .wrapper {
-                padding: 0 !important;
-
-                .carousel {
-                    .item_carousel {
-                        display: flex;
-                        flex-direction: row;
-                        
-
-                        .item_box_column {
-                            display: flex;
-                            flex-direction: column;
-                            height: 26rem;
-                            padding: 8.5px;
-                            gap: 8px;
-
-                            .item_box {
-                                width: 23.5rem;
-                                border: 1px solid rgb(207, 224, 255);
-                                margin: 5px;
-                                border-radius: 12px;
-                                padding: 16px 12px;
-                                display: flex;
-                                justify-content: space-between;
-
-                                .img_logo {
-                                    width: 27%;
-                                    height: 100%;
-
-                                    img {
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                        border-radius: 12px;
-                                    }
-                                }
-
-                                .item_content {
-                                    width: 60%;
-                                    display: flex;
-                                    flex-direction: column;
-                                    gap: 4px;
-                                    .job_name {
-                                        font-size: 16px;
-                                        font-weight: 600;
-                                        cursor: pointer;
-                                        white-space: nowrap;
-                                        /* Ngăn không cho văn bản ngắn xuống dòng */
-                                        overflow: hidden;
-                                        /* Ẩn phần văn bản vượt quá phạm vi */
-                                        text-overflow: ellipsis;
-                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
-                                    }
-
-                                    .job_name_title{
-                                        color: red;
-                                        font-size: 16px;
-                                        font-weight: 600;
-                                        cursor: pointer;
-                                        white-space: nowrap;
-                                        /* Ngăn không cho văn bản ngắn xuống dòng */
-                                        overflow: hidden;
-                                        /* Ẩn phần văn bản vượt quá phạm vi */
-                                        text-overflow: ellipsis;
-                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
-                                    }
-
-                                    .job_name:hover {
-                                        color: #FF7D55;
-                                    }
-
-                                    .company_name {
-                                        font-size: 14px;
-                                        cursor: pointer;
-                                    }
-
-                                    .company_name:hover {
-                                        color: #FF7D55;
-                                    }
-
-                                    .salary {
-                                        font-size: 14px;
-                                        color: #FF7D55;
-                                    }
-
-                                    .address {
-                                        font-size: 14px;
-                                        white-space: nowrap;
-                                        /* Ngăn không cho văn bản ngắn xuống dòng */
-                                        overflow: hidden;
-                                        /* Ẩn phần văn bản vượt quá phạm vi */
-                                        text-overflow: ellipsis;
-                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
-                                    }
-                                }
-
-                                .item_hot {
-                                    //width: 10%;
-                                    height: 100%;
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                    .hot_box {
-                                        width: 100%;
-                                        background-color: #FCEDED;
-                                        border-radius: 8px;
-                                        padding: 2px;
-                                        display: flex;
-                                        align-items: center;
-                                        color: #DC362E;
-                                    }
-                                    .join_job{
-                                        cursor: pointer;
-                                        
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            .control_item {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-
-                button {
-                    border-radius: 50%;
-                    height: 35px;
-                    width: 35px;
-                    margin: 10px 20px 20px 20px;
-                }
-            }
-        }
-    }
-}
-
-.key_industries {
-    margin-top: 50px;
-    width: 100vw;
-    height: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    .title {
-        font-size: 2rem;
-        font-weight: 600;
-    }
-
-    .wrapper {
-        width: 92%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-top: 20px;
-
-        .carousel {
-            border: none !important;
-            border-radius: 12px;
-            display: flex;
-            gap: 20px;
-            
-            .carousel_industries {
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                cursor: pointer;
-    
-                .item_industries {
-                    width: calc(15rem - 40px);
-                    height: calc(13rem - 40px);
-                    background-color: #F2F7FF;
-                    border-radius: 12px;
-                    padding: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: space-between;
-    
-                    .logo_industries {
-                        //width: 50%;
-                        height: 90px;
-    
-                        img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                    }
-    
-                    .name_industries {
-                        font-size: 1rem;
-                        font-weight: 600;
-                        text-align: center;
-                    }
-    
-                    .quantity_industries {
-                        font-size: 0.8rem;
-                    }
-                }
-            }
-        }
-
-       
-
-        .tui-island_size_m {
-            padding: 0 !important;
-        }
-
-    }
-}
-
-
-.outstanding_jobs, .career_jobs {
-    width: 100vw;
-    height: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-
-    .best_work_box {
-        width: calc(85% - 20px);
-        //height: 1rem;
-        border: 1px solid #ccdeff;
-        border-radius: 6px;
-
-        .header {
-            //width: 100%;
-            //height: 5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 20px;
-            background-color: #F2F7FF;
-            border-radius: 6px 6px 0 0;
-
-            .title {
-                font-size: 1.5rem;
-            }
-
-            .hightLight {
-                font-size: 1.5rem;
-                font-weight: bold;
-                margin-left: 5px;
-            }
-
-            .see_more {
-                font-size: 1rem;
-                color: #005AFF;
-                cursor: pointer;
-            }
-        }
-
-        .body {
-
-            //background-color: bisque;
-            display: flex;
-            flex-direction: column;
-
-            .wrapper {
-                padding: 0 !important;
-
-                .carousel {
-                    app-loading {
-                        width: 100%;
-                        height: 27.2rem;
-                        display: flex;
                         align-items: center;
-                        justify-content: center;
+                        justify-content: space-between;
+        
+                        .logo_industries {
+                            //width: 50%;
+                            height: 90px;
+        
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+        
+                        .name_industries {
+                            font-size: 1rem;
+                            font-weight: 600;
+                            text-align: center;
+                        }
+        
+                        .quantity_industries {
+                            font-size: 0.8rem;
+                        }
                     }
-                    .item_carousel {
-                        display: flex;
-                        flex-direction: row;
-                        // justify-content: space-evenly;
-                        //gap: 10px;
-                        .item_box_column {
+                }
+            }
+    
+           
+    
+            .tui-island_size_m {
+                padding: 0 !important;
+            }
+    
+        }
+    }
+    
+    
+    .outstanding_jobs, .career_jobs {
+        width: 100vw;
+        height: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    
+        .best_work_box {
+            width: calc(85% - 20px);
+            //height: 1rem;
+            border: 1px solid #ccdeff;
+            border-radius: 6px;
+    
+            .header {
+                //width: 100%;
+                //height: 5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 25px 20px;
+                background-color: #F2F7FF;
+                border-radius: 6px 6px 0 0;
+    
+                .title {
+                    font-size: 1.5rem;
+                }
+    
+                .hightLight {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    margin-left: 5px;
+                }
+    
+                .see_more {
+                    font-size: 1rem;
+                    color: #005AFF;
+                    cursor: pointer;
+                }
+            }
+    
+            .body {
+    
+                //background-color: bisque;
+                display: flex;
+                flex-direction: column;
+    
+                .wrapper {
+                    padding: 0 !important;
+    
+                    .carousel {
+                        app-loading {
+                            width: 100%;
+                            height: 27.2rem;
                             display: flex;
-                            flex-direction: column;
-                            height: 26rem;
-                            padding: 8.5px;
-                            gap: 8px;
-
-                            .item_box {
-                                width: 23.5rem;
-                                border: 1px solid rgb(207, 224, 255);
-                                margin: 5px;
-                                border-radius: 12px;
-                                padding: 16px 12px;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        .item_carousel {
+                            display: flex;
+                            flex-direction: row;
+                            // justify-content: space-evenly;
+                            //gap: 10px;
+                            .item_box_column {
                                 display: flex;
-                                gap: 10px;
-
-                                .img_logo {
-                                    width: 27%;
-                                    height: 100%;
-
-                                    img {
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                        border-radius: 12px;
-                                    }
-                                }
-
-                                .item_content {
-                                    width: 60%;
+                                flex-direction: column;
+                                height: 26rem;
+                                padding: 8.5px;
+                                gap: 8px;
+    
+                                .item_box {
+                                    width: 23.5rem;
+                                    border: 1px solid rgb(207, 224, 255);
+                                    margin: 5px;
+                                    border-radius: 12px;
+                                    padding: 16px 12px;
                                     display: flex;
-                                    flex-direction: column;
-
-
-                                    gap: 4px;
-
-                                    .job_name {
-                                        font-size: 16px;
-                                        font-weight: bold;
-                                        cursor: pointer;
-                                        white-space: nowrap;
-                                        /* Ngăn không cho văn bản ngắn xuống dòng */
-                                        overflow: hidden;
-                                        /* Ẩn phần văn bản vượt quá phạm vi */
-                                        text-overflow: ellipsis;
-                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                    gap: 10px;
+    
+                                    .img_logo {
+                                        width: 27%;
+                                        height: 100%;
+    
+                                        img {
+                                            width: 100%;
+                                            height: 100%;
+                                            object-fit: cover;
+                                            border-radius: 12px;
+                                        }
                                     }
-
-                                    .job_name_title{
-                                        color: red;
-                                        font-size: 16px;
-                                        font-weight: 600;
-                                        cursor: pointer;
-                                        white-space: nowrap;
-                                        /* Ngăn không cho văn bản ngắn xuống dòng */
-                                        overflow: hidden;
-                                        /* Ẩn phần văn bản vượt quá phạm vi */
-                                        text-overflow: ellipsis;
-                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
-                                    }
-
-                                    .job_name:hover {
-                                        color: #FF7D55;
-                                    }
-
-                                    .company_name {
-                                        font-size: 14px;
-                                        cursor: pointer;
-                                    }
-
-                                    .company_name:hover {
-                                        color: #FF7D55;
-                                    }
-
-                                    .salary {
-                                        font-size: 14px;
-                                        color: #FF7D55;
-                                    }
-
-                                    .address {
-                                        font-size: 14px;
-                                        white-space: nowrap;
-                                        /* Ngăn không cho văn bản ngắn xuống dòng */
-                                        overflow: hidden;
-                                        /* Ẩn phần văn bản vượt quá phạm vi */
-                                        text-overflow: ellipsis;
-                                        /* Thêm dấu ba chấm cho văn bản đã ẩn */
-                                    }
-                                }
-
-                                .item_hot {
-                                    width: 10%;
-
-                                    .hot_box {
-                                        width: 100%;
-                                        background-color: #FCEDED;
-                                        border-radius: 8px;
-                                        padding: 2px;
+    
+                                    .item_content {
+                                        width: 60%;
                                         display: flex;
-                                        align-items: center;
-                                        color: #DC362E;
+                                        flex-direction: column;
+    
+    
+                                        gap: 4px;
+    
+                                        .job_name {
+                                            font-size: 16px;
+                                            font-weight: bold;
+                                            cursor: pointer;
+                                            white-space: nowrap;
+                                            /* Ngăn không cho văn bản ngắn xuống dòng */
+                                            overflow: hidden;
+                                            /* Ẩn phần văn bản vượt quá phạm vi */
+                                            text-overflow: ellipsis;
+                                            /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                        }
+    
+                                        .job_name_title{
+                                            color: red;
+                                            font-size: 16px;
+                                            font-weight: 600;
+                                            cursor: pointer;
+                                            white-space: nowrap;
+                                            /* Ngăn không cho văn bản ngắn xuống dòng */
+                                            overflow: hidden;
+                                            /* Ẩn phần văn bản vượt quá phạm vi */
+                                            text-overflow: ellipsis;
+                                            /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                        }
+    
+                                        .job_name:hover {
+                                            color: #FF7D55;
+                                        }
+    
+                                        .company_name {
+                                            font-size: 14px;
+                                            cursor: pointer;
+                                            white-space: nowrap;
+                                            /* Ngăn không cho văn bản ngắn xuống dòng */
+                                            overflow: hidden;
+                                            /* Ẩn phần văn bản vượt quá phạm vi */
+                                            text-overflow: ellipsis;
+                                            /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                        }
+    
+                                        .company_name:hover {
+                                            color: #FF7D55;
+                                        }
+    
+                                        .salary {
+                                            font-size: 14px;
+                                            color: #FF7D55;
+                                        }
+    
+                                        .address {
+                                            font-size: 14px;
+                                            white-space: nowrap;
+                                            /* Ngăn không cho văn bản ngắn xuống dòng */
+                                            overflow: hidden;
+                                            /* Ẩn phần văn bản vượt quá phạm vi */
+                                            text-overflow: ellipsis;
+                                            /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                        }
+                                    }
+    
+                                    .item_hot {
+                                        width: 10%;
+    
+                                        .hot_box {
+                                            width: 100%;
+                                            background-color: #FCEDED;
+                                            border-radius: 8px;
+                                            padding: 2px;
+                                            display: flex;
+                                            align-items: center;
+                                            color: #DC362E;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
-
-            .control_item {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-
-                button {
-                    border-radius: 50%;
-                    height: 35px;
-                    width: 35px;
-                    margin: 10px 20px 20px 20px;
+    
+                .control_item {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 50px;
+                    button {
+                        border-radius: 50%;
+                        height: 35px;
+                        width: 35px;
+                        margin: 10px 20px 20px 20px;
+                    }
                 }
             }
         }

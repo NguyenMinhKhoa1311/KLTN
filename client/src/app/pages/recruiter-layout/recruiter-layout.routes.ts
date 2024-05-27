@@ -65,6 +65,11 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         path:'payment-success',
         loadChildren: () =>
           import('./payment-success/payment-success.routes').then((m) => m.PAYMENTSUCCESS_ROUTERS),
+      },
+      {
+        path:'forgot-pass',
+        loadChildren: () =>
+          import('./forgot-pass/forgot-pass.routes').then((m) => m.FORGOTPASS_ROUTERS),
       }
     ],
   },
