@@ -1,0 +1,102 @@
+<div id="account_management_container">
+    <div class="account_management_box">
+        <div class="account_management_title">
+            Quản lý tài khoản
+        </div>
+        <div class="account_management_body">
+            <div class="title">
+                Email đăng nhập & mật khẩu
+            </div>
+            <div class="box">
+                Email hiện tại: a
+            </div>
+            <div class="control" (click)="openForgotPassDialog()">
+                Thay đổi mật khẩu
+            </div>
+        </div>
+    </div>
+</div>
+
+<dialog id="forgot_dialog" style="color: #1f1a1c" #forgotPassDialog>
+    <div id="top_dialog">
+        <div class="title">
+            Thay đổi mật khẩu
+        </div>
+        <div class="btnClose" (click)="closeForgotPassDialog()">
+            <span class="material-symbols-outlined">
+                close
+            </span>
+        </div>
+    </div>
+    <div id="body_dialog">
+        <div class="info">
+            <form [formGroup]="forgotPass">
+                <div class="current_pass" > 
+                    <span class="title">Mật khẩu hiện tại</span>
+                    <tui-input-password
+                        formControlName="CurentPass"
+                        class="tui-space_top-2"
+                        >
+                        Mật khẩu hiện tại của bạn
+                        <input
+                            tuiTextfield
+                        />
+                    </tui-input-password>
+                    <tui-error
+                        formControlName="CurentPass"
+                        [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+                <div class="current_pass" > 
+                    <span class="title">Mật khẩu mới</span>
+                    <tui-input-password
+                        formControlName="NewPass"
+                        class="tui-space_top-2"
+                        >
+                        Mật khẩu mới của bạn
+                        <input
+                            tuiTextfield
+                        />
+                    </tui-input-password>
+                    <tui-error
+                        formControlName="NewPass"
+                        [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+                <div class="current_pass" > 
+                    <span class="title">Xác nhận mật khẩu mới</span>
+                    <tui-input-password
+                        formControlName="ConfirmPass"
+                        class="tui-space_top-2"
+                        >
+                        Xác nhận mật khẩu mới của bạn
+                        <input
+                            tuiTextfield
+                        />
+                    </tui-input-password>
+                    <tui-error
+                        formControlName="ConfirmPass"
+                        [error]="[] | tuiFieldError | async"
+                    ></tui-error>
+                </div>
+            </form>
+        </div>
+        <div class="a" style="width: 100%;
+        border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+        <div class="row4">
+            <div class="btn_Huy">
+                <button appearance="primary" tuiButton type="button" (click)="closeForgotPassDialog()"
+                    class="tui-space_right-3 tui-space_bottom-3">
+                    Hủy
+                </button>
+            </div>
+            <div class="btn_Luu">
+                <button appearance="primary" tuiButton type="button" 
+                    class="tui-space_right-3 tui-space_bottom-3">
+                    Chấp nhận
+                </button>
+            </div>
+        </div>
+    </div>
+
+</dialog>

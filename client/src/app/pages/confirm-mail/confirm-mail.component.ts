@@ -45,7 +45,7 @@ export class ConfirmMailComponent implements OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
-  readonly mailForm = new FormGroup({
+  mailForm = new FormGroup({
     email: new FormControl(''),
   });
   confirmMail(){
@@ -58,6 +58,6 @@ export class ConfirmMailComponent implements OnDestroy{
     this.store.dispatch(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidate({tokenResetPassword:token}));
   }
 
-
+  
 
 }

@@ -70,6 +70,16 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         path:'forgot-pass',
         loadChildren: () =>
           import('./forgot-pass/forgot-pass.routes').then((m) => m.FORGOTPASS_ROUTERS),
+      },
+      {
+        path:'account-management',
+        loadChildren: () =>
+          import('./account-management/account-management.routes').then((m) => m.ACCOUNTMANAGEMENT_ROUTERS),
+      },
+      {
+        path:'confirm-mail',
+        loadChildren: () =>
+          import('./confirm-mail/confirm-mail.routes').then((m) => m.CONFIRMMAIL_ROUTERS),
       }
     ],
   },
