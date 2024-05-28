@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { PaymentService } from "../../services/payment.service";
+
 import * as PaymentActions from "../actions/payment.actions";
 import { catchError, exhaustMap, map, of } from "rxjs";
+import { PaymentService } from "../../services/payment/payment.service";
 
 @Injectable()
 export class PaymentEffects{

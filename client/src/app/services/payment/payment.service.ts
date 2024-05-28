@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Payment } from '../models/payment.model';
+import { Payment } from '../../models/payment.model';
+
 
 @Injectable({
   providedIn: 'root'

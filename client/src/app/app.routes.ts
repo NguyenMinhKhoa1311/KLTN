@@ -40,5 +40,10 @@ export const routes: Routes = [
         path: 'forgot-pass',
         loadChildren: () =>
           import('./pages/forgot-pass/forgot-pass.routes').then((m) => m.FORGOTPASS_ROUTERS),
-    }
+    },
+    {
+        path: 'confirm-mail',
+        loadChildren: () =>
+          import('./pages/confirm-mail/confirm-mail.routes').then((m) => m.CONFIRMMAIL_ROUTERS),
+    },
 ];

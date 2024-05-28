@@ -42,6 +42,8 @@ import { billReducer } from "./ngrx/reducers/bill.reducer";
 import { BillEffects } from "./ngrx/effects/bill.effects";
 import { PaymentEffects } from "./ngrx/effects/payment.effects";
 import { PaymentReducer } from "./ngrx/reducers/payment.reducer";
+import { tokenResetPasswordReducer } from "./ngrx/reducers/token-reset-password.reducer";
+import { TokenResetPasswordEffects } from "./ngrx/effects/token-reset-password.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -71,6 +73,7 @@ export const appConfig: ApplicationConfig = {
     provideState({name:'recruiter', reducer: recruiterReducer}),
     provideState({name:'bill', reducer: billReducer}),
     provideState({name:'payment', reducer: PaymentReducer}),
+    provideState({name:'tokenResetPassword', reducer: tokenResetPasswordReducer}),
     provideEffects([
       AuthEffects,
       UserEffects,
@@ -85,7 +88,8 @@ export const appConfig: ApplicationConfig = {
       MaillEffects,
       RecruiterEffects,
       BillEffects,
-      PaymentEffects
+      PaymentEffects,
+      TokenResetPasswordEffects
 
     ]),
     provideHttpClient(), provideAnimationsAsync(),

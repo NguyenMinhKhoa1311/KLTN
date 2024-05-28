@@ -84,13 +84,17 @@
                     <div class="wrapper">
                         <tui-ring-chart
                             class="tui-ring-chart"
+                            size="xl"
                             [value]="grandTotalsOfCareer"
                             [(activeItemIndex)]="activeItemIndex"
+                            
                         >
+                        
                             <tui-money
                                 class="tui-money"
                                 [singleColor]="true"
                                 [value]="sum"
+                                
                             ></tui-money>
                             <div>{{label}}</div>
                         </tui-ring-chart>

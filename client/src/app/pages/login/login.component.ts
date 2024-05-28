@@ -175,6 +175,9 @@ export class LoginComponent implements  OnDestroy {
   register() {
     this.router.navigate(['/register']);
   }
+  navigateToForgotPass() {
+    this.router.navigate(['/confirm-mail']);
+  }
 }
 
 
