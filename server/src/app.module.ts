@@ -27,6 +27,7 @@ import { FieldController } from './field/field.controller';
 import { PaymentModule } from './payment/payment.module';
 import { CronJobModule } from './cron-job/cron-job.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { TokenResetPasswordModule } from './token-reset-password/token-reset-password.module';
 
 
 @Module({
@@ -54,6 +55,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     ReferencesModule,
     AuthModule,
     PaymentModule,
+    TokenResetPasswordModule,
 
 
 

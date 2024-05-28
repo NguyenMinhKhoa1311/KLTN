@@ -34,11 +34,31 @@ export class CronJobService {
         return jobs;
     }
     
-    //@Cron('0 30 11 * * *')
-    @Cron('15 * * * * *')
+    @Cron('0 54 19 * * *')
+    //@Cron('15 * * * * *')
     async handleCron() {
         const allUsers = await this.getAllUser();
         const jobBackUp = await this.jobService.getAllAndSort(0,5);
+        // Tạo HTML content
+        let htmlContentOfJobBackUp = '<h1>Danh Sách Các Công Việc Hấp Dẫn</h1>';
+        jobBackUp.forEach(job => {
+        htmlContentOfJobBackUp += `
+            <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+            <h2>${job.Name}</h2>
+            <p><strong>Địa điểm:</strong> ${job.Location.join(', ')}</p>
+            <p><strong>Mức lương:</strong> ${job.Salary}</p>
+            <p><strong>Phúc lợi:</strong></p>
+            <ul>
+            ${job.Welfare.map(w => `<li>${w}</li>`).join('')}
+            </ul>
+            <p><strong>Mô tả công việc:</strong></p>
+            <p>${job.Description.replace(/\n/g, '<br>')}</p>
+            <p><strong>Thời gian bắt đầu:</strong> ${job.StartDate.toDateString()}</p>
+            <p><strong>Thời gian kết thúc:</strong> ${job.EndDate.toDateString()}</p>
+            <p><strong>Tags:</strong> ${job.Tags.join(', ')}</p>
+            </div>
+            `;
+            });
         const jobBackupdata = this.converToJob(jobBackUp);
         allUsers.forEach(async (user) => {
             log(user.Field)
@@ -48,10 +68,51 @@ export class CronJobService {
                 log('job by field of user' + user.Field + user.Email)
                 log(job.length)
                 log(jobData)
+                // Tạo HTML content
+                let htmlContent = '<h1>Danh Sách Các Công Việc Hấp Dẫn</h1>';
+                job.forEach(job => {
+                htmlContent += `
+                    <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                    <h2>${job.Name}</h2>
+                    <p><strong>Địa điểm:</strong> ${job.Location.join(', ')}</p>
+                    <p><strong>Mức lương:</strong> ${job.Salary}</p>
+                    <p><strong>Phúc lợi:</strong></p>
+                    <ul>
+                    ${job.Welfare.map(w => `<li>${w}</li>`).join('')}
+                    </ul>
+                    <p><strong>Mô tả công việc:</strong></p>
+                    <p>${job.Description.replace(/\n/g, '<br>')}</p>
+                    <p><strong>Thời gian bắt đầu:</strong> ${job.StartDate.toDateString()}</p>
+                    <p><strong>Thời gian kết thúc:</strong> ${job.EndDate.toDateString()}</p>
+                    <p><strong>Tags:</strong> ${job.Tags.join(', ')}</p>
+                    </div>
+                    `;
+                });
+                // Thiết lập mailOptions với nội dung HTML đã tạo
+                let mailOptions = {
+                    from: "Minh Mập",
+                    to: user.Email,
+                    subject: "Send Mail",
+                    text: "test send mail with cron job at main server",
+                    html: htmlContent
+                        }
+                this.sendMailService.sendMail(mailOptions);
             }else{
-                log('job by backupof user' + user.Field + user.Email)
+                log('job by backup of user' + user.Field + user.Email)
                 log(jobBackUp.length)
                 log(jobBackupdata)
+                log('job by field of user' + user.Field + user.Email)
+                log(job.length)
+                log(jobData)
+                // Thiết lập mailOptions với nội dung HTML đã tạo
+                let mailOptions = {
+                    from: "Minh Mập",
+                    to: user.Email,
+                    subject: "Send Mail",
+                    text: "test send mail with cron job at main server",
+                    html: htmlContentOfJobBackUp
+                        }
+                this.sendMailService.sendMail(mailOptions);
             }
         
             // let mailOptions: MailOptions = {
