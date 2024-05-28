@@ -35,5 +35,10 @@ export const routes: Routes = [
         path: 'admin',
         loadChildren: () =>
           import('./pages/admin/admin.routes').then((m) => m.ADMIN_ROUTERS),
+    },
+    {
+        path: 'forgot-pass',
+        loadChildren: () =>
+          import('./pages/forgot-pass/forgot-pass.routes').then((m) => m.FORGOTPASS_ROUTERS),
     }
 ];

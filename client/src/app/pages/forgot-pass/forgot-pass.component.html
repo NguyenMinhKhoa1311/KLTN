@@ -1,0 +1,53 @@
+<div id="forgotpass_container">
+    <div class="head">
+        <form [formGroup]="forgotPass"></form>
+        <div class="box">
+            <tui-input
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldLabelOutside]="true"
+                    formControlName="email"
+                >
+                    Email
+                    <input
+                        autocomplete="email"
+                        placeholder="Nhập email"
+                        tuiTextfield
+                        type="email"
+                    />
+            </tui-input>                              
+        </div>
+        <div class="box">
+            <tui-input-password
+                formControlName="Pass"
+                class="tui-space_top-2"
+                >
+                Mật khẩu
+                <input
+                    tuiTextfield
+                />
+            </tui-input-password>                       
+        </div>
+        <div class="box">
+            <tui-input-password
+                formControlName="passConfirm"
+                class="tui-space_top-2"
+                >
+                Mật khẩu
+                <input
+                    tuiTextfield
+                />
+            </tui-input-password>                       
+        </div>
+        <div class="btn">
+            <div class="accpet">
+                <button
+                    appearance="primary"
+                    tuiButton
+                    type="button"
+                >
+                    Xác nhận
+                </button>
+            </div>
+        </div>           
+    </div>
+</div>
