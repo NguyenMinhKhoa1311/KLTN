@@ -56,10 +56,6 @@ import { TokenResetPasswordModule } from './token-reset-password/token-reset-pas
     AuthModule,
     PaymentModule,
     TokenResetPasswordModule,
-
-
-
-
   ],
   controllers: [AppController],
   providers: [AppService],

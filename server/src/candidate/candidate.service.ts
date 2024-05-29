@@ -119,6 +119,16 @@ export class CandidateService {
       }
     }
   }
+  async findByEmailAndConvertToCandidate(email:string){
+    try{
+      const candidate = await this.CandidateModel.findOne({ User: email })
+      return candidate;
+  }catch(err){
+    return {
+      _id: "500",
+    }
+  }
+}
 
 
 

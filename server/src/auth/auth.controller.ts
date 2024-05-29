@@ -1,5 +1,5 @@
 // auth.controller.ts
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Query } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/create-auth.dto';
 import { UserService } from 'src/user/user.service';
@@ -22,5 +22,10 @@ export class AuthController {
     // Nếu thông tin đăng nhập hợp lệ, tạo và trả về token
     const token = await this.authService.generateToken({ username: user.Username, password: user.Password});
     return { token };
+  }
+  @Post('validate')
+  async validate(@Query('token') token: string) {
+    const isValid = await this.authService.validateToken(token);
+    return isValid;
   }
 }

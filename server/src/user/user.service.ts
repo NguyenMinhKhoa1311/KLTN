@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
+import { log } from 'console';
 
 @Injectable()
 export class UserService {
@@ -67,6 +68,25 @@ export class UserService {
     }
     catch(error){
       throw new HttpException(error.message, error.status);
+    }
+  }
+  async updatePassword(userName:string, password:string){
+    try{
+      log(userName)
+      const user = await this.UserModel.findOneAndUpdate({ Username: userName }, { Password: password }, { new: true }).exec();
+      log(user)
+      if(user._id){
+        return user;
+      }
+      return {
+        _id: "500",
+        error: "User not found"
+      }
+    }catch(error){
+      return{
+        _id:"500",
+        error: error.message
+      }
     }
   }
 

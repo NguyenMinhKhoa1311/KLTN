@@ -1,12 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { log } from 'console';
+import { AuthService } from 'src/auth/auth.service';
+
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService
+  ) {}
 
   @Post('create')
   async create(@Body() createUserDto: CreateUserDto) {
@@ -51,4 +56,30 @@ export class UserController {
       throw err;
     }
   }
+  @Put('updatePassword')
+  async updatePassword(@Query('token') token: string, @Query('password') password: string){
+    try{
+      console.log(token);
+      
+      const userFormToken = await this.authService.validateToken(token);
+      log(userFormToken)
+
+      if(userFormToken){
+        const user = await this.userService.updatePassword(userFormToken.user, password);
+        return user;
+      }else{
+        return {
+          _id: '500',
+          err: 'Invalid token'
+        }
+      }
+    }
+    catch(err){
+      return {
+        _id: '500',
+        err: err,
+      }
+    }
+  }
+
 }
