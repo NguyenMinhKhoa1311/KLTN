@@ -68,6 +68,17 @@ export const initialState: UserState ={
     getByUsernameOfRecruiterWithAccountAtRegisterError: '',
     userTakenByUsernameOfRecruiterWithAccountAtRegister: <User>{},
 
+    changePassOfCandidateError: '',
+    isChangePassOfCandidateLoading: false,
+    isChangePassOfCandidateSuccess: false,
+    userChangedPassOfCandidate: <User>{},
+
+    changePassOfRecruiterError: '',
+    isChangePassOfRecruiterLoading: false,
+    isChangePassOfRecruiterSuccess: false,
+    userChangedPassOfRecruiter: <User>{},
+
+
 
 
 };
@@ -567,6 +578,77 @@ export const userReducer = createReducer(
         return newState;
     }
     ),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.changePassOfCandidate, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfCandidateLoading: true,
+            isChangePassOfCandidateSuccess: false,
+            changePassOfCandidateError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfCandidateSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfCandidateLoading: false,
+            isChangePassOfCandidateSuccess: true,
+            changePassOfCandidateError: '',
+            userChangedPassOfCandidate: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfCandidateFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfCandidateLoading: false,
+            isChangePassOfCandidateSuccess: false,
+            changePassOfCandidateError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.changePassOfRecruiter, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfRecruiterLoading: true,
+            isChangePassOfRecruiterSuccess: false,
+            changePassOfRecruiterError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfRecruiterSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfRecruiterLoading: false,
+            isChangePassOfRecruiterSuccess: true,
+            changePassOfRecruiterError: '',
+            userChangedPassOfRecruiter: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfRecruiterFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfRecruiterLoading: false,
+            isChangePassOfRecruiterSuccess: false,
+            changePassOfRecruiterError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+    
 
 
 

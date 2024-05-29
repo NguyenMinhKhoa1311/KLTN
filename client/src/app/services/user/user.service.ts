@@ -19,4 +19,7 @@ export class UserService {
   getUserWithUserNameAndPassword(userName: string, password: string){
     return this.httpClient.get<User | any>(`${URL}/user/getByUserNameAndPassword/?username=${userName}&password=${password}`)
   }
+  changePass(token: string, password: string){
+    return this.httpClient.put<User | any>(`${URL}/user/updatePassword/?token=${token}&password=${password}`, null)
+  }
 }

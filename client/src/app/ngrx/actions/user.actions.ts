@@ -218,6 +218,36 @@ export const getByGmailOfRecruiterWithAccountAtRegisterFailure = createAction(
 );
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const changePassOfCandidate = createAction(
+    '[User] change pass of candidate',
+    props<{ token: string, password: string}>()
+);
+export const changePassOfCandidateSuccess = createAction(
+    '[User] change pass of candidate success',
+    props<{ user: User}>()
+);
+export const changePassOfCandidateFailure = createAction(
+    '[User] change pass of candidate failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const changePassOfRecruiter = createAction(
+    '[User] change pass of recruiter',
+    props<{ token: string, password: string}>()
+);
+export const changePassOfRecruiterSuccess = createAction(
+    '[User] change pass of recruiter success',
+    props<{ user: User}>()
+);
+export const changePassOfRecruiterFailure = createAction(
+    '[User] change pass of recruiter failure',
+    props<{ errorMessage: string}>()
+);
+
 
 
 

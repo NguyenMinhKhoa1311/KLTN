@@ -5,6 +5,7 @@ export interface User{
     Password: string;
     createAt: Date;
     updateAt: Date;
+    err: string;
 }
 export function isUser(obj: any): obj is User {
     return (

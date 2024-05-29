@@ -69,4 +69,15 @@ export interface UserState{
     getByUsernameOfRecruiterWithAccountAtRegisterError: string;
     userTakenByUsernameOfRecruiterWithAccountAtRegister: User;
 
+    isChangePassOfCandidateLoading: boolean;
+    isChangePassOfCandidateSuccess: boolean;
+    changePassOfCandidateError: string;
+    userChangedPassOfCandidate: User;
+
+    isChangePassOfRecruiterLoading: boolean;
+    isChangePassOfRecruiterSuccess: boolean;
+    changePassOfRecruiterError: string;
+    userChangedPassOfRecruiter: User;
+    
+
 }

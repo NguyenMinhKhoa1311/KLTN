@@ -185,4 +185,28 @@ export class UserEffects {
         )
     )
     )
+
+    changePassOfCandidate$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.changePassOfCandidate),
+        mergeMap((action) =>
+            this.userService.changePass(action.token, action.password).pipe(
+                map((user) => UserActions.changePassOfCandidateSuccess({ user })),
+                catchError((error) => of(UserActions.changePassOfCandidateFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
+    changePassOfRecruiter$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.changePassOfRecruiter),
+        mergeMap((action) =>
+            this.userService.changePass(action.token, action.password).pipe(
+                map((user) => UserActions.changePassOfRecruiterSuccess({ user })),
+                catchError((error) => of(UserActions.changePassOfRecruiterFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
 }

@@ -24,6 +24,8 @@ export class ConfirmMailComponent implements OnDestroy{
 
   //variables
   isCreateToken: boolean = false;
+  isCreateTokenSuccess: boolean = false;
+
 
   //ngrx of token reset password
   tokenResetPassword$ = this.store.select('tokenResetPassword', 'tokenAtForgotPasswordOfCandidate');
@@ -37,12 +39,14 @@ export class ConfirmMailComponent implements OnDestroy{
     this.subscriptions.push(
       this.tokenResetPassword$.subscribe((token) => {
         if(token._id != '500'&& this.isCreateToken){
-          this.router.navigate(['/forgot-pass']);
+          this.isCreateTokenSuccess = true;
         }
       }),
     )
     }
   ngOnDestroy(): void {
+    this.isCreateToken = false;
+    this.isCreateTokenSuccess = false;
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
   mailForm = new FormGroup({
@@ -50,7 +54,7 @@ export class ConfirmMailComponent implements OnDestroy{
   });
   confirmMail(){
     console.log(this.mailForm.value.email);
-    
+    this.isCreateToken = true;
     const token = {
       TokenId: generateUuid(),
       User: this.mailForm.value.email,

@@ -1,4 +1,5 @@
-<form
+<div *ngIf="!isCreateTokenSuccess">
+    <form
     class="b-form"
     [formGroup]="mailForm"
 >
@@ -28,6 +29,10 @@
     class="tui-space_right-3 tui-space_bottom-3"
     (click)="confirmMail()"
 >
-    primary
+    Gửi link đổi mật khẩu
 </button>
+</div>
+<div *ngIf="isCreateTokenSuccess">
+    bạn hãy vào gmail để lấy link đổi mật khẩu
+</div>
 

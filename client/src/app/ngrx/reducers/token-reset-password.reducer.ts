@@ -21,25 +21,31 @@ export const tokenResetPasswordReducer = createReducer(
     on(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidate, (state,action) => {
         console.log(action.type);
         return{
-            ...state,
+        ...state,
         isCreateAtForgotPasswordOfCandidateLoading: true,
         isCreateAtForgotPasswordOfCandidateSuccess: false,
         createAtForgotPasswordOfCandidateError: ''
     }
     }),
-    on(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidateSuccess, (state,action) => ({
+    on(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidateSuccess, (state,action) => {
+        console.log(action.type);
+        
+        return{
         ...state,
         tokenAtForgotPasswordOfCandidate: action.token,
         isCreateAtForgotPasswordOfCandidateLoading: false,
         isCreateAtForgotPasswordOfCandidateSuccess: true,
         createAtForgotPasswordOfCandidateError: ''
-    })),
-    on(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidateFailure, (state,action) => ({
+    }
+    }),
+    on(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidateFailure, (state,action) => {
+        return{
         ...state,
         isCreateAtForgotPasswordOfCandidateLoading: false,
         isCreateAtForgotPasswordOfCandidateSuccess: false,
         createAtForgotPasswordOfCandidateError: action.error
-    })),
+    }
+    }),
 
 
 

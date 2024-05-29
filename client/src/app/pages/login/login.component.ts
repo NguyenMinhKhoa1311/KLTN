@@ -147,9 +147,7 @@ export class LoginComponent implements  OnDestroy {
                 this.store.dispatch(CandidateActions.getByUserWithGoogleAtLogin({user: user._id}))
             }
           }}
-        }),
-
-
+        })
       )
 
     }

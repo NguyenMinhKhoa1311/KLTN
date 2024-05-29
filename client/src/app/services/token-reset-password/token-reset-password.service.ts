@@ -12,7 +12,6 @@ export class TokenResetPasswordService {
 
   create(tokenResetPassword: any){
     console.log(tokenResetPassword,`${URL}token-reset-password/create`);
-    
-    return this.httpClient.post<TokenResetPassword>(`${URL}token-reset-password/create`, tokenResetPassword);
+    return this.httpClient.post<TokenResetPassword>(`${URL}/token-reset-password/create`, tokenResetPassword);
   }
 }
