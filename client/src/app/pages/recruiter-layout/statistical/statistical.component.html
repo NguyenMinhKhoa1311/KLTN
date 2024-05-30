@@ -10,62 +10,64 @@
         </div>
         <div class="statistical_box2">
             <div class="chart_box">
-                <div class="choose">
-                    <tui-tabs [(activeItemIndex)]="activeItemIndexOfChoose">
-                        <button tuiTab (click)="changeModeOfTime(true,false,false)">
-                            Ngày
-                        </button>
-                        <button tuiTab (click)="changeModeOfTime(false,true,false)"> 
-                            Tháng
-                        </button>
-                        <button tuiTab (click)="changeModeOfTime(false,false,true)">
-                            Năm
-                        </button>
-                    </tui-tabs>
-                </div>
-                <div class="tab">
-                    <form [formGroup]="data">
-                        <div class="input">
-                            <tui-input-date
-                                class="b-form"
-                                formControlName="date"
-                                tuiTextfieldSize="m"
-                                [tuiTextfieldCleaner]="true"
-                                *ngIf="isGetByDate"
-                            >
-                                Choose a date
-                            </tui-input-date>
+                <div class="head">
+                    <div class="choose">
+                        <tui-tabs [(activeItemIndex)]="activeItemIndexOfChoose">
+                            <button tuiTab (click)="changeModeOfTime(true,false,false)">
+                                Ngày
+                            </button>
+                            <button tuiTab (click)="changeModeOfTime(false,true,false)"> 
+                                Tháng
+                            </button>
+                            <button tuiTab (click)="changeModeOfTime(false,false,true)">
+                                Năm
+                            </button>
+                        </tui-tabs>
+                    </div>
+                    <div class="tab">
+                        <form [formGroup]="data">
+                            <div class="input">
+                                <tui-input-date
+                                    class="b-form"
+                                    formControlName="date"
+                                    tuiTextfieldSize="m"
+                                    [tuiTextfieldCleaner]="true"
+                                    *ngIf="isGetByDate"
+                                >
+                                    Choose a date
+                                </tui-input-date>
+        
+                                <tui-input-month
+                                    class="b-form"
+                                    formControlName="month"
+                                    tuiTextfieldSize="m"
+                                    [tuiTextfieldCleaner]="true"
+                                    *ngIf="isGetByMonth"
+                                >
+                                    Choose a month
+                                    <input
+                                        placeholder="Not September please"
+                                        tuiTextfield
+                                    />
+                                </tui-input-month>
+        
+                                <tui-input-year
+                                    class="b-form"
+                                    formControlName="year"
+                                    tuiTextfieldSize="m"
+                                    [tuiTextfieldCleaner]="true"
+                                    *ngIf="isGetByYear"
+                                >
+                                    Choose a year
+                                    <input
+                                        placeholder="Not 2022 please"
+                                        tuiTextfield
+                                    />
+                                </tui-input-year>
     
-                            <tui-input-month
-                                class="b-form"
-                                formControlName="month"
-                                tuiTextfieldSize="m"
-                                [tuiTextfieldCleaner]="true"
-                                *ngIf="isGetByMonth"
-                            >
-                                Choose a month
-                                <input
-                                    placeholder="Not September please"
-                                    tuiTextfield
-                                />
-                            </tui-input-month>
-    
-                            <tui-input-year
-                                class="b-form"
-                                formControlName="year"
-                                tuiTextfieldSize="m"
-                                [tuiTextfieldCleaner]="true"
-                                *ngIf="isGetByYear"
-                            >
-                                Choose a year
-                                <input
-                                    placeholder="Not 2022 please"
-                                    tuiTextfield
-                                />
-                            </tui-input-year>
-
-                        </div>
-                    </form>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="chart">
                     <tui-axes class="axes" [axisXLabels]="fields" [axisYLabels]="labelsY">
