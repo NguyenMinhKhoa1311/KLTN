@@ -33,8 +33,8 @@ import { TokenResetPasswordModule } from './token-reset-password/token-reset-pas
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb+srv://nguyenminhkhoa1311:cn4ABLLOwrbH4m4z@cluster0.bj8qqej.mongodb.net/'),
-    // ScheduleModule.forRoot(),
-    // CronJobModule,
+    ScheduleModule.forRoot(),
+    CronJobModule,
     UserModule,
     CandidateModule,
     FieldModule,

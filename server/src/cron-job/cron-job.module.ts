@@ -4,6 +4,7 @@ import { JobModule } from 'src/job/job.module';
 import { SendMailModule } from 'src/send-mail/send-mail.module';
 import { UserModule } from 'src/user/user.module';
 import { CandidateModule } from 'src/candidate/candidate.module';
+import { CronJobController } from './cron-job.controller';
 
 
 @Module({
@@ -14,5 +15,6 @@ import { CandidateModule } from 'src/candidate/candidate.module';
 
   ],
   providers: [CronJobService],
+  controllers: [CronJobController],
 })
 export class CronJobModule {}
