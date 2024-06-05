@@ -15,6 +15,11 @@ export const ADMIN_ROUTERS: Routes = [
         path: 'job-confirm',
         loadChildren: () =>
           import('./job-confirm/job-confirm.routes').then((m) => m.JOBCONFIRM_ROUTERS),
+      },
+      {
+        path:'choose-format',
+        loadChildren: () =>
+          import('./choose-format/choose-format.routes').then((m) => m.CHOOSEFORMAT_ROUTERS),
       }
     ],
   },
