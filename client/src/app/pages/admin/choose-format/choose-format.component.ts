@@ -26,11 +26,12 @@ export class ChooseFormatComponent implements OnDestroy{
   }); 
 
   format = null;
-  readonly formats = [
+  formats = [
     '1',
     '2',
     '3',
   ];
+  selectedFormat: number | null = null;  
   items2 = tuiCreateTimePeriods(0, 24, [0,5,10, 15,20,25,30,35,40,45,50,55]);
 
   subscriptions: Subscription[] = [];
@@ -54,7 +55,7 @@ export class ChooseFormatComponent implements OnDestroy{
             time: time.hours + ' ' + time.minute,
             format: cronJob.format.toString()
           })
-          
+          this.formatForm.valueChanges.subscribe(value => this.onFormatChange(cronJob.format));
         }
       }),
       this.isUpdateCronJobAtChangeFormatSuccess$.subscribe((status)=>{
@@ -70,6 +71,9 @@ export class ChooseFormatComponent implements OnDestroy{
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
+  onFormatChange(value: number) {
+    this.selectedFormat = value;
+  }
 
 
   update(){
