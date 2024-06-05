@@ -44,6 +44,8 @@ import { PaymentEffects } from "./ngrx/effects/payment.effects";
 import { PaymentReducer } from "./ngrx/reducers/payment.reducer";
 import { tokenResetPasswordReducer } from "./ngrx/reducers/token-reset-password.reducer";
 import { TokenResetPasswordEffects } from "./ngrx/effects/token-reset-password.effects";
+import { cronJobReducer } from "./ngrx/reducers/cron-job.reducer";
+import { CronJobEffects } from "./ngrx/effects/cron-job.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -74,6 +76,7 @@ export const appConfig: ApplicationConfig = {
     provideState({name:'bill', reducer: billReducer}),
     provideState({name:'payment', reducer: PaymentReducer}),
     provideState({name:'tokenResetPassword', reducer: tokenResetPasswordReducer}),
+    provideState({name:'cronJob', reducer: cronJobReducer}),
     provideEffects([
       AuthEffects,
       UserEffects,
@@ -89,7 +92,8 @@ export const appConfig: ApplicationConfig = {
       RecruiterEffects,
       BillEffects,
       PaymentEffects,
-      TokenResetPasswordEffects
+      TokenResetPasswordEffects,
+      CronJobEffects
 
     ]),
     provideHttpClient(), provideAnimationsAsync(),

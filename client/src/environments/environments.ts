@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import * as cronParser  from 'cron-parser';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -122,4 +123,18 @@ export function convertDayMonthYearYYYMMDD(strDate: string): { day: number, mont
     month: parseInt(parts[1]) + 1, // Tháng trong JavaScript bắt đầu từ 0
     year: parseInt(parts[0]),
   };
+}
+
+export function getTimeFromCronTime(s: string): {hours:string, minute:string} {
+  // Tách chuỗi thành các phần tử
+  const parts: string[] = s.split(" ");
+  
+  // Lấy giờ và phút từ các phần tử
+  const gio: string = parts[2];
+  const phut: string = parts[1];
+  console.log(parts);
+  
+  
+  // Trả về chuỗi giờ và phút
+  return {hours: gio, minute: phut};
 }
