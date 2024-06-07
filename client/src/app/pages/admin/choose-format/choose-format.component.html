@@ -21,7 +21,7 @@
                     tuiTextfieldSize="m"
                     [tuiTextfieldCleaner]="true"
                     formControlName="format"
-
+                    (ngModelChange)="onFormatChange($event)"
                     >
                         Format
                         <tui-data-list-wrapper
@@ -38,184 +38,114 @@
                         size="m"
                         (click)="update()"
                     >
-                        primary
+                        Xác nhận
                     </button>
                 </div>
             </div>
         </form>
         <div class="format_form">
-            <!-- <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                    <th style="border: 1px solid #ddd; padding: 8px;">Tên Công Việc</th>
-                    <th style="border: 1px solid #ddd; padding: 8px;">Địa điểm</th>
-                    <th style="border: 1px solid #ddd; padding: 8px;">Mức lương</th>
-                    <th style="border: 1px solid #ddd; padding: 8px;">Phúc lợi</th>
-                    <th style="border: 1px solid #ddd; padding: 8px;">Mô tả</th>
-                    <th style="border: 1px solid #ddd; padding: 8px;">Thời gian</th>
-                    <th style="border: 1px solid #ddd; padding: 8px;">Tags</th>
-                </tr>
-    
-                <tr>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Senior Graphic Designer</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">L3-301, ARC Building, Số 1D Nguyễn Duy, Phường 3, Quận Bình Thạnh, TPHCM, Tầng 4, Số nhà 22, Xuân La, Phường Xuân La, Quận Tây Hồ, Hà Nội</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">500-700</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <ul>
-                            <li>Thưởng  Mức lương: Lương cứng từ 15-18mil + Hot bonus + Commission theo dự án</li><li>Chăm sóc sức khoẻ  Đãi ngộ theo cơ chế chung của công ty.</li><li>Hoạt động nhóm  Môi trường làm việc chuyên nghiệp, phát huy tối đa năng lực của bản thân, cơ hội thăng tiến cao</li>
-                        </ul>
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">• Tham gia hoạt động brainstorm đưa ra concept cho dự án và triển khai các key visual, artwork mô phỏng ý tưởng<br><br>• Kết hợp cùng team Copywriter hoặc team Account sáng tạo các thiết kế phù hợp với yêu cầu của khách hàng (chủ yếu là các nội dung trên kênh digital như social media post, digital banner, infographic,… và một số ấn phẩm marketing khác như tờ rơi, standee, brochure, …)<br><br>• Nghiên cứu về hành vi/insight của khách hàng trên kênh digital đứng trên góc độ của designer bao gồm:<br><br>- Các xu hướng thiết kế nói chung & trên kênh digital nói riêng<br><br>- Cách thức tiếp cận thông tin của của người tiêu dùng dưới góc độ hình ảnh<br><br>- Cách thức truyền tải và tối ưu thông điệp bằng hình ảnh trên kênh digital<br><br>• Hỗ trợ team với các công việc chuyên môn khác.</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        Bắt đầu: Mon May 27 2024<br>
-                        Kết thúc: Wed Jul 31 2024
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Truyền thông/Báo chí/Quảng cáo, Thiết kế, Thiết kế đồ họa</td>
-                </tr>
-    
-                <tr>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Area Sales Senior Executive (Hanoi)</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Hà Nội, Nghỉ phép có lương  16 Day Leaves + Health Insurance, Thưởng  Attractive Salary + 2 Performance Review/ Bonuses Review Per Year</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Thỏa thuận</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <ul>
-                            <li>Máy tính xách tay  Laptop + Taxi Cards</li>
-                        </ul>
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">The incumbent will perform the following duties and responsibilities:<br><br>- In charge of dealers in North region and support dealers after sales service;<br><br>- Making sales order to fulfil account demand; Full responsibility of product strategy and product display, maintain in dealer outlets<br><br>- To prepare sell out and market information to discus and negotiate with dealers for sell out campaign, implement sell out activities scheduled by dealers to maximize effect of ROI and maximize sell out.<br><br>- To observe and train product knowledge to PG and dealers’ floor salesman.<br><br>- Lead and make sure the product display always properly with POP and follow product display strategy;<br><br>- Excellent in company product line up and strategy to discuss with dealers for advance quarterly and yearly target and activities to make sure for achievement<br><br>- To update sell out and sell in situation and giving solution idea to achieve target and product concept idea for market in next few years.<br><br>- To propose event display activities and budget according to dealer’s request<br><br>- To follow and report result/budget used up to Sales Manager</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        Bắt đầu: Mon May 27 2024<br>
-                        Kết thúc: Wed Jul 31 2024
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Bán Hàng/Phát Triển Kinh Doanh, Dealer Management</td>
-                </tr>
-    
-                <tr>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Trưởng Phòng Nghiệp Vụ Bán/cho Thuê Bất Động Sản</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Hà Nội</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Thỏa thuận</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <ul>
-                            <li>Thưởng  Lương tháng 13, thưởng ngày Lễ, Tết</li><li>Chăm sóc sức khoẻ  Khám sức khỏe định kỳ, BH chăm sóc sức khỏe</li><li>Cơ hội du lịch  Du lịch trong nước, nước ngoài</li>    
-                        </ul>
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">- Thẩm định và xử lý các tờ trình/báo cáo Lãnh đạo thuộc các lĩnh vực: Kinh doanh BĐS, tài chính/đầu tư BĐS (Chính sách, chiến lược, hiệu quả kinh doanh, ngân sách BĐS)<br><br>- Thẩm định/đánh giá các tờ trình liên quan đến lĩnh vực BĐS: chính sách bán hàng, quản lý đại lý, đề xuất giá bán, hoa hồng đại lý, mẫu biểu hợp đồng khách hàng.<br><br>- Phối hợp với các phòng ban để xử lý các loại tờ trình liên quan đến lĩnh vực BĐS<br><br>- Chịu trách nhiểm quản lý và rà soát công việc của nhân viên<br><br>- Theo dõi tiến độ, công tác triển khai bán hàng tại các dự án BDDS của Tập đoàn<br><br>- Xây dựng định hướng phát triển của phòng, xây dựng quy trình xử lý văn bản của phòng<br><br>- Xây dựng kế hoạch, chỉ tiêu công việc hàng tháng<br><br>- Chịu trách nhiệm báo cáo kết quả và kế hoạch thực hiện của phòng nghiệp vụ</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        Bắt đầu: Mon May 27 2024<br>
-                        Kết thúc: Wed Jul 31 2024
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Kinh doanh bất động sản</td>
-                </tr>
-    
-                <tr>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Python Test Automation Framework Engineer</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Hà Nội</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Thỏa thuận</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <ul>
-                            <li>Thưởng  Attractive and competitive salary package; sign on bonus; position bonus</li><li>Cơ hội du lịch  On-site & training opportunities in Korea, US, UK, France, etc.</li><li>Khác  13th month salary + incentive bonus ( total remuneration package: up to 16-month salary)</li>
-                        </ul>
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Mô tả công việc<br>• Maintain and develop new features for testing automation framework using Python language<br><br>• Stabilization of webOS automation test environment, improve the test coverage<br><br>• Guide and monitor best practices for test automation across Scrum teams<br><br>• Propose and develop tools that can improve developer efficiency<br><br>• Triage problems, prioritize accordingly, and propose a solution<br><br>• Defect review and tracking with team<br><br>• Communicate with developers and stakeholders in headquarter (Korea) regularly</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        Bắt đầu: Thu May 02 2024<br>
-                        Kết thúc: Wed Jul 31 2024
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">QML, Python, QML, Python</td>
-                </tr>
-    
-                <tr>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Java Back-end Developer</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">HaNoi</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Thỏa thuận</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <ul>
-                            <li>Thưởng quý/năm</li><li>12 ngày phép/năm và chế độ BH đầy đủ theo luật LĐ</li><li>Thưởng các ngày lễ (30/4, 1/5, 2/9, ngày thành lập Tập đoàn/TCT...); tiền nghỉ mát</li>
-                        </ul>
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">- Xây dựng các module lõi cho nền tảng Logistics thế hệ mới của ViettelPost.<br><br>- Tối ưu hóa các nghiệp vụ, thuật toán, kiến trúc để nâng cao chất lượng sản phẩm.<br><br>- Làm việc trực tiếp với các đội nghiệp vụ để thực thi sản phẩm theo đúng yêu cầu. Tư vấn ngược lại cho đội nghiệp vụ để thông minh hóa quy trình.<br><br>- Xây dựng các sản phẩm mới phục vụ hàng triệu người dùng của ViettelPost<br><br>(Thông tin dự án sẽ được trao đổi chi tiết trong buổi phỏng vấn)</td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        Bắt đầu: Wed Apr 24 2024<br>
-                        Kết thúc: Wed Jul 31 2024
-                    </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">Back-end</td>
-                </tr>
-            </table> -->
+            <div class="format_box" *ngIf="selectedFormat==1">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Tên Công Việc</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Địa điểm</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Mức lương</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Phúc lợi</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Mô tả</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Thời gian</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Tags</th>
+                    </tr>
         
-            <!-- <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
-                <h2 style="color: #007BFF;">Senior Graphic Designer</h2>
-                <p><strong>Địa điểm:</strong> L3-301, ARC Building, Số 1D Nguyễn Duy, Phường 3, Quận Bình Thạnh, TPHCM, Tầng 4, Số nhà 22, Xuân La, Phường Xuân La, Quận Tây Hồ, Hà Nội</p>
-                <p><strong>Mức lương:</strong> 500-700</p>
-                <p><strong>Phúc lợi:</strong></p>
-                <ul>
-                    <li>Thưởng  Mức lương: Lương cứng từ 15-18mil + Hot bonus + Commission theo dự án</li><li>Chăm sóc sức khoẻ  Đãi ngộ theo cơ chế chung của công ty.</li><li>Hoạt động nhóm  Môi trường làm việc chuyên nghiệp, phát huy tối đa năng lực của bản thân, cơ hội thăng tiến cao</li>
-                </ul>
-                <p><strong>Mô tả công việc:</strong></p>
-                <p>• Tham gia hoạt động brainstorm đưa ra concept cho dự án và triển khai các key visual, artwork mô phỏng ý tưởng<br><br>• Kết hợp cùng team Copywriter hoặc team Account sáng tạo các thiết kế phù hợp với yêu cầu của khách hàng (chủ yếu là các nội dung trên kênh digital như social media post, digital banner, infographic,… và một số ấn phẩm marketing khác như tờ rơi, standee, brochure, …)<br><br>• Nghiên cứu về hành vi/insight của khách hàng trên kênh digital đứng trên góc độ của designer bao gồm:<br><br>- Các xu hướng thiết kế nói chung & trên kênh digital nói riêng<br><br>- Cách thức tiếp cận thông tin của của người tiêu dùng dưới góc độ hình ảnh<br><br>- Cách thức truyền tải và tối ưu thông điệp bằng hình ảnh trên kênh digital<br><br>• Hỗ trợ team với các công việc chuyên môn khác.</p>
-                <p><strong>Thời gian:</strong> Mon May 27 2024 - Wed Jul 31 2024</p>
-                <p><strong>Tags:</strong> Truyền thông/Báo chí/Quảng cáo, Thiết kế, Thiết kế đồ họa</p>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Senior Graphic Designer</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">L3-301, ARC Building, Số 1D Nguyễn Duy, Phường 3, Quận Bình Thạnh, TPHCM, Tầng 4, Số nhà 22, Xuân La, Phường Xuân La, Quận Tây Hồ, Hà Nội</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">500-700</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            <ul>
+                                <li>Thưởng  Mức lương: Lương cứng từ 15-18mil + Hot bonus + Commission theo dự án</li><li>Chăm sóc sức khoẻ  Đãi ngộ theo cơ chế chung của công ty.</li><li>Hoạt động nhóm  Môi trường làm việc chuyên nghiệp, phát huy tối đa năng lực của bản thân, cơ hội thăng tiến cao</li>
+                            </ul>
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">• Tham gia hoạt động brainstorm đưa ra concept cho dự án và triển khai các key visual, artwork mô phỏng ý tưởng<br><br>• Kết hợp cùng team Copywriter hoặc team Account sáng tạo các thiết kế phù hợp với yêu cầu của khách hàng (chủ yếu là các nội dung trên kênh digital như social media post, digital banner, infographic,… và một số ấn phẩm marketing khác như tờ rơi, standee, brochure, …)<br><br>• Nghiên cứu về hành vi/insight của khách hàng trên kênh digital đứng trên góc độ của designer bao gồm:<br><br>- Các xu hướng thiết kế nói chung & trên kênh digital nói riêng<br><br>- Cách thức tiếp cận thông tin của của người tiêu dùng dưới góc độ hình ảnh<br><br>- Cách thức truyền tải và tối ưu thông điệp bằng hình ảnh trên kênh digital<br><br>• Hỗ trợ team với các công việc chuyên môn khác.</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            Bắt đầu: Mon May 27 2024<br>
+                            Kết thúc: Wed Jul 31 2024
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Truyền thông/Báo chí/Quảng cáo, Thiết kế, Thiết kế đồ họa</td>
+                    </tr>
+        
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Area Sales Senior Executive (Hanoi)</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Hà Nội, Nghỉ phép có lương  16 Day Leaves + Health Insurance, Thưởng  Attractive Salary + 2 Performance Review/ Bonuses Review Per Year</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Thỏa thuận</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            <ul>
+                                <li>Máy tính xách tay  Laptop + Taxi Cards</li>
+                            </ul>
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">The incumbent will perform the following duties and responsibilities:<br><br>- In charge of dealers in North region and support dealers after sales service;<br><br>- Making sales order to fulfil account demand; Full responsibility of product strategy and product display, maintain in dealer outlets<br><br>- To prepare sell out and market information to discus and negotiate with dealers for sell out campaign, implement sell out activities scheduled by dealers to maximize effect of ROI and maximize sell out.<br><br>- To observe and train product knowledge to PG and dealers’ floor salesman.<br><br>- Lead and make sure the product display always properly with POP and follow product display strategy;<br><br>- Excellent in company product line up and strategy to discuss with dealers for advance quarterly and yearly target and activities to make sure for achievement<br><br>- To update sell out and sell in situation and giving solution idea to achieve target and product concept idea for market in next few years.<br><br>- To propose event display activities and budget according to dealer’s request<br><br>- To follow and report result/budget used up to Sales Manager</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            Bắt đầu: Mon May 27 2024<br>
+                            Kết thúc: Wed Jul 31 2024
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Bán Hàng/Phát Triển Kinh Doanh, Dealer Management</td>
+                    </tr>
+        
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Trưởng Phòng Nghiệp Vụ Bán/cho Thuê Bất Động Sản</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Hà Nội</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Thỏa thuận</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            <ul>
+                                <li>Thưởng  Lương tháng 13, thưởng ngày Lễ, Tết</li><li>Chăm sóc sức khoẻ  Khám sức khỏe định kỳ, BH chăm sóc sức khỏe</li><li>Cơ hội du lịch  Du lịch trong nước, nước ngoài</li>    
+                            </ul>
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">- Thẩm định và xử lý các tờ trình/báo cáo Lãnh đạo thuộc các lĩnh vực: Kinh doanh BĐS, tài chính/đầu tư BĐS (Chính sách, chiến lược, hiệu quả kinh doanh, ngân sách BĐS)<br><br>- Thẩm định/đánh giá các tờ trình liên quan đến lĩnh vực BĐS: chính sách bán hàng, quản lý đại lý, đề xuất giá bán, hoa hồng đại lý, mẫu biểu hợp đồng khách hàng.<br><br>- Phối hợp với các phòng ban để xử lý các loại tờ trình liên quan đến lĩnh vực BĐS<br><br>- Chịu trách nhiểm quản lý và rà soát công việc của nhân viên<br><br>- Theo dõi tiến độ, công tác triển khai bán hàng tại các dự án BDDS của Tập đoàn<br><br>- Xây dựng định hướng phát triển của phòng, xây dựng quy trình xử lý văn bản của phòng<br><br>- Xây dựng kế hoạch, chỉ tiêu công việc hàng tháng<br><br>- Chịu trách nhiệm báo cáo kết quả và kế hoạch thực hiện của phòng nghiệp vụ</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            Bắt đầu: Mon May 27 2024<br>
+                            Kết thúc: Wed Jul 31 2024
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Kinh doanh bất động sản</td>
+                    </tr>
+        
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Python Test Automation Framework Engineer</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Hà Nội</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Thỏa thuận</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            <ul>
+                                <li>Thưởng  Attractive and competitive salary package; sign on bonus; position bonus</li><li>Cơ hội du lịch  On-site & training opportunities in Korea, US, UK, France, etc.</li><li>Khác  13th month salary + incentive bonus ( total remuneration package: up to 16-month salary)</li>
+                            </ul>
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Mô tả công việc<br>• Maintain and develop new features for testing automation framework using Python language<br><br>• Stabilization of webOS automation test environment, improve the test coverage<br><br>• Guide and monitor best practices for test automation across Scrum teams<br><br>• Propose and develop tools that can improve developer efficiency<br><br>• Triage problems, prioritize accordingly, and propose a solution<br><br>• Defect review and tracking with team<br><br>• Communicate with developers and stakeholders in headquarter (Korea) regularly</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            Bắt đầu: Thu May 02 2024<br>
+                            Kết thúc: Wed Jul 31 2024
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">QML, Python, QML, Python</td>
+                    </tr>
+        
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Java Back-end Developer</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">HaNoi</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Thỏa thuận</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            <ul>
+                                <li>Thưởng quý/năm</li><li>12 ngày phép/năm và chế độ BH đầy đủ theo luật LĐ</li><li>Thưởng các ngày lễ (30/4, 1/5, 2/9, ngày thành lập Tập đoàn/TCT...); tiền nghỉ mát</li>
+                            </ul>
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">- Xây dựng các module lõi cho nền tảng Logistics thế hệ mới của ViettelPost.<br><br>- Tối ưu hóa các nghiệp vụ, thuật toán, kiến trúc để nâng cao chất lượng sản phẩm.<br><br>- Làm việc trực tiếp với các đội nghiệp vụ để thực thi sản phẩm theo đúng yêu cầu. Tư vấn ngược lại cho đội nghiệp vụ để thông minh hóa quy trình.<br><br>- Xây dựng các sản phẩm mới phục vụ hàng triệu người dùng của ViettelPost<br><br>(Thông tin dự án sẽ được trao đổi chi tiết trong buổi phỏng vấn)</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            Bắt đầu: Wed Apr 24 2024<br>
+                            Kết thúc: Wed Jul 31 2024
+                        </td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Back-end</td>
+                    </tr>
+                </table>
             </div>
-
-            <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
-                <h2 style="color: #007BFF;">Area Sales Senior Executive (Hanoi)</h2>
-                <p><strong>Địa điểm:</strong> Hà Nội, Nghỉ phép có lương  16 Day Leaves + Health Insurance, Thưởng  Attractive Salary + 2 Performance Review/ Bonuses Review Per Year</p>
-                <p><strong>Mức lương:</strong> Thỏa thuận</p>
-                <p><strong>Phúc lợi:</strong></p>
-                <ul>
-                    <li>Máy tính xách tay  Laptop + Taxi Cards</li>
-                </ul>
-                <p><strong>Mô tả công việc:</strong></p>
-                <p>The incumbent will perform the following duties and responsibilities:<br><br>- In charge of dealers in North region and support dealers after sales service;<br><br>- Making sales order to fulfil account demand; Full responsibility of product strategy and product display, maintain in dealer outlets<br><br>- To prepare sell out and market information to discus and negotiate with dealers for sell out campaign, implement sell out activities scheduled by dealers to maximize effect of ROI and maximize sell out.<br><br>- To observe and train product knowledge to PG and dealers’ floor salesman.<br><br>- Lead and make sure the product display always properly with POP and follow product display strategy;<br><br>- Excellent in company product line up and strategy to discuss with dealers for advance quarterly and yearly target and activities to make sure for achievement<br><br>- To update sell out and sell in situation and giving solution idea to achieve target and product concept idea for market in next few years.<br><br>- To propose event display activities and budget according to dealer’s request<br><br>- To follow and report result/budget used up to Sales Manager</p>
-                <p><strong>Thời gian:</strong> Mon May 27 2024 - Wed Jul 31 2024</p>
-                <p><strong>Tags:</strong> Bán Hàng/Phát Triển Kinh Doanh, Dealer Management</p>
-            </div>
-
-            <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
-                <h2 style="color: #007BFF;">Trưởng Phòng Nghiệp Vụ Bán/cho Thuê Bất Động Sản</h2>
-                <p><strong>Địa điểm:</strong> Hà Nội</p>
-                <p><strong>Mức lương:</strong> Thỏa thuận</p>
-                <p><strong>Phúc lợi:</strong></p>
-                <ul>
-                    <li>Thưởng  Lương tháng 13, thưởng ngày Lễ, Tết</li><li>Chăm sóc sức khoẻ  Khám sức khỏe định kỳ, BH chăm sóc sức khỏe</li><li>Cơ hội du lịch  Du lịch trong nước, nước ngoài</li>        
-                </ul>
-                <p><strong>Mô tả công việc:</strong></p>
-                <p>- Thẩm định và xử lý các tờ trình/báo cáo Lãnh đạo thuộc các lĩnh vực: Kinh doanh BĐS, tài chính/đầu tư BĐS (Chính sách, chiến lược, hiệu quả kinh doanh, ngân sách BĐS)<br><br>- Thẩm định/đánh giá các tờ trình liên quan đến lĩnh vực BĐS: chính sách bán hàng, quản lý đại lý, đề xuất giá bán, hoa hồng đại lý, mẫu biểu hợp đồng khách hàng.<br><br>- Phối hợp với các phòng ban để xử lý các loại tờ trình liên quan đến lĩnh vực BĐS<br><br>- Chịu trách nhiểm quản lý và rà soát công việc của nhân viên<br><br>- Theo dõi tiến độ, công tác triển khai bán hàng tại các dự án BDDS của Tập đoàn<br><br>- Xây dựng định hướng phát triển của phòng, xây dựng quy trình xử lý văn bản của phòng<br><br>- Xây dựng kế hoạch, chỉ tiêu công việc hàng tháng<br><br>- Chịu trách nhiệm báo cáo kết quả và kế hoạch thực hiện của phòng nghiệp vụ</p>
-                <p><strong>Thời gian:</strong> Mon May 27 2024 - Wed Jul 31 2024</p>
-                <p><strong>Tags:</strong> Kinh doanh bất động sản</p>
-            </div>
-
-            <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
-                <h2 style="color: #007BFF;">Python Test Automation Framework Engineer</h2>
-                <p><strong>Địa điểm:</strong> Hà Nội</p>
-                <p><strong>Mức lương:</strong> Thỏa thuận</p>
-                <p><strong>Phúc lợi:</strong></p>
-                <ul>
-                    <li>Thưởng  Attractive and competitive salary package; sign on bonus; position bonus</li><li>Cơ hội du lịch  On-site & training opportunities in Korea, US, UK, France, etc.</li><li>Khác  13th month salary + incentive bonus ( total remuneration package: up to 16-month salary)</li>
-                </ul>
-                <p><strong>Mô tả công việc:</strong></p>
-                <p>Mô tả công việc<br>• Maintain and develop new features for testing automation framework using Python language<br><br>• Stabilization of webOS automation test environment, improve the test coverage<br><br>• Guide and monitor best practices for test automation across Scrum teams<br><br>• Propose and develop tools that can improve developer efficiency<br><br>• Triage problems, prioritize accordingly, and propose a solution<br><br>• Defect review and tracking with team<br><br>• Communicate with developers and stakeholders in headquarter (Korea) regularly</p>
-                <p><strong>Thời gian:</strong> Thu May 02 2024 - Wed Jul 31 2024</p>
-                <p><strong>Tags:</strong> QML, Python, QML, Python</p>
-            </div>
-
-            <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
-                <h2 style="color: #007BFF;">Java Back-end Developer</h2>
-                <p><strong>Địa điểm:</strong> HaNoi</p>
-                <p><strong>Mức lương:</strong> Thỏa thuận</p>
-                <p><strong>Phúc lợi:</strong></p>
-                <ul>
-                    <li>Thưởng quý/năm</li><li>12 ngày phép/năm và chế độ BH đầy đủ theo luật LĐ</li><li>Thưởng các ngày lễ (30/4, 1/5, 2/9, ngày thành lập Tập đoàn/TCT...); tiền nghỉ mát</li>
-                </ul>
-                <p><strong>Mô tả công việc:</strong></p>
-                <p>- Xây dựng các module lõi cho nền tảng Logistics thế hệ mới của ViettelPost.<br><br>- Tối ưu hóa các nghiệp vụ, thuật toán, kiến trúc để nâng cao chất lượng sản phẩm.<br><br>- Làm việc trực tiếp với các đội nghiệp vụ để thực thi sản phẩm theo đúng yêu cầu. Tư vấn ngược lại cho đội nghiệp vụ để thông minh hóa quy trình.<br><br>- Xây dựng các sản phẩm mới phục vụ hàng triệu người dùng của ViettelPost<br><br>(Thông tin dự án sẽ được trao đổi chi tiết trong buổi phỏng vấn)</p>
-                <p><strong>Thời gian:</strong> Wed Apr 24 2024 - Wed Jul 31 2024</p>
-                <p><strong>Tags:</strong> Back-end</p>
-            </div> -->
-
-            <div style="border: 1px solid #ddd; margin-bottom: 10px;">
-                <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-0').style.display = document.getElementById('job-details-0').style.display === 'none' ? 'block' : 'none'">
-                    <h2 style="margin: 0;">Senior Graphic Designer</h2>
-                </div>
-                <div id="job-details-0" style="display: none; padding: 10px;">
+        
+            <div class="format_box" *ngIf="selectedFormat==2">
+                <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
+                    <h2 style="color: #007BFF;">Senior Graphic Designer</h2>
                     <p><strong>Địa điểm:</strong> L3-301, ARC Building, Số 1D Nguyễn Duy, Phường 3, Quận Bình Thạnh, TPHCM, Tầng 4, Số nhà 22, Xuân La, Phường Xuân La, Quận Tây Hồ, Hà Nội</p>
                     <p><strong>Mức lương:</strong> 500-700</p>
                     <p><strong>Phúc lợi:</strong></p>
@@ -224,17 +154,13 @@
                     </ul>
                     <p><strong>Mô tả công việc:</strong></p>
                     <p>• Tham gia hoạt động brainstorm đưa ra concept cho dự án và triển khai các key visual, artwork mô phỏng ý tưởng<br><br>• Kết hợp cùng team Copywriter hoặc team Account sáng tạo các thiết kế phù hợp với yêu cầu của khách hàng (chủ yếu là các nội dung trên kênh digital như social media post, digital banner, infographic,… và một số ấn phẩm marketing khác như tờ rơi, standee, brochure, …)<br><br>• Nghiên cứu về hành vi/insight của khách hàng trên kênh digital đứng trên góc độ của designer bao gồm:<br><br>- Các xu hướng thiết kế nói chung & trên kênh digital nói riêng<br><br>- Cách thức tiếp cận thông tin của của người tiêu dùng dưới góc độ hình ảnh<br><br>- Cách thức truyền tải và tối ưu thông điệp bằng hình ảnh trên kênh digital<br><br>• Hỗ trợ team với các công việc chuyên môn khác.</p>
-                    <p><strong>Thời gian bắt đầu:</strong> Mon May 27 2024</p>
-                    <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                    <p><strong>Thời gian:</strong> Mon May 27 2024 - Wed Jul 31 2024</p>
                     <p><strong>Tags:</strong> Truyền thông/Báo chí/Quảng cáo, Thiết kế, Thiết kế đồ họa</p>
                 </div>
-            </div>
 
-            <div style="border: 1px solid #ddd; margin-bottom: 10px;">
-                <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-1').style.display = document.getElementById('job-details-1').style.display === 'none' ? 'block' : 'none'">
-                    <h2 style="margin: 0;">Area Sales Senior Executive (Hanoi)</h2>
-                </div>
-                <div id="job-details-1" style="display: none; padding: 10px;">
+                
+                <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
+                    <h2 style="color: #007BFF;">Area Sales Senior Executive (Hanoi)</h2>
                     <p><strong>Địa điểm:</strong> Hà Nội, Nghỉ phép có lương  16 Day Leaves + Health Insurance, Thưởng  Attractive Salary + 2 Performance Review/ Bonuses Review Per Year</p>
                     <p><strong>Mức lương:</strong> Thỏa thuận</p>
                     <p><strong>Phúc lợi:</strong></p>
@@ -243,36 +169,26 @@
                     </ul>
                     <p><strong>Mô tả công việc:</strong></p>
                     <p>The incumbent will perform the following duties and responsibilities:<br><br>- In charge of dealers in North region and support dealers after sales service;<br><br>- Making sales order to fulfil account demand; Full responsibility of product strategy and product display, maintain in dealer outlets<br><br>- To prepare sell out and market information to discus and negotiate with dealers for sell out campaign, implement sell out activities scheduled by dealers to maximize effect of ROI and maximize sell out.<br><br>- To observe and train product knowledge to PG and dealers’ floor salesman.<br><br>- Lead and make sure the product display always properly with POP and follow product display strategy;<br><br>- Excellent in company product line up and strategy to discuss with dealers for advance quarterly and yearly target and activities to make sure for achievement<br><br>- To update sell out and sell in situation and giving solution idea to achieve target and product concept idea for market in next few years.<br><br>- To propose event display activities and budget according to dealer’s request<br><br>- To follow and report result/budget used up to Sales Manager</p>
-                    <p><strong>Thời gian bắt đầu:</strong> Mon May 27 2024</p>
-                    <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                    <p><strong>Thời gian:</strong> Mon May 27 2024 - Wed Jul 31 2024</p>
                     <p><strong>Tags:</strong> Bán Hàng/Phát Triển Kinh Doanh, Dealer Management</p>
                 </div>
-            </div>
 
-            <div style="border: 1px solid #ddd; margin-bottom: 10px;">
-                <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-2').style.display = document.getElementById('job-details-2').style.display === 'none' ? 'block' : 'none'">
-                    <h2 style="margin: 0;">Trưởng Phòng Nghiệp Vụ Bán/cho Thuê Bất Động Sản</h2>
-                </div>
-                <div id="job-details-2" style="display: none; padding: 10px;">
+                <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
+                    <h2 style="color: #007BFF;">Trưởng Phòng Nghiệp Vụ Bán/cho Thuê Bất Động Sản</h2>
                     <p><strong>Địa điểm:</strong> Hà Nội</p>
                     <p><strong>Mức lương:</strong> Thỏa thuận</p>
                     <p><strong>Phúc lợi:</strong></p>
                     <ul>
-                        <li>Thưởng  Lương tháng 13, thưởng ngày Lễ, Tết</li><li>Chăm sóc sức khoẻ  Khám sức khỏe định kỳ, BH chăm sóc sức khỏe</li><li>Cơ hội du lịch  Du lịch trong nước, nước ngoài</li>    
+                        <li>Thưởng  Lương tháng 13, thưởng ngày Lễ, Tết</li><li>Chăm sóc sức khoẻ  Khám sức khỏe định kỳ, BH chăm sóc sức khỏe</li><li>Cơ hội du lịch  Du lịch trong nước, nước ngoài</li>        
                     </ul>
                     <p><strong>Mô tả công việc:</strong></p>
                     <p>- Thẩm định và xử lý các tờ trình/báo cáo Lãnh đạo thuộc các lĩnh vực: Kinh doanh BĐS, tài chính/đầu tư BĐS (Chính sách, chiến lược, hiệu quả kinh doanh, ngân sách BĐS)<br><br>- Thẩm định/đánh giá các tờ trình liên quan đến lĩnh vực BĐS: chính sách bán hàng, quản lý đại lý, đề xuất giá bán, hoa hồng đại lý, mẫu biểu hợp đồng khách hàng.<br><br>- Phối hợp với các phòng ban để xử lý các loại tờ trình liên quan đến lĩnh vực BĐS<br><br>- Chịu trách nhiểm quản lý và rà soát công việc của nhân viên<br><br>- Theo dõi tiến độ, công tác triển khai bán hàng tại các dự án BDDS của Tập đoàn<br><br>- Xây dựng định hướng phát triển của phòng, xây dựng quy trình xử lý văn bản của phòng<br><br>- Xây dựng kế hoạch, chỉ tiêu công việc hàng tháng<br><br>- Chịu trách nhiệm báo cáo kết quả và kế hoạch thực hiện của phòng nghiệp vụ</p>
-                    <p><strong>Thời gian bắt đầu:</strong> Mon May 27 2024</p>
-                    <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                    <p><strong>Thời gian:</strong> Mon May 27 2024 - Wed Jul 31 2024</p>
                     <p><strong>Tags:</strong> Kinh doanh bất động sản</p>
                 </div>
-            </div>
 
-            <div style="border: 1px solid #ddd; margin-bottom: 10px;">
-                <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-3').style.display = document.getElementById('job-details-3').style.display === 'none' ? 'block' : 'none'">
-                    <h2 style="margin: 0;">Python Test Automation Framework Engineer</h2>
-                </div>
-                <div id="job-details-3" style="display: none; padding: 10px;">
+                <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
+                    <h2 style="color: #007BFF;">Python Test Automation Framework Engineer</h2>
                     <p><strong>Địa điểm:</strong> Hà Nội</p>
                     <p><strong>Mức lương:</strong> Thỏa thuận</p>
                     <p><strong>Phúc lợi:</strong></p>
@@ -281,17 +197,12 @@
                     </ul>
                     <p><strong>Mô tả công việc:</strong></p>
                     <p>Mô tả công việc<br>• Maintain and develop new features for testing automation framework using Python language<br><br>• Stabilization of webOS automation test environment, improve the test coverage<br><br>• Guide and monitor best practices for test automation across Scrum teams<br><br>• Propose and develop tools that can improve developer efficiency<br><br>• Triage problems, prioritize accordingly, and propose a solution<br><br>• Defect review and tracking with team<br><br>• Communicate with developers and stakeholders in headquarter (Korea) regularly</p>
-                    <p><strong>Thời gian bắt đầu:</strong> Thu May 02 2024</p>
-                    <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                    <p><strong>Thời gian:</strong> Thu May 02 2024 - Wed Jul 31 2024</p>
                     <p><strong>Tags:</strong> QML, Python, QML, Python</p>
                 </div>
-            </div>
 
-            <div style="border: 1px solid #ddd; margin-bottom: 10px;">
-                <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-4').style.display = document.getElementById('job-details-4').style.display === 'none' ? 'block' : 'none'">
-                    <h2 style="margin: 0;">Java Back-end Developer</h2>
-                </div>
-                <div id="job-details-4" style="display: none; padding: 10px;">
+                <div style="border: 2px solid #007BFF; border-radius: 5px; padding: 15px; margin-bottom: 15px; background-color: #F8F9FA;">
+                    <h2 style="color: #007BFF;">Java Back-end Developer</h2>
                     <p><strong>Địa điểm:</strong> HaNoi</p>
                     <p><strong>Mức lương:</strong> Thỏa thuận</p>
                     <p><strong>Phúc lợi:</strong></p>
@@ -300,9 +211,105 @@
                     </ul>
                     <p><strong>Mô tả công việc:</strong></p>
                     <p>- Xây dựng các module lõi cho nền tảng Logistics thế hệ mới của ViettelPost.<br><br>- Tối ưu hóa các nghiệp vụ, thuật toán, kiến trúc để nâng cao chất lượng sản phẩm.<br><br>- Làm việc trực tiếp với các đội nghiệp vụ để thực thi sản phẩm theo đúng yêu cầu. Tư vấn ngược lại cho đội nghiệp vụ để thông minh hóa quy trình.<br><br>- Xây dựng các sản phẩm mới phục vụ hàng triệu người dùng của ViettelPost<br><br>(Thông tin dự án sẽ được trao đổi chi tiết trong buổi phỏng vấn)</p>
-                    <p><strong>Thời gian bắt đầu:</strong> Wed Apr 24 2024</p>
-                    <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                    <p><strong>Thời gian:</strong> Wed Apr 24 2024 - Wed Jul 31 2024</p>
                     <p><strong>Tags:</strong> Back-end</p>
+                </div>
+            </div>
+            
+            <div class="format_box" *ngIf="selectedFormat==3">
+                <div style="border: 1px solid #ddd; margin-bottom: 10px;">
+                    <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-0').style.display = document.getElementById('job-details-0').style.display === 'none' ? 'block' : 'none'">
+                        <h2 style="margin: 0;">Senior Graphic Designer</h2>
+                    </div>
+                    <div id="job-details-0" style="display: none; padding: 10px;">
+                        <p><strong>Địa điểm:</strong> L3-301, ARC Building, Số 1D Nguyễn Duy, Phường 3, Quận Bình Thạnh, TPHCM, Tầng 4, Số nhà 22, Xuân La, Phường Xuân La, Quận Tây Hồ, Hà Nội</p>
+                        <p><strong>Mức lương:</strong> 500-700</p>
+                        <p><strong>Phúc lợi:</strong></p>
+                        <ul>
+                            <li>Thưởng  Mức lương: Lương cứng từ 15-18mil + Hot bonus + Commission theo dự án</li><li>Chăm sóc sức khoẻ  Đãi ngộ theo cơ chế chung của công ty.</li><li>Hoạt động nhóm  Môi trường làm việc chuyên nghiệp, phát huy tối đa năng lực của bản thân, cơ hội thăng tiến cao</li>
+                        </ul>
+                        <p><strong>Mô tả công việc:</strong></p>
+                        <p>• Tham gia hoạt động brainstorm đưa ra concept cho dự án và triển khai các key visual, artwork mô phỏng ý tưởng<br><br>• Kết hợp cùng team Copywriter hoặc team Account sáng tạo các thiết kế phù hợp với yêu cầu của khách hàng (chủ yếu là các nội dung trên kênh digital như social media post, digital banner, infographic,… và một số ấn phẩm marketing khác như tờ rơi, standee, brochure, …)<br><br>• Nghiên cứu về hành vi/insight của khách hàng trên kênh digital đứng trên góc độ của designer bao gồm:<br><br>- Các xu hướng thiết kế nói chung & trên kênh digital nói riêng<br><br>- Cách thức tiếp cận thông tin của của người tiêu dùng dưới góc độ hình ảnh<br><br>- Cách thức truyền tải và tối ưu thông điệp bằng hình ảnh trên kênh digital<br><br>• Hỗ trợ team với các công việc chuyên môn khác.</p>
+                        <p><strong>Thời gian bắt đầu:</strong> Mon May 27 2024</p>
+                        <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                        <p><strong>Tags:</strong> Truyền thông/Báo chí/Quảng cáo, Thiết kế, Thiết kế đồ họa</p>
+                    </div>
+                </div>
+    
+                <div style="border: 1px solid #ddd; margin-bottom: 10px;">
+                    <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-1').style.display = document.getElementById('job-details-1').style.display === 'none' ? 'block' : 'none'">
+                        <h2 style="margin: 0;">Area Sales Senior Executive (Hanoi)</h2>
+                    </div>
+                    <div id="job-details-1" style="display: none; padding: 10px;">
+                        <p><strong>Địa điểm:</strong> Hà Nội, Nghỉ phép có lương  16 Day Leaves + Health Insurance, Thưởng  Attractive Salary + 2 Performance Review/ Bonuses Review Per Year</p>
+                        <p><strong>Mức lương:</strong> Thỏa thuận</p>
+                        <p><strong>Phúc lợi:</strong></p>
+                        <ul>
+                            <li>Máy tính xách tay  Laptop + Taxi Cards</li>
+                        </ul>
+                        <p><strong>Mô tả công việc:</strong></p>
+                        <p>The incumbent will perform the following duties and responsibilities:<br><br>- In charge of dealers in North region and support dealers after sales service;<br><br>- Making sales order to fulfil account demand; Full responsibility of product strategy and product display, maintain in dealer outlets<br><br>- To prepare sell out and market information to discus and negotiate with dealers for sell out campaign, implement sell out activities scheduled by dealers to maximize effect of ROI and maximize sell out.<br><br>- To observe and train product knowledge to PG and dealers’ floor salesman.<br><br>- Lead and make sure the product display always properly with POP and follow product display strategy;<br><br>- Excellent in company product line up and strategy to discuss with dealers for advance quarterly and yearly target and activities to make sure for achievement<br><br>- To update sell out and sell in situation and giving solution idea to achieve target and product concept idea for market in next few years.<br><br>- To propose event display activities and budget according to dealer’s request<br><br>- To follow and report result/budget used up to Sales Manager</p>
+                        <p><strong>Thời gian bắt đầu:</strong> Mon May 27 2024</p>
+                        <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                        <p><strong>Tags:</strong> Bán Hàng/Phát Triển Kinh Doanh, Dealer Management</p>
+                    </div>
+                </div>
+    
+                <div style="border: 1px solid #ddd; margin-bottom: 10px;">
+                    <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-2').style.display = document.getElementById('job-details-2').style.display === 'none' ? 'block' : 'none'">
+                        <h2 style="margin: 0;">Trưởng Phòng Nghiệp Vụ Bán/cho Thuê Bất Động Sản</h2>
+                    </div>
+                    <div id="job-details-2" style="display: none; padding: 10px;">
+                        <p><strong>Địa điểm:</strong> Hà Nội</p>
+                        <p><strong>Mức lương:</strong> Thỏa thuận</p>
+                        <p><strong>Phúc lợi:</strong></p>
+                        <ul>
+                            <li>Thưởng  Lương tháng 13, thưởng ngày Lễ, Tết</li><li>Chăm sóc sức khoẻ  Khám sức khỏe định kỳ, BH chăm sóc sức khỏe</li><li>Cơ hội du lịch  Du lịch trong nước, nước ngoài</li>    
+                        </ul>
+                        <p><strong>Mô tả công việc:</strong></p>
+                        <p>- Thẩm định và xử lý các tờ trình/báo cáo Lãnh đạo thuộc các lĩnh vực: Kinh doanh BĐS, tài chính/đầu tư BĐS (Chính sách, chiến lược, hiệu quả kinh doanh, ngân sách BĐS)<br><br>- Thẩm định/đánh giá các tờ trình liên quan đến lĩnh vực BĐS: chính sách bán hàng, quản lý đại lý, đề xuất giá bán, hoa hồng đại lý, mẫu biểu hợp đồng khách hàng.<br><br>- Phối hợp với các phòng ban để xử lý các loại tờ trình liên quan đến lĩnh vực BĐS<br><br>- Chịu trách nhiểm quản lý và rà soát công việc của nhân viên<br><br>- Theo dõi tiến độ, công tác triển khai bán hàng tại các dự án BDDS của Tập đoàn<br><br>- Xây dựng định hướng phát triển của phòng, xây dựng quy trình xử lý văn bản của phòng<br><br>- Xây dựng kế hoạch, chỉ tiêu công việc hàng tháng<br><br>- Chịu trách nhiệm báo cáo kết quả và kế hoạch thực hiện của phòng nghiệp vụ</p>
+                        <p><strong>Thời gian bắt đầu:</strong> Mon May 27 2024</p>
+                        <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                        <p><strong>Tags:</strong> Kinh doanh bất động sản</p>
+                    </div>
+                </div>
+    
+                <div style="border: 1px solid #ddd; margin-bottom: 10px;">
+                    <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-3').style.display = document.getElementById('job-details-3').style.display === 'none' ? 'block' : 'none'">
+                        <h2 style="margin: 0;">Python Test Automation Framework Engineer</h2>
+                    </div>
+                    <div id="job-details-3" style="display: none; padding: 10px;">
+                        <p><strong>Địa điểm:</strong> Hà Nội</p>
+                        <p><strong>Mức lương:</strong> Thỏa thuận</p>
+                        <p><strong>Phúc lợi:</strong></p>
+                        <ul>
+                            <li>Thưởng  Attractive and competitive salary package; sign on bonus; position bonus</li><li>Cơ hội du lịch  On-site & training opportunities in Korea, US, UK, France, etc.</li><li>Khác  13th month salary + incentive bonus ( total remuneration package: up to 16-month salary)</li>
+                        </ul>
+                        <p><strong>Mô tả công việc:</strong></p>
+                        <p>Mô tả công việc<br>• Maintain and develop new features for testing automation framework using Python language<br><br>• Stabilization of webOS automation test environment, improve the test coverage<br><br>• Guide and monitor best practices for test automation across Scrum teams<br><br>• Propose and develop tools that can improve developer efficiency<br><br>• Triage problems, prioritize accordingly, and propose a solution<br><br>• Defect review and tracking with team<br><br>• Communicate with developers and stakeholders in headquarter (Korea) regularly</p>
+                        <p><strong>Thời gian bắt đầu:</strong> Thu May 02 2024</p>
+                        <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                        <p><strong>Tags:</strong> QML, Python, QML, Python</p>
+                    </div>
+                </div>
+    
+                <div style="border: 1px solid #ddd; margin-bottom: 10px;">
+                    <div style="background-color: #007BFF; color: white; padding: 10px; cursor: pointer;" onclick="document.getElementById('job-details-4').style.display = document.getElementById('job-details-4').style.display === 'none' ? 'block' : 'none'">
+                        <h2 style="margin: 0;">Java Back-end Developer</h2>
+                    </div>
+                    <div id="job-details-4" style="display: none; padding: 10px;">
+                        <p><strong>Địa điểm:</strong> HaNoi</p>
+                        <p><strong>Mức lương:</strong> Thỏa thuận</p>
+                        <p><strong>Phúc lợi:</strong></p>
+                        <ul>
+                            <li>Thưởng quý/năm</li><li>12 ngày phép/năm và chế độ BH đầy đủ theo luật LĐ</li><li>Thưởng các ngày lễ (30/4, 1/5, 2/9, ngày thành lập Tập đoàn/TCT...); tiền nghỉ mát</li>
+                        </ul>
+                        <p><strong>Mô tả công việc:</strong></p>
+                        <p>- Xây dựng các module lõi cho nền tảng Logistics thế hệ mới của ViettelPost.<br><br>- Tối ưu hóa các nghiệp vụ, thuật toán, kiến trúc để nâng cao chất lượng sản phẩm.<br><br>- Làm việc trực tiếp với các đội nghiệp vụ để thực thi sản phẩm theo đúng yêu cầu. Tư vấn ngược lại cho đội nghiệp vụ để thông minh hóa quy trình.<br><br>- Xây dựng các sản phẩm mới phục vụ hàng triệu người dùng của ViettelPost<br><br>(Thông tin dự án sẽ được trao đổi chi tiết trong buổi phỏng vấn)</p>
+                        <p><strong>Thời gian bắt đầu:</strong> Wed Apr 24 2024</p>
+                        <p><strong>Thời gian kết thúc:</strong> Wed Jul 31 2024</p>
+                        <p><strong>Tags:</strong> Back-end</p>
+                    </div>
                 </div>
             </div>
         </div>
