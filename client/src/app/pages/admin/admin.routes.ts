@@ -20,6 +20,16 @@ export const ADMIN_ROUTERS: Routes = [
         path:'choose-format',
         loadChildren: () =>
           import('./choose-format/choose-format.routes').then((m) => m.CHOOSEFORMAT_ROUTERS),
+      },
+      {
+        path:'candidate-management',
+        loadChildren: () =>
+          import('./candidate-management/candidate-management.routes').then((m) => m.CANDIDATEMANAGEMENT_ROUTERS),
+      },
+      {
+        path:'recruiter-management',
+        loadChildren: () =>
+          import('./recruiter-management/recruiter-management.routes').then((m) => m.RECRUITERMANAGEMENT_ROUTERS),
       }
     ],
   },
