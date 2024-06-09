@@ -147,6 +147,11 @@ export interface candidateState{
     getByIdAtFavoriteJobError: string;
     candidateTakenByIdAtFavoriteJob: Candidate;
 
+    isGetAllAtManageCandidateLoading: boolean;
+    isGetAllAtManageCandidateSuccess: boolean;
+    getAllAtManageCandidateError: string;
+    candidateTakenAllAtManageCandidate: Candidate[];
+
     isChangeState: boolean;
     
 

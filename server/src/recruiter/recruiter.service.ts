@@ -93,4 +93,31 @@ export class RecruiterService {
       throw new HttpException(error.message, error.status);
     }
   }
+  async unBanRecruiter(id: string){
+    try {
+      const recruiterUnBanned = await this.RecruiterModel.findByIdAndUpdate(id,{isBan: false},{new: true}).exec();
+      if(recruiterUnBanned._id.toString().length > 0){
+        return true;
+      }else{
+        return false;
+      }
+    } catch (error) {
+      log(error);
+      return false;
+    }
+  }
+
+  async banRecruiter(id: string){
+    try {
+      const recruiterBanned = await this.RecruiterModel.findByIdAndUpdate(id,{isBan: true},{new: true}).exec();
+      if(recruiterBanned._id.toString().length > 0){
+        return true;
+      }else{
+        return false;
+      }
+    } catch (error) {
+      log(error);
+      return false;
+    }
+  }
 }

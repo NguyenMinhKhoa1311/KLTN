@@ -66,4 +66,21 @@ export class RecruiterEffects {
         )
     )
     )
+
+    getAllRecruitersAtManageRecruiter$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(RecruiterActions.getAllAtManageRecruiter),
+            exhaustMap(() =>
+                this.recruiterService.getAll().pipe(
+                    map((result) => {
+                        return RecruiterActions.getAllAtManageRecruiterSuccess({recruiters: result})
+                    }),
+                    catchError((err) =>
+                        of(RecruiterActions.getAllAtManageRecruiterFailure({errorMessage: err})
+                    )
+                )
+            )
+        )
+    )
+    )
 }

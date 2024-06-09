@@ -18,6 +18,11 @@ export const initialState: RecruiterState = {
     isCreateRecruiterAtRegisterSuccess: false,
     createRecruiterAtRegisterError: '',
     recruiterCreatedAtRegister: <Recruiter>{},
+
+    isGetAllAtManageRecruiterLoading: false,
+    isGetAllAtManageRecruiterSuccess: false,
+    getAllAtManageRecruiterError: '',
+    recruiters: [],
 };
 
 export const recruiterReducer = createReducer(
@@ -106,4 +111,33 @@ export const recruiterReducer = createReducer(
             createRecruiterAtRegisterError: action.errorMessage,
         }
     }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruiterActions.getAllAtManageRecruiter,(state,action)=>{
+        return{
+            ...state,
+            isGetAllAtManageRecruiterLoading: true,
+            isGetAllAtManageRecruiterSuccess: false,
+            getAllAtManageRecruiterError: '',
+        }
+    }),
+    on(RecruiterActions.getAllAtManageRecruiterSuccess,(state,action)=>{
+        return{
+            ...state,
+            isGetAllAtManageRecruiterLoading: false,
+            isGetAllAtManageRecruiterSuccess: true,
+            getAllAtManageRecruiterError: '',
+            recruiters: action.recruiters
+        }
+    }),
+    on(RecruiterActions.getAllAtManageRecruiterFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetAllAtManageRecruiterLoading: false,
+            isGetAllAtManageRecruiterSuccess: false,
+            getAllAtManageRecruiterError: action.errorMessage,
+        }
+    }),
+
 );

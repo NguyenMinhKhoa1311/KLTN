@@ -35,5 +35,6 @@ export interface Candidate{
      References: Reference[],
     createAt: Date;
     updateAt: Date;
+    isBan: boolean;
 }
 

@@ -9,6 +9,7 @@ export class CreateRecruiterDto {
         public  Phone: string,
         public  voucher: string[],
         public  Address: string,
-        public Company: string
+        public Company: string,
+        public isBan: boolean,
     ){}
 }

@@ -141,6 +141,10 @@ export const initialState: candidateState = {
     updateFavoriteJobAtCompanyDetailError: "",
     candidateUpdatedFavoriteJobAtCompanyDetail: <Candidate>{},
 
+    candidateTakenAllAtManageCandidate: [],
+    getAllAtManageCandidateError: "",
+    isGetAllAtManageCandidateLoading: false,
+    isGetAllAtManageCandidateSuccess: false,
 
     isChangeState: false,
 
@@ -213,6 +217,37 @@ export const candidateReducer = createReducer(
             createCandidateAtCreateProfileError: actions.error,
         };
     }),
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+on(CandidateActions.getAllAtManageCandidate,(state, actions)=>{
+    return{
+        ...state,
+        isGetAllAtManageCandidateLoading: true,
+        isGetAllAtManageCandidateSuccess: false,
+        getAllAtManageCandidateError: "",
+    };
+}),
+on(CandidateActions.getAllAtManageCandidateSuccess,(state, actions)=>{
+    return{
+        ...state,
+        isGetAllAtManageCandidateLoading: false,
+        isGetAllAtManageCandidateSuccess: true,
+        getAllAtManageCandidateError: "",
+        candidateTakenAllAtManageCandidate: actions.candidates,
+    };
+}),
+on(CandidateActions.getAllAtManageCandidateFailure,(state, actions)=>{
+    return{
+        ...state,
+        isGetAllAtManageCandidateLoading: false,
+        isGetAllAtManageCandidateSuccess: false,
+        getAllAtManageCandidateError: actions.error,
+    };
+}),
 
 
 

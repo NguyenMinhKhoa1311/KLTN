@@ -66,6 +66,22 @@ export class CandidateEffects{
          )
     );
 
+    getAllAtManageCandidate$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(CandidateActions.getAllAtManageCandidate),
+        exhaustMap(() =>
+         this.candidateService.getAll().pipe(
+            map((item)=>{
+                if(item.length>0){
+                    return CandidateActions.getAllAtManageCandidateSuccess({candidates: item})
+                }
+                else{
+                    return CandidateActions.getAllAtManageCandidateFailure({error: "Get All At Manage Candidate Failure"})
+                }
+            }),
+            catchError((error) => of(CandidateActions.getAllAtManageCandidateFailure({error: error})))))
+         )
+    );
     
     getCandidateByUserWithGoogleAtRegister$ = createEffect(()=>
     this.action$.pipe(

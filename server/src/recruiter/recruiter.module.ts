@@ -12,6 +12,7 @@ import { UserModule } from 'src/user/user.module';
 import { VoucherSchema } from 'src/voucher/entities/voucher.entity';
 import { VoucherModule } from 'src/voucher/voucher.module';
 import { StorageSchema } from 'src/storage/entities/storage.entity';
+import { BanModule } from 'src/ban/ban.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { StorageSchema } from 'src/storage/entities/storage.entity';
     ]),
     forwardRef(() => CompanyModule),
     forwardRef(() => UserModule),
-    forwardRef(() => VoucherModule)
+    forwardRef(() => VoucherModule),
+    forwardRef(() => BanModule)
   ],
   controllers: [RecruiterController],
   providers: [RecruiterService],

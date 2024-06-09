@@ -93,21 +93,24 @@ export class LoginComponent implements OnDestroy {
         if (recruiter) {
           if (recruiter._id) {
             console.log('recruiter', recruiter);
-            
             if (recruiter._id == "500") {
               this.router.navigate(['recruiterLayout/create-company']);
               console.log('recruiter', recruiter);
               sessionStorage.setItem('userOfRecruiterLogged', JSON.stringify(this.userLoged));
-              
             }
             else{
-              sessionStorage.setItem('recruiterLoged', JSON.stringify(recruiter));
-              const userToGetToken: any = {
-                username: this.userLoged.Username,
-                password: this.userLoged.Password,
+              if(recruiter.isBan){
+                this.alerts
+                .open('', {label: 'Tài khoản của bạn đã bị khóa !!!',status:'error'})
+                .subscribe();
+              }else{
+                sessionStorage.setItem('recruiterLoged', JSON.stringify(recruiter));
+                const userToGetToken: any = {
+                  username: this.userLoged.Username,
+                  password: this.userLoged.Password,
+                }
+                this.store.dispatch(AuthAcitons.getTokenAtLoginOfRecruiter({ user: userToGetToken }));
               }
-              this.store.dispatch(AuthAcitons.getTokenAtLoginOfRecruiter({ user: userToGetToken }));
-              
             }
           }
         }

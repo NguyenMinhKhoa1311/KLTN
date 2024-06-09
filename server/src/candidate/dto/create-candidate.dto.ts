@@ -21,7 +21,7 @@ export class CreateCandidateDto {
         public DateOfBirth: Date,
         public FavoriteJobs: string[],
         public References: string[],
-        CareerGoal
+        public isBan: boolean,
         
         
     ){}

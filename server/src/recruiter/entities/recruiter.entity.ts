@@ -51,5 +51,8 @@ export class Recruiter {
         ref:'User',
     })
     User: string;
+
+    @Prop({required: true})
+    isBan: boolean;
 }
 export const RecruiterSchema = SchemaFactory.createForClass(Recruiter);

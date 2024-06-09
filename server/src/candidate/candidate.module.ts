@@ -24,6 +24,8 @@ import { SkillSchema } from 'src/skill/entities/skill.entity';
 import { SkillModule } from 'src/skill/skill.module';
 import { ReferencesSchema } from 'src/references/entities/reference.entity';
 import { ReferencesModule } from 'src/references/references.module';
+import { BanModule } from 'src/ban/ban.module';
+
 
 
 @Module({
@@ -50,7 +52,8 @@ import { ReferencesModule } from 'src/references/references.module';
     forwardRef(() =>EducationModule),
     forwardRef(() => WorkExperienceModule),
     forwardRef(() => SkillModule),
-    forwardRef(() => ReferencesModule )
+    forwardRef(() => ReferencesModule ),
+    forwardRef(() => BanModule)
 
   ],
   controllers: [CandidateController],

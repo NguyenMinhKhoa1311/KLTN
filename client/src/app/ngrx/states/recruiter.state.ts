@@ -15,4 +15,9 @@ export interface RecruiterState{
     isCreateRecruiterAtRegisterSuccess: boolean;
     createRecruiterAtRegisterError: string;
     recruiterCreatedAtRegister: Recruiter;
+
+    isGetAllAtManageRecruiterLoading: boolean;
+    isGetAllAtManageRecruiterSuccess: boolean;
+    getAllAtManageRecruiterError: string;   
+    recruiters: Recruiter[];
 }

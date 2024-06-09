@@ -258,7 +258,44 @@ export class CandidateService {
         _id: "500",
       }
     }
+  }
 
+  async banCandidate(id:string){
+    try{
+      const candidateBanned = await this.CandidateModel.findByIdAndUpdate(id, {
+        isBan: true
+      },
+      {
+        new: true 
+      })
+      .exec();
+      log(candidateBanned);
+      if(candidateBanned._id.toString().length > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }catch(err){
+      return false
+    }
+  }
+  async unBanCandidate(id:string){
+    try{
+      const candidateBanned = await this.CandidateModel.findByIdAndUpdate(id, {
+        isBan: false
+      },
+      {
+        new: true 
+      })
+      .exec();
+      if(candidateBanned._id.toString().length > 0){
+        return true;
+      }else{
+        return false;
+      }
+    }catch(err){
+      return false
+    }
   }
 
   async updateCareerGoal(id:string, careerGoal:string){

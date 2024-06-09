@@ -16,4 +16,5 @@ export interface Recruiter{
      Company: Company
     createAt: Date;
     updateAt: Date;
+    isBan: boolean;
 }

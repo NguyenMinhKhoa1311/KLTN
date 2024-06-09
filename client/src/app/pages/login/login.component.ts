@@ -38,9 +38,14 @@ export class LoginComponent implements  OnDestroy {
 
 
   //ngrx state for user
-
+  //failure
+  takenByGmailWithGoogleAtLoginError$ = this.store.select('user', 'getByUsernameWithGoogleAtLoginError');
+  //success
   userTakenByGmailWithGoogleAtLogin$ = this.store.select('user', 'userTakenByUsernameWithGoogleAtLogin');
+  //success
   isCreateUserWithGoogleAtLoginSuccess$ = this.store.select('user', 'isCreateWithGoogleAtLoginSuccess');
+  //failure
+  createUserWithGoogleAtLoginError$ = this.store.select('user', 'cerateWithGoogleAtLoginError');
   userTakenByUsernameAndPasswordAtLogin$ = this.store.select('user', 'userTakenByUsernameAndPasswordAtLogin');
   userLoginWithGoogle: User = <User>{};
 
@@ -116,8 +121,14 @@ export class LoginComponent implements  OnDestroy {
                 this.router.navigate(['createProfile/personal-information']);
               }
               else{
-                this.store.dispatch(AuthAcitons.getTokenAtLoginOfCandidate({user: this.userLogged}));
-                sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+                if(candidate.isBan){
+                  this.alerts
+                  .open('', {label: 'Tài khoản của bạn đã bị khóa !!!',status:'error'})
+                  .subscribe();
+                }else{
+                  this.store.dispatch(AuthAcitons.getTokenAtLoginOfCandidate({user: this.userLogged}));
+                  sessionStorage.setItem('userLogged', JSON.stringify(candidate));
+                }
               }
           }}
         }),

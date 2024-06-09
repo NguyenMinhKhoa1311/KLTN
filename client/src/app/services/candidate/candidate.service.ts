@@ -18,6 +18,10 @@ export class CandidateService {
     return this.httpClient.get<Candidate>(`${URL}/candidate/getById?id=${id}`);
   }
 
+  getAll(){
+    return this.httpClient.get<Candidate[]>(`${URL}/candidate/getAll`);
+  }
+
   create(candidate: any){
     return this.httpClient.post<Candidate>(`${URL}/candidate/create`, candidate);
   }

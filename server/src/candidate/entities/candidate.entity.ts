@@ -114,6 +114,9 @@ export class Candidate {
     @Prop({required: true})
     DateOfBirth: Date;
 
+    @Prop({required: true})
+    isBan: boolean;
+
 
 }
 export const CandidateSchema = SchemaFactory.createForClass(Candidate);

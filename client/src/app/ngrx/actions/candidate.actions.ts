@@ -41,6 +41,23 @@ export const createCandidateAtCreateProfileFailure = createAction(
 
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    export const getAllAtManageCandidate = createAction(
+        "[Candidate] Get All At Manage Candidate"
+        );
+    export const getAllAtManageCandidateSuccess = createAction(
+        "[Candidate] Get All At Manage Candidate Success",
+        props<{candidates: Candidate[]}>()
+        );
+    export const getAllAtManageCandidateFailure = createAction(
+        "[Candidate] Get All At Manage Candidate Failure",
+        props<{error: string}>()
+        );
+        
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const updateFavoriteJobsAtJob = createAction(

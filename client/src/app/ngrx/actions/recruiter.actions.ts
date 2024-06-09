@@ -47,3 +47,18 @@ export const createRecruiterAtRegisterFailure = createAction(
     '[Recruiter] Create Recruiter Failure',
     props<{ errorMessage: string }>()
 )
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllAtManageRecruiter = createAction(
+    '[Recruiter] Get All At Manage Recruiter'
+)
+export const getAllAtManageRecruiterSuccess = createAction(
+    '[Recruiter] Get All At Manage Recruiter Success',
+    props<{ recruiters: Recruiter[] }>()
+)
+export const getAllAtManageRecruiterFailure = createAction(
+    '[Recruiter] Get All At Manage Recruiter Failure',
+    props<{ errorMessage: string }>()
+)

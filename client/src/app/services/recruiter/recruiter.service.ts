@@ -22,4 +22,8 @@ export class RecruiterService {
   getByUser(user: string){
     return this.httpClient.get<Recruiter>(`${URL}/recruiter/getByUser?_id=${user}`);
   }
+
+  getAll(){
+    return this.httpClient.get<Recruiter[]>(`${URL}/recruiter/getAll`);
+  }
 }
