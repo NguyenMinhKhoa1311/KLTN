@@ -90,7 +90,6 @@ export class CandidateManagementComponent implements OnDestroy{
   closeCandidateDialog() {
     this.candidateDialog.nativeElement.close();
     this.cdr1.detectChanges();
-    
   }
 
   @ViewChild('detailDialog', { static: true })

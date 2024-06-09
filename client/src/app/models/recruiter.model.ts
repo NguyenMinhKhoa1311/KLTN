@@ -11,6 +11,7 @@ export interface Recruiter{
       Storage: Storage,
       Avatar: string,
       Phone: string,
+      Email: string,
       voucher: Voucher[],
       Address: string,
      Company: Company

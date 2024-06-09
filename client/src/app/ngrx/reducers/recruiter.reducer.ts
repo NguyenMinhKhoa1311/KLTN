@@ -22,7 +22,7 @@ export const initialState: RecruiterState = {
     isGetAllAtManageRecruiterLoading: false,
     isGetAllAtManageRecruiterSuccess: false,
     getAllAtManageRecruiterError: '',
-    recruiters: [],
+    recruitersTakenAllAtManageRecruiter: [],
 };
 
 export const recruiterReducer = createReducer(

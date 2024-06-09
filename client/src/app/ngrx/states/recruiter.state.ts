@@ -19,5 +19,5 @@ export interface RecruiterState{
     isGetAllAtManageRecruiterLoading: boolean;
     isGetAllAtManageRecruiterSuccess: boolean;
     getAllAtManageRecruiterError: string;   
-    recruiters: Recruiter[];
+    recruitersTakenAllAtManageRecruiter: Recruiter[];
 }

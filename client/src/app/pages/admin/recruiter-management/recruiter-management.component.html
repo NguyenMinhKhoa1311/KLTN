@@ -6,23 +6,20 @@
     </div>
     <div id="body">
         <div class="item_list">
-            <div class="item">
+            <div class="item" *ngFor="let recruiter of recruitersToRender">
                 <div class="item_box">
                     <div class="item_header">
-                        <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                        <img src="{{recruiter.Avatar}}" alt="">
                     </div>
                     <div class="item_body">
                         <div class="item_name">
-                            Nguyễn Văn A
+                            {{recruiter.Name}}
                         </div>
                         <div class="item_email">
-                            khoaphung.18072002!gmail.com
+                            {{recruiter.Email}}
                         </div>
                         <div class="item_phone">
-                            0981809824
-                        </div>
-                        <div class="item_address">
-                            TP Hồ Chí Minh
+                            {{recruiter.Phone}}
                         </div>
                     </div>
                 </div>
@@ -64,4 +61,86 @@
                 </div>
             </div>
         </div>
+</dialog>
+
+
+<dialog id="detail_dialog" style="color: #1f1a1c" #detailDialog>
+    <div id="top_dialog">
+        <div class="title">
+            <h4>Chi tiết ứng viên</h4>
+        </div>
+        <div class="btnClose" (click)="closeDetailDialog()">
+            <span class="material-symbols-outlined">
+                close
+            </span>
+        </div>
+    </div>
+    <div id="body_dialog" *ngIf="recruiterToRender._id">
+        <div class="info">
+            <div class="basic">
+                <div class="avatar">
+                    <img src="{{recruiterToRender.Avatar}}" alt="avatar">
+                </div>
+                <div class="info_basic">
+                    <div class="name">
+                        <div class="title">
+                            Họ và Tên:
+                        </div>
+                        {{recruiterToRender.Name}}
+                    </div>
+                    <div class="email">
+                        <div class="title">
+                            Gmail:
+                        </div>
+                        {{recruiterToRender.Email}}
+                    </div>
+                    <div class="phone">
+                        <div class="title">
+                            Số điện thoại:
+                        </div>
+                        {{recruiterToRender.Phone}}
+                    </div>
+                </div>
+            </div>
+            <div class="Company">
+                <div class="title">
+                    Tên công ty: {{recruiterToRender.Company.Name}}
+                </div>
+                    <div class="h1">
+                        <div class="company">
+                            <div class="title">
+                                Địa chỉ:
+                            </div>
+                            {{recruiterToRender.Company.Address}}
+                        </div>
+                        <div class="position">
+                            <div class="title">
+                                Email: 
+                            </div>
+                            {{recruiterToRender.Company.Email}}
+                        </div>
+                        <div class="position">
+                            <div class="title">
+                                Số điện thoại
+                            </div>
+                            {{recruiterToRender.Company.Phone}}
+                        </div>
+                    </div>
+                
+            </div>
+
+
+        </div>
+        <div class="a" style="width: 100%;
+        border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+        <div class="row4">
+            <div class="btn_Huy">
+                <button appearance="primary" tuiButton type="button" (click)="closeDetailDialog()"
+                    class="tui-space_right-3 tui-space_bottom-3">
+                    Hủy
+                </button>
+            </div>
+        </div>
+    </div>
+
 </dialog>
