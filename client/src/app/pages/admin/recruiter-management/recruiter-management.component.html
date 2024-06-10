@@ -24,9 +24,24 @@
                     </div>
                 </div>
                 <div class="control">
-                    <span class="material-symbols-outlined" (click)="openRecruiterDialog(recruiter)">
-                        block
-                    </span>
+                    <div class="top">
+                        <span class="material-symbols-outlined" (click)="openDetailDialog(recruiter)">
+                            info
+                        </span>
+                        <span class="material-symbols-outlined" (click)="openRecruiterDialog(recruiter)">
+                            block
+                        </span>
+                    </div>
+                    <div class="bot">
+                        <div class="tag" *ngIf="recruiter.isBan">
+                            <tui-tag
+                                size="l"
+                                class="custom-red-tag"
+                                [value]="'cấm'"
+                                [hoverable]="true"
+                            ></tui-tag>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

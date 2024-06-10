@@ -11,6 +11,11 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         redirectTo: 'login',
         pathMatch: 'full',
       },
+      // {
+      //   path:'**',
+      //   redirectTo: 'login',
+      //   pathMatch: 'full',
+      // },
       {
         path: 'job-posting',
         loadChildren: () =>
@@ -80,6 +85,11 @@ export const RECRUITERLAYOUT_ROUTERS: Routes = [
         path:'confirm-mail',
         loadChildren: () =>
           import('./confirm-mail/confirm-mail.routes').then((m) => m.CONFIRMMAIL_ROUTERS),
+      },
+      {
+        path:'profile',
+        loadChildren: () =>
+          import('./profile/profile.routes').then((m) => m.PROFILE_ROUTERS),
       }
     ],
   },
