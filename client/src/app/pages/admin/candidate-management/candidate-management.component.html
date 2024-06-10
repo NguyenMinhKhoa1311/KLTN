@@ -24,15 +24,28 @@
                         <div class="item_address">
                             {{candidate.Address}}
                         </div>
+                        
                     </div>
                 </div>
                 <div class="control">
-                    <span class="material-symbols-outlined" (click)="openDetailDialog(candidate)">
-                        info
+                    <div class="top">
+                        <span class="material-symbols-outlined" (click)="openDetailDialog(candidate)">
+                            info
                         </span>
-                    <span class="material-symbols-outlined" (click)="openCandidateDialog(candidate)">
-                        block
-                    </span>
+                        <span class="material-symbols-outlined" (click)="openCandidateDialog(candidate)">
+                            block
+                        </span>
+                    </div>
+                    <div class="bot">
+                        <div class="tag" *ngIf="candidate.isBan">
+                            <tui-tag
+                                size="l"
+                                class="custom-red-tag"
+                                [value]="'cấm'"
+                                [hoverable]="true"
+                            ></tui-tag>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +56,7 @@
 <dialog id="candidate_dialog" style="color: #1f1a1c" #candidateDialog>
         <div id="top_dialog">
             <div class="title">
-                <h4>Bạn có chắc chắn muốn cấm ?</h4>
+                <h4>Thông báo</h4>
             </div>
             <div class="btnClose" (click)="closeCandidateDialog()">
                 <span class="material-symbols-outlined">
@@ -52,15 +65,18 @@
             </div>
         </div>
         <div id="body_dialog">
+            <div class="title">
+                Bạn có chắc chắn muốn cấm ứng viên này không?
+            </div>
             <div class="control">
                 <div class="btn_Huy">
-                    <button appearance="primary" size="m" tuiButton type="button" (click)="closeCandidateDialog()"
+                    <button appearance="primary" size="s" tuiButton type="button" (click)="closeCandidateDialog()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         No
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" size="m" tuiButton type="button" (click)="banCandidate()"
+                    <button appearance="primary" size="s" tuiButton type="button" (click)="banCandidate()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Yes
                     </button>
