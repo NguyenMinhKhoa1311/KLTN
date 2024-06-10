@@ -1,0 +1,343 @@
+<div id="profile_container">
+    <div class="profile_center">
+        <div class="basic_information">
+            <div class="information_box">
+                <div class="img_profile">
+                    <!-- <div class="img-file" *ngIf="!isUpdateImage" (click)="fileInput.click()">
+                        <img src="{{candidateToRender.Avatar}}" alt="Selected Image" style="width: 100px;height: 100px; border-radius: 8px;" />
+                    </div>
+                    <div class="img-file" *ngIf="isUpdateImage" >
+                        <img [src]="selectedImage" alt="Selected Image" style="width: 100px;height: 100px; border-radius: 8px;" (click)="fileInput.click()" />
+                        <button (click)="updateAvatar()">lưu</button>
+                    </div>
+                    <input type="file" accept="image/*" (change)="onFileSelected($event) "
+                        #fileInput formControlName="Image" style="display: none"/> -->
+                    <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                </div>
+                <div class="information">
+                    <div class="user_name">
+                        Phung Thanh Tung
+                        <span class="material-symbols-outlined" (click)="openUserDialog()">
+                            edit
+                        </span>
+                    </div>
+                    <div class="info_list">
+                        <div class="row1">
+                            <div class="gmail_user">
+                                <span class="material-symbols-outlined">
+                                    mail
+                                </span>
+                                <span class="gmail">a</span>
+                            </div>
+                            <div class="phone_user">
+                                <span class="material-symbols-outlined">
+                                    phone
+                                </span>
+                                <span class="phone">a</span>
+                            </div>
+                        </div>
+                        <div class="row2">
+                            <div class="address_user">
+                                <span class="material-symbols-outlined">
+                                    home
+                                </span>
+                                <span class="address">a</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="company_box">
+                <div class="title">
+                    <h2>Công ty của tôi</h2>
+                    <span class="material-symbols-outlined" (click)="openCompanyDialog()">
+                        edit
+                    </span>
+                </div>
+                <div class="body">
+                    <div class="logo_company">
+                        <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                    </div>
+                    <div class="info_company">
+                        <div class="left">
+                            <div class="title">
+                                Tên công ty:
+                            </div>
+                            <div class="title">
+                                Email:
+                            </div>
+                            <div class="title">
+                                Số điện thoại:
+                            </div>
+                            <div class="title">
+                                địa chỉ:
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="content" style="font-weight: 600;">
+                                Công ty TNHH ABC
+                            </div>
+                            <div class="content">
+                                12356778
+                            </div>
+                            <div class="content">
+                                12314515
+                            </div>
+                            <div class="content">
+                                12312312
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<dialog id="user_dialog" style="color: #1f1a1c" #userDialog>
+    <form [formGroup]="profileForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thông tin cơ bản</h4>
+            </div>
+            <div class="btnClose" (click)="closeUserDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <div class="basic">
+                    <div class="info_user">
+                        <div class="name_user">
+                            <span class="title">Họ và Tên</span>
+                            <tui-input
+                                formControlName="Name"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                                style="margin-bottom: 10px;"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                        <div class="position_user">
+                            <span class="title">Số điện thoại</span>
+                            <tui-input
+                                formControlName="Phone"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                                style="margin-bottom: 10px;"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="email">
+                        <span class="title">Email</span>
+                        <tui-input
+                            formControlName="Email"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            style="margin-bottom: 10px;"
+                        >
+                            <input
+                                tuiTextfield
+                                type="email"
+                            />
+                        </tui-input>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="field">
+                        <span class="title">Lĩnh vực</span>
+                        <div class="custom-select"> 
+                            <select formControlName="Field" (change)="onFieldChange($event)">
+                              <option *ngFor="let field of fieldList" value="{{field._id}}" >{{field.FieldName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="career">
+                        <span class="title">Ngành nghề</span>
+                        <div class="custom-select" > 
+                            <select formControlName="Career">
+                              <option *ngFor="let career of careerList" value="{{career._id}}" >{{career.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="address">
+                    <span class="title">Địa chỉ</span>
+                    <tui-input
+                        formControlName="Address"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                        style="margin-bottom: 10px;"
+                    >
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+            </div>
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeUserDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>
+
+<dialog id="company_dialog" style="color: #1f1a1c" #companyDialog>
+    <form [formGroup]="companyForm">
+        <div id="top_dialog">
+            <div class="title">
+                <h4>Thông tin công ty</h4>
+            </div>
+            <div class="btnClose" (click)="closeCompanyDialog()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div id="body_dialog">
+            <div class="row1">
+                <div class="basic">
+                    <div class="info_user">
+                        <div class="name_user">
+                            <span class="title">Tên công ty</span>
+                            <tui-input
+                                formControlName="Name"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                                style="margin-bottom: 10px;"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                        <div class="position_user">
+                            <span class="title">Số điện thoại</span>
+                            <tui-input
+                                formControlName="Phone"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                                style="margin-bottom: 10px;"
+                            >
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="email">
+                        <span class="title">Email</span>
+                        <tui-input
+                            formControlName="Email"
+                            [tuiTextfieldCleaner]="true"
+                            [tuiTextfieldLabelOutside]="true"
+                            style="margin-bottom: 10px;"
+                        >
+                            <input
+                                tuiTextfield
+                                type="email"
+                            />
+                        </tui-input>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="field">
+                        <span class="title">Lĩnh vực</span>
+                        <div class="custom-select"> 
+                            <select formControlName="Field" (change)="onFieldChange($event)">
+                              <option *ngFor="let field of fieldList" value="{{field._id}}" >{{field.FieldName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="career">
+                        <span class="title">Ngành nghề</span>
+                        <div class="custom-select" > 
+                            <select formControlName="Career">
+                              <option *ngFor="let career of careerList" value="{{career._id}}" >{{career.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="address">
+                    <span class="title">Địa chỉ</span>
+                    <tui-input
+                        formControlName="Address"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                        style="margin-bottom: 10px;"
+                    >
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+                <div class="address">
+                    <span class="title">Lĩnh vực</span>
+                    <tui-input
+                        formControlName="Field"
+                        [tuiTextfieldCleaner]="true"
+                        [tuiTextfieldLabelOutside]="true"
+                        style="margin-bottom: 10px;"
+                    >
+                        <input
+                            tuiTextfield
+                            type="text"
+                        />
+                    </tui-input>
+                </div>
+            </div>
+            <div class="a" style="width: 100%;
+            border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+            <div class="row4">
+                <div class="btn_Huy">
+                    <button appearance="primary" tuiButton type="button" (click)="closeCompanyDialog()"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Hủy
+                    </button>
+                </div>
+                <div class="btn_Luu">
+                    <button appearance="primary" tuiButton type="button"
+                        class="tui-space_right-3 tui-space_bottom-3">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</dialog>

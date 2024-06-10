@@ -12,6 +12,11 @@ export const ADMIN_ROUTERS: Routes = [
         pathMatch: 'full',
       },
       {
+        path:'**',
+        redirectTo: 'job-confirm',
+        //pathMatch: 'full',
+      },
+      {
         path: 'job-confirm',
         loadChildren: () =>
           import('./job-confirm/job-confirm.routes').then((m) => m.JOBCONFIRM_ROUTERS),
