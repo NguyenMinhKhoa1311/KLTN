@@ -34,6 +34,7 @@ export class CandidateManagementComponent implements OnDestroy{
 
   //ngrx of ban
   isBanSuccess$ = this.store.select('ban', 'isBanUserAtManageCandidateSuccess');
+  banError$ = this.store.select('ban', 'banUserAtManageCandidateError');
 
   parseDateInComponent(date: Date) {
     return parseDate(date);
@@ -59,7 +60,14 @@ export class CandidateManagementComponent implements OnDestroy{
           .open('', {label: 'Đã cấm thành công ứng viên',status:'info'})
           .subscribe();
           }
-        })
+        }),
+        this.banError$.subscribe(error => {
+          if (error.length) {
+            this.alerts
+          .open('', {label: 'Có lỗi xảy ra',status:'error'})
+          .subscribe();
+          }
+        }),
     );
     this.store.dispatch(CandidateActions.getAllAtManageCandidate());
   }

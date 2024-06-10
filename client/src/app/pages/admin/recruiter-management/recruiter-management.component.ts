@@ -9,7 +9,7 @@ import { RecruiterState } from '../../../ngrx/states/recruiter.state';
 import * as RecruiterActions from '../../../ngrx/actions/recruiter.actions';
 import * as BanActions from '../../../ngrx/actions/ban.actions';
 import { Recruiter } from '../../../models/recruiter.model';
-import { parseDate } from '../../../../environments/environments';
+import { generateUuid, parseDate } from '../../../../environments/environments';
 
 @Component({
   selector: 'app-recruiter-management',
@@ -32,6 +32,7 @@ export class RecruiterManagementComponent implements OnDestroy{
 
   //ngrx of ban
   isBanSuccess$ = this.store.select('ban', 'isBanUserAtManageRecruiterSuccess');
+  banError$ = this.store.select('ban', 'banUserAtManageRecruiterError');
 
   constructor(
     private readonly store: Store<{ 
@@ -40,13 +41,17 @@ export class RecruiterManagementComponent implements OnDestroy{
     }>,
     private readonly alerts: TuiAlertService,
   ) {
+    this.store.dispatch(RecruiterActions.getAllAtManageRecruiter());
     this.subscriptions.push(
         this.recruiters$.subscribe(recruiters => {
+          
           if (recruiters.length) {
             this.recruitersToRender = recruiters;
           }
         }),
         this.isBanSuccess$.subscribe(isBanSuccess => {
+          console.log(isBanSuccess);
+          
           if (isBanSuccess) {
             this.closeRecruiterDialog();
             this.alerts
@@ -54,6 +59,14 @@ export class RecruiterManagementComponent implements OnDestroy{
           .subscribe();
           }
         }),
+        this.banError$.subscribe(error => {
+          if (error.length) {
+            this.closeRecruiterDialog();
+            this.alerts
+            .open('', {label: 'Có lỗi xảy ra',status:'error'})
+            .subscribe();
+          }
+        })
     );
   }
   ngOnDestroy(): void {
@@ -65,20 +78,31 @@ export class RecruiterManagementComponent implements OnDestroy{
   }
 
 
-
+  banRecruiter() {
+    const ban: any ={
+      BanId: generateUuid(),
+      Recruiter: this.recruiterToBan._id,
+      Date: new Date(),
+      Reason: 'Reason',
+    }
+    this.store.dispatch(BanActions.banUserAtManageRecruiter({ban}));
+  }
 
 
   @ViewChild('recruiterDialog', { static: true })
   recruiterDialog!: ElementRef<HTMLDialogElement>;
   cdr1 = inject(ChangeDetectorRef);
-  openRecruiterDialog() {
+  openRecruiterDialog(recruiter: Recruiter) {
     this.recruiterDialog.nativeElement.showModal();
     this.cdr1.detectChanges();
+    this.recruiterToBan = recruiter;
   }
   closeRecruiterDialog() {
     this.recruiterDialog.nativeElement.close();
     this.cdr1.detectChanges();
   }
+
+
 
   @ViewChild('detailDialog', { static: true })
   detailDialog!: ElementRef<HTMLDialogElement>;
@@ -89,6 +113,7 @@ export class RecruiterManagementComponent implements OnDestroy{
     this.recruiterToRender = recruiter;
     this.detailDialog.nativeElement.showModal();
     this.cdr2.detectChanges();
+    this.recruiterToRender = recruiter;
   }
   // close detail dialog
   closeDetailDialog() {

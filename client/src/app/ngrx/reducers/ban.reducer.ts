@@ -46,4 +46,81 @@ export const banReducer = createReducer(
             banUserAtManageCandidateError: action.error,
         };
     }),
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(BanActions.unBanUserAtManageCandidate, (state, action) => {
+        return {
+            ...state,
+            isUnBanUserAtManageCandidateLoading: true,
+            isUnBanUserAtManageCandidateSuccess: false,
+            unBanUserAtManageCandidateError: "",
+        };
+    }),
+    on(BanActions.unBanUserAtManageCandidateSuccess, (state, action) => {
+        return {
+            ...state,
+            isUnBanUserAtManageCandidateLoading: false,
+            isUnBanUserAtManageCandidateSuccess: true,
+        };
+    }),
+    on(BanActions.unBanUserAtManageCandidateFailure, (state, action) => {
+        return {
+            ...state,
+            isUnBanUserAtManageCandidateLoading: false,
+            isUnBanAtManageCandidateSuccess: false,
+            unBanUserAtManageCandidateError: action.error,
+        };
+    }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(BanActions.banUserAtManageRecruiter, (state, action) => {
+        return {
+            ...state,
+            isBanUserAtManageRecruiterLoading: true,
+            isBanUserAtManageRecruiterSuccess: false,
+            banUserAtManageRecruiterError: "",
+        };
+    }),
+    on(BanActions.banUserAtManageRecruiterSuccess, (state, action) => {
+        return {
+            ...state,
+            isBanUserAtManageRecruiterLoading: false,
+            isBanUserAtManageRecruiterSuccess: true,
+        };
+    }),
+    on(BanActions.banUserAtManageRecruiterFailure, (state, action) => {
+        return {
+            ...state,
+            isBanUserAtManageRecruiterLoading: false,
+            isBanUserAtManageRecruiterSuccess: false,
+            banUserAtManageRecruiterError: action.error,
+        };
+    }),
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(BanActions.unBanUserAtManageRecruiter, (state, action) => {
+        return {
+            ...state,
+            unBanUserAtManageRecruiterLoading: true,
+            unBanUserAtManageRecruiterSuccess: false,
+            unBanUserAtManageRecruiterError: "",
+        };
+    }),
+    on(BanActions.unBanUserAtManageRecruiterSuccess, (state, action) => {
+        return {
+            ...state,
+            unBanUserAtManageRecruiterLoading: false,
+            unBanUserAtManageRecruiterSuccess: true,
+        };
+    }),
+    on(BanActions.unBanUserAtManageRecruiterFailure, (state, action) => {
+        return {
+            ...state,
+            unBanUserAtManageRecruiterLoading: false,
+            unBanUserAtManageRecruiterSuccess: false,
+            unBanUserAtManageRecruiterError: action.error,
+        };
+    })
+
 )

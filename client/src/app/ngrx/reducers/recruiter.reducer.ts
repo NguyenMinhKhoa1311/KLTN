@@ -128,7 +128,7 @@ export const recruiterReducer = createReducer(
             isGetAllAtManageRecruiterLoading: false,
             isGetAllAtManageRecruiterSuccess: true,
             getAllAtManageRecruiterError: '',
-            recruiters: action.recruiters
+            recruitersTakenAllAtManageRecruiter: action.recruiters
         }
     }),
     on(RecruiterActions.getAllAtManageRecruiterFailure,(state,action)=>{

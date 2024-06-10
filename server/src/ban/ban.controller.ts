@@ -18,14 +18,12 @@ export class BanController {
   @Post('create')
   async create(@Body() createBanDto: CreateBanDto) {
     try{
-      log(createBanDto)
       if(createBanDto.Candidate){
-        log(createBanDto.Candidate)
         const banAlreadyExist = await this.banService.findByCandidate(createBanDto.Candidate);
-        log(banAlreadyExist)
-        if(banAlreadyExist._id="500"){        
+        log(banAlreadyExist._id, "banAlreadyExist")
+        if(banAlreadyExist._id=="500"){        
           const result = await this.CandidateService.banCandidate(createBanDto.Candidate);
-          log(result)
+          log(result, "result")
           if(result){
             const newBan = await this.banService.create(createBanDto);
             log(newBan)
@@ -37,7 +35,8 @@ export class BanController {
         }
       } else if(createBanDto.Recruiter){
         const banAlreadyExist = await this.banService.findByRecruiter(createBanDto.Recruiter);
-        if(banAlreadyExist._id="500"){  
+        console.log(banAlreadyExist._id, "banAlreadyExist")
+        if(banAlreadyExist._id=="500"){  
           const result = await this.recruiterService.banRecruiter(createBanDto.Recruiter);
           if(result){
             const newBan = await this.banService.create(createBanDto);

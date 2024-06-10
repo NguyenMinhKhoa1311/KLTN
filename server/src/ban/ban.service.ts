@@ -16,10 +16,8 @@ export class BanService {
     @InjectModel(Recruiter.name) private readonly recruiterModel: Model<Recruiter>
   ) {}
   async create(createBanDto: CreateBanDto) {
-    log(createBanDto);
     const ban = new this.banModel(createBanDto)
     const newBan = await ban.save();
-    log(newBan);
     if(newBan._id){
       return true;
     }else{
