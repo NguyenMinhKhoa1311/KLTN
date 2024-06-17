@@ -151,4 +151,11 @@ export class LoginComponent implements OnDestroy {
     this.store.dispatch(UserActions.getByUsernameAndPasswordOfRecruiterAtLogin({ username: this.recruiterLoginForm.value.Username??"", password: this.recruiterLoginForm.value.Password??"" }));
   }
 
+  register() {
+    this.router.navigate(['recruiterLayout/register']);
+  }
+  navigateToForgotPass() {
+    this.router.navigate(['recruiterLayout/confirm-mail']);
+  }
+
 }

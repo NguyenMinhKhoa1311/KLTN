@@ -120,6 +120,9 @@ export class AppModule implements NestModule {
         { path: 'candidate/updateCareerGoal', method: RequestMethod.PUT },
         { path: 'candidate/UpdateFavoriteJobs', method: RequestMethod.PUT },
         { path: 'candidate/DeleteFavoriteJobs', method: RequestMethod.PUT },
+        {path: 'recruiter/update', method: RequestMethod.PUT},
+        {path: 'company/update', method: RequestMethod.PUT},
+        {path: 'user/updatePasswordWithoutToken', method: RequestMethod.PUT},
 
         
       )

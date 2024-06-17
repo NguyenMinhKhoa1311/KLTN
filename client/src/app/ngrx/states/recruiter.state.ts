@@ -20,4 +20,15 @@ export interface RecruiterState{
     isGetAllAtManageRecruiterSuccess: boolean;
     getAllAtManageRecruiterError: string;   
     recruitersTakenAllAtManageRecruiter: Recruiter[];
+
+    isUpdateAtProfileLoading: boolean;
+    isUpdateAtProfileSuccess: boolean;
+    updateAtProfileError: string;
+    recruiterUpdatedAtProfile: Recruiter;
+
+    isGetBy_idAtProfileLoading: boolean;
+    isGetBy_idAtProfileSuccess: boolean;
+    getBy_idAtProfileError: string;
+    recruiterTakenBy_idAtProfile: Recruiter;
+    
 }

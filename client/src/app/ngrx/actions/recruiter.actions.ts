@@ -62,3 +62,36 @@ export const getAllAtManageRecruiterFailure = createAction(
     '[Recruiter] Get All At Manage Recruiter Failure',
     props<{ errorMessage: string }>()
 )
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const updateAtProfile = createAction(
+    '[Recruiter] update at profile',
+    props<{ id: string, newProfile: any, token: string }>()
+)
+export const updateAtProfileSuccess = createAction(
+    '[Recruiter] update at profile success',
+    props<{ recruiter: Recruiter }>()
+)
+export const updateAtProfileFailure = createAction(
+    '[Recruiter] update at profile failure',
+    props<{ errorMessage: string }>()
+)
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+export const getBy_idAtProfile = createAction(
+    '[Recruiter] Get By Id At Profile',
+    props<{ id: string }>()
+)
+export const getBy_idAtProfileSuccess = createAction(
+    '[Recruiter] Get By Id At Profile Success',
+    props<{ recruiter: Recruiter }>()
+)
+export const getBy_idAtProfileFailure = createAction(
+    '[Recruiter] Get By Id At Profile Failure',
+    props<{ errorMessage: string }>()
+)

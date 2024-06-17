@@ -35,7 +35,7 @@ export class RecruiterService {
   async getBy_id(id: string){
     try{
       return await this.RecruiterModel.findById(id)
-      .populate('Company','CompanyId Name', this.CompanyModel)
+      .populate('Company','CompanyId Name Email Phone Address Avatar Description Field', this.CompanyModel)
       .populate('User','Uid Username Password', this.UserModel)
       .populate('Voucher','VoucherId Name', this.VoucherModel)
       .exec();
@@ -51,7 +51,7 @@ export class RecruiterService {
   async findAll() {
     try{
       return await this.RecruiterModel.find()
-      .populate('Company','CompanyId Name', this.CompanyModel)
+      .populate('Company','CompanyId Name Email Phone Address Avatar Description Field', this.CompanyModel)
       .populate('User','Uid Username Password', this.UserModel)
       .populate('Voucher','VoucherId Name', this.VoucherModel)
       .exec();
@@ -59,13 +59,36 @@ export class RecruiterService {
     catch(error){
       throw new HttpException(error.message, error.status);
     }
-
   }
+
+  async update(id: string, updateRecruiterDto: UpdateRecruiterDto) {
+
+    try{
+      log(updateRecruiterDto);
+      log(id);
+      const updateRecruiter = await this.RecruiterModel.findByIdAndUpdate(id, updateRecruiterDto, {new: true}).exec();
+      if(updateRecruiter._id.toString().length > 0){
+        return updateRecruiter;
+      } else{
+        return{
+          _id: "500"
+        }
+      }
+    }
+    catch(error){
+      log(error);
+      return{
+        _id_:"500",
+        error: error
+      }
+    }
+  }
+
 
   async getByUser(user:string){
     try{
       const recruiter = await this.RecruiterModel.findOne({User: user})
-      .populate('Company','CompanyId Name', this.CompanyModel)
+      .populate('Company','CompanyId Name Email Phone Address Avatar Description Field', this.CompanyModel)
       .populate('User','Uid Username Password', this.UserModel)
       .populate('Voucher','VoucherId Name', this.VoucherModel)
       .exec();

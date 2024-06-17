@@ -1,1 +1,38 @@
-<p>confirm-mail works!</p>
+<div *ngIf="!isCreateTokenSuccess">
+    <form
+    class="b-form"
+    [formGroup]="mailForm"
+>
+    <p>
+        <tui-input
+            formControlName="email"
+            tuiHintContent="It will be used for sending documents"
+            [tuiTextfieldCleaner]="true"
+        >
+            Type an email
+            <span class="tui-required"></span>
+            <input
+                autocomplete="email"
+                placeholder="mail@mail.ru"
+                tuiTextfield
+                type="email"
+            />
+        </tui-input>
+    </p>
+</form>
+
+
+<button
+    appearance="primary"
+    tuiButton
+    type="button"
+    class="tui-space_right-3 tui-space_bottom-3"
+    (click)="confirmMail()"
+>
+    Gửi link đổi mật khẩu
+</button>
+</div>
+<div *ngIf="isCreateTokenSuccess">
+    bạn hãy vào gmail để lấy link đổi mật khẩu
+</div>
+

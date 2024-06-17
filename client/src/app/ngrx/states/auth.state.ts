@@ -48,4 +48,19 @@ export interface AuthState {
   getTokenAtRegisterOfCandidateErrorMessage: string,
   tokenAtRegisterOfCandidate: any,
 
+  isGetTokenAtUserManagementOfCandidateLoading: boolean,
+  isGetTokenAtUserManagementOfCandidateSuccessfull: boolean,
+  getTokenAtUserManagementOfCandidateErrorMessage: string,
+  tokenAtUserManagementOfCandidate: any,
+
+  isGetTokenAtUserManagementOfRecruiterLoading: boolean,
+  isGetTokenAtUserManagementOfRecruiterSuccessfull: boolean,
+  getTokenAtUserManagementOfRecruiterErrorMessage: string,
+  tokenAtUserManagementOfRecruiter: any,
+
+  isGetTokenAtUserManagementOfAdminLoading: boolean,
+  isGetTokenAtUserManagementOfAdminSuccessfull: boolean,
+  getTokenAtUserManagementOfAdminErrorMessage: string,
+  tokenAtUserManagementOfAdmin: any,
+
 }

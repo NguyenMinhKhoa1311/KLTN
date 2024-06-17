@@ -209,4 +209,81 @@ export class UserEffects {
         )
     )
     )
+
+    changePassOfAdminWithoutToken$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.changePassOfAdminWithoutToken),
+        mergeMap((action) =>
+            this.userService.changePassWithoutToken(action.username, action.password,action.token).pipe(
+                map((user) => UserActions.changePassOfAdminWithoutTokenSuccess({ user })),
+                catchError((error) => of(UserActions.changePassOfAdminWithoutTokenFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
+    changePassOfRecruiterWithoutToken$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.changePassOfRecruiterWithoutToken),
+        mergeMap((action) =>
+            this.userService.changePassWithoutToken(action.username, action.password,action.token).pipe(
+                map((user) => UserActions.changePassOfRecruiterWithoutTokenSuccess({ user })),
+                catchError((error) => of(UserActions.changePassOfRecruiterWithoutTokenFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
+    changePassOfCandidateWithoutToken$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.changePassOfCandidateWithoutToken),
+        mergeMap((action) =>
+            this.userService.changePassWithoutToken(action.username, action.password,action.token).pipe(
+                map((user) => UserActions.changePassOfCandidateWithoutTokenSuccess({ user })),
+                catchError((error) => of(UserActions.changePassOfCandidateWithoutTokenFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
+    getByUserNameAtUserManagementOfCandidate$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.getUserByUsernameAtUserManagementOfCandidate),
+        mergeMap((action) =>
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getUserByUsernameAtUserManagementOfCandidateSuccess({ user })),
+                catchError((error) => of(UserActions.getUserByUsernameAtUserManagementOfCandidateFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
+    getByUserNameAtUserManagementOfRecruiter$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.getUserByUsernameAtUserManagementOfRecruiter),
+        mergeMap((action) =>
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getUserByUsernameAtUserManagementOfRecruiterSuccess({ user})),
+                catchError((error) => of(UserActions.getUserByUsernameAtUserManagementOfRecruiterFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
+    getByUserNameAtUserManagementOfAdmin$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.getUserByUsernameAtUserManagementOfAdmin),
+        mergeMap((action) =>
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getUserByUsernameAtUserManagementOfAdminSuccess({ user })),
+                catchError((error) => of(UserActions.getUserByUsernameAtUserManagementOfAdminFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
+        
+    
+
+
 }

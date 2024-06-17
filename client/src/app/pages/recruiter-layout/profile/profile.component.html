@@ -12,11 +12,11 @@
                     </div>
                     <input type="file" accept="image/*" (change)="onFileSelected($event) "
                         #fileInput formControlName="Image" style="display: none"/> -->
-                    <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                    <img src="{{userLogged.Avatar}}" alt="">
                 </div>
                 <div class="information">
                     <div class="user_name">
-                        Phung Thanh Tung
+                        {{userLogged.Name}}
                         <span class="material-symbols-outlined" (click)="openUserDialog()">
                             edit
                         </span>
@@ -27,13 +27,13 @@
                                 <span class="material-symbols-outlined">
                                     mail
                                 </span>
-                                <span class="gmail">a</span>
+                                <span class="gmail">{{userLogged.Email}}</span>
                             </div>
                             <div class="phone_user">
                                 <span class="material-symbols-outlined">
                                     phone
                                 </span>
-                                <span class="phone">a</span>
+                                <span class="phone">{{userLogged.Phone}}</span>
                             </div>
                         </div>
                         <div class="row2">
@@ -41,7 +41,7 @@
                                 <span class="material-symbols-outlined">
                                     home
                                 </span>
-                                <span class="address">a</span>
+                                <span class="address">{{userLogged.Address}}</span>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="body">
                     <div class="logo_company">
-                        <img src="../../../../assets/images/avatar-user.jpg" alt="">
+                        <img src="{{userLogged.Company.Avatar}}" alt="">
                     </div>
                     <div class="info_company">
                         <div class="left">
@@ -71,21 +71,27 @@
                                 Số điện thoại:
                             </div>
                             <div class="title">
-                                địa chỉ:
+                                Địa chỉ:
+                            </div>
+                            <div class="title">
+                                lĩnh vực:
                             </div>
                         </div>
                         <div class="right">
                             <div class="content" style="font-weight: 600;">
-                                Công ty TNHH ABC
+                                {{userLogged.Company.Name}}
                             </div>
                             <div class="content">
-                                12356778
+                                {{userLogged.Company.Email}}
                             </div>
                             <div class="content">
-                                12314515
+                                {{userLogged.Company.Phone}}
                             </div>
                             <div class="content">
-                                12312312
+                                {{userLogged.Company.Description}}
+                            </div>
+                            <div class="content">
+                                {{fieldAsName}}
                             </div>
                         </div>
                     </div>
@@ -202,7 +208,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button"
+                    <button appearance="primary" tuiButton type="button" (click)="updateProfile()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>
@@ -309,8 +315,16 @@
                 </div>
                 <div class="address">
                     <span class="title">Lĩnh vực</span>
+                    <div class="custom-select"> 
+                        <select formControlName="Field">
+                        <option class="select-item" *ngFor="let field of fields">{{field.FieldName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="address">
+                    <span class="title">Mô tả</span>
                     <tui-input
-                        formControlName="Field"
+                        formControlName="Description"
                         [tuiTextfieldCleaner]="true"
                         [tuiTextfieldLabelOutside]="true"
                         style="margin-bottom: 10px;"
@@ -332,7 +346,7 @@
                     </button>
                 </div>
                 <div class="btn_Luu">
-                    <button appearance="primary" tuiButton type="button"
+                    <button appearance="primary" tuiButton type="button" (click)="updateCompany()"
                         class="tui-space_right-3 tui-space_bottom-3">
                         Lưu
                     </button>

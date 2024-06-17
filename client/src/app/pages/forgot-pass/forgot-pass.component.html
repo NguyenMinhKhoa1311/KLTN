@@ -1,6 +1,6 @@
 <div id="forgotpass_container">
     <div class="head">
-        <form [formGroup]="forgotPass"></form>
+        <form [formGroup]="forgotPass">
         <div class="box">
             <tui-input
                     [tuiTextfieldCleaner]="true"
@@ -18,7 +18,7 @@
         </div>
         <div class="box">
             <tui-input-password
-                formControlName="Pass"
+                formControlName="pass"
                 class="tui-space_top-2"
                 >
                 Mật khẩu
@@ -48,6 +48,7 @@
                     Xác nhận
                 </button>
             </div>
-        </div>           
+        </div>
+    </form>           
     </div>
 </div>

@@ -81,5 +81,19 @@ export class UserController {
       }
     }
   }
+  @Put('updatePasswordWithoutToken')
+  async updatePasswordWithoutToken(@Query('username') username: string, @Query('password') password: string){
+    try{
+      const user = await this.userService.updatePassword(username, password);
+      return user;
+    }
+    catch(err){
+      return {
+        _id: '500',
+        err: err,
+      }
+    }
+  }
+
 
 }

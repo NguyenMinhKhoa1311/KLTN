@@ -41,7 +41,12 @@ export const initualState: FieldState = {
     fieldNoLimitAtCreateCompany: [],
     isGetAllNoLimitAtCreateCompanyLoading: false,
     isGetAllNoLimitAtCreateCompanySuccess: false,
-    getAllNoLimitAtCreateCompanyError: ''
+    getAllNoLimitAtCreateCompanyError: '',
+
+    fieldNoLimitAtProfileRecruiter: [],
+    isGetAllNoLimitAtProfileRecruiterLoading: false,
+    isGetAllNoLimitAtProfileRecruiterSuccess: false,
+    getAllNoLimitAtProfileRecruiterError: ''
 
 }
 
@@ -268,8 +273,38 @@ export const fieldReducer = createReducer(
             isGetAllNoLimitAtCreateCompanySuccess: false,
             getAllNoLimitAtCreateCompanyError: action.err
         }
-    })
+    }),
     
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+    on(FieldActions.getAllNoLimitAtProfileRecruiter, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtProfileRecruiterLoading: true,
+            isGetAllNoLimitAtProfileRecruiterSuccess: false,
+            getAllNoLimitAtProfileRecruiterError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtProfileRecruiterSuccess, (state, action) =>{
+        return {
+            ...state,
+            fieldNoLimitAtProfileRecruiter: action.fields,
+            isGetAllNoLimitAtProfileRecruiterLoading: false,
+            isGetAllNoLimitAtProfileRecruiterSuccess: true,
+            getAllNoLimitAtProfileRecruiterError: ''
+        }
+    }),
+    on(FieldActions.getAllNoLimitAtProfileRecruiterFailure, (state, action) =>{
+        return {
+            ...state,
+            isGetAllNoLimitAtProfileRecruiterLoading: false,
+            isGetAllNoLimitAtProfileRecruiterSuccess: false,
+            getAllNoLimitAtProfileRecruiterError: action.err
+        }
+    })
 
 
 )

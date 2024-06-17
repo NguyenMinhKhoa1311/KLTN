@@ -78,6 +78,37 @@ export interface UserState{
     isChangePassOfRecruiterSuccess: boolean;
     changePassOfRecruiterError: string;
     userChangedPassOfRecruiter: User;
+
+    isChangePassOfAdminWithoutTokenLoading: boolean;
+    isChangePassOfAdminWithoutTokenSuccess: boolean;
+    changePassOfAdminWithoutTokenError: string;
+    userChangedPassOfAdminWithoutToken: User;
+
+    isChangePassOfCandidateWithoutTokenLoading: boolean;
+    isChangePassOfCandidateWithoutTokenSuccess: boolean;
+    changePassOfCandidateWithoutTokenError: string;
+    userChangedPassOfCandidateWithoutToken: User;
+
+    isChangePassOfRecruiterWithoutTokenLoading: boolean;
+    isChangePassOfRecruiterWithoutTokenSuccess: boolean;
+    changePassOfRecruiterWithoutTokenError: string;
+    userChangedPassOfRecruiterWithoutToken: User;
+
+    isGetByUsernameAtUserManagementOfCandidateLoading: boolean;
+    isGetByUsernameAtUserManagementOfCandidateSuccess: boolean;
+    getByUsernameAtUserManagementOfCandidateError: string;
+    userTakenByUsernameAtUserManagementOfCandidate: User;
+
+    isGetByUsernameAtUserManagementOfRecruiterLoading: boolean;
+    isGetByUsernameAtUserManagementOfRecruiterSuccess: boolean;
+    getByUsernameAtUserManagementOfRecruiterError: string;
+    userTakenByUsernameAtUserManagementOfRecruiter: User;
+
+    isGetByUsernameAtUserManagementOfAdminLoading: boolean;
+    isGetByUsernameAtUserManagementOfAdminSuccess: boolean;
+    getByUsernameAtUserManagementOfAdminError: string;
+    userTakenByUsernameAtUserManagementOfAdmin: User;
+
     
 
 }

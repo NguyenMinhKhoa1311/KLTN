@@ -118,4 +118,22 @@ export class CompanyService {
     }
   }
 
+  async update(id: string, updateCompanyDto: UpdateCompanyDto) {
+    try{
+      const updateCompany = await this.CompanyModel.findByIdAndUpdate(id, updateCompanyDto, {new: true}).exec();
+      if(updateCompany._id.toString().length > 0){
+        return updateCompany;
+      } else{
+        return{
+          _id: "500"
+        }
+      }
+    }catch(error){
+      return{
+        _id_:"500",
+        error: error
+      }
+    }
+  }
+
 }

@@ -5,6 +5,7 @@ import { UpdateRecruiterDto } from './dto/update-recruiter.dto';
 import { ObjectId } from 'mongoose';
 import { CreateCompanyDto } from 'src/company/dto/create-company.dto';
 import { CompanyService } from 'src/company/company.service';
+import { log } from 'console';
 
 @Controller('recruiter')
 export class RecruiterController {
@@ -73,8 +74,34 @@ export class RecruiterController {
       }
     }
   }
+  @Get('getBy_id')
+  async findOne(@Query('id') id: string) {
+    try{
+      const recruiter = await this.recruiterService.getBy_id(id);
+      return recruiter;
+    }
+    catch(err){
+      return {
+        _id: "500",
+        err: err
+      }
+    }
+  }
 
-
+  @Put('update')
+  async update(@Query('id') id: string, @Body() updateRecruiterDto: UpdateRecruiterDto) {
+    log(id);
+    try{
+      const updatedRecruiter = await this.recruiterService.update(id, updateRecruiterDto);
+      return updatedRecruiter;
+    }
+    catch(err){
+      return {
+        _id: "500",
+        err: err
+      }
+    }
+  }
 
 
   @Put('updateVoucher')

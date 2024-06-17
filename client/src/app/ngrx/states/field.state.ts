@@ -42,6 +42,10 @@ export interface FieldState{
     isGetAllNoLimitAtCreateCompanySuccess: boolean;
     getAllNoLimitAtCreateCompanyError: string;
     
+    fieldNoLimitAtProfileRecruiter: Field[];
+    isGetAllNoLimitAtProfileRecruiterLoading: boolean;
+    isGetAllNoLimitAtProfileRecruiterSuccess: boolean;
+    getAllNoLimitAtProfileRecruiterError: string;
     
     
 

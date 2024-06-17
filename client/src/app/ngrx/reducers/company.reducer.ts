@@ -23,7 +23,13 @@ export const initualState: CompanyState = {
     isGetByNameWithKeywordAtCompanyLoading: false,
     isGetByNameWithKeywordAtCompanySuccess: false,
     getByNameWithKeywordAtCompanyError: '',
-    companysTakenByGetByNameWithKeywordAtCompany: []
+    companysTakenByGetByNameWithKeywordAtCompany: [],
+
+    isUpdateAtProfileLoading: false,
+    isUpdateAtProfileSuccess: false,
+    updateAtProfileError: '',
+    companyUpdatedByUpdateAtProfile: <Company>{},
+
 
 
 };
@@ -147,5 +153,32 @@ export const companyReducer = createReducer(
         return {
             ...initualState
         }
-    })
+    }),
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CompanyActions.updateAtProfile,(state,action)=>{
+        return {
+            ...state,
+            isUpdateAtProfileLoading: true,
+            isUpdateAtProfileSuccess: false,
+            updateAtProfileError: ''
+        }
+    }),
+    on(CompanyActions.updateAtProfileSuccess,(state,action)=>{
+        return {
+            ...state,
+            isUpdateAtProfileLoading: false,
+            isUpdateAtProfileSuccess: true,
+            companyUpdatedByUpdateAtProfile: action.company
+        }
+    }),
+    on(CompanyActions.updateAtProfileFailure,(state,action)=>{
+        return {
+            ...state,
+            isUpdateAtProfileLoading: false,
+            isUpdateAtProfileSuccess: false,
+            updateAtProfileError: action.error
+        }
+    }),
+    
 )

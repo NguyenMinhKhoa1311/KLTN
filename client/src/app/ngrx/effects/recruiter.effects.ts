@@ -83,4 +83,38 @@ export class RecruiterEffects {
         )
     )
     )
+
+    updateAtProfile$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(RecruiterActions.updateAtProfile),
+            exhaustMap(action =>
+                this.recruiterService.update(action.newProfile,action.id,action.token).pipe(
+                    map((result) => {
+                        return RecruiterActions.updateAtProfileSuccess({recruiter: result})
+                    }),
+                    catchError((err) =>
+                        of(RecruiterActions.updateAtProfileFailure({errorMessage: err})
+                    )
+                )
+            )
+        )
+    )
+    )
+
+    getBy_idAtProfile$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(RecruiterActions.getBy_idAtProfile),
+            exhaustMap(action =>
+                this.recruiterService.getBy_id(action.id).pipe(
+                    map((result) => {
+                        return RecruiterActions.getBy_idAtProfileSuccess({recruiter: result})
+                    }),
+                    catchError((err) =>
+                        of(RecruiterActions.getBy_idAtProfileFailure({errorMessage: err})
+                    )
+                )
+            )
+        )
+    )
+    )
 }

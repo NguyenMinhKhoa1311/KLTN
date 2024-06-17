@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="reset_pass"  >
-                    <span >Quên mật khẩu</span>
+                    <span (click)="navigateToForgotPass()">Quên mật khẩu</span>
                 </div>
                 <div class="btn_login" (click)="loginWithAcouunt()">
                     <button
@@ -63,7 +63,7 @@
                 </div>
                 <div class="register_box">
                     <span>Bạn chưa có tài khoản?</span>
-                    <span style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng ký ngay</span>
+                    <span style="color: #526ed3; margin-left: 3px; cursor: pointer;" (click)="register()">Đăng ký ngay</span>
                 </div>
             </form>
             </div>
