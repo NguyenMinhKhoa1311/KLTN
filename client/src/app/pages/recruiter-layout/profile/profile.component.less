@@ -6,13 +6,16 @@
     .profile_center{
         display: flex;
         flex-direction: column;
-        width: 60%;
+        width: 100%;
         padding: 20px;
+        //justify-content: center;
+        align-items: center;
         .basic_information{
             padding: 16px;
             background-color: #F1F2F4;
             border-radius: 8px;
-            width: 100%;
+            width: 60%;
+            
             //height: 15rem;
             display: flex;
             flex-direction: column;
@@ -107,11 +110,11 @@
                 .body{
                     display: flex;
                     flex-direction: row;
-                    gap: 20px;
+                    width: 100%;
                     .logo_company{
                         width: 100px;
                         height: 100px;
-                        
+                        margin-right: 15px;
                         img{
                             width: 100%;
                             height: 100%;
@@ -120,20 +123,16 @@
                     }
                     .info_company{
                         display: flex;
-                        flex-direction: row;
-                        .left{
-                            //width: 50%;
+                        flex-direction: column;
+                        gap: 5px;
+                        width: calc(100% - 115px);
+                        .name,.email,.phone,.address,.field{
                             display: flex;
-                            flex-direction: column;
-                            gap: 5px;
-                            margin-right: 100px;
+                            flex-direction: row;
+                            .company_name_tilte,.company_email_tilte,.company_phone_tilte,.company_address_tilte,.company_field_tilte{
+                                width: 15%;
+                            }
                         }
-                        .right{
-                            display: flex;
-                            flex-direction: column;
-                            gap: 5px;
-                        }
-                        
                     }
                 }
                 

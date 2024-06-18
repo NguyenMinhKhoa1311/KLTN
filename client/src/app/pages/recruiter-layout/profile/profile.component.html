@@ -60,37 +60,43 @@
                         <img src="{{userLogged.Company.Avatar}}" alt="">
                     </div>
                     <div class="info_company">
-                        <div class="left">
-                            <div class="title">
+                        <div class="name">
+                            <div class="company_name_tilte">
                                 Tên công ty:
                             </div>
-                            <div class="title">
-                                Email:
-                            </div>
-                            <div class="title">
-                                Số điện thoại:
-                            </div>
-                            <div class="title">
-                                Địa chỉ:
-                            </div>
-                            <div class="title">
-                                lĩnh vực:
-                            </div>
-                        </div>
-                        <div class="right">
-                            <div class="content" style="font-weight: 600;">
+                            <div class="company_name">
                                 {{userLogged.Company.Name}}
                             </div>
-                            <div class="content">
+                        </div>
+                        <div class="email">
+                            <div class="company_email_tilte">
+                                Email:
+                            </div>
+                            <div class="company_email">
                                 {{userLogged.Company.Email}}
                             </div>
-                            <div class="content">
+                        </div>
+                        <div class="phone">
+                            <div class="company_phone_tilte">
+                                Số điện thoại:
+                            </div>
+                            <div class="company_phone">
                                 {{userLogged.Company.Phone}}
                             </div>
-                            <div class="content">
-                                {{userLogged.Company.Description}}
+                        </div>
+                        <div class="address">
+                            <div class="company_address_tilte">
+                                Địa chỉ:
                             </div>
-                            <div class="content">
+                            <div class="company_address">
+                                {{userLogged.Company.Address}}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="company_field_tilte">
+                                Lĩnh vực:
+                            </div>
+                            <div class="company_field">
                                 {{fieldAsName}}
                             </div>
                         </div>

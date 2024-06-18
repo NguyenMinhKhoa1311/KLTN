@@ -11,11 +11,10 @@ export const ADMIN_ROUTERS: Routes = [
         redirectTo: 'job-confirm',
         pathMatch: 'full',
       },
-      {
-        path:'**',
-        redirectTo: 'job-confirm',
-        //pathMatch: 'full',
-      },
+      // {
+      //   path:'**',
+      //   redirectTo: 'job-confirm',
+      // },
       {
         path: 'job-confirm',
         loadChildren: () =>
@@ -35,6 +34,11 @@ export const ADMIN_ROUTERS: Routes = [
         path:'recruiter-management',
         loadChildren: () =>
           import('./recruiter-management/recruiter-management.routes').then((m) => m.RECRUITERMANAGEMENT_ROUTERS),
+      },
+      {
+        path:'account-management',
+        loadChildren: () =>
+          import('./account-management/account-management.routes').then((m) => m.ACCOUNTMANAGEMENT_ROUTERS),
       },
       {
         path:'register',

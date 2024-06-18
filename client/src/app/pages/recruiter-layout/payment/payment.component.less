@@ -41,18 +41,29 @@
             }
             .payment_job_item{
                 display: flex;
-                flex-direction: row;
-                .job_left{
-                    width: 35%;
-                }
-                .job_right{
-                    width: 65%;
-                }
-                .job_left, .job_right{
+                flex-direction: column;
+                gap: 5px;
+                .name, .description, .address, .location, .salary, .welfare, .field, .career,.date,.requirement,.tag{
                     display: flex;
-                    flex-direction: column;
-                    gap: 5px;
+                    flex-direction: row;
+                    .job_name_title, .job_description_title, .job_address_title, .job_location_title,.job_salary_title
+                    ,.job_welfare_title, .job_field_title, .job_career_title, .job_date_title, .job_requirement_title, .job_tag_title
+                    {    
+                        width: 30%;
+                    }
                 }
+                // .job_left{
+                //     width: 35%;
+                // }
+                // .job_right{
+                //     width: 65%;
+                // }
+                // .job_left, .job_right{
+                //     display: flex;
+                //     flex-direction: column;
+                //     gap: 5px;
+                // }
+
             }
         }
     }

@@ -1,7 +1,7 @@
 #service_container{
     display: flex;
     justify-content: center;
-    align-items: center;
+    //align-items: center;
     height: calc(100vh - 32px);
     width: calc(100vw - 32px);
     background-color: #F8F9FA;
@@ -17,13 +17,13 @@
         }
         .body{
             width: 60%;
-            margin-top: 3rem;
+            margin-top: 1rem;
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
+            flex-direction: column;
+            //flex-wrap: wrap;
             .service_iteam{
                 padding: 12px;
-                width: calc(32% - 24px);
+                width: calc(100% - 24px);
                 border-radius: 12px;
                 border: 1px solid #E9ECEF;
                 margin: 5px;
@@ -42,12 +42,17 @@
             .selected {
                 border: 1px solid rgb(160, 193, 255);
                 background-color: rgb(249, 251, 255);
-            }
-            
+            }   
+        }
+
+        .notice_box{
+            margin-top: 1rem;
+            color: red;
         }
 
         .total_box{
             width: 60%;
+            margin-top: 1rem;
             .total{
                 display: flex;
                 flex-direction: column;
