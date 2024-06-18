@@ -23,6 +23,17 @@ export const initialState: RecruiterState = {
     isGetAllAtManageRecruiterSuccess: false,
     getAllAtManageRecruiterError: '',
     recruitersTakenAllAtManageRecruiter: [],
+
+    isUpdateAtProfileLoading: false,
+    isUpdateAtProfileSuccess: false,
+    updateAtProfileError: '',
+    recruiterUpdatedAtProfile: <Recruiter>{},
+
+    isGetBy_idAtProfileLoading: false,
+    isGetBy_idAtProfileSuccess: false,
+    getBy_idAtProfileError: '',
+    recruiterTakenBy_idAtProfile: <Recruiter>{},
+
 };
 
 export const recruiterReducer = createReducer(
@@ -137,6 +148,64 @@ export const recruiterReducer = createReducer(
             isGetAllAtManageRecruiterLoading: false,
             isGetAllAtManageRecruiterSuccess: false,
             getAllAtManageRecruiterError: action.errorMessage,
+        }
+    }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruiterActions.updateAtProfile,(state,action)=>{
+        return{
+            ...state,
+            isUpdateAtProfileLoading: true,
+            isUpdateAtProfileSuccess: false,
+            updateAtProfileError: '',
+        }
+    }),
+    on(RecruiterActions.updateAtProfileSuccess,(state,action)=>{
+        return{
+            ...state,
+            isUpdateAtProfileLoading: false,
+            isUpdateAtProfileSuccess: true,
+            updateAtProfileError: '',
+            recruiterUpdatedAtProfile: action.recruiter
+        }
+    }),
+    on(RecruiterActions.updateAtProfileFailure,(state,action)=>{
+        return{
+            ...state,
+            isUpdateAtProfileLoading: false,
+            isUpdateAtProfileSuccess: false,
+            updateAtProfileError: action.errorMessage,
+        }
+    }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruiterActions.getBy_idAtProfile,(state,action)=>{
+        return{
+            ...state,
+            isGetBy_idAtProfileLoading: true,
+            isGetBy_idAtProfileSuccess: false,
+            getBy_idAtProfileError: '',
+        }
+    }),
+    on(RecruiterActions.getBy_idAtProfileSuccess,(state,action)=>{
+        return{
+            ...state,
+            isGetBy_idAtProfileLoading: false,
+            isGetBy_idAtProfileSuccess: true,
+            getBy_idAtProfileError: '',
+            recruiterTakenBy_idAtProfile: action.recruiter
+        }
+    }),
+    on(RecruiterActions.getBy_idAtProfileFailure,(state,action)=>{
+        return{
+            ...state,
+            isGetBy_idAtProfileLoading: false,
+            isGetBy_idAtProfileSuccess: false,
+            getBy_idAtProfileError: action.errorMessage,
         }
     }),
 

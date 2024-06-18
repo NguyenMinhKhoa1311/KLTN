@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
@@ -57,6 +57,15 @@ export class CompanyController {
     return await this.companyService.getByNameWithKeyword(keyword, page, limit, sortBy, sortOrder);
   }
   
+
+  @Put('update')
+  async update(@Body() updateCompanyDto: UpdateCompanyDto,@Query('id') id: string){
+    try {
+      return await this.companyService.update(id, updateCompanyDto);
+    } catch (error) {
+      throw error;
+    }
+  }
 
 
 }

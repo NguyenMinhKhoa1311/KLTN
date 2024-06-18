@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import{ URL } from '../../../environments/environments'
 import { User } from '../../models/user.model';
@@ -21,5 +21,13 @@ export class UserService {
   }
   changePass(token: string, password: string){
     return this.httpClient.put<User | any>(`${URL}/user/updatePassword/?token=${token}&password=${password}`, null)
+  }
+  changePassWithoutToken(userName: string, password: string,token: string){
+    console.log(userName, password, token);
+    
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.httpClient.put<User | any>(`${URL}/user/updatePasswordWithoutToken/?username=${userName}&password=${password}`, null, { headers })
   }
 }

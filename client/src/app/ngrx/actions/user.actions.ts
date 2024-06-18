@@ -250,6 +250,121 @@ export const changePassOfRecruiterFailure = createAction(
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const changePassOfRecruiterWithoutToken = createAction(
+    '[User] change pass of recruiter without token',
+    props<{ username: string, password: string,token:string}>()
+);
+export const changePassOfRecruiterWithoutTokenSuccess = createAction(
+    '[User] change pass of recruiter without token success',
+    props<{ user: User}>()
+);
+export const changePassOfRecruiterWithoutTokenFailure = createAction(
+    '[User] change pass of recruiter without token failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const changePassOfCandidateWithoutToken = createAction(
+    '[User] change pass of candidate without token',
+    props<{ username: string, password: string,token:string}>()
+);
+export const changePassOfCandidateWithoutTokenSuccess = createAction(
+    '[User] change pass of candidate without token success',
+    props<{ user: User}>()
+);
+export const changePassOfCandidateWithoutTokenFailure = createAction(
+    '[User] change pass of candidate without token failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const changePassOfAdminWithoutToken = createAction(
+    '[User] change pass of admin without token',
+    props<{ username: string, password: string,token:string}>()
+);
+export const changePassOfAdminWithoutTokenSuccess = createAction(
+    '[User] change pass of admin without token success',
+    props<{ user: User}>()
+);
+export const changePassOfAdminWithoutTokenFailure = createAction(
+    '[User] change pass of admin without token failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getUserByUsernameAtUserManagementOfCandidate = createAction(
+    '[User] get user by username at user management of candidate',
+    props<{ username: string}>()
+);
+export const getUserByUsernameAtUserManagementOfCandidateSuccess = createAction(
+    '[User] get user by username at user management of candidate success',
+    props<{ user: User}>()
+);
+export const getUserByUsernameAtUserManagementOfCandidateFailure = createAction(
+    '[User] get user by username at user management of candidate failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getUserByUsernameAtUserManagementOfRecruiter = createAction(
+    '[User] get user by username at user management of recruiter',
+    props<{ username: string}>()
+);
+export const getUserByUsernameAtUserManagementOfRecruiterSuccess = createAction(
+    '[User] get user by username at user management of recruiter success',
+    props<{ user: User}>()
+);
+export const getUserByUsernameAtUserManagementOfRecruiterFailure = createAction(
+    '[User] get user by username at user management of recruiter failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getUserByUsernameAtUserManagementOfAdmin = createAction(
+    '[User] get user by username at user management of admin',
+    props<{ username: string}>()
+);
+export const getUserByUsernameAtUserManagementOfAdminSuccess = createAction(
+    '[User] get user by username at user management of admin success',
+    props<{ user: User}>()
+);
+export const getUserByUsernameAtUserManagementOfAdminFailure = createAction(
+    '[User] get user by username at user management of admin failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateUserAtUserManagement = createAction(
+    '[User] update user at user management',
+    props<{ user: User}>()
+);
+export const updateUserAtUserManagementSuccess = createAction(
+    '[User] update user at user management success',
+    props<{ user: User}>()
+);
+
+
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const resetState = createAction(

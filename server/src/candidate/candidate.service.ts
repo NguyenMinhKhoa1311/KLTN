@@ -13,6 +13,7 @@ import { DesiredJob } from 'src/desired-job/entities/desired-job.entity';
 import { Skill } from 'src/skill/entities/skill.entity';
 import { Reference } from 'src/references/entities/reference.entity';
 import { Job } from 'src/job/entities/job.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class CandidateService {
@@ -26,6 +27,7 @@ export class CandidateService {
     @InjectModel(Skill.name) private SkillModel: Model<Skill>,
     @InjectModel(Reference.name) private ReferenceModel: Model<Reference>,
     @InjectModel(Job.name) private JobModel: Model<Job>,
+    @InjectModel(User.name) private UserModel: Model<User>
   ){}
   async create(createCandidateDto: CreateCandidateDto) {
     try {
@@ -48,6 +50,7 @@ export class CandidateService {
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Field', 'FieldId FieldName', this.FieldModel).exec();
 
     }
@@ -74,6 +77,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
@@ -103,6 +107,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('FavoriteJobs', 'JobId Name Salary Tags Address', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel).exec();
       if(candidate._id.toString.length > 0){
@@ -147,6 +152,7 @@ export class CandidateService {
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
       if(candidateAfterUpdate._id.toString().length > 0){
@@ -179,6 +185,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
@@ -209,6 +216,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -239,6 +247,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -308,6 +317,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -340,6 +350,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -372,6 +383,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -412,6 +424,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -443,6 +456,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -473,6 +487,7 @@ export class CandidateService {
       .populate('DesiredJob', 'DesiredJobId Location Salary', this.DesiredJobModel)
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
@@ -508,6 +523,7 @@ export class CandidateService {
       .populate('Skills', 'SkillId Name Level',this.SkillModel)
       .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
       .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+      .populate('User', 'Uid Username Password', this.UserModel)
       .populate('Career', 'CareerId Name', this.CareerModel)
       .populate('Field', 'FieldId Name', this.FieldModel)
       .exec();
@@ -540,6 +556,7 @@ async deleteSkills(id:string, job_id :string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+    .populate('User', 'Uid Username Password', this.UserModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
     .exec();
@@ -571,6 +588,7 @@ async deleteReference(id:string, reference:string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+    .populate('User', 'Uid Username Password', this.UserModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
     .exec();
@@ -603,6 +621,7 @@ async deleteEducation(id:string, job_id :string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+    .populate('User', 'Uid Username Password', this.UserModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
     .exec();
@@ -635,6 +654,7 @@ async deleteWorkExperience(id:string, job_id :string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+    .populate('User', 'Uid Username Password', this.UserModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
     .exec();
@@ -666,6 +686,7 @@ async deleteLanguage(id:string, language:string){
     .populate('Skills', 'SkillId Name Level',this.SkillModel)
     .populate('FavoriteJobs', 'JobId Name Salary', this.JobModel)
     .populate('References', 'ReferenceId Name Email Position Company Phone', this.ReferenceModel)
+    .populate('User', 'Uid Username Password', this.UserModel)
     .populate('Career', 'CareerId Name', this.CareerModel)
     .populate('Field', 'FieldId Name', this.FieldModel)
     .exec();

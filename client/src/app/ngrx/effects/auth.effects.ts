@@ -139,4 +139,47 @@ export class AuthEffects {
       )
     )
   );
+
+  getTokenAtUserManagementOfCandidate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtUserManagementOfCandidate),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtUserManagementOfCandidateSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtUserManagementOfCandidateFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
+
+  getTokenAtUserManagementOfRecruiter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtUserManagementOfRecruiter),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtUserManagementOfRecruiterSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtUserManagementOfRecruiterFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
+  getTokenAtUserManagementOfAdmin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtUserManagementOfAdmin),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtUserManagementOfAdminSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtUserManagementOfAdminFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
 }

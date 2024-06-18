@@ -49,6 +49,22 @@ export const initialState: AuthState = {
     getTokenAtRegisterOfCandidateErrorMessage: '',
     tokenAtRegisterOfCandidate: {},
 
+    isGetTokenAtUserManagementOfCandidateLoading: false,
+    isGetTokenAtUserManagementOfCandidateSuccessfull: false,
+    getTokenAtUserManagementOfCandidateErrorMessage: '',
+    tokenAtUserManagementOfCandidate: {},
+
+    isGetTokenAtUserManagementOfRecruiterLoading: false,
+    isGetTokenAtUserManagementOfRecruiterSuccessfull: false,
+    getTokenAtUserManagementOfRecruiterErrorMessage: '',
+    tokenAtUserManagementOfRecruiter: {},
+
+    isGetTokenAtUserManagementOfAdminLoading: false,
+    isGetTokenAtUserManagementOfAdminSuccessfull: false,
+    getTokenAtUserManagementOfAdminErrorMessage: '',
+    tokenAtUserManagementOfAdmin: {},
+
+
 };
 
 export const authReducer = createReducer(
@@ -365,5 +381,98 @@ export const authReducer = createReducer(
       };
       return newState;
     }),
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtUserManagementOfCandidate, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtUserManagementOfCandidateLoading: true,
+        isGetTokenAtUserManagementOfCandidateSuccessfull: false,
+        getTokenAtUserManagementOfCandidateErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtUserManagementOfCandidateSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtUserManagementOfCandidate: action.res,
+        isGetTokenAtUserManagementOfCandidateLoading: false,
+        isGetTokenAtUserManagementOfCandidateSuccessfull: true,
+        getTokenAtUserManagementOfCandidateErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtUserManagementOfCandidateFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtUserManagementOfCandidateLoading: false,
+        isGetTokenAtUserManagementOfCandidateSuccessfull: false,
+        getTokenAtUserManagementOfCandidateErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtUserManagementOfRecruiter, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtUserManagementOfRecruiterLoading: true,
+        isGetTokenAtUserManagementOfRecruiterSuccessfull: false,
+        getTokenAtUserManagementOfRecruiterErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtUserManagementOfRecruiterSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtUserManagementOfRecruiter: action.res,
+        isGetTokenAtUserManagementOfRecruiterLoading: false,
+        isGetTokenAtUserManagementOfRecruiterSuccessfull: true,
+        getTokenAtUserManagementOfRecruiterErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtUserManagementOfRecruiterFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtUserManagementOfRecruiterLoading: false,
+        isGetTokenAtUserManagementOfRecruiterSuccessfull: false,
+        getTokenAtUserManagementOfRecruiterErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtUserManagementOfAdmin, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtUserManagementOfAdminLoading: true,
+        isGetTokenAtUserManagementOfAdminSuccessfull: false,
+        getTokenAtUserManagementOfAdminErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtUserManagementOfAdminSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtUserManagementOfAdmin: action.res,
+        isGetTokenAtUserManagementOfAdminLoading: false,
+        isGetTokenAtUserManagementOfAdminSuccessfull: true,
+        getTokenAtUserManagementOfAdminErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtUserManagementOfAdminFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtUserManagementOfAdminLoading: false,
+        isGetTokenAtUserManagementOfAdminSuccessfull: false,
+        getTokenAtUserManagementOfAdminErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
 
   );

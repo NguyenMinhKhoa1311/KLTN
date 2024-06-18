@@ -39,7 +39,17 @@ export const ADMIN_ROUTERS: Routes = [
         path:'account-management',
         loadChildren: () =>
           import('./account-management/account-management.routes').then((m) => m.ACCOUNTMANAGEMENT_ROUTERS),
-      }
+      },
+      {
+        path:'register',
+        loadChildren: () =>
+          import('./register/register.routes').then((m) => m.REGISTER_ROUTERS),
+      },
+      {
+        path:'basic-information',
+        loadChildren: () =>
+          import('./basic-information/basic-information.routes').then((m) => m.BASICINFORMATION_ROUTERS),
+      },
     ],
   },
 ];

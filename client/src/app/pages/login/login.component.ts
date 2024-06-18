@@ -52,6 +52,7 @@ export class LoginComponent implements  OnDestroy {
   //ngrx state for candidate
   isGetCadidateWithGoogleAtLoginSuccess$ = this.store.select('candidate', 'isGetByUserWithGoogleAtLoginSuccess');
   candidateTakenByUserWithGoogleAtLogin$ = this.store.select('candidate', 'candidateTakenByUserWithGoogleAtLogin');
+  candidateTakenByUserWithGoogleAtLoginError$ = this.store.select('candidate', 'getByUserWithGoogleAtLoginError');
 
 
   userUseForLoginWithGoogleAtLogin: User = <User>{};
@@ -158,7 +159,30 @@ export class LoginComponent implements  OnDestroy {
                 this.store.dispatch(CandidateActions.getByUserWithGoogleAtLogin({user: user._id}))
             }
           }}
-        })
+        }),
+        this.candidateTakenByUserWithGoogleAtLoginError$.subscribe((error) => {
+          if(error){
+            if(error.length > 0){
+              this.alerts
+              .open('', {label: 'Đã xảy ra lỗi',status:'error'})
+              .subscribe();
+            }
+          }
+        }),
+        this.takenByGmailWithGoogleAtLoginError$.subscribe((error) => {
+          if(error){
+              this.alerts
+              .open('', {label: 'Đã xảy ra lỗi',status:'error'})
+              .subscribe();
+          }
+        }),
+        this.createUserWithGoogleAtLoginError$.subscribe((error) => {
+          if(error.length){
+              this.alerts
+              .open('', {label: 'Đã xảy ra lỗi',status:'error'})
+              .subscribe();
+            }
+        }),
       )
 
     }

@@ -94,6 +94,67 @@ export const getTokenAtRegisterOfCandidateFailure = createAction(
 );
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtUserManagementOfCandidate = createAction(
+  '[Auth] get token At User Management Of Candidate',
+  props<{ user: any }>()
+);
+export const getTokenAtUserManagementOfCandidateSuccess = createAction(
+  '[Auth] get token At User Management Of Candidate success',
+  props<{ res: any }>()
+);
+export const getTokenAtUserManagementOfCandidateFailure = createAction(
+  '[Auth] get token At User Management Of Candidate failure',
+  props<{ errorMessage: string }>()
+);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtUserManagementOfRecruiter = createAction(
+  '[Auth] get token At User Management Of Recruiter',
+  props<{ user: any }>()
+);
+export const getTokenAtUserManagementOfRecruiterSuccess = createAction(
+  '[Auth] get token At User Management Of Recruiter success',
+  props<{ res: any }>()
+);
+export const getTokenAtUserManagementOfRecruiterFailure = createAction(
+  '[Auth] get token At User Management Of Recruiter failure',
+  props<{ errorMessage: string }>()
+);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtUserManagementOfAdmin = createAction(
+  '[Auth] get token At User Management Of Admin',
+  props<{ user: any }>()
+);
+export const getTokenAtUserManagementOfAdminSuccess = createAction(
+  '[Auth] get token At User Management Of Admin success',
+  props<{ res: any }>()
+);
+export const getTokenAtUserManagementOfAdminFailure = createAction(
+  '[Auth] get token At User Management Of Admin failure',
+  props<{ errorMessage: string }>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const changePassOfCandidateWithoutToken = createAction(
+  '[Auth] change pass of candidate without token',
+  props<{ user: any }>()
+);
+export const changePassOfCandidateWithoutTokenSuccess = createAction(
+  '[Auth] change pass of candidate without token success',
+  props<{ res: any }>()
+);
+export const changePassOfCandidateWithoutTokenFailure = createAction(
+  '[Auth] change pass of candidate without token failure',
+  props<{ errorMessage: string }>()
+);
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const loginOfRecruiterAtLogin = createAction

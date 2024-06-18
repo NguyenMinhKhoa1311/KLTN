@@ -815,11 +815,10 @@ export class JobComponent implements OnDestroy{
   ];
 
   navigateToJobDetail(jobId: string) {
-    this.router.navigate(['/job-detail',{
-      jobId: jobId
-    }]);
-  }
-
+    this.router.navigate(['/job-detail'], {
+      queryParams: { job: jobId }
+    });
+    }
 
   onSelectionChange(_id: string) {
     console.log("Giá trị đã chọn là: ", _id);

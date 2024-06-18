@@ -145,4 +145,21 @@ export class FieldEffects {
             catchError((error) => of(FieldActions.getAllNoLimitAtCreateCompanyFailure({err: error})))))
          )
     );
+
+    getAllNoLimitAtProfileRecruiter$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(FieldActions.getAllNoLimitAtProfileRecruiter),
+        exhaustMap(() =>
+         this.fieldService.getAllNoLimit().pipe(
+            map((fields)=>{
+                if(fields != undefined || fields != null){
+                    return FieldActions.getAllNoLimitAtProfileRecruiterSuccess({fields: fields})
+                }
+                else{
+                    return FieldActions.getAllNoLimitAtProfileRecruiterFailure({err: "Get All Fields No Limit At Profile Recruiter Failure"})
+                }
+            }),
+            catchError((error) => of(FieldActions.getAllNoLimitAtProfileRecruiterFailure({err: error})))))
+         )
+    );
 }

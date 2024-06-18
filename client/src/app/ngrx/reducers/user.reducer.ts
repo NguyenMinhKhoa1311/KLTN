@@ -78,6 +78,35 @@ export const initialState: UserState ={
     isChangePassOfRecruiterSuccess: false,
     userChangedPassOfRecruiter: <User>{},
 
+    changePassOfAdminWithoutTokenError: '',
+    isChangePassOfAdminWithoutTokenLoading: false,
+    isChangePassOfAdminWithoutTokenSuccess: false,
+    userChangedPassOfAdminWithoutToken: <User>{},
+
+    changePassOfCandidateWithoutTokenError: '',
+    isChangePassOfCandidateWithoutTokenLoading: false,
+    isChangePassOfCandidateWithoutTokenSuccess: false,
+    userChangedPassOfCandidateWithoutToken: <User>{},
+
+    changePassOfRecruiterWithoutTokenError: '',
+    isChangePassOfRecruiterWithoutTokenLoading: false,
+    isChangePassOfRecruiterWithoutTokenSuccess: false,
+    userChangedPassOfRecruiterWithoutToken: <User>{},
+
+    isGetByUsernameAtUserManagementOfAdminLoading: false,
+    isGetByUsernameAtUserManagementOfAdminSuccess: false,
+    getByUsernameAtUserManagementOfAdminError: '',
+    userTakenByUsernameAtUserManagementOfAdmin: <User>{},
+
+    isGetByUsernameAtUserManagementOfCandidateLoading: false,
+    isGetByUsernameAtUserManagementOfCandidateSuccess: false,
+    getByUsernameAtUserManagementOfCandidateError: '',
+    userTakenByUsernameAtUserManagementOfCandidate: <User>{},
+
+    isGetByUsernameAtUserManagementOfRecruiterLoading: false,
+    isGetByUsernameAtUserManagementOfRecruiterSuccess: false,
+    getByUsernameAtUserManagementOfRecruiterError: '',
+    userTakenByUsernameAtUserManagementOfRecruiter: <User>{},
 
 
 
@@ -649,6 +678,227 @@ export const userReducer = createReducer(
     }
     ),
     
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.changePassOfAdminWithoutToken, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfAdminWithoutTokenLoading: true,
+            isChangePassOfAdminWithoutTokenSuccess: false,
+            changePassOfAdminWithoutTokenError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfAdminWithoutTokenSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfAdminWithoutTokenLoading: false,
+            isChangePassOfAdminWithoutTokenSuccess: true,
+            changePassOfAdminWithoutTokenError: '',
+            userChangedPassOfAdminWithoutToken: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfAdminWithoutTokenFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfAdminWithoutTokenLoading: false,
+            isChangePassOfAdminWithoutTokenSuccess: false,
+            changePassOfAdminWithoutTokenError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.changePassOfCandidateWithoutToken, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfCandidateWithoutTokenLoading: true,
+            isChangePassOfCandidateWithoutTokenSuccess: false,
+            changePassOfCandidateWithoutTokenError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfCandidateWithoutTokenSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfCandidateWithoutTokenLoading: false,
+            isChangePassOfCandidateWithoutTokenSuccess: true,
+            changePassOfCandidateWithoutTokenError: '',
+            userChangedPassOfCandidateWithoutToken: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfCandidateWithoutTokenFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfCandidateWithoutTokenLoading: false,
+            isChangePassOfCandidateWithoutTokenSuccess: false,
+            changePassOfCandidateWithoutTokenError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.changePassOfRecruiterWithoutToken, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfRecruiterWithoutTokenLoading: true,
+            isChangePassOfRecruiterWithoutTokenSuccess: false,
+            changePassOfRecruiterWithoutTokenError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfRecruiterWithoutTokenSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfRecruiterWithoutTokenLoading: false,
+            isChangePassOfRecruiterWithoutTokenSuccess: true,
+            changePassOfRecruiterWithoutTokenError: '',
+            userChangedPassOfRecruiterWithoutToken: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.changePassOfRecruiterWithoutTokenFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isChangePassOfRecruiterWithoutTokenLoading: false,
+            isChangePassOfRecruiterWithoutTokenSuccess: false,
+            changePassOfRecruiterWithoutTokenError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+    
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getUserByUsernameAtUserManagementOfAdmin, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfAdminLoading: true,
+            isGetByUsernameAtUserManagementOfAdminSuccess: false,
+            getByUsernameAtUserManagementOfAdminError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getUserByUsernameAtUserManagementOfAdminSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfAdminLoading: false,
+            isGetByUsernameAtUserManagementOfAdminSuccess: true,
+            getByUsernameAtUserManagementOfAdminError: '',
+            userTakenByUsernameAtUserManagementOfAdmin: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getUserByUsernameAtUserManagementOfAdminFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfAdminLoading: false,
+            isGetByUsernameAtUserManagementOfAdminSuccess: false,
+            getByUsernameAtUserManagementOfAdminError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getUserByUsernameAtUserManagementOfCandidate, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfCandidateLoading: true,
+            isGetByUsernameAtUserManagementOfCandidateSuccess: false,
+            getByUsernameAtUserManagementOfCandidateError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getUserByUsernameAtUserManagementOfCandidateSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfCandidateLoading: false,
+            isGetByUsernameAtUserManagementOfCandidateSuccess: true,
+            getByUsernameAtUserManagementOfCandidateError: '',
+            userTakenByUsernameAtUserManagementOfCandidate: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getUserByUsernameAtUserManagementOfCandidateFailure, (state, action) => {
+        console.log(action.type);
+        
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfCandidateLoading: false,
+            isGetByUsernameAtUserManagementOfCandidateSuccess: false,
+            getByUsernameAtUserManagementOfCandidateError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getUserByUsernameAtUserManagementOfRecruiter, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfRecruiterLoading: true,
+            isGetByUsernameAtUserManagementOfRecruiterSuccess: false,
+            getByUsernameAtUserManagementOfRecruiterError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getUserByUsernameAtUserManagementOfRecruiterSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfRecruiterLoading: false,
+            isGetByUsernameAtUserManagementOfRecruiterSuccess: true,
+            getByUsernameAtUserManagementOfRecruiterError: '',
+            userTakenByUsernameAtUserManagementOfRecruiter: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getUserByUsernameAtUserManagementOfRecruiterFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameAtUserManagementOfRecruiterLoading: false,
+            isGetByUsernameAtUserManagementOfRecruiterSuccess: false,
+            getByUsernameAtUserManagementOfRecruiterError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
 
 
 

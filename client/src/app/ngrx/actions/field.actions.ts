@@ -119,3 +119,17 @@ export const getAllNoLimitAtCreateCompanyFailure = createAction(
     props<{err: string}>()
     );
     
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getAllNoLimitAtProfileRecruiter = createAction(
+    '[Field] Get All No Limit At Profile Recruiter'
+    );
+export const getAllNoLimitAtProfileRecruiterSuccess = createAction(
+    '[Field] Get All No Limit At Profile Recruiter Success',
+    props<{fields: Field[]}>()
+    );
+export const getAllNoLimitAtProfileRecruiterFailure = createAction(
+    '[Field] Get All No Limit At Profile Recruiter Failure',
+    props<{err: string}>()
+    );
+    

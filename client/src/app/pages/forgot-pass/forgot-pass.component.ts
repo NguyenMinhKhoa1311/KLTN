@@ -40,17 +40,21 @@ export class ForgotPassComponent implements OnDestroy{
     private readonly alerts: TuiAlertService,
     private router: Router,
     ) {
-      this.token =  this.route.snapshot.queryParamMap.get('token') ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ndXllbm1pbmhraG9hMTMxMUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE3MTY5NjI4MDUsImV4cCI6MTcxNjk2Mjg2NX0.Oho820kg-qY4SLNv5sWmSk-K9LLyosXgOnoSUtu1mmQ";
+ this.token =  this.route.snapshot.queryParamMap.get('token') ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ndXllbm1pbmhraG9hMTMxMUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE3MTY5NjI4MDUsImV4cCI6MTcxNjk2Mjg2NX0.Oho820kg-qY4SLNv5sWmSk-K9LLyosXgOnoSUtu1mmQ";
       if(this.token){
-        this.router.navigate(['/home']);
+        //this.router.navigate(['/home']);
       }
       this.subscriptions.push(
         this.userchangeDPassOfCandidate$.subscribe((user) => {
-          if(user._id != '500'){
-            this.alerts
-            .open('', {label: 'Cập nhật mật khẩu thành công',status:'success'})
-            .subscribe();
-            this.router.navigate(['/login']);
+          console.log(user);
+          if(user._id){
+            if(user._id != '500'){
+              this.alerts
+              .open('', {label: 'Cập nhật mật khẩu thành công',status:'success'})
+              .subscribe();
+              console.log('success');
+              this.router.navigate(['/login']);
+            }
           }
         }),
       )

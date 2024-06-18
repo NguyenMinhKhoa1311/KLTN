@@ -43,20 +43,30 @@ export class HomeComponent implements OnDestroy {
   isLogin: boolean = false;
 
   //ngrx of job
-  jobsTakenByHotJob$ = this.store.select('job', 'jobTakenByHotJobAtHome');
-  jobsTakenByCareer$ = this.store.select('job', 'jobTakenByCareerAtHome');
-  jobTakenByGetAllAndSortByWelfareAndSalary$ = this.store.select('job', "jobsTakenByAllAndSortByWelfareAndSalaryAtHome")
-  isGetAllAndSortByWelfareAndSalarySuccess$ = this.store.select('job', 'isGetAllAndSortByWelfareAndSalaryAtHomeSuccess');
   isGetByHotJobSuccess$ = this.store.select('job', 'isGetByHotJobAtHomeSuccess');
+  jobsTakenByHotJob$ = this.store.select('job', 'jobTakenByHotJobAtHome');
+  takenByHotJobError$ = this.store.select('job', 'getByHotJobAtHomeError');
+
   isGetByCareerSuccess$ = this.store.select('job', 'isGetByCareerAtHomeSuccess');
+  jobsTakenByCareer$ = this.store.select('job', 'jobTakenByCareerAtHome');
+  takenByCareerError$ = this.store.select('job', 'getByCareerAtHomeError');
+
+  jobTakenByGetAllAndSortByWelfareAndSalary$ = this.store.select('job', "jobsTakenByAllAndSortByWelfareAndSalaryAtHome")
+  takenByGetAllAndSortByWelfareAndSalaryError$ = this.store.select('job', 'getAllAndSortByWelfareAndSalaryAtHomeError');
+  isGetAllAndSortByWelfareAndSalarySuccess$ = this.store.select('job', 'isGetAllAndSortByWelfareAndSalaryAtHomeSuccess');
+
+
+
 
   //ngrx for field
   fieldsTakenAtHome$ = this.store.select('field', 'fieldAtHome');
   isGetFieldAtHomeSuccess$ = this.store.select('field', 'isGetFieldAtHomeSuccess');
+  getFieldAtHomeError$ = this.store.select('field', 'getFieldAtHomeError');
 
 
   //ngrx for company
   compantTakenByGetAllAndSortAtHome$ = this.store.select('company', 'companysTakenByGetAllAndSortAtHome');
+  getAllAndSortAtHomeError$ = this.store.select('company', 'getAllAndSortAtHomeError');
   //test
   isGetFieldAtHomeLoading$ = this.store.select('field', 'isGetFieldAtHomeLoading');
 
@@ -126,7 +136,7 @@ export class HomeComponent implements OnDestroy {
           }else if(this.isGetJobByCareerSuccess){
             this.pageByCareer--;
             this.alerts
-            .open('', {label: 'Không còn công việc nào',status:'info'})
+            .open('', {label: 'Không có công việc nào theo ngành nghề của bạn',status:'info'})
             .subscribe();
           }
 
@@ -145,7 +155,7 @@ export class HomeComponent implements OnDestroy {
           }else if(this.isGetJobByHotJobSuccess){
             this.pageHotJob--;
             this.alerts
-            .open('', {label: 'Không còn công việc nào',status:'info'})
+            .open('', {label: 'Không có công việc nổi bật nào',status:'info'})
             .subscribe();
           }
         }),
@@ -187,11 +197,47 @@ export class HomeComponent implements OnDestroy {
             }else if(this.isGetJobByAllAndSortByWelfareAndSalarySuccess){
               this.pageByWelfareAndSalary--;
               this.alerts
-              .open('', {label: 'Không còn công việc nào',status:'info'})
+              .open('', {label: 'Không còn công việc tốt nhất nào',status:'info'})
               .subscribe();
             }
           }),
-
+    // error
+          this.takenByCareerError$.subscribe((error) => {
+            if(error.length){
+              this.alerts
+              .open('', {label: 'Đã xảy ra lỗi',status:'error'})
+              .subscribe();
+            }
+          }),
+          this.takenByHotJobError$.subscribe((error) => {
+            if(error.length){
+              this.alerts
+              .open('', {label: 'Đã xảy ra lỗi',status:'error'})
+              .subscribe();
+            }
+          }),
+          this.getFieldAtHomeError$.subscribe((error) => {
+            if(error.length){
+              this.alerts
+              .open('', {label: 'Đã xảy ra lỗi',status:'error'})
+              .subscribe();
+            }
+          }),
+          this.getAllAndSortAtHomeError$.subscribe((error) => {
+            if(error.length){
+              this.alerts
+              .open('', {label: 'Đã xảy ra lỗi',status:'error'})
+              .subscribe();
+            }
+          }),
+          this.takenByGetAllAndSortByWelfareAndSalaryError$.subscribe((error) => {
+            if(error.length){
+              this.alerts
+              .open('', {label: 'Đã xảy ra lỗi',status:'error'})
+              .subscribe();
+            }
+          }),
+          
     )
 
     setTimeout(() => {

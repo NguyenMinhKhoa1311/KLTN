@@ -74,4 +74,20 @@ export class CompanyEffects{
             })
         )
     })
+
+    updateAtProfile$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(CompanyActions.updateAtProfile),
+            switchMap((action)=>{
+                return this.companyService.update(action.updateCompany, action.id, action.token).pipe(
+                    map((company)=>{
+                        return CompanyActions.updateAtProfileSuccess({company: company});
+                    }),
+                    catchError((error)=>{
+                        return of(CompanyActions.updateAtProfileFailure({error}));
+                    })
+                )
+            })
+        )
+    })
 }

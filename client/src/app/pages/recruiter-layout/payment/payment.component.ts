@@ -73,7 +73,7 @@ export class PaymentComponent implements OnDestroy{
         this.paymentAtPayment$.subscribe(payment => {
           if(payment.status){
             console.log("payment: ", payment);
-            window.location.href = payment.data.shortLink;
+            window.location.href = payment.data.payUrl;
           }
         })
       );

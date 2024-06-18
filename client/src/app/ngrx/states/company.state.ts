@@ -23,6 +23,12 @@ export interface CompanyState{
     isGetByNameWithKeywordAtCompanySuccess: boolean;
     getByNameWithKeywordAtCompanyError: string;
     companysTakenByGetByNameWithKeywordAtCompany: Company[];
+
+
+    isUpdateAtProfileLoading: boolean;
+    isUpdateAtProfileSuccess: boolean;
+    updateAtProfileError: string;
+    companyUpdatedByUpdateAtProfile: Company;
     
     
 } 

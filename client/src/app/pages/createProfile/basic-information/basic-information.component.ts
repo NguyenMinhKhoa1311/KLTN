@@ -189,6 +189,7 @@ export class BasicInformationComponent implements OnDestroy {
       Education:[],
       CareerGoal:"",
       References:[],
+      isBan:false,
     }
     console.log(this.candidateToRegister);
     this.store.dispatch(CandidateActions.createCandidateAtCreateProfile({candidate: this.candidateToRegister}))

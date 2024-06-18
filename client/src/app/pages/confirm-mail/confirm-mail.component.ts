@@ -31,7 +31,6 @@ export class ConfirmMailComponent implements OnDestroy{
   tokenResetPassword$ = this.store.select('tokenResetPassword', 'tokenAtForgotPasswordOfCandidate');
 
   constructor (
-
     private store: Store<{tokenResetPassword: TokenResetPasswordState}>,
     private router: Router,
     private readonly alerts: TuiAlertService,

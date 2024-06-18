@@ -75,3 +75,19 @@ export const getByNameWithKeywordAtCompanyFailure = createAction(
 export const resetState = createAction(
     '[Company] Reset State'
     );
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const updateAtProfile = createAction(
+    '[Company] Update At Profile',
+    props<{ id: string, updateCompany: any, token: string }>()
+    );
+export const updateAtProfileSuccess = createAction(
+    '[Company] Update At Profile Success',
+    props<{ company: Company }>()
+    );
+export const updateAtProfileFailure = createAction(
+    '[Company] Update At Profile Failure',
+    props<{ error: string }>()
+    );
