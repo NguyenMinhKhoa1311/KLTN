@@ -108,6 +108,21 @@ export const initialState: UserState ={
     getByUsernameAtUserManagementOfRecruiterError: '',
     userTakenByUsernameAtUserManagementOfRecruiter: <User>{},
 
+    createUserOfAdminAtRegisterError: '',
+    isCreateUserOfAdminAtRegisterLoading: false,
+    isCreateUserOfAdminAtRegisterSuccess: false,
+    userCreatedOfAdminAtRegister: <User>{},
+
+    getByGmailOfAdminAtRegisterError: '',
+    isGetByGmailOfAdminAtRegisterLoading: false,
+    isGetByGmailOfAdminAtRegisterSuccess: false,
+    userTakenByGmailOfAdminAtRegister: <User>{},
+
+    getByGmailOfAdminWithAccountAtRegisterError: '',
+    isGetByGmailOfAdminWithAccountAtRegisterLoading: false,
+    isGetByGmailOfAdminWithAccountAtRegisterSuccess: false,
+    userTakenByGmailOfAdminWithAccountAtRegister: <User>{},
+
 
 
 };
@@ -898,6 +913,119 @@ export const userReducer = createReducer(
         return newState;
     }
     ),
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.createAtRegisterOfAdmin, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfAdminAtRegisterLoading: true,
+            isCreateUserOfAdminAtRegisterSuccess: false,
+            createUserOfAdminAtRegisterError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.createAtRegisterOfAdminSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfAdminAtRegisterLoading: false,
+            isCreateUserOfAdminAtRegisterSuccess: true,
+            createUserOfAdminAtRegisterError: '',
+            userCreatedOfAdminAtRegister: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.createAtRegisterOfAdminFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfAdminAtRegisterLoading: false,
+            isCreateUserOfAdminAtRegisterSuccess: false,
+            createUserOfAdminAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getByGmailOfAdminAtRegister, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByGmailOfAdminAtRegisterLoading: true,
+            isGetByGmailOfAdminAtRegisterSuccess: false,
+            getByGmailOfAdminAtRegisterError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByGmailOfAdminAtRegisterSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByGmailOfAdminAtRegisterLoading: false,
+            isGetByGmailOfAdminAtRegisterSuccess: true,
+            getByGmailOfAdminAtRegisterError: '',
+            userTakenByGmailOfAdminAtRegister: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByGmailOfAdminAtRegisterFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByGmailOfAdminAtRegisterLoading: false,
+            isGetByGmailOfAdminAtRegisterSuccess: false,
+            getByGmailOfAdminAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getByGmailOfAdminWithAccountAtRegister, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByGmailOfAdminWithAccountAtRegisterLoading: true,
+            isGetByGmailOfAdminWithAccountAtRegisterSuccess: false,
+            getByGmailOfAdminWithAccountAtRegisterError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByGmailOfAdminWithAccountAtRegisterSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByGmailOfAdminWithAccountAtRegisterLoading: false,
+            isGetByGmailOfAdminWithAccountAtRegisterSuccess: true,
+            getByGmailOfAdminWithAccountAtRegisterError: '',
+            userTakenByGmailOfAdminWithAccountAtRegister: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByGmailOfAdminWithAccountAtRegisterFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByGmailOfAdminWithAccountAtRegisterLoading: false,
+            isGetByGmailOfAdminWithAccountAtRegisterSuccess: false,
+            getByGmailOfAdminWithAccountAtRegisterError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
 
 
 

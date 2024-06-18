@@ -95,6 +95,23 @@ export const getTokenAtRegisterOfCandidateFailure = createAction(
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtRegisterOfAdmin = createAction(
+  '[Auth] get token At Register Of Admin',
+  props<{ user: any }>()
+);
+export const getTokenAtRegisterOfAdminSuccess = createAction(
+  '[Auth] get token At Register Of Admin success',
+  props<{ res: any }>()
+);
+export const getTokenAtRegisterOfAdminFailure = createAction(
+  '[Auth] get token At Register Of Admin failure',
+  props<{ errorMessage: string }>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getTokenAtUserManagementOfCandidate = createAction(
   '[Auth] get token At User Management Of Candidate',
   props<{ user: any }>()
@@ -184,6 +201,23 @@ export const loginOfRecruiterAtRegisterFailure = createAction(
   '[Auth] login of recruiter at register failure',
   props<{ errorMessage: any }>()
 );
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const loginOfAdminAtRegister = createAction
+('[Auth] login of admin at register'
+);
+export const loginOfAdminAtRegisterSuccess = createAction(
+  '[Auth] login of admin at register success',
+  props<{ user: UserFirebase }>()
+);
+export const loginOfAdminAtRegisterFailure = createAction(
+  '[Auth] login of admin at register failure',
+  props<{ errorMessage: any }>()
+);
+
 
 
 

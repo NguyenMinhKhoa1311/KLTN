@@ -109,6 +109,20 @@ export interface UserState{
     getByUsernameAtUserManagementOfAdminError: string;
     userTakenByUsernameAtUserManagementOfAdmin: User;
 
+    isGetByGmailOfAdminAtRegisterLoading: boolean;
+    isGetByGmailOfAdminAtRegisterSuccess: boolean;
+    getByGmailOfAdminAtRegisterError: string;
+    userTakenByGmailOfAdminAtRegister: User;
+
+    isCreateUserOfAdminAtRegisterLoading: boolean;
+    isCreateUserOfAdminAtRegisterSuccess: boolean;
+    createUserOfAdminAtRegisterError: string;
+    userCreatedOfAdminAtRegister: User;
+
+    isGetByGmailOfAdminWithAccountAtRegisterLoading: boolean;
+    isGetByGmailOfAdminWithAccountAtRegisterSuccess: boolean;
+    getByGmailOfAdminWithAccountAtRegisterError: string;
+    userTakenByGmailOfAdminWithAccountAtRegister: User;
     
 
 }

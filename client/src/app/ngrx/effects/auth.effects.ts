@@ -84,6 +84,34 @@ export class AuthEffects {
     )
   );
 
+  loginOfAdminAtRegister$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginOfAdminAtRegister),
+      exhaustMap(() =>
+        from(this.authService.loginWithGoogle()).pipe(
+          map((user) => AuthActions.loginOfAdminAtRegisterSuccess({ user })),
+          catchError((error) =>
+            of(AuthActions.loginOfAdminAtRegisterFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
+  getTokenAtRegisterOfAdmin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtRegisterOfAdmin),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtRegisterOfAdminSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtRegisterOfAdminFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
   getTokenAtLoginOfCandidate$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.getTokenAtLoginOfCandidate),

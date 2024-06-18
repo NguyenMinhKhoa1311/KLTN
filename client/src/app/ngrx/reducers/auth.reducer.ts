@@ -64,6 +64,16 @@ export const initialState: AuthState = {
     getTokenAtUserManagementOfAdminErrorMessage: '',
     tokenAtUserManagementOfAdmin: {},
 
+    isGetTokenAtRegisterOfAdminLoading: false,
+    isGetTokenAtRegisterOfAdminSuccessfull: false,
+    getTokenAtRegisterOfAdminErrorMessage: '',
+    tokenAtRegisterOfAdmin: {},
+
+    isLoginAtRegisterOfAdminLoading: false,
+    isLoginAtRegisterOfAdminSuccessfull: false,
+    loginAtRegisterOfAdminErrorMessage: '',
+    userAtregisterOfAdmin: <UserFirebase>{},
+
 
 };
 
@@ -473,6 +483,77 @@ export const authReducer = createReducer(
       };
       return newState;
     }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtRegisterOfAdmin, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtRegisterOfAdminLoading: true,
+        isGetTokenAtRegisterOfAdminSuccessfull: false,
+        getTokenAtRegisterOfAdminErrorMessage: '',
+      };
+      return newState;
+    }
+    ),
+    on(LoginActions.getTokenAtRegisterOfAdminSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtRegisterOfAdmin: action.res,
+        isGetTokenAtRegisterOfAdminLoading: false,
+        isGetTokenAtRegisterOfAdminSuccessfull: true,
+        getTokenAtRegisterOfAdminErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtRegisterOfAdminFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtRegisterOfAdminLoading: false,
+        isGetTokenAtRegisterOfAdminSuccessfull: false,
+        getTokenAtRegisterOfAdminErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.loginOfAdminAtRegister, (state, action) => {
+      console.log(action.type);
+      
+      let newState: AuthState = {
+        ...state,
+        isLoginAtRegisterOfAdminLoading: true,
+        isLoginAtRegisterOfAdminSuccessfull: false,
+        loginAtRegisterOfAdminErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.loginOfAdminAtRegisterSuccess, (state, action) => {
+      console.log(action.type);
+      
+      let newState: AuthState = {
+        ...state,
+        userAtregisterOfAdmin: action.user,
+        isLoginAtRegisterOfAdminLoading: false,
+        isLoginAtRegisterOfAdminSuccessfull: true,
+        loginAtRegisterOfAdminErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.loginOfAdminAtRegisterFailure, (state, action) => {
+      action.errorMessage
+      let newState: AuthState = {
+        ...state,
+        isLoginAtRegisterOfAdminLoading: false,
+        isLoginAtRegisterOfAdminSuccessfull: false,
+        loginAtRegisterOfAdminErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
 
 
   );

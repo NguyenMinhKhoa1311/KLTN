@@ -12,6 +12,7 @@ import * as RecruiterActions from '../../../ngrx/actions/recruiter.actions';
 import * as AuthAcitons from '../../../ngrx/actions/auth.actions';
 import { Subscription } from 'rxjs';
 import { generateUuid } from '../../../../environments/environments';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-register',
@@ -53,7 +54,8 @@ export class RegisterComponent implements OnDestroy {
 
   constructor(
     private store: Store<{ auth: AuthState, user: UserState, recruiter: RecruiterState}>,
-    private router: Router
+    private router: Router,
+    private readonly alerts: TuiAlertService,
   ) {
     this.subscriptions.push(
       this.userFirebase$.subscribe((user) => {
@@ -97,8 +99,6 @@ export class RegisterComponent implements OnDestroy {
             if (recruiter._id == "500") {
               sessionStorage.setItem('userOfRecruiterLogged', JSON.stringify(this.userLoged));
               this.router.navigate(['recruiterLayout/create-company']);
-
-              
             }
             else{
               sessionStorage.setItem('userOfRecruiterLogged', JSON.stringify(recruiter));
@@ -110,7 +110,9 @@ export class RegisterComponent implements OnDestroy {
         if (user._id) {
           if (user._id != "404 user not found") {
             console.log('user', user);
-            alert('user is already taken');
+            this.alerts
+            .open('', {label: 'Tài khoản đã tồn tại',status:'info'})
+            .subscribe();
           }else{
             let userToCreate:any = {
               Username: this.recruiterRegisterForm.value.Email??'',

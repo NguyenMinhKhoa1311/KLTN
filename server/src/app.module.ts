@@ -29,6 +29,7 @@ import { CronJobModule } from './cron-job/cron-job.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TokenResetPasswordModule } from './token-reset-password/token-reset-password.module';
 import { BanModule } from './ban/ban.module';
+import { AdminModule } from './admin/admin.module';
 
 
 @Module({
@@ -58,6 +59,7 @@ import { BanModule } from './ban/ban.module';
     PaymentModule,
     TokenResetPasswordModule,
     BanModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

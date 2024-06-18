@@ -114,6 +114,47 @@ export class UserEffects {
     )
     )
 
+    createAtRegisterOfAdmin$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(UserActions.createAtRegisterOfAdmin),
+        mergeMap((action) => 
+            this.userService.create(action.user).pipe(
+                map((user) => {
+                    if(user._id.length > 0){
+                        return UserActions.createAtRegisterOfAdminSuccess({user:user})
+                    }
+                    return UserActions.createAtRegisterOfAdminFailure({errorMessage: 'error'})
+                }),
+                catchError((error) => of(UserActions.createAtRegisterOfAdminFailure({errorMessage: error.message})))
+                )
+        )
+    )
+    )
+
+    getByGmailOfAdminAtRegister$ = createEffect(()=>
+    this.action$.pipe(
+        ofType(UserActions.getByGmailOfAdminAtRegister),
+        mergeMap((action) => 
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getByGmailOfAdminAtRegisterSuccess({user})),
+                catchError((error) => of(UserActions.getByGmailOfAdminAtRegisterFailure({errorMessage: error.message})))
+                )
+        )
+    )
+    )
+
+    getByGmailOfAdminWithAccountAtRegister$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.getByGmailOfAdminWithAccountAtRegister),
+        mergeMap((action) =>
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getByGmailOfAdminWithAccountAtRegisterSuccess({ user })),
+                catchError((error) => of(UserActions.getByGmailOfAdminWithAccountAtRegisterFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
     createUserOfRecruiterAtLogin$ = createEffect(()=>
     this.action$.pipe(
         ofType(UserActions.createUserOfRecruiterAtLogin),

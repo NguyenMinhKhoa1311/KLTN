@@ -22,7 +22,6 @@ export class CreateCandidateDto {
         public FavoriteJobs: string[],
         public References: string[],
         public isBan: boolean,
-        
-        
+
     ){}
 }

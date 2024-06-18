@@ -11,11 +11,11 @@ export const ADMIN_ROUTERS: Routes = [
         redirectTo: 'job-confirm',
         pathMatch: 'full',
       },
-      {
-        path:'**',
-        redirectTo: 'job-confirm',
-        //pathMatch: 'full',
-      },
+      // {
+      //   path:'**',
+      //   redirectTo: 'job-confirm',
+      //   //pathMatch: 'full',
+      // },
       {
         path: 'job-confirm',
         loadChildren: () =>

@@ -1,1 +1,85 @@
-<p>register works!</p>
+<div id="register_container">
+    <div id="background_register"></div>    
+    <div id="register_box">
+        <div id="register_form_box">
+            <div class="header">
+            <span>ĐĂNG KÍ TÀI KHOẢN Admin</span>
+            </div>
+            <form [formGroup]="adminRegisterForm">
+            <div class="body">
+                <div class="form_register">
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Email</label>
+                        <p>
+                            <tui-input
+                                formControlName="Email"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                            >
+                                Email
+                                <input
+                                    autocomplete="email"
+                                    placeholder="Nhập email"
+                                    tuiTextfield
+                                    type="email"
+                                />
+                            </tui-input>
+                        </p>
+                    </div>
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Mật khẩu</label>
+                        <p>
+                            <tui-input-password
+                                formControlName="Password"
+                                class="tui-space_top-2"
+                                >
+                                Mật khẩu
+                                <input
+                                    tuiTextfield
+                                />
+                            </tui-input-password>
+                        </p>
+                    </div>
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Xác nhận mật khẩu</label>
+                        <p>
+                            <tui-input-password
+                                formControlName="ConfirmPassword"
+                                class="tui-space_top-2"
+                                >
+                                Xác nhận mật khẩu
+                                <input
+                                    tuiTextfield
+                                />
+                            </tui-input-password>
+                        </p>
+                    </div>
+                </div>
+                
+                <div  class="btn_register" (click)="registerWithAccount()">
+                        <button
+                        appearance="primary"
+                        tuiButton
+                        type="button"
+                        class="tui-space_right-3 tui-space_bottom-3"
+                        
+                    >
+                        Đăng ký
+                    </button>
+                </div>
+                <span class="register_option">Hoặc đăng nhập bằng</span>
+                <div class="register_google" (click)="loginWithGoogle()">
+                    <div class="img_google" >
+                        <img src="../../../assets/images/icons8-google-30.png" alt="">
+                    </div>
+                    <span>Google</span>
+                </div>
+                <div class="register_box">
+                    <span>Bạn đã có tài khoản?</span>
+                    <span style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng nhập ngay</span>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

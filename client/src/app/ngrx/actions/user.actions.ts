@@ -50,6 +50,59 @@ export const getByGmailOfRecruiterAtLoginFailure = createAction(
 
 
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const createAtRegisterOfAdmin = createAction(
+    '[User] create at register of admin',
+    props<{ user: User}>()
+);
+export const createAtRegisterOfAdminSuccess = createAction(
+    '[User] create at register of admin success',
+    props<{ user: User}>()
+);
+export const createAtRegisterOfAdminFailure = createAction(
+    '[User] create at register of admin failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByGmailOfAdminWithAccountAtRegister = createAction(
+    '[User] get by gmail of admin with account at register',
+    props<{ username: string}>()
+);
+export const getByGmailOfAdminWithAccountAtRegisterSuccess = createAction(
+    '[User] get by gmail of admin with account at register success',
+    props<{ user: User}>()
+);
+export const getByGmailOfAdminWithAccountAtRegisterFailure = createAction(
+    '[User] get by gmail of admin with account at register failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByGmailOfAdminAtRegister = createAction(
+    '[User] get by gmail of admin at register',
+    props<{ username: string}>()
+);
+export const getByGmailOfAdminAtRegisterSuccess = createAction(
+    '[User] get by gmail of admin at register success',
+    props<{ user: User}>()
+);
+export const getByGmailOfAdminAtRegisterFailure = createAction(
+    '[User] get by gmail of admin at register failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const createWithGoogoleAtRegister = createAction(
     '[User] create with google at register',
