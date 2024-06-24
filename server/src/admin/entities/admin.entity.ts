@@ -19,7 +19,15 @@ export class Admin {
     User: mongoose.Schema.Types.ObjectId;
 
     @Prop({required: true})
-    StatusConfirm: string;
+    StatusConfirm: boolean;
+
+    @Prop({required: true})
+    Phone: string;
+
+    @Prop({required: true})
+    Address: string;
+
+
 }
 
 export const AdminSchema = SchemaFactory.createForClass(Admin);

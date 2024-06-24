@@ -30,6 +30,8 @@ export class NavbarComponent implements OnInit{
       this.activeItemIndex = 1;
     } else if (this.router.url.includes('/application-list')) {
       this.activeItemIndex = 2;
+    } else if (this.router.url.includes('/profile')) {
+      this.activeItemIndex = 3;
     } 
 
   }
@@ -58,6 +60,8 @@ export class NavbarComponent implements OnInit{
           this.activeItemIndex = 1;
         } else if (url.startsWith('/application-list')) {
           this.activeItemIndex = 2;
+        }  else if (url.startsWith('/profile')) {
+          this.activeItemIndex = 3;
         } 
       }
     });
@@ -74,6 +78,9 @@ export class NavbarComponent implements OnInit{
         break;
       case 'application-list':
         this.router.navigate(['/recruiterLayout/application-list']); 
+        break;
+      case 'profile':
+        this.router.navigate(['/recruiterLayout/profile']); 
         break;
       default:
         console.warn('Invalid tab name:', tabName);

@@ -27,74 +27,92 @@
             </div>
             <div class="payment_job_content">
                 <div class="payment_job_item">
-                    <div class="job_left">
+                    <div class="name">
                         <div class="job_name_title">
                             Tên công việc:
                         </div>
+                        <div class="job_name" *ngIf="isGetJobSuccess">
+                            {{jobToRender.Name}}
+                        </div>
+                    </div>
+                    <div class="description">
                         <div class="job_description_title">
                             Mô tả:
                         </div>
+                        <div class="job_description" *ngIf="isGetJobSuccess">
+                            {{jobToRender.Description}}
+                        </div>
+                    </div>
+                    <div class="address">
                         <div class="job_address_title">
                             Địa chỉ làm việc:
                         </div>
+                        <div class="job_address" *ngIf="isGetJobSuccess">
+                            {{jobToRender.Address}}
+                        </div>
+                    </div>
+                    <div class="location">
                         <div class="job_location_title">
                             Địa điểm làm việc:
                         </div>
+                        <div class="job_location" *ngIf="isGetJobSuccess">
+                            <div *ngFor="let location of jobToRender.Location">{{location}}</div>
+                        </div>
+                    </div>
+                    <div class="salary">
                         <div class="job_salary_title">
                             Lương:
                         </div>
+                        <div class="job_salary" *ngIf="isGetJobSuccess">
+                            {{jobToRender.Salary}}
+                        </div>
+                    </div>
+                    <div class="welfare">
                         <div class="job_welfare_title">
                             Phúc lợi:
                         </div>
-                        <div class="job_field_title">
-                            Lĩnh vực:
-                        </div>
-                        <div class="job_career_title">
-                            Ngành nghề:
-                        </div>
-                        <div class="job_date_title">
-                            Ngày đăng:
-                        </div>
-                        <div class="job_requirement_title">
-                            Yêu cầu:
-                        </div>
-                        <div class="job_tag">
-                            Tag:
-                        </div>
-                    </div>
-                    <div class="job_right" *ngIf="isGetJobSuccess">
-                        <div class="job_name">
-                            {{jobToRender.Name}}
-                        </div>
-                        <div class="job_description">
-                            {{jobToRender.Description}}
-                        </div>
-                        <div class="job_address">
-                            {{jobToRender.Address}}
-                        </div>
-                        <div class="job_location">
-                            <div *ngFor="let location of jobToRender.Location">{{location}}</div>
-                        </div>
-                        <div class="job_salary">
-                            {{jobToRender.Salary}}
-                        </div>
-                        <div class="job_welfare">
+                        <div class="job_welfare" *ngIf="isGetJobSuccess">
                             <div *ngIf="jobToRender.Welfare.length==0">Không có phúc lợi</div>
                             <div *ngFor="let welfare of jobToRender.Welfare">{{welfare}}</div>
                         </div>
-                        <div class="job_field" >
+                    </div>
+                    <div class="field">
+                        <div class="job_field_title">
+                            Lĩnh vực:
+                        </div>
+                        <div class="job_field" *ngIf="isGetJobSuccess">
                             {{jobToRender.Field.FieldName}}
                         </div>
-                        <div class="job_career">
+                    </div>
+                    <div class="career">
+                        <div class="job_career_title">
+                            Ngành nghề:
+                        </div>
+                        <div class="job_career" *ngIf="isGetJobSuccess">
                             {{jobToRender.Career.Name}}
                         </div>
-                        <div class="job_date">
+                    </div>
+                    <div class="date">
+                        <div class="job_date_title">
+                            Ngày đăng:
+                        </div>
+                        <div class="job_date" *ngIf="isGetJobSuccess">
                             {{parseDate(jobToRender.StartDate)}}
                         </div>
-                        <div class="job_requirement">
+                    </div>
+                    <div class="requirement">
+                        <div class="job_requirement_title">
+                            Yêu cầu:
+                        </div>
+                        <div class="job_requirement" *ngIf="isGetJobSuccess">
                             {{jobToRender.Requirement}}
                         </div>
-                        <div class="job_tag">
+                    </div>
+                    <div class="tag">
+                        <div class="job_tag_title">
+                            Tag:
+                        </div>
+                        <div class="job_tag" *ngIf="isGetJobSuccess">
                             <div *ngIf="jobToRender.Tags.length==0">Không có tag</div>
                             <div *ngFor="let tag of jobToRender.Tags">{{tag}}</div>
                         </div>

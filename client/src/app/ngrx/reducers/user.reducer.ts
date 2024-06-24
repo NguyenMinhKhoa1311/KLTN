@@ -468,6 +468,8 @@ export const userReducer = createReducer(
     }),
     on(UserActions.createUserOfRecruiterAtLoginFailure, (state, action) => {
         console.log(action.type);
+        console.log(action.errorMessage);
+        
         
         let newState: UserState = {
             ...state,

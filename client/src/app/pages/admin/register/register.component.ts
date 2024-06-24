@@ -53,9 +53,12 @@ export class RegisterComponent implements OnDestroy{
   ) { 
     this.subscriptions.push(
       this.userFirebase$.subscribe((user) => {
+        
         if (user.email) {
 
           if(user.email.length>0){
+            console.log('user', user);
+            
             this.userLoged.Username = user.email;
             this.store.dispatch(UserActions.getByGmailOfAdminAtRegister({ username: user.email }));
           }
@@ -63,8 +66,12 @@ export class RegisterComponent implements OnDestroy{
       }),
       this.userTakenByGmail$.subscribe((user) => {
         if (user.Username) {
+          console.log('user', user);
+          
           if(user.Username != "404 user not found"){
             this.userLoged._id = user._id;
+            console.log('user at have user');
+            
             this.store.dispatch(AdminActions.getBy_idAtRegister({ id: user._id }));
           }else{
             this.userLoged.Password = '1234';
@@ -79,7 +86,7 @@ export class RegisterComponent implements OnDestroy{
             console.log('user', user);
             const userAsJson = JSON.stringify(user);
             sessionStorage.setItem('userOfAdmin', userAsJson);
-            this.router.navigate(['admin/basic-infomation']);
+            this.router.navigate(['admin/basic-information']);
             
           }
         }
@@ -89,11 +96,11 @@ export class RegisterComponent implements OnDestroy{
           if (admin._id.length !=500) {
             console.log('admin', admin);
             const adminAsJson = JSON.stringify(admin);
-            sessionStorage.setItem('admin', adminAsJson);
+            sessionStorage.setItem('adminLogged', adminAsJson);
             this.router.navigate(['admin/job-confirm']);
           }else{
-            sessionStorage.setItem('userOfAdminLogged', JSON.stringify(this.userLoged));
-            this.router.navigate(['admin/basic-infomation']);
+            sessionStorage.setItem('userOfAdmin', JSON.stringify(this.userLoged));
+            this.router.navigate(['admin/basic-information']);
           }
         }
       }),

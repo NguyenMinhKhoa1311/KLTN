@@ -97,7 +97,7 @@ export class RegisterComponent implements OnDestroy {
           if (recruiter._id) {
             console.log('recruiter', recruiter);
             if (recruiter._id == "500") {
-              sessionStorage.setItem('userOfRecruiterLogged', JSON.stringify(this.userLoged));
+              sessionStorage.setItem('userOfRecruiter', JSON.stringify(this.userLoged));
               this.router.navigate(['recruiterLayout/create-company']);
             }
             else{

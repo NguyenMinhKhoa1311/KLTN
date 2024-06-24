@@ -47,7 +47,7 @@ export class BasicInformationComponent implements OnDestroy {
     private store: Store<{ recruiter: RecruiterState, auth: AuthState,company: CompanyState}>,
     private router: Router
   ) {
-    const userAsJson = sessionStorage.getItem('userOfRecruiterLogged');
+    const userAsJson = sessionStorage.getItem('userOfRecruiter');
     console.log(userAsJson);
     if(userAsJson){
       this.user = JSON.parse(userAsJson || '');

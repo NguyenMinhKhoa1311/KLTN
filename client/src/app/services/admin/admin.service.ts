@@ -12,6 +12,7 @@ export class AdminService {
     private httpClient: HttpClient
   ) {}
   create(admin: any){
+
     return this.httpClient.post<Admin>(`${URL}/admin/create`, admin);
   }
   findAll(){
@@ -21,6 +22,8 @@ export class AdminService {
     return this.httpClient.get<Admin>(`${URL}/admin/byUser?email=${email}`);
   }
   findBy_id(id: string){
+    console.log('id', id);
+    
     return this.httpClient.get<Admin>(`${URL}/admin/getBy_id?id=${id}`);
   }
 }

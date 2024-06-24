@@ -1,0 +1,56 @@
+<div id="navbar_container">
+    <div id="navbar_box">
+      <div id="logo" (click)="onTabClick('home')">
+        <img src="https://vcdn1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=i2M2IgCcw574LT-bXFY92g" alt="">
+      </div>
+      <tui-tabs [(activeItemIndex)]="activeItemIndex" class="tabs-container">
+          <button class="btn_tab" [disabled]="activeItemIndex === 0" [routerLink]="['job-confirm']" routerLinkActive tuiTab>
+            <span class="material-symbols-rounded">Bài tuyển dụng</span>
+          </button>
+          <button class="btn_tab" [disabled]="activeItemIndex === 1" [routerLink]="['candidate-management']" routerLinkActive tuiTab>
+            <span class="material-symbols-rounded">Quản lí ứng viên</span>
+          </button>
+          <button class="btn_tab" [disabled]="activeItemIndex === 2" [routerLink]="['recruiter-management']" routerLinkActive tuiTab>
+            <span class="material-symbols-rounded">Quản lí nhà tuyển dụng</span>
+          </button>
+          <button class="btn_tab" [disabled]="activeItemIndex === 3" [routerLink]="['account-management']" routerLinkActive tuiTab>
+            <span class="material-symbols-rounded">Quản lí tài khoản</span>
+          </button>
+        </tui-tabs>
+    </div>
+    <div id="option_user">
+        
+      <div class="login" (click)="navigateToLogin()" >
+        Đăng nhập
+      </div>
+      <div class="register" (click)="navigateToRegister()">
+        Đăng ký
+      </div>
+
+      <!-- <div class="gach"></div> -->
+
+      <!-- <div class="user_dropdown">
+        <button class="user_dropbtn">
+          <div class="user_box">
+            <div class="img_user">
+              <img src="{{userLogged.Avatar}}" alt="">
+            </div>
+            <span>123</span>
+            <span class="material-symbols-outlined">
+              expand_more
+            </span>
+          </div>
+        </button>
+        <div class="dropdown-content">
+          <a href="/recruiterLayout/login" >Đăng nhập</a>
+          <a href="/recruiterLayout/register" >Đăng kí</a>
+          <a href="/recruiterLayout/choice-service">Đăng tuyển dụng</a>
+          <a href="/recruiterLayout/job-detail">Bài tuyển dụng</a>
+          <a href="/recruiterLayout/application-list">Danh sách tuyển dụng</a>
+          <a href="/recruiterLayout/statistical">Thống kê</a>
+          <a href="/recruiterLayout/profile">Hồ sơ</a>
+          <a href="/recruiterLayout/account-management">Quản lí tài khoản</a>
+        </div>
+      </div> -->
+    </div>
+</div>

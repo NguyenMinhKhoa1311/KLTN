@@ -96,6 +96,7 @@ export class AppModule implements NestModule {
         { path: 'job/getByLocationdWithKeyword', method: RequestMethod.GET },
         { path: 'job/getByLocationdWithKeywordAndUrgent', method: RequestMethod.GET },
         { path: 'job/getByStatusPayment', method: RequestMethod.GET },
+        {path: 'job/create', method: RequestMethod.POST},
 
 
 

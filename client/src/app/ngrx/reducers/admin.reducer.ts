@@ -45,6 +45,8 @@ export const  adminReducer = createReducer(
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     on(AdminActions.getBy_idAtRegister, (state,action) => {
+        console.log('action', action);
+        
         return {
             ...state,
             isGetBy_idAtRegisterLoading: true,
@@ -53,6 +55,8 @@ export const  adminReducer = createReducer(
         }
     }),
     on(AdminActions.getBy_idAtRegisterSuccess, (state, action) => {
+        console.log('action', action);
+        
         return {
             ...state,
             isGetBy_idAtRegisterLoading: false,
@@ -61,6 +65,8 @@ export const  adminReducer = createReducer(
         }
     }),
     on(AdminActions.getBy_idAtRegisterFailure, (state, action) => {
+        console.log('action', action);
+        
         return {
             ...state,
             isGetBy_idAtRegisterLoading: false,

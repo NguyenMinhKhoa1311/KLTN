@@ -73,7 +73,12 @@ export class LoginComponent implements OnDestroy {
             }else{
               this.userLoged.Password = "1234";
               this.userLoged.Uid = generateUuid();
-              this.store.dispatch(UserActions.createUserOfRecruiterAtLogin({ user: this.userLoged}))
+              const newUser:any = {
+                Username: this.userLoged.Username,
+                Password: this.userLoged.Password,
+                Uid: this.userLoged.Uid,
+              }
+              this.store.dispatch(UserActions.createUserOfRecruiterAtLogin({ user: newUser}))
             }
           }
       }),
