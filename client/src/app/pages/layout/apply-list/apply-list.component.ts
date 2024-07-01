@@ -31,7 +31,7 @@ export class ApplyListComponent implements OnDestroy{
   isGetJobByApplyJob: boolean = false;
   candidateLogin: Candidate = <Candidate>{};
   isGetRecruitmentByCandidateSuccess: boolean = false;
-
+  isLogin: boolean = false;
   
   //ngrx of recruitment
   isGetRecruitmentByCandidateSuccess$ = this.store.select('recruitment','isGetByCandidateSuccess');
@@ -57,11 +57,13 @@ export class ApplyListComponent implements OnDestroy{
     if(userLogged){
       let userAfterParse = JSON.parse(userLogged) as Candidate;
       if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
+        this.isLogin = true;
         console.log(userAfterParse);
         this.candidateLogin = userAfterParse;
         this.store.dispatch(RecruitmentActions.getByCandidasteAtAplicationListOfCandidate({ candidate: userAfterParse?._id,  page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc' }))
       }
     }else{
+      this.isLogin = false;
       this.alerts
       .open('', {label: 'Vui lòng đăng nhập',status:'info'})
       .subscribe();

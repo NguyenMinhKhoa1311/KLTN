@@ -1,4 +1,7 @@
-<div id="job_container">
+<div *ngIf="!isLogin" style="padding: 16px; font-size: 16px;">
+    Vui lòng đăng nhập để xem việc làm của tôi !
+</div>
+<div *ngIf="isLogin" id="job_container">
 
     <div class="title">
         <div class="title_box">
