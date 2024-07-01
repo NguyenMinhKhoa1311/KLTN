@@ -24,6 +24,7 @@ export class FavouriteJobComponent implements OnDestroy{
   skip: number = 2;
   start: number = 0;
   end: number = 2;
+  isLogin: boolean = false;
   //ngrx of candidate
   candidateTakenByIdAtFavoriteJob$ = this.store.select('candidate', 'candidateTakenByIdAtFavoriteJob');
   constructor(
@@ -37,19 +38,20 @@ export class FavouriteJobComponent implements OnDestroy{
     if(userLogged){
       let userAfterParse = JSON.parse(userLogged) as Candidate;
       if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
-    this.store.dispatch(CandidateActions.getByIdAtFavoriteJob({id:userAfterParse._id}));
-    this.subscriptions.push(
-      this.candidateTakenByIdAtFavoriteJob$.subscribe(candidate => {
-        if(candidate._id){
-          this.candidateToRender = candidate;
-        }
-      })
-    )
-  }}else{
-    this.alerts
-    .open('', {label: 'Vui lòng đăng nhập',status:'info'})
-    .subscribe();
-  }
+      this.isLogin = true;
+      this.store.dispatch(CandidateActions.getByIdAtFavoriteJob({id:userAfterParse._id}));
+      this.subscriptions.push(
+        this.candidateTakenByIdAtFavoriteJob$.subscribe(candidate => {
+          if(candidate._id){
+            this.candidateToRender = candidate;
+          }
+        })
+      )
+    }}else{
+      this.alerts
+      .open('', {label: 'Vui lòng đăng nhập',status:'info'})
+      .subscribe();
+    }
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
