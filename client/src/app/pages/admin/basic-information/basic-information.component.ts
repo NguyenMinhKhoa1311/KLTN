@@ -26,7 +26,7 @@ export class BasicInformationComponent implements OnDestroy {
     user: any ={}
 
   //ngrx of admin
-  recruiterCreated$ = this.store.select('admin','admincreatedAtRegister')
+  adminCreated$ = this.store.select('admin','admincreatedAtRegister')
 
   //ngrx of auth
   tokenTakenAtRegisterOfAdmin$ = this.store.select('auth', 'tokenAtRegisterOfAdmin');
@@ -46,19 +46,27 @@ export class BasicInformationComponent implements OnDestroy {
       console.log(this.user);
     }
     this.subscriptions.push(
-      this.recruiterCreated$.subscribe((recruiter) => {
-          if(recruiter._id){
-            sessionStorage.setItem('recruiterLoged', JSON.stringify(recruiter));
+      this.adminCreated$.subscribe((admin) => {
+        if(admin._id){
+          if(admin._id!='500'){
+            console.log(localStorage.length);
+            console.log('admin', admin);
+            
+            
+            sessionStorage.setItem('adminLogged', JSON.stringify(admin));
             const userToGetToken : any = {
               username: this.user.Username,
               password: this.user.Password
             }
             this.store.dispatch(AuthActions.getTokenAtRegisterOfAdmin({user: userToGetToken}));
           }
+        }
       }),
       this.tokenTakenAtRegisterOfAdmin$.subscribe((token) => {
         if(token.token){
-          sessionStorage.setItem('tokenOfRecruiter', token.token);
+          console.log('token', token.token);
+          
+          sessionStorage.setItem('tokenOfAdmin', token.token);
           this.router.navigate(['admin/job-confirm']);
         }
       })
@@ -71,15 +79,16 @@ export class BasicInformationComponent implements OnDestroy {
     Phone: new FormControl('', [Validators.required]),
     Address: new FormControl('', [Validators.required]),
   });
-  registerRecruiter(): void {
+  registerAdmin(): void {
     const newAdmin: any= {
+      User: this.user._id,
       AdminId: generateUuid(),
       Name: this.adminRegisterForm.value.Name,
       Phone: this.adminRegisterForm.value.Phone,
       Address: this.adminRegisterForm.value.Address,
       StatusConfirm: false,
     }
-    console.log('registerRecruiter');
+    console.log('admin', newAdmin);
     this.store.dispatch(AdminActions.createAtRegister({ admin: newAdmin }));
   }
 

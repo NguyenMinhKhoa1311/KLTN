@@ -18,8 +18,8 @@ export class AdminService {
   findAll(){
     return this.httpClient.get<Admin[]>(`${URL}/admin/all`);
   }
-  findByUser(email: string){
-    return this.httpClient.get<Admin>(`${URL}/admin/byUser?email=${email}`);
+  findByUser(user: string){
+    return this.httpClient.get<Admin>(`${URL}/admin/byUser?user=${user}`);
   }
   findBy_id(id: string){
     console.log('id', id);

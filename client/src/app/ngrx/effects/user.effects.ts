@@ -323,6 +323,50 @@ export class UserEffects {
     )
     )
 
+
+    getByUsernameAtLoginOfAdmin$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.getByUsernameOfAdminAtLogin),
+        mergeMap((action) =>
+            this.userService.getUserWithUserName(action.username).pipe(
+                map((user) => UserActions.getByUsernameAndPasswordOfAdminAtLoginSuccess({ user })),
+                catchError((error) => of(UserActions.getByUsernameAndPasswordOfAdminAtLoginFailure({ errorMessage: error.message })))
+            )
+        )
+    )
+    )
+
+    createAtLoginOfAdmin$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.createAtLoginOfAdmin),
+        mergeMap((action) =>
+            this.userService.create(action.user).pipe(
+                map((user) => {
+                    if(user._id.length > 0){
+                        return UserActions.createAtLoginOfAdminSuccess({user:user})
+                    }
+                    return UserActions.createAtLoginOfAdminFailure({errorMessage: 'error'})
+                }),
+                catchError((error) => of(UserActions.createAtLoginOfAdminFailure({ errorMessage: error.message }))
+                )
+            )
+        )
+    )
+    )
+
+    getByUsernameAndPasswordOfAdminAtLogin$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(UserActions.getByUsernameAndPasswordOfAdminAtLogin),
+        mergeMap((action) =>
+            this.userService.getUserWithUserNameAndPassword(action.username, action.password).pipe(
+                map((user) => UserActions.getByUsernameAndPasswordOfAdminAtLoginSuccess({ user })),
+                catchError((error) => of(UserActions.getByUsernameAndPasswordOfAdminAtLoginFailure({ errorMessage: error.message }))
+                )
+            )
+        )
+    )
+    )
+
         
     
 

@@ -7,7 +7,7 @@
             <span style="font-size: 14px; color: black; font-weight: normal; margin-top: 10px;">THÔNG TIN ĐĂNG NHẬP</span>
             </div>
             <div class="body">
-                <form [formGroup]="recruiterLoginForm">
+                <form [formGroup]="adminLoginForm">
                 <div class="form_login">
                     <div class="form_login_box">
                         <p>
@@ -41,9 +41,9 @@
                     </div>
                 </div>
                 <div class="reset_pass"  >
-                    <span (click)="navigateToForgotPass()">Quên mật khẩu</span>
+                    <span >Quên mật khẩu</span>
                 </div>
-                <div class="btn_login" (click)="loginWithAcount()">
+                <div class="btn_login" (click)="loginWitAccount()">
                     <button
                         appearance="primary"
                         tuiButton

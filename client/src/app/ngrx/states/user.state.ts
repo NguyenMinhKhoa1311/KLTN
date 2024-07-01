@@ -123,6 +123,24 @@ export interface UserState{
     isGetByGmailOfAdminWithAccountAtRegisterSuccess: boolean;
     getByGmailOfAdminWithAccountAtRegisterError: string;
     userTakenByGmailOfAdminWithAccountAtRegister: User;
+
+    isGetByUsernameOfAdminAtLoginLoading: boolean;
+    isGetByUsernameOfAdminAtLoginSuccess: boolean;
+    getByUsernameOfAdminAtLoginError: string;
+    userTakenByUsernameOfAdminAtLogin: User;
+
+    isCreateUserOfAdminAtLoginLoading: boolean;
+    isCreateUserOfAdminAtLoginSuccess: boolean;
+    createUserOfAdminAtLoginError: string;
+    userCreatedOfAdminAtLogin: User;
+
+    isGetByUsernameandPasswordOfAdminAtLoginLoading: boolean;
+    isGetByUsernameandPasswordOfAdminAtLoginSuccess: boolean;
+    getByUsernameandPasswordOfAdminAtLoginError: string;
+    userTakenByUsernameandPasswordOfAdminAtLogin: User;
+    
+
+    
     
 
 }

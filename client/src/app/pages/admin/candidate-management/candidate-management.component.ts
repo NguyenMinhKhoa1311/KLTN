@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { Candidate } from '../../../models/candidate.model';
 import { generateUuid, parseDate } from '../../../../environments/environments';
 import { TuiAlertService } from '@taiga-ui/core';
+import { Ban } from '../../../models/ban.model';
 
 @Component({
   selector: 'app-candidate-management',
@@ -24,6 +25,8 @@ export class CandidateManagementComponent implements OnDestroy{
   candidatesToRender: Candidate[] = [];
   candidateToRender: Candidate = <Candidate>{};
   candidateToBan: Candidate = <Candidate>{};
+  banToUnBan: Ban = <Ban>{};
+  isBan: boolean = false;
 
   
   subscriptions: Subscription[] = [];
@@ -35,6 +38,8 @@ export class CandidateManagementComponent implements OnDestroy{
   //ngrx of ban
   isBanSuccess$ = this.store.select('ban', 'isBanUserAtManageCandidateSuccess');
   banError$ = this.store.select('ban', 'banUserAtManageCandidateError');
+  banTakenByCandidate$ = this.store.select('ban', 'banTakenByCandidateAtManagementCandidate');
+  isUnBanSuccess$ = this.store.select('ban', 'isUnBanUserAtManageCandidateSuccess');
 
   parseDateInComponent(date: Date) {
     return parseDate(date);
@@ -57,8 +62,9 @@ export class CandidateManagementComponent implements OnDestroy{
           if (isBanSuccess) {
             this.closeCandidateDialog();
             this.alerts
-          .open('', {label: 'Đã cấm thành công ứng viên',status:'info'})
+          .open('', {label: 'Đã cấm thành công ứng viên',status:'success'})
           .subscribe();
+          this.store.dispatch(CandidateActions.getAllAtManageCandidate());
           }
         }),
         this.banError$.subscribe(error => {
@@ -68,6 +74,23 @@ export class CandidateManagementComponent implements OnDestroy{
           .subscribe();
           }
         }),
+        this.banTakenByCandidate$.subscribe(ban => {
+          if (ban._id) {
+            if(ban._id!='500'){
+              this.banToUnBan = ban;
+              this.openCandidateDialog(ban.Candidate);
+            }
+          }
+        }),
+        this.isUnBanSuccess$.subscribe(isUnBanSuccess => {
+          if (isUnBanSuccess) {
+            this.closeCandidateDialog();
+            this.alerts
+          .open('', {label: 'Đã hủy cấm thành công ứng viên',status:'success'})
+          .subscribe();
+          this.store.dispatch(CandidateActions.getAllAtManageCandidate());
+          }
+        })
     );
     this.store.dispatch(CandidateActions.getAllAtManageCandidate());
   }
@@ -86,12 +109,42 @@ export class CandidateManagementComponent implements OnDestroy{
     
     this.store.dispatch(BanActions.banUserAtManageCandidate({ban:ban}));
   }
+  unbanCandidate() {
+    const unBan: any ={
+      _id: this.banToUnBan._id,
+      User: this.banToUnBan.Candidate._id,
+      forCandidate: 'true',
+      forRecruiter: 'false'
+    }
+    this.store.dispatch(BanActions.unBanUserAtManageCandidate({ban: unBan}));
+  }
+  checkIsBan(candidate: Candidate) {
+    console.log(candidate.isBan);
+    
+    if (candidate.isBan) {
+      console.log(candidate._id);
+      
+      this.store.dispatch(BanActions.getByCandidateAtManageCandidate({candidate: candidate._id}));
+    } else {
+      console.log(candidate);
+      
+      this.openCandidateDialog(candidate);
+    }
+  }
+  banOrUnbanCandidate() {
+    if (this.isBan) {
+      this.unbanCandidate();
+    } else {
+      this.banCandidate();
+    }
+  }
 
   @ViewChild('candidateDialog', { static: true })
   candidateDialog!: ElementRef<HTMLDialogElement>;
   cdr1 = inject(ChangeDetectorRef);
   openCandidateDialog(candidate:Candidate) {
     this.candidateToBan = candidate;
+    this.isBan = candidate.isBan;
     this.candidateDialog.nativeElement.showModal();
     this.cdr1.detectChanges();
   }

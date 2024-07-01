@@ -73,4 +73,14 @@ export interface AuthState {
   loginAtRegisterOfAdminErrorMessage: string,
   userAtregisterOfAdmin: UserFirebase,
 
+  isLoginOfAdminAtLoginLoading: boolean,
+  isLoginOfAdminAtLoginSuccessfull: boolean,
+  loginOfAdminAtLoginErrorMessage: string,
+  userOfAdminAtLogin: UserFirebase,
+
+  isGetTokenAtLoginOfAdminLoading: boolean,
+  isGetTokenAtLoginOfAdminSuccessfull: boolean,
+  getTokenAtLoginOfAdminErrorMessage: string,
+  tokenAtLoginOfAdmin: any,
+
 }

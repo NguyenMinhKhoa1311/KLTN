@@ -128,7 +128,9 @@ export class RegisterComponent implements OnDestroy {
   }
   registerWithAccount(): void {
     if(this.recruiterRegisterForm.value.Password !== this.recruiterRegisterForm.value.ConfirmPassword){
-      alert('Password and Confirm Password are not the same');
+      this.alerts
+            .open('', {label: 'Mật khẩu và mật khẩu xác nhận không trùng khớp',status:'info'})
+            .subscribe();
       return;
     }
     this.store.dispatch(UserActions.getByGmailOfRecruiterWithAccountAtRegister({ username: this.recruiterRegisterForm.value.Email??"" }));

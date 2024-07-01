@@ -1,3 +1,5 @@
+import { Ban } from "../../models/ban.model";
+
 export interface BanState{
     isBanUserAtManageCandidateLoading: boolean;
     isBanUserAtManageCandidateSuccess: boolean;
@@ -14,4 +16,15 @@ export interface BanState{
     unBanUserAtManageRecruiterLoading: boolean;
     unBanUserAtManageRecruiterSuccess: boolean;
     unBanUserAtManageRecruiterError: string;
+
+    isGetBanByCandidateAtManageCandidateLoading: boolean;
+    isGetBanByCandidateAtManageCandidateSuccess: boolean;
+    getBanByCandidateAtManageCandidateError: string;
+    banTakenByCandidateAtManagementCandidate: Ban;
+
+    isGetBanByRecruiterAtManageRecruiterLoading: boolean;
+    isGetBanByRecruiterAtManageRecruiterSuccess: boolean;
+    getBanByRecruiterAtManageRecruiterError: string;
+    banTakenByRecruiterAtManageRecruiter: Ban;
+
 }

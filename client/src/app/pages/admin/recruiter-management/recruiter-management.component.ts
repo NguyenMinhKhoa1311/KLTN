@@ -24,6 +24,8 @@ export class RecruiterManagementComponent implements OnDestroy{
   recruitersToRender: Recruiter[] = [];
   recruiterToRender: Recruiter = <Recruiter>{};
   recruiterToBan: Recruiter = <Recruiter>{};
+  banToUnBan: any = {};
+  isBan: boolean = false;
 
   subscriptions: Subscription[] = [];
 
@@ -33,6 +35,10 @@ export class RecruiterManagementComponent implements OnDestroy{
   //ngrx of ban
   isBanSuccess$ = this.store.select('ban', 'isBanUserAtManageRecruiterSuccess');
   banError$ = this.store.select('ban', 'banUserAtManageRecruiterError');
+  banTakenByRecruiter$ = this.store.select('ban', 'banTakenByRecruiterAtManageRecruiter');
+  isUnBanSuccess$ = this.store.select('ban', 'unBanUserAtManageRecruiterSuccess');
+
+
 
   constructor(
     private readonly store: Store<{ 
@@ -55,8 +61,9 @@ export class RecruiterManagementComponent implements OnDestroy{
           if (isBanSuccess) {
             this.closeRecruiterDialog();
             this.alerts
-          .open('', {label: 'Đã cấm nhà tuyển dụng thành công',status:'info'})
+          .open('', {label: 'Đã cấm nhà tuyển dụng thành công',status:'success'})
           .subscribe();
+          this.store.dispatch(RecruiterActions.getAllAtManageRecruiter());
           }
         }),
         this.banError$.subscribe(error => {
@@ -65,6 +72,23 @@ export class RecruiterManagementComponent implements OnDestroy{
             this.alerts
             .open('', {label: 'Có lỗi xảy ra',status:'error'})
             .subscribe();
+          }
+        }),
+        this.isUnBanSuccess$.subscribe(isUnBanSuccess => {
+          if (isUnBanSuccess) {
+            this.closeRecruiterDialog();
+            this.alerts
+          .open('', {label: 'Đã bỏ cấm nhà tuyển dụng thành công',status:'success'})
+          .subscribe();
+          this.store.dispatch(RecruiterActions.getAllAtManageRecruiter());
+          }
+        }),
+        this.banTakenByRecruiter$.subscribe(ban => {
+          if (ban._id) {
+            if(ban._id!='500'){
+              this.banToUnBan = ban;
+              this.openRecruiterDialog(ban.Recruiter);
+            }
           }
         })
     );
@@ -87,6 +111,32 @@ export class RecruiterManagementComponent implements OnDestroy{
     }
     this.store.dispatch(BanActions.banUserAtManageRecruiter({ban}));
   }
+  unBanRecruiter() {
+    const ban: any ={
+      _id: this.banToUnBan._id,
+      User: this.banToUnBan.Recruiter._id,
+      forCandidate: 'false',
+      forRecruiter: 'true'
+    }
+    console.log(ban);
+    
+    this.store.dispatch(BanActions.unBanUserAtManageRecruiter({ban:ban}));
+  }
+  checkIsBan(recruiter: Recruiter) {
+    if(recruiter.isBan){
+      this.store.dispatch(BanActions.getByRecruiterAtManageRecruiter({recruiter: recruiter._id}));
+    }else{
+      this.openRecruiterDialog(recruiter);
+    }
+  }
+
+  banOrUnBanRecruiter() {
+    if(this.isBan){
+      this.unBanRecruiter();
+    }else{
+      this.banRecruiter();
+    }
+  }
 
 
   @ViewChild('recruiterDialog', { static: true })
@@ -96,6 +146,7 @@ export class RecruiterManagementComponent implements OnDestroy{
     this.recruiterDialog.nativeElement.showModal();
     this.cdr1.detectChanges();
     this.recruiterToBan = recruiter;
+    this.isBan = recruiter.isBan;
   }
   closeRecruiterDialog() {
     this.recruiterDialog.nativeElement.close();

@@ -74,6 +74,16 @@ export const initialState: AuthState = {
     loginAtRegisterOfAdminErrorMessage: '',
     userAtregisterOfAdmin: <UserFirebase>{},
 
+    getTokenAtLoginOfAdminErrorMessage: '',
+    tokenAtLoginOfAdmin: {},
+    isGetTokenAtLoginOfAdminSuccessfull: false,
+    isGetTokenAtLoginOfAdminLoading: false,
+
+    isLoginOfAdminAtLoginLoading: false,
+    isLoginOfAdminAtLoginSuccessfull: false,
+    loginOfAdminAtLoginErrorMessage: '',
+    userOfAdminAtLogin: <UserFirebase>{},
+
 
 };
 
@@ -549,6 +559,67 @@ export const authReducer = createReducer(
         isLoginAtRegisterOfAdminLoading: false,
         isLoginAtRegisterOfAdminSuccessfull: false,
         loginAtRegisterOfAdminErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.getTokenAtLoginOfAdmin, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtLoginOfAdminLoading: true,
+        isGetTokenAtLoginOfAdminSuccessfull: false,
+        getTokenAtLoginOfAdminErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtLoginOfAdminSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        tokenAtLoginOfAdmin: action.res,
+        isGetTokenAtLoginOfAdminLoading: false,
+        isGetTokenAtLoginOfAdminSuccessfull: true,
+        getTokenAtLoginOfAdminErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.getTokenAtLoginOfAdminFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isGetTokenAtLoginOfAdminLoading: false,
+        isGetTokenAtLoginOfAdminSuccessfull: false,
+        getTokenAtLoginOfAdminErrorMessage: action.errorMessage,
+      };
+      return newState;
+    }),
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(LoginActions.loginOfAdminAtLogin, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isLoginOfAdminAtLoginLoading: true,
+        isLoginOfAdminAtLoginSuccessfull: false,
+        loginOfAdminAtLoginErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.loginOfAdminAtLoginSuccess, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        userOfAdminAtLogin: action.user,
+        isLoginOfAdminAtLoginLoading: false,
+        isLoginOfAdminAtLoginSuccessfull: true,
+        loginOfAdminAtLoginErrorMessage: '',
+      };
+      return newState;
+    }),
+    on(LoginActions.loginOfAdminAtLoginFailure, (state, action) => {
+      let newState: AuthState = {
+        ...state,
+        isLoginOfAdminAtLoginLoading: false,
+        isLoginOfAdminAtLoginSuccessfull: false,
+        loginOfAdminAtLoginErrorMessage: action.errorMessage,
       };
       return newState;
     }),

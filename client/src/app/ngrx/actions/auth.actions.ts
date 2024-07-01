@@ -109,6 +109,21 @@ export const getTokenAtRegisterOfAdminFailure = createAction(
 );
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getTokenAtLoginOfAdmin = createAction(
+  '[Auth] get token At Login Of Admin',
+  props<{ user: any }>()
+);
+export const getTokenAtLoginOfAdminSuccess = createAction(
+  '[Auth] get token At Login Of Admin success',
+  props<{ res: any }>()
+);
+export const getTokenAtLoginOfAdminFailure = createAction(
+  '[Auth] get token At Login Of Admin failure',
+  props<{ errorMessage: string }>()
+);
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,8 +221,8 @@ export const loginOfRecruiterAtRegisterFailure = createAction(
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const loginOfAdminAtRegister = createAction
-('[Auth] login of admin at register'
+export const loginOfAdminAtRegister = createAction(
+  '[Auth] login of admin at register'
 );
 export const loginOfAdminAtRegisterSuccess = createAction(
   '[Auth] login of admin at register success',
@@ -215,6 +230,22 @@ export const loginOfAdminAtRegisterSuccess = createAction(
 );
 export const loginOfAdminAtRegisterFailure = createAction(
   '[Auth] login of admin at register failure',
+  props<{ errorMessage: any }>()
+);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const loginOfAdminAtLogin = createAction(
+  '[Auth] login of admin at login'
+);
+export const loginOfAdminAtLoginSuccess = createAction(
+  '[Auth] login of admin at login success',
+  props<{ user: UserFirebase }>()
+);
+export const loginOfAdminAtLoginFailure = createAction(
+  '[Auth] login of admin at login failure',
   props<{ errorMessage: any }>()
 );
 

@@ -18,7 +18,7 @@ export class AdminController {
   }
 
   @Get('byUser')
-  findByUser(@Query('email') email: string) {
+  findByUser(@Query('user') email: string) {
     return this.adminService.findByUser(email);
   }
 

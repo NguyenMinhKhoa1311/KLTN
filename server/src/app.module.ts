@@ -126,8 +126,6 @@ export class AppModule implements NestModule {
         {path: 'recruiter/update', method: RequestMethod.PUT},
         {path: 'company/update', method: RequestMethod.PUT},
         {path: 'user/updatePasswordWithoutToken', method: RequestMethod.PUT},
-
-        
       )
       ;
   }

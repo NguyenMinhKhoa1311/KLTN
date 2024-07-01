@@ -95,4 +95,46 @@ export class BanEffects{
 
         )
     )
+
+    getByCandidateAtManageCandidate$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(BanActions.getByCandidateAtManageCandidate),
+            exhaustMap((action)=>
+                this.banService.getByCandidate(action.candidate).pipe(
+                    map((ban)=>{
+                        if(ban){
+                            return BanActions.getByCandidateAtManageCandidateSuccess({ban: ban})
+                        }else{
+                            return BanActions.getByCandidateAtManageCandidateFailure({error: "Error"})
+                        }
+                    }),
+                    catchError((error)=>{
+                        return of(BanActions.getByCandidateAtManageCandidateFailure({error: error}))
+                    })
+                )
+            )
+
+        )
+    )
+    getByRecruiterAtManageRecruiter$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(BanActions.getByRecruiterAtManageRecruiter),
+            exhaustMap((action)=>
+                this.banService.getByRecruiter(action.recruiter).pipe(
+                    map((ban)=>{
+                        if(ban){
+                            return BanActions.getByRecruiterAtManageRecruiterSuccess({ban: ban})
+                        }else{
+                            return BanActions.getByRecruiterAtManageRecruiterFailure({error: "Error"})
+                        }
+                    }),
+                    catchError((error)=>{
+                        return of(BanActions.getByRecruiterAtManageRecruiterFailure({error: error}))
+                    })
+                )
+            )
+
+        )
+    )
+
 }

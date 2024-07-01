@@ -99,9 +99,9 @@ export class LoginComponent implements OnDestroy {
           if (recruiter._id) {
             console.log('recruiter', recruiter);
             if (recruiter._id == "500") {
+              sessionStorage.setItem('userOfRecruiterLogged', JSON.stringify(this.userLoged));
               this.router.navigate(['recruiterLayout/create-company']);
               console.log('recruiter', recruiter);
-              sessionStorage.setItem('userOfRecruiterLogged', JSON.stringify(this.userLoged));
             }
             else{
               if(recruiter.isBan){
@@ -152,7 +152,7 @@ export class LoginComponent implements OnDestroy {
   loginWithGoogle() {
     this.store.dispatch(AuthAcitons.loginOfRecruiterAtLogin());
   }
-  loginWithAcouunt() {
+  loginWithAcount() {
     this.store.dispatch(UserActions.getByUsernameAndPasswordOfRecruiterAtLogin({ username: this.recruiterLoginForm.value.Username??"", password: this.recruiterLoginForm.value.Password??"" }));
   }
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { BanService } from './ban.service';
 import { CreateBanDto } from './dto/create-ban.dto';
 import { UpdateBanDto } from './dto/update-ban.dto';
@@ -54,16 +54,34 @@ export class BanController {
   }
 
   @Delete('delete')
-  async delete(@Body() deleteBanDto: DeleteBanDto){
+  async delete(@Query('ban') ban: string, @Query('user') User: string, @Query('forCandidate') ForCandidate: string, @Query('forRecruiter') ForRecruiter: string) {
+    const deleteBanDto: DeleteBanDto = {
+      _id: ban,
+      User: User,
+      ForCandidate: false,
+      ForRecruiter: false
+    }
+    if(ForCandidate=="true"){
+      deleteBanDto.ForCandidate = true;
+    }
+    if(ForRecruiter=="true"){
+      deleteBanDto.ForRecruiter = true;
+    }
+    log(deleteBanDto, "deleteBanDto")
     if(deleteBanDto.ForCandidate){
       const result = await this.CandidateService.unBanCandidate(deleteBanDto.User);
+      log(result, "result")
       if(result){
         return await this.banService.delete(deleteBanDto._id);
       }else{
         return false
       }
-    }else if(deleteBanDto.ForRecruiter){
+    }
+    log(deleteBanDto.ForCandidate, "deleteBanDto.ForCandidate")
+    log(deleteBanDto.ForRecruiter, "deleteBanDto.ForRecruiter")
+    if(deleteBanDto.ForRecruiter){
       const result = await this.recruiterService.unBanRecruiter(deleteBanDto.User);
+      log(result, "result")
       if(result){
         return await this.banService.delete(deleteBanDto._id);
       }else{
@@ -71,6 +89,16 @@ export class BanController {
       }
     }
   }
+
+  @Get('getByCandidate')
+  async findByCandidate(@Query('candidate') candidate: string){
+    return await this.banService.findByCandidate(candidate);
+  }
+  @Get('getByRecruiter')
+  async findByRecruiter(@Query('recruiter') recruiter: string){
+    return await this.banService.findByRecruiter(recruiter);
+  }
+
 
 
 

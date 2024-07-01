@@ -51,6 +51,11 @@ export const ADMIN_ROUTERS: Routes = [
         loadChildren: () =>
           import('./basic-information/basic-information.routes').then((m) => m.BASICINFORMATION_ROUTERS),
       },
+      {
+        path:'login',
+        loadChildren: () =>
+          import('./login/login.routes').then((m) => m.LOGIN_ROUTERS),
+      },
     ],
   },
 ];

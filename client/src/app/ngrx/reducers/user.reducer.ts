@@ -123,6 +123,20 @@ export const initialState: UserState ={
     isGetByGmailOfAdminWithAccountAtRegisterSuccess: false,
     userTakenByGmailOfAdminWithAccountAtRegister: <User>{},
 
+    isGetByUsernameOfAdminAtLoginLoading: false,
+    isGetByUsernameOfAdminAtLoginSuccess: false,
+    getByUsernameOfAdminAtLoginError: '',
+    userTakenByUsernameOfAdminAtLogin: <User>{},
+
+    isCreateUserOfAdminAtLoginLoading: false,
+    isCreateUserOfAdminAtLoginSuccess: false,
+    createUserOfAdminAtLoginError: '',
+    userCreatedOfAdminAtLogin: <User>{},
+
+    getByUsernameandPasswordOfAdminAtLoginError: '',
+    isGetByUsernameandPasswordOfAdminAtLoginLoading: false,
+    isGetByUsernameandPasswordOfAdminAtLoginSuccess: false,
+    userTakenByUsernameandPasswordOfAdminAtLogin: <User>{},
 
 
 };
@@ -1026,6 +1040,115 @@ export const userReducer = createReducer(
         return newState;
     }
     ),
+
+
+    
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getByUsernameOfAdminAtLogin, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfAdminAtLoginLoading: true,
+            isGetByUsernameOfAdminAtLoginSuccess: false,
+            getByUsernameOfAdminAtLoginError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByUsernameOfAdminAtLoginSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfAdminAtLoginLoading: false,
+            isGetByUsernameOfAdminAtLoginSuccess: true,
+            getByUsernameOfAdminAtLoginError: '',
+            userTakenByUsernameOfAdminAtLogin: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.getByUsernameOfAdminAtLoginFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameOfAdminAtLoginLoading: false,
+            isGetByUsernameOfAdminAtLoginSuccess: false,
+            getByUsernameOfAdminAtLoginError: action.errorMessage,
+        };
+        return newState;
+    }
+    ), 
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.createAtLoginOfAdmin, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfAdminAtLoginLoading: true,
+            isCreateUserOfAdminAtLoginSuccess: false,
+            createUserOfAdminAtLoginError: '',
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.createAtLoginOfAdminSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfAdminAtLoginLoading: false,
+            isCreateUserOfAdminAtLoginSuccess: true,
+            createUserOfAdminAtLoginError: '',
+            userCreatedOfAdminAtLogin: action.user,
+        };
+        return newState;
+    }
+    ),
+    on(UserActions.createAtLoginOfAdminFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isCreateUserOfAdminAtLoginLoading: false,
+            isCreateUserOfAdminAtLoginSuccess: false,
+            createUserOfAdminAtLoginError: action.errorMessage,
+        };
+        return newState;
+    }
+    ),
+
+
+
+
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(UserActions.getByUsernameAndPasswordOfAdminAtLogin, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameandPasswordOfAdminAtLoginLoading: true,
+            isGetByUsernameandPasswordOfAdminAtLoginSuccess: false,
+            getByUsernameandPasswordOfAdminAtLoginError: '',
+        };
+        return newState;
+    }),
+    on(UserActions.getByUsernameAndPasswordOfAdminAtLoginSuccess, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameandPasswordOfAdminAtLoginLoading: false,
+            isGetByUsernameandPasswordOfAdminAtLoginSuccess: true,
+            getByUsernameandPasswordOfAdminAtLoginError: '',
+            userTakenByUsernameandPasswordOfAdminAtLogin: action.user,
+        };
+        return newState;
+    }),
+    on(UserActions.getByUsernameAndPasswordOfAdminAtLoginFailure, (state, action) => {
+        let newState: UserState = {
+            ...state,
+            isGetByUsernameandPasswordOfAdminAtLoginLoading: false,
+            isGetByUsernameandPasswordOfAdminAtLoginSuccess: false,
+            getByUsernameandPasswordOfAdminAtLoginError: action.errorMessage,
+        };
+        return newState;
+    }),
+
 
 
 

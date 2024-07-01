@@ -16,6 +16,15 @@ export class BanService {
     return this.httpClient.post<boolean>(`${URL}/ban/create`, ban);
   }
   delete(ban: any){
-    return this.httpClient.delete<boolean>(`${URL}/ban/delete`, ban);
+    console.log(`${URL}/ban/delete`);
+    
+    return this.httpClient.delete<boolean>(`${URL}/ban/delete?ban=${ban._id}&user=${ban.User}&forCandidate=${ban.forCandidate}&forRecruiter=${ban.forRecruiter}`);
   }
+  getByCandidate(candidate: string){
+    return this.httpClient.get<Ban>(`${URL}/ban/getByCandidate?candidate=${candidate}`);
+  }
+  getByRecruiter(recruiter: string){
+    return this.httpClient.get<Ban>(`${URL}/ban/getByRecruiter?recruiter=${recruiter}`);
+  }
+
 }

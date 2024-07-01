@@ -157,7 +157,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
   }
 
   job_post(){
-    this.router.navigate(['/recruiterLayout/choice-service']);
+    this.router.navigate(['/recruiterLayout/job-detail']);
   }
 
 }

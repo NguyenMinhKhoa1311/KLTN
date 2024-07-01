@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { Ban } from "../../models/ban.model";
 
 export const banUserAtManageCandidate = createAction(
     '[Ban] Ban User At Manage Candidate',
@@ -55,3 +56,31 @@ export const unBanUserAtManageRecruiterFailure = createAction(
     props<{error: string}>()
     );
     
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByCandidateAtManageCandidate = createAction(
+    '[Ban] Get By Candidate At Manage Candidate',
+    props<{candidate: string}>()
+    );
+export const getByCandidateAtManageCandidateSuccess = createAction(
+    '[Ban] Get By Candidate Success At Manage Candidate',
+    props<{ban: Ban}>()
+    );
+export const getByCandidateAtManageCandidateFailure = createAction(
+    '[Ban] Get By Candidate Failure At Manage Candidate',
+    props<{error: string}>()
+    );
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByRecruiterAtManageRecruiter = createAction(
+    '[Ban] Get By Recruiter At Manage Recruiter',
+    props<{recruiter: string}>()
+    );
+export const getByRecruiterAtManageRecruiterSuccess = createAction(
+    '[Ban] Get By Recruiter Success At Manage Recruiter',
+    props<{ban: Ban}>()
+    );
+export const getByRecruiterAtManageRecruiterFailure = createAction(
+    '[Ban] Get By Recruiter Failure At Manage Recruiter',
+    props<{error: string}>()
+    );

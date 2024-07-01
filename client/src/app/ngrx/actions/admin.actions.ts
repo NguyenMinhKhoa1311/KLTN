@@ -28,3 +28,19 @@ export const getBy_idAtRegisterFailure = createAction(
     '[Admin] get by_id at register failure',
     props<{ errorMessage: string }>()
 );
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByUserAtLogin = createAction(
+    '[Admin] get by user at login',
+    props<{ user: string }>()
+);
+export const getByUserAtLoginSuccess = createAction(
+    '[Admin] get by user at login success',
+    props<{ admin: Admin }>()
+);
+export const getByUserAtLoginFailure = createAction(
+    '[Admin] get by user at login failure',
+    props<{ errorMessage: string }>()
+);
+

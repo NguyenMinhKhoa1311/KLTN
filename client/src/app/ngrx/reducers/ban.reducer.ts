@@ -2,6 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { BanState } from "../states/ban.state";
 
 import * as BanActions from "../actions/ban.actions";
+import { Ban } from "../../models/ban.model";
 
 const initizaState: BanState = {
     isBanUserAtManageCandidateLoading: false,
@@ -19,6 +20,16 @@ const initizaState: BanState = {
     unBanUserAtManageRecruiterLoading: false,
     unBanUserAtManageRecruiterSuccess: false,
     unBanUserAtManageRecruiterError: "",
+
+    isGetBanByCandidateAtManageCandidateLoading: false,
+    isGetBanByCandidateAtManageCandidateSuccess: false,
+    getBanByCandidateAtManageCandidateError: "",
+    banTakenByCandidateAtManagementCandidate: <Ban>{},
+
+    banTakenByRecruiterAtManageRecruiter: <Ban>{},
+    isGetBanByRecruiterAtManageRecruiterLoading: false,
+    isGetBanByRecruiterAtManageRecruiterSuccess: false,
+    getBanByRecruiterAtManageRecruiterError: "",
 };
 
 export const banReducer = createReducer(
@@ -121,6 +132,60 @@ export const banReducer = createReducer(
             unBanUserAtManageRecruiterSuccess: false,
             unBanUserAtManageRecruiterError: action.error,
         };
-    })
+    }),
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(BanActions.getByCandidateAtManageCandidate, (state, action) => {
+        return {
+            ...state,
+            isGetBanByCandidateAtManageCandidateLoading: true,
+            isGetBanByCandidateAtManageCandidateSuccess: false,
+            getBanByCandidateAtManageCandidateError: "",
+        };
+    }),
+    on(BanActions.getByCandidateAtManageCandidateSuccess, (state, action) => {
+        return {
+            ...state,
+            isGetBanByCandidateAtManageCandidateLoading: false,
+            isGetBanByCandidateAtManageCandidateSuccess: true,
+            banTakenByCandidateAtManagementCandidate: action.ban,
+        };
+    }),
+    on(BanActions.getByCandidateAtManageCandidateFailure, (state, action) => {
+        return {
+            ...state,
+            isGetBanByCandidateAtManageCandidateLoading: false,
+            isGetBanByCandidateAtManageCandidateSuccess: false,
+            getBanByCandidateAtManageCandidateError: action.error,
+        };
+    }),
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(BanActions.getByRecruiterAtManageRecruiter, (state, action) => {
+        return {
+            ...state,
+            isGetBanByRecruiterAtManageRecruiterLoading: true,
+            isGetBanByRecruiterAtManageRecruiterSuccess: false,
+            getBanByRecruiterAtManageRecruiterError: "",
+        };
+    }),
+    on(BanActions.getByRecruiterAtManageRecruiterSuccess, (state, action) => {
+        return {
+            ...state,
+            isGetBanByRecruiterAtManageRecruiterLoading: false,
+            isGetBanByRecruiterAtManageRecruiterSuccess: true,
+            banTakenByRecruiterAtManageRecruiter: action.ban,
+        };
+    }),
+    on(BanActions.getByRecruiterAtManageRecruiterFailure, (state, action) => {
+        return {
+            ...state,
+            isGetBanByRecruiterAtManageRecruiterLoading: false,
+            isGetBanByRecruiterAtManageRecruiterSuccess: false,
+            getBanByRecruiterAtManageRecruiterError: action.error,
+        };
+    }),
+    
+
 
 )

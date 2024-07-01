@@ -97,6 +97,19 @@ export class AuthEffects {
       )
     )
   );
+  loginOfAdminAtLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginOfAdminAtLogin),
+      exhaustMap(() =>
+        from(this.authService.loginWithGoogle()).pipe(
+          map((user) => AuthActions.loginOfAdminAtLoginSuccess({ user })),
+          catchError((error) =>
+            of(AuthActions.loginOfAdminAtLoginFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
 
   getTokenAtRegisterOfAdmin$ = createEffect(() =>
     this.actions$.pipe(
@@ -205,6 +218,20 @@ export class AuthEffects {
           map((res) => AuthActions.getTokenAtUserManagementOfAdminSuccess({ res })),
           catchError((error) =>
             of(AuthActions.getTokenAtUserManagementOfAdminFailure({ errorMessage: error }))
+          )
+        )
+      )
+    )
+  );
+
+  getTokenAtLoginOfAdmin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.getTokenAtLoginOfAdmin),
+      exhaustMap((action) =>
+        from(this.authService.getToken(action.user)).pipe(
+          map((res) => AuthActions.getTokenAtLoginOfAdminSuccess({ res })),
+          catchError((error) =>
+            of(AuthActions.getTokenAtLoginOfAdminFailure({ errorMessage: error }))
           )
         )
       )

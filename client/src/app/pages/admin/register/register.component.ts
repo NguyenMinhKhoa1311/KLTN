@@ -93,7 +93,7 @@ export class RegisterComponent implements OnDestroy{
       }),
       this.adminTakenByUser$.subscribe((admin) => {
         if (admin._id) {
-          if (admin._id.length !=500) {
+          if (admin._id !='500') {
             console.log('admin', admin);
             const adminAsJson = JSON.stringify(admin);
             sessionStorage.setItem('adminLogged', adminAsJson);

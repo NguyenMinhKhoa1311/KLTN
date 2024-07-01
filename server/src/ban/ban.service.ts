@@ -39,7 +39,8 @@ export class BanService {
   }
   async findByCandidate(id: string){
     try{
-      const ban = await this.banModel.findOne({Candidate: id});
+      const ban = await this.banModel.findOne({Candidate: id})
+      .populate('Candidate').exec();
       if(ban._id){
         return ban;
       }else{
@@ -56,7 +57,8 @@ export class BanService {
   }
   async findByRecruiter(id: string){
     try{
-      const ban = await this.banModel.findOne({Recruiter: id});
+      const ban = await this.banModel.findOne({Recruiter: id})
+      .populate('Recruiter').exec();
       if(ban._id){
         return ban;
       }else{

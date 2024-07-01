@@ -101,6 +101,59 @@ export const getByGmailOfAdminAtRegisterFailure = createAction(
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const createAtLoginOfAdmin = createAction(
+    '[User] create at login of admin',
+    props<{ user: User}>()
+);
+export const createAtLoginOfAdminSuccess = createAction(
+    '[User] create at login of admin success',
+    props<{ user: User}>()
+);
+export const createAtLoginOfAdminFailure = createAction(
+    '[User] create at login of admin failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByUsernameAndPasswordOfAdminAtLogin = createAction(
+    '[User] get by username and password of admin at login',
+    props<{ username: string, password: string}>()
+);
+export const getByUsernameAndPasswordOfAdminAtLoginSuccess = createAction(
+    '[User] get by username and password of admin at login success',
+    props<{ user: User}>()
+);
+export const getByUsernameAndPasswordOfAdminAtLoginFailure = createAction(
+    '[User] get by username and password of admin at login failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const getByUsernameOfAdminAtLogin = createAction(
+    '[User] get by username of admin at login',
+    props<{ username: string}>()
+);
+export const getByUsernameOfAdminAtLoginSuccess = createAction(
+    '[User] get by username of admin at login success',
+    props<{ user: User}>()
+);
+export const getByUsernameOfAdminAtLoginFailure = createAction(
+    '[User] get by username of admin at login failure',
+    props<{ errorMessage: string}>()
+);
+
+
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
