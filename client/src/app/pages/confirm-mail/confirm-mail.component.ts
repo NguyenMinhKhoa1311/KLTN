@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [TaigaModule,ShareModule],
   templateUrl: './confirm-mail.component.html',
-  styleUrl: './confirm-mail.component.scss'
+  styleUrl: './confirm-mail.component.less'
 })
 export class ConfirmMailComponent implements OnDestroy{
 
@@ -52,13 +52,14 @@ export class ConfirmMailComponent implements OnDestroy{
     email: new FormControl(''),
   });
   confirmMail(){
-    console.log(this.mailForm.value.email);
-    this.isCreateToken = true;
-    const token = {
-      TokenId: generateUuid(),
-      User: this.mailForm.value.email,
-    }
-    this.store.dispatch(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidate({tokenResetPassword:token}));
+    // console.log(this.mailForm.value.email);
+    // this.isCreateToken = true;
+    // const token = {
+    //   TokenId: generateUuid(),
+    //   User: this.mailForm.value.email,
+    // }
+    // this.store.dispatch(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidate({tokenResetPassword:token}));
+    this.isCreateTokenSuccess = true;
   }
 
   
