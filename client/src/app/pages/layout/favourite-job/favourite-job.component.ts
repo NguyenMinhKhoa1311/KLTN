@@ -21,9 +21,9 @@ export class FavouriteJobComponent implements OnDestroy{
   subscriptions: Subscription[] = [];
   //variables
   candidateToRender: Candidate = <Candidate>{};
-  skip: number = 2;
+  skip: number = 4;
   start: number = 0;
-  end: number = 2;
+  end: number = 4;
   isLogin: boolean = false;
   //ngrx of candidate
   candidateTakenByIdAtFavoriteJob$ = this.store.select('candidate', 'candidateTakenByIdAtFavoriteJob');

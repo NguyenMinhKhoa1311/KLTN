@@ -124,6 +124,7 @@ export class LoginComponent implements OnDestroy {
         if (res.token) {
           console.log('tokenOfRecruiter', res);
           sessionStorage.setItem('tokenOfRecruiter', res.token);
+          this.store.dispatch(RecruiterActions.haveRecruiterAtLogin());
           this.router.navigate(['recruiterLayout/job-detail']);
         }
       }),

@@ -52,7 +52,7 @@ export const getByDateAtStatisticalFailure = createAction(
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const createAtPaymentSuccess = createAction(
     '[Bill] Create At PaymentSuccess',
-    props<{bill:any}>()
+    props<{bill:any,token: string}>()
     );
 export const createAtPaymentSuccessFailure = createAction(
     '[Bill] Create At PaymentSuccess Failure',
@@ -68,7 +68,7 @@ export const createAtPaymentSuccessSuccess = createAction(
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const createAtJobConfirm = createAction(
     '[Bill] Create At Job Confirm',
-    props<{bill:any}>()
+    props<{bill:any,token: string}>()
     );
 export const createAtJobConfirmSuccess = createAction(
     '[Bill] Create At Job Confirm Success',

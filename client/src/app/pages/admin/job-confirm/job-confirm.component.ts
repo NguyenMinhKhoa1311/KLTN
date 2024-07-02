@@ -28,6 +28,7 @@ export class JobConfirmComponent implements OnDestroy{
   jobToRender: Job = <Job>{};
   page: number = 0;
   isOpenDialog: boolean = false;
+  token: string = "";
 
 
 
@@ -43,6 +44,12 @@ export class JobConfirmComponent implements OnDestroy{
     private store: Store<{job: jobState, bill: BillState}>,
     private readonly alerts: TuiAlertService,
   ) {
+    let token = sessionStorage.getItem('tokenOfAdmin');
+    if(token){
+      this.token = token;
+      console.log(this.token);
+      
+    }
     this.store.dispatch(JobActions.getByStatusPaymentAtConfirmJob({status: false,page: this.page, limit: 10}));
     
     this.subscriptions.push(
@@ -53,6 +60,7 @@ export class JobConfirmComponent implements OnDestroy{
         if(jobs.length){
           this.jobsToRender = jobs;
         }else if(this.isGetByStatusPaymentSuccess){
+          this.page--;
           this.alerts
           .open('', {label: 'Không còn công việc nào',status:'info'})
           .subscribe();
@@ -100,7 +108,7 @@ export class JobConfirmComponent implements OnDestroy{
       Company: this.jobToRender.Company._id,
       Career: this.jobToRender.Career._id,
     }
-    this.store.dispatch(BillActions.createAtJobConfirm({bill: bill}));
+    this.store.dispatch(BillActions.createAtJobConfirm({bill: bill,token: this.token}));
   }
 
   @ViewChild('visibilityDialog', { static: true })
@@ -114,8 +122,13 @@ export class JobConfirmComponent implements OnDestroy{
     this.visibilityDialog.nativeElement.close();
     this.cdr2.detectChanges();
   }
-
-
-  
+  nextPage(){
+    this.page++;
+    this.store.dispatch(JobActions.getByStatusPaymentAtConfirmJob({status: false,page: this.page, limit: 10}));
+  }
+  prevPage(){
+    this.page--;
+    this.store.dispatch(JobActions.getByStatusPaymentAtConfirmJob({status: false,page: this.page, limit: 10}));
+  }
 
 }

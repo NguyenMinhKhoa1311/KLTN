@@ -76,6 +76,7 @@ export class BasicInformationComponent implements OnDestroy {
         if(token.token){
           sessionStorage.setItem('tokenOfRecruiter', token.token);
           this.router.navigate(['recruiterLayout/job-detail']);
+          this.store.dispatch(RecruiterActions.haveRecruiterAtRegister())
         }
       })
     );

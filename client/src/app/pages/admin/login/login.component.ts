@@ -71,11 +71,20 @@ export class LoginComponent implements OnDestroy {
         }
       }),
       this.userTakenByGmail$.subscribe((user) => {
+        console.log(user,"user of gmail");
+        
           if(user._id){
+            console.log(user,"user");
+            
             if(user.Username!= '404 user not found'){
               this.userLoged._id = user._id;
+              this.userLoged.Username = user.Username;
+              this.userLoged.Password = user.Password;
+              console.log(this.userLoged,"this.userLoged");
               this.store.dispatch(AdminActions.getByUserAtLogin({user: user._id}));
             }else{
+              console.log(this.userLoged,"this.userLoged");
+              
               this.userLoged.Password = '1234';
               this.userLoged.Uid = generateUuid();
               const newUser:any = {
@@ -100,10 +109,14 @@ export class LoginComponent implements OnDestroy {
         if(admin._id){
           if(admin._id!='500'){
             sessionStorage.setItem('adminLogged', JSON.stringify(admin));
+            console.log(this.userLoged,"this.userLoged");
+            
             const userToGetToken : any = {
               username: this.userLoged.Username,
               password: this.userLoged.Password
             }
+            console.log(userToGetToken,"userToGetToken");
+            
             this.store.dispatch(AuthAcitons.getTokenAtLoginOfAdmin({user: userToGetToken}));
           }else{
             sessionStorage.setItem('userOfAdmin', JSON.stringify(this.userLoged));
@@ -117,12 +130,17 @@ export class LoginComponent implements OnDestroy {
         if(token.token){
           sessionStorage.setItem('tokenOfAdmin', token.token);
           this.router.navigate(['admin/job-confirm']);
+          console.log('chuyển trang');
+          
         }
       }),
       this.userTakenByUsernameAndPassword$.subscribe((user) => {
         if(user._id){
           if(user._id != '404 user not found'){
             this.userLoged._id = user._id;
+            this.userLoged.Username = user.Username;
+            this.userLoged.Password = user.Password;
+            console.log(this.userLoged,"this.userLoged");
             this.store.dispatch(AdminActions.getByUserAtLogin({user: user._id}));
           }else{
             this.alerts

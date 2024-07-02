@@ -33,6 +33,8 @@ export const initialState: RecruiterState = {
     isGetBy_idAtProfileSuccess: false,
     getBy_idAtProfileError: '',
     recruiterTakenBy_idAtProfile: <Recruiter>{},
+    
+    isHaveRecruiter: false,
 
 };
 
@@ -206,6 +208,20 @@ export const recruiterReducer = createReducer(
             isGetBy_idAtProfileLoading: false,
             isGetBy_idAtProfileSuccess: false,
             getBy_idAtProfileError: action.errorMessage,
+        }
+    }),
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(RecruiterActions.haveRecruiterAtLogin,(state,action)=>{
+        return{
+            ...state,
+            isHaveRecruiter: true,
+        }
+    }),
+    on(RecruiterActions.resetHaveRecruiterAtNavbar,(state,action)=>{
+        return{
+            ...state,
+            isHaveRecruiter: false,
         }
     }),
 

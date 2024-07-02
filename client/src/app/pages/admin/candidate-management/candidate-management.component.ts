@@ -27,6 +27,7 @@ export class CandidateManagementComponent implements OnDestroy{
   candidateToBan: Candidate = <Candidate>{};
   banToUnBan: Ban = <Ban>{};
   isBan: boolean = false;
+  token: string = "";
 
   
   subscriptions: Subscription[] = [];

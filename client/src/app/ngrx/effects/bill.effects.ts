@@ -64,7 +64,7 @@ export class BillEffects{
         this.actions$.pipe(
             ofType(BillActions.createAtPaymentSuccess),
             exhaustMap((action)=>
-                this.billService.create(action.bill).pipe(
+                this.billService.create(action.bill,action.token).pipe(
                     map((bill)=>{
                         return BillActions.createAtPaymentSuccessSuccess({bill: bill})
                     }),
@@ -81,7 +81,7 @@ export class BillEffects{
         this.actions$.pipe(
             ofType(BillActions.createAtJobConfirm),
             exhaustMap((action)=>
-                this.billService.create(action.bill).pipe(
+                this.billService.create(action.bill,action.token).pipe(
                     map((bill)=>{
                         return BillActions.createAtJobConfirmSuccess({bill: bill})
                     }),

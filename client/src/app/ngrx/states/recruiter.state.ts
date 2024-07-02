@@ -30,5 +30,7 @@ export interface RecruiterState{
     isGetBy_idAtProfileSuccess: boolean;
     getBy_idAtProfileError: string;
     recruiterTakenBy_idAtProfile: Recruiter;
+
+    isHaveRecruiter: boolean;
     
 }

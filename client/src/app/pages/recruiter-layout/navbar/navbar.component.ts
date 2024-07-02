@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ShareModule } from '../../../shared/shared.module';
 import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { Recruiter } from '../../../models/recruiter.model';
+import { RecruiterState } from '../../../ngrx/states/recruiter.state';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +14,9 @@ import { Recruiter } from '../../../models/recruiter.model';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.less'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit, OnDestroy{
+
+  subscriptions: Subscription[] = [];
 
   selectedTab!: string; // Thuộc tính để lưu trữ tên của tab hiện đang được chọn
   activeItemIndex = 0;
@@ -20,9 +25,13 @@ export class NavbarComponent implements OnInit{
   isLogin = false;
   userLogged: Recruiter = <Recruiter>{};
 
+  //ngrx of recruiter
+  isHaveRecruiter$ = this.store.select('recruiter', 'isHaveRecruiter');
+
 
   constructor (
     private router: Router,
+    private readonly store: Store<{recruiter: RecruiterState}>
   ) {
     if (this.router.url.includes('/choice-service')) {
       this.activeItemIndex = 0;
@@ -33,7 +42,27 @@ export class NavbarComponent implements OnInit{
     } else if (this.router.url.includes('/profile')) {
       this.activeItemIndex = 3;
     } 
+    this.subscriptions.push(
+      this.isHaveRecruiter$.subscribe(isHaveRecruiter => {
+        if (isHaveRecruiter) {
+          let userLogged = sessionStorage.getItem('recruiterLoged');
+          console.log('userOfRecruiterLogged',userLogged);
+          
+          if(userLogged){
+            let userAfterParse = JSON.parse(userLogged);
+            if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
+              console.log('userOfRecruiterLogged',userLogged);
+              this.isLogin = true;
+              this.userLogged = userAfterParse;
+            }
+          }
+        }
+      })
+    );
 
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   ngOnInit(): void {

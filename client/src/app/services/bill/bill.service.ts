@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { URL } from '../../../environments/environments';
 import { Bill } from '../../models/bill.model';
@@ -18,7 +18,10 @@ export class BillService {
   getByDate(date: string,recruiter: string){
     return this.httpClient.get<Bill[]>(`${URL}/bill/getByDate?recruiter=${recruiter}&date=${date}`);
   }
-  create(bill: any){
-    return this.httpClient.post<Bill>(`${URL}/bill/create`, bill);
+  create(bill: any, token: string){
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    })
+    return this.httpClient.post<Bill>(`${URL}/bill/create`, bill,{ headers });
   }
 }
