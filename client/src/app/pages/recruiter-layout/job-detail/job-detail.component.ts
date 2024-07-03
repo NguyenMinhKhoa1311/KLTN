@@ -50,6 +50,7 @@ export class JobDetailComponent implements OnDestroy {
   dateStart: string = '';
   token: string = '';
   userLogged: Recruiter = <Recruiter>{};
+  isLogin: boolean = false;
 
   parseDateInComponent(date: Date) {
     return parseDate(date);
@@ -85,6 +86,7 @@ export class JobDetailComponent implements OnDestroy {
     let token = sessionStorage.getItem('tokenOfRecruiter');
     let userLogged = sessionStorage.getItem('recruiterLoged');
     if(userLogged){
+      this.isLogin = true;
       let userAfterParse = JSON.parse(userLogged) as Recruiter;
       if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
         this.userLogged = userAfterParse;

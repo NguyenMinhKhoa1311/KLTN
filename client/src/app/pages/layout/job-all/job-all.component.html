@@ -25,8 +25,8 @@
                         <div class="date">
                             Ngày đăng: {{job.StartDate}}
                         </div>
-                        <div class="tag"*ngFor="let tag of job.Tags">
-                            <div class="tag_box" (click)="navigateToJobs(tag)">#{{tag}}</div>
+                        <div class="tag">
+                            <div class="tag_box" *ngFor="let tag of job.Tags"(click)="navigateToJobs(tag)">#{{tag}}</div>
                         </div>
                     </div>
                 </div>

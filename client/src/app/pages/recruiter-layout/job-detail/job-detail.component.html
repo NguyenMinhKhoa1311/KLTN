@@ -1,4 +1,7 @@
-<div id="jobdetail_container">
+<div *ngIf="!isLogin" style=" font-size: 16px; padding: 16px;">
+    Vui lòng đăng nhập để xem danh sách bài đăng tuyển dụng !
+</div>
+<div *ngIf="isLogin" id="jobdetail_container">
     <div class="jobdetail_box">
         <div class="title">
             Bài đăng tuyển dụng

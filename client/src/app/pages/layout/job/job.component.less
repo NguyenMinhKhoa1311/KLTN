@@ -127,14 +127,12 @@
             flex-direction: column;
             justify-content: space-between;
             .iteamList{
-               
                 display: flex;
                 flex-direction: column;
                 .item_box_column {
                     display: flex;
                     flex-direction: column; 
-                    gap: 8px;
-        
+                    gap: 3px;
                     .item_box {
                         //width: 90%;
                         //height: 50%;
@@ -242,6 +240,13 @@
             
                                 .address {
                                     font-size: 14px;
+                                    white-space: nowrap;
+                                    /* Ngăn không cho văn bản ngắn xuống dòng */
+                                    overflow: hidden;
+                                    /* Ẩn phần văn bản vượt quá phạm vi */
+                                    text-overflow: ellipsis;
+                                    /* Thêm dấu ba chấm cho văn bản đã ẩn */
+                                    width: 500px;
                                 }
                                 .tag{
                                     display: flex;
