@@ -1,38 +1,51 @@
-<div *ngIf="!isCreateTokenSuccess">
-    <form
-    class="b-form"
-    [formGroup]="mailForm"
->
-    <p>
-        <tui-input
-            formControlName="email"
-            tuiHintContent="It will be used for sending documents"
-            [tuiTextfieldCleaner]="true"
-        >
-            Type an email
-            <span class="tui-required"></span>
-            <input
-                autocomplete="email"
-                placeholder="mail@mail.ru"
-                tuiTextfield
-                type="email"
-            />
-        </tui-input>
-    </p>
-</form>
+<div id="login_container" >
+    <div id="background_register"></div>
+    <div id="login_box">
+        <div id="login_form_box">
+            <div class="header">
+            <span>Vui lòng nhập gmail để xác nhận đổi mật khẩu</span>
+            <!-- <span style="font-size: 14px; color: black; font-weight: normal; margin-top: 10px;">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng</span> -->
+            </div>
+            <div class="body">
+                <form [formGroup]="mailForm">
+                    <div class="form_login">
+                        <div class="form_login_box">
+                            <p>
+                                <tui-input
+                                    [tuiTextfieldCleaner]="true"
+                                    [tuiTextfieldLabelOutside]="true"
+                                    formControlName="email"
+                                >
+                                    Email
+                                    <input
+                                        autocomplete="email"
+                                        placeholder="Nhập email"
+                                        tuiTextfield
+                                        type="email"
+                                    />
+                                </tui-input>
+                            </p>
+                        </div>
+                    </div>
+                    <div *ngIf="isCreateTokenSuccess">
+                        Bạn hãy vào gmail để lấy link đổi mật khẩu
+                    </div>
+                    <div class="btn_login">
+                        <button
+                            appearance="primary"
+                            tuiButton
+                            type="button"
+                            class="tui-space_right-3 tui-space_bottom-3"
+                            (click)="confirmMail()"
+                        >
+                        Xác nhận
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-<button
-    appearance="primary"
-    tuiButton
-    type="button"
-    class="tui-space_right-3 tui-space_bottom-3"
-    (click)="confirmMail()"
->
-    Gửi link đổi mật khẩu
-</button>
-</div>
-<div *ngIf="isCreateTokenSuccess">
-    bạn hãy vào gmail để lấy link đổi mật khẩu
-</div>
 

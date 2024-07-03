@@ -14,7 +14,7 @@ import { UserState } from '../../ngrx/states/user.state';
   standalone: true,
   imports: [TaigaModule, ShareModule],
   templateUrl: './forgot-pass.component.html',
-  styleUrl: './forgot-pass.component.scss'
+  styleUrl: './forgot-pass.component.less'
 })
 export class ForgotPassComponent implements OnDestroy{
   subscriptions: Subscription[] = [];

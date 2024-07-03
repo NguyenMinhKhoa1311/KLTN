@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-
+            
             
             <div class="desired_job">
                 <div class="title">
@@ -93,7 +93,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="pdf">
             <div class="control_pdf">
                 <div class="change" (click)="navigatePDF()">
@@ -1140,15 +1140,19 @@
                                 />
                             </tui-input>
                         </div>
-                        <div class="phone">
-                            <span class="title">Số Điện Thoại</span>
-                            <tui-input-phone
+                        <div class="email">
+                            <span class="title">Số điện thoại</span>
+                            <tui-input-number
+                            style="margin-top: 10px;"
                             formControlName="PhoneReference"
                             [tuiTextfieldCleaner]="true"
                             [tuiTextfieldLabelOutside]="true"
                             >
-                                
-                            </tui-input-phone>
+                                <input
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input-number>
                         </div>
                     </div>
                 </div>

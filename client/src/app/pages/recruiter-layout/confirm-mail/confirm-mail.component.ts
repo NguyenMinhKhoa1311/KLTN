@@ -15,7 +15,7 @@ import { generateUuid } from '../../../../environments/environments';
   standalone: true,
   imports: [TaigaModule,ShareModule],
   templateUrl: './confirm-mail.component.html',
-  styleUrl: './confirm-mail.component.scss'
+  styleUrl: './confirm-mail.component.less'
 })
 export class ConfirmMailComponent {
   
@@ -47,12 +47,22 @@ export class ConfirmMailComponent {
 
     confirmMail(){
       console.log(this.mailForm.value.email);
-      this.isCreateToken = true;
-      const token = {
-        TokenId: generateUuid(),
-        User: this.mailForm.value.email,
+      if (this.mailForm.value.email == '') {
+        this.isCreateTokenSuccess = false;
+        this.alerts
+        .open('', {label: 'Vui lòng nhập email',status:'info'})
+        .subscribe();
+        return;
       }
-      this.store.dispatch(TokenResetPasswordActions.createTokenAtForgotPasswordOfRecruiter({tokenResetPassword:token}));
+      else{
+        this.isCreateToken = true;
+        this.isCreateTokenSuccess = true;
+        const token = {
+          TokenId: generateUuid(),
+          User: this.mailForm.value.email,
+        }
+        this.store.dispatch(TokenResetPasswordActions.createTokenAtForgotPasswordOfRecruiter({tokenResetPassword:token}));
+      }
     }
 
 }
