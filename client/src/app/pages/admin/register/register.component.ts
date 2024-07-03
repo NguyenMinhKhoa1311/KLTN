@@ -35,16 +35,17 @@ export class RegisterComponent implements OnDestroy{
       _id:''
     };
     //ngrx of auth
-    userFirebase$ = this.store.select('auth', 'userAtregisterOfAdmin');
+    tokenTakenAtRegisterOfAdmin$ = this.store.select('auth', 'tokenAtRegisterOfAdmin');
 
     //ngrx of user
     userTakenByGmail$ = this.store.select('user','userTakenByGmailOfAdminAtRegister')
     userCreatedOfAdmin$ = this.store.select('user','userCreatedOfAdminAtRegister')
-    userTakenByUsernameAndPassword$ = this.store.select('user','userTakenByGmailOfAdminWithAccountAtRegister')
+    userTakenByUsernameOfAdminWithAccount$ = this.store.select('user','userTakenByGmailOfAdminWithAccountAtRegister')
 
   
     //ngrx of admin
-    adminTakenByUser$ = this.store.select('admin','adminGetBy_idAtRegister')
+    adminTakenByUser$ = this.store.select('admin','adminGetByUserAtRegister')
+    adminCreated$ = this.store.select('admin','admincreatedAtRegister')
 
   constructor(
     private store: Store<{ auth: AuthState, user: UserState, admin: AdminState}>,
@@ -52,65 +53,53 @@ export class RegisterComponent implements OnDestroy{
     private readonly alerts: TuiAlertService,
   ) { 
     this.subscriptions.push(
-      this.userFirebase$.subscribe((user) => {
-        
-        if (user.email) {
-
-          if(user.email.length>0){
-            console.log('user', user);
-            
-            this.userLoged.Username = user.email;
-            this.store.dispatch(UserActions.getByGmailOfAdminAtRegister({ username: user.email }));
-          }
-        }
-      }),
-      this.userTakenByGmail$.subscribe((user) => {
-        if (user.Username) {
-          console.log('user', user);
-          
-          if(user.Username != "404 user not found"){
-            this.userLoged._id = user._id;
-            console.log('user at have user');
-            
-            this.store.dispatch(AdminActions.getBy_idAtRegister({ id: user._id }));
-          }else{
-            this.userLoged.Password = '1234';
-            this.userLoged.Uid = generateUuid();
-            this.store.dispatch(UserActions.createAtRegisterOfAdmin({ user: this.userLoged }))
-          }
-        }
-      }),
       this.userCreatedOfAdmin$.subscribe((user) => {
         if (user._id) {
           if (user._id.length >0) {
             console.log('user', user);
-            const userAsJson = JSON.stringify(user);
-            sessionStorage.setItem('userOfAdmin', userAsJson);
-            this.router.navigate(['admin/basic-information']);
-            
+            const newAdmin: any= {
+              User: user._id,
+              AdminId: generateUuid(),
+              Name: this.adminRegisterForm.value.Name,
+              Phone: this.adminRegisterForm.value.Phone,
+              Address: this.adminRegisterForm.value.Address,
+              Avatar:"https://storage.googleapis.com/storagedoan.appspot.com/images/CloneAvatar/c6139be4-6e0a-4e5b-8fcd-ff75466607fb-avatar-trang-4.jpg?GoogleAccessId=firebase-adminsdk-8r86k%40storagedoan.iam.gserviceaccount.com&Expires=4162813200&Signature=vQgsNuWiC8gGsB6uky3ucxyRhILtcvRvEW6K8NDEaKD1iEkHHFD7hIMkhqrS9aDYGO7rHRvFCOjJcHZihO8smr0opYETm4HZEKoCPi1HqxRRT9XhE9fnOcDluw4NByUhi5XXsWp0YMibEvjhsLOd0hn9ZPvqT%2BdIvhgWl6lilCuLcrr9EW%2Ff4KkhP0SGY%2FN%2BjwcY7cyQZDNQc9ExqY1l2%2BXpknRuaiyzZr6wnmpBncZx7UBvBVEtrCEToVWKs3IXGZEXUiFYFIis07d0d4IzOFoqnBIMyRB7H41B6XTEse3PtWL1lBfEtIRN1vw%2FRAz2D5RuPvruynG%2FfcytoHzW4w%3D%3D",
+              StatusConfirm: true,
+            }
+            console.log('admin', newAdmin);
+            this.store.dispatch(AdminActions.createAtRegister({ admin: newAdmin }));
           }
         }
       }),
       this.adminTakenByUser$.subscribe((admin) => {
         if (admin._id) {
           if (admin._id !='500') {
-            console.log('admin', admin);
-            const adminAsJson = JSON.stringify(admin);
-            sessionStorage.setItem('adminLogged', adminAsJson);
-            this.router.navigate(['admin/job-confirm']);
-          }else{
-            sessionStorage.setItem('userOfAdmin', JSON.stringify(this.userLoged));
-            this.router.navigate(['admin/basic-information']);
-          }
-        }
-      }),
-      this.userTakenByUsernameAndPassword$.subscribe((user) => {
-        if (user._id) {
-          if (user._id != "404 user not found") {
-            console.log('user', user);
             this.alerts
             .open('', {label: 'Tài khoản đã tồn tại',status:'info'})
             .subscribe();
+          }else{
+            /// bug có thể ở đây
+            const newAdmin: any= {
+              User: this.userLoged._id,
+              AdminId: generateUuid(),
+              Name: this.adminRegisterForm.value.Name,
+              Phone: this.adminRegisterForm.value.Phone,
+              Address: this.adminRegisterForm.value.Address,
+              Avatar:"https://storage.googleapis.com/storagedoan.appspot.com/images/CloneAvatar/c6139be4-6e0a-4e5b-8fcd-ff75466607fb-avatar-trang-4.jpg?GoogleAccessId=firebase-adminsdk-8r86k%40storagedoan.iam.gserviceaccount.com&Expires=4162813200&Signature=vQgsNuWiC8gGsB6uky3ucxyRhILtcvRvEW6K8NDEaKD1iEkHHFD7hIMkhqrS9aDYGO7rHRvFCOjJcHZihO8smr0opYETm4HZEKoCPi1HqxRRT9XhE9fnOcDluw4NByUhi5XXsWp0YMibEvjhsLOd0hn9ZPvqT%2BdIvhgWl6lilCuLcrr9EW%2Ff4KkhP0SGY%2FN%2BjwcY7cyQZDNQc9ExqY1l2%2BXpknRuaiyzZr6wnmpBncZx7UBvBVEtrCEToVWKs3IXGZEXUiFYFIis07d0d4IzOFoqnBIMyRB7H41B6XTEse3PtWL1lBfEtIRN1vw%2FRAz2D5RuPvruynG%2FfcytoHzW4w%3D%3D",
+              StatusConfirm: true,
+            }
+            console.log('admin', newAdmin);
+            this.store.dispatch(AdminActions.createAtRegister({ admin: newAdmin }));
+          }
+        }
+      }),
+      this.userTakenByUsernameOfAdminWithAccount$.subscribe((user) => {
+        if (user._id) {
+          if (user._id != "404 user not found") {
+            console.log('user', user);
+            this.userLoged._id = user._id;
+            console.log('user at have user');
+            this.store.dispatch(AdminActions.getByUserAtRegister({ user: user._id }));
           }else{
             let userToCreate:any = {
               Username: this.adminRegisterForm.value.Email??'',
@@ -120,7 +109,22 @@ export class RegisterComponent implements OnDestroy{
             this.store.dispatch(UserActions.createAtRegisterOfAdmin({ user: userToCreate }))
           }
         }
+      }),
+      this.adminCreated$.subscribe((admin) => {
+        if (admin._id) {
+          if (admin._id != '500') {
+            this.alerts
+            .open('', {label: 'Tạo tài khoản Admin thành công',status:'success'})
+            .subscribe();
+          }else{
+            this.alerts
+            .open('', {label: 'Tạo tài khoản Admin thất bại',status:'error'})
+            .subscribe();
+          
+          }
+        }
       })
+
     )
   }
 
@@ -132,6 +136,9 @@ export class RegisterComponent implements OnDestroy{
     Email: new FormControl('', [Validators.required]),
     Password: new FormControl('', [Validators.required]),
     ConfirmPassword: new FormControl('', [Validators.required]),
+    Name: new FormControl('', [Validators.required]),
+    Phone: new FormControl('', [Validators.required]),
+    Address: new FormControl('', [Validators.required]),
   });
   registerWithAccount(): void {
     if(this.adminRegisterForm.value.Password !== this.adminRegisterForm.value.ConfirmPassword){
@@ -139,11 +146,6 @@ export class RegisterComponent implements OnDestroy{
       return;
     }
     this.store.dispatch(UserActions.getByGmailOfAdminWithAccountAtRegister({ username: this.adminRegisterForm.value.Email??"" }));
-  }
-  loginWithGoogle(): void {
-    console.log('login with google');
-    
-    this.store.dispatch(AuthAcitons.loginOfAdminAtRegister());
   }
 }
 

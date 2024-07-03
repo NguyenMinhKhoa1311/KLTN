@@ -3,7 +3,7 @@
     <div id="register_box">
         <div id="register_form_box">
             <div class="header">
-            <span>ĐĂNG KÍ TÀI KHOẢN Admin</span>
+            <span>ĐĂNG KÍ TÀI KHOẢN ADMIN</span>
             </div>
             <form [formGroup]="adminRegisterForm">
             <div class="body">
@@ -54,6 +54,58 @@
                             </tui-input-password>
                         </p>
                     </div>
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Tên</label>
+                        <p>
+                            <tui-input
+                                formControlName="Name"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                            >
+                                Tên
+                                <input
+                                    placeholder="Nhập tên"
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </p>
+                    </div>
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Địa chỉ</label>
+                        <p>
+                            <tui-input
+                                formControlName="Address"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                            >
+                                Địa chỉ
+                                <input
+                                    placeholder="Nhập địa chỉ"
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </p>
+                    </div>
+                    <div class="form_register_box">
+                        <label style="margin-top: 10px;">Phone</label>
+                        <p>
+                            <tui-input
+                                formControlName="Phone"
+                                [tuiTextfieldCleaner]="true"
+                                [tuiTextfieldLabelOutside]="true"
+                            >
+                                Phone
+                                <input
+
+                                    placeholder="Nhập số điện thoại"
+                                    tuiTextfield
+                                    type="text"
+                                />
+                            </tui-input>
+                        </p>
+                    </div>
                 </div>
                 
                 <div  class="btn_register" (click)="registerWithAccount()">
@@ -66,17 +118,6 @@
                     >
                         Đăng ký
                     </button>
-                </div>
-                <span class="register_option">Hoặc đăng nhập bằng</span>
-                <div class="register_google" (click)="loginWithGoogle()">
-                    <div class="img_google" >
-                        <img src="../../../assets/images/icons8-google-30.png" alt="">
-                    </div>
-                    <span>Google</span>
-                </div>
-                <div class="register_box">
-                    <span>Bạn đã có tài khoản?</span>
-                    <span style="color: #526ed3; margin-left: 3px; cursor: pointer;">Đăng nhập ngay</span>
                 </div>
             </div>
         </form>

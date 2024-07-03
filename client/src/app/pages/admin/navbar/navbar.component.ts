@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { ShareModule } from '../../../shared/shared.module';
 import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { TaigaModule } from '../../../shared/taiga.module';
+import { Admin } from '../../../models/admin.model';
 
 @Component({
   selector: 'app-navbar',
@@ -15,8 +16,8 @@ export class NavbarComponent {
   activeItemIndex = 0;
 
   //variables
-  // isLogin = false;
-  // userLogged: Recruiter = <Recruiter>{};
+  isLogin = false;
+  userLogged: Admin = <Admin>{};
 
 
   constructor (
@@ -36,17 +37,17 @@ export class NavbarComponent {
 
   ngOnInit(): void {
     console.log('navigation');
-    let userLogged = sessionStorage.getItem('recruiterLoged');
+    let userLogged = sessionStorage.getItem('adminLogged');
     console.log('userOfRecruiterLogged',userLogged);
     
-    // if(userLogged){
-    //   let userAfterParse = JSON.parse(userLogged);
-    //   if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
-    //     console.log('userOfRecruiterLogged',userLogged);
-    //     this.isLogin = true;
-    //     this.userLogged = userAfterParse;
-    //   }
-    // }
+    if(userLogged){
+      let userAfterParse = JSON.parse(userLogged);
+      if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
+        console.log('userOfRecruiterLogged',userLogged);
+        this.isLogin = true;
+        this.userLogged = userAfterParse;
+      }
+    }
 
     this.router.events.subscribe((event) => {
       ('navigation')

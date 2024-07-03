@@ -18,39 +18,29 @@
           </button>
         </tui-tabs>
     </div>
-    <div id="option_user">
+    <div id="option_user" >
         
-      <div class="login" (click)="navigateToLogin()" >
+      <div class="login" (click)="navigateToLogin()" *ngIf="!isLogin">
         Đăng nhập
       </div>
-      <div class="register" (click)="navigateToRegister()">
+      <div class="register" (click)="navigateToRegister()"*ngIf="!isLogin">
         Đăng ký
       </div>
 
-      <!-- <div class="gach"></div> -->
+      <div class="gach"></div>
 
-      <!-- <div class="user_dropdown">
+      <div class="user_dropdown"*ngIf="isLogin">
         <button class="user_dropbtn">
           <div class="user_box">
             <div class="img_user">
               <img src="{{userLogged.Avatar}}" alt="">
             </div>
-            <span>123</span>
+            <span>{{userLogged.Name}}</span>
             <span class="material-symbols-outlined">
               expand_more
             </span>
           </div>
         </button>
-        <div class="dropdown-content">
-          <a href="/recruiterLayout/login" >Đăng nhập</a>
-          <a href="/recruiterLayout/register" >Đăng kí</a>
-          <a href="/recruiterLayout/choice-service">Đăng tuyển dụng</a>
-          <a href="/recruiterLayout/job-detail">Bài tuyển dụng</a>
-          <a href="/recruiterLayout/application-list">Danh sách tuyển dụng</a>
-          <a href="/recruiterLayout/statistical">Thống kê</a>
-          <a href="/recruiterLayout/profile">Hồ sơ</a>
-          <a href="/recruiterLayout/account-management">Quản lí tài khoản</a>
-        </div>
-      </div> -->
+      </div> 
     </div>
 </div>

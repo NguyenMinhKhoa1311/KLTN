@@ -63,39 +63,6 @@ export class LoginComponent implements OnDestroy {
     private readonly alerts: TuiAlertService,
   ) {
     this.subscriptions.push(
-      this.userFirebase$.subscribe((user) => {
-        if (user.email) {
-          this.userLoged.Username = user.email;
-          this.store.dispatch(AuthAcitons.loginOfAdminAtLogin());
-          this.store.dispatch(UserActions.getByUsernameOfAdminAtLogin({username: user.email}));
-        }
-      }),
-      this.userTakenByGmail$.subscribe((user) => {
-        console.log(user,"user of gmail");
-        
-          if(user._id){
-            console.log(user,"user");
-            
-            if(user.Username!= '404 user not found'){
-              this.userLoged._id = user._id;
-              this.userLoged.Username = user.Username;
-              this.userLoged.Password = user.Password;
-              console.log(this.userLoged,"this.userLoged");
-              this.store.dispatch(AdminActions.getByUserAtLogin({user: user._id}));
-            }else{
-              console.log(this.userLoged,"this.userLoged");
-              
-              this.userLoged.Password = '1234';
-              this.userLoged.Uid = generateUuid();
-              const newUser:any = {
-                Username: this.userLoged.Username,
-                Password: this.userLoged.Password,
-                Uid: this.userLoged.Uid,
-              }
-              this.store.dispatch(UserActions.createAtLoginOfAdmin({user: newUser}))
-          }
-        }
-      }),
       this.userCreatedOfAdmin$.subscribe((user) => {
         if(user._id){
           if(user._id.length>0){
@@ -152,9 +119,6 @@ export class LoginComponent implements OnDestroy {
     )
   }
 
-  loginWithGoogle(): void {
-    this.store.dispatch(AuthAcitons.loginOfAdminAtLogin());
-  }
   loginWitAccount(): void {
     this.store.dispatch(UserActions.getByUsernameAndPasswordOfAdminAtLogin({username: this.adminLoginForm.value.Username??"",password: this.adminLoginForm.value.Password??""}));
   }
