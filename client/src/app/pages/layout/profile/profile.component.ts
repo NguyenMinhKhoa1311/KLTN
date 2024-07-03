@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, ViewChild, inject } from '@angular/core';
 import { ShareModule } from '../../../shared/shared.module';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -23,6 +23,9 @@ import { WorkExperience } from '../../../models/work-experience.model';
 import { Skill } from '../../../models/skill.model';
 import { Reference } from '../../../models/reference.model';
 import { Router } from '@angular/router';
+import {TUI_PROMPT, TuiPromptData} from '@taiga-ui/kit';
+import {TuiAlertService, TuiDialogService} from '@taiga-ui/core';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -33,6 +36,8 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnDestroy {
   constructor(
+    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     private store: Store<{
       candidate: candidateState,
       storage: StorageState,
@@ -487,6 +492,7 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateEducation = true;
       }
       this.store.dispatch(CandidateActions.updateEducationAtProfile({education: educationData, id: this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Thêm 1 học vấn thành công', {status: 'success'}).subscribe();
     }
   }
 
@@ -499,8 +505,6 @@ export class ProfileComponent implements OnDestroy {
       EndDate: this.profileForm.value.EndDay??"",
       Description: this.profileForm.value.Description,
     }
-    console.log(this.profileForm.value.StartDay??"");
-    console.log(this.profileForm.value.EndDay??"");
     
     
     // níu dữ liệu lỗi thì cook
@@ -510,7 +514,9 @@ export class ProfileComponent implements OnDestroy {
       if(!this.isUpdateWorkExperience){
         this.isUpdateWorkExperience = true;
       }
+      
       this.store.dispatch(CandidateActions.updateWorkExperienceAtProfile({workExperience: workExperienceData, id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Thêm 1 kinh nghiệm thành công', {status: 'success'}).subscribe();
     }
   }
 
@@ -522,6 +528,7 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateLanguage = true;
       }
       this.store.dispatch(CandidateActions.updateLanguageAtProfile({language: language, id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Thêm 1 ngôn ngữ thành công', {status: 'success'}).subscribe();
     }
     else{
       alert('Invalid date');
@@ -545,6 +552,7 @@ export class ProfileComponent implements OnDestroy {
         }
         console.log(desiredJobData);
         this.store.dispatch(CandidateActions.updateDesiredJobAtProfile({desiredJob: desiredJobData, id:this.candidateToRender._id, token: this.token}));
+        this.alerts.open('Cập nhật thành công', {status: 'success'}).subscribe();
       }
       else{
         alert('Invalid date');
@@ -560,14 +568,11 @@ export class ProfileComponent implements OnDestroy {
     }
     // kiểm tra dl có lỗi k nếu có thì cook
     if(skill?.Name.length > 0){
-
-      
       if(!this.isUpdateSkill){    
         this.isUpdateSkill = true;
-      }
-
-      
+      }      
       this.store.dispatch(CandidateActions.updateSkillAtProfile({skill: skill, id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Thêm 1 kỹ năng thành công', {status: 'success'}).subscribe();
     }
     else{
       alert('Invalid date');
@@ -586,6 +591,7 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateOneOfSkill = true;
       }
       this.store.dispatch(CandidateActions.updateOneOfSkillAtProfile({skill: skill, id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Cập nhật thành công', {status: 'success'}).subscribe();
     }
     else{
       alert('Invalid date');
@@ -605,6 +611,7 @@ export class ProfileComponent implements OnDestroy {
       let fileName ="ImgOf_"+ this.candidateToRender.Name +"_"+ generateUuid();
       this.foldernameCreatedAtProfile=fileName;
       this.store.dispatch(StorageActions.createAtProfile({fileName:fileName, file:this.file}));
+      
     }
     else{
       alert('Invalid image');
@@ -633,6 +640,7 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateBasicInfo = true;
       }
       this.store.dispatch(CandidateActions.updateBasicInfoAtProfile({basicInfo: basicInfo, id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Cập nhật thành công', {status: 'success'}).subscribe();
     }
   }
 
@@ -648,40 +656,144 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateCareerGoald = true;
       }
       this.store.dispatch(CandidateActions.updateCareerGoalAtProfile({careerGoal: careerGoal??"", id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Cập nhật thành công', {status: 'success'}).subscribe();
     }
   }
 
   deleteSkill(skill: Skill){
+    const data: TuiPromptData = {
+      yes: 'Xác nhận',
+      no: 'Hủy',
+    };
     console.log(skill);
     if(!this.isDeleteSkill){
       this.isDeleteSkill = true;
     }
-    this.store.dispatch(CandidateActions.deleteSkillAtProfile({skill: skill._id, id: this.candidateToRender._id, token: this.token}));
     
+    this.dialogs
+      .open<boolean>(TUI_PROMPT, {
+        label: 'Bạn có chắc chắn muốn xóa ?',
+        size: 's',
+        data,
+      })
+      .pipe(
+        switchMap(response => {
+          if (response) {
+            this.store.dispatch(CandidateActions.deleteSkillAtProfile({skill: skill._id, id: this.candidateToRender._id, token: this.token}));
+            return this.alerts.open('Xóa thành công', { status: 'success' });
+          }
+          else {
+            return this.alerts.open('Xóa không thành công', { status: 'info' });
+          }
+        })
+      )
+      .subscribe();
   }
   deleteEducation(education: string){
+    const data: TuiPromptData = {
+      yes: 'Xác nhận',
+      no: 'Hủy',
+    };
+    
     console.log(education);
     if(!this.isDeleteEducation){
       this.isDeleteEducation = true;
     }
-    this.store.dispatch(CandidateActions.deleteEducationAtProfile({education: education, id: this.candidateToRender._id, token: this.token}));
+
+    this.dialogs
+      .open<boolean>(TUI_PROMPT, {
+        label: 'Bạn có chắc chắn muốn xóa ?',
+        size: 's',
+        data,
+      })
+      .pipe(
+        switchMap(response => {
+          if (response) {
+            this.store.dispatch(CandidateActions.deleteEducationAtProfile({education: education, id: this.candidateToRender._id, token: this.token}));
+            return this.alerts.open('Xóa thành công', { status: 'success' });
+          }
+          else {
+            return this.alerts.open('Xóa không thành công', { status: 'info' });
+          }
+        })
+      )
+      .subscribe();
+      
+    // this.store.dispatch(CandidateActions.deleteEducationAtProfile({education: education, id: this.candidateToRender._id, token: this.token}));
   }
 
+  // deleteWorkExperience(workExperience: string){
+  //   console.log(workExperience);
+  //   if(!this.isDeleteWorkExperience){
+  //     this.isDeleteWorkExperience = true;
+  //   }
+  //   this.store.dispatch(CandidateActions.deleteWorkExperienceAtProfile({workExperience: workExperience, id: this.candidateToRender._id, token: this.token}));
+  // }
+
   deleteWorkExperience(workExperience: string){
+    const data: TuiPromptData = {
+      yes: 'Xác nhận',
+      no: 'Hủy',
+    };
+    
     console.log(workExperience);
-    if(!this.isDeleteWorkExperience){
+    if (!this.isDeleteWorkExperience) {
       this.isDeleteWorkExperience = true;
     }
-    this.store.dispatch(CandidateActions.deleteWorkExperienceAtProfile({workExperience: workExperience, id: this.candidateToRender._id, token: this.token}));
+    
+    this.dialogs
+      .open<boolean>(TUI_PROMPT, {
+        label: 'Bạn có chắc chắn muốn xóa ?',
+        size: 's',
+        data,
+      })
+      .pipe(
+        switchMap(response => {
+          if (response) {
+            this.store.dispatch(CandidateActions.deleteWorkExperienceAtProfile({
+              workExperience: workExperience,
+              id: this.candidateToRender._id,
+              token: this.token
+            }));
+            return this.alerts.open('Xóa thành công', { status: 'success' });
+          }
+          else {
+            return this.alerts.open('Xóa không thành công', { status: 'info' });
+          }
+        })
+      )
+      .subscribe();
     
   }
 
   deleteLanguage(language: string){
+    const data: TuiPromptData = {
+      yes: 'Xác nhận',
+      no: 'Hủy',
+    };
     console.log(language);
     if(!this.isDeleteLanguage){
       this.isDeleteLanguage = true;
     }
-    this.store.dispatch(CandidateActions.deleteLanguageAtProfile({language: language, id: this.candidateToRender._id, token: this.token}));
+    
+    this.dialogs
+      .open<boolean>(TUI_PROMPT, {
+        label: 'Bạn có chắc chắn muốn xóa ?',
+        size: 's',
+        data,
+      })
+      .pipe(
+        switchMap(response => {
+          if (response) {
+            this.store.dispatch(CandidateActions.deleteLanguageAtProfile({language: language, id: this.candidateToRender._id, token: this.token}));
+            return this.alerts.open('Xóa thành công', { status: 'success' });
+          }
+          else {
+            return this.alerts.open('Xóa không thành công', { status: 'info' });
+          }
+        })
+      )
+      .subscribe();
   }
   updateOneOfEducation (){
     let updateOneOfEducationData = {
@@ -704,9 +816,8 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateOneOfEdcation = true;
       }
       this.store.dispatch(CandidateActions.updateOneOfEducationAtProfile({education: updateOneOfEducationData, id: this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Cập nhật thành công', {status: 'success'}).subscribe();
     }
-
-    
   }
   updateOneOfWorkExperience (){
     let updateOneOfWorkExperienceData = {
@@ -729,6 +840,7 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateOneOfWorkExperience = true;
       }
       this.store.dispatch(CandidateActions.updateOneOfWorkExperienceAtProfile({workExperience: updateOneOfWorkExperienceData, id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Cập nhật thành công', {status: 'success'}).subscribe();
     }
     
   }
@@ -754,6 +866,7 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateOneOfReference = true;
       }
       this.store.dispatch(CandidateActions.updateOneOfReferenceAtProfile({reference: referenceData, id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Cập nhật thành công', {status: 'success'}).subscribe();
     }
   }
   addReference(){
@@ -775,6 +888,7 @@ export class ProfileComponent implements OnDestroy {
         this.isUpdateReferenceOfNgrx = true;
       }
       this.store.dispatch(CandidateActions.updateReferenceAtProfile({references: referenceData, id:this.candidateToRender._id, token: this.token}));
+      this.alerts.open('Thêm 1 người tham khảo thành công', {status: 'success'}).subscribe();
     }
 
   }
@@ -788,11 +902,36 @@ export class ProfileComponent implements OnDestroy {
     }
   }
   deleteReference(reference: Reference){
+    const data: TuiPromptData = {
+      yes: 'Xác nhận',
+      no: 'Hủy',
+    };
     console.log(reference);
     if(!this.isDeleteReference){
       this.isDeleteReference = true;
     }
-    this.store.dispatch(CandidateActions.deleteReferenceAtProfile({reference: reference._id, id: this.candidateToRender._id, token: this.token}));
+    
+    this.dialogs
+      .open<boolean>(TUI_PROMPT, {
+        label: 'Bạn có chắc chắn muốn xóa ?',
+        size: 's',
+        data,
+      })
+      .pipe(
+        switchMap(response => {
+          if (response) {
+            this.store.dispatch(CandidateActions.deleteReferenceAtProfile({reference: reference._id, id: this.candidateToRender._id, token: this.token}));
+            return this.alerts.open('Xóa thành công', { status: 'success' });
+          }
+          else {
+            return this.alerts.open('Xóa không thành công', { status: 'info' });
+          }
+        })
+      )
+      .subscribe();
+
+    
+    
   }
 
   

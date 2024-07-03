@@ -2,106 +2,51 @@
     <div class="resume">
     <div class="base">
       <div class="profile">
-        <div class="photo"><img src="https://i.imgur.com/u5c9F94.jpg"></div>
+        <div class="photo"><img src="{{userLogged.Avatar}}"></div>
         <div class="info">
-          <h4 class="name">Faresse TAHLAITI</h4><small class="job">Développeur Web</small>
+          <h4 class="name">{{userLogged.Name}}</h4><small class="job">{{userLogged.Position}}</small>
         </div>
       </div>
       <div class="about">
-        <h3>A propos</h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti impedit asperiores obcaecati nobis blanditiis.<br/>
+        <h4>GIỚI THIỆU BẢN THÂN</h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti impedit asperiores obcaecati nobis blanditiis.<br/>
       </div>
       <div class="contact">
-        <h3>Contact</h3>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure itaque sed sit cum esse facere velit cumque amet harum eum aperiam expedita, hic, cupiditate quidem inventore molestiae rerum voluptatibus. Veritatis.
-      </div>
-      <div class="follow">
-        <h3>Réseaux</h3>
-        <div class="box"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a><a href="https://www.plurk.com/natsukawa" target="_blank"><i class="pif-plurkapp"></i></a><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a><a href="javascript:void(0);"><i class="fa fa-pinterest-p"></i></a><a href="javascript:void(0);"><i class="fa fa-tumblr"></i></a><a href="https://codepen.io/xichen/" target="_blank"><i class="fa fa-codepen"></i></a></div>
+        <h4>LIÊN HỆ</h4>
+        <p style="font-size: 11px;">{{userLogged.Email}}</p>
       </div>
     </div>
     <div class="func">
       <div class="work">
         <h3><i class="fa fa-briefcase"></i>Kinh nghiệm</h3>
         <ul>
-          <li><span>Développeur Web Full-Stack</span><small>Apr 2018 - Now</small></li>
-          <li><span>Marin-Pompier</span><small>Feb 2015 - Mars 2018 </small></li>
-          <li><span>Technicien de Maintenance</span><small>Apr 2014 - Juin 2014</small></li>
+          <li *ngFor="let workExperience of userLogged.WorkExperience">
+            <span>{{workExperience.JobTitle}}</span>
+            <small>{{workExperience.StartDate | date:'yyyy'}} - {{workExperience.EndDate | date:'yyyy'}}</small>
+          </li>
         </ul>
       </div>
       <div class="edu">
         <h3><i class="fa fa-graduation-cap"></i>Học vấn</h3>
         <ul>
-          <li><span>House of Code - Développeur Web</span><small>Apr 2018</small></li>
-          <li><span>Formation Bataillon de Marins-Pompiers</span><small>Nov 2014 - Feb 2015</small></li>
-          <li><span>BTS - Maintenance des Équipements Industriels</span><small>Juin 2014</small></li>  
+          <li *ngFor="let education of userLogged.Education">
+            <span>{{education.Degree}} - {{education.School}}</span>
+            <small>{{education.StartDate | date:'yyyy'}} - {{education.EndDate | date:'yyyy'}}</small>
+          </li>
         </ul>
       </div>
       <div class="skills-prog">
-        <h3><i class="fa fa-code"></i>Compétences de programmation</h3>
+        <h3><i class="fa fa-code"></i>Kỹ năng</h3>
         <ul>
-          <li data-percent="96"><span>HTML5</span>
+          <li data-percent="96" *ngFor="let skill of userLogged.Skills"><span>{{skill.Name}}</span>
             <div class="progress">
                <progress id="avancement" class="progressBar" value="85" max="100"></progress>
             </div>
           </li>
-          <li data-percent="96"><span>CSS3</span>
-            <div class="progress">
-               <progress id="avancement" class="progressBar" value="100" max="100"></progress>
-            </div>
-          </li>
-          <li data-percent="96"><span>Bootstrap</span>
-            <div class="progress">
-               <progress id="avancement" class="progressBar" value="50" max="100"></progress>
-            </div>
-          </li>
-          <li data-percent="96"><span>JavaScript</span>
-            <div class="progress">
-               <progress id="avancement" class="progressBar" value="40" max="100"></progress>
-            </div>
-          </li>
-          <li data-percent="96"><span>PHP</span>
-            <div class="progress">
-               <progress id="avancement" class="progressBar" value="40" max="100"></progress>
-            </div>
-          </li>
-          <li data-percent="96"><span>Git</span>
-            <div class="progress">
-               <progress id="avancement" class="progressBar" value="80" max="100"></progress>
-            </div>
-          </li>
         </ul>
       </div>
-      <div class="skills-soft">
-        <h3><i class="fa fa-th-list"></i>Autres compétences</h3>
-        <ul>
-          <li data-percent="94">
-            <svg viewbox="0 0 100 100">
-              <circle cx="50" cy="50" r="45"></circle>
-              <circle class="cbar" cx="50" cy="50" r="45"></circle>
-            </svg><span>Photoshop</span><small></small>
-          </li>
-          <li data-percent="80">
-            <svg viewbox="0 0 100 100">
-              <circle cx="50" cy="50" r="45"></circle>
-              <circle class="cbar" cx="50" cy="50" r="45"></circle>
-            </svg><span>Illustrator</span><small></small>
-          </li>
-          <li data-percent="89">
-            <svg viewbox="0 0 100 100">
-              <circle cx="50" cy="50" r="45"></circle>
-              <circle class="cbar" cx="50" cy="50" r="45"></circle>
-            </svg><span>Sublime Text</span><small></small>
-          </li>
-          <li data-percent="55">
-            <svg viewbox="0 0 100 100">
-              <circle cx="50" cy="50" r="45"></circle>
-              <circle class="cbar" cx="50" cy="50" r="45"></circle>
-            </svg><span>Photofiltre</span><small></small>
-          </li>
-        </ul>
-      </div>
+      
       <div class="interests">
-        <h3><i class="fa fa-star"></i>Hobbies</h3>
+        <h3><i class="fa fa-star"></i>SỞ THÍCH</h3>
        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati labore, adipisci a, et ducimus non? Tenetur accusamus incidunt explicabo nobis ipsum, ratione temporibus eius est minus quis esse, vitae eos.</p>
       </div>
     </div>

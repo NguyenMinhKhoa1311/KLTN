@@ -52,14 +52,23 @@ export class ConfirmMailComponent implements OnDestroy{
     email: new FormControl(''),
   });
   confirmMail(){
-    // console.log(this.mailForm.value.email);
-    // this.isCreateToken = true;
-    // const token = {
-    //   TokenId: generateUuid(),
-    //   User: this.mailForm.value.email,
-    // }
-    // this.store.dispatch(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidate({tokenResetPassword:token}));
-    this.isCreateTokenSuccess = true;
+    console.log(this.mailForm.value.email);
+    if (this.mailForm.value.email == '') {
+      this.isCreateTokenSuccess = false;
+      this.alerts
+      .open('', {label: 'Vui lòng nhập email',status:'info'})
+      .subscribe();
+      return;
+    }
+    else{
+      this.isCreateToken = true;
+      this.isCreateTokenSuccess = true;
+      const token = {
+        TokenId: generateUuid(),
+        User: this.mailForm.value.email,
+      }
+      this.store.dispatch(TokenResetPasswordActions.createTokenAtForgotPasswordOfCandidate({tokenResetPassword:token}));
+    }
   }
 
   

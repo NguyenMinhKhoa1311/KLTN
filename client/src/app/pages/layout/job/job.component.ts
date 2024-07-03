@@ -507,11 +507,14 @@ export class JobComponent implements OnDestroy{
           this.isDeletedFavoriteJob = true;
         }
         this.store.dispatch(CandidateActions.deleteFavoriteJobAtJob({id:this.candidateLogged._id,jobId: job._id, token: this.token}));
+        this.alerts.open('Bạn vừa xóa 1 công việc', {status:'success'}).subscribe();
       }else if(result == 'iconHeartNotFilled'){
         if(this.isUpdatedFavoriteJob){
           this.isUpdatedFavoriteJob = true;
         }
         this.store.dispatch(CandidateActions.updateFavoriteJobsAtJob({id:this.candidateLogged._id,jobId: job._id, token: this.token}));
+        
+        this.alerts.open('Bạn đã lưu việc làm thành công', {status:'success'}).subscribe();
       }
     }
     else{
@@ -658,6 +661,26 @@ export class JobComponent implements OnDestroy{
     }else{
       this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.searchForm.value.Keyword??"", page: 0, limit: 9}));
     }
+  }
+
+  deleteSearch(){
+    this.isGetAll = true;
+    this.isGetByFieldName = false;
+    this.isGetByCareer = false;
+    this.isGetByLocation = false;
+    this.isGetByKeyword = false;
+    if(this.page>0){
+      this.page = 0;
+    }
+    if(this.UrgentForm.value.checked){
+      this.store.dispatch(JobActions.getAllAndSortWithUrgentAtJob({page: 0, limit: 9, urgent: true}));
+    }else{
+      this.store.dispatch(JobActions.getAllAndSortAtJob({page: 0, limit: 9}));
+    }
+    this.fieldValue = "";
+    this.careerValue = "";
+    this.locationValue = "";
+    this.searchForm.reset();
   }
 
   nextJobs(){

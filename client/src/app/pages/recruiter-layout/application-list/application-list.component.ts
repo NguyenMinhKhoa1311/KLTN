@@ -42,6 +42,7 @@ export class ApplicationListComponent implements OnDestroy {
   isUpdatedDateInterView: boolean = false;
   token: string = '';
   userLogged: Recruiter = <Recruiter>{};
+  isLogin: boolean = false;
 
   
   //ngrx of recruitment
@@ -73,6 +74,7 @@ export class ApplicationListComponent implements OnDestroy {
     let token = sessionStorage.getItem('tokenOfRecruiter');
     let userLogged = sessionStorage.getItem('recruiterLoged');
     if(userLogged){
+      this.isLogin = true;
       let userAfterParse = JSON.parse(userLogged) as Recruiter;
       if(userAfterParse?._id.length > 0 && userAfterParse?._id != ""){
         this.userLogged = userAfterParse;
