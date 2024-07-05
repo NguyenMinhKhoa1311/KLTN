@@ -45,12 +45,9 @@
                             tuiTextfield
                         />
                     </tui-input-password>
-                    <tui-error
-                        formControlName="NewPass"
-                        [error]="[] | tuiFieldError | async"
-                    ></tui-error>
+                    
                 </div>
-                <div class="current_pass" > 
+                <div class="current_pass" style="margin-top: 20px;"> 
                     <span class="title">Xác nhận mật khẩu mới</span>
                     <tui-input-password
                         formControlName="ConfirmPass"
@@ -61,10 +58,7 @@
                             tuiTextfield
                         />
                     </tui-input-password>
-                    <tui-error
-                        formControlName="ConfirmPass"
-                        [error]="[] | tuiFieldError | async"
-                    ></tui-error>
+                    
                 </div>
             </form>
         </div>

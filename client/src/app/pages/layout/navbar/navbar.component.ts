@@ -50,6 +50,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
       this.activeItemIndex = 4;
     } else if (this.router.url.includes('/favourite-job')) {
       this.activeItemIndex = 5;
+    } else if (this.router.url.includes('/account-management')) {
+      this.activeItemIndex = 6;
     } 
 
     this.subscriptions.push(
@@ -113,36 +115,38 @@ export class NavbarComponent implements OnInit, OnDestroy{
           this.activeItemIndex = 4;
         } else if (url.startsWith('/favourite-job')) {
           this.activeItemIndex = 5;
+        } else if (url.startsWith('/account-management')) {
+          this.activeItemIndex = 6;
         }
       }
     });
   }
 
-  // onTabClick(tabName: string) {
-  //   this.selectedTab = tabName; 
-  //   switch (tabName) {
-  //     case 'home':
-  //       this.router.navigate(['/']); 
-  //       break;
-  //     case 'job':
-  //       this.router.navigate(['/job']); 
-  //       break;
-  //     case 'company':
-  //       this.router.navigate(['/company']); 
-  //       break;
-  //     case 'profile':
-  //       this.router.navigate(['/profile']); 
-  //       break;
-  //     case'apply-list':
-  //       this.router.navigate(['/apply-list']);
-  //       break;
-  //     case'favourite-job':
-  //       this.router.navigate(['/favourite-job']);
-  //       break;
-  //     default:
-  //       console.warn('Invalid tab name:', tabName);
-  //   }
-  // }
+  onTabClick(tabName: string) {
+    this.selectedTab = tabName; 
+    switch (tabName) {
+      case 'home':
+        this.router.navigate(['/']); 
+        break;
+      case 'job':
+        this.router.navigate(['/job']); 
+        break;
+      case 'company':
+        this.router.navigate(['/company']); 
+        break;
+      case 'profile':
+        this.router.navigate(['/profile']); 
+        break;
+      case'apply-list':
+        this.router.navigate(['/apply-list']);
+        break;
+      case'favourite-job':
+        this.router.navigate(['/favourite-job']);
+        break;
+      default:
+        console.warn('Invalid tab name:', tabName);
+    }
+  }
   
   logout() {
     this.store.dispatch(AuthActions.logout());
