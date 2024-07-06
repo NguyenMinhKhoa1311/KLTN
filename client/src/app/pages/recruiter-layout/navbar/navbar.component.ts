@@ -41,6 +41,10 @@ export class NavbarComponent implements OnInit, OnDestroy{
       this.activeItemIndex = 2;
     } else if (this.router.url.includes('/profile')) {
       this.activeItemIndex = 3;
+    } else if (this.router.url.includes('/login')) {
+      this.activeItemIndex = 4;
+    } else if (this.router.url.includes('/register')) {
+      this.activeItemIndex = 5;
     } 
     this.subscriptions.push(
       this.isHaveRecruiter$.subscribe(isHaveRecruiter => {
@@ -91,30 +95,34 @@ export class NavbarComponent implements OnInit, OnDestroy{
           this.activeItemIndex = 2;
         }  else if (url.startsWith('/profile')) {
           this.activeItemIndex = 3;
+        } else if (url.startsWith('/login')) {
+          this.activeItemIndex = 4;
+        } else if (url.startsWith('/register')) {
+          this.activeItemIndex = 5;
         } 
       }
     });
   }
 
-  onTabClick(tabName: string) {
-    this.selectedTab = tabName; 
-    switch (tabName) {
-      case 'choice-service':
-        this.router.navigate(['/recruiterLayout/choice-service']); 
-        break;
-      case 'job-detail':
-        this.router.navigate(['/recruiterLayout/job-detail']); 
-        break;
-      case 'application-list':
-        this.router.navigate(['/recruiterLayout/application-list']); 
-        break;
-      case 'profile':
-        this.router.navigate(['/recruiterLayout/profile']); 
-        break;
-      default:
-        console.warn('Invalid tab name:', tabName);
-    }
-  }
+  // onTabClick(tabName: string) {
+  //   this.selectedTab = tabName; 
+  //   switch (tabName) {
+  //     case 'choice-service':
+  //       this.router.navigate(['/recruiterLayout/choice-service']); 
+  //       break;
+  //     case 'job-detail':
+  //       this.router.navigate(['/recruiterLayout/job-detail']); 
+  //       break;
+  //     case 'application-list':
+  //       this.router.navigate(['/recruiterLayout/application-list']); 
+  //       break;
+  //     case 'profile':
+  //       this.router.navigate(['/recruiterLayout/profile']); 
+  //       break;
+  //     default:
+  //       console.warn('Invalid tab name:', tabName);
+  //   }
+  // }
 
   navigateToHone(){
     this.router.navigate(['/home']);
