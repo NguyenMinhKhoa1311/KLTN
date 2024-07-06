@@ -124,9 +124,19 @@
     <div class="a" style="width: 60%;
         border-bottom: 1px solid #cac8c8;margin-top: 30px;">
     </div>
+    <div class="notice">
+        <p>Bạn có thể chuyển khoản trực tiếp để thanh toán</p>
+        <p>Số tài khoản: 0501 2105 2633</p>
+        <p>Ngân hàng: Vietcombank</p>
+        <p>Chủ tài khoản: Phùng Minh Khoa</p>
+    </div>
+    <div style="font-size: 14px;">Hoặc</div>
     <div class="payment_total">
-        <button appearance="primary" tuiButton type="button" (click)="payment()">
-            Thanh toán
-        </button>
+        <!-- <button class="btn_momo" tuiButton type="button" (click)="payment()">
+            Thanh toán momo
+        </button> -->
+        <div class="btn_momo" (click)="payment()">
+            Thanh toán momo
+        </div>
     </div>
 </div>
