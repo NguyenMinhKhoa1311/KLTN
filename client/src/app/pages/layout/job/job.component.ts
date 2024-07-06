@@ -67,6 +67,7 @@ export class JobComponent implements OnDestroy{
   page: number = 0;
   field: string = "";
   career: string = "";
+  keyword: string = "";
   isUpdatedFavoriteJob: boolean = false;
   isDeletedFavoriteJob: boolean = false;
   jobToRender: Job[] = [];
@@ -139,6 +140,7 @@ export class JobComponent implements OnDestroy{
     this.field = this.route.snapshot.queryParamMap.get('field')??"";
     this.career = this.route.snapshot.queryParamMap.get('career')??"";
     this.tagValue = this.route.snapshot.queryParamMap.get('tag')??"";
+    this.keyword = this.route.snapshot.queryParamMap.get('keyword')??"";
     if(this.field.length > 0){
       this.isGetByFieldNameAddNavigate = true;
       this.isGetAll = false;
@@ -164,7 +166,16 @@ export class JobComponent implements OnDestroy{
       this.isGetByKeyword = false;
       this.isGetByTag = false;
       this.store.dispatch(JobActions.getByCareerNameAtJob({careerName: this.career, page: 0, limit: 9}));
-    }else if(this.field.length == 0){
+    } else if(this.keyword.length > 0){
+      this.isGetAll = false;
+      this.isGetByFieldName = false;
+      this.isGetByCareer = false;
+      this.isGetByLocation = false;
+      this.isGetByKeyword = true;
+      this.isGetByTag = false;
+      this.store.dispatch(JobActions.getByKeywordAtJob({keyword: this.keyword, page: 0, limit: 9}));
+    }
+    else {
       this.isGetAll = true;
       this.isGetByFieldName = false;
       this.isGetByCareer = false;

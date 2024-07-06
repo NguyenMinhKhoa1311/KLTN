@@ -43,4 +43,14 @@ export class AdminEffects  {
             );
         })
     ));
+    findByUserAtRegister$ = createEffect(()=>this.action$.pipe(
+        ofType(AdminActions.getByUserAtRegister),
+        switchMap((action) => {
+            return this.adminService.findByUser(action.user).pipe(
+                map((admin) => AdminActions.getByUserAtRegisterSuccess({ admin: admin })),
+                catchError((error) => of(AdminActions.getByUserAtRegisterFailure({ errorMessage: error }))
+                )
+            );
+        })
+    ));
 }

@@ -53,6 +53,16 @@ export class CandidateManagementComponent implements OnDestroy{
     }>,
     private readonly alerts: TuiAlertService,
   ) {
+    let token = sessionStorage.getItem('tokenOfAdmin');
+    if(token){
+      this.token = token;
+      console.log(this.token);
+      this.store.dispatch(CandidateActions.getAllAtManageCandidate());
+    }else{
+      this.alerts
+      .open('', {label: 'Vui lòng đăng nhập',status:'info'})
+      .subscribe();
+    }
     this.subscriptions.push(
         this.candidates$.subscribe(candidates => {
           if (candidates.length) {
@@ -93,7 +103,6 @@ export class CandidateManagementComponent implements OnDestroy{
           }
         })
     );
-    this.store.dispatch(CandidateActions.getAllAtManageCandidate());
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
@@ -108,7 +117,7 @@ export class CandidateManagementComponent implements OnDestroy{
     }
     console.log(ban);
     
-    this.store.dispatch(BanActions.banUserAtManageCandidate({ban:ban}));
+    this.store.dispatch(BanActions.banUserAtManageCandidate({ban:ban,token: this.token}));
   }
   unbanCandidate() {
     const unBan: any ={
@@ -117,7 +126,7 @@ export class CandidateManagementComponent implements OnDestroy{
       forCandidate: 'true',
       forRecruiter: 'false'
     }
-    this.store.dispatch(BanActions.unBanUserAtManageCandidate({ban: unBan}));
+    this.store.dispatch(BanActions.unBanUserAtManageCandidate({ban: unBan, token: this.token}));
   }
   checkIsBan(candidate: Candidate) {
     console.log(candidate.isBan);

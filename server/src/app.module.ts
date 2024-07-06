@@ -30,6 +30,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { TokenResetPasswordModule } from './token-reset-password/token-reset-password.module';
 import { BanModule } from './ban/ban.module';
 import { AdminModule } from './admin/admin.module';
+import path from 'path';
 
 
 @Module({
@@ -127,6 +128,8 @@ export class AppModule implements NestModule {
         {path: 'company/update', method: RequestMethod.PUT},
         {path: 'user/updatePasswordWithoutToken', method: RequestMethod.PUT},
         {path: 'bill/create', method: RequestMethod.POST},
+        {path: 'ban/create', method: RequestMethod.POST},
+        {path:'ban/delete', method: RequestMethod.DELETE},
       )
       ;
   }

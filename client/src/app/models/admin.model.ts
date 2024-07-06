@@ -8,4 +8,5 @@ export interface Admin {
     StatusConfirm: string;
     createdAt: Date;
     updatedAt: Date;
+    Avatar: string;
 }

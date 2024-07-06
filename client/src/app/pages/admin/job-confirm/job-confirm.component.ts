@@ -48,9 +48,13 @@ export class JobConfirmComponent implements OnDestroy{
     if(token){
       this.token = token;
       console.log(this.token);
-      
+      this.store.dispatch(JobActions.getByStatusPaymentAtConfirmJob({status: false,page: this.page, limit: 10}));
+    }else{
+      this.alerts
+      .open('', {label: 'Vui lòng đăng nhập',status:'info'})
+      .subscribe();
     }
-    this.store.dispatch(JobActions.getByStatusPaymentAtConfirmJob({status: false,page: this.page, limit: 10}));
+    
     
     this.subscriptions.push(
       this.isGetByStatusPaymentSuccess$.subscribe((status)=>{

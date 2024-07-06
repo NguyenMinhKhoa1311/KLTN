@@ -19,6 +19,12 @@ export const initialState: AdminState = {
     getByUserAtLoginError: '',
     adminGetByUserAtLogin: <Admin>{},
 
+    adminGetByUserAtRegister: <Admin>{},
+    isGetByUserAtRegisterLoading: false,
+    isGetByUserAtRegisterSuccess: false,
+    getByUserAtRegisterError: '',
+
+
 };
 
 export const  adminReducer = createReducer(
@@ -107,5 +113,34 @@ export const  adminReducer = createReducer(
             getByUserAtLoginError: action.errorMessage,
         }
     }),
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(AdminActions.getByUserAtRegister, (state,action) => {
+        return {
+            ...state,
+            isGetByUserAtRegisterLoading: true,
+            isGetByUserAtRegisterSuccess: false,
+            getByUserAtRegisterError: '',
+        }
+    }),
+    on(AdminActions.getByUserAtRegisterSuccess, (state, action) => {
+        return {
+            ...state,
+            isGetByUserAtRegisterLoading: false,
+            isGetByUserAtRegisterSuccess: true,
+            adminGetByUserAtRegister: action.admin,
+        }
+    }),
+    on(AdminActions.getByUserAtRegisterFailure, (state, action) => {
+        return {
+            ...state,
+            isGetByUserAtRegisterLoading: false,
+            isGetByUserAtRegisterSuccess: false,
+            getByUserAtRegisterError: action.errorMessage,
+        }
+    }),
+
     
 )

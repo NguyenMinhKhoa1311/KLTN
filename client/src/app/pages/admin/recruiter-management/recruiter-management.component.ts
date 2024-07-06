@@ -26,6 +26,8 @@ export class RecruiterManagementComponent implements OnDestroy{
   recruiterToBan: Recruiter = <Recruiter>{};
   banToUnBan: any = {};
   isBan: boolean = false;
+  token: string = "";
+
 
   subscriptions: Subscription[] = [];
 
@@ -47,7 +49,17 @@ export class RecruiterManagementComponent implements OnDestroy{
     }>,
     private readonly alerts: TuiAlertService,
   ) {
-    this.store.dispatch(RecruiterActions.getAllAtManageRecruiter());
+    let token = sessionStorage.getItem('tokenOfAdmin');
+    if(token){
+      this.token = token;
+      console.log(this.token);
+      this.store.dispatch(RecruiterActions.getAllAtManageRecruiter());
+    }else{
+      this.alerts
+      .open('', {label: 'Vui lòng đăng nhập',status:'info'})
+      .subscribe();
+    }
+
     this.subscriptions.push(
         this.recruiters$.subscribe(recruiters => {
           
@@ -109,7 +121,7 @@ export class RecruiterManagementComponent implements OnDestroy{
       Date: new Date(),
       Reason: 'Reason',
     }
-    this.store.dispatch(BanActions.banUserAtManageRecruiter({ban}));
+    this.store.dispatch(BanActions.banUserAtManageRecruiter({ban, token: this.token}));
   }
   unBanRecruiter() {
     const ban: any ={
@@ -120,7 +132,7 @@ export class RecruiterManagementComponent implements OnDestroy{
     }
     console.log(ban);
     
-    this.store.dispatch(BanActions.unBanUserAtManageRecruiter({ban:ban}));
+    this.store.dispatch(BanActions.unBanUserAtManageRecruiter({ban:ban, token: this.token}));
   }
   checkIsBan(recruiter: Recruiter) {
     if(recruiter.isBan){

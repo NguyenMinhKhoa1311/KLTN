@@ -6,5 +6,6 @@ export class CreateAdminDto {
         public Phone: string,
         public Address: string,
         public StatusConfirm: string,
+        public Avatar: string,
     ) {}
 }

@@ -15,7 +15,7 @@ export class BanEffects{
         this.actions$.pipe(
             ofType(BanActions.banUserAtManageCandidate),
             exhaustMap((action)=>
-                this.banService.create(action.ban).pipe(
+                this.banService.create(action.ban, action.token).pipe(
                     map((ban)=>{
                         if(ban){
                             return BanActions.banUserAtManageCandidateSuccess()
@@ -36,7 +36,7 @@ export class BanEffects{
         this.actions$.pipe(
             ofType(BanActions.unBanUserAtManageCandidate),
             exhaustMap((action)=>
-                this.banService.delete(action.ban).pipe(
+                this.banService.delete(action.ban, action.token).pipe(
                     map((ban)=>{
                         if(ban){
                             return BanActions.unBanUserAtManageCandidateSuccess()
@@ -58,7 +58,7 @@ export class BanEffects{
         this.actions$.pipe(
             ofType(BanActions.banUserAtManageRecruiter),
             exhaustMap((action)=>
-                this.banService.create(action.ban).pipe(
+                this.banService.create(action.ban, action.token).pipe(
                     map((ban)=>{
                         if(ban){
                             return BanActions.banUserAtManageRecruiterSuccess()
@@ -79,7 +79,7 @@ export class BanEffects{
         this.actions$.pipe(
             ofType(BanActions.unBanUserAtManageRecruiter),
             exhaustMap((action)=>
-                this.banService.delete(action.ban).pipe(
+                this.banService.delete(action.ban, action.token).pipe(
                     map((ban)=>{
                         if(ban){
                             return BanActions.unBanUserAtManageRecruiterSuccess()

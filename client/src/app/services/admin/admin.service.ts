@@ -23,7 +23,6 @@ export class AdminService {
   }
   findBy_id(id: string){
     console.log('id', id);
-    
     return this.httpClient.get<Admin>(`${URL}/admin/getBy_id?id=${id}`);
   }
 }

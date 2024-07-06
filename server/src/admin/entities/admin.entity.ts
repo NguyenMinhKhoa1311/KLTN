@@ -27,6 +27,9 @@ export class Admin {
     @Prop({required: true})
     Address: string;
 
+    @Prop({required: true})
+    Avatar: string;
+
 
 }
 

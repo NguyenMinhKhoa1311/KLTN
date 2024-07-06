@@ -3,7 +3,7 @@ import { Ban } from "../../models/ban.model";
 
 export const banUserAtManageCandidate = createAction(
     '[Ban] Ban User At Manage Candidate',
-    props<{ban: any}>()
+    props<{ban: any, token: string}>()
     );
 export const banUserAtManageCandidateSuccess = createAction(
     '[Ban] Ban User Success At Manage Candidate',
@@ -17,7 +17,7 @@ export const banUserAtManageCandidateFailure = createAction(
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const unBanUserAtManageCandidate = createAction(
     '[Ban] UnBan User At Manage Candidate',
-    props<{ban: any}>()
+    props<{ban: any, token: string}>()
     );
 export const unBanUserAtManageCandidateSuccess = createAction(
     '[Ban] UnBan User Success At Manage Candidate',
@@ -31,7 +31,7 @@ export const unBanUserAtManageCandidateFailure = createAction(
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const banUserAtManageRecruiter = createAction(
     '[Ban] Ban User At Manage Recruiter',
-    props<{ban: any}>()
+    props<{ban: any, token: string}>()
     );
 export const banUserAtManageRecruiterSuccess = createAction(
     '[Ban] Ban User Success At Manage Recruiter',
@@ -46,7 +46,7 @@ export const banUserAtManageRecruiterFailure = createAction(
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const unBanUserAtManageRecruiter = createAction(
     '[Ban] UnBan User At Manage Recruiter',
-    props<{ban: any}>()
+    props<{ban: any, token: string}>()
     );
 export const unBanUserAtManageRecruiterSuccess = createAction(
     '[Ban] UnBan User Success At Manage Recruiter',

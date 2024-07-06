@@ -21,6 +21,7 @@ import { Company } from '../../../models/company.model';
 import { Candidate } from '../../../models/candidate.model';
 import { LoadingComponent } from '../../loading/loading.component';
 import { TuiAlertService } from '@taiga-ui/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -36,6 +37,10 @@ import { TuiAlertService } from '@taiga-ui/core';
 
 
 export class HomeComponent implements OnDestroy {
+
+  formgroupSearch = new FormGroup({
+    keyword: new FormControl('', [Validators.required]),
+  })
 
   subscriptions: Subscription[] = [];
 
@@ -350,6 +355,14 @@ export class HomeComponent implements OnDestroy {
       this.router.navigate(['/job'], {
         queryParams: { field: field }
       });
+    }
+    navigateToJobByKeyword() {
+      console.log(this.formgroupSearch.value.keyword);
+      const keyword = this.formgroupSearch.value.keyword;
+      this.router.navigate(['/job'], {
+        queryParams: { keyword: keyword }
+      });
+    
     }
     navigateToJoByCareer(career: string) {
       this.router.navigate(['/job'], {
