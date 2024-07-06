@@ -56,6 +56,11 @@
                             delete
                         </span>
                     </div>
+                    <div class="payment" *ngIf="!job.StatusPayment" >
+                        <span class="material-symbols-outlined" (click)="openPaymentDialog(job)">
+                            payments
+                            </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -485,6 +490,44 @@
         </div>
         <div class="a" style="width: 100%;
         border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+        <div class="row4">
+            <div class="btn_Huy">
+                <button appearance="primary" tuiButton type="button" (click)="closeVisibilityDialog()"
+                    class="tui-space_right-3 tui-space_bottom-3">
+                    Hủy
+                </button>
+            </div>
+        </div>
+    </div>
+</dialog>
+<dialog id="paymentDialog" style="color: #1f1a1c" #paymentDialog>
+    <div id="top_dialog">
+        <div class="title">
+            <h4>Thanh toán công việc</h4>
+        </div>
+        <div class="btnClose" (click)="closeVisibilityDialog()">
+            <span class="material-symbols-outlined">
+                close
+            </span>
+        </div>
+    </div>
+    <div id="body_dialog">
+        <div class="job_box">
+            <div>
+                Thanh toán công việc nếu như bạn chưa thanh toán
+            </div>
+            
+        </div>
+        <div class="a" style="width: 100%;
+        border-bottom: 1px solid #cac8c8;margin-top: 30px;"></div>
+                <div class="row4">
+                    <div class="btn_Huy">
+                        <button appearance="primary" tuiButton type="button" (click)="payment()"
+                            class="tui-space_right-3 tui-space_bottom-3">
+                            Xác nhận
+                        </button>
+                    </div>
+                </div>
         <div class="row4">
             <div class="btn_Huy">
                 <button appearance="primary" tuiButton type="button" (click)="closeVisibilityDialog()"

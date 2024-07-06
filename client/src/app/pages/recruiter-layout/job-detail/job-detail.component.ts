@@ -59,6 +59,7 @@ export class JobDetailComponent implements OnDestroy {
   //variables
   page: number = 0;
   isGetByRecruiterAtJobDetailSuccess: boolean = false;
+  jobToPayment: Job = <Job>{};
 
 
   //ngrx of job
@@ -81,6 +82,7 @@ export class JobDetailComponent implements OnDestroy {
   constructor(
     private store: Store<{job: jobState, field: FieldState, career: CareerState}>,
     private readonly alerts: TuiAlertService,
+    private router: Router,
 
   ){
     let token = sessionStorage.getItem('tokenOfRecruiter');
@@ -148,7 +150,7 @@ export class JobDetailComponent implements OnDestroy {
       this.jobUpdatedAtJobDetail$.subscribe(job => {
         console.log(job);
         if(job._id!='500'){
-          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 6}) );
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: 0, limit: 6}) );
           this.closeJobDialog();
           this.alerts
           .open('', {label: 'Cập nhật công việc thành công !!!',status:'success'})
@@ -158,7 +160,7 @@ export class JobDetailComponent implements OnDestroy {
       //theo dõi job dc xóa
       this.isDeletedJobAtJobDetail$.subscribe(result => {
         if(result){
-          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: '65fa893d3dcc1153af38b1a5',page: 0, limit: 6}) );
+          this.store.dispatch(JobActions.getJobByRecruiterAtJobDetail({recruiter: this.userLogged._id,page: 0, limit: 6}) );
           this.alerts
           .open('', {label: 'Xóa công việc thành công !!!',status:'success'})
           .subscribe();
@@ -315,6 +317,18 @@ export class JobDetailComponent implements OnDestroy {
     console.log(this.welfareList);
   }
 
+  @ViewChild('paymentDialog', { static: true })
+  paymentDialog!: ElementRef<HTMLDialogElement>;
+  cdr3 = inject(ChangeDetectorRef);
+  openPaymentDialog(job:Job) {
+    this.jobToPayment = job;
+    this.paymentDialog.nativeElement.showModal();
+    this.cdr3.detectChanges();
+  }
+  closePaymentDialog() {
+    this.paymentDialog.nativeElement.close();
+    this.cdr3.detectChanges();
+  }
   
 
   @ViewChild('visibilityDialog', { static: true })
@@ -391,6 +405,13 @@ export class JobDetailComponent implements OnDestroy {
   //delete job
   deleteJob(job: Job) {
     this.store.dispatch(JobActions.deleteAtJobDetailOfRecruiter({id: job._id,careerId: job.Career._id, companyId:job.Company._id,fieldId: job.Field._id,token: this.token}));
+  }
+
+  //payment
+  payment(){
+    this.router.navigate(['recruiterLayout/payment'], {
+      queryParams: { job: this.jobToPayment.JobId }
+    });
   }
 }
 

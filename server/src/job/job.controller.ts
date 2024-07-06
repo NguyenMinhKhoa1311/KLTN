@@ -443,9 +443,21 @@ export class JobController {
   @Delete('deleteJob')
   async deleteJob(@Query('id') id: string, @Query('carrerId') carrerId: string, @Query('fieldId') fieldId: string, @Query('companyId') companyId: string) {
     try{
+      const jobTodelete = await this.jobService.getBy_id(id);
+      //log(jobTodelete);
+      // Kiểm jobTodelete là một đối tượng Job và có thuộc tính StatusPayment
+      if (jobTodelete && 'StatusPayment' in jobTodelete) {
+      if (!jobTodelete.StatusPayment) {
+        console.log('Job is not paid yet');
+        const result = await this.jobService.deleteJob(id);
+        return result;
+      }
+      } 
       let resultOfCareer = await this.careerService.decreaseQuantity(carrerId);
       let resultOfField = await this.fieldService.decreaseQuantity(fieldId);
       let resultOfCompany = await this.companyService.decreaseJobQuantity(companyId);
+      console.log(resultOfCareer, resultOfField, resultOfCompany);
+      
       if(resultOfCareer && resultOfField && resultOfCompany){
         const result = await this.jobService.deleteJob(id);
       return result

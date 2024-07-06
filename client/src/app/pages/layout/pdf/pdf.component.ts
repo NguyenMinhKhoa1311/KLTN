@@ -13,23 +13,41 @@ import { Router } from '@angular/router';
 })
 export class PdfComponent {
   generatePDF() {
-    const elementToprint: any = document.getElementById('theContent');
-    html2canvas(elementToprint,{ scale: 2,useCORS: true  }).then((canvas) => {
-      const pdf = new jsPDF();
-      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-      pdf.setProperties(
-        {
-          title: 'Title',
-          subject: 'This is the subject',
-          author: 'This is the author',
-        }
-      );
-      pdf.setFontSize(12);
-      pdf.text('This is the title', 10, 10);
-      pdf.save('file.pdf');
-    });
+    const element = document.getElementById('theContent');
+    if (element) {
+      this.loadImage(element).then(() => {
+        html2canvas(element).then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          console.log(imgData);
+          
+          const pdf = new jsPDF('p', 'mm', 'a4');
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('CV.pdf');
+        });
+      });
+    } else {
+      console.error('Element not found!');
+    }
   }
 
+  loadImage(element: HTMLElement): Promise<void> {
+    const img = element.querySelector('img');
+    return new Promise<void>((resolve, reject) => {
+      if (img && img.complete) {
+        resolve();
+      } else if (img) {
+        img.onload = () => {
+          resolve(); // Resolve after image is completely loaded and painted
+        };
+        img.onerror = () => reject();
+      } else {
+        resolve();  // No image found, resolve immediately
+      }
+    });
+  }
+  
   constructor( private router:Router) {
   }
   cv1() {
