@@ -11,6 +11,7 @@ import { ShareModule } from '../../../../../shared/shared.module';
 })
 export class Cv1Component {
   userLogged : Candidate = <Candidate>{};
+  avatar: string = ''
 
   constructor() {
     let userLogged = sessionStorage.getItem('userLogged');
@@ -19,6 +20,9 @@ export class Cv1Component {
       if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse?._id!=""){
         console.log(userAfterParse);
         this.userLogged = userAfterParse;
+        this.avatar = `../../../../../../assets/images/${this.userLogged.Name}.jpg`
+        console.log(this.avatar);
+        
       }
     }
   }
