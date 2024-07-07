@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { CronJobState } from '../../../ngrx/states/cron-job.state';
 import { TuiAlertService } from '@taiga-ui/core';
 import * as CronJobActions from '../../../ngrx/actions/cron-job.actions';
-import { getTimeFromCronTime } from '../../../../environments/environments';
+import { _TuiTime, getTimeFromCronTime } from '../../../../environments/environments';
 
 
 
@@ -20,8 +20,9 @@ import { getTimeFromCronTime } from '../../../../environments/environments';
   styleUrl: './choose-format.component.less'
 })
 export class ChooseFormatComponent implements OnDestroy{
+  _tuiTime: _TuiTime =<_TuiTime> {}
   formatForm = new FormGroup({
-    time: new FormControl('', Validators.required),
+    time: new FormControl(this._tuiTime, Validators.required),
     format: new FormControl('', Validators.required),
   }); 
 
@@ -50,9 +51,14 @@ export class ChooseFormatComponent implements OnDestroy{
         if(cronJob.cronTime){
           const time = getTimeFromCronTime(cronJob.cronTime);
           console.log(time.hours + ' ' + time.minute);
-          
+          const tuiTime: _TuiTime = {
+            hours: parseInt(time.hours),
+            minutes: parseInt(time.minute),
+            ms: 0,
+            seconds: 0
+          }
           this.formatForm.setValue({
-            time: time.hours + ' ' + time.minute,
+            time: tuiTime,
             format: cronJob.format.toString()
           })
           this.formatForm.valueChanges.subscribe(value => this.onFormatChange(cronJob.format));
@@ -77,11 +83,16 @@ export class ChooseFormatComponent implements OnDestroy{
 
 
   update(){
+    console.log(this.formatForm.value.time);
+    
+    const hour = this.formatForm.value.time
+    const minute = this.formatForm.value.time??"".split(':')[2];
 
-    const cronTime = `0 ${this.formatForm.value.time} * * *`;
+    
+    const cronTime = `0 ${minute} ${hour} * * *`;
     console.log(cronTime);
     
-    this.store.dispatch(CronJobActions.updateCronJobAtChangeFormat({cronTime: cronTime, format: parseInt(this.formatForm.value.format??"1")}));
+    //this.store.dispatch(CronJobActions.updateCronJobAtChangeFormat({cronTime: cronTime, format: parseInt(this.formatForm.value.format??"1")}));
 
   }
 }

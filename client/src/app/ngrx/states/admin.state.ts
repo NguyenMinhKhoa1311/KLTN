@@ -20,5 +20,7 @@ export interface AdminState {
     isGetByUserAtRegisterSuccess: boolean;
     getByUserAtRegisterError: string;
     adminGetByUserAtRegister: Admin;
+
+    isLoginAtLogin: boolean;
     
 }

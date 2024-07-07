@@ -43,6 +43,22 @@ export class CompanyEffects{
         )
     })
 
+    getAllAndSortAtJob$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(CompanyActions.getAllAndSortAtJob),
+            switchMap((action)=>{
+                return this.companyService.getAllAndSort(action.page, action.limit, action.sortBy, action.sortOrder).pipe(
+                    map((companys)=>{
+                        return CompanyActions.getAllAndSortAtJobSuccess({companys: companys});
+                    }),
+                    catchError((error)=>{
+                        return of(CompanyActions.getAllAndSortAtJobFailure({error}));
+                    })
+                )
+            })
+        )
+    })
+
     getAllAndSortAtCompany$ = createEffect(()=>{
         return this.actions$.pipe(
             ofType(CompanyActions.getAllAndSortAtCompany),

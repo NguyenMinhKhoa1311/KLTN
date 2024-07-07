@@ -25,7 +25,7 @@ export class CronJobService {
         private readonly sendMailService: SendMailService,
         private readonly candidateService: CandidateService,
     ) {
-        this.initCronJob('0 30 11 * * *',1);
+        this.initCronJob('0 40 19 * * *',1);
     }
     private initCronJob(cronTime: string, format: number) {
         if (this.cronJob) {
@@ -65,6 +65,7 @@ export class CronJobService {
         }
     }
     async updateCronJob(cronTime: string,format: number) {
+        log(`Updating cron job to run at ${cronTime}`);
         const newCronJob = await this.updateCronJobInDB(cronTime,format);
         if(newCronJob._id!="500"){
             log(`Updating cron job to run at ${cronTime}`);
@@ -127,7 +128,7 @@ export class CronJobService {
                     text: "test send mail with cron job at main server",
                     html: htmlContent
                         }
-                //this.sendMailService.sendMail(mailOptions);
+                this.sendMailService.sendMail(mailOptions);
             }else{
                 log('job by backup of user' + user.Field + user.Email)
                 log(jobBackUp.length)
@@ -140,7 +141,7 @@ export class CronJobService {
                     text: "test send mail with cron job at main server",
                     html: htmlContentOfJobBackUp
                         }
-                //this.sendMailService.sendMail(mailOptions);
+                this.sendMailService.sendMail(mailOptions);
             }
         
             // let mailOptions: MailOptions = {
@@ -152,8 +153,6 @@ export class CronJobService {
             // }
             // this.sendMailService.sendMail(mailOptions);
         });
-
-        this.logger.log('Called when the second is 45');
     }
 
 

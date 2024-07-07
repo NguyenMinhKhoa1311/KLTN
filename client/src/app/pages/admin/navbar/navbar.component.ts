@@ -1,8 +1,12 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnDestroy,OnInit } from '@angular/core';
 import { ShareModule } from '../../../shared/shared.module';
 import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { TaigaModule } from '../../../shared/taiga.module';
 import { Admin } from '../../../models/admin.model';
+import { Store } from '@ngrx/store';
+import { AdminState } from '../../../ngrx/states/admin.state';
+import { Subscription } from 'rxjs';
+import * as AdminActions from '../../../ngrx/actions/admin.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -11,17 +15,23 @@ import { Admin } from '../../../models/admin.model';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.less'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
   selectedTab!: string; // Thuộc tính để lưu trữ tên của tab hiện đang được chọn
   activeItemIndex = 0;
+
+  subscriptions: Subscription[] = [];
 
   //variables
   isLogin = false;
   userLogged: Admin = <Admin>{};
 
+  //ngrx of admin
+  isLogin$ = this.store.select('admin', 'isLoginAtLogin');
+
 
   constructor (
     private router: Router,
+    private store: Store<{ admin: AdminState}>
   ) {
     if (this.router.url.includes('/job-confirm')) {
       this.activeItemIndex = 0;
@@ -32,7 +42,28 @@ export class NavbarComponent {
     } else if (this.router.url.includes('/account-management')) {
       this.activeItemIndex = 3;
     } 
-
+    this.subscriptions.push(
+      this.isLogin$.subscribe(isLogin => {
+        if (isLogin) {
+          let userLogged = sessionStorage.getItem('adminLogged');
+          console.log('userOfRecruiterLogged',userLogged);
+          
+          if(userLogged){
+            let userAfterParse = JSON.parse(userLogged);
+            if(userAfterParse?._id.length > 0&&userAfterParse!=null&&userAfterParse!="null"&&userAfterParse!="undefined"&&userAfterParse?._id!=""){
+              console.log('userOfRecruiterLogged',userLogged);
+              this.isLogin = true;
+              this.userLogged = userAfterParse;
+              this.store.dispatch(AdminActions.resetIsLoginAtLogin());
+            }
+          }
+        }
+      })
+    )
+    
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   ngOnInit(): void {

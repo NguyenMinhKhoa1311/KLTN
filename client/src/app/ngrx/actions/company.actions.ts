@@ -17,6 +17,22 @@ export const getAllAndSortAtHomeFailure = createAction(
 
 
 
+export const getAllAndSortAtJob = createAction(
+    '[Company] Get All And Sort At Job',
+    props<{ page: number, limit: number, sortBy: string, sortOrder: string }>()
+    );
+export const getAllAndSortAtJobSuccess = createAction(
+    '[Company] Get AllAnd Sort At Job Success',
+    props<{ companys: Company[] }>()
+    );
+export const getAllAndSortAtJobFailure = createAction(
+    '[Company] Get All And Sort At Job Failure',
+    props<{ error: string }>()
+    );
+    
+
+
+
 
 
 

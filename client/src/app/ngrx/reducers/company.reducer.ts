@@ -30,6 +30,12 @@ export const initualState: CompanyState = {
     updateAtProfileError: '',
     companyUpdatedByUpdateAtProfile: <Company>{},
 
+    isGetAllAndSortAtJobLoading: false,
+    isGetAllAndSortAtJobSuccess: false,
+    getAllAndSortAtJobError: '',
+    companysTakenByGetAllAndSortAtJob: []
+
+
 
 
 };
@@ -180,5 +186,32 @@ export const companyReducer = createReducer(
             updateAtProfileError: action.error
         }
     }),
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    on(CompanyActions.getAllAndSortAtJob,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAndSortAtJobLoading: true,
+            isGetAllAndSortAtJobSuccess: false,
+            getAllAndSortAtJobError: ''
+        }
+    }),
+    on(CompanyActions.getAllAndSortAtJobSuccess,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAndSortAtJobLoading: false,
+            isGetAllAndSortAtJobSuccess: true,
+            companysTakenByGetAllAndSortAtJob: action.companys
+        }
+    }),
+    on(CompanyActions.getAllAndSortAtJobFailure,(state,action)=>{
+        return {
+            ...state,
+            isGetAllAndSortAtJobLoading: false,
+            isGetAllAndSortAtJobSuccess: false,
+            getAllAndSortAtJobError: action.error
+        }
+    }),
+    
     
 )

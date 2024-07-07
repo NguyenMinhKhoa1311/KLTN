@@ -97,6 +97,7 @@ export class LoginComponent implements OnDestroy {
         if(token.token){
           sessionStorage.setItem('tokenOfAdmin', token.token);
           this.router.navigate(['admin/job-confirm']);
+          this.store.dispatch(AdminActions.isLoginAtLogin())
           console.log('chuyển trang');
           
         }

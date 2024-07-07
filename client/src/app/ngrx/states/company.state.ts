@@ -30,5 +30,10 @@ export interface CompanyState{
     updateAtProfileError: string;
     companyUpdatedByUpdateAtProfile: Company;
     
+    isGetAllAndSortAtJobLoading: boolean;
+    isGetAllAndSortAtJobSuccess: boolean;
+    getAllAndSortAtJobError: string;
+    companysTakenByGetAllAndSortAtJob: Company[];
+    
     
 } 

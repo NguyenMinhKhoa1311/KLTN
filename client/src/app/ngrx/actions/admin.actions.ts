@@ -60,3 +60,12 @@ export const getByUserAtLoginFailure = createAction(
     props<{ errorMessage: string }>()
 );
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const isLoginAtLogin = createAction(
+    '[Admin] is login at login',
+);
+export const resetIsLoginAtLogin = createAction(
+    '[Admin] reset is login at login',
+);

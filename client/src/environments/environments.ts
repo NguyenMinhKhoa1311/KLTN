@@ -128,13 +128,22 @@ export function convertDayMonthYearYYYMMDD(strDate: string): { day: number, mont
 export function getTimeFromCronTime(s: string): {hours:string, minute:string} {
   // Tách chuỗi thành các phần tử
   const parts: string[] = s.split(" ");
-  
-  // Lấy giờ và phút từ các phần tử
-  const gio: string = parts[2];
-  const phut: string = parts[1];
   console.log(parts);
+  const gio: string = parts[2]
+  const phut: string = parts[1]
+  console.log(gio, phut);
   
   
   // Trả về chuỗi giờ và phút
   return {hours: gio, minute: phut};
 }
+
+export interface _TuiTime {
+  hours: number;
+  minutes: number;
+  seconds: 0;
+  ms: 0
+}
+
+  
+

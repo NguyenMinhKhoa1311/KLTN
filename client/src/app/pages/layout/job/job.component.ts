@@ -13,6 +13,7 @@ import { CareerState } from '../../../ngrx/states/career.state';
 import * as JobActions from '../../../ngrx/actions/job.actions';
 import * as FieldActions from '../../../ngrx/actions/field.actions';
 import * as CareerActions from '../../../ngrx/actions/career.actions';
+import * as CompaynActions from '../../../ngrx/actions/company.actions';
 
 import { Job } from '../../../models/job.model';
 import { Field } from '../../../models/field.model';
@@ -23,6 +24,8 @@ import { candidateState } from '../../../ngrx/states/candidate.state';
 import * as CandidateActions from '../../../ngrx/actions/candidate.actions';
 import { Candidate } from '../../../models/candidate.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CompanyState } from '../../../ngrx/states/company.state';
+import { Company } from '../../../models/company.model';
 
 
 @Component({
@@ -59,7 +62,7 @@ export class JobComponent implements OnDestroy{
   isGetAllAndSortWithUrgentSuccess: boolean = false;
   isGetByTagWithUrgentSuccess: boolean = false;
   tagValue: string = "";
-
+  companys: Company[] = [];
   isGetByFieldNameAddNavigate: boolean = false;
 
 
@@ -117,6 +120,9 @@ export class JobComponent implements OnDestroy{
   candidateUpdatedFavoriteJob$ = this.store.select('candidate','candidateUpdatedFavoriteJobAtJob');
   candidateDeletedFavoriteJob$ = this.store.select('candidate','candidateDeletedFavoriteJobAtJob');
 
+  // ngrx of company
+  companysTakenByGetAllAndSortAtJob$ = this.store.select('company', 'companysTakenByGetAllAndSortAtJob');
+
 
 
 
@@ -127,7 +133,7 @@ export class JobComponent implements OnDestroy{
 
 
   constructor(
-    private store: Store<{ job: jobState, field : FieldState, career : CareerState, candidate: candidateState }>,
+    private store: Store<{ job: jobState, field : FieldState, career : CareerState, candidate: candidateState, company: CompanyState }>,
     private route: ActivatedRoute,
     private router: Router,
     private _snackBar: MatSnackBar,
@@ -141,6 +147,7 @@ export class JobComponent implements OnDestroy{
     this.career = this.route.snapshot.queryParamMap.get('career')??"";
     this.tagValue = this.route.snapshot.queryParamMap.get('tag')??"";
     this.keyword = this.route.snapshot.queryParamMap.get('keyword')??"";
+    this.store.dispatch(CompaynActions.getAllAndSortAtJob({page: 0, limit: 4, sortBy: "createdAt", sortOrder: "asc"}))
     if(this.field.length > 0){
       this.isGetByFieldNameAddNavigate = true;
       this.isGetAll = false;
@@ -200,6 +207,14 @@ export class JobComponent implements OnDestroy{
     this.store.dispatch(FieldActions.getAllNoLimit());
     this.store.dispatch(CareerActions.getAllAtJobs());
     this.subscriptions.push(
+      //subscribe to ngrx of companysTakenByGetAllAndSortAtJob
+      this.companysTakenByGetAllAndSortAtJob$.subscribe((companys)=>{
+        if(companys.length>0){
+          console.log(companys);
+          this.companys = companys;
+          
+        }
+      }),
       // subscribe to ngrx of isGetAllAndSortAtJobSuccess
       this.isGetAllAndSortAtJobSuccess$.subscribe((isSuccess)=>{
         if(isSuccess){
@@ -911,6 +926,12 @@ export class JobComponent implements OnDestroy{
   UrgentForm = new FormGroup({
     checked: new FormControl(false),
   });
+
+      navigateToCompanyDetail(companyId: string) {
+      this.router.navigate(['/company-detail'], {
+        queryParams: { company: companyId }
+      });
+    }
 
 
 }

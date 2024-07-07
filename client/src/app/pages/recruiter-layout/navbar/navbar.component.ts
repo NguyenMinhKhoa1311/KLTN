@@ -6,6 +6,7 @@ import { Recruiter } from '../../../models/recruiter.model';
 import { RecruiterState } from '../../../ngrx/states/recruiter.state';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import * as RecruiterActions from '../../../ngrx/actions/recruiter.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -58,6 +59,7 @@ export class NavbarComponent implements OnInit, OnDestroy{
               console.log('userOfRecruiterLogged',userLogged);
               this.isLogin = true;
               this.userLogged = userAfterParse;
+              this.store.dispatch(RecruiterActions.resetHaveRecruiterAtNavbar());
             }
           }
         }
