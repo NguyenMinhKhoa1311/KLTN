@@ -138,12 +138,23 @@ export function getTimeFromCronTime(s: string): {hours:string, minute:string} {
   return {hours: gio, minute: phut};
 }
 
-export interface _TuiTime {
-  hours: number;
-  minutes: number;
-  seconds: 0;
-  ms: 0
+export function daysUntilDate(dateString: string): number {
+  // Chuyển đổi chuỗi ngày thành đối tượng Date
+  const targetDate = new Date(dateString);
+  
+  // Lấy ngày hiện tại
+  const currentDate = new Date();
+
+  // Tính số miligiây giữa hai ngày
+  const differenceInMillis = targetDate.getTime() - currentDate.getTime();
+
+  // Chuyển đổi từ miligiây sang ngày
+  const differenceInDays:number = Math.ceil(differenceInMillis / (1000 * 60 * 60 * 24));
+
+  return differenceInDays;
 }
+
+
 
   
 

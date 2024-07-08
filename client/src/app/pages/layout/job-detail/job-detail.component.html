@@ -12,7 +12,7 @@
                     <span class="material-symbols-outlined">
                         history
                     </span>
-                    Hết hạn trong 21 ngày
+                    Hết hạn trong {{daysUntilEnd}} ngày
                 </div>
                 <div class="gach"></div>
                 <div class="location" *ngFor="let location of jobToRender.Location">
@@ -42,7 +42,7 @@
                         <div class="title2">
                             NGÀY ĐĂNG
                         </div>
-                        <span>{{jobToRender.StartDate}}</span>
+                        <span>{{parseDateInComponent(jobToRender.StartDate)}}</span>
                     </div>
                     <div class="career" *ngIf="jobToRender.Career!=undefined">
                         <div class="title2">

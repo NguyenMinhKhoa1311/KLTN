@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { Job } from '../../../models/job.model';
 import { ShareModule } from '../../../shared/shared.module';
 import { TaigaModule } from '../../../shared/taiga.module';
-import { generateUuid, parseDate } from '../../../../environments/environments';
+import { daysUntilDate, generateUuid, parseDate } from '../../../../environments/environments';
 import { Candidate } from '../../../models/candidate.model';
 import { StorageState } from '../../../ngrx/states/storage.state';
 import * as StorageActions from '../../../ngrx/actions/storage.actions';
@@ -32,6 +32,7 @@ export class JobDetailComponent implements OnDestroy {
   isHavePdf : boolean = false;
   folderName: string = "";
   token: string = "";
+  daysUntilEnd: number = 0;
 
   //ngrx of jobs
   jobTakenByIdAtJobDetailOfCandidate$ = this.store.select('job', 'jobTakenByIdAtJobDetailOfCandidate');
@@ -76,6 +77,8 @@ export class JobDetailComponent implements OnDestroy {
         if(job._id!=undefined) {
           if(job._id != "500"){
               this.jobToRender = job;
+              console.log(this.jobToRender.EndDate);
+              this.daysUntilEnd = daysUntilDate(this.jobToRender.EndDate.toString());
               console.log("jobToRender: ", this.jobToRender);
           }
         }

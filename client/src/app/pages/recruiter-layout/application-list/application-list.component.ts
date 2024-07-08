@@ -98,6 +98,7 @@ export class ApplicationListComponent implements OnDestroy {
           this.alerts
           .open('', {label: 'Không có đơn ứng tuyển nào !!!',status:'info'})
           .subscribe();
+
         }
         
       }),
@@ -125,7 +126,7 @@ export class ApplicationListComponent implements OnDestroy {
             this.alerts
             .open('', {label: 'Đã thông báo cho ứng viên',status:'success'})
             .subscribe();
-            this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: '65fa893d3dcc1153af38b1a5', page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
+            this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: this.userLogged._id, page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
             this.closeEmailDialog();
           }
         }
@@ -140,12 +141,12 @@ export class ApplicationListComponent implements OnDestroy {
 
   nextPage(){
     this.page++;
-    this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: '65fa893d3dcc1153af38b1a5', page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
+    this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: this.userLogged._id, page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
   }
   previousPage(){
     if(this.page > 0){
       this.page--;
-      this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: '65fa893d3dcc1153af38b1a5', page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
+      this.store.dispatch(RecruitmentActions.getByRecruiterAtAplicationList({recruiter: this.userLogged._id, page: this.page, limit: 10, sortBy: 'createdAt', sortOrder: 'desc'}))
     }
   }
 
