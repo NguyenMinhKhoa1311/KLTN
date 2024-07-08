@@ -56,6 +56,11 @@ export const ADMIN_ROUTERS: Routes = [
         loadChildren: () =>
           import('./login/login.routes').then((m) => m.LOGIN_ROUTERS),
       },
+      {
+        path:'choose-format',
+        loadChildren: () =>
+          import('./choose-format/choose-format.routes').then((m) => m.CHOOSEFORMAT_ROUTERS),
+      }
     ],
   },
 ];

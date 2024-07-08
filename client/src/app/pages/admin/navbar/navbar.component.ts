@@ -41,7 +41,9 @@ export class NavbarComponent implements OnDestroy {
       this.activeItemIndex = 2;
     } else if (this.router.url.includes('/account-management')) {
       this.activeItemIndex = 3;
-    } 
+    } else if (this.router.url.includes('/choose-format')) {
+      this.activeItemIndex = 4;
+    }
     this.subscriptions.push(
       this.isLogin$.subscribe(isLogin => {
         if (isLogin) {
@@ -92,6 +94,8 @@ export class NavbarComponent implements OnDestroy {
           this.activeItemIndex = 2;
         }  else if (url.startsWith('/account-management')) {
           this.activeItemIndex = 3;
+        } else if (url.startsWith('/choose-format')) {
+          this.activeItemIndex = 4;
         } 
       }
     });

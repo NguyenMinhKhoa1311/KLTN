@@ -104,4 +104,8 @@ export class PaymentComponent implements OnDestroy{
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  navigatePaymentsuccess(){
+    this.router.navigate(['/recruiterLayout/payment-success']);
+  }
+
 }
