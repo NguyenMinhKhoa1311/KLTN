@@ -14,7 +14,7 @@
     .payment_content{
         display: flex;
         flex-direction: row;
-        width: 60%;
+        width: 80%;
         .payment_service{
             width: 40%;
         }
@@ -40,6 +40,7 @@
                 }
             }
             .payment_job_item{
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
@@ -49,20 +50,16 @@
                     .job_name_title, .job_description_title, .job_address_title, .job_location_title,.job_salary_title
                     ,.job_welfare_title, .job_field_title, .job_career_title, .job_date_title, .job_requirement_title, .job_tag_title
                     {    
-                        width: 30%;
+                        width: 20%;
+                        
                     }
+
+                    .job_description, .job_address, .job_location, .job_salary, .job_welfare, .job_field, .job_career, .job_date, .job_requirement, .job_tag{
+                        width: 80%;
+                    }
+                    
                 }
-                // .job_left{
-                //     width: 35%;
-                // }
-                // .job_right{
-                //     width: 65%;
-                // }
-                // .job_left, .job_right{
-                //     display: flex;
-                //     flex-direction: column;
-                //     gap: 5px;
-                // }
+                
 
             }
         }
