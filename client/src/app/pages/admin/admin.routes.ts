@@ -8,7 +8,7 @@ export const ADMIN_ROUTERS: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'job-confirm',
+        redirectTo: 'login',
         pathMatch: 'full',
       },
       // {

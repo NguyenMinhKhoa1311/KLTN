@@ -611,7 +611,7 @@ export class ProfileComponent implements OnDestroy {
       let fileName ="ImgOf_"+ this.candidateToRender.Name +"_"+ generateUuid();
       this.foldernameCreatedAtProfile=fileName;
       this.store.dispatch(StorageActions.createAtProfile({fileName:fileName, file:this.file}));
-      
+      this.alerts.open('Cập nhật thành công', {status: 'success'}).subscribe();
     }
     else{
       alert('Invalid image');
