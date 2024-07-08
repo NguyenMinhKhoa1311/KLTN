@@ -1,6 +1,6 @@
 #detailcompany_container{
     width: calc(100% - 32px);
-    height: calc(100% - 32px);
+    height: calc(100vh - 32px);
     background-color: #F8F9FA;
     display: flex;
     justify-content: center;
@@ -10,6 +10,9 @@
         background-color: #ffffff;
         border-radius: 12px;
         padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         .job{
             width: calc(100% - 32px);
             padding: 16px;
@@ -47,11 +50,26 @@
             }
             .btn{
                 display: flex;
-                flex-direction: row;
+                
                 .btn_accept{
                     width: 70%;
                     height: 40px;
                     background-color: #FF7D55;
+                    color: #ffffff;
+                    border-radius: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-weight: 500;
+                    font-size: 16px;
+                    margin-right: 10px;
+                    cursor: pointer;
+                }
+
+                .btn_done{
+                    width: 70%;
+                    height: 40px;
+                    background-color: #807876;
                     color: #ffffff;
                     border-radius: 8px;
                     display: flex;

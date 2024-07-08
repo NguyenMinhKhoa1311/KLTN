@@ -199,7 +199,7 @@ export class JobDetailComponent implements OnDestroy {
     console.log(this.jobToUpdate._id);
     
     this.store.dispatch(JobActions.updateJobAtJobDetail({job: jobData, id: this.jobToUpdate._id,token:this.token}));
-    
+    //this.alerts.open('', {label: 'Cập nhật công việc thành công',status:'success'}).subscribe();
 
   }
   openJobDialog(job: Job) {
@@ -405,6 +405,7 @@ export class JobDetailComponent implements OnDestroy {
   //delete job
   deleteJob(job: Job) {
     this.store.dispatch(JobActions.deleteAtJobDetailOfRecruiter({id: job._id,careerId: job.Career._id, companyId:job.Company._id,fieldId: job.Field._id,token: this.token}));
+    //this.alerts.open('', {label: 'Xóa công việc thành công',status:'success'}).subscribe();
   }
 
   //payment

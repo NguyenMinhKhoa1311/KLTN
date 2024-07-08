@@ -23,15 +23,15 @@
                 </div>
             </div>
             <div class="btn">
-                <div class="btn_accept" (click)="openApplyDialog()">
-                    <div *ngIf="checkApply()">Bạn đã ứng tuyển công việc này</div>
-                    <div *ngIf="!checkApply()">Ứng tuyển ngay</div>
+                <div class="btn_accept" (click)="openApplyDialog()" *ngIf="!checkApply()">
+                    <div >Ứng tuyển ngay</div>
+                </div>
+                <div class="btn_done" *ngIf="checkApply()">
+                    <div >Bạn đã ứng tuyển công việc này</div>
                 </div>
             </div>
         </div>
-        <div class="description">
-            Mô tả công việc
-        </div>
+        
         <div class="info_job">
             <div class="title_info">
                 Thông tin việc làm
@@ -72,8 +72,6 @@
                     </div>
                 </div>
             </div>
-            
-            
         </div>
         <div class="address">
             <div class="title_address">

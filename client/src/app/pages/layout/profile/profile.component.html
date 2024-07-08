@@ -14,7 +14,7 @@
                     <div class="img-file" *ngIf="!isUpdateImage" (click)="fileInput.click()">
                         <img src="{{candidateToRender.Avatar}}" alt="Selected Image" style="width: 100px;height: 100px; border-radius: 8px;" />
                     </div>
-                    <div class="overlay">Đổi Avatar</div>
+                    <div class="overlay"(click)="fileInput.click()">Đổi Avatar</div>
                     <div class="img-file" *ngIf="isUpdateImage" >
                         <img [src]="selectedImage" alt="Selected Image" style="width: 100px;height: 100px; border-radius: 8px;" (click)="fileInput.click()" />
                         <button (click)="updateAvatar()">lưu</button>
