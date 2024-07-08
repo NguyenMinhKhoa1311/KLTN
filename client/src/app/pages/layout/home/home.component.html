@@ -19,7 +19,7 @@
                                 </svg>
                             </div>
                             <div class="search">
-                                <input type="search" placeholder="Tìm kiếm việc làm, kỹ năng, tên công ty" autocomplete="off" formControlName="keyword">
+                                <input type="search" placeholder="Tìm kiếm việc làm" autocomplete="off" formControlName="keyword">
                             </div>
                             <div class="search_btn">
                                 <div class="search_btn_box" (click)="navigateToJobByKeyword()">
@@ -32,7 +32,7 @@
             </form>
 
             <div class="carousel_home">
-                <tui-carousel [duration]="5000" [(index)]="index" class="carousel_container">
+                <tui-carousel [duration]="3000" [(index)]="index" class="carousel_container">
                     <ng-container *ngFor="let company of companys">
                         <tui-island *tuiItem class="carousel_item" (click)="navigateToCompanyDetail(company._id)">
                             <div class="img_copany">

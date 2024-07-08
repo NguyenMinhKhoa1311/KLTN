@@ -97,7 +97,7 @@
                             Ngày đăng:
                         </div>
                         <div class="job_date" *ngIf="isGetJobSuccess">
-                            {{parseDate(jobToRender.StartDate)}}
+                            {{jobToRender.StartDate | date: 'dd/MM/yyyy'}}
                         </div>
                     </div>
                     <div class="requirement">
@@ -122,19 +122,21 @@
         </div>
     </div>
     <div class="a" style="width: 60%;
-        border-bottom: 1px solid #cac8c8;margin-top: 30px;">
+        border-bottom: 1px solid #cac8c8;margin-top: 15px;">
     </div>
     <div class="notice">
         <p>Bạn có thể chuyển khoản trực tiếp để thanh toán</p>
         <p>Số tài khoản: 0501 2105 2633</p>
         <p>Ngân hàng: Vietcombank</p>
-        <p>Chủ tài khoản: Phùng Minh Khoa</p>
+        <p>Chủ tài khoản: Nguyễn Minh Khoa</p>
     </div>
-    <div style="font-size: 14px;">Hoặc</div>
+    <div class="payment_accept">
+        <div class="btn_accept" (click)="navigatePaymentsuccess()">
+            Xác nhận thanh toán
+        </div>
+    </div>
+    <div style="font-size: 14px;margin: 10px;">Hoặc</div>
     <div class="payment_total">
-        <!-- <button class="btn_momo" tuiButton type="button" (click)="payment()">
-            Thanh toán momo
-        </button> -->
         <div class="btn_momo" (click)="payment()">
             Thanh toán momo
         </div>
