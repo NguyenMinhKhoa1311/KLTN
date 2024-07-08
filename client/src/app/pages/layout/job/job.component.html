@@ -75,7 +75,7 @@
                                 </div>
                                 
                                 <span class="company_name">{{job.Company.Name}}</span>
-                                <span class="salary">Thương lượng</span>
+                                <span class="salary">{{job.Salary}}</span>
 
                                 <div class="tag">
                                     <div class="tag_box" *ngFor="let tag of job.Tags"(click)="getByTag(tag)">#{{tag}}</div>
